@@ -1,0 +1,28 @@
+/* ── EDS 브랜드 색상 & 전역 스타일 ── */
+@import url('https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,400;0,600;0,700;1,700;1,800&family=Noto+Sans+KR:wght@300;400;500;700&display=swap');
+
+:root {
+  --navy:  #0D3A4A;
+  --navy2: #0A2D3A;
+  --navy3: #061E28;
+  --red:   #D42B2B;
+  --red2:  #B82222;
+  --cyan:  #00B8D9;
+  --gray:  #8C9BA5;
+  --light: #E8EFF2;
+  --bg:    #F4F7F9;
+  --white: #FFFFFF;
+  --line:  rgba(13,58,74,0.10);
+  --sans:  'Barlow','Noto Sans KR',sans-serif;
+  --kr:    'Noto Sans KR',sans-serif;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html  { scroll-behavior: smooth; }
+body  { background: var(--bg); color: var(--navy3); font-family: var(--sans); overflow-x: hidden; }
+img   { max-width: 100%; display: block; }
+a     { text-decoration: none; }
+
+/* 스크롤 등장 애니메이션 */
+.reveal { opacity: 0; transform: translateY(20px); transition: opacity .7s ease, transform .7s ease; }
+.reveal.visible { opacity: 1; transform: translateY(0); }

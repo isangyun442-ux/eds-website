@@ -1,0 +1,36 @@
+---
+// 모든 페이지가 공유하는 HTML 틀
+// props로 title을 받아서 <title> 태그에 넣어요
+const { title = 'EDS — Beyond The Future' } = Astro.props;
+---
+
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="EDS 이담에스티 — 스마트 회의실, LED 스튜디오, 강의실 구축 전문" />
+    <title>{title}</title>
+    <link rel="icon" type="image/png" href="/images/logo.png" />
+  </head>
+  <body>
+    <!-- 각 페이지 내용이 여기에 들어와요 -->
+    <slot />
+
+    <!-- 스크롤 애니메이션 스크립트 (모든 페이지 공통) -->
+    <script>
+      const obs = new IntersectionObserver((entries) => {
+        entries.forEach((e, i) => {
+          if (e.isIntersecting) {
+            setTimeout(() => e.target.classList.add('visible'), i * 60);
+            obs.unobserve(e.target);
+          }
+        });
+      }, { threshold: 0.08 });
+      document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+    </script>
+  </body>
+</html>
+
+<style is:global>
+  @import '../styles/global.css';
+</style>

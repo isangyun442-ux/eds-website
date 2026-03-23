@@ -1,0 +1,140 @@
+---
+// 문의 섹션
+// 수정할 것: 주소, 이메일, 전화번호
+const info = {
+  address: '서울특별시 강남구 테헤란로 000',
+  phone:   '02-000-0000',
+  email:   'hello@eds.co.kr',
+  hours:   '평일 09:00 – 18:00',
+};
+---
+
+<section id="contact">
+  <div class="contact-wrap">
+    <div class="c-left">
+      <div class="cl-eyebrow">Contact EDS</div>
+      <h2 class="cl-title">스마트한 공간,<br />지금 시작하세요</h2>
+      <p class="cl-sub">도입을 고민 중이시다면 먼저 무료 상담을 신청해보세요. 전문 컨설턴트가 최적의 솔루션을 제안해드립니다.</p>
+      <div class="c-info-list">
+        <div class="ci"><div class="ci-icon">📍</div>{info.address}</div>
+        <div class="ci"><div class="ci-icon">📞</div>{info.phone}</div>
+        <div class="ci"><div class="ci-icon">✉️</div>{info.email}</div>
+        <div class="ci"><div class="ci-icon">🕐</div>{info.hours}</div>
+      </div>
+    </div>
+
+    <div class="c-right">
+      <div class="cf-title">도입 문의하기</div>
+      <div class="cf-sub">평균 4시간 이내 답변드립니다</div>
+      <!--
+        💡 실제 이메일 전송 연결 방법:
+        1. formspree.io 무료 가입
+        2. 폼 생성 후 받은 URL을 아래 action에 넣기
+        예: action="https://formspree.io/f/xyzabcde"
+      -->
+      <form class="cf" action="#" method="POST">
+        <div class="cf-row">
+          <div class="cf-g">
+            <label class="cf-label">담당자 이름</label>
+            <input class="cf-input" type="text" name="name" placeholder="홍길동" required />
+          </div>
+          <div class="cf-g">
+            <label class="cf-label">연락처</label>
+            <input class="cf-input" type="tel" name="phone" placeholder="010-0000-0000" />
+          </div>
+        </div>
+        <div class="cf-g full">
+          <label class="cf-label">이메일</label>
+          <input class="cf-input" type="email" name="email" placeholder="example@company.com" required />
+        </div>
+        <div class="cf-g full">
+          <label class="cf-label">도입 유형</label>
+          <select class="cf-select" name="type">
+            <option value="">선택해주세요</option>
+            <option>스마트 회의실</option>
+            <option>LED 스튜디오</option>
+            <option>스마트 강의실</option>
+            <option>시스템 통합(SI)</option>
+            <option>기타 문의</option>
+          </select>
+        </div>
+        <div class="cf-g full">
+          <label class="cf-label">문의 내용</label>
+          <textarea class="cf-ta" name="message" placeholder="공간 규모, 예산, 일정 등 간략히 알려주시면 더욱 빠른 안내가 가능합니다."></textarea>
+        </div>
+        <button class="cf-submit" type="submit">문의 보내기 →</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<style>
+  #contact { padding: 100px 60px; background: var(--bg); }
+  .contact-wrap {
+    display: grid; grid-template-columns: 1fr 1fr;
+    box-shadow: 0 20px 80px rgba(13,58,74,0.12);
+  }
+  .c-left {
+    background: var(--navy3); padding: 56px 48px;
+    position: relative; overflow: hidden;
+  }
+  .c-left::before {
+    content: 'EDS'; position: absolute; bottom: -30px; right: -20px;
+    font-family: var(--sans); font-size: 160px; font-weight: 900; font-style: italic;
+    color: rgba(255,255,255,0.025); line-height: 1; pointer-events: none; user-select: none;
+  }
+  .c-left::after {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px;
+    background: linear-gradient(90deg, var(--navy) 0%, var(--red) 40%, var(--cyan) 100%);
+  }
+  .cl-eyebrow { font-size: 10px; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; color: var(--cyan); margin-bottom: 20px; }
+  .cl-title   { font-family: var(--sans); font-size: 30px; font-weight: 800; font-style: italic; color: #fff; line-height: 1.15; margin-bottom: 20px; }
+  .cl-sub     { font-family: var(--kr); font-size: 13px; line-height: 1.9; color: rgba(255,255,255,0.5); margin-bottom: 40px; }
+  .c-info-list { display: flex; flex-direction: column; gap: 14px; }
+  .ci { display: flex; align-items: center; gap: 12px; font-family: var(--kr); font-size: 13px; color: rgba(255,255,255,0.65); }
+  .ci-icon {
+    width: 30px; height: 30px; flex-shrink: 0;
+    background: rgba(0,184,217,0.12); display: flex; align-items: center; justify-content: center; font-size: 13px;
+    clip-path: polygon(6px 0, 100% 0, calc(100% - 6px) 100%, 0 100%);
+  }
+
+  .c-right { background: var(--white); padding: 56px 48px; }
+  .c-right::before {
+    content: ''; display: block; height: 4px;
+    background: linear-gradient(90deg, var(--red) 0%, var(--cyan) 100%);
+    margin: -56px -48px 36px;
+  }
+  .cf-title { font-family: var(--sans); font-size: 20px; font-weight: 700; color: var(--navy); margin-bottom: 6px; }
+  .cf-sub   { font-family: var(--kr); font-size: 12px; color: var(--gray); margin-bottom: 32px; }
+
+  .cf { display: flex; flex-direction: column; gap: 0; }
+  .cf-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .cf-g { display: flex; flex-direction: column; border-bottom: 1.5px solid var(--light); padding: 16px 0 10px; margin-bottom: 4px; }
+  .cf-g.full { grid-column: 1/-1; }
+  .cf-g:focus-within { border-bottom-color: var(--cyan); }
+  .cf-label  { font-size: 9px; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; color: var(--gray); margin-bottom: 6px; }
+  .cf-input, .cf-select, .cf-ta {
+    background: none; border: none; outline: none;
+    font-family: var(--kr); font-size: 14px; color: var(--navy3); resize: none;
+  }
+  .cf-input::placeholder, .cf-ta::placeholder { color: rgba(13,58,74,0.25); }
+  .cf-ta     { min-height: 80px; }
+  .cf-select { cursor: pointer; appearance: none; }
+  .cf-submit {
+    margin-top: 28px; align-self: flex-start;
+    background: var(--red); color: #fff; border: none; cursor: pointer;
+    font-family: var(--sans); font-size: 12px; font-weight: 700;
+    letter-spacing: .15em; text-transform: uppercase; padding: 15px 40px;
+    clip-path: polygon(10px 0, 100% 0, calc(100% - 10px) 100%, 0 100%);
+    transition: background 0.2s, transform 0.15s;
+  }
+  .cf-submit:hover { background: var(--red2); transform: translateY(-2px); }
+
+  @media (max-width: 768px) {
+    #contact { padding: 72px 24px; }
+    .contact-wrap { grid-template-columns: 1fr; }
+    .c-left, .c-right { padding: 40px 28px; }
+    .c-right::before { margin: -40px -28px 36px; }
+    .cf-row { grid-template-columns: 1fr; }
+  }
+</style>
