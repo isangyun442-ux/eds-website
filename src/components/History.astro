@@ -1,0 +1,328 @@
+---
+// 회사 연혁 섹션 — 세로 타임라인
+const history = [
+  {
+    year: '2020',
+    items: [
+      { month: '05월', desc: '구내방송장치 직접생산증명 등록' },
+    ]
+  },
+  {
+    year: '2019',
+    items: [
+      { month: '09월', desc: '컴퓨터서버 직접생산증명 등록' },
+    ]
+  },
+  {
+    year: '2018',
+    items: [
+      { month: '01월', desc: '캐나다 Kontron 사 Symkloud Partner 계약' },
+      { month: '03월', desc: '공장등록 (에이스테크노타워 2차)' },
+      { month: '05월', desc: 'KOBA 2018 전시회 출품' },
+    ]
+  },
+  {
+    year: '2017',
+    items: [
+      { month: '12월', desc: '구로구 디지털로31길 에이스테크노타워 2차 본점 이전' },
+    ]
+  },
+  {
+    year: '2016',
+    items: [
+      { month: '04월', desc: '납입자본금 2억으로 증자' },
+      { month: '05월', desc: '정보통신공사업 면허 획득' },
+      { month: '11월', desc: '소프트웨어 직접생산증명 등록' },
+    ]
+  },
+  {
+    year: '2015',
+    items: [
+      { month: '06월', desc: '기술혁신형 중소기업(이노비즈) 인증' },
+      { month: '10월', desc: '디지털방송 모니터링 시스템 특허 등록' },
+    ]
+  },
+  {
+    year: '2014',
+    items: [
+      { month: '01월', desc: '내용기반 영상검색 장치 및 방법 특허 획득' },
+      { month: '05월', desc: '(주)넷클립스 Authorized Value Partner' },
+      { month: '10월', desc: '다중 영상 스트림 녹화 방법 및 그 장치 특허 획득' },
+    ]
+  },
+  {
+    year: '2013',
+    items: [
+      { month: '01월', desc: '구로3동 170-3 벽산디지털밸리 7차로 본점 이전' },
+      { month: '01월', desc: '디지털방송 모니터링 장비 "mediabox" 출시' },
+    ]
+  },
+  {
+    year: '2012',
+    items: [
+      { month: '05월', desc: '연구개발전담부서 설립' },
+      { month: '08월', desc: '디지털방송 모니터링 시스템 특허 획득' },
+    ]
+  },
+  {
+    year: '2009',
+    items: [
+      { month: '02월', desc: 'ISO 9001: 2000, KS A 9001: 2007 취득' },
+      { month: '05월', desc: 'HP Business Partner' },
+    ]
+  },
+  {
+    year: '2008',
+    items: [
+      { month: '04월', desc: 'Apple Technical Partner 계약' },
+      { month: '09월', desc: '소프트웨어사업자 등록' },
+      { month: '11월', desc: '프로그램등록 (이담 Easy Encode / 이담 CLUSTER MG)' },
+      { month: '12월', desc: '벤처기업 확인서 (기술보증기금)' },
+    ]
+  },
+  {
+    year: '2007',
+    items: [
+      { month: '03월', desc: '구로구 구로동 이엔씨벤처드림타워 5차에서 (주)이담에스티 설립' },
+      { month: '08월', desc: '자본금 1억으로 증자' },
+    ]
+  },
+];
+---
+
+<section id="history">
+  <div class="history-inner">
+
+    <!-- 헤더 -->
+    <div class="h-header reveal">
+      <div class="h-eyebrow">Company History</div>
+      <h2 class="h-title">EDS의<br />걸어온 길</h2>
+      <p class="h-sub">2007년 창립 이래 끊임없이 성장해온 이담에스티의 연혁입니다</p>
+    </div>
+
+    <!-- 타임라인 -->
+    <div class="timeline">
+      <!-- 중앙 라인 -->
+      <div class="tl-line"></div>
+
+      {history.map((h, i) => (
+        <div class={`tl-row reveal ${i % 2 === 0 ? 'left' : 'right'}`}>
+
+          <!-- 연도 뱃지 -->
+          <div class="tl-year-wrap">
+            <div class="tl-year">{h.year}</div>
+          </div>
+
+          <!-- 내용 카드 -->
+          <div class="tl-card">
+            <div class="tl-card-inner">
+              {h.items.map((item) => (
+                <div class="tl-item">
+                  <span class="tl-month">{item.month}</span>
+                  <span class="tl-desc">{item.desc}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+        </div>
+      ))}
+
+      <!-- 시작점 -->
+      <div class="tl-start reveal">
+        <div class="tl-start-dot"></div>
+        <div class="tl-start-label">FOUNDED 2007</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<style>
+  #history {
+    background: var(--navy3);
+    padding: 100px 60px;
+    position: relative;
+    overflow: hidden;
+  }
+  /* 배경 그리드 */
+  #history::before {
+    content: '';
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(0,184,217,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,184,217,0.04) 1px, transparent 1px);
+    background-size: 60px 60px;
+    pointer-events: none;
+  }
+
+  .history-inner { max-width: 1000px; margin: 0 auto; position: relative; z-index: 1; }
+
+  /* 헤더 */
+  .h-header { text-align: center; margin-bottom: 80px; }
+  .h-eyebrow {
+    display: inline-flex; align-items: center; gap: 12px;
+    font-size: 11px; font-weight: 700; letter-spacing: .22em;
+    text-transform: uppercase; color: var(--cyan); margin-bottom: 16px;
+  }
+  .h-eyebrow::before,
+  .h-eyebrow::after { content: ''; display: block; width: 32px; height: 1px; background: var(--cyan); opacity: .4; }
+  .h-title {
+    font-family: var(--sans);
+    font-size: clamp(32px, 5vw, 52px); font-weight: 800; font-style: italic;
+    color: #fff; line-height: 1.1; letter-spacing: -0.02em; margin-bottom: 16px;
+  }
+  .h-sub { font-family: var(--kr); font-size: 14px; color: rgba(255,255,255,0.4); line-height: 1.7; }
+
+  /* 타임라인 컨테이너 */
+  .timeline {
+    position: relative;
+    padding: 0 0 60px;
+  }
+
+  /* 중앙 세로 라인 */
+  .tl-line {
+    position: absolute;
+    top: 0; bottom: 0;
+    left: 50%; transform: translateX(-50%);
+    width: 2px;
+    background: linear-gradient(180deg, var(--cyan) 0%, rgba(0,184,217,0.2) 100%);
+  }
+
+  /* 각 연도 행 */
+  .tl-row {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 0 24px;
+    margin-bottom: 40px;
+    align-items: flex-start;
+    position: relative;
+  }
+
+  /* 연도 뱃지 — 중앙 */
+  .tl-year-wrap {
+    grid-column: 2;
+    display: flex; justify-content: center; align-items: flex-start;
+    padding-top: 4px;
+  }
+  .tl-year {
+    background: var(--red);
+    color: #fff;
+    font-family: var(--sans);
+    font-size: 14px; font-weight: 800; font-style: italic;
+    letter-spacing: .06em;
+    padding: 6px 16px;
+    clip-path: polygon(8px 0, 100% 0, calc(100% - 8px) 100%, 0 100%);
+    white-space: nowrap;
+    position: relative; z-index: 2;
+  }
+
+  /* 카드 */
+  .tl-card { display: flex; }
+
+  /* 왼쪽 행 — 카드가 왼쪽 */
+  .tl-row.left .tl-card {
+    grid-column: 1; grid-row: 1;
+    justify-content: flex-end;
+  }
+  .tl-row.left .tl-year-wrap { grid-column: 2; grid-row: 1; }
+  .tl-row.left { grid-template-areas: "card year empty"; }
+  .tl-row.left > .tl-card    { grid-area: card; }
+  .tl-row.left > .tl-year-wrap { grid-area: year; }
+
+  /* 오른쪽 행 — 카드가 오른쪽 */
+  .tl-row.right { grid-template-areas: "empty year card"; }
+  .tl-row.right > .tl-year-wrap { grid-area: year; }
+  .tl-row.right > .tl-card   { grid-area: card; }
+
+  .tl-card-inner {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(0,184,217,0.15);
+    border-radius: 2px;
+    padding: 16px 20px;
+    max-width: 360px;
+    width: 100%;
+    position: relative;
+    transition: border-color 0.3s, background 0.3s;
+  }
+  .tl-card-inner:hover {
+    border-color: rgba(0,184,217,0.4);
+    background: rgba(255,255,255,0.07);
+  }
+
+  /* 카드 화살표 */
+  .tl-row.left .tl-card-inner::after {
+    content: '';
+    position: absolute; top: 12px; right: -8px;
+    border-top: 8px solid transparent;
+    border-bottom: 8px solid transparent;
+    border-left: 8px solid rgba(0,184,217,0.15);
+  }
+  .tl-row.right .tl-card-inner::after {
+    content: '';
+    position: absolute; top: 12px; left: -8px;
+    border-top: 8px solid transparent;
+    border-bottom: 8px solid transparent;
+    border-right: 8px solid rgba(0,184,217,0.15);
+  }
+
+  /* 항목 */
+  .tl-item {
+    display: flex; gap: 10px; align-items: flex-start;
+    padding: 5px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+  }
+  .tl-item:last-child { border-bottom: none; padding-bottom: 0; }
+  .tl-item:first-child { padding-top: 0; }
+
+  .tl-month {
+    font-family: var(--sans);
+    font-size: 10px; font-weight: 700;
+    letter-spacing: .08em; color: var(--cyan);
+    flex-shrink: 0; padding-top: 2px;
+    min-width: 30px;
+  }
+  .tl-desc {
+    font-family: var(--kr);
+    font-size: 12px; line-height: 1.7;
+    color: rgba(255,255,255,0.7);
+  }
+
+  /* 시작점 */
+  .tl-start {
+    display: flex; flex-direction: column; align-items: center;
+    margin-top: 20px;
+  }
+  .tl-start-dot {
+    width: 16px; height: 16px; border-radius: 50%;
+    background: var(--cyan);
+    box-shadow: 0 0 16px var(--cyan);
+    margin-bottom: 10px;
+  }
+  .tl-start-label {
+    font-family: var(--sans);
+    font-size: 11px; font-weight: 700; font-style: italic;
+    letter-spacing: .15em; color: var(--cyan); opacity: .7;
+  }
+
+  /* 모바일 */
+  @media (max-width: 768px) {
+    #history { padding: 72px 24px; }
+    .tl-line { left: 20px; }
+    .tl-row {
+      grid-template-columns: auto 1fr;
+      grid-template-areas: "year card" !important;
+      gap: 0 16px;
+    }
+    .tl-row > .tl-card { grid-area: card !important; justify-content: flex-start !important; }
+    .tl-row > .tl-year-wrap { grid-area: year !important; }
+    .tl-row.left .tl-card-inner::after,
+    .tl-row.right .tl-card-inner::after {
+      top: 12px; left: -8px; right: auto;
+      border-left: none;
+      border-right: 8px solid rgba(0,184,217,0.15);
+    }
+    .tl-card-inner { max-width: 100%; }
+    .tl-start { align-items: flex-start; padding-left: 12px; }
+  }
+</style>
