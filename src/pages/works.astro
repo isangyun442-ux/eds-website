@@ -48,21 +48,22 @@
     .result-count strong{color:#D42B2B;font-weight:700;}
 
     /* GRID */
-    .works-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;background:#e8e8e8;}
-    .wc{background:#fff;cursor:pointer;position:relative;overflow:hidden;transition:box-shadow 0.2s;display:flex;flex-direction:column;}
-    .wc:hover{box-shadow:0 4px 20px rgba(0,0,0,0.1);z-index:1;}
-    .wc-img{height:160px;overflow:hidden;position:relative;background:#C8D8E0;}
-    .wc-img-bg{position:absolute;inset:0;background-size:cover;background-position:center;transition:transform 0.4s;}
-    .wc:hover .wc-img-bg{transform:scale(1.04);}
-    .wc-img-placeholder{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#D8E8EE,#C0D4DC);}
-    .wc-img-placeholder span{font-size:9px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:#8CAAB4;}
-    .wc-body{padding:14px 16px;flex:1;display:flex;flex-direction:column;}
-    .wc-cat{font-size:9px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:#00B8D9;margin-bottom:5px;}
-    .wc-title{font-size:13px;font-weight:700;color:#0A0A0A;line-height:1.4;margin-bottom:6px;flex:1;}
-    .wc-overview{font-size:11px;color:#999;line-height:1.65;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;margin-bottom:8px;}
-    .wc-meta{display:flex;align-items:center;justify-content:space-between;border-top:1px solid #f5f5f5;padding-top:8px;margin-top:auto;}
-    .wc-date{font-size:10px;color:#bbb;}
-    .wc-client{font-size:9px;font-weight:700;background:#f0f0f0;color:#555;padding:2px 8px;}
+    .works-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:3px;background:#e0e0e0;}
+    .wc{cursor:pointer;position:relative;overflow:hidden;height:220px;background:#0D2030;}
+    .wc:hover .wc-img-bg{transform:scale(1.06);}
+    .wc-img-bg{position:absolute;inset:0;background-size:cover;background-position:center;transition:transform 0.5s ease;opacity:0.85;}
+    .wc:hover .wc-img-bg{opacity:1;}
+    .wc-img-placeholder{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#0D2A3A,#1A3A4A);}
+    .wc-img-placeholder span{font-size:9px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.3);}
+    .wc-overlay{position:absolute;inset:0;background:linear-gradient(transparent 30%,rgba(0,0,0,0.75));}
+    .wc:hover .wc-overlay{background:linear-gradient(transparent 20%,rgba(0,0,0,0.82));}
+    .wc-body{position:absolute;bottom:0;left:0;right:0;padding:14px 16px;}
+    .wc-cat{font-size:9px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:#00B8D9;margin-bottom:4px;display:block;}
+    .wc-title{font-size:13px;font-weight:700;color:#fff;line-height:1.35;margin-bottom:4px;}
+    .wc-meta{display:flex;align-items:center;justify-content:space-between;margin-top:4px;}
+    .wc-date{font-size:10px;color:rgba(255,255,255,0.45);}
+    .wc-client{font-size:9px;font-weight:700;background:rgba(255,255,255,0.12);color:rgba(255,255,255,0.7);padding:2px 8px;}
+    .wc-overview{display:none;}
 
     /* EMPTY */
     .empty{text-align:center;padding:80px 20px;display:none;}
@@ -107,17 +108,17 @@
     .footer img{height:22px;filter:brightness(0) invert(1);opacity:0.6;}
     .footer-copy{font-size:11px;color:#444;}
 
-    @media(max-width:960px){.works-grid{grid-template-columns:repeat(3,1fr);}}
+    @media(max-width:1024px){.works-grid{grid-template-columns:repeat(3,1fr);}}
     @media(max-width:768px){
       .nav{padding:12px 20px;}
       .nav-menu{display:none;}
       .wrap{padding:80px 16px 60px;}
-      .works-grid{grid-template-columns:repeat(2,1fr);}
+      .works-grid{grid-template-columns:repeat(2,1fr);} .wc{height:180px;}
       .modal-gallery{grid-template-columns:1fr 70px;}
       .modal-main{height:240px;}
       .footer{padding:20px 24px;flex-direction:column;gap:10px;text-align:center;}
     }
-    @media(max-width:480px){.works-grid{grid-template-columns:1fr;}}
+    @media(max-width:480px){.works-grid{grid-template-columns:1fr 1fr;} .wc{height:160px;}}
   </style>
 </head>
 <body>
@@ -214,7 +215,7 @@
 
 
 
-<script is:inline>
+<script>
 const allProjects = [
   { id:16585, title:'한국외국어대학교 스튜디오 첨단화', date:'2025.02', service:'LED 디스플레이', client:'교육기관', overview:'신규 LED 설치 및 유튜브 부스 설치를 통한 이러닝 컨텐츠 및 미디어 컨텐츠 제작 첨단 방송시스템', images:["/images/portfolio/HUFS_ST_04.jpg"] },
   { id:16578, title:'서울사이버대학교 스튜디오 장비 고도화', date:'2024.12', service:'스마트 강의실', client:'교육기관', overview:'기존 방송시스템', images:["/images/portfolio/SC_ST_09.jpg"] },
@@ -409,11 +410,11 @@ function render() {
       ? `<div class="wc-img-bg" style="background-image:url('${p.images[0]}')"></div>`
       : `<div class="wc-img-placeholder"><span>${p.service}</span></div>`;
     return `<div class="wc" onclick="openModal(${p.id})">
-      <div class="wc-img">${imgHtml}</div>
+      ${imgHtml}
+      <div class="wc-overlay"></div>
       <div class="wc-body">
         <span class="wc-cat">${p.service}</span>
         <p class="wc-title">${p.title}</p>
-        ${p.overview ? `<p class="wc-overview">${p.overview}</p>` : ''}
         <div class="wc-meta">
           <span class="wc-date">${p.date}</span>
           <span class="wc-client">${p.client}</span>
