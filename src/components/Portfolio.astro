@@ -1,15 +1,65 @@
 ---
-// 구축사례 섹션
-// 수정할 것: projects 배열의 내용과 image 경로
-// image: '/images/파일명.jpg' 형태로 public/images/ 폴더에 사진 넣으면 돼요
-
 const projects = [
-  { cat: 'LED Studio',    name: 'K-콘텐츠 XR 스튜디오',    meta: '서울 강남 · 2024', image: '/images/studio-1.jpg', big: true },
-  { cat: 'Smart Meeting', name: '대기업 임원회의실',         meta: '서울 여의도 · 2024', image: '/images/studio-2.jpg', big: true },
-  { cat: 'Lecture Room',  name: '대학교 스마트 강의동',      meta: '경기 수원 · 2024', image: '' },
-  { cat: 'LED Studio',    name: '방송사 뉴스 스튜디오',      meta: '서울 마포 · 2023', image: '' },
-  { cat: 'Smart Meeting', name: '스타트업 허브 회의시설',    meta: '서울 성수 · 2023', image: '' },
-  { cat: 'Education',     name: '기업 교육센터 구축',        meta: '인천 송도 · 2023', image: '' },
+  {
+    id: 1,
+    cat: 'LED 디스플레이',
+    name: '한국외국어대학교 스튜디오 첨단화',
+    meta: '2025.02 · 교육기관',
+    desc: '신규 LED 설치 및 유튜브 부스 설치를 통한 이러닝 컨텐츠 및 미디어 컨텐츠 제작 첨단 방송시스템 구축',
+    tags: ['LED Wall', '유튜브 스튜디오', '이러닝', '방송제작시스템'],
+    images: ['/images/HUFS_ST_04.jpg', '', '', ''],
+    big: true,
+  },
+  {
+    id: 2,
+    cat: '스마트 강의실',
+    name: '서울사이버대학교 스튜디오 고도화',
+    meta: '2024.12 · 교육기관',
+    desc: '기존 방송시스템 장비 전면 고도화. 최신 UHD 촬영 환경과 스마트 강의실 시스템으로 업그레이드',
+    tags: ['스마트 강의실', 'UHD 스튜디오', '방송제작시스템', '이러닝'],
+    images: ['/images/SC_ST_09.jpg', '', '', ''],
+    big: false,
+  },
+  {
+    id: 3,
+    cat: '이러닝 스튜디오',
+    name: '공주대학교 미디어 콘텐츠 스튜디오',
+    meta: '2024.08 · 교육기관',
+    desc: '온라인 교육 콘텐츠 제작에 최적화된 이러닝 스튜디오. 크로마키·자동 추적 카메라·실시간 스트리밍 지원',
+    tags: ['이러닝 스튜디오', '자동 추적 카메라', '크로마키', '스트리밍'],
+    images: ['/images/GMC_S_01.jpg', '', '', ''],
+    big: false,
+  },
+  {
+    id: 4,
+    cat: '방송제작 스튜디오',
+    name: '경기도교육청 UHD 스튜디오',
+    meta: '2023.12 · 공공기관',
+    desc: '경기도 교육청 남부청사 UHD 방송 스튜디오 구축. 4K UHD 촬영 및 실시간 방송제작 환경 완성',
+    tags: ['UHD 스튜디오', '방송제작', '공공기관', '4K'],
+    images: ['/images/GKDE_S_08.jpg', '', '', ''],
+    big: false,
+  },
+  {
+    id: 5,
+    cat: '방송 인프라',
+    name: 'KTV 방송시스템 장비 설치',
+    meta: '2024.12 · 공공기관',
+    desc: '한국정책방송원 KTV 방송시스템 장비 구매 및 설치. 기존 시스템과 연계·호환되는 방송 제작환경 개선',
+    tags: ['방송 인프라', '방송시스템', '공공기관', '시스템 통합'],
+    images: ['/images/KTV_BS_01.jpg', '', '', ''],
+    big: false,
+  },
+  {
+    id: 6,
+    cat: '아카이브 시스템',
+    name: '몽골 국가기록원 디지털 아카이브',
+    meta: '2024.08 · 해외',
+    desc: '몽골 국가기록원 디지털 아카이브 시스템 구축. 영상 자산 디지털화 및 장기 보존 시스템 완성',
+    tags: ['아카이브 시스템', '디지털 보존', '해외 사업', '미디어 자산'],
+    images: ['/images/MG_DAS_02.jpg', '', '', ''],
+    big: false,
+  },
 ];
 ---
 
@@ -17,20 +67,25 @@ const projects = [
   <div class="reveal">
     <div class="s-eyebrow">Portfolio</div>
     <h2 class="s-title">구축 사례</h2>
-    <p class="s-sub">실제 완성된 공간들을 확인해보세요</p>
+    <p class="s-sub">2007년부터 쌓아온 <strong>170개+</strong> 구축 경험을 확인하세요</p>
   </div>
 
   <div class="port-grid">
-    {projects.map((p, i) => (
-      <div class={`port-card reveal ${p.big ? 'big' : ''}`}>
-        <div class="port-bg" style={p.image ? `background-image:url('${p.image}')` : ''}></div>
-        {/* 사진 없을 때 LED 픽셀 애니메이션 표시 */}
-        {!p.image && (
+    {projects.map((p) => (
+      <div
+        class={`port-card reveal ${p.big ? 'big' : ''}`}
+        onclick={`openModal(${p.id})`}
+        role="button"
+        tabindex="0"
+      >
+        <div class="port-bg" style={p.images[0] ? `background-image:url('${p.images[0]}')` : ''}></div>
+        {!p.images[0] && (
           <div class="port-pixels">
             {Array.from({length: 80}).map(() => <div class="pp"></div>)}
           </div>
         )}
         <div class="port-overlay"></div>
+        <div class="port-hover-icon">🔍</div>
         <div class="port-info">
           <div class="pi-cat">{p.cat}</div>
           <div class="pi-name">{p.name}</div>
@@ -41,12 +96,61 @@ const projects = [
   </div>
 </section>
 
+<div class="modal-backdrop" id="modal-backdrop" onclick="closeModal()"></div>
+<div class="modal-wrap" id="modal-wrap">
+  <div class="modal-header">
+    <div>
+      <div class="modal-cat"  id="modal-cat"></div>
+      <div class="modal-title" id="modal-title"></div>
+      <div class="modal-meta"  id="modal-meta"></div>
+    </div>
+    <button class="modal-close" onclick="closeModal()">✕</button>
+  </div>
+  <div class="modal-content">
+    <div class="modal-main-img" id="modal-main-img">
+      <div class="modal-pixels" id="modal-pixels">
+        {Array.from({length: 36}).map(() => <div class="mpp"></div>)}
+      </div>
+      <img id="modal-img" src="" alt="" />
+    </div>
+    <div class="modal-thumbs" id="modal-thumbs">
+      {[0,1,2,3].map((i) => (
+        <div class="thumb" id={`thumb-${i}`} onclick={`selectThumb(${i})`}>
+          <div class="thumb-inner" id={`thumb-inner-${i}`}></div>
+          <div class="thumb-num">{i+1}</div>
+        </div>
+      ))}
+    </div>
+  </div>
+  <div class="modal-body">
+    <p class="modal-desc" id="modal-desc"></p>
+    <div class="modal-tags" id="modal-tags"></div>
+  </div>
+  <div class="modal-footer">
+    <button class="modal-nav-btn" onclick="closeModal()">← 목록으로</button>
+    <a class="modal-contact-btn" href="#contact">도입 문의하기 →</a>
+  </div>
+</div>
+
 <style>
   #portfolio { padding: 100px 60px; background: var(--navy3); }
   #portfolio .s-eyebrow { color: var(--cyan); }
   #portfolio .s-eyebrow::before { background: var(--cyan); }
   #portfolio .s-title { color: #fff; }
-  #portfolio .s-sub   { color: rgba(255,255,255,0.4); }
+  #portfolio .s-sub { color: rgba(255,255,255,0.4); }
+  #portfolio .s-sub strong { color: var(--cyan); }
+  .s-eyebrow {
+    display: inline-flex; align-items: center; gap: 10px;
+    font-size: 11px; font-weight: 700; letter-spacing: .2em; text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+  .s-eyebrow::before { content: ''; display: block; width: 24px; height: 2px; }
+  .s-title {
+    font-family: var(--sans); font-size: clamp(28px, 4vw, 44px);
+    font-weight: 800; font-style: italic;
+    line-height: 1.1; letter-spacing: -0.02em; margin-bottom: 16px;
+  }
+  .s-sub { font-family: var(--kr); font-size: 15px; line-height: 1.85; color: var(--gray); max-width: 520px; }
 
   .port-grid {
     display: grid; grid-template-columns: repeat(3,1fr);
@@ -55,48 +159,184 @@ const projects = [
   }
   .port-card { position: relative; overflow: hidden; background: var(--navy2); cursor: pointer; }
   .port-card.big { grid-row: 1/3; }
-
   .port-bg {
     position: absolute; inset: 0;
-    background: linear-gradient(135deg, #061828 0%, #0D2E45 50%, #0A4060 100%);
+    background: linear-gradient(135deg, #061828, #0D2E45, #0A4060);
     background-size: cover; background-position: center;
     transition: transform 0.5s cubic-bezier(0.25,0.46,0.45,0.94);
   }
   .port-card:hover .port-bg { transform: scale(1.04); }
-
   .port-pixels {
     position: absolute; inset: 0;
     display: grid; grid-template-columns: repeat(10,1fr); grid-template-rows: repeat(8,1fr);
-    gap: 3px; padding: 16px; opacity: 0.45;
+    gap: 3px; padding: 16px; opacity: 0.4;
   }
   .pp { border-radius: 1px; background: var(--cyan); animation: ppa 3s ease-in-out infinite; }
   .pp:nth-child(3n) { animation-delay:.4s; background: var(--red); }
-  .pp:nth-child(5n) { animation-delay:.8s; background: #fff; opacity:.2; }
-  .pp:nth-child(7n) { animation-delay:1.2s; opacity:.1; }
+  .pp:nth-child(5n) { animation-delay:.8s; opacity:.2; }
   @keyframes ppa { 0%,100%{opacity:.6} 50%{opacity:.15} }
-
   .port-overlay {
     position: absolute; inset: 0;
-    background: linear-gradient(transparent 40%, rgba(6,18,28,0.9) 100%);
+    background: linear-gradient(transparent 40%, rgba(6,18,28,0.9));
+    transition: background 0.3s;
   }
+  .port-card:hover .port-overlay { background: linear-gradient(rgba(13,58,74,0.35), rgba(6,18,28,0.92)); }
+  .port-hover-icon {
+    position: absolute; top: 50%; left: 50%;
+    transform: translate(-50%,-50%) scale(0);
+    font-size: 28px; opacity: 0; z-index: 2;
+    transition: transform 0.3s, opacity 0.3s;
+  }
+  .port-card:hover .port-hover-icon { transform: translate(-50%,-50%) scale(1); opacity: 1; }
   .port-card::after {
     content: ''; position: absolute; top: 0; right: 0;
-    border-top: 28px solid var(--cyan); border-left: 28px solid transparent; opacity: 0.6;
+    border-top: 24px solid var(--cyan); border-left: 24px solid transparent; opacity: .6;
   }
   .port-card:nth-child(even)::after { border-top-color: var(--red); }
-
-  .port-info { position: absolute; bottom: 0; left: 0; right: 0; padding: 20px 22px; }
-  .pi-cat  { font-size: 10px; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; color: var(--cyan); margin-bottom: 6px; }
-  .pi-name { font-family: var(--sans); font-size: 16px; font-weight: 700; color: #fff; margin-bottom: 4px; }
+  .port-info { position: absolute; bottom: 0; left: 0; right: 0; padding: 18px 20px; }
+  .pi-cat  { font-size: 10px; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; color: var(--cyan); margin-bottom: 5px; }
+  .pi-name { font-family: var(--sans); font-size: 15px; font-weight: 700; color: #fff; margin-bottom: 3px; }
   .pi-meta { font-size: 11px; color: rgba(255,255,255,0.35); }
+
+  .modal-backdrop {
+    display: none; position: fixed; inset: 0;
+    background: rgba(0,0,0,0.8); z-index: 900;
+  }
+  .modal-backdrop.open { display: block; }
+  .modal-wrap {
+    display: none; position: fixed;
+    top: 50%; left: 50%;
+    transform: translate(-50%,-50%);
+    width: 90%; max-width: 780px;
+    background: var(--white); z-index: 901;
+    max-height: 90vh; overflow-y: auto;
+  }
+  .modal-wrap.open { display: block; }
+  .modal-header {
+    background: var(--navy); padding: 18px 22px;
+    display: flex; align-items: center; justify-content: space-between;
+    border-bottom: 3px solid var(--red);
+    position: sticky; top: 0; z-index: 10;
+  }
+  .modal-cat   { font-size: 10px; font-weight: 700; letter-spacing: .15em; text-transform: uppercase; color: var(--cyan); margin-bottom: 4px; }
+  .modal-title { font-family: var(--sans); font-size: 20px; font-weight: 800; font-style: italic; color: #fff; }
+  .modal-meta  { font-size: 11px; color: rgba(255,255,255,0.4); margin-top: 3px; }
+  .modal-close {
+    width: 34px; height: 34px; background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.15); cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 14px; color: rgba(255,255,255,0.6); flex-shrink: 0;
+    clip-path: polygon(6px 0,100% 0,calc(100% - 6px) 100%,0 100%);
+    transition: background 0.2s;
+  }
+  .modal-close:hover { background: rgba(212,43,43,0.5); color: #fff; }
+  .modal-content { display: grid; grid-template-columns: 1fr 90px; }
+  .modal-main-img {
+    height: 320px; position: relative; overflow: hidden;
+    background: linear-gradient(135deg, #061828, #0D2E45);
+    display: flex; align-items: center; justify-content: center;
+  }
+  #modal-img { display: none; width: 100%; height: 100%; object-fit: cover; position: absolute; inset: 0; }
+  .modal-pixels {
+    position: absolute; inset: 12px;
+    display: grid; grid-template-columns: repeat(12,1fr); gap: 3px; opacity: 0.2;
+  }
+  .mpp { border-radius: 1px; background: var(--cyan); animation: ppa 3s ease-in-out infinite; }
+  .mpp:nth-child(3n) { animation-delay:.4s; background: var(--red); }
+  .modal-thumbs {
+    display: flex; flex-direction: column; gap: 3px;
+    padding: 3px; background: var(--navy2);
+    border-left: 1px solid rgba(0,184,217,0.15);
+  }
+  .thumb { flex: 1; cursor: pointer; position: relative; overflow: hidden; border: 1.5px solid transparent; transition: border-color 0.2s; min-height: 0; }
+  .thumb.active { border-color: var(--cyan); }
+  .thumb-inner { width: 100%; height: 100%; background: #0A2D3A; background-size: cover; background-position: center; }
+  .thumb-num { position: absolute; bottom: 2px; right: 4px; font-size: 8px; color: rgba(255,255,255,0.4); font-weight: 700; }
+  .modal-body { padding: 18px 22px; background: var(--white); border-top: 1px solid var(--line); }
+  .modal-desc { font-family: var(--kr); font-size: 13px; line-height: 1.9; color: #607080; margin-bottom: 14px; }
+  .modal-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+  .modal-tag  { font-size: 10px; font-weight: 600; background: var(--light); color: var(--navy); padding: 3px 10px; }
+  .modal-footer {
+    padding: 12px 22px; background: var(--bg);
+    border-top: 1px solid var(--line);
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .modal-nav-btn { font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--gray); cursor: pointer; background: none; border: none; transition: color 0.2s; }
+  .modal-nav-btn:hover { color: var(--navy); }
+  .modal-contact-btn {
+    font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
+    background: var(--red); color: #fff; border: none; cursor: pointer;
+    padding: 9px 22px; text-decoration: none;
+    clip-path: polygon(6px 0,100% 0,calc(100% - 6px) 100%,0 100%);
+    transition: background 0.2s; display: inline-flex; align-items: center;
+  }
+  .modal-contact-btn:hover { background: var(--red2); }
 
   @media (max-width: 768px) {
     #portfolio { padding: 72px 24px; }
     .port-grid { grid-template-columns: 1fr 1fr; grid-template-rows: auto; }
-    .port-card.big { grid-row: auto; }
-    .port-card { height: 200px; }
+    .port-card.big { grid-row: auto; height: 200px; }
+    .port-card { height: 180px; }
+    .modal-wrap { width: 95%; }
+    .modal-content { grid-template-columns: 1fr 70px; }
+    .modal-main-img { height: 220px; }
   }
   @media (max-width: 480px) {
     .port-grid { grid-template-columns: 1fr; }
   }
 </style>
+
+<script is:inline>
+  const projects = [
+    { id:1, cat:'LED 디스플레이',    name:'한국외국어대학교 스튜디오 첨단화',      meta:'2025.02 · 교육기관', desc:'신규 LED 설치 및 유튜브 부스 설치를 통한 이러닝 컨텐츠 및 미디어 컨텐츠 제작 첨단 방송시스템 구축', tags:['LED Wall','유튜브 스튜디오','이러닝','방송제작시스템'], images:['/images/HUFS_ST_04.jpg','/images/HUFS_ST_01.jpg','/images/HUFS_ST_02.jpg','/images/HUFS_ST_03.jpg'] },
+    { id:2, cat:'스마트 강의실',     name:'서울사이버대학교 스튜디오 고도화',      meta:'2024.12 · 교육기관', desc:'기존 방송시스템 장비 전면 고도화. 최신 UHD 촬영 환경과 스마트 강의실 시스템으로 업그레이드', tags:['스마트 강의실','UHD 스튜디오','방송제작시스템','이러닝'], images:['/images/SC_ST_09.jpg','/images/SC_ST_01.jpg','/images/SC_ST_02.jpg','/images/SC_ST_03.jpg'] },
+    { id:3, cat:'이러닝 스튜디오',   name:'공주대학교 미디어 콘텐츠 스튜디오',    meta:'2024.08 · 교육기관', desc:'온라인 교육 콘텐츠 제작에 최적화된 이러닝 스튜디오. 크로마키·자동 추적 카메라·실시간 스트리밍 지원', tags:['이러닝 스튜디오','자동 추적 카메라','크로마키','스트리밍'], images:['/images/GMC_S_01.jpg','/images/GMC_S_02.jpg','/images/GMC_S_03.jpg','/images/GMC_S_04.jpg'] },
+    { id:4, cat:'방송제작 스튜디오', name:'경기도교육청 UHD 스튜디오',            meta:'2023.12 · 공공기관', desc:'경기도 교육청 남부청사 UHD 방송 스튜디오 구축. 4K UHD 촬영 및 실시간 방송제작 환경 완성', tags:['UHD 스튜디오','방송제작','공공기관','4K'], images:['/images/GKDE_S_08.jpg','/images/GKDE_S_06.jpg','/images/GKDE_S_07.jpg','/images/GKDE_S_09.jpg'] },
+    { id:5, cat:'방송 인프라',       name:'KTV 방송시스템 장비 설치',             meta:'2024.12 · 공공기관', desc:'한국정책방송원 KTV 방송시스템 장비 구매 및 설치. 기존 시스템과 연계·호환되는 방송 제작환경 개선', tags:['방송 인프라','방송시스템','공공기관','시스템 통합'], images:['/images/KTV_BS_01.jpg','/images/KTV_BS_02.jpg','/images/KTV_BS_03.jpg','/images/KTV_BS_04.jpg'] },
+    { id:6, cat:'아카이브 시스템',   name:'몽골 국가기록원 디지털 아카이브',      meta:'2024.08 · 해외', desc:'몽골 국가기록원 디지털 아카이브 시스템 구축. 영상 자산 디지털화 및 장기 보존 시스템 완성', tags:['아카이브 시스템','디지털 보존','해외 사업','미디어 자산'], images:['/images/MG_DAS_02.jpg','/images/MG_DAS_03.jpg','/images/MG_DAS_04.jpg','/images/MG_DAS_05.jpg'] },
+  ];
+
+  let currentImages = [];
+
+  function openModal(id) {
+    const p = projects.find(x => x.id === id);
+    if (!p) return;
+    currentImages = p.images;
+    document.getElementById('modal-cat').textContent   = p.cat;
+    document.getElementById('modal-title').textContent = p.name;
+    document.getElementById('modal-meta').textContent  = p.meta;
+    document.getElementById('modal-desc').textContent  = p.desc;
+    document.getElementById('modal-tags').innerHTML = p.tags.map(t => `<span class="modal-tag">${t}</span>`).join('');
+    p.images.forEach((img, i) => {
+      const el = document.getElementById(`thumb-inner-${i}`);
+      if (el) el.style.backgroundImage = img ? `url('${img}')` : 'none';
+    });
+    selectThumb(0);
+    document.getElementById('modal-backdrop').classList.add('open');
+    document.getElementById('modal-wrap').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModal() {
+    document.getElementById('modal-backdrop').classList.remove('open');
+    document.getElementById('modal-wrap').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  function selectThumb(i) {
+    document.querySelectorAll('.thumb').forEach(t => t.classList.remove('active'));
+    document.getElementById(`thumb-${i}`)?.classList.add('active');
+    const src = currentImages[i];
+    const img = document.getElementById('modal-img');
+    const pixels = document.getElementById('modal-pixels');
+    if (src) {
+      img.src = src; img.style.display = 'block';
+      if (pixels) pixels.style.display = 'none';
+    } else {
+      img.style.display = 'none';
+      if (pixels) pixels.style.display = 'grid';
+    }
+  }
+
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+</script>

@@ -1,85 +1,520 @@
 ---
-// 메인 페이지
-// 컴포넌트를 import해서 조립하는 곳이에요
-// 순서 바꾸거나 섹션 추가/제거할 때 여기만 수정하면 돼요
-import Layout    from '../layouts/Layout.astro';
-import Nav       from '../components/Nav.astro';
-import Hero      from '../components/Hero.astro';
-import Services  from '../components/Services.astro';
-import Portfolio from '../components/Portfolio.astro';
-import History from '../components/History.astro';
-import Clients   from '../components/Clients.astro';
-import Contact   from '../components/Contact.astro';
+// EDS 이담에스티 — 풀페이지 스크롤 홈페이지
+// src/pages/index.astro 에 저장하세요
 ---
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EDS 이담에스티 — Beyond The Future | 스마트 공간 솔루션</title>
+  <meta name="description" content="방송 스튜디오부터 LED 디스플레이까지. 17년의 경험으로 최적의 스마트 공간을 설계합니다." />
+  <link rel="icon" href="/favicon.ico" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body {
+      width: 100%; height: 100%;
+      overflow: hidden;
+      font-family: 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', sans-serif;
+      background: #fff;
+      -webkit-font-smoothing: antialiased;
+    }
 
-<Layout title="EDS — Beyond The Future | 스마트 공간 솔루션">
+    /* ── 풀페이지 ── */
+    .fp { position: fixed; inset: 0; overflow: hidden; }
 
-  <Nav />
-  <Hero />
+    /* ── NAV ── */
+    .nav {
+      position: absolute; top: 0; left: 0; right: 0; z-index: 300;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 22px 52px;
+      transition: background 0.5s, box-shadow 0.5s, padding 0.4s;
+    }
+    .nav.scrolled {
+      background: rgba(255,255,255,0.97);
+      box-shadow: 0 1px 0 rgba(0,0,0,0.07);
+      padding: 14px 52px;
+    }
+    .nav-logo { height: 28px; position: relative; width: 140px; }
+    .logo-color {
+      position: absolute; top: 0; left: 0;
+      height: 28px; width: auto; object-fit: contain;
+      opacity: 0; transition: opacity 0.4s;
+    }
+    .logo-white {
+      position: absolute; top: 0; left: 0;
+      height: 28px; width: auto; object-fit: contain;
+      filter: brightness(0) invert(1);
+      opacity: 1; transition: opacity 0.4s;
+    }
+    .nav.scrolled .logo-color  { opacity: 1; }
+    .nav.scrolled .logo-white  { opacity: 0; }
+    .nav-menu { display: flex; gap: 32px; }
+    .nav-menu a { font-size: 13px; font-weight: 500; text-decoration: none; transition: color 0.3s; }
+    .nav.scrolled .nav-menu a { color: #444; }
+    .nav:not(.scrolled) .nav-menu a { color: rgba(255,255,255,0.85); }
+    .nav-cta {
+      font-size: 12px; font-weight: 700; padding: 9px 22px;
+      border: none; cursor: pointer; letter-spacing: 0.06em; transition: all 0.3s;
+    }
+    .nav.scrolled .nav-cta { background: #0D3A4A; color: #fff; }
+    .nav:not(.scrolled) .nav-cta { background: rgba(255,255,255,0.13); color: #fff; border: 1px solid rgba(255,255,255,0.25); }
+    .nav-hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; }
+    .nav-hamburger span { display: block; width: 22px; height: 2px; background: #fff; transition: background 0.3s; }
+    .nav.scrolled .nav-hamburger span { background: #0D3A4A; }
 
-  <!-- 통계 배너 -->
-  <div class="stats-band">
-    <div class="stat-item reveal"><div class="sn">200<span class="sc">+</span></div><div class="sl">구축 완료 공간</div></div>
-    <div class="stat-item reveal"><div class="sn">15<span class="sc">년</span></div><div class="sl">업력 및 전문성</div></div>
-    <div class="stat-item reveal"><div class="sn">98<span class="sc">%</span></div><div class="sl">고객 만족도</div></div>
-    <div class="stat-item reveal"><div class="sn">24<span class="sc">/7</span></div><div class="sl">기술 지원</div></div>
+    /* ── 섹션 공통 ── */
+    .sec {
+      position: absolute; inset: 0;
+      opacity: 0; transform: translateY(24px);
+      pointer-events: none;
+      transition: opacity 0.85s cubic-bezier(0.4,0,0.2,1), transform 0.85s cubic-bezier(0.4,0,0.2,1);
+    }
+    .sec.active  { opacity: 1; transform: translateY(0); pointer-events: all; }
+    .sec.exit-up { opacity: 0; transform: translateY(-24px); }
+
+    /* ── S0 HERO ── */
+    .s0 { background: #000; display: flex; align-items: flex-end; }
+    .yt-wrap { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
+    .yt-wrap iframe {
+      position: absolute; top: 50%; left: 50%;
+      width: calc(100% + 240px); height: calc(100% + 240px);
+      transform: translate(-50%, -50%); border: none;
+    }
+    .hero-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.88) 0%, rgba(0,0,0,0.25) 50%, rgba(0,0,0,0.1) 100%);
+    }
+    .hero-content {
+      position: relative; z-index: 2;
+      padding: 0 52px 64px; width: 100%;
+      opacity: 0; transform: translateY(24px);
+      animation: heroIn 1s 0.6s forwards;
+    }
+    @keyframes heroIn { to { opacity: 1; transform: translateY(0); } }
+    .hero-tag {
+      font-size: 10px; font-weight: 700; letter-spacing: 0.22em;
+      text-transform: uppercase; color: #00B8D9; margin-bottom: 14px;
+      display: flex; align-items: center; gap: 12px;
+    }
+    .hero-tag::before { content: ''; width: 22px; height: 2px; background: #00B8D9; display: block; }
+    .hero-title { font-size: clamp(32px,5vw,68px); font-weight: 800; line-height: 1.06; letter-spacing: -0.03em; color: #fff; margin-bottom: 18px; }
+    .hero-title em { font-style: normal; color: #00B8D9; }
+    .hero-sub { font-size: 15px; color: rgba(255,255,255,0.55); line-height: 1.85; max-width: 460px; margin-bottom: 32px; }
+    .hero-btns { display: flex; gap: 12px; flex-wrap: wrap; }
+    .btn-white  { background: #fff; color: #0D3A4A; font-size: 13px; font-weight: 700; padding: 13px 26px; border: none; cursor: pointer; }
+    .btn-outline{ background: transparent; color: #fff; font-size: 13px; font-weight: 600; padding: 13px 26px; border: 1.5px solid rgba(255,255,255,0.35); cursor: pointer; }
+    .scroll-hint {
+      position: absolute; bottom: 22px; left: 50%; transform: translateX(-50%);
+      z-index: 10; display: flex; flex-direction: column; align-items: center; gap: 6px;
+      transition: opacity 0.5s;
+    }
+    .scroll-hint.hide { opacity: 0; pointer-events: none; }
+    .sh-mouse { width: 20px; height: 30px; border: 1.5px solid rgba(255,255,255,0.35); border-radius: 10px; display: flex; align-items: flex-start; justify-content: center; padding-top: 4px; }
+    .sh-wheel { width: 2px; height: 5px; background: rgba(255,255,255,0.4); border-radius: 1px; animation: shw 1.8s ease infinite; }
+    @keyframes shw { 0%{opacity:1;transform:translateY(0)} 100%{opacity:0;transform:translateY(9px)} }
+    .sh-text { font-size: 9px; color: rgba(255,255,255,0.35); letter-spacing: 0.2em; text-transform: uppercase; }
+
+    /* ── S1 LOGO ── */
+    .s1 { background: #fff; display: flex; align-items: center; justify-content: center; }
+    .logo-reveal { display: flex; flex-direction: column; align-items: center; gap: 20px; text-align: center; }
+    .logo-big { height: 72px; width: auto; max-width: 320px; opacity: 0; transform: scale(0.88); transition: opacity 1s 0.1s, transform 1s 0.1s; }
+    .s1.active .logo-big { opacity: 1; transform: scale(1); }
+    .logo-line { width: 0; height: 3px; background: linear-gradient(90deg,#0D3A4A,#D42B2B,#00B8D9); transition: width 1.2s 0.4s ease; }
+    .s1.active .logo-line { width: 220px; }
+    .logo-claim { font-size: clamp(18px,3vw,30px); font-weight: 800; color: #0A0A0A; letter-spacing: -0.02em; line-height: 1.4; opacity: 0; transform: translateY(14px); transition: opacity 0.8s 0.6s, transform 0.8s 0.6s; }
+    .s1.active .logo-claim { opacity: 1; transform: translateY(0); }
+    .logo-since { font-size: 12px; color: #bbb; letter-spacing: 0.04em; opacity: 0; transition: opacity 0.8s 0.9s; }
+    .s1.active .logo-since { opacity: 1; }
+
+    /* ── S2 PORTFOLIO ── */
+    .s2 { background: #fff; display: flex; flex-direction: column; padding: 72px 48px 28px; }
+    .sec-header { margin-bottom: 20px; flex-shrink: 0; }
+    .sec-tag { font-size: 10px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: #bbb; display: block; margin-bottom: 5px; }
+    .sec-title { font-size: clamp(24px,3.5vw,40px); font-weight: 800; letter-spacing: -0.03em; color: #0A0A0A; }
+    .port-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 2px; flex: 1; background: #f0f0f0; min-height: 0; }
+    .pc { overflow: hidden; position: relative; cursor: pointer; background: #C8D8E0; }
+    .pc-col { display: grid; grid-template-rows: 1fr 1fr; gap: 2px; }
+    .pc-bg { position: absolute; inset: 0; background-size: cover; background-position: center; transition: transform 0.5s ease; }
+    .pc:hover .pc-bg { transform: scale(1.04); }
+    .pc-ov { position: absolute; inset: 0; background: linear-gradient(transparent 35%, rgba(0,0,0,0.65)); }
+    .pc-info { position: absolute; bottom: 0; left: 0; right: 0; padding: 16px 18px; }
+    .pc-cat { font-size: 9px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: #00B8D9; display: block; margin-bottom: 4px; }
+    .pc-name { font-size: 13px; font-weight: 700; color: #fff; line-height: 1.35; }
+    .pc-meta { font-size: 10px; color: rgba(255,255,255,0.45); margin-top: 2px; }
+
+    /* ── S3 SERVICES ── */
+    .s3 { background: #FAFAFA; display: flex; flex-direction: column; padding: 72px 48px 28px; }
+    .svc-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1px; background: #ebebeb; flex: 1; min-height: 0; }
+    .svc { background: #fff; padding: 28px 28px 22px; cursor: pointer; transition: background 0.2s; display: flex; flex-direction: column; }
+    .svc:hover { background: #F5F5F5; }
+    .svc-n { font-size: 10px; font-weight: 700; color: #ddd; letter-spacing: 0.1em; margin-bottom: 10px; }
+    .svc-title { font-size: 15px; font-weight: 700; color: #0A0A0A; margin-bottom: 8px; }
+    .svc-desc { font-size: 12px; color: #999; line-height: 1.75; flex: 1; }
+    .svc-arr { font-size: 16px; color: #ddd; margin-top: 10px; display: inline-block; transition: color 0.2s, transform 0.2s; }
+    .svc:hover .svc-arr { color: #00B8D9; transform: translateX(4px); }
+
+    /* ── S4 STATS + PARTNERS ── */
+    .s4 { background: #fff; display: flex; flex-direction: column; }
+    .s4-scroll { flex: 1; overflow-y: auto; overflow-x: hidden; scrollbar-width: none; min-height: 0; }
+    .s4-scroll::-webkit-scrollbar { display: none; }
+    .s4-inner { padding: 72px 48px 48px; }
+    .s4-sub { font-size: 13px; color: #aaa; text-align: center; margin-bottom: 32px; }
+    .s4-sub strong { color: #D42B2B; }
+    .stats-row { display: grid; grid-template-columns: repeat(4,1fr); gap: 2px; background: #f0f0f0; margin-bottom: 0; }
+    .stat { background: #fff; padding: 28px 28px 22px; }
+    .stat-n { font-size: 44px; font-weight: 800; letter-spacing: -0.04em; color: #0A0A0A; line-height: 1; }
+    .stat-n span { color: #00B8D9; font-size: 28px; }
+    .stat-l { font-size: 11px; color: #aaa; margin-top: 6px; }
+    .mq-wrap { position: relative; overflow: hidden; border-top: 1px solid #f5f5f5; border-bottom: 1px solid #f5f5f5; }
+    .mq-wrap::before,.mq-wrap::after { content:''; position:absolute; top:0; bottom:0; width:52px; z-index:2; pointer-events:none; }
+    .mq-wrap::before { left:0; background: linear-gradient(90deg,#fff,transparent); }
+    .mq-wrap::after  { right:0; background: linear-gradient(-90deg,#fff,transparent); }
+    .mq-track { display: flex; width: max-content; animation: mq 26s linear infinite; }
+    @keyframes mq { 0%{transform:translateX(0)} 100%{transform:translateX(-50%)} }
+    .cli { display:flex; flex-direction:column; align-items:center; justify-content:center; width:130px; height:68px; border-right:1px solid #f5f5f5; gap:5px; padding:0 16px; flex-shrink:0; }
+    .cli-bar { height: 3px; border-radius: 2px; }
+    .cli span { font-size:11px; font-weight:700; letter-spacing:0.06em; color:#0D3A4A; opacity:0.4; text-transform:uppercase; }
+    .brands-div { display:flex; align-items:center; gap:14px; padding:18px 0 14px; }
+    .brands-div::before,.brands-div::after { content:''; flex:1; height:1px; background:#f0f0f0; }
+    .brands-div span { font-size:9px; font-weight:700; letter-spacing:0.18em; text-transform:uppercase; color:#bbb; white-space:nowrap; }
+    .brands-grid { display:grid; grid-template-columns:repeat(6,1fr); gap:1px; background:#f0f0f0; }
+    .brand { background:#fff; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:18px 10px; gap:6px; transition:background 0.2s; }
+    .brand:hover { background:#FAFAFA; }
+    .bb { width:38px; height:38px; display:flex; align-items:center; justify-content:center; font-size:9px; font-weight:800; color:#fff; clip-path:polygon(7px 0,100% 0,calc(100% - 7px) 100%,0 100%); }
+    .bl { font-size:9px; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; color:#0D3A4A; opacity:0.5; text-align:center; }
+    .bc { font-size:8px; letter-spacing:0.06em; text-transform:uppercase; color:#bbb; text-align:center; }
+    .brand:hover .bl { opacity:1; }
+
+    /* ── S5 CONTACT ── */
+    .s5 { background: #0D3A4A; display: flex; align-items: center; justify-content: center; overflow-y: auto; }
+    .ct-inner { display:grid; grid-template-columns:1fr 1fr; gap:64px; align-items:center; padding:60px 56px; width:100%; }
+    .ct-left  { opacity:0; transform:translateX(-20px); transition:opacity 0.8s, transform 0.8s; }
+    .ct-right { opacity:0; transform:translateX(20px);  transition:opacity 0.8s 0.2s, transform 0.8s 0.2s; }
+    .s5.active .ct-left  { opacity:1; transform:translateX(0); }
+    .s5.active .ct-right { opacity:1; transform:translateX(0); }
+    .ct-tag { font-size:10px; font-weight:700; letter-spacing:0.18em; text-transform:uppercase; color:#00B8D9; display:block; margin-bottom:12px; }
+    .ct-title { font-size:clamp(22px,3vw,36px); font-weight:800; color:#fff; letter-spacing:-0.03em; line-height:1.2; margin-bottom:20px; }
+    .ct-logo { height:30px; width:auto; max-width:180px; filter:brightness(0) invert(1); opacity:0.6; display:block; margin-bottom:18px; }
+    .ct-info { display:flex; flex-direction:column; gap:8px; }
+    .ct-row  { display:flex; gap:14px; }
+    .ct-label { font-size:9px; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:#4A7A8A; min-width:44px; }
+    .ct-val   { font-size:12px; color:rgba(255,255,255,0.45); }
+    .ct-form  { display:flex; flex-direction:column; border-top:1px solid rgba(255,255,255,0.1); }
+    .ct-field { border-bottom:1px solid rgba(255,255,255,0.1); padding:12px 0; }
+    .ct-field label { display:block; font-size:9px; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color:#4A7A8A; margin-bottom:4px; }
+    .ct-field input { background:none; border:none; outline:none; font-size:13px; color:#fff; width:100%; font-family:inherit; }
+    .ct-field input::placeholder { color:rgba(255,255,255,0.18); }
+    .ct-btn { margin-top:18px; background:#00B8D9; color:#fff; border:none; font-size:12px; font-weight:700; padding:13px 30px; cursor:pointer; letter-spacing:0.1em; text-transform:uppercase; font-family:inherit; }
+
+    /* ── DOTS ── */
+    .dots { position:absolute; right:22px; top:50%; transform:translateY(-50%); display:flex; flex-direction:column; gap:8px; z-index:300; }
+    .dot { width:6px; height:6px; border-radius:50%; background:rgba(0,0,0,0.18); border:none; cursor:pointer; transition:background 0.3s, transform 0.3s; padding:0; }
+    .dot.active { background:#0D3A4A; transform:scale(1.6); }
+    .dots.dark .dot { background:rgba(255,255,255,0.3); }
+    .dots.dark .dot.active { background:#fff; }
+
+    /* ── 모바일 ── */
+    @media (max-width: 768px) {
+      .nav { padding: 16px 24px; }
+      .nav.scrolled { padding: 12px 24px; }
+      .nav-menu { display: none; }
+      .nav-hamburger { display: flex; }
+      .nav-logo { width: 120px; }
+      .logo-big, .logo-color, .logo-white { height: 22px; }
+      .hero-content { padding: 0 24px 52px; }
+      .hero-title { font-size: clamp(28px, 8vw, 44px); }
+      .hero-sub { font-size: 13px; }
+      .s2, .s3 { padding: 64px 20px 20px; }
+      .port-grid { grid-template-columns: 1fr 1fr; grid-template-rows: auto; }
+      .pc-col { grid-template-rows: 140px 140px; }
+      .pc-big { grid-column: span 2; height: 200px; }
+      .svc-grid { grid-template-columns: 1fr 1fr; }
+      .s4-inner { padding: 64px 20px 40px; }
+      .stats-row { grid-template-columns: 1fr 1fr; }
+      .stat-n { font-size: 34px; }
+      .brands-grid { grid-template-columns: repeat(3,1fr); }
+      .ct-inner { grid-template-columns: 1fr; padding: 64px 24px 40px; gap: 32px; }
+      .dots { right: 8px; }
+      .dot { width: 5px; height: 5px; }
+    }
+    @media (max-width: 480px) {
+      .port-grid { grid-template-columns: 1fr; }
+      .pc-big { grid-column: span 1; }
+      .svc-grid { grid-template-columns: 1fr; }
+      .brands-grid { grid-template-columns: repeat(2,1fr); }
+      .hero-btns { flex-direction: column; }
+      .btn-white, .btn-outline { width: 100%; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+<div class="fp" id="fp">
+
+  <!-- NAV -->
+  <nav class="nav scrolled" id="nav">
+    <div class="nav-logo">
+      <img class="logo-color" src="/images/logo.png" alt="EDS 이담에스티" />
+      <img class="logo-white" src="/images/logo.png" alt="EDS 이담에스티" />
+    </div>
+    <div class="nav-menu">
+      <a href="#" onclick="goTo(2);return false;">구축사례</a>
+      <a href="#" onclick="goTo(3);return false;">서비스</a>
+      <a href="#" onclick="goTo(4);return false;">파트너스</a>
+      <a href="#" onclick="goTo(5);return false;">도입 문의</a>
+    </div>
+    <button class="nav-cta" onclick="goTo(5)">도입 문의</button>
+    <div class="nav-hamburger" id="hamburger" onclick="goTo(5)">
+      <span></span><span></span><span></span>
+    </div>
+  </nav>
+
+  <!-- S0 HERO -->
+  <section class="sec s0 active" id="sec0">
+    <div class="yt-wrap">
+      <iframe
+        src="https://www.youtube.com/embed/lbpwd0M2E1M?autoplay=1&mute=1&loop=1&playlist=lbpwd0M2E1M&controls=0&showinfo=0&rel=0&modestbranding=1&playsinline=1"
+        allow="autoplay; encrypted-media" allowfullscreen>
+      </iframe>
+    </div>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <div class="hero-tag">Smart Space Solution · Since 2007</div>
+      <h1 class="hero-title">스마트한 공간,<br><em>이담에스티</em>가<br>만듭니다</h1>
+      <p class="hero-sub">방송 스튜디오부터 LED 디스플레이까지.<br>17년의 경험으로 최적의 공간을 설계합니다.</p>
+      <div class="hero-btns">
+        <button class="btn-white" onclick="goTo(2)">구축사례 보기 →</button>
+        <button class="btn-outline" onclick="goTo(5)">무료 상담 신청</button>
+      </div>
+    </div>
+    <div class="scroll-hint" id="sh">
+      <div class="sh-mouse"><div class="sh-wheel"></div></div>
+      <span class="sh-text">scroll</span>
+    </div>
+  </section>
+
+  <!-- S1 LOGO -->
+  <section class="sec s1" id="sec1">
+    <div class="logo-reveal">
+      <img class="logo-big" src="/images/logo.png" alt="EDS 이담에스티" />
+      <div class="logo-line"></div>
+      <p class="logo-claim">스마트 공간 전문기업<br>Beyond The Future</p>
+      <p class="logo-since">2007년 창립 · 서울시 구로구 디지털로31길 19</p>
+    </div>
+  </section>
+
+  <!-- S2 PORTFOLIO -->
+  <section class="sec s2" id="sec2">
+    <div class="sec-header">
+      <span class="sec-tag">Portfolio</span>
+      <h2 class="sec-title">구축 사례</h2>
+    </div>
+    <div class="port-grid">
+      <div class="pc pc-big" onclick="location.href='/works'">
+        <div class="pc-bg" style="background-image:url('/images/HUFS_ST_04.jpg')"></div>
+        <div class="pc-ov"></div>
+        <div class="pc-info">
+          <span class="pc-cat">LED 디스플레이</span>
+          <p class="pc-name">한국외국어대학교 스튜디오 첨단화</p>
+          <p class="pc-meta">2025.02 · 교육기관</p>
+        </div>
+      </div>
+      <div class="pc-col">
+        <div class="pc" onclick="location.href='/works'">
+          <div class="pc-bg" style="background-image:url('/images/SC_ST_09.jpg')"></div>
+          <div class="pc-ov"></div>
+          <div class="pc-info"><span class="pc-cat">스마트 강의실</span><p class="pc-name">서울사이버대학교 고도화</p></div>
+        </div>
+        <div class="pc" onclick="location.href='/works'">
+          <div class="pc-bg" style="background-image:url('/images/GMC_S_01.jpg')"></div>
+          <div class="pc-ov"></div>
+          <div class="pc-info"><span class="pc-cat">이러닝 스튜디오</span><p class="pc-name">공주대학교 스튜디오</p></div>
+        </div>
+      </div>
+      <div class="pc-col">
+        <div class="pc" onclick="location.href='/works'">
+          <div class="pc-bg" style="background-image:url('/images/GKDE_S_08.jpg')"></div>
+          <div class="pc-ov"></div>
+          <div class="pc-info"><span class="pc-cat">방송제작</span><p class="pc-name">경기도교육청 UHD</p></div>
+        </div>
+        <div class="pc" onclick="location.href='/works'">
+          <div class="pc-bg" style="background-image:url('/images/KTV_BS_01.jpg')"></div>
+          <div class="pc-ov"></div>
+          <div class="pc-info"><span class="pc-cat">방송 인프라</span><p class="pc-name">KTV 방송시스템</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- S3 SERVICES -->
+  <section class="sec s3" id="sec3">
+    <div class="sec-header">
+      <span class="sec-tag">Services</span>
+      <h2 class="sec-title">서비스</h2>
+    </div>
+    <div class="svc-grid">
+      <div class="svc"><span class="svc-n">01</span><h3 class="svc-title">방송제작 스튜디오</h3><p class="svc-desc">4K UHD 촬영부터 실시간 스트리밍까지</p><span class="svc-arr">→</span></div>
+      <div class="svc"><span class="svc-n">02</span><h3 class="svc-title">이러닝 스튜디오</h3><p class="svc-desc">자동 추적 카메라와 크로마키 환경</p><span class="svc-arr">→</span></div>
+      <div class="svc"><span class="svc-n">03</span><h3 class="svc-title">LED 디스플레이</h3><p class="svc-desc">P1.5 피치 LED Wall XR 스튜디오</p><span class="svc-arr">→</span></div>
+      <div class="svc"><span class="svc-n">04</span><h3 class="svc-title">스마트 강의실</h3><p class="svc-desc">온·오프라인 동시 수업 환경 구현</p><span class="svc-arr">→</span></div>
+      <div class="svc"><span class="svc-n">05</span><h3 class="svc-title">아카이브 시스템</h3><p class="svc-desc">영상 자산 디지털화 및 장기 보존</p><span class="svc-arr">→</span></div>
+      <div class="svc"><span class="svc-n">06</span><h3 class="svc-title">화상회의 시스템</h3><p class="svc-desc">Zoom·Teams 통합 원격 회의 환경</p><span class="svc-arr">→</span></div>
+    </div>
+  </section>
+
+  <!-- S4 STATS + PARTNERS -->
+  <section class="sec s4" id="sec4">
+    <div class="s4-scroll" id="s4scroll">
+      <div class="s4-inner">
+        <div class="sec-header" style="text-align:center;">
+          <span class="sec-tag" style="text-align:center;">Clients & Partners</span>
+          <h2 class="sec-title">신뢰받는 파트너십</h2>
+        </div>
+        <p class="s4-sub">국내 <strong>200+</strong> 기관·기업과 함께합니다</p>
+        <div class="stats-row">
+          <div class="stat"><p class="stat-n">200<span>+</span></p><p class="stat-l">구축 완료 공간</p></div>
+          <div class="stat"><p class="stat-n">17<span>년</span></p><p class="stat-l">업력 및 전문성</p></div>
+          <div class="stat"><p class="stat-n">98<span>%</span></p><p class="stat-l">고객 만족도</p></div>
+          <div class="stat"><p class="stat-n">24<span>/7</span></p><p class="stat-l">기술 지원</p></div>
+        </div>
+        <div class="mq-wrap">
+          <div class="mq-track">
+            <div class="cli"><div class="cli-bar" style="background:#E11E3C;width:32px"></div><span>LG</span></div>
+            <div class="cli"><div class="cli-bar" style="background:#006EFF;width:48px"></div><span>Hyundai</span></div>
+            <div class="cli"><div class="cli-bar" style="background:#003087;width:36px"></div><span>KDB</span></div>
+            <div class="cli"><div class="cli-bar" style="background:#E60012;width:32px"></div><span>KT</span></div>
+            <div class="cli"><div class="cli-bar" style="background:#FF6600;width:28px"></div><span>SK</span></div>
+            <div class="cli"><div class="cli-bar" style="background:#003DA5;width:44px"></div><span>Posco</span></div>
+            <div class="cli"><div class="cli-bar" style="background:#D4002A;width:40px"></div><span>Lotte</span></div>
+            <div class="cli"><div class="cli-bar" style="background:#0055A4;width:48px"></div><span>Hanwha</span></div>
+            <div class="cli"><div class="cli-bar" style="background:#00854A;width:44px"></div><span>Naver</span></div>
+            <div class="cli"><div class="cli-bar" style="background:#1428A0;width:48px"></div><span>Samsung</span></div>
+            <div class="cli"><div class="cli-bar" style="background:#E11E3C;width:32px"></div><span>LG</span></div>
+            <div class="cli"><div class="cli-bar" style="background:#006EFF;width:48px"></div><span>Hyundai</span></div>
+            <div class="cli"><div class="cli-bar" style="background:#003087;width:36px"></div><span>KDB</span></div>
+            <div class="cli"><div class="cli-bar" style="background:#E60012;width:32px"></div><span>KT</span></div>
+            <div class="cli"><div class="cli-bar" style="background:#FF6600;width:28px"></div><span>SK</span></div>
+            <div class="cli"><div class="cli-bar" style="background:#003DA5;width:44px"></div><span>Posco</span></div>
+            <div class="cli"><div class="cli-bar" style="background:#D4002A;width:40px"></div><span>Lotte</span></div>
+            <div class="cli"><div class="cli-bar" style="background:#0055A4;width:48px"></div><span>Hanwha</span></div>
+            <div class="cli"><div class="cli-bar" style="background:#00854A;width:44px"></div><span>Naver</span></div>
+            <div class="cli"><div class="cli-bar" style="background:#1428A0;width:48px"></div><span>Samsung</span></div>
+          </div>
+        </div>
+        <div class="brands-div"><span>취급 브랜드 · Technology Partners</span></div>
+        <div class="brands-grid">
+          <div class="brand"><div class="bb" style="background:#E60012">Pan</div><p class="bl">Panasonic</p><p class="bc">Display · AV</p></div>
+          <div class="brand"><div class="bb" style="background:#003087">Sony</div><p class="bl">Sony Pro</p><p class="bc">Camera</p></div>
+          <div class="brand"><div class="bb" style="background:#0066CC">Cre</div><p class="bl">Crestron</p><p class="bc">Control</p></div>
+          <div class="brand"><div class="bb" style="background:#FF6600">Poly</div><p class="bl">Poly</p><p class="bc">Video Conf.</p></div>
+          <div class="brand"><div class="bb" style="background:#1A1A1A">Shu</div><p class="bl">Shure</p><p class="bc">Audio · Mic</p></div>
+          <div class="brand"><div class="bb" style="background:#D42B2B">NEC</div><p class="bl">NEC Display</p><p class="bc">Large Format</p></div>
+          <div class="brand"><div class="bb" style="background:#00B8D9">AMX</div><p class="bl">AMX</p><p class="bc">Control</p></div>
+          <div class="brand"><div class="bb" style="background:#0D3A4A">Bos</div><p class="bl">Bose Pro</p><p class="bc">Speaker</p></div>
+          <div class="brand"><div class="bb" style="background:#1428A0">Sam</div><p class="bl">Samsung B2B</p><p class="bc">LED</p></div>
+          <div class="brand"><div class="bb" style="background:#A50034">LG</div><p class="bl">LG Business</p><p class="bc">OLED</p></div>
+          <div class="brand"><div class="bb" style="background:#007DC3">Ext</div><p class="bl">Extron</p><p class="bc">Signal</p></div>
+          <div class="brand"><div class="bb" style="background:#5C2D91">Mic</div><p class="bl">Microsoft</p><p class="bc">Teams</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- S5 CONTACT -->
+  <section class="sec s5" id="sec5">
+    <div class="ct-inner">
+      <div class="ct-left">
+        <span class="ct-tag">Contact</span>
+        <h2 class="ct-title">지금 바로<br>상담을 시작하세요</h2>
+        <img class="ct-logo" src="/images/logo.png" alt="EDS 이담에스티" />
+        <div class="ct-info">
+          <div class="ct-row"><span class="ct-label">주소</span><span class="ct-val">서울시 구로구 디지털로31길 19, 406호</span></div>
+          <div class="ct-row"><span class="ct-label">전화</span><span class="ct-val">02-857-7744</span></div>
+          <div class="ct-row"><span class="ct-label">이메일</span><span class="ct-val">pub@edamst.com</span></div>
+        </div>
+      </div>
+      <div class="ct-right">
+        <div class="ct-form">
+          <div class="ct-field"><label>이름</label><input type="text" placeholder="담당자 이름" /></div>
+          <div class="ct-field"><label>연락처</label><input type="tel" placeholder="010-0000-0000" /></div>
+          <div class="ct-field"><label>이메일</label><input type="email" placeholder="example@company.com" /></div>
+          <div class="ct-field"><label>문의 유형</label><input type="text" placeholder="방송제작 스튜디오, LED 디스플레이..." /></div>
+        </div>
+        <button class="ct-btn">문의 보내기 →</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- DOTS -->
+  <div class="dots dark" id="dots">
+    <button class="dot active" onclick="goTo(0)"></button>
+    <button class="dot" onclick="goTo(1)"></button>
+    <button class="dot" onclick="goTo(2)"></button>
+    <button class="dot" onclick="goTo(3)"></button>
+    <button class="dot" onclick="goTo(4)"></button>
+    <button class="dot" onclick="goTo(5)"></button>
   </div>
 
-  <Services />
-  <Portfolio />
-  <History />
-  <Clients />
-  <Contact />
+</div>
 
-  <!-- 푸터 -->
-  <footer>
-    <div class="ft-logo">
-      <img src="/images/logo.png" alt="EDS" />
-    </div>
-    <div class="ft-tagline">Beyond The Future — 이담에스티 주식회사</div>
-    <div class="ft-copy">© 2025 EDS. All rights reserved.</div>
-  </footer>
+<script>
+  const DARK_SECS = [0, 5];
+  let cur = 0, busy = false;
+  const N = 6;
+  const secs   = Array.from({length:N}, (_,i) => document.getElementById('sec'+i));
+  const dots   = document.querySelectorAll('.dot');
+  const nav    = document.getElementById('nav');
+  const dotsEl = document.getElementById('dots');
+  const sh     = document.getElementById('sh');
+  const s4sc   = document.getElementById('s4scroll');
 
-</Layout>
+  function goTo(n) {
+    if (busy || n === cur || n < 0 || n >= N) return;
+    busy = true;
+    secs[cur].classList.remove('active');
+    secs[cur].classList.add('exit-up');
+    dots[cur].classList.remove('active');
+    setTimeout(() => secs[cur].classList.remove('exit-up'), 900);
+    cur = n;
+    secs[cur].classList.add('active');
+    dots[cur].classList.add('active');
+    const isDark = DARK_SECS.includes(cur);
+    nav.classList.toggle('scrolled', !isDark);
+    dotsEl.classList.toggle('dark', isDark);
+    if (sh) sh.classList.toggle('hide', cur > 0);
+    if (cur !== 4 && s4sc) s4sc.scrollTop = 0;
+    setTimeout(() => { busy = false; }, 900);
+  }
 
-<style>
-  /* 통계 배너 */
-  .stats-band {
-    background: var(--navy);
-    display: grid; grid-template-columns: repeat(4,1fr);
-    position: relative; overflow: hidden;
-  }
-  .stats-band::before {
-    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
-    background: linear-gradient(90deg, var(--navy2) 0%, var(--red) 33%, var(--cyan) 66%, var(--navy2) 100%);
-  }
-  .stat-item {
-    padding: 44px 32px; text-align: center;
-    border-right: 1px solid rgba(255,255,255,0.06);
-  }
-  .stat-item:last-child { border-right: none; }
-  .sn {
-    font-family: var(--sans); font-size: 52px; font-weight: 800; font-style: italic;
-    color: #fff; line-height: 1; margin-bottom: 8px; letter-spacing: -0.03em;
-  }
-  .sc { color: var(--cyan); font-size: 32px; }
-  .sl { font-size: 11px; font-weight: 600; letter-spacing: .15em; text-transform: uppercase; color: var(--gray); }
+  window.goTo = goTo;
 
-  /* 푸터 */
-  footer {
-    background: var(--navy3);
-    border-top: 3px solid var(--red);
-    padding: 36px 60px;
-    display: grid; grid-template-columns: auto 1fr auto;
-    align-items: center; gap: 40px;
-  }
-  .ft-logo img { height: 28px; width: auto; object-fit: contain; filter: brightness(0) invert(1); opacity: .85; }
-  .ft-tagline  { font-size: 11px; font-weight: 600; letter-spacing: .15em; text-transform: uppercase; color: rgba(255,255,255,0.25); }
-  .ft-copy     { font-size: 11px; color: rgba(255,255,255,0.2); }
+  // 초기 상태 — 첫 화면은 어두운 배경
+  nav.classList.remove('scrolled');
 
-  @media (max-width: 768px) {
-    .stats-band { grid-template-columns: repeat(2,1fr); }
-    .stat-item  { padding: 32px 20px; }
-    footer { grid-template-columns: 1fr; gap: 12px; padding: 28px 24px; text-align: center; }
-  }
-</style>
+  document.getElementById('fp').addEventListener('wheel', e => {
+    if (cur === 4 && s4sc) {
+      const atTop = s4sc.scrollTop <= 1;
+      const atBot = s4sc.scrollTop + s4sc.clientHeight >= s4sc.scrollHeight - 4;
+      if (e.deltaY > 0 && !atBot) return;
+      if (e.deltaY < 0 && !atTop) return;
+    }
+    e.preventDefault();
+    goTo(e.deltaY > 0 ? cur + 1 : cur - 1);
+  }, { passive: false });
+
+  let ts = 0;
+  document.getElementById('fp').addEventListener('touchstart', e => {
+    ts = e.touches[0].clientY;
+  }, { passive: true });
+  document.getElementById('fp').addEventListener('touchend', e => {
+    const d = ts - e.changedTouches[0].clientY;
+    if (Math.abs(d) > 50) goTo(d > 0 ? cur + 1 : cur - 1);
+  });
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'ArrowDown' || e.key === 'PageDown') { e.preventDefault(); goTo(cur + 1); }
+    if (e.key === 'ArrowUp'   || e.key === 'PageUp')   { e.preventDefault(); goTo(cur - 1); }
+  });
+</script>
+</body>
+</html>
