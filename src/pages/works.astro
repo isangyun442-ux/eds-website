@@ -349,7 +349,7 @@ function render(){
   g.style.display='grid';e.style.display='none';
   g.innerHTML=fl.map(p=>{
     const hi=p.images&&p.images.length>0;
-    const bg=hi?'<div class="wc-bg" style="background-image:url('+JSON.stringify(p.images[0])+')"></div>':'<div class="wc-ph"><span>'+p.service+'</span></div>';
+    const bg=hi?'<div class="wc-bg" style="background-image:url('+p.images[0]+')"></div>':'<div class="wc-ph"><span>'+p.service+'</span></div>';
     return '<div class="wc" onclick="openModal('+p.id+')">'
       +bg
       +'<div class="wc-ov"></div>'
@@ -373,7 +373,7 @@ function openModal(id){
   document.getElementById('mtags').innerHTML=[p.service,p.client].map(t=>'<span class="mtag">'+t+'</span>').join('');
   const th=document.getElementById('mth');
   if(p.images&&p.images.length>0){
-    th.innerHTML=p.images.slice(0,4).map((img,i)=>'<div class="mthumb '+(i===0?'on':'')+'" onclick="selImg('+i+')">'+'<div class="mthumb-bg" style="background-image:url('+JSON.stringify(img)+')"></div>'+'<span class="mthumb-n">'+(i+1)+'</span></div>').join('');
+    th.innerHTML=p.images.slice(0,4).map((img,i)=>'<div class="mthumb '+(i===0?'on':'')+'" onclick="selImg('+i+')">'+'<div class="mthumb-bg" style="background-image:url('+img+')"></div>'+'<span class="mthumb-n">'+(i+1)+'</span></div>').join('');
     setMain(p.images[0],true);
   }else{
     th.innerHTML=[1,2,3,4].map(i=>'<div class="mthumb '+(i===1?'on':'')+'"><div class="mthumb-bg"></div><span class="mthumb-n">'+i+'</span></div>').join('');
@@ -385,7 +385,7 @@ function openModal(id){
 
 function setMain(url,has){
   const bg=document.getElementById('mbg2'),ph=document.getElementById('mph');
-  if(has&&url){bg.style.backgroundImage='url('+JSON.stringify(url)+')';bg.style.display='block';ph.style.display='none';}
+  if(has&&url){bg.style.backgroundImage='url('+url+')';bg.style.display='block';ph.style.display='none';}
   else{bg.style.display='none';ph.style.display='flex';}
 }
 
