@@ -198,23 +198,11 @@ import SecContact    from '../components/SecContact.astro';
   // 초기 상태
   nav.classList.remove('scrolled');
 
-  // 휠 이벤트 — 끝 도달 후 N ms 대기 → 자동으로 다음 섹션 전환
-  let edgePending = false;
-  let edgeDir = 0;
-  let edgeTimer = null;
-  // 스크롤 섹션 끝 도달 후 대기 시간 (ms)
-  const EDGE_DELAY = { 2: 800, 5: 600, 6: 600 };
-
-  function triggerEdge(dir) {
-    if (edgePending) return;
-    edgePending = true;
-    edgeDir = dir;
-    const delay = EDGE_DELAY[cur] || 0;
-    edgeTimer = setTimeout(() => {
-      edgePending = false;
-      goTo(cur + edgeDir);
-    }, delay);
-  }
+  // 휠 이벤트 — 스크롤 끝 도달 후 멈췄다가 다시 내리면 섹션 전환
+  let edgeHit = false;      // 끝에 닿은 적 있는지
+  let edgeDir = 0;          // 어느 방향으로 끝에 닿았는지
+  let edgeStopTimer = null; // 휠 멈춤 감지 타이머
+  let edgeReady = false;    // 멈춤 감지 후 다음 휠 허용 여부
 
   document.getElementById('fp').addEventListener('wheel', e => {
     e.preventDefault();
@@ -223,23 +211,52 @@ import SecContact    from '../components/SecContact.astro';
       const atTop = scrollEl.scrollTop <= 1;
       const atBot = scrollEl.scrollTop + scrollEl.clientHeight >= scrollEl.scrollHeight - 4;
 
-      // 아직 끝에 안 닿은 경우 — 그냥 스크롤하고 타이머 리셋
+      // 아직 끝에 안 닿은 경우 — 그냥 스크롤, 상태 초기화
       if (e.deltaY > 0 && !atBot) {
         scrollEl.scrollTop += e.deltaY;
-        clearTimeout(edgeTimer);
-        edgePending = false;
+        edgeHit = false;
+        edgeReady = false;
+        clearTimeout(edgeStopTimer);
         return;
       }
       if (e.deltaY < 0 && !atTop) {
         scrollEl.scrollTop += e.deltaY;
-        clearTimeout(edgeTimer);
-        edgePending = false;
+        edgeHit = false;
+        edgeReady = false;
+        clearTimeout(edgeStopTimer);
         return;
       }
 
-      // 끝 도달 — 대기 후 자동 전환
-      triggerEdge(e.deltaY > 0 ? 1 : -1);
-      return;
+      // 끝에 도달한 상태
+      const dir = e.deltaY > 0 ? 1 : -1;
+
+      // 방향이 바뀌면 초기화
+      if (edgeDir !== dir) {
+        edgeHit = false;
+        edgeReady = false;
+        clearTimeout(edgeStopTimer);
+      }
+      edgeDir = dir;
+
+      if (!edgeHit) {
+        // 처음 끝에 닿은 순간 — 멈춤 감지 시작
+        edgeHit = true;
+        edgeReady = false;
+        clearTimeout(edgeStopTimer);
+        // 300ms 동안 휠이 없으면 "멈췄다"고 판단 → 다음 휠 허용
+        edgeStopTimer = setTimeout(() => {
+          edgeReady = true;
+        }, 300);
+        return;
+      }
+
+      // edgeReady 아직 false = 아직 멈추지 않은 연속 스크롤 → 무시
+      if (!edgeReady) return;
+
+      // edgeReady = true → 멈췄다가 다시 내린 것 → 섹션 전환!
+      edgeHit = false;
+      edgeReady = false;
+      clearTimeout(edgeStopTimer);
     }
     goTo(e.deltaY > 0 ? cur + 1 : cur - 1);
   }, { passive: false });
