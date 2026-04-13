@@ -150,8 +150,9 @@ import SecContact    from '../components/SecContact.astro';
     // 섹션 이동 시 스크롤 위치 초기화
     const prevScroll = getScrollEl(cur === 0 ? N - 1 : cur - 1);
     if (prevScroll) prevScroll.scrollTop = 0;
-    // 전환 후 1.2초 쿨다운 (너무 예민한 반응 방지)
-    setTimeout(() => { busy = false; }, 1200);
+    // 전환 후 쿨다운 — 스크롤 섹션에서 나올 때 더 길게
+    const cooldown = [2, 5, 6].includes(n) || [2, 5, 6].includes(cur) ? 1600 : 1200;
+    setTimeout(() => { busy = false; }, cooldown);
   }
 
   window.goTo = goTo;
@@ -174,9 +175,11 @@ import SecContact    from '../components/SecContact.astro';
   // 초기 상태
   nav.classList.remove('scrolled');
 
-  // 휠 이벤트 — 스크롤 끝에서 한 번 더 휠해야 섹션 전환
+  // 휠 이벤트 — 스크롤 끝에서 3번 더 휠해야 섹션 전환
   let edgeCount = 0;
   let edgeTimer = null;
+  // 스크롤 섹션별 필요 횟수 (숫자 높을수록 덜 예민)
+  const EDGE_THRESHOLD = { 2: 3, 5: 2, 6: 2 };
 
   document.getElementById('fp').addEventListener('wheel', e => {
     e.preventDefault();
@@ -194,11 +197,12 @@ import SecContact    from '../components/SecContact.astro';
         edgeCount = 0;
         return;
       }
-      // 끝에 도달한 상태 — 한 번 더 휠해야 전환
+      // 끝에 도달한 상태 — threshold 횟수만큼 휠해야 전환
+      const threshold = EDGE_THRESHOLD[cur] || 1;
       edgeCount++;
       clearTimeout(edgeTimer);
-      edgeTimer = setTimeout(() => { edgeCount = 0; }, 800);
-      if (edgeCount < 2) return;
+      edgeTimer = setTimeout(() => { edgeCount = 0; }, 1200);
+      if (edgeCount < threshold) return;
       edgeCount = 0;
     }
     goTo(e.deltaY > 0 ? cur + 1 : cur - 1);
