@@ -146,13 +146,32 @@
     /* ── S3 SERVICES ── */
     .s3 { background: #FAFAFA; display: flex; flex-direction: column; padding: 72px 48px 28px; }
     .svc-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1px; background: #ebebeb; flex: 1; min-height: 0; }
-    .svc { background: #fff; padding: 28px 28px 22px; cursor: pointer; transition: background 0.2s; display: flex; flex-direction: column; }
-    .svc:hover { background: #F5F5F5; }
+    .svc { position: relative; overflow: hidden; cursor: pointer; min-height: 160px; background: #0D2030; }
+    .svc-bg { position: absolute; inset: 0; background-size: cover; background-position: center; transition: transform 0.5s, opacity 0.3s; opacity: 0.65; }
+    .svc:hover .svc-bg { transform: scale(1.06); opacity: 0.85; }
+    .svc-ov { position: absolute; inset: 0; background: linear-gradient(transparent 20%, rgba(0,0,0,0.82)); }
+    .svc-info { position: absolute; bottom: 0; left: 0; right: 0; padding: 18px 20px; }
     .svc-n { font-size: 10px; font-weight: 700; color: #00B8D9; letter-spacing: 0.1em; display: block; margin-bottom: 6px; }
     .svc-title { font-size: 15px; font-weight: 700; color: #fff; margin-bottom: 6px; }
     .svc-desc { font-size: 11px; color: rgba(255,255,255,0.55); line-height: 1.6; }
     .svc-arr { font-size: 16px; color: rgba(255,255,255,0.3); margin-top: 8px; display: inline-block; transition: color 0.2s, transform 0.2s; }
     .svc:hover .svc-arr { color: #00B8D9; transform: translateX(4px); }
+    /* 서비스 모달 */
+    .svc-modal-bg { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.75); z-index: 400; align-items: center; justify-content: center; }
+    .svc-modal-bg.on { display: flex; }
+    .svc-modal { background: #fff; width: 90%; max-width: 700px; display: grid; grid-template-columns: 1fr 1fr; max-height: 90vh; overflow: hidden; }
+    .svc-modal-img { background-size: cover; background-position: center; min-height: 300px; }
+    .svc-modal-body { padding: 32px 28px; position: relative; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; }
+    .svc-modal-close { position: absolute; top: 14px; right: 14px; width: 28px; height: 28px; background: #f0f0f0; border: none; cursor: pointer; font-size: 14px; display: flex; align-items: center; justify-content: center; font-family: inherit; }
+    .svc-modal-close:hover { background: #D42B2B; color: #fff; }
+    .svc-modal-n { font-size: 10px; font-weight: 700; color: #00B8D9; letter-spacing: 0.16em; }
+    .svc-modal-title { font-size: 20px; font-weight: 800; color: #0A0A0A; border-bottom: 2px solid #00B8D9; padding-bottom: 10px; }
+    .svc-modal-desc { font-size: 12px; color: #666; line-height: 1.85; }
+    .svc-modal-list { display: flex; flex-direction: column; gap: 7px; list-style: none; }
+    .svc-modal-list li { font-size: 12px; color: #444; padding-left: 14px; position: relative; line-height: 1.6; }
+    .svc-modal-list li::before { content: ""; position: absolute; left: 0; top: 7px; width: 5px; height: 5px; border-radius: 50%; background: #00B8D9; }
+    .svc-modal-cta { margin-top: auto; background: #0D3A4A; color: #fff; border: none; font-size: 12px; font-weight: 700; padding: 11px 22px; cursor: pointer; font-family: inherit; align-self: flex-start; }
+    .svc-modal-cta:hover { background: #D42B2B; }
 
     /* ── S4 STATS + PARTNERS ── */
     .s4 { background: #fff; display: flex; flex-direction: column; }
