@@ -75,11 +75,13 @@
 
     /* ── S0 HERO ── */
     .s0 { background: #000; display: flex; align-items: flex-end; }
-    .yt-wrap { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
-    .yt-wrap iframe {
+    .video-wrap { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
+    .video-wrap video {
       position: absolute; top: 50%; left: 50%;
-      width: calc(100% + 240px); height: calc(100% + 240px);
-      transform: translate(-50%, -50%); border: none;
+      min-width: 100%; min-height: 100%;
+      width: auto; height: auto;
+      transform: translate(-50%, -50%);
+      object-fit: cover;
     }
     .hero-overlay {
       position: absolute; inset: 0;
@@ -266,9 +268,9 @@
       .btn-white, .btn-outline { width: 100%; text-align: center; }
     }
 
-    /* ── 모바일: YouTube 숨기고 이미지로 대체 ── */
+    /* ── 모바일: 영상 숨기고 이미지로 대체 ── */
     @media (max-width: 768px) {
-      .yt-wrap { display: none; }
+      .video-wrap { display: none; }
       .s0 {
         background-image: url('/images/HUFS_ST_04.jpg');
         background-size: cover;
@@ -331,11 +333,12 @@
 
   <!-- S0 HERO -->
   <section class="sec s0 active" id="sec0">
-    <div class="yt-wrap">
-      <iframe
-        src="https://www.youtube.com/embed/lbpwd0M2E1M?autoplay=1&mute=1&loop=1&playlist=lbpwd0M2E1M&controls=0&showinfo=0&rel=0&modestbranding=1&playsinline=1"
-        allow="autoplay; encrypted-media" allowfullscreen>
-      </iframe>
+    <div class="video-wrap">
+      <video
+        src="/videos/hero.mp4"
+        autoplay muted loop playsinline
+        preload="auto">
+      </video>
     </div>
     <div class="hero-overlay"></div>
     <div class="hero-content">
