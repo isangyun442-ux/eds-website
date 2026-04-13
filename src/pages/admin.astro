@@ -1,0 +1,512 @@
+---
+// src/pages/admin.astro
+---
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EDS 관리자 — 구축사례 관리</title>
+  <style is:global>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif; background: #f5f5f5; color: #0A0A0A; -webkit-font-smoothing: antialiased; }
+
+    /* 로그인 */
+    .login-wrap { display: flex; align-items: center; justify-content: center; min-height: 100vh; }
+    .login-box { background: #fff; padding: 48px 40px; width: 360px; border-top: 4px solid #0D3A4A; }
+    .login-logo { font-size: 22px; font-weight: 900; color: #0D3A4A; letter-spacing: -0.03em; margin-bottom: 6px; }
+    .login-sub { font-size: 12px; color: #aaa; margin-bottom: 32px; }
+    .login-box input { width: 100%; border: 1px solid #e0e0e0; padding: 12px 14px; font-size: 14px; font-family: inherit; outline: none; margin-bottom: 12px; }
+    .login-box input:focus { border-color: #0D3A4A; }
+    .login-btn { width: 100%; background: #0D3A4A; color: #fff; border: none; padding: 13px; font-size: 14px; font-weight: 700; cursor: pointer; font-family: inherit; letter-spacing: 0.06em; }
+    .login-btn:hover { background: #00B8D9; }
+    .login-err { color: #D42B2B; font-size: 12px; margin-top: 8px; display: none; }
+
+    /* 레이아웃 */
+    .app { display: none; min-height: 100vh; }
+    .header { background: #0D3A4A; padding: 0 32px; height: 56px; display: flex; align-items: center; justify-content: space-between; }
+    .header-title { color: #fff; font-size: 15px; font-weight: 700; letter-spacing: -0.01em; }
+    .header-title span { color: #00B8D9; }
+    .header-right { display: flex; align-items: center; gap: 16px; }
+    .logout-btn { background: none; border: 1px solid rgba(255,255,255,0.25); color: rgba(255,255,255,0.7); font-size: 12px; padding: 6px 14px; cursor: pointer; font-family: inherit; }
+    .logout-btn:hover { border-color: #fff; color: #fff; }
+
+    .main { max-width: 1200px; margin: 0 auto; padding: 32px 24px; }
+
+    /* 통계 카드 */
+    .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 32px; }
+    .stat-card { background: #fff; padding: 20px 24px; border-left: 4px solid #00B8D9; }
+    .stat-card.red { border-left-color: #D42B2B; }
+    .stat-n { font-size: 32px; font-weight: 900; color: #0A0A0A; letter-spacing: -0.03em; }
+    .stat-l { font-size: 12px; color: #aaa; margin-top: 4px; }
+
+    /* 툴바 */
+    .toolbar { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; }
+    .toolbar-left { display: flex; gap: 8px; }
+    .search-input { border: 1px solid #e0e0e0; padding: 9px 14px; font-size: 13px; font-family: inherit; outline: none; width: 240px; }
+    .search-input:focus { border-color: #0D3A4A; }
+    .filter-select { border: 1px solid #e0e0e0; padding: 9px 12px; font-size: 13px; font-family: inherit; outline: none; background: #fff; cursor: pointer; }
+    .add-btn { background: #0D3A4A; color: #fff; border: none; padding: 9px 20px; font-size: 13px; font-weight: 700; cursor: pointer; font-family: inherit; display: flex; align-items: center; gap: 6px; }
+    .add-btn:hover { background: #00B8D9; }
+
+    /* 테이블 */
+    .table-wrap { background: #fff; overflow: hidden; }
+    table { width: 100%; border-collapse: collapse; }
+    thead th { background: #0D3A4A; color: #fff; padding: 12px 16px; font-size: 12px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; text-align: left; }
+    tbody tr { border-bottom: 1px solid #f0f0f0; transition: background 0.15s; }
+    tbody tr:hover { background: #FAFCFD; }
+    tbody td { padding: 14px 16px; font-size: 13px; color: #444; vertical-align: middle; }
+    .td-img { width: 64px; height: 44px; object-fit: cover; background: #f0f0f0; display: block; }
+    .td-img-placeholder { width: 64px; height: 44px; background: #f0f0f0; display: flex; align-items: center; justify-content: center; font-size: 10px; color: #bbb; }
+    .td-title { font-weight: 700; color: #0A0A0A; }
+    .td-badge { display: inline-block; font-size: 10px; font-weight: 700; padding: 3px 8px; background: #EAF6FA; color: #0D3A4A; letter-spacing: 0.04em; }
+    .td-actions { display: flex; gap: 6px; }
+    .edit-btn { background: none; border: 1px solid #e0e0e0; padding: 5px 12px; font-size: 11px; font-weight: 700; cursor: pointer; color: #0D3A4A; font-family: inherit; }
+    .edit-btn:hover { border-color: #0D3A4A; background: #f5f5f5; }
+    .del-btn { background: none; border: 1px solid #e0e0e0; padding: 5px 12px; font-size: 11px; font-weight: 700; cursor: pointer; color: #D42B2B; font-family: inherit; }
+    .del-btn:hover { border-color: #D42B2B; background: #fff5f5; }
+    .empty-row td { text-align: center; padding: 48px; color: #bbb; font-size: 14px; }
+
+    /* 모달 */
+    .modal-bg { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.6); z-index: 500; align-items: center; justify-content: center; }
+    .modal-bg.on { display: flex; }
+    .modal { background: #fff; width: 90%; max-width: 640px; max-height: 90vh; overflow-y: auto; }
+    .modal-head { background: #0D3A4A; padding: 18px 24px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; }
+    .modal-head-title { color: #fff; font-size: 15px; font-weight: 700; }
+    .modal-close { background: none; border: none; color: rgba(255,255,255,0.6); font-size: 18px; cursor: pointer; line-height: 1; }
+    .modal-close:hover { color: #fff; }
+    .modal-body { padding: 28px 24px; display: flex; flex-direction: column; gap: 18px; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .form-group { display: flex; flex-direction: column; gap: 6px; }
+    .form-group.full { grid-column: 1/-1; }
+    .form-label { font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #888; }
+    .form-input, .form-select, .form-textarea {
+      border: 1px solid #e0e0e0; padding: 10px 12px;
+      font-size: 13px; font-family: inherit; outline: none;
+      transition: border-color 0.2s;
+    }
+    .form-input:focus, .form-select:focus, .form-textarea:focus { border-color: #0D3A4A; }
+    .form-textarea { min-height: 80px; resize: vertical; }
+
+    /* 이미지 업로드 */
+    .img-upload-area {
+      border: 2px dashed #e0e0e0; padding: 20px;
+      text-align: center; cursor: pointer; transition: border-color 0.2s;
+    }
+    .img-upload-area:hover { border-color: #00B8D9; }
+    .img-upload-area input { display: none; }
+    .img-upload-text { font-size: 13px; color: #aaa; }
+    .img-upload-text span { color: #0D3A4A; font-weight: 700; }
+    .img-preview-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-top: 12px; }
+    .img-preview-item { position: relative; aspect-ratio: 4/3; background: #f0f0f0; }
+    .img-preview-item img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .img-preview-remove {
+      position: absolute; top: 3px; right: 3px;
+      width: 20px; height: 20px; background: rgba(0,0,0,0.6);
+      border: none; cursor: pointer; color: #fff; font-size: 11px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .img-upload-progress { font-size: 12px; color: #00B8D9; margin-top: 8px; display: none; }
+
+    .modal-footer { padding: 16px 24px; background: #f9f9f9; border-top: 1px solid #f0f0f0; display: flex; justify-content: flex-end; gap: 10px; }
+    .cancel-btn { background: none; border: 1px solid #e0e0e0; padding: 10px 22px; font-size: 13px; font-weight: 600; cursor: pointer; font-family: inherit; color: #666; }
+    .cancel-btn:hover { border-color: #aaa; }
+    .save-btn { background: #0D3A4A; color: #fff; border: none; padding: 10px 28px; font-size: 13px; font-weight: 700; cursor: pointer; font-family: inherit; }
+    .save-btn:hover { background: #00B8D9; }
+    .save-btn:disabled { background: #ccc; cursor: not-allowed; }
+
+    .toast { position: fixed; bottom: 24px; right: 24px; background: #0D3A4A; color: #fff; padding: 12px 20px; font-size: 13px; font-weight: 600; display: none; z-index: 999; }
+    .toast.on { display: block; }
+    .toast.err { background: #D42B2B; }
+  </style>
+</head>
+<body>
+
+<!-- 로그인 화면 -->
+<div class="login-wrap" id="loginWrap" style="display:flex">
+  <div class="login-box">
+    <div class="login-logo">EDS <span style="color:#00B8D9">Admin</span></div>
+    <div class="login-sub">구축사례 관리자 페이지</div>
+    <input type="password" id="pwInput" placeholder="비밀번호를 입력하세요" />
+    <button class="login-btn" onclick="doLogin()">로그인</button>
+    <div class="login-err" id="loginErr">비밀번호가 올바르지 않습니다</div>
+  </div>
+</div>
+
+<!-- 관리자 앱 -->
+<div class="app" id="app" style="display:none">
+  <header class="header">
+    <div class="header-title">EDS <span>Admin</span> — 구축사례 관리</div>
+    <div class="header-right">
+      <span style="font-size:12px;color:rgba(255,255,255,0.5)" id="projectCount"></span>
+      <button class="logout-btn" onclick="doLogout()">로그아웃</button>
+    </div>
+  </header>
+
+  <main class="main">
+    <!-- 통계 -->
+    <div class="stats">
+      <div class="stat-card">
+        <div class="stat-n" id="statTotal">0</div>
+        <div class="stat-l">전체 프로젝트</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-n" id="statEdu">0</div>
+        <div class="stat-l">교육기관</div>
+      </div>
+      <div class="stat-card red">
+        <div class="stat-n" id="statPublic">0</div>
+        <div class="stat-l">공공기관</div>
+      </div>
+    </div>
+
+    <!-- 툴바 -->
+    <div class="toolbar">
+      <div class="toolbar-left">
+        <input class="search-input" type="text" placeholder="프로젝트 검색..." id="searchInput" oninput="renderTable()" />
+        <select class="filter-select" id="filterSelect" onchange="renderTable()">
+          <option value="">전체 서비스</option>
+          <option>방송제작 스튜디오</option>
+          <option>이러닝 스튜디오</option>
+          <option>LED 디스플레이</option>
+          <option>스마트 강의실</option>
+          <option>아카이브 시스템</option>
+          <option>화상회의 시스템</option>
+          <option>방송 인프라</option>
+          <option>전시체험</option>
+        </select>
+      </div>
+      <button class="add-btn" onclick="openModal()">＋ 새 프로젝트 추가</button>
+    </div>
+
+    <!-- 테이블 -->
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th style="width:80px">이미지</th>
+            <th>프로젝트명</th>
+            <th style="width:140px">서비스</th>
+            <th style="width:100px">고객유형</th>
+            <th style="width:90px">날짜</th>
+            <th style="width:110px">관리</th>
+          </tr>
+        </thead>
+        <tbody id="tableBody"></tbody>
+      </table>
+    </div>
+  </main>
+</div>
+
+<!-- 추가/수정 모달 -->
+<div class="modal-bg" id="modalBg">
+  <div class="modal">
+    <div class="modal-head">
+      <span class="modal-head-title" id="modalTitle">새 프로젝트 추가</span>
+      <button class="modal-close" onclick="closeModal()">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="form-row">
+        <div class="form-group full">
+          <label class="form-label">프로젝트명 *</label>
+          <input class="form-input" type="text" id="fTitle" placeholder="예: 한국외국어대학교 스튜디오 첨단화" />
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">서비스 유형 *</label>
+          <select class="form-select" id="fService">
+            <option value="">선택해주세요</option>
+            <option>방송제작 스튜디오</option>
+            <option>이러닝 스튜디오</option>
+            <option>LED 디스플레이</option>
+            <option>스마트 강의실</option>
+            <option>아카이브 시스템</option>
+            <option>화상회의 시스템</option>
+            <option>방송 인프라</option>
+            <option>전시체험</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">고객 유형 *</label>
+          <select class="form-select" id="fClient">
+            <option value="">선택해주세요</option>
+            <option>교육기관</option>
+            <option>공공기관</option>
+            <option>기업</option>
+            <option>해외</option>
+            <option>종교단체</option>
+            <option>병원</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">완료 날짜 *</label>
+          <input class="form-input" type="month" id="fDate" />
+        </div>
+      </div>
+      <div class="form-group full" style="grid-column:1/-1">
+        <label class="form-label">프로젝트 개요</label>
+        <textarea class="form-textarea" id="fOverview" placeholder="구축 내용을 간략히 설명해주세요"></textarea>
+      </div>
+
+      <!-- 이미지 업로드 -->
+      <div class="form-group full" style="grid-column:1/-1">
+        <label class="form-label">이미지 (최대 4장)</label>
+        <div class="img-upload-area" onclick="document.getElementById('fileInput').click()">
+          <input type="file" id="fileInput" multiple accept="image/*" onchange="handleFiles(this.files)" />
+          <div class="img-upload-text">클릭하여 이미지 선택 <span>또는 드래그 앤 드롭</span></div>
+          <div style="font-size:11px;color:#ccc;margin-top:4px">JPG, PNG, WEBP · 최대 10MB</div>
+        </div>
+        <div class="img-upload-progress" id="uploadProgress">업로드 중...</div>
+        <div class="img-preview-grid" id="previewGrid"></div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="cancel-btn" onclick="closeModal()">취소</button>
+      <button class="save-btn" id="saveBtn" onclick="saveProject()">저장</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+  let TOKEN = '';
+  let projects = [];
+  let editId = null;
+  let uploadedImages = [];
+
+  // ── 로그인 ──
+  async function doLogin() {
+    const pw = document.getElementById('pwInput').value;
+    const res = await fetch('/api/admin/projects', {
+      headers: { 'x-admin-token': pw }
+    });
+    if (res.ok) {
+      TOKEN = pw;
+      projects = await res.json();
+      document.getElementById('loginWrap').style.display = 'none';
+      document.getElementById('app').style.display = 'block';
+      renderTable();
+      updateStats();
+    } else {
+      document.getElementById('loginErr').style.display = 'block';
+    }
+  }
+
+  document.getElementById('pwInput').addEventListener('keydown', e => {
+    if (e.key === 'Enter') doLogin();
+  });
+
+  function doLogout() {
+    TOKEN = '';
+    projects = [];
+    document.getElementById('loginWrap').style.display = 'flex';
+    document.getElementById('app').style.display = 'none';
+    document.getElementById('pwInput').value = '';
+  }
+
+  // ── 통계 ──
+  function updateStats() {
+    document.getElementById('statTotal').textContent  = projects.length;
+    document.getElementById('statEdu').textContent    = projects.filter(p => p.client === '교육기관').length;
+    document.getElementById('statPublic').textContent = projects.filter(p => p.client === '공공기관').length;
+    document.getElementById('projectCount').textContent = `총 ${projects.length}개`;
+  }
+
+  // ── 테이블 렌더링 ──
+  function renderTable() {
+    const q   = document.getElementById('searchInput').value.toLowerCase();
+    const svc = document.getElementById('filterSelect').value;
+    const filtered = projects.filter(p =>
+      (!q   || p.title.toLowerCase().includes(q) || (p.overview||'').toLowerCase().includes(q)) &&
+      (!svc || p.service === svc)
+    );
+    const tbody = document.getElementById('tableBody');
+    if (!filtered.length) {
+      tbody.innerHTML = '<tr class="empty-row"><td colspan="6">프로젝트가 없습니다</td></tr>';
+      return;
+    }
+    tbody.innerHTML = filtered.map(p => `
+      <tr>
+        <td>
+          ${p.images && p.images[0]
+            ? `<img class="td-img" src="${p.images[0]}" alt="" />`
+            : `<div class="td-img-placeholder">No Image</div>`}
+        </td>
+        <td><div class="td-title">${p.title}</div><div style="font-size:11px;color:#bbb;margin-top:2px">${p.overview ? p.overview.slice(0,40)+'...' : ''}</div></td>
+        <td><span class="td-badge">${p.service}</span></td>
+        <td style="font-size:12px">${p.client}</td>
+        <td style="font-size:12px">${p.date}</td>
+        <td>
+          <div class="td-actions">
+            <button class="edit-btn" onclick="openModal(${p.id})">수정</button>
+            <button class="del-btn"  onclick="deleteProject(${p.id})">삭제</button>
+          </div>
+        </td>
+      </tr>
+    `).join('');
+  }
+
+  // ── 모달 ──
+  function openModal(id = null) {
+    editId = id;
+    uploadedImages = [];
+    document.getElementById('previewGrid').innerHTML = '';
+    document.getElementById('uploadProgress').style.display = 'none';
+    document.getElementById('modalTitle').textContent = id ? '프로젝트 수정' : '새 프로젝트 추가';
+
+    if (id) {
+      const p = projects.find(x => x.id === id);
+      document.getElementById('fTitle').value    = p.title;
+      document.getElementById('fService').value  = p.service;
+      document.getElementById('fClient').value   = p.client;
+      document.getElementById('fDate').value     = p.date;
+      document.getElementById('fOverview').value = p.overview || '';
+      uploadedImages = [...(p.images || [])];
+      renderPreviews();
+    } else {
+      document.getElementById('fTitle').value    = '';
+      document.getElementById('fService').value  = '';
+      document.getElementById('fClient').value   = '';
+      document.getElementById('fDate').value     = '';
+      document.getElementById('fOverview').value = '';
+    }
+    document.getElementById('modalBg').classList.add('on');
+  }
+
+  function closeModal() {
+    document.getElementById('modalBg').classList.remove('on');
+    editId = null;
+    uploadedImages = [];
+  }
+
+  document.getElementById('modalBg').addEventListener('click', e => {
+    if (e.target === document.getElementById('modalBg')) closeModal();
+  });
+
+  // ── 이미지 업로드 ──
+  async function handleFiles(files) {
+    if (uploadedImages.length >= 4) { showToast('이미지는 최대 4장입니다', true); return; }
+    const remaining = 4 - uploadedImages.length;
+    const toUpload = Array.from(files).slice(0, remaining);
+    document.getElementById('uploadProgress').style.display = 'block';
+    document.getElementById('saveBtn').disabled = true;
+
+    for (const file of toUpload) {
+      const fd = new FormData();
+      fd.append('file', file);
+      try {
+        const res = await fetch('/api/admin/upload', {
+          method: 'POST',
+          headers: { 'x-admin-token': TOKEN },
+          body: fd,
+        });
+        const data = await res.json();
+        if (data.url) uploadedImages.push(data.url);
+      } catch {
+        showToast('업로드 실패', true);
+      }
+    }
+
+    document.getElementById('uploadProgress').style.display = 'none';
+    document.getElementById('saveBtn').disabled = false;
+    renderPreviews();
+  }
+
+  function renderPreviews() {
+    const grid = document.getElementById('previewGrid');
+    grid.innerHTML = uploadedImages.map((url, i) => `
+      <div class="img-preview-item">
+        <img src="${url}" alt="" />
+        <button class="img-preview-remove" onclick="removeImage(${i})">✕</button>
+      </div>
+    `).join('');
+  }
+
+  function removeImage(i) {
+    uploadedImages.splice(i, 1);
+    renderPreviews();
+  }
+
+  // 드래그 앤 드롭
+  const uploadArea = document.querySelector('.img-upload-area');
+  uploadArea.addEventListener('dragover', e => { e.preventDefault(); uploadArea.style.borderColor = '#00B8D9'; });
+  uploadArea.addEventListener('dragleave', () => { uploadArea.style.borderColor = ''; });
+  uploadArea.addEventListener('drop', e => {
+    e.preventDefault();
+    uploadArea.style.borderColor = '';
+    handleFiles(e.dataTransfer.files);
+  });
+
+  // ── 저장 ──
+  async function saveProject() {
+    const title   = document.getElementById('fTitle').value.trim();
+    const service = document.getElementById('fService').value;
+    const client  = document.getElementById('fClient').value;
+    const date    = document.getElementById('fDate').value;
+    if (!title || !service || !client || !date) {
+      showToast('필수 항목을 모두 입력해주세요', true); return;
+    }
+
+    const body = {
+      id:       editId,
+      title,
+      service,
+      client,
+      date:     date.replace('-', '.'),
+      overview: document.getElementById('fOverview').value.trim(),
+      images:   uploadedImages,
+    };
+
+    const res = await fetch('/api/admin/projects', {
+      method:  editId ? 'PUT' : 'POST',
+      headers: { 'Content-Type': 'application/json', 'x-admin-token': TOKEN },
+      body:    JSON.stringify(body),
+    });
+
+    if (res.ok) {
+      const saved = await res.json();
+      if (editId) {
+        const idx = projects.findIndex(p => p.id === editId);
+        projects[idx] = saved;
+      } else {
+        projects.unshift(saved);
+      }
+      closeModal();
+      renderTable();
+      updateStats();
+      showToast(editId ? '수정 완료!' : '추가 완료!');
+    } else {
+      showToast('저장 실패', true);
+    }
+  }
+
+  // ── 삭제 ──
+  async function deleteProject(id) {
+    if (!confirm('정말 삭제하시겠습니까?')) return;
+    const res = await fetch('/api/admin/projects', {
+      method:  'DELETE',
+      headers: { 'Content-Type': 'application/json', 'x-admin-token': TOKEN },
+      body:    JSON.stringify({ id }),
+    });
+    if (res.ok) {
+      projects = projects.filter(p => p.id !== id);
+      renderTable();
+      updateStats();
+      showToast('삭제 완료!');
+    }
+  }
+
+  // ── 토스트 ──
+  function showToast(msg, isErr = false) {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.className = 'toast on' + (isErr ? ' err' : '');
+    setTimeout(() => { t.className = 'toast'; }, 2500);
+  }
+</script>
+</body>
+</html>
