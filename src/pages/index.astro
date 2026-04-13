@@ -17,14 +17,14 @@ import SecContact    from '../components/SecContact.astro';
   <title>EDS 이담에스티 — Beyond The Future | 스마트 공간 솔루션</title>
   <meta name="description" content="방송 스튜디오부터 LED 디스플레이까지. 17년의 경험으로 최적의 스마트 공간을 설계합니다." />
   <link rel="icon" href="/favicon.ico" />
-  <style>
+  <style is:global>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html, body { width: 100%; height: 100%; overflow: hidden; font-family: 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', sans-serif; background: #fff; -webkit-font-smoothing: antialiased; }
 
     /* 풀페이지 컨테이너 */
     .fp { position: fixed; inset: 0; overflow: hidden; }
 
-    /* 공통 섹션 */
+    /* 공통 섹션 — is:global 로 모든 컴포넌트에 적용 */
     .sec { position: absolute; inset: 0; opacity: 0; transform: translateY(24px); pointer-events: none; transition: opacity 0.85s cubic-bezier(0.4,0,0.2,1), transform 0.85s cubic-bezier(0.4,0,0.2,1); }
     .sec.active  { opacity: 1; transform: translateY(0); pointer-events: all; }
     .sec.exit-up { opacity: 0; transform: translateY(-24px); }
