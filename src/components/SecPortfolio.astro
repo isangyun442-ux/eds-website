@@ -1,0 +1,71 @@
+---
+// src/components/SecPortfolio.astro
+---
+<section class="sec s4" id="sec4">
+  <div class="sec-header">
+    <span class="sec-tag">Portfolio</span>
+    <h2 class="sec-title">구축 사례</h2>
+  </div>
+  <div class="port-grid">
+    <div class="pc pc-big" onclick="location.href='/works'">
+      <div class="pc-bg" style="background-image:url('/images/HUFS_ST_04.jpg')"></div>
+      <div class="pc-ov"></div>
+      <div class="pc-info">
+        <span class="pc-cat">LED 디스플레이</span>
+        <p class="pc-name">한국외국어대학교 스튜디오 첨단화</p>
+        <p class="pc-meta">2025.02 · 교육기관</p>
+      </div>
+    </div>
+    <div class="pc-col">
+      <div class="pc" onclick="location.href='/works'">
+        <div class="pc-bg" style="background-image:url('/images/SC_ST_09.jpg')"></div>
+        <div class="pc-ov"></div>
+        <div class="pc-info"><span class="pc-cat">스마트 강의실</span><p class="pc-name">서울사이버대학교 고도화</p></div>
+      </div>
+      <div class="pc" onclick="location.href='/works'">
+        <div class="pc-bg" style="background-image:url('/images/GMC_S_01.jpg')"></div>
+        <div class="pc-ov"></div>
+        <div class="pc-info"><span class="pc-cat">이러닝 스튜디오</span><p class="pc-name">공주대학교 스튜디오</p></div>
+      </div>
+    </div>
+    <div class="pc-col">
+      <div class="pc" onclick="location.href='/works'">
+        <div class="pc-bg" style="background-image:url('/images/GKDE_S_08.jpg')"></div>
+        <div class="pc-ov"></div>
+        <div class="pc-info"><span class="pc-cat">방송제작</span><p class="pc-name">경기도교육청 UHD</p></div>
+      </div>
+      <div class="pc" onclick="location.href='/works'">
+        <div class="pc-bg" style="background-image:url('/images/KTV_BS_01.jpg')"></div>
+        <div class="pc-ov"></div>
+        <div class="pc-info"><span class="pc-cat">방송 인프라</span><p class="pc-name">KTV 방송시스템</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .s4 { background: #fff; display: flex; flex-direction: column; padding: 72px 48px 28px; }
+  .sec-header { margin-bottom: 20px; flex-shrink: 0; }
+  .sec-tag { font-size: 10px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: #bbb; display: block; margin-bottom: 5px; }
+  .sec-title { font-size: clamp(24px,3.5vw,40px); font-weight: 800; letter-spacing: -0.03em; color: #0A0A0A; }
+  .port-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 2px; flex: 1; background: #f0f0f0; min-height: 0; }
+  .pc { overflow: hidden; position: relative; cursor: pointer; background: #C8D8E0; }
+  .pc-col { display: grid; grid-template-rows: 1fr 1fr; gap: 2px; }
+  .pc-big { grid-row: span 1; }
+  .pc-bg { position: absolute; inset: 0; background-size: cover; background-position: center; transition: transform 0.5s ease; }
+  .pc:hover .pc-bg { transform: scale(1.04); }
+  .pc-ov { position: absolute; inset: 0; background: linear-gradient(transparent 35%, rgba(0,0,0,0.65)); }
+  .pc-info { position: absolute; bottom: 0; left: 0; right: 0; padding: 16px 18px; }
+  .pc-cat { font-size: 9px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: #00B8D9; display: block; margin-bottom: 4px; }
+  .pc-name { font-size: 13px; font-weight: 700; color: #fff; line-height: 1.35; }
+  .pc-meta { font-size: 10px; color: rgba(255,255,255,0.45); margin-top: 2px; }
+
+  @media (max-width: 768px) {
+    .s4 { padding: 64px 20px 20px; }
+    .port-grid { grid-template-columns: 1fr; }
+    .pc-col { grid-template-rows: 160px 160px; }
+    .pc-big { height: 220px; }
+    .pc { height: 160px; }
+  }
+  @media (max-width: 480px) { .port-grid { grid-template-columns: 1fr; } }
+</style>

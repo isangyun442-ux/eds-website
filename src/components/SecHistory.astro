@@ -1,0 +1,156 @@
+---
+// src/components/SecHistory.astro
+const history = [
+  { year: '2020', items: [{ month: '05월', desc: '구내방송장치 직접생산증명 등록' }] },
+  { year: '2019', items: [{ month: '09월', desc: '컴퓨터서버 직접생산증명 등록' }] },
+  { year: '2018', items: [
+    { month: '01월', desc: '캐나다 Kontron 사 Symkloud Partner 계약' },
+    { month: '03월', desc: '공장등록 (에이스테크노타워 2차)' },
+    { month: '05월', desc: 'KOBA 2018 전시회 출품' },
+  ]},
+  { year: '2017', items: [{ month: '12월', desc: '구로구 디지털로31길 에이스테크노타워 2차 본점 이전' }] },
+  { year: '2016', items: [
+    { month: '04월', desc: '납입자본금 2억으로 증자' },
+    { month: '05월', desc: '정보통신공사업 면허 획득' },
+    { month: '11월', desc: '소프트웨어 직접생산증명 등록' },
+  ]},
+  { year: '2015', items: [
+    { month: '06월', desc: '기술혁신형 중소기업(이노비즈) 인증' },
+    { month: '10월', desc: '디지털방송 모니터링 시스템 특허 등록' },
+  ]},
+  { year: '2014', items: [
+    { month: '01월', desc: '내용기반 영상검색 장치 및 방법 특허 획득' },
+    { month: '05월', desc: '(주)넷클립스 Authorized Value Partner' },
+    { month: '10월', desc: '다중 영상 스트림 녹화 방법 및 그 장치 특허 획득' },
+  ]},
+  { year: '2013', items: [
+    { month: '01월', desc: '구로3동 170-3 벽산디지털밸리 7차로 본점 이전' },
+    { month: '01월', desc: '디지털방송 모니터링 장비 "mediabox" 출시' },
+  ]},
+  { year: '2012', items: [
+    { month: '05월', desc: '연구개발전담부서 설립' },
+    { month: '08월', desc: '디지털방송 모니터링 시스템 특허 획득' },
+  ]},
+  { year: '2009', items: [
+    { month: '02월', desc: 'ISO 9001: 2000, KS A 9001: 2007 취득' },
+    { month: '05월', desc: 'HP Business Partner' },
+  ]},
+  { year: '2008', items: [
+    { month: '04월', desc: 'Apple Technical Partner 계약' },
+    { month: '09월', desc: '소프트웨어사업자 등록' },
+    { month: '11월', desc: '프로그램등록 (이담 Easy Encode / 이담 CLUSTER MG)' },
+    { month: '12월', desc: '벤처기업 확인서 (기술보증기금)' },
+  ]},
+  { year: '2007', items: [
+    { month: '03월', desc: '구로구 구로동 이엔씨벤처드림타워 5차에서 (주)이담에스티 설립' },
+    { month: '08월', desc: '자본금 1억으로 증자' },
+  ]},
+];
+---
+<section class="sec s5" id="sec5">
+  <div class="hist-scroll">
+    <div class="hist-inner">
+      <div class="h-header">
+        <span class="h-eyebrow">Company History</span>
+        <h2 class="h-title">EDS의 걸어온 길</h2>
+        <p class="h-sub">2007년 창립 이래 끊임없이 성장해온 이담에스티의 연혁입니다</p>
+      </div>
+      <div class="timeline">
+        <div class="tl-line"></div>
+        {history.map((h) => (
+          <div class="tl-row">
+            <div class="tl-year-col"><div class="tl-year">{h.year}</div></div>
+            <div class="tl-dot-col"><div class="tl-dot"></div></div>
+            <div class="tl-content-col">
+              <div class="tl-card">
+                {h.items.map((item) => (
+                  <div class="tl-item">
+                    <span class="tl-month">{item.month}</span>
+                    <span class="tl-desc">{item.desc}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        ))}
+        <div class="tl-end">
+          <div class="tl-end-dot"></div>
+          <span class="tl-end-label">FOUNDED 2007</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .s5 { background: #fff; display: flex; flex-direction: column; }
+  .hist-scroll { flex: 1; overflow-y: auto; overflow-x: hidden; scrollbar-width: none; min-height: 0; }
+  .hist-scroll::-webkit-scrollbar { display: none; }
+  .hist-inner { max-width: 860px; margin: 0 auto; padding: 72px 52px 60px; }
+
+  .h-header { text-align: center; margin-bottom: 64px; }
+  .h-eyebrow {
+    display: inline-flex; align-items: center; gap: 10px;
+    font-size: 10px; font-weight: 700; letter-spacing: 0.22em;
+    text-transform: uppercase; color: #00B8D9; margin-bottom: 14px;
+  }
+  .h-eyebrow::before, .h-eyebrow::after { content: ''; display: block; width: 28px; height: 1px; background: #00B8D9; opacity: 0.5; }
+  .h-title { font-size: clamp(26px, 3.5vw, 40px); font-weight: 800; letter-spacing: -0.03em; color: #0A0A0A; margin-bottom: 10px; }
+  .h-sub { font-size: 14px; color: #999; line-height: 1.7; }
+
+  .timeline { position: relative; padding-bottom: 48px; }
+  .tl-line { position: absolute; top: 0; bottom: 0; left: 88px; width: 1px; background: #ebebeb; }
+
+  .tl-row { display: grid; grid-template-columns: 88px 0 1fr; gap: 0 28px; align-items: flex-start; position: relative; }
+
+  .tl-year-col { display: flex; justify-content: flex-end; padding-right: 24px; padding-top: 14px; }
+  .tl-year { font-size: 14px; font-weight: 800; letter-spacing: -0.02em; color: #0D3A4A; }
+
+  .tl-dot-col { display: flex; justify-content: center; padding-top: 18px; position: relative; z-index: 2; }
+  .tl-dot { width: 9px; height: 9px; border-radius: 50%; background: #fff; border: 2px solid #00B8D9; flex-shrink: 0; margin-left: -4px; }
+
+  .tl-content-col { padding: 10px 0 24px 0; }
+  .tl-card { display: flex; flex-direction: column; }
+  .tl-item { display: flex; gap: 14px; align-items: flex-start; padding: 8px 0; border-bottom: 1px solid #f5f5f5; }
+  .tl-item:last-child { border-bottom: none; }
+  .tl-item:first-child { padding-top: 0; }
+  .tl-month { font-size: 11px; font-weight: 700; color: #00B8D9; letter-spacing: 0.04em; flex-shrink: 0; min-width: 32px; padding-top: 2px; }
+  .tl-desc { font-size: 13px; line-height: 1.75; color: #555; }
+
+  .tl-end { display: flex; flex-direction: column; align-items: flex-start; padding-left: 76px; margin-top: 4px; gap: 6px; }
+  .tl-end-dot { width: 13px; height: 13px; border-radius: 50%; background: #0D3A4A; margin-left: 7px; }
+  .tl-end-label { font-size: 10px; font-weight: 700; letter-spacing: 0.18em; color: #aaa; text-transform: uppercase; }
+
+  /* 스크롤 페이드업 */
+  .tl-row { opacity: 0; transform: translateY(20px); transition: opacity 0.55s ease, transform 0.55s ease; }
+  .tl-row.visible { opacity: 1; transform: translateY(0); }
+  .h-header { opacity: 0; transform: translateY(20px); transition: opacity 0.55s ease, transform 0.55s ease; }
+  .h-header.visible { opacity: 1; transform: translateY(0); }
+
+  @media (max-width: 768px) {
+    .hist-inner { padding: 64px 24px 48px; }
+    .tl-line { left: 60px; }
+    .tl-row { grid-template-columns: 60px 0 1fr; gap: 0 18px; }
+    .tl-year-col { padding-right: 16px; }
+    .tl-year { font-size: 12px; }
+    .tl-dot-col { padding-top: 16px; }
+    .tl-end { padding-left: 48px; }
+  }
+  @media (max-width: 480px) {
+    .hist-inner { padding: 56px 16px 40px; }
+    .tl-line { left: 52px; }
+    .tl-row { grid-template-columns: 52px 0 1fr; gap: 0 12px; }
+  }
+</style>
+
+<script is:inline>
+  (function() {
+    const histScroll = document.querySelector('#sec5 .hist-scroll');
+    if (!histScroll) return;
+    const targets = histScroll.querySelectorAll('.tl-row, .h-header');
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+    }, { root: histScroll, threshold: 0.1, rootMargin: '0px 0px -20px 0px' });
+    targets.forEach(el => obs.observe(el));
+  })();
+</script>

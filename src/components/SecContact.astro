@@ -1,0 +1,55 @@
+---
+// src/components/SecContact.astro
+---
+<section class="sec s7" id="sec7">
+  <div class="ct-inner">
+    <div class="ct-left">
+      <span class="ct-tag">Contact</span>
+      <h2 class="ct-title">지금 바로<br>상담을 시작하세요</h2>
+      <img class="ct-logo" src="/images/logo.png" alt="EDS 이담에스티" />
+      <div class="ct-info">
+        <div class="ct-row"><span class="ct-label">주소</span><span class="ct-val">서울시 구로구 디지털로31길 19, 406호</span></div>
+        <div class="ct-row"><span class="ct-label">전화</span><span class="ct-val">02-857-7744</span></div>
+        <div class="ct-row"><span class="ct-label">팩스</span><span class="ct-val">02-857-7321</span></div>
+        <div class="ct-row"><span class="ct-label">이메일</span><span class="ct-val">pub@edamst.com</span></div>
+        <div class="ct-row"><span class="ct-label">운영</span><span class="ct-val">평일 09:00 – 18:00</span></div>
+      </div>
+    </div>
+    <div class="ct-right">
+      <div class="ct-form">
+        <div class="ct-field"><label>이름</label><input type="text" placeholder="담당자 이름" /></div>
+        <div class="ct-field"><label>연락처</label><input type="tel" placeholder="010-0000-0000" /></div>
+        <div class="ct-field"><label>이메일</label><input type="email" placeholder="example@company.com" /></div>
+        <div class="ct-field"><label>문의 유형</label><input type="text" placeholder="방송제작 스튜디오, LED 디스플레이..." /></div>
+      </div>
+      <button class="ct-btn">문의 보내기 →</button>
+    </div>
+  </div>
+</section>
+
+<style>
+  .s7 { background: #0D3A4A; display: flex; align-items: center; justify-content: center; overflow-y: auto; }
+  .ct-inner { display:grid; grid-template-columns:1fr 1fr; gap:64px; align-items:center; padding:60px 56px; width:100%; }
+  .ct-left  { opacity:0; transform:translateX(-20px); transition:opacity 0.8s, transform 0.8s; }
+  .ct-right { opacity:0; transform:translateX(20px);  transition:opacity 0.8s 0.2s, transform 0.8s 0.2s; }
+  .s7.active .ct-left  { opacity:1; transform:translateX(0); }
+  .s7.active .ct-right { opacity:1; transform:translateX(0); }
+  .ct-tag { font-size:10px; font-weight:700; letter-spacing:0.18em; text-transform:uppercase; color:#00B8D9; display:block; margin-bottom:12px; }
+  .ct-title { font-size:clamp(22px,3vw,36px); font-weight:800; color:#fff; letter-spacing:-0.03em; line-height:1.2; margin-bottom:20px; }
+  .ct-logo { height:30px; width:auto; max-width:180px; filter:brightness(0) invert(1); opacity:0.6; display:block; margin-bottom:18px; }
+  .ct-info { display:flex; flex-direction:column; gap:8px; }
+  .ct-row  { display:flex; gap:14px; }
+  .ct-label { font-size:9px; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:#4A7A8A; min-width:44px; }
+  .ct-val   { font-size:12px; color:rgba(255,255,255,0.45); }
+  .ct-form  { display:flex; flex-direction:column; border-top:1px solid rgba(255,255,255,0.1); }
+  .ct-field { border-bottom:1px solid rgba(255,255,255,0.1); padding:12px 0; }
+  .ct-field label { display:block; font-size:9px; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color:#4A7A8A; margin-bottom:4px; }
+  .ct-field input { background:none; border:none; outline:none; font-size:13px; color:#fff; width:100%; font-family:inherit; }
+  .ct-field input::placeholder { color:rgba(255,255,255,0.18); }
+  .ct-btn { margin-top:18px; background:#00B8D9; color:#fff; border:none; font-size:12px; font-weight:700; padding:13px 30px; cursor:pointer; letter-spacing:0.1em; text-transform:uppercase; font-family:inherit; }
+  .ct-btn:hover { background:#009bb8; }
+
+  @media (max-width: 768px) {
+    .ct-inner { grid-template-columns: 1fr; padding: 64px 24px 40px; gap: 32px; }
+  }
+</style>

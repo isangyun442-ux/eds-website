@@ -1,0 +1,14 @@
+---
+// src/components/SecLogoVideo.astro
+---
+<section class="sec s1" id="sec1">
+  <div class="logo-video-wrap">
+    <video id="logoVideo" src="/videos/logo.mp4" muted playsinline preload="auto"></video>
+  </div>
+</section>
+
+<style>
+  .s1 { background: #000; overflow: hidden; }
+  .logo-video-wrap { position: absolute; inset: 0; }
+  .logo-video-wrap video { width: 100%; height: 100%; object-fit: cover; display: block; }
+</style>
