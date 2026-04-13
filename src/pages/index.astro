@@ -1,3 +1,7 @@
+---
+// EDS 이담에스티 — 풀페이지 스크롤 홈페이지
+// src/pages/index.astro 에 저장하세요
+---
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -144,10 +148,10 @@
     .svc-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1px; background: #ebebeb; flex: 1; min-height: 0; }
     .svc { background: #fff; padding: 28px 28px 22px; cursor: pointer; transition: background 0.2s; display: flex; flex-direction: column; }
     .svc:hover { background: #F5F5F5; }
-    .svc-n { font-size: 10px; font-weight: 700; color: #ddd; letter-spacing: 0.1em; margin-bottom: 10px; }
-    .svc-title { font-size: 15px; font-weight: 700; color: #0A0A0A; margin-bottom: 8px; }
-    .svc-desc { font-size: 12px; color: #999; line-height: 1.75; flex: 1; }
-    .svc-arr { font-size: 16px; color: #ddd; margin-top: 10px; display: inline-block; transition: color 0.2s, transform 0.2s; }
+    .svc-n { font-size: 10px; font-weight: 700; color: #00B8D9; letter-spacing: 0.1em; display: block; margin-bottom: 6px; }
+    .svc-title { font-size: 15px; font-weight: 700; color: #fff; margin-bottom: 6px; }
+    .svc-desc { font-size: 11px; color: rgba(255,255,255,0.55); line-height: 1.6; }
+    .svc-arr { font-size: 16px; color: rgba(255,255,255,0.3); margin-top: 8px; display: inline-block; transition: color 0.2s, transform 0.2s; }
     .svc:hover .svc-arr { color: #00B8D9; transform: translateX(4px); }
 
     /* ── S4 STATS + PARTNERS ── */
@@ -241,6 +245,47 @@
       .brands-grid { grid-template-columns: repeat(2,1fr); }
       .hero-btns { flex-direction: column; }
       .btn-white, .btn-outline { width: 100%; text-align: center; }
+    }
+
+    /* ── 모바일: YouTube 숨기고 이미지로 대체 ── */
+    @media (max-width: 768px) {
+      .yt-wrap { display: none; }
+      .s0 {
+        background-image: url('/images/HUFS_ST_04.jpg');
+        background-size: cover;
+        background-position: center;
+      }
+      .nav { padding: 14px 20px; }
+      .nav.scrolled { padding: 12px 20px; }
+      .nav-menu { display: none; }
+      .nav-logo { width: 110px; }
+      .logo-color, .logo-white { height: 22px; }
+      .hero-content { padding: 0 24px 52px; }
+      .hero-title { font-size: clamp(28px, 8vw, 42px); }
+      .hero-sub { font-size: 13px; max-width: 100%; }
+      .hero-btns { flex-direction: column; gap: 10px; }
+      .btn-white, .btn-outline { width: 100%; text-align: center; padding: 14px 20px; }
+      .s2 { padding: 64px 20px 20px; }
+      .port-grid { grid-template-columns: 1fr; }
+      .pc-big { height: 220px; }
+      .pc-col { grid-template-rows: 160px 160px; }
+      .pc { height: 160px; }
+      .s3 { padding: 64px 20px 20px; }
+      .svc-grid { grid-template-columns: 1fr 1fr; }
+      .svc { padding: 20px 18px 16px; }
+      .svc-title { font-size: 13px; }
+      .s4-inner { padding: 64px 20px 40px; }
+      .stats-row { grid-template-columns: 1fr 1fr; }
+      .stat-n { font-size: 34px; }
+      .brands-grid { grid-template-columns: repeat(3, 1fr); }
+      .s5 { overflow-y: auto; }
+      .ct-inner { grid-template-columns: 1fr; padding: 64px 20px 40px; gap: 28px; }
+      .dots { right: 8px; }
+      .dot { width: 5px; height: 5px; }
+    }
+    @media (max-width: 480px) {
+      .svc-grid { grid-template-columns: 1fr; }
+      .brands-grid { grid-template-columns: repeat(2, 1fr); }
     }
   </style>
 </head>
@@ -349,14 +394,53 @@
       <h2 class="sec-title">서비스</h2>
     </div>
     <div class="svc-grid">
-      <div class="svc"><span class="svc-n">01</span><h3 class="svc-title">방송제작 스튜디오</h3><p class="svc-desc">4K UHD 촬영부터 실시간 스트리밍까지</p><span class="svc-arr">→</span></div>
-      <div class="svc"><span class="svc-n">02</span><h3 class="svc-title">이러닝 스튜디오</h3><p class="svc-desc">자동 추적 카메라와 크로마키 환경</p><span class="svc-arr">→</span></div>
-      <div class="svc"><span class="svc-n">03</span><h3 class="svc-title">LED 디스플레이</h3><p class="svc-desc">P1.5 피치 LED Wall XR 스튜디오</p><span class="svc-arr">→</span></div>
-      <div class="svc"><span class="svc-n">04</span><h3 class="svc-title">스마트 강의실</h3><p class="svc-desc">온·오프라인 동시 수업 환경 구현</p><span class="svc-arr">→</span></div>
-      <div class="svc"><span class="svc-n">05</span><h3 class="svc-title">아카이브 시스템</h3><p class="svc-desc">영상 자산 디지털화 및 장기 보존</p><span class="svc-arr">→</span></div>
-      <div class="svc"><span class="svc-n">06</span><h3 class="svc-title">화상회의 시스템</h3><p class="svc-desc">Zoom·Teams 통합 원격 회의 환경</p><span class="svc-arr">→</span></div>
+      <div class="svc" onclick="openSvc(0)">
+        <div class="svc-bg" style="background-image:url('/images/KTV_BS_01.jpg')"></div>
+        <div class="svc-ov"></div>
+        <div class="svc-info"><span class="svc-n">01</span><h3 class="svc-title">방송제작 스튜디오</h3><p class="svc-desc">4K UHD 촬영부터 실시간 스트리밍까지</p><span class="svc-arr">→</span></div>
+      </div>
+      <div class="svc" onclick="openSvc(1)">
+        <div class="svc-bg" style="background-image:url('/images/SC_ST_09.jpg')"></div>
+        <div class="svc-ov"></div>
+        <div class="svc-info"><span class="svc-n">02</span><h3 class="svc-title">이러닝 스튜디오</h3><p class="svc-desc">자동 추적 카메라와 크로마키 환경</p><span class="svc-arr">→</span></div>
+      </div>
+      <div class="svc" onclick="openSvc(2)">
+        <div class="svc-bg" style="background-image:url('/images/GKDE_S_08.jpg')"></div>
+        <div class="svc-ov"></div>
+        <div class="svc-info"><span class="svc-n">03</span><h3 class="svc-title">LED 디스플레이</h3><p class="svc-desc">P1.5 피치 LED Wall XR 스튜디오</p><span class="svc-arr">→</span></div>
+      </div>
+      <div class="svc" onclick="openSvc(3)">
+        <div class="svc-bg" style="background-image:url('/images/GMC_S_01.jpg')"></div>
+        <div class="svc-ov"></div>
+        <div class="svc-info"><span class="svc-n">04</span><h3 class="svc-title">스마트 강의실</h3><p class="svc-desc">온·오프라인 동시 수업 환경 구현</p><span class="svc-arr">→</span></div>
+      </div>
+      <div class="svc" onclick="openSvc(4)">
+        <div class="svc-bg" style="background-image:url('/images/MG_DAS_02.jpg')"></div>
+        <div class="svc-ov"></div>
+        <div class="svc-info"><span class="svc-n">05</span><h3 class="svc-title">아카이브 시스템</h3><p class="svc-desc">영상 자산 디지털화 및 장기 보존</p><span class="svc-arr">→</span></div>
+      </div>
+      <div class="svc" onclick="openSvc(5)">
+        <div class="svc-bg" style="background-image:url('/images/HUFS_ST_04.jpg')"></div>
+        <div class="svc-ov"></div>
+        <div class="svc-info"><span class="svc-n">06</span><h3 class="svc-title">화상회의 시스템</h3><p class="svc-desc">Zoom·Teams 통합 원격 회의 환경</p><span class="svc-arr">→</span></div>
+      </div>
     </div>
   </section>
+
+  <!-- 서비스 모달 -->
+  <div class="svc-modal-bg" id="svc-modal-bg">
+    <div class="svc-modal">
+      <div class="svc-modal-img" id="svc-modal-img"></div>
+      <div class="svc-modal-body">
+        <button class="svc-modal-close" onclick="closeSvc()">✕</button>
+        <span class="svc-modal-n" id="svc-modal-n"></span>
+        <h3 class="svc-modal-title" id="svc-modal-title"></h3>
+        <p class="svc-modal-desc" id="svc-modal-desc"></p>
+        <ul class="svc-modal-list" id="svc-modal-list"></ul>
+        <button class="svc-modal-cta" onclick="goTo(5)">도입 문의하기 →</button>
+      </div>
+    </div>
+  </div>
 
   <!-- S4 STATS + PARTNERS -->
   <section class="sec s4" id="sec4">
@@ -481,6 +565,48 @@
     if (cur !== 4 && s4sc) s4sc.scrollTop = 0;
     setTimeout(() => { busy = false; }, 900);
   }
+
+
+  const svcData = [
+    { n:'01', title:'방송제작 스튜디오', img:'/images/KTV_BS_01.jpg',
+      desc:'4K UHD 카메라, 스위처, 조명 시스템을 통합하여 전문 방송 제작 환경을 구축합니다. 실시간 스트리밍과 녹화를 동시에 지원합니다.',
+      list:['4K UHD 다카메라 시스템','실시간 스트리밍 지원','자동화 조명 및 크로마키','프롬프터·부조정실 통합','OB차량 야외 촬영 지원'] },
+    { n:'02', title:'이러닝 스튜디오', img:'/images/SC_ST_09.jpg',
+      desc:'온라인 교육 콘텐츠 제작에 최적화된 이러닝 스튜디오를 구축합니다. 자동 추적 카메라와 전자칠판으로 고품질 강의를 제작합니다.',
+      list:['자동 추적 PTZ 카메라','전자칠판·태블릿 연동','크로마키 배경 시스템','1인 셀프 스튜디오','LMS 자동 업로드'] },
+    { n:'03', title:'LED 디스플레이', img:'/images/GKDE_S_08.jpg',
+      desc:'P1.5~P4 피치 LED Wall을 활용한 XR 가상 스튜디오, 전시 공간, 강당 등 다양한 공간에 맞춤형 LED 디스플레이를 설치합니다.',
+      list:['P1.5 초고해상도 LED Wall','XR 가상 스튜디오 배경','실내외 대형 전광판','미디어 서버 연동','공연장·전시관 맞춤 설계'] },
+    { n:'04', title:'스마트 강의실', img:'/images/GMC_S_01.jpg',
+      desc:'원터치로 온·오프라인 동시 수업이 가능한 스마트 강의실을 구축합니다. 하이브리드 교육 환경을 실현합니다.',
+      list:['원터치 통합 제어 시스템','온·오프라인 동시 수업','전자칠판·인터랙티브 디스플레이','자동 추적 카메라','다중 강의실 연동'] },
+    { n:'05', title:'아카이브 시스템', img:'/images/MG_DAS_02.jpg',
+      desc:'방송 영상, 교육 콘텐츠, 기관 기록물 등을 장기 보존하고 효율적으로 관리할 수 있는 미디어 아카이브 시스템을 구축합니다.',
+      list:['MAM 미디어 자산 관리','대용량 SAN·NAS 스토리지','자동 인제스트·메타데이터','검색·공유·스트리밍 통합','LTO 테이프 아카이브'] },
+    { n:'06', title:'화상회의 시스템', img:'/images/HUFS_ST_04.jpg',
+      desc:'Zoom, Teams, Webex 등 주요 플랫폼과 완벽 호환되는 화상회의 시스템을 구축합니다.',
+      list:['Zoom·Teams·Webex 통합','자동 추적 카메라','에코 제거 마이크 어레이','대형 디스플레이 연동','다자간 화상회의실 구성'] }
+  ];
+
+  function openSvc(i) {
+    const d = svcData[i];
+    document.getElementById('svc-modal-n').textContent = d.n;
+    document.getElementById('svc-modal-title').textContent = d.title;
+    document.getElementById('svc-modal-desc').textContent = d.desc;
+    document.getElementById('svc-modal-img').style.backgroundImage = "url('" + d.img + "')";
+    document.getElementById('svc-modal-list').innerHTML = d.list.map(l => '<li>' + l + '</li>').join('');
+    document.getElementById('svc-modal-bg').classList.add('on');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeSvc() {
+    document.getElementById('svc-modal-bg').classList.remove('on');
+    document.body.style.overflow = '';
+  }
+
+  document.getElementById('svc-modal-bg').addEventListener('click', function(e) {
+    if (e.target === this) closeSvc();
+  });
 
   window.goTo = goTo;
 
