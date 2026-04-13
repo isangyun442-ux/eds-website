@@ -17,6 +17,7 @@ import SecContact    from '../components/SecContact.astro';
   <title>EDS 이담에스티 — Beyond The Future | 스마트 공간 솔루션</title>
   <meta name="description" content="방송 스튜디오부터 LED 디스플레이까지. 17년의 경험으로 최적의 스마트 공간을 설계합니다." />
   <link rel="icon" href="/favicon.ico" />
+  <script is:inline src="/i18n/translations.js"></script>
   <style is:global>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html, body { width: 100%; height: 100%; overflow: hidden; font-family: 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', sans-serif; background: #fff; -webkit-font-smoothing: antialiased; }
@@ -55,6 +56,20 @@ import SecContact    from '../components/SecContact.astro';
     .dots.dark .dot { background: rgba(255,255,255,0.3); }
     .dots.dark .dot.active { background: #fff; }
 
+    /* 언어 버튼 */
+    .lang-wrap { display: flex; gap: 4px; margin-right: 16px; }
+    .lang-btn {
+      font-size: 11px; font-weight: 700; padding: 5px 9px;
+      background: transparent; border: 1px solid rgba(255,255,255,0.25);
+      color: rgba(255,255,255,0.55); cursor: pointer; letter-spacing: 0.06em;
+      transition: all 0.2s;
+    }
+    .nav.scrolled .lang-btn { border-color: rgba(0,0,0,0.15); color: #aaa; }
+    .lang-btn:hover { color: #fff; border-color: rgba(255,255,255,0.6); }
+    .nav.scrolled .lang-btn:hover { color: #0D3A4A; border-color: #0D3A4A; }
+    .lang-btn.active { color: #fff; border-color: #00B8D9; background: rgba(0,184,217,0.15); }
+    .nav.scrolled .lang-btn.active { color: #0D3A4A; border-color: #0D3A4A; background: rgba(13,58,74,0.08); }
+
     @media (max-width: 768px) {
       .nav { padding: 14px 20px; }
       .nav.scrolled { padding: 12px 20px; }
@@ -64,6 +79,8 @@ import SecContact    from '../components/SecContact.astro';
       .logo-color, .logo-white { height: 22px; }
       .dots { right: 8px; }
       .dot { width: 5px; height: 5px; }
+      .lang-wrap { margin-right: 8px; gap: 2px; }
+      .lang-btn { font-size: 10px; padding: 4px 7px; }
     }
   </style>
 </head>
@@ -77,14 +94,20 @@ import SecContact    from '../components/SecContact.astro';
       <img class="logo-white" src="/images/logo.png" alt="EDS 이담에스티" />
     </div>
     <div class="nav-menu">
-      <a href="#" onclick="goTo(2);return false;">회사소개</a>
-      <a href="#" onclick="goTo(3);return false;">서비스</a>
-      <a href="#" onclick="goTo(4);return false;">구축사례</a>
-      <a href="#" onclick="goTo(5);return false;">회사연혁</a>
-      <a href="#" onclick="goTo(6);return false;">파트너스</a>
-      <a href="#" onclick="goTo(7);return false;">도입 문의</a>
+      <a href="#" data-i18n="nav.about"     onclick="goTo(2);return false;">회사소개</a>
+      <a href="#" data-i18n="nav.services"  onclick="goTo(3);return false;">서비스</a>
+      <a href="#" data-i18n="nav.portfolio" onclick="goTo(4);return false;">구축사례</a>
+      <a href="#" data-i18n="nav.history"   onclick="goTo(5);return false;">회사연혁</a>
+      <a href="#" data-i18n="nav.clients"   onclick="goTo(6);return false;">파트너스</a>
+      <a href="#" data-i18n="nav.contact"   onclick="goTo(7);return false;">도입 문의</a>
     </div>
-    <button class="nav-cta" onclick="goTo(7)">도입 문의</button>
+    <div class="lang-wrap">
+      <button class="lang-btn active" data-lang="ko" onclick="__applyLang('ko')">KO</button>
+      <button class="lang-btn" data-lang="en" onclick="__applyLang('en')">EN</button>
+      <button class="lang-btn" data-lang="zh" onclick="__applyLang('zh')">ZH</button>
+      <button class="lang-btn" data-lang="ja" onclick="__applyLang('ja')">JA</button>
+    </div>
+    <button class="nav-cta" data-i18n="nav.contact" onclick="goTo(7)">도입 문의</button>
     <button class="nav-hamburger" id="hamburger">
       <span></span><span></span><span></span>
     </button>
