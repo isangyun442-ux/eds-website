@@ -2,56 +2,64 @@
 // src/components/SecAbout.astro
 ---
 <section class="sec s2" id="sec2">
-  <div class="about-scroll">
-    <div class="about-inner">
+  <div class="ab-scroll">
+    <div class="ab-wrap">
 
-      <!-- 1만 시간의 법칙 -->
-      <div class="ab-block ab-law">
-        <div class="ab-law-left">
-          <div class="ab-num">10,000</div>
-          <div class="ab-num-sub">HOURS</div>
+      <!-- ① 1만 시간의 법칙 — 이미지 왼쪽 / 텍스트 오른쪽 -->
+      <div class="ab-block ab-row">
+        <div class="ab-img-col">
+          <img src="/images/about-10000hours.svg" alt="1만 시간의 법칙" class="ab-img" />
         </div>
-        <div class="ab-law-right">
+        <div class="ab-text-col">
           <span class="ab-eyebrow">Introduce</span>
           <h2 class="ab-title">"1만 시간의 법칙"</h2>
-          <p class="ab-text">
+          <div class="ab-divider"></div>
+          <p class="ab-body">
             어떤 분야에서 전문성을 갖기 위해 투자해야 하는 시간을 의미합니다.
             1993년 앤더스 에릭슨의 연구를 바탕으로 말콤 글래드웰이
-            <em>《아웃라이어》(2009)</em>에서 "1만 시간을 연습하면 전문가가 된다"는 이론으로 설명했습니다.
-            하루 3시간, 주 20시간씩 10년간 한 가지 일을 훈련하고 반복해야
+            <em>《아웃라이어》(2009)</em>에서 제시한 이론으로,
+            하루 3시간, 주 20시간씩 10년간 한 가지 일을 반복해야
             비로소 전문가가 될 수 있다는 뜻입니다.
           </p>
-          <div class="ab-stats">
-            <div class="ab-stat"><div class="ab-sv">하루 3시간</div><div class="ab-sl">일일 훈련량</div></div>
-            <div class="ab-stat"><div class="ab-sv">주 20시간</div><div class="ab-sl">주간 훈련량</div></div>
-            <div class="ab-stat"><div class="ab-sv">10년</div><div class="ab-sl">지속 기간</div></div>
+          <div class="ab-stat-row">
+            <div class="ab-stat">
+              <div class="ab-stat-n">3h</div>
+              <div class="ab-stat-l">하루 훈련량</div>
+            </div>
+            <div class="ab-stat-sep"></div>
+            <div class="ab-stat">
+              <div class="ab-stat-n">20h</div>
+              <div class="ab-stat-l">주간 훈련량</div>
+            </div>
+            <div class="ab-stat-sep"></div>
+            <div class="ab-stat">
+              <div class="ab-stat-n">10Y</div>
+              <div class="ab-stat-l">지속 기간</div>
+            </div>
           </div>
         </div>
       </div>
 
-      <!-- 전문가 집단 -->
-      <div class="ab-block ab-expert">
-        <div class="ab-expert-header">
+      <div class="ab-section-sep"></div>
+
+      <!-- ② 전문가 집단 — 텍스트 왼쪽 / 이미지 오른쪽 -->
+      <div class="ab-block ab-row">
+        <div class="ab-text-col">
           <span class="ab-eyebrow">Expert Group</span>
-          <h2 class="ab-title">전문가 집단 이담에스티</h2>
-        </div>
-        <div class="ab-expert-body">
-          <div class="ab-expert-text">
-            <p>
-              이담에스티는 방송기술, 컴퓨터그래픽, 오디오, IT 분야의
-              <strong>20년 이상의 외길</strong>을 다져온 전문가들로 구성된 회사입니다.
-              미디어 기술은 HDTV·3DTV·AR/VR을 거쳐 메타버스와 홀로그램으로 빠르게 변화하고 있습니다.
-            </p>
-            <p>
-              고객의 요구는 기술적 측면뿐만 아니라 사회적·경제적·문화적 활용의 중요성이 높아지고 있으며,
-              기초와 경험이 부족하면 쉽게 뒤쳐질 수 있는 분야입니다.
-            </p>
-            <p>
-              우리 회사는 <strong>전원 엔지니어로 구성</strong>되어 있으며,
-              매월 자체 사내 세미나 개최와 기술 습득 지원을 통해 트렌드에 뒤쳐지지 않습니다.
-            </p>
-          </div>
-          <div class="ab-expert-tags">
+          <h2 class="ab-title">전문가 집단<br>이담에스티</h2>
+          <div class="ab-divider"></div>
+          <p class="ab-body">
+            방송기술, 컴퓨터그래픽, 오디오, IT 분야에서
+            <strong>20년 이상의 외길</strong>을 다져온 전문가들로 구성된 회사입니다.
+            미디어 기술은 HDTV·3DTV·AR/VR을 거쳐 메타버스와 홀로그램으로
+            빠르게 변화하고 있습니다.
+          </p>
+          <p class="ab-body">
+            우리 회사는 <strong>전원 엔지니어로 구성</strong>되어 있으며,
+            매월 자체 사내 세미나와 기술 습득 지원을 통해
+            트렌드에 뒤쳐지지 않습니다.
+          </p>
+          <div class="ab-tags">
             <span class="ab-tag">방송기술</span>
             <span class="ab-tag">컴퓨터그래픽</span>
             <span class="ab-tag">오디오</span>
@@ -60,42 +68,51 @@
             <span class="ab-tag">Metaverse</span>
           </div>
         </div>
+        <div class="ab-img-col">
+          <img src="/images/about-expert.svg" alt="전문가 집단 이담에스티" class="ab-img" />
+        </div>
       </div>
 
-      <!-- 고객 실적 -->
-      <div class="ab-block ab-clients">
-        <span class="ab-eyebrow ab-eyebrow-dark">Customer Service</span>
-        <h2 class="ab-title ab-title-dark">다양하고 만족도 높은 고객 서비스</h2>
-        <p class="ab-text ab-text-dark">
-          준비된 기술 서비스를 바탕으로 수많은 국내외 고객에게
-          상호 소개와 재구매를 통해 이담에스티의 서비스를 검증받았습니다.
-        </p>
-        <div class="ab-nums">
+      <div class="ab-section-sep"></div>
+
+      <!-- ③ 고객 실적 -->
+      <div class="ab-block ab-nums-block">
+        <div class="ab-nums-header">
+          <span class="ab-eyebrow">Customer Service</span>
+          <h2 class="ab-title">다양하고 만족도 높은 고객 서비스</h2>
+          <div class="ab-divider"></div>
+          <p class="ab-body ab-body-center">
+            준비된 기술 서비스를 바탕으로 수많은 국내외 고객에게
+            상호 소개와 재구매를 통해 이담에스티의 서비스를 검증받았습니다.
+          </p>
+        </div>
+        <div class="ab-nums-grid">
           <div class="ab-numcard">
+            <div class="ab-nc-accent"></div>
             <div class="ab-nc-n">91<span>개</span></div>
             <div class="ab-nc-l">관공서 · 공공기관</div>
             <div class="ab-nc-s">중앙정부, 지자체, 공기업 포함</div>
           </div>
-          <div class="ab-numcard">
+          <div class="ab-numcard ab-numcard-mid">
+            <div class="ab-nc-accent"></div>
             <div class="ab-nc-n">115<span>개</span></div>
             <div class="ab-nc-l">교육기관</div>
             <div class="ab-nc-s">대학교, 학교, 교육청</div>
           </div>
           <div class="ab-numcard">
+            <div class="ab-nc-accent"></div>
             <div class="ab-nc-n">516<span>+</span></div>
             <div class="ab-nc-l">총 고객사</div>
             <div class="ab-nc-s">방송국, 병원, 기업, 종교단체</div>
           </div>
         </div>
-        <!-- 임직원 메시지 -->
         <div class="ab-message">
-          <div class="ab-quote-mark">"</div>
-          <p class="ab-quote-text">
+          <p class="ab-msg-text">
             이담에스티는 다양한 미디어 시스템 구축 노하우와
             끊임없는 사내 연구 및 대외 기술 습득 활동을 통해
             트렌디한 구축 서비스를 제공하겠습니다.
           </p>
-          <div class="ab-sign">— 임직원 일동</div>
+          <div class="ab-msg-sign">— 임직원 일동</div>
         </div>
       </div>
 
@@ -104,87 +121,73 @@
 </section>
 
 <style>
-  .s2 { background: #06121C; display: flex; flex-direction: column; }
-  .about-scroll { flex: 1; overflow-y: auto; overflow-x: hidden; scrollbar-width: none; min-height: 0; }
-  .about-scroll::-webkit-scrollbar { display: none; }
-  .about-inner { padding: 0; }
+  .s2 { background: #fff; display: flex; flex-direction: column; }
+  .ab-scroll { flex: 1; overflow-y: auto; overflow-x: hidden; scrollbar-width: none; min-height: 0; }
+  .ab-scroll::-webkit-scrollbar { display: none; }
+  .ab-wrap { max-width: 1080px; margin: 0 auto; padding: 80px 60px; }
 
   .ab-eyebrow {
     display: inline-flex; align-items: center; gap: 10px;
-    font-size: 10px; font-weight: 700; letter-spacing: 0.22em;
-    text-transform: uppercase; color: #00B8D9; margin-bottom: 12px;
+    font-size: 11px; font-weight: 700; letter-spacing: 0.22em;
+    text-transform: uppercase; color: #00B8D9; margin-bottom: 14px;
   }
-  .ab-eyebrow::before { content: ''; width: 22px; height: 1px; background: #00B8D9; display: block; }
-  .ab-eyebrow-dark { color: #0D3A4A; }
-  .ab-eyebrow-dark::before { background: #0D3A4A; }
+  .ab-eyebrow::before { content: ''; width: 24px; height: 2px; background: #00B8D9; display: block; }
+  .ab-title { font-size: clamp(22px, 2.6vw, 34px); font-weight: 800; letter-spacing: -0.03em; color: #0A0A0A; line-height: 1.25; }
+  .ab-divider { width: 40px; height: 3px; background: #00B8D9; margin: 20px 0; }
+  .ab-body { font-size: 14px; color: #666; line-height: 2.0; margin-bottom: 14px; max-width: 480px; }
+  .ab-body em { font-style: italic; color: #444; }
+  .ab-body strong { color: #0A0A0A; font-weight: 700; }
+  .ab-body-center { max-width: 600px; text-align: center; margin: 0 auto; }
 
-  .ab-title { font-size: clamp(20px, 2.5vw, 32px); font-weight: 800; letter-spacing: -0.03em; color: #fff; margin-bottom: 16px; line-height: 1.2; }
-  .ab-title-dark { color: #0A0A0A; }
-  .ab-text { font-size: 14px; color: rgba(255,255,255,0.55); line-height: 1.9; margin-bottom: 0; }
-  .ab-text em { font-style: italic; color: rgba(255,255,255,0.75); }
-  .ab-text-dark { color: #666; }
+  .ab-row { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; padding: 64px 0; }
+  .ab-img-col { display: flex; align-items: center; justify-content: center; }
+  .ab-img { width: 100%; max-width: 400px; height: auto; }
+  .ab-text-col { display: flex; flex-direction: column; }
 
-  /* 1만 시간 블록 */
-  .ab-law {
-    display: grid; grid-template-columns: 220px 1fr;
-    background: #06121C;
-    padding: 56px 52px; gap: 48px; align-items: center;
-    border-bottom: 1px solid rgba(255,255,255,0.06);
-  }
-  .ab-law-left { display: flex; flex-direction: column; align-items: flex-start; }
-  .ab-num { font-size: clamp(48px, 6vw, 80px); font-weight: 900; color: #00B8D9; line-height: 1; letter-spacing: -0.04em; }
-  .ab-num-sub { font-size: 12px; font-weight: 700; letter-spacing: 0.2em; color: rgba(255,255,255,0.25); margin-top: 6px; text-transform: uppercase; }
-  .ab-stats { display: flex; gap: 28px; margin-top: 24px; flex-wrap: wrap; }
-  .ab-stat { display: flex; flex-direction: column; gap: 4px; }
-  .ab-sv { font-size: 14px; font-weight: 700; color: #fff; }
-  .ab-sl { font-size: 10px; color: rgba(255,255,255,0.35); letter-spacing: 0.06em; }
+  .ab-stat-row { display: flex; align-items: center; margin-top: 32px; padding-top: 28px; border-top: 1px solid #f0f0f0; }
+  .ab-stat { text-align: center; flex: 1; }
+  .ab-stat-n { font-size: 20px; font-weight: 800; color: #0D3A4A; letter-spacing: -0.02em; }
+  .ab-stat-l { font-size: 11px; color: #bbb; margin-top: 5px; letter-spacing: 0.04em; }
+  .ab-stat-sep { width: 1px; height: 32px; background: #eee; flex-shrink: 0; }
 
-  /* 전문가 블록 */
-  .ab-expert {
-    background: #0D2030;
-    padding: 56px 52px;
-    border-bottom: 1px solid rgba(255,255,255,0.06);
-  }
-  .ab-expert-header { margin-bottom: 28px; }
-  .ab-expert-body { display: grid; grid-template-columns: 1fr 200px; gap: 40px; align-items: start; }
-  .ab-expert-text { display: flex; flex-direction: column; gap: 14px; }
-  .ab-expert-text p { font-size: 14px; color: rgba(255,255,255,0.6); line-height: 1.9; margin: 0; }
-  .ab-expert-text strong { color: #fff; font-weight: 700; }
-  .ab-expert-tags { display: flex; flex-wrap: wrap; gap: 8px; align-content: flex-start; }
-  .ab-tag {
-    font-size: 11px; font-weight: 600; padding: 5px 12px;
-    border: 1px solid rgba(0,184,217,0.3); color: #00B8D9;
-    letter-spacing: 0.04em;
-  }
+  .ab-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 24px; }
+  .ab-tag { font-size: 11px; font-weight: 600; padding: 5px 14px; border: 1px solid #e8e8e8; color: #666; letter-spacing: 0.04em; transition: border-color 0.2s, color 0.2s; }
+  .ab-tag:hover { border-color: #00B8D9; color: #00B8D9; }
 
-  /* 고객 실적 블록 */
-  .ab-clients {
-    background: #fff;
-    padding: 56px 52px;
-  }
-  .ab-nums { display: grid; grid-template-columns: repeat(3,1fr); gap: 2px; background: #f0f0f0; margin: 32px 0; }
-  .ab-numcard { background: #fff; padding: 28px 24px; }
-  .ab-nc-n { font-size: 44px; font-weight: 800; letter-spacing: -0.04em; color: #0A0A0A; line-height: 1; }
-  .ab-nc-n span { font-size: 26px; color: #00B8D9; }
-  .ab-nc-l { font-size: 13px; font-weight: 700; color: #0D3A4A; margin-top: 8px; }
-  .ab-nc-s { font-size: 11px; color: #aaa; margin-top: 4px; }
+  .ab-section-sep { height: 1px; background: #f0f0f0; }
 
-  /* 임직원 메시지 */
-  .ab-message { border-left: 3px solid #00B8D9; padding: 16px 24px; background: #f9f9f9; margin-top: 8px; }
-  .ab-quote-mark { font-size: 48px; font-weight: 900; color: #00B8D9; line-height: 0.8; margin-bottom: 8px; }
-  .ab-quote-text { font-size: 14px; color: #444; line-height: 1.9; margin: 0 0 12px; }
-  .ab-sign { font-size: 12px; font-weight: 700; color: #0D3A4A; letter-spacing: 0.06em; }
+  .ab-nums-block { padding: 64px 0 0; }
+  .ab-nums-header { text-align: center; margin-bottom: 48px; display: flex; flex-direction: column; align-items: center; }
+  .ab-nums-header .ab-divider { margin: 20px auto; }
 
-  @media (max-width: 768px) {
-    .ab-law { grid-template-columns: 1fr; padding: 48px 24px; gap: 28px; }
-    .ab-expert { padding: 48px 24px; }
-    .ab-expert-body { grid-template-columns: 1fr; }
-    .ab-clients { padding: 48px 24px; }
-    .ab-nums { grid-template-columns: 1fr 1fr; }
-    .ab-nc-n { font-size: 34px; }
+  .ab-nums-grid { display: grid; grid-template-columns: repeat(3, 1fr); border: 1px solid #f0f0f0; }
+  .ab-numcard { padding: 44px 40px; border-right: 1px solid #f0f0f0; transition: background 0.2s; }
+  .ab-numcard:last-child { border-right: none; }
+  .ab-numcard:hover { background: #FAFCFD; }
+  .ab-nc-accent { width: 32px; height: 3px; background: #00B8D9; margin-bottom: 22px; }
+  .ab-numcard-mid .ab-nc-accent { background: #0D3A4A; }
+  .ab-nc-n { font-size: 54px; font-weight: 900; letter-spacing: -0.04em; color: #0A0A0A; line-height: 1; margin-bottom: 14px; }
+  .ab-nc-n span { font-size: 28px; color: #00B8D9; margin-left: 2px; }
+  .ab-numcard-mid .ab-nc-n span { color: #0D3A4A; }
+  .ab-nc-l { font-size: 14px; font-weight: 700; color: #0A0A0A; margin-bottom: 6px; }
+  .ab-nc-s { font-size: 12px; color: #aaa; line-height: 1.6; }
+
+  .ab-message { margin-top: 40px; padding: 32px 40px; background: #F8FBFC; border-left: 4px solid #00B8D9; }
+  .ab-msg-text { font-size: 15px; color: #555; line-height: 2; font-style: italic; margin-bottom: 16px; }
+  .ab-msg-sign { font-size: 13px; font-weight: 700; color: #0D3A4A; letter-spacing: 0.06em; }
+
+  @media (max-width: 900px) {
+    .ab-wrap { padding: 56px 28px; }
+    .ab-row { grid-template-columns: 1fr; gap: 36px; padding: 48px 0; }
+    .ab-img { max-width: 300px; }
+    .ab-nums-grid { grid-template-columns: 1fr; }
+    .ab-numcard { border-right: none; border-bottom: 1px solid #f0f0f0; padding: 28px 24px; }
+    .ab-numcard:last-child { border-bottom: none; }
+    .ab-nc-n { font-size: 40px; }
   }
   @media (max-width: 480px) {
-    .ab-nums { grid-template-columns: 1fr; }
-    .ab-stats { gap: 16px; }
+    .ab-wrap { padding: 40px 18px; }
+    .ab-message { padding: 24px 20px; }
+    .ab-stat-n { font-size: 17px; }
   }
 </style>
