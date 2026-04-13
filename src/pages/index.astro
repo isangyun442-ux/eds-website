@@ -75,13 +75,11 @@
 
     /* ── S0 HERO ── */
     .s0 { background: #000; display: flex; align-items: flex-end; }
-    .video-wrap { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
-    .video-wrap video {
+    .yt-wrap { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
+    .yt-wrap iframe {
       position: absolute; top: 50%; left: 50%;
-      min-width: 100%; min-height: 100%;
-      width: auto; height: auto;
-      transform: translate(-50%, -50%);
-      object-fit: cover;
+      width: calc(100% + 240px); height: calc(100% + 240px);
+      transform: translate(-50%, -50%); border: none;
     }
     .hero-overlay {
       position: absolute; inset: 0;
@@ -117,17 +115,14 @@
     @keyframes shw { 0%{opacity:1;transform:translateY(0)} 100%{opacity:0;transform:translateY(9px)} }
     .sh-text { font-size: 9px; color: rgba(255,255,255,0.35); letter-spacing: 0.2em; text-transform: uppercase; }
 
-    /* ── S1 LOGO ── */
-    .s1 { background: #fff; display: flex; align-items: center; justify-content: center; }
-    .logo-reveal { display: flex; flex-direction: column; align-items: center; gap: 20px; text-align: center; }
-    .logo-big { height: 72px; width: auto; max-width: 320px; opacity: 0; transform: scale(0.88); transition: opacity 1s 0.1s, transform 1s 0.1s; }
-    .s1.active .logo-big { opacity: 1; transform: scale(1); }
-    .logo-line { width: 0; height: 3px; background: linear-gradient(90deg,#0D3A4A,#D42B2B,#00B8D9); transition: width 1.2s 0.4s ease; }
-    .s1.active .logo-line { width: 220px; }
-    .logo-claim { font-size: clamp(18px,3vw,30px); font-weight: 800; color: #0A0A0A; letter-spacing: -0.02em; line-height: 1.4; opacity: 0; transform: translateY(14px); transition: opacity 0.8s 0.6s, transform 0.8s 0.6s; }
-    .s1.active .logo-claim { opacity: 1; transform: translateY(0); }
-    .logo-since { font-size: 12px; color: #bbb; letter-spacing: 0.04em; opacity: 0; transition: opacity 0.8s 0.9s; }
-    .s1.active .logo-since { opacity: 1; }
+    /* ── S1 LOGO VIDEO ── */
+    .s1 { background: #000; overflow: hidden; }
+    .logo-video-wrap { position: absolute; inset: 0; }
+    .logo-video-wrap video {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      display: block;
+    }
 
     /* ── S2 PORTFOLIO ── */
     .s2 { background: #fff; display: flex; flex-direction: column; padding: 72px 48px 28px; }
@@ -268,9 +263,9 @@
       .btn-white, .btn-outline { width: 100%; text-align: center; }
     }
 
-    /* ── 모바일: 영상 숨기고 이미지로 대체 ── */
+    /* ── 모바일: YouTube 숨기고 이미지로 대체 ── */
     @media (max-width: 768px) {
-      .video-wrap { display: none; }
+      .yt-wrap { display: none; }
       .s0 {
         background-image: url('/images/HUFS_ST_04.jpg');
         background-size: cover;
@@ -333,12 +328,11 @@
 
   <!-- S0 HERO -->
   <section class="sec s0 active" id="sec0">
-    <div class="video-wrap">
-      <video
-        src="/videos/hero.mp4"
-        autoplay muted loop playsinline
-        preload="auto">
-      </video>
+    <div class="yt-wrap">
+      <iframe
+        src="https://www.youtube.com/embed/lbpwd0M2E1M?autoplay=1&mute=1&loop=1&playlist=lbpwd0M2E1M&controls=0&showinfo=0&rel=0&modestbranding=1&playsinline=1"
+        allow="autoplay; encrypted-media" allowfullscreen>
+      </iframe>
     </div>
     <div class="hero-overlay"></div>
     <div class="hero-content">
@@ -356,13 +350,15 @@
     </div>
   </section>
 
-  <!-- S1 LOGO -->
+  <!-- S1 LOGO VIDEO -->
   <section class="sec s1" id="sec1">
-    <div class="logo-reveal">
-      <img class="logo-big" src="/images/logo.png" alt="EDS 이담에스티" />
-      <div class="logo-line"></div>
-      <p class="logo-claim">스마트 공간 전문기업<br>Beyond The Future</p>
-      <p class="logo-since">2007년 창립 · 서울시 구로구 디지털로31길 19</p>
+    <div class="logo-video-wrap">
+      <video
+        id="logoVideo"
+        src="/videos/logo.mp4"
+        muted playsinline
+        preload="auto">
+      </video>
     </div>
   </section>
 
@@ -629,6 +625,23 @@
   document.getElementById('svc-modal-bg').addEventListener('click', function(e) {
     if (e.target === this) closeSvc();
   });
+
+  // 로고 영상 — 섹션 활성화 시 재생, 종료 시 Portfolio로 자동 이동
+  const logoVideo = document.getElementById('logoVideo');
+  if (logoVideo) {
+    logoVideo.addEventListener('ended', () => {
+      goTo(2);
+    });
+  }
+
+  // goTo 후크: sec1 활성화 시 영상 처음부터 재생
+  const _origGoTo = goTo;
+  window.goTo = function(n) {
+    _origGoTo(n);
+    if (n === 1 && logoVideo) {
+      setTimeout(() => { logoVideo.currentTime = 0; logoVideo.play(); }, 100);
+    }
+  };
 
   window.goTo = goTo;
 
