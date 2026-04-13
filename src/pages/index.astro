@@ -198,11 +198,23 @@ import SecContact    from '../components/SecContact.astro';
   // 초기 상태
   nav.classList.remove('scrolled');
 
-  // 휠 이벤트 — 시간 기반 딜레이로 예민도 제어
-  let edgeReady = false;
-  let edgeReadyTimer = null;
-  // 스크롤 섹션 끝 도달 후 이 시간(ms) 동안 머물러야 섹션 전환 허용
-  const EDGE_DELAY = { 2: 1000, 5: 600, 6: 600 };
+  // 휠 이벤트 — 끝 도달 후 N ms 대기 → 자동으로 다음 섹션 전환
+  let edgePending = false;
+  let edgeDir = 0;
+  let edgeTimer = null;
+  // 스크롤 섹션 끝 도달 후 대기 시간 (ms)
+  const EDGE_DELAY = { 2: 800, 5: 600, 6: 600 };
+
+  function triggerEdge(dir) {
+    if (edgePending) return;
+    edgePending = true;
+    edgeDir = dir;
+    const delay = EDGE_DELAY[cur] || 0;
+    edgeTimer = setTimeout(() => {
+      edgePending = false;
+      goTo(cur + edgeDir);
+    }, delay);
+  }
 
   document.getElementById('fp').addEventListener('wheel', e => {
     e.preventDefault();
@@ -211,29 +223,23 @@ import SecContact    from '../components/SecContact.astro';
       const atTop = scrollEl.scrollTop <= 1;
       const atBot = scrollEl.scrollTop + scrollEl.clientHeight >= scrollEl.scrollHeight - 4;
 
-      // 아직 끝에 안 닿은 경우 — 그냥 스크롤
+      // 아직 끝에 안 닿은 경우 — 그냥 스크롤하고 타이머 리셋
       if (e.deltaY > 0 && !atBot) {
         scrollEl.scrollTop += e.deltaY;
-        edgeReady = false;
-        clearTimeout(edgeReadyTimer);
+        clearTimeout(edgeTimer);
+        edgePending = false;
         return;
       }
       if (e.deltaY < 0 && !atTop) {
         scrollEl.scrollTop += e.deltaY;
-        edgeReady = false;
-        clearTimeout(edgeReadyTimer);
+        clearTimeout(edgeTimer);
+        edgePending = false;
         return;
       }
 
-      // 끝에 도달 — 딜레이 타이머 시작
-      if (!edgeReady) {
-        const delay = EDGE_DELAY[cur] || 0;
-        clearTimeout(edgeReadyTimer);
-        edgeReadyTimer = setTimeout(() => { edgeReady = true; }, delay);
-        return;
-      }
-      // 딜레이 경과 후에만 섹션 전환 허용
-      edgeReady = false;
+      // 끝 도달 — 대기 후 자동 전환
+      triggerEdge(e.deltaY > 0 ? 1 : -1);
+      return;
     }
     goTo(e.deltaY > 0 ? cur + 1 : cur - 1);
   }, { passive: false });
