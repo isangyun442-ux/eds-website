@@ -114,7 +114,9 @@ import SecContact    from '../components/SecContact.astro';
   </nav>
 
   <!-- 섹션들 -->
-  <SecHero />
+  <div id="hero-wrap" class="hero-wrap">
+    <SecHero />
+  </div>
   <SecLogoVideo />
   <SecAbout />
   <SecServices />
@@ -123,41 +125,49 @@ import SecContact    from '../components/SecContact.astro';
   <SecClients />
   <SecContact />
 
-  <!-- DOTS: 총 8섹션 (0~7) -->
+  <!-- DOTS: PC 8개 / 모바일 7개 -->
   <div class="dots dark" id="dots">
-    <button class="dot active" onclick="goTo(0)"></button>
-    <button class="dot" onclick="goTo(1)"></button>
-    <button class="dot" onclick="goTo(2)"></button>
-    <button class="dot" onclick="goTo(3)"></button>
-    <button class="dot" onclick="goTo(4)"></button>
-    <button class="dot" onclick="goTo(5)"></button>
-    <button class="dot" onclick="goTo(6)"></button>
-    <button class="dot" onclick="goTo(7)"></button>
+    <button class="dot active" id="dot0" onclick="goTo(0)"></button>
+    <button class="dot" id="dot1" onclick="goTo(1)"></button>
+    <button class="dot" id="dot2" onclick="goTo(2)"></button>
+    <button class="dot" id="dot3" onclick="goTo(3)"></button>
+    <button class="dot" id="dot4" onclick="goTo(4)"></button>
+    <button class="dot" id="dot5" onclick="goTo(5)"></button>
+    <button class="dot" id="dot6" onclick="goTo(6)"></button>
+    <button class="dot" id="dot7" onclick="goTo(7)"></button>
   </div>
 
 </div>
 
 <script is:inline>
-  // 어두운 배경 섹션 (nav/dots 흰색 모드)
-  const DARK_SECS = [0, 1, 7];
-  const SCROLLABLE_SECS = { 2: 'ab-scroll', 5: 'hist-scroll', 6: 's6scroll' };
-
-  // 모바일 여부 확인
   const isMobile = window.innerWidth <= 768;
 
-  // 모바일이면 sec0 숨기고 sec1부터 시작
+  // 모바일: Hero wrap 완전 제거, sec1(로고영상)을 첫 화면으로
   if (isMobile) {
-    const sec0 = document.getElementById('sec0');
-    if (sec0) { sec0.classList.remove('active'); sec0.style.cssText = 'display:none !important'; }
-    const sec1 = document.getElementById('sec1');
-    if (sec1) sec1.classList.add('active');
+    const hw = document.getElementById('hero-wrap');
+    if (hw) hw.remove();
+    // sec 번호 재조정 — sec1→sec0, sec2→sec1 ... sec7→sec6
+    for (let i = 1; i <= 7; i++) {
+      const el = document.getElementById('sec' + i);
+      if (el) el.id = 'sec' + (i - 1);
+    }
+    // dot0 제거
+    const d0 = document.getElementById('dot0');
+    if (d0) d0.remove();
   }
 
-  let cur = isMobile ? 1 : 0;
+  // 모바일: 어두운 섹션 = [0(로고),6(contact)] / PC: [0(hero),1(로고),7(contact)]
+  const DARK_SECS = isMobile ? [0, 6] : [0, 1, 7];
+  // 모바일: sec 번호가 1씩 당겨짐
+  const SCROLLABLE_SECS = isMobile
+    ? { 1: 'ab-scroll', 4: 'hist-scroll', 5: 's6scroll' }
+    : { 2: 'ab-scroll', 5: 'hist-scroll', 6: 's6scroll' };
+
+  let cur = 0;
   let busy = false;
-  const N = 8;
-  const secs   = Array.from({length: N}, (_, i) => document.getElementById('sec' + i));
-  const dots   = document.querySelectorAll('.dot');
+  const N = isMobile ? 7 : 8;
+  const secs = Array.from({length: N}, (_, i) => document.getElementById('sec' + i));
+  const dots = document.querySelectorAll('.dot');
   const nav    = document.getElementById('nav');
   const dotsEl = document.getElementById('dots');
   const sh     = document.getElementById('sh');
@@ -208,13 +218,13 @@ import SecContact    from '../components/SecContact.astro';
   };
 
   // 초기 상태
-  if (isMobile) {
-    nav.classList.remove('scrolled');
-    dotsEl.classList.add('dark');
-    dots[0].classList.remove('active');
-    dots[1].classList.add('active');
-  } else {
-    nav.classList.remove('scrolled');
+  nav.classList.remove('scrolled');
+  dotsEl.classList.add('dark');
+  if (dots[0]) dots[0].classList.add('active');
+
+  // 모바일: 로고영상 자동 재생
+  if (isMobile && logoVideo) {
+    setTimeout(() => { logoVideo.currentTime = 0; logoVideo.play(); }, 100);
   }
 
   // 휠 이벤트 — 스크롤 끝 도달 후 멈췄다가 다시 내리면 섹션 전환
