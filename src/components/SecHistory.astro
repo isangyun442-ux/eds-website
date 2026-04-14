@@ -105,7 +105,7 @@ const history = [
 </section>
 
 <style>
-  .s5 { background: #fff; display: flex; flex-direction: column; position: relative; }
+  .s5 { background: #fff; display: flex; flex-direction: column; position: relative; height: 100%; }
   .hist-scroll { flex: 1; overflow-y: auto; overflow-x: hidden; scrollbar-width: none; min-height: 0; }
   .hist-scroll::-webkit-scrollbar { display: none; }
   .hist-inner { max-width: 860px; margin: 0 auto; padding: 72px 52px 60px; }
@@ -219,65 +219,6 @@ const history = [
     .eds-footer-info, .eds-footer-mail { font-size: 10px; }
     .eds-footer-copy { font-size: 9px; }
   }
-  /* ── 스크롤 힌트 ── */
-  .scroll-hint-sec {
-    position: absolute;
-    bottom: 110px;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 20;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 6px;
-    pointer-events: none;
-  }
-  .scroll-hint-sec .sh-mouse {
-    width: 20px; height: 30px;
-    border-radius: 10px;
-    display: flex; align-items: flex-start;
-    justify-content: center; padding-top: 4px;
-  }
-  .scroll-hint-sec .sh-wheel {
-    width: 2px; height: 5px;
-    border-radius: 1px;
-    animation: shw-sec 1.8s ease infinite;
-  }
-  @keyframes shw-sec {
-    0%  { opacity: 1; transform: translateY(0); }
-    100%{ opacity: 0; transform: translateY(9px); }
-  }
-  .scroll-hint-sec .sh-text {
-    font-size: 9px;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-  }
-  .s4 .scroll-hint-sec .sh-mouse,
-  .s5 .scroll-hint-sec .sh-mouse,
-  .s6 .scroll-hint-sec .sh-mouse { border: 1.5px solid rgba(0,0,0,0.2); }
-  .s4 .scroll-hint-sec .sh-wheel,
-  .s5 .scroll-hint-sec .sh-wheel,
-  .s6 .scroll-hint-sec .sh-wheel { background: rgba(0,0,0,0.3); }
-  .s4 .scroll-hint-sec .sh-text,
-  .s5 .scroll-hint-sec .sh-text,
-  .s6 .scroll-hint-sec .sh-text  { color: rgba(0,0,0,0.25); }
-  /* ── EDS Footer ── */
-  .eds-footer {
-    background: #0A0A0A; padding: 22px 56px 26px;
-    border-top: 1px solid rgba(255,255,255,0.07); flex-shrink: 0;
-  }
-  .eds-footer-top {
-    display: flex; align-items: center; justify-content: space-between;
-    margin-bottom: 12px; padding-bottom: 12px;
-    border-bottom: 1px solid rgba(255,255,255,0.06);
-  }
-  .eds-footer-logo { height: 22px; width: auto; object-fit: contain; filter: brightness(0) invert(1); opacity: 0.75; }
-  .eds-footer-copy { font-size: 10px; color: rgba(255,255,255,0.25); letter-spacing: 0.06em; }
-  .eds-footer-bottom { display: flex; align-items: center; flex-wrap: wrap; gap: 4px 10px; }
-  .eds-footer-info { font-size: 11px; color: rgba(255,255,255,0.38); }
-  .eds-footer-div { font-size: 10px; color: rgba(255,255,255,0.15); }
-  .eds-footer-mail { font-size: 11px; color: #00B8D9; text-decoration: none; transition: color 0.2s; }
-  .eds-footer-mail:hover { color: #fff; }
   /* ── 스크롤 힌트 ── */
   .scroll-hint-sec {
     position: absolute; bottom: 110px; left: 50%;
