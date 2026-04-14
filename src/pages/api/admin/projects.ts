@@ -1,29 +1,39 @@
 // src/pages/api/admin/projects.ts
 import type { APIRoute } from 'astro';
-import fs from 'node:fs/promises';
-import path from 'node:path';
 
-const DATA_FILE = path.resolve('src/data/projects.json');
+const KV_URL = import.meta.env.KV_REST_API_URL;
+const KV_TOKEN = import.meta.env.KV_REST_API_TOKEN;
+const KEY = 'eds-projects';
 
 async function readProjects() {
   try {
-    const raw = await fs.readFile(DATA_FILE, 'utf-8');
-    return JSON.parse(raw);
+    const res = await fetch(`${KV_URL}/get/${KEY}`, {
+      headers: { Authorization: `Bearer ${KV_TOKEN}` },
+    });
+    const data = await res.json();
+    if (!data.result) return [];
+    return JSON.parse(data.result);
   } catch {
     return [];
   }
 }
 
-async function writeProjects(data: unknown) {
-  await fs.mkdir(path.dirname(DATA_FILE), { recursive: true });
-  await fs.writeFile(DATA_FILE, JSON.stringify(data, null, 2), 'utf-8');
+async function writeProjects(projects: unknown) {
+  await fetch(`${KV_URL}/set/${KEY}`, {
+    method: 'POST',
+    headers: {
+      Authorization: `Bearer ${KV_TOKEN}`,
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ value: JSON.stringify(projects) }),
+  });
 }
 
 function authCheck(request: Request) {
   return request.headers.get('x-admin-token') === import.meta.env.ADMIN_PASSWORD;
 }
 
-// GET — 전체 목록 (인증 불필요 — 일반 방문자도 읽기 가능)
+// GET — 전체 목록 (인증 불필요)
 export const GET: APIRoute = async () => {
   const projects = await readProjects();
   return new Response(JSON.stringify(projects), {
@@ -37,7 +47,7 @@ export const POST: APIRoute = async ({ request }) => {
   const body = await request.json();
   const projects = await readProjects();
   const newProject = {
-    id: Date.now(),
+    id:       Date.now(),
     title:    body.title    || '',
     service:  body.service  || '',
     client:   body.client   || '',
