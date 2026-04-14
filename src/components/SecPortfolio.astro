@@ -9,7 +9,7 @@
     </div>
     <div class="port-nav">
       <button class="port-btn" id="port-prev" aria-label="이전">←</button>
-      <span class="port-count"><span id="port-cur">1</span> / <span id="port-total">5</span></span>
+      <span class="port-count"><span id="port-cur">1</span> / <span id="port-total">6</span></span>
       <button class="port-btn" id="port-next" aria-label="다음">→</button>
     </div>
   </div>
@@ -17,7 +17,7 @@
   <div class="port-track-wrap">
     <div class="port-track" id="port-track">
 
-      <div class="port-card" onclick="location.href='/works/hufs'">
+      <div class="port-card" onclick="location.href='/works'">
         <div class="port-img" style="background-image:url('/images/HUFS_ST_04.jpg')"></div>
         <div class="port-body">
           <span class="port-n">01</span>
@@ -27,7 +27,7 @@
         </div>
       </div>
 
-      <div class="port-card" onclick="location.href='/works/sc'">
+      <div class="port-card" onclick="location.href='/works'">
         <div class="port-img" style="background-image:url('/images/SC_ST_09.jpg')"></div>
         <div class="port-body">
           <span class="port-n">02</span>
@@ -37,7 +37,7 @@
         </div>
       </div>
 
-      <div class="port-card" onclick="location.href='/works/gmc'">
+      <div class="port-card" onclick="location.href='/works'">
         <div class="port-img" style="background-image:url('/images/GMC_S_01.jpg')"></div>
         <div class="port-body">
           <span class="port-n">03</span>
@@ -47,7 +47,7 @@
         </div>
       </div>
 
-      <div class="port-card" onclick="location.href='/works/gkde'">
+      <div class="port-card" onclick="location.href='/works'">
         <div class="port-img" style="background-image:url('/images/GKDE_S_08.jpg')"></div>
         <div class="port-body">
           <span class="port-n">04</span>
@@ -57,13 +57,22 @@
         </div>
       </div>
 
-      <div class="port-card" onclick="location.href='/works/ktv'">
+      <div class="port-card" onclick="location.href='/works'">
         <div class="port-img" style="background-image:url('/images/KTV_BS_01.jpg')"></div>
         <div class="port-body">
           <span class="port-n">05</span>
           <h3 class="port-title">KTV<br>방송 인프라 시스템</h3>
           <p class="port-desc">방송 인프라 · 2024.03 · 방송국</p>
           <span class="port-link">사례 보기 →</span>
+        </div>
+      </div>
+
+      <!-- CTA 카드 -->
+      <div class="port-card port-cta-card" onclick="location.href='/works'">
+        <div class="port-cta-inner">
+          <span class="port-cta-num">516<span class="port-cta-plus">+</span></span>
+          <p class="port-cta-label">전체 구축 사례</p>
+          <span class="port-cta-arr">전체 보기 →</span>
         </div>
       </div>
 
@@ -219,6 +228,53 @@
     transition: color 0.2s;
   }
   .port-card:hover .port-link { color: #00B8D9; }
+
+
+  /* ── CTA 카드 ── */
+  .port-cta-card {
+    background: #0A0A0A;
+    cursor: pointer;
+    display: flex !important;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-left: 56px;
+  }
+  .port-cta-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    padding: 0 24px 0 0;
+  }
+  .port-cta-num {
+    font-size: 52px;
+    font-weight: 800;
+    color: #fff;
+    letter-spacing: -0.04em;
+    line-height: 1;
+  }
+  .port-cta-plus {
+    font-size: 36px;
+    color: #00B8D9;
+  }
+  .port-cta-label {
+    font-size: 12px;
+    font-weight: 500;
+    color: rgba(255,255,255,0.4);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+  .port-cta-arr {
+    font-size: 12px;
+    font-weight: 700;
+    color: #00B8D9;
+    letter-spacing: 0.06em;
+    margin-top: 4px;
+    transition: transform 0.2s;
+  }
+  .port-cta-card:hover .port-cta-arr { transform: translateX(4px); }
+  .port-cta-card:hover { background: #0D2030; }
 
   /* ── Progress ── */
   .port-progress-wrap {
