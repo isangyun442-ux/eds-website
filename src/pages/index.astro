@@ -210,13 +210,23 @@ import SecContact    from '../components/SecContact.astro';
   };
 
   // 초기 상태
+  nav.classList.remove('scrolled');
+  dotsEl.classList.add('dark');
+
   if (isMobile) {
-    nav.classList.remove('scrolled');
-    dotsEl.classList.add('dark');
-    dots[0].classList.remove('active');
-    dots[1].classList.add('active');
-  } else {
-    nav.classList.remove('scrolled');
+    // dot[0] 숨기기
+    if (dots[0]) dots[0].style.display = 'none';
+    if (dots[1]) dots[1].classList.add('active');
+    // 로고영상 자동재생
+    if (logoVideo) {
+      logoVideo.play().catch(() => {
+        // 자동재생 실패시 화면 터치하면 재생
+        document.addEventListener('touchstart', function playOnTouch() {
+          logoVideo.play();
+          document.removeEventListener('touchstart', playOnTouch);
+        }, { once: true });
+      });
+    }
   }
 
   // 휠 이벤트 — 스크롤 끝 도달 후 멈췄다가 다시 내리면 섹션 전환
