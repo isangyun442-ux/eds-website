@@ -4,14 +4,14 @@
 <section class="sec s1" id="sec1">
   <!-- 모바일 터치 대기 화면 -->
   <div class="logo-touch-screen" id="logoTouchScreen">
-    <img src="/images/logo.png" alt="EDS 이담에스티" class="logo-touch-img" />
-    <p class="logo-touch-text">화면을 터치하여 시작하세요</p>
-    <div class="logo-touch-dot">
-      <span></span><span></span><span></span>
+    <img src="/images/logo-eds.png" alt="EDS 이담에스티" class="logo-touch-img" />
+    <div class="logo-touch-finger">
+      <img src="/images/touch-finger.png" alt="터치" class="finger-img" />
     </div>
+    <p class="logo-touch-text">화면을 터치하여 시작하세요</p>
   </div>
   <!-- 영상 -->
-  <div class="logo-video-wrap">
+  <div class="logo-video-wrap" id="logoVideoWrap">
     <video id="logoVideo" src="/videos/logo.mp4" muted playsinline preload="auto"></video>
   </div>
 </section>
@@ -28,45 +28,48 @@
     justify-content: center;
     background: #fff;
     z-index: 2;
-    gap: 24px;
+    gap: 32px;
   }
+
+  /* 로고 */
   .logo-touch-img {
-    width: 200px; height: auto;
-    animation: logoFloat 2.5s ease-in-out infinite;
+    width: 220px; height: auto;
+    animation: logoFloat 3s ease-in-out infinite;
   }
   @keyframes logoFloat {
     0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-10px); }
+    50% { transform: translateY(-12px); }
   }
+
+  /* 손가락 */
+  .logo-touch-finger {
+    display: flex; align-items: center; justify-content: center;
+  }
+  .finger-img {
+    width: 80px; height: auto;
+    animation: fingerTap 1.4s ease-in-out infinite;
+  }
+  @keyframes fingerTap {
+    0%, 100% { transform: translateY(0) rotate(-15deg); }
+    50% { transform: translateY(-14px) rotate(-15deg); }
+  }
+
+  /* 안내 문구 */
   .logo-touch-text {
     font-family: 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
     font-size: 14px; font-weight: 600;
-    color: #0D3A4A; letter-spacing: 0.08em;
+    color: #0D3A4A; letter-spacing: 0.1em;
     animation: fadePulse 1.8s ease-in-out infinite;
   }
   @keyframes fadePulse {
     0%, 100% { opacity: 1; }
-    50% { opacity: 0.3; }
-  }
-  .logo-touch-dot {
-    display: flex; gap: 8px;
-  }
-  .logo-touch-dot span {
-    width: 6px; height: 6px; border-radius: 50%;
-    background: #00B8D9;
-    animation: dotBounce 1.2s ease-in-out infinite;
-  }
-  .logo-touch-dot span:nth-child(2) { animation-delay: 0.2s; }
-  .logo-touch-dot span:nth-child(3) { animation-delay: 0.4s; }
-  @keyframes dotBounce {
-    0%, 100% { transform: translateY(0); opacity: 0.4; }
-    50% { transform: translateY(-8px); opacity: 1; }
+    50% { opacity: 0.25; }
   }
 
   /* 영상 */
   .logo-video-wrap {
     position: absolute; inset: 0;
-    background: #fff;
+    background: #000;
     display: none;
   }
   .logo-video-wrap video {
@@ -78,10 +81,10 @@
   @media (min-width: 769px) {
     .s1 { background: #000; }
     .logo-touch-screen { display: none !important; }
-    .logo-video-wrap { display: block; background: #000; }
+    .logo-video-wrap { display: block !important; }
   }
 
-  /* 모바일 — 터치화면 보이고 영상 숨김 */
+  /* 모바일 — 터치화면 */
   @media (max-width: 768px) {
     .logo-touch-screen { display: flex; }
     .logo-video-wrap { display: none; }
@@ -94,20 +97,19 @@
   if (!isMobile) return;
 
   const touchScreen = document.getElementById('logoTouchScreen');
-  const videoWrap = touchScreen?.nextElementSibling;
+  const videoWrap = document.getElementById('logoVideoWrap');
   const video = document.getElementById('logoVideo');
 
   if (!touchScreen || !video) return;
 
   function startVideo() {
     touchScreen.style.display = 'none';
-    videoWrap.style.display = 'block';
+    videoWrap.style.cssText = 'display:block; position:absolute; inset:0; background:#000;';
     video.currentTime = 0;
     video.play();
   }
 
-  // 터치하면 영상 재생
-  touchScreen.addEventListener('click', startVideo);
+  touchScreen.addEventListener('click', startVideo, { once: true });
   touchScreen.addEventListener('touchstart', startVideo, { once: true });
 })();
 </script>
