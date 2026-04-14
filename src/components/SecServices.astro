@@ -2,143 +2,164 @@
 // src/components/SecServices.astro
 ---
 <section class="sec s3" id="sec3">
-  <div class="s3-header">
-    <span class="sec-tag" data-i18n="svc.eyebrow">Services</span>
-    <h2 class="sec-title" data-i18n="svc.title">서비스</h2>
-  </div>
 
-  <!-- ── 블록 1: 방송 SI ── -->
-  <div class="svc-block">
-    <div class="svc-hero" style="background-image:url('/images/KTV_BS_01.jpg')">
-      <div class="svc-hero-ov"></div>
-      <div class="svc-hero-text">
-        <h3 class="svc-hero-title" data-i18n="svc.1.title">방송 SI</h3>
-        <p class="svc-hero-sub" data-i18n="svc.1.desc">방송제작, 디지털미디어, 아카이브, 장애인방송 시스템의 구축경험을 통한 솔루션 제공</p>
+  <!-- 내부 스크롤 컨테이너 — index.astro의 SCROLLABLE_SECS에서 감지 -->
+  <div class="s3scroll">
+
+    <div class="s3-header">
+      <span class="sec-tag" data-i18n="svc.eyebrow">Services</span>
+      <h2 class="sec-title" data-i18n="svc.title">서비스</h2>
+    </div>
+
+    <!-- ── 블록 1: 방송 SI ── -->
+    <div class="svc-block">
+      <div class="svc-hero" style="background-image:url('/images/KTV_BS_01.jpg')">
+        <div class="svc-hero-ov"></div>
+        <div class="svc-hero-text">
+          <h3 class="svc-hero-title" data-i18n="svc.1.title">방송 SI</h3>
+          <p class="svc-hero-sub" data-i18n="svc.1.desc">방송제작, 디지털미디어, 아카이브, 장애인방송 시스템의 구축경험을 통한 솔루션 제공</p>
+        </div>
+      </div>
+      <div class="svc-tabs" data-block="0">
+        <button class="svc-tab on" data-idx="0">방송제작시스템</button>
+        <button class="svc-tab" data-idx="1">디지털미디어</button>
+        <button class="svc-tab" data-idx="2">아카이브시스템</button>
+        <button class="svc-tab" data-idx="3">장애인방송</button>
+      </div>
+      <div class="svc-desc-bar">
+        <p class="svc-desc-text" id="svc-desc-0">안정적인 콘텐츠 제작 기반 마련을 위한 미디어 스토리지, 비디오 서버, 미디어관리시스템 등 방송시스템 구축을 제공합니다.</p>
       </div>
     </div>
-    <div class="svc-tabs" data-block="0">
-      <button class="svc-tab on" data-idx="0">방송제작시스템</button>
-      <button class="svc-tab" data-idx="1">디지털미디어</button>
-      <button class="svc-tab" data-idx="2">아카이브시스템</button>
-      <button class="svc-tab" data-idx="3">장애인방송</button>
-    </div>
-    <div class="svc-desc-bar">
-      <p class="svc-desc-text" id="svc-desc-0">안정적인 콘텐츠 제작 기반 마련을 위한 미디어 스토리지, 비디오 서버, 미디어관리시스템 등 방송시스템 구축을 제공합니다.</p>
-    </div>
-  </div>
 
-  <!-- ── 블록 2: 스튜디오 ── -->
-  <div class="svc-block">
-    <div class="svc-hero" style="background-image:url('/images/SC_ST_09.jpg')">
-      <div class="svc-hero-ov"></div>
-      <div class="svc-hero-text">
-        <h3 class="svc-hero-title" data-i18n="svc.2.title">스튜디오</h3>
-        <p class="svc-hero-sub" data-i18n="svc.2.desc">이러닝, 방송제작, 유튜브, 레코딩 스튜디오 구축과 유지보수</p>
+    <!-- ── 블록 2: 스튜디오 ── -->
+    <div class="svc-block">
+      <div class="svc-hero" style="background-image:url('/images/SC_ST_09.jpg')">
+        <div class="svc-hero-ov"></div>
+        <div class="svc-hero-text">
+          <h3 class="svc-hero-title" data-i18n="svc.2.title">스튜디오</h3>
+          <p class="svc-hero-sub" data-i18n="svc.2.desc">이러닝, 방송제작, 유튜브, 레코딩 스튜디오 구축과 유지보수</p>
+        </div>
+      </div>
+      <div class="svc-tabs" data-block="1">
+        <button class="svc-tab on" data-idx="0">이러닝스튜디오</button>
+        <button class="svc-tab" data-idx="1">방송제작스튜디오</button>
+        <button class="svc-tab" data-idx="2">유튜브스튜디오</button>
+        <button class="svc-tab" data-idx="3">레코딩스튜디오</button>
+      </div>
+      <div class="svc-desc-bar">
+        <p class="svc-desc-text" id="svc-desc-1">사이버대학교 등의 온라인 대학부터 비대면 강의를 위한 오프라인 대학까지 다양한 이러닝 제작콘텐츠를 위한 시스템 구축 및 유지보수를 수행합니다.</p>
       </div>
     </div>
-    <div class="svc-tabs" data-block="1">
-      <button class="svc-tab on" data-idx="0">이러닝스튜디오</button>
-      <button class="svc-tab" data-idx="1">방송제작스튜디오</button>
-      <button class="svc-tab" data-idx="2">유튜브스튜디오</button>
-      <button class="svc-tab" data-idx="3">레코딩스튜디오</button>
-    </div>
-    <div class="svc-desc-bar">
-      <p class="svc-desc-text" id="svc-desc-1">사이버대학교 등의 온라인 대학부터 비대면 강의를 위한 오프라인 대학까지 다양한 이러닝 제작콘텐츠를 위한 시스템 구축 및 유지보수를 수행합니다.</p>
-    </div>
-  </div>
 
-  <!-- ── 블록 3: LED 디스플레이 ── -->
-  <div class="svc-block">
-    <div class="svc-hero" style="background-image:url('/images/GKDE_S_08.jpg')">
-      <div class="svc-hero-ov"></div>
-      <div class="svc-hero-text">
-        <h3 class="svc-hero-title" data-i18n="svc.3.title">LED 디스플레이</h3>
-        <p class="svc-hero-sub" data-i18n="svc.3.desc">P1.5 피치부터 대형 전광판까지 실내외 LED 솔루션 구축</p>
+    <!-- ── 블록 3: LED 디스플레이 ── -->
+    <div class="svc-block">
+      <div class="svc-hero" style="background-image:url('/images/GKDE_S_08.jpg')">
+        <div class="svc-hero-ov"></div>
+        <div class="svc-hero-text">
+          <h3 class="svc-hero-title" data-i18n="svc.3.title">LED 디스플레이</h3>
+          <p class="svc-hero-sub" data-i18n="svc.3.desc">P1.5 피치부터 대형 전광판까지 실내외 LED 솔루션 구축</p>
+        </div>
+      </div>
+      <div class="svc-tabs" data-block="2">
+        <button class="svc-tab on" data-idx="0">LED Wall</button>
+        <button class="svc-tab" data-idx="1">XR 스튜디오</button>
+        <button class="svc-tab" data-idx="2">전광판</button>
+        <button class="svc-tab" data-idx="3">미디어서버</button>
+      </div>
+      <div class="svc-desc-bar">
+        <p class="svc-desc-text" id="svc-desc-2">P1.5 초고해상도 LED Wall을 활용한 XR 가상 스튜디오 배경 구현 및 실내외 대형 전광판을 설치합니다.</p>
       </div>
     </div>
-    <div class="svc-tabs" data-block="2">
-      <button class="svc-tab on" data-idx="0">LED Wall</button>
-      <button class="svc-tab" data-idx="1">XR 스튜디오</button>
-      <button class="svc-tab" data-idx="2">전광판</button>
-      <button class="svc-tab" data-idx="3">미디어서버</button>
-    </div>
-    <div class="svc-desc-bar">
-      <p class="svc-desc-text" id="svc-desc-2">P1.5 초고해상도 LED Wall을 활용한 XR 가상 스튜디오 배경 구현 및 실내외 대형 전광판을 설치합니다.</p>
-    </div>
-  </div>
 
-  <!-- ── 블록 4: 스마트 강의실 ── -->
-  <div class="svc-block">
-    <div class="svc-hero" style="background-image:url('/images/GMC_S_01.jpg')">
-      <div class="svc-hero-ov"></div>
-      <div class="svc-hero-text">
-        <h3 class="svc-hero-title" data-i18n="svc.4.title">스마트 강의실</h3>
-        <p class="svc-hero-sub" data-i18n="svc.4.desc">온·오프라인 동시 수업 환경 구현, 하이브리드 교육 솔루션</p>
+    <!-- ── 블록 4: 스마트 강의실 ── -->
+    <div class="svc-block">
+      <div class="svc-hero" style="background-image:url('/images/GMC_S_01.jpg')">
+        <div class="svc-hero-ov"></div>
+        <div class="svc-hero-text">
+          <h3 class="svc-hero-title" data-i18n="svc.4.title">스마트 강의실</h3>
+          <p class="svc-hero-sub" data-i18n="svc.4.desc">온·오프라인 동시 수업 환경 구현, 하이브리드 교육 솔루션</p>
+        </div>
+      </div>
+      <div class="svc-tabs" data-block="3">
+        <button class="svc-tab on" data-idx="0">원터치 제어</button>
+        <button class="svc-tab" data-idx="1">하이브리드 수업</button>
+        <button class="svc-tab" data-idx="2">인터랙티브 디스플레이</button>
+        <button class="svc-tab" data-idx="3">다중 강의실 연동</button>
+      </div>
+      <div class="svc-desc-bar">
+        <p class="svc-desc-text" id="svc-desc-3">원터치로 온·오프라인 동시 수업이 가능한 스마트 강의실을 구축합니다. 전자칠판, 인터랙티브 디스플레이, 자동 추적 카메라를 통합 제어합니다.</p>
       </div>
     </div>
-    <div class="svc-tabs" data-block="3">
-      <button class="svc-tab on" data-idx="0">원터치 제어</button>
-      <button class="svc-tab" data-idx="1">하이브리드 수업</button>
-      <button class="svc-tab" data-idx="2">인터랙티브 디스플레이</button>
-      <button class="svc-tab" data-idx="3">다중 강의실 연동</button>
-    </div>
-    <div class="svc-desc-bar">
-      <p class="svc-desc-text" id="svc-desc-3">원터치로 온·오프라인 동시 수업이 가능한 스마트 강의실을 구축합니다. 전자칠판, 인터랙티브 디스플레이, 자동 추적 카메라를 통합 제어합니다.</p>
-    </div>
-  </div>
 
-  <!-- ── 블록 5: 아카이브 시스템 ── -->
-  <div class="svc-block">
-    <div class="svc-hero" style="background-image:url('/images/MG_DAS_02.jpg')">
-      <div class="svc-hero-ov"></div>
-      <div class="svc-hero-text">
-        <h3 class="svc-hero-title" data-i18n="svc.5.title">아카이브 시스템</h3>
-        <p class="svc-hero-sub" data-i18n="svc.5.desc">영상 자산 디지털화 및 장기 보존 솔루션</p>
+    <!-- ── 블록 5: 아카이브 시스템 ── -->
+    <div class="svc-block">
+      <div class="svc-hero" style="background-image:url('/images/MG_DAS_02.jpg')">
+        <div class="svc-hero-ov"></div>
+        <div class="svc-hero-text">
+          <h3 class="svc-hero-title" data-i18n="svc.5.title">아카이브 시스템</h3>
+          <p class="svc-hero-sub" data-i18n="svc.5.desc">영상 자산 디지털화 및 장기 보존 솔루션</p>
+        </div>
+      </div>
+      <div class="svc-tabs" data-block="4">
+        <button class="svc-tab on" data-idx="0">MAM 자산관리</button>
+        <button class="svc-tab" data-idx="1">SAN·NAS 스토리지</button>
+        <button class="svc-tab" data-idx="2">자동 인제스트</button>
+        <button class="svc-tab" data-idx="3">LTO 테이프</button>
+      </div>
+      <div class="svc-desc-bar">
+        <p class="svc-desc-text" id="svc-desc-4">방송 영상, 교육 콘텐츠, 기관 기록물 등을 장기 보존하고 효율적으로 관리할 수 있는 미디어 아카이브 시스템을 구축합니다.</p>
       </div>
     </div>
-    <div class="svc-tabs" data-block="4">
-      <button class="svc-tab on" data-idx="0">MAM 자산관리</button>
-      <button class="svc-tab" data-idx="1">SAN·NAS 스토리지</button>
-      <button class="svc-tab" data-idx="2">자동 인제스트</button>
-      <button class="svc-tab" data-idx="3">LTO 테이프</button>
-    </div>
-    <div class="svc-desc-bar">
-      <p class="svc-desc-text" id="svc-desc-4">방송 영상, 교육 콘텐츠, 기관 기록물 등을 장기 보존하고 효율적으로 관리할 수 있는 미디어 아카이브 시스템을 구축합니다.</p>
-    </div>
-  </div>
 
-  <!-- ── 블록 6: 화상회의 ── -->
-  <div class="svc-block">
-    <div class="svc-hero" style="background-image:url('/images/HUFS_ST_04.jpg')">
-      <div class="svc-hero-ov"></div>
-      <div class="svc-hero-text">
-        <h3 class="svc-hero-title" data-i18n="svc.6.title">화상회의 시스템</h3>
-        <p class="svc-hero-sub" data-i18n="svc.6.desc">Zoom·Teams·Webex 통합 원격 회의 환경 구축</p>
+    <!-- ── 블록 6: 화상회의 ── -->
+    <div class="svc-block">
+      <div class="svc-hero" style="background-image:url('/images/HUFS_ST_04.jpg')">
+        <div class="svc-hero-ov"></div>
+        <div class="svc-hero-text">
+          <h3 class="svc-hero-title" data-i18n="svc.6.title">화상회의 시스템</h3>
+          <p class="svc-hero-sub" data-i18n="svc.6.desc">Zoom·Teams·Webex 통합 원격 회의 환경 구축</p>
+        </div>
+      </div>
+      <div class="svc-tabs" data-block="5">
+        <button class="svc-tab on" data-idx="0">Zoom·Teams 통합</button>
+        <button class="svc-tab" data-idx="1">자동 추적 카메라</button>
+        <button class="svc-tab" data-idx="2">에코 제거 마이크</button>
+        <button class="svc-tab" data-idx="3">다자간 회의실</button>
+      </div>
+      <div class="svc-desc-bar">
+        <p class="svc-desc-text" id="svc-desc-5">Zoom, Teams, Webex 등 주요 플랫폼과 완벽 호환되는 화상회의 시스템을 구축합니다. 에코 제거 마이크 어레이와 대형 디스플레이를 연동합니다.</p>
       </div>
     </div>
-    <div class="svc-tabs" data-block="5">
-      <button class="svc-tab on" data-idx="0">Zoom·Teams 통합</button>
-      <button class="svc-tab" data-idx="1">자동 추적 카메라</button>
-      <button class="svc-tab" data-idx="2">에코 제거 마이크</button>
-      <button class="svc-tab" data-idx="3">다자간 회의실</button>
-    </div>
-    <div class="svc-desc-bar">
-      <p class="svc-desc-text" id="svc-desc-5">Zoom, Teams, Webex 등 주요 플랫폼과 완벽 호환되는 화상회의 시스템을 구축합니다. 에코 제거 마이크 어레이와 대형 디스플레이를 연동합니다.</p>
-    </div>
-  </div>
 
+  </div><!-- /s3scroll -->
 </section>
 
 <style>
   /* ── Section ── */
-  .s3 {
-    background: #F8F8F6;
-    padding: 80px 0 0;
+  .s3 { background: #F8F8F6; }
+
+  /* ── 내부 스크롤 컨테이너 ── */
+  .s3scroll {
+    position: absolute;
+    inset: 0;
+    overflow-y: auto;
+    overflow-x: hidden;
+    scrollbar-width: thin;
+    scrollbar-color: #D0D0D0 transparent;
+    -webkit-overflow-scrolling: touch;
   }
+  .s3scroll::-webkit-scrollbar { width: 4px; }
+  .s3scroll::-webkit-scrollbar-track { background: transparent; }
+  .s3scroll::-webkit-scrollbar-thumb { background: #D0D0D0; border-radius: 2px; }
 
   /* ── Header ── */
   .s3-header {
-    padding: 0 56px 48px;
+    padding: 56px 56px 36px;
+    background: #F8F8F6;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    border-bottom: 1px solid #EEEEEE;
   }
   .sec-tag {
     font-size: 10px;
@@ -147,10 +168,10 @@
     text-transform: uppercase;
     color: #00B8D9;
     display: block;
-    margin-bottom: 8px;
+    margin-bottom: 6px;
   }
   .sec-title {
-    font-size: clamp(28px, 3.5vw, 44px);
+    font-size: clamp(24px, 3vw, 38px);
     font-weight: 800;
     letter-spacing: -0.04em;
     color: #0A0A0A;
@@ -158,15 +179,13 @@
   }
 
   /* ── 서비스 블록 ── */
-  .svc-block {
-    margin-bottom: 0;
-  }
+  .svc-block { display: block; }
 
   /* ── 히어로 이미지 ── */
   .svc-hero {
     position: relative;
     width: 100%;
-    height: 400px;
+    height: 360px;
     background-size: cover;
     background-position: center;
     display: flex;
@@ -177,7 +196,7 @@
   .svc-hero-ov {
     position: absolute;
     inset: 0;
-    background: rgba(0, 0, 0, 0.52);
+    background: rgba(0,0,0,0.50);
   }
   .svc-hero-text {
     position: relative;
@@ -187,18 +206,17 @@
     max-width: 760px;
   }
   .svc-hero-title {
-    font-size: clamp(26px, 4vw, 42px);
+    font-size: clamp(24px, 3.5vw, 40px);
     font-weight: 800;
     color: #fff;
     letter-spacing: -0.03em;
-    margin-bottom: 14px;
+    margin-bottom: 12px;
     line-height: 1.1;
   }
   .svc-hero-sub {
-    font-size: clamp(13px, 1.6vw, 16px);
-    color: rgba(255, 255, 255, 0.78);
+    font-size: clamp(12px, 1.4vw, 15px);
+    color: rgba(255,255,255,0.75);
     line-height: 1.7;
-    font-weight: 400;
   }
 
   /* ── 탭 바 ── */
@@ -210,13 +228,12 @@
     -ms-overflow-style: none;
   }
   .svc-tabs::-webkit-scrollbar { display: none; }
-
   .svc-tab {
     flex: 0 0 auto;
-    padding: 16px 28px;
+    padding: 15px 28px;
     font-size: 13px;
     font-weight: 600;
-    color: rgba(255, 255, 255, 0.45);
+    color: rgba(255,255,255,0.4);
     background: none;
     border: none;
     border-bottom: 2px solid transparent;
@@ -226,89 +243,72 @@
     white-space: nowrap;
     transition: color 0.2s, border-color 0.2s, background 0.2s;
   }
-  .svc-tab:hover {
-    color: rgba(255, 255, 255, 0.8);
-    background: rgba(255, 255, 255, 0.05);
-  }
-  .svc-tab.on {
-    color: #fff;
-    border-bottom-color: #00B8D9;
-    background: rgba(0, 184, 217, 0.08);
-  }
+  .svc-tab:hover { color: rgba(255,255,255,0.8); background: rgba(255,255,255,0.05); }
+  .svc-tab.on { color: #fff; border-bottom-color: #00B8D9; background: rgba(0,184,217,0.08); }
 
   /* ── 설명 텍스트 바 ── */
   .svc-desc-bar {
     background: #111111;
     padding: 20px 56px;
-    min-height: 68px;
+    min-height: 66px;
     display: flex;
     align-items: center;
   }
   .svc-desc-text {
     font-size: 13px;
-    color: rgba(255, 255, 255, 0.6);
-    line-height: 1.8;
+    color: rgba(255,255,255,0.58);
+    line-height: 1.85;
     max-width: 900px;
-    transition: opacity 0.25s ease;
+    transition: opacity 0.22s ease;
   }
-  .svc-desc-text.fade {
-    opacity: 0;
-  }
+  .svc-desc-text.fade { opacity: 0; }
 
   /* ── 반응형 ── */
   @media (max-width: 768px) {
-    .s3 { padding: 64px 0 0; }
-    .s3-header { padding: 0 28px 36px; }
-    .svc-hero { height: 280px; }
-    .svc-tab { padding: 14px 20px; font-size: 12px; }
-    .svc-desc-bar { padding: 18px 28px; }
+    .s3-header { padding: 40px 24px 24px; }
+    .svc-hero { height: 260px; }
+    .svc-tab { padding: 13px 18px; font-size: 12px; }
+    .svc-desc-bar { padding: 18px 24px; }
     .svc-desc-text { font-size: 12px; }
   }
   @media (max-width: 480px) {
-    .svc-hero { height: 240px; }
-    .svc-tab { padding: 13px 16px; font-size: 11px; }
+    .svc-hero { height: 220px; }
+    .svc-tab { padding: 12px 14px; font-size: 11px; }
   }
 </style>
 
 <script is:inline>
-/* 블록별 탭 설명 데이터 */
 const svcTabData = [
-  /* 블록 0: 방송 SI */
   [
     '안정적인 콘텐츠 제작 기반 마련을 위한 미디어 스토리지, 비디오 서버, 미디어관리시스템 등 방송시스템 구축을 제공합니다.',
     '디지털 사이니지, IPTV, OTT 플랫폼 연동을 위한 디지털미디어 배포 시스템을 구축합니다.',
     'LTO 테이프, 클라우드, NAS를 결합한 계층형 아카이브 시스템으로 영상 자산을 장기 보존합니다.',
     '장애인방송 의무편성을 위한 자막, 화면해설, 수어방송 제작 시스템을 구축합니다.'
   ],
-  /* 블록 1: 스튜디오 */
   [
     '사이버대학교 등의 온라인 대학부터 비대면 강의를 위한 오프라인 대학까지 다양한 이러닝 제작콘텐츠를 위한 시스템 구축 및 유지보수를 수행합니다.',
     '4K UHD 카메라, 스위처, 조명 시스템을 통합한 전문 방송 제작 스튜디오를 구축합니다.',
     '1인 크리에이터부터 기업 유튜브 채널까지 최적화된 유튜브 스튜디오를 구축합니다.',
     '방음 설계부터 콘솔, 모니터 스피커까지 전문 레코딩 스튜디오 환경을 구축합니다.'
   ],
-  /* 블록 2: LED 디스플레이 */
   [
     'P1.5 초고해상도 LED Wall을 활용한 XR 가상 스튜디오 배경 구현 및 실내외 대형 전광판을 설치합니다.',
     '실시간 3D 배경과 LED Wall을 결합한 XR 스튜디오로 가상 스튜디오 제작 환경을 구현합니다.',
     '실내외 환경에 맞는 대형 LED 전광판을 설계하고 설치합니다. 방수·방열 설계로 내구성을 보장합니다.',
     'LED Wall과 연동되는 미디어 서버를 통해 콘텐츠를 실시간으로 재생·제어합니다.'
   ],
-  /* 블록 3: 스마트 강의실 */
   [
     '원터치로 온·오프라인 동시 수업이 가능한 스마트 강의실을 구축합니다. 전자칠판, 인터랙티브 디스플레이, 자동 추적 카메라를 통합 제어합니다.',
     'Zoom, Teams 등 플랫폼과 연동하여 현장 수업과 원격 수업을 동시에 진행할 수 있는 하이브리드 환경을 구현합니다.',
     '터치 기반 인터랙티브 디스플레이와 전자칠판으로 몰입도 높은 수업 환경을 제공합니다.',
     '여러 강의실을 하나의 시스템으로 통합 관리하고, 강의 내용을 동시에 여러 공간에 전송합니다.'
   ],
-  /* 블록 4: 아카이브 시스템 */
   [
     '방송 영상, 교육 콘텐츠, 기관 기록물 등을 장기 보존하고 효율적으로 관리할 수 있는 미디어 아카이브 시스템을 구축합니다.',
     '대용량 SAN·NAS 스토리지를 기반으로 고속 영상 편집 및 협업 환경을 구성합니다.',
     '영상 소재의 자동 인제스트, 메타데이터 입력, 검색 기능을 통해 자산 관리 효율을 높입니다.',
     'LTO 테이프를 활용한 오프라인 아카이브로 장기 보존 비용을 절감하고 데이터 안전성을 확보합니다.'
   ],
-  /* 블록 5: 화상회의 */
   [
     'Zoom, Teams, Webex 등 주요 플랫폼과 완벽 호환되는 화상회의 시스템을 구축합니다. 에코 제거 마이크 어레이와 대형 디스플레이를 연동합니다.',
     '자동 추적 PTZ 카메라를 설치해 발언자를 자동으로 포착, 원격 참석자에게 선명한 영상을 전달합니다.',
@@ -318,22 +318,16 @@ const svcTabData = [
 ];
 
 document.querySelectorAll('.svc-tabs').forEach(function(tabGroup) {
-  const blockIdx = parseInt(tabGroup.getAttribute('data-block'));
-  const descEl = document.getElementById('svc-desc-' + blockIdx);
-  const tabs = tabGroup.querySelectorAll('.svc-tab');
-
-  tabs.forEach(function(tab) {
+  const bi = parseInt(tabGroup.getAttribute('data-block'));
+  const descEl = document.getElementById('svc-desc-' + bi);
+  tabGroup.querySelectorAll('.svc-tab').forEach(function(tab) {
     tab.addEventListener('click', function() {
-      const tabIdx = parseInt(tab.getAttribute('data-idx'));
-
-      /* 탭 활성화 */
-      tabs.forEach(function(t) { t.classList.remove('on'); });
+      const ti = parseInt(tab.getAttribute('data-idx'));
+      tabGroup.querySelectorAll('.svc-tab').forEach(function(t) { t.classList.remove('on'); });
       tab.classList.add('on');
-
-      /* 텍스트 페이드 전환 */
       descEl.classList.add('fade');
       setTimeout(function() {
-        descEl.textContent = svcTabData[blockIdx][tabIdx];
+        descEl.textContent = svcTabData[bi][ti];
         descEl.classList.remove('fade');
       }, 220);
     });
