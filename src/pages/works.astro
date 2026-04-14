@@ -345,9 +345,7 @@ let sv='all',cl='all',q='',cp=null;
 
 async function loadAdminProjects() {
   try {
-    const res = await fetch('/api/admin/projects', {
-      headers: { 'x-admin-token': sessionStorage.getItem('eds-admin-token') || '' }
-    });
+    const res = await fetch('/api/admin/projects');
     if (!res.ok) return;
     const adminProjects = await res.json();
     const hardcodedIds = new Set(hardcodedProjects.map(p => p.id));
