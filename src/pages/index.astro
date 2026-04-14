@@ -71,56 +71,6 @@ import SecContact    from '../components/SecContact.astro';
     .nav.scrolled .lang-btn.active { color: #0D3A4A; border-color: #0D3A4A; background: rgba(13,58,74,0.08); }
 
 
-    /* ── FIXED FOOTER ── */
-    .site-footer {
-      position: fixed;
-      bottom: 0; left: 0; right: 0;
-      z-index: 200;
-      background: rgba(0,0,0,0.72);
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
-      border-top: 1px solid rgba(255,255,255,0.08);
-      padding: 10px 52px;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.4s ease;
-    }
-    .site-footer.visible {
-      opacity: 1;
-      pointer-events: all;
-    }
-    .site-footer-inner {
-      display: flex;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 6px 10px;
-    }
-    .site-footer-copy {
-      font-size: 10px;
-      font-weight: 600;
-      color: rgba(255,255,255,0.55);
-      letter-spacing: 0.04em;
-    }
-    .site-footer-divider {
-      font-size: 10px;
-      color: rgba(255,255,255,0.2);
-    }
-    .site-footer-info {
-      font-size: 10px;
-      color: rgba(255,255,255,0.4);
-      letter-spacing: 0.02em;
-    }
-    .site-footer-mail {
-      font-size: 10px;
-      color: #00B8D9;
-      text-decoration: none;
-      letter-spacing: 0.02em;
-      transition: color 0.2s;
-    }
-    .site-footer-mail:hover { color: #fff; }
-
-    @media (max-width: 768px) {
-      .site-footer { padding: 8px 16px; }
       .site-footer-divider { display: none; }
       .site-footer-inner { gap: 2px 8px; }
       .site-footer-copy { font-size: 9px; width: 100%; }
@@ -180,23 +130,6 @@ import SecContact    from '../components/SecContact.astro';
   <SecClients />
   <SecContact />
 
-  <!-- FIXED FOOTER: sec3~sec6에서만 표시 -->
-  <footer class="site-footer" id="site-footer">
-    <div class="site-footer-inner">
-      <span class="site-footer-copy">Copyright 2022. EDAMST. All rights reserved.</span>
-      <span class="site-footer-divider">|</span>
-      <span class="site-footer-info">대표 최명순</span>
-      <span class="site-footer-divider">|</span>
-      <span class="site-footer-info">서울시 구로구 디지털로31길 19, 406호 (에이스테크노타워Ⅱ)</span>
-      <span class="site-footer-divider">|</span>
-      <span class="site-footer-info">Tel 02-857-7744</span>
-      <span class="site-footer-divider">|</span>
-      <span class="site-footer-info">Fax 02-857-7321</span>
-      <span class="site-footer-divider">|</span>
-      <a class="site-footer-mail" href="mailto:pub@edamst.com">pub@edamst.com</a>
-    </div>
-  </footer>
-
   <!-- DOTS: 총 8섹션 (0~7) -->
   <div class="dots dark" id="dots">
     <button class="dot active" onclick="goTo(0)"></button>
@@ -235,8 +168,6 @@ import SecContact    from '../components/SecContact.astro';
   const nav    = document.getElementById('nav');
   const dotsEl = document.getElementById('dots');
   const sh     = document.getElementById('sh');
-  const siteFooter = document.getElementById('site-footer');
-  const FOOTER_SECS = [3, 4, 5, 6];
 
   function getScrollEl(n) {
     const cls = SCROLLABLE_SECS[n];
@@ -260,7 +191,6 @@ import SecContact    from '../components/SecContact.astro';
     nav.classList.toggle('scrolled', !isDark);
     dotsEl.classList.toggle('dark', isDark);
     if (sh) sh.classList.toggle('hide', cur > 0);
-    if (siteFooter) siteFooter.classList.toggle('visible', FOOTER_SECS.includes(cur));
     // 섹션 이동 시 스크롤 위치 초기화
     const prevScroll = getScrollEl(cur === 0 ? N - 1 : cur - 1);
     if (prevScroll) prevScroll.scrollTop = 0;
