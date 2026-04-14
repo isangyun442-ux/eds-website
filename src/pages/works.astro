@@ -1,4 +1,16 @@
 ---
+import fs from 'node:fs/promises';
+import path from 'node:path';
+
+// 관리자 페이지에서 추가한 프로젝트 읽기
+let adminProjects = [];
+try {
+  const raw = await fs.readFile(path.resolve('src/data/projects.json'), 'utf-8');
+  adminProjects = JSON.parse(raw);
+} catch {
+  adminProjects = [];
+}
+const adminProjectsJson = JSON.stringify(adminProjects);
 ---
 <!DOCTYPE html>
 <html lang="ko">
@@ -166,7 +178,10 @@
   </footer>
 
 <script is:inline>
-const allProjects = [
+// 관리자가 추가한 프로젝트 (맨 앞에 추가)
+const adminProjects = {adminProjectsJson};
+
+const hardcodedProjects = [
   { id:16585, title:'한국외국어대학교 스튜디오 첨단화', date:'2025.02', service:'LED 디스플레이', client:'교육기관', overview:'신규 LED 설치 및 유튜브 부스 설치를 통한 이러닝 컨텐츠 및 미디어 컨텐츠 제작 첨단 방송시스템', images:["/images/portfolio/HUFS_ST_04.jpg"] },
   { id:16578, title:'서울사이버대학교 스튜디오 장비 고도화', date:'2024.12', service:'스마트 강의실', client:'교육기관', overview:'기존 방송시스템', images:["/images/portfolio/SC_ST_09.jpg"] },
   { id:16570, title:'다다익선 디스플레이 영상장치 대체 연구용역', date:'2012.05', service:'전시체험', client:'공공기관', overview:'백남준 &lt;다다익선&gt; 노후화 및 CRT 수급 불가로 인한 대체 디스플레이 및 분배장치 연구용역', images:["/images/portfolio/DDIS_DY_07.jpg"] },
@@ -338,6 +353,11 @@ const allProjects = [
   { id:12040, title:'드림온TV 스튜디오', date:'2007.09', service:'방송제작 스튜디오', client:'기업', overview:'SD기반 방송 촬영, 제작 스튜디오', images:["/images/portfolio/DreamOnTV_3.jpg", "/images/portfolio/DreamOnTV_1.jpg", "/images/portfolio/DreamOnTV_2.jpg", "/images/portfolio/DreamOnTV_4.jpg"] },
   { id:12034, title:'대구디지털산업진흥원 스튜디오', date:'2007.01', service:'방송제작 스튜디오', client:'공공기관', overview:'스튜디오 부스, 부조정실 구조의 촬영 스튜디오', images:["/images/portfolio/DIP_2.jpg", "/images/portfolio/DIP_1.jpg", "/images/portfolio/DIP_3.jpg"] },
 ];
+
+// 관리자 추가분 + 기존 데이터 합치기 (중복 제거)
+const hardcodedIds = new Set(hardcodedProjects.map(p => p.id));
+const newProjects = adminProjects.filter(p => !hardcodedIds.has(p.id));
+const allProjects = [...newProjects, ...hardcodedProjects];
 
 let sv='all',cl='all',q='',cp=null;
 
