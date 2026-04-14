@@ -65,9 +65,15 @@
   @keyframes shw { 0%{opacity:1;transform:translateY(0)} 100%{opacity:0;transform:translateY(9px)} }
   .sh-text { font-size: 9px; color: rgba(255,255,255,0.35); letter-spacing: 0.2em; text-transform: uppercase; }
 
-  /* 모바일 — Hero 섹션 완전히 숨김 */
+  /* 모바일 — Hero 섹션 완전히 숨김 (active 여부 무관) */
   @media (max-width: 768px) {
-    #sec0 { display: none !important; }
+    #sec0,
+    #sec0.active,
+    #sec0.sec {
+      display: none !important;
+      opacity: 0 !important;
+      pointer-events: none !important;
+    }
   }
 </style>
 

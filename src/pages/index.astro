@@ -71,16 +71,16 @@ import SecContact    from '../components/SecContact.astro';
     .nav.scrolled .lang-btn.active { color: #0D3A4A; border-color: #0D3A4A; background: rgba(13,58,74,0.08); }
 
     @media (max-width: 768px) {
-      .nav { padding: 14px 20px; }
-      .nav.scrolled { padding: 12px 20px; }
+      .nav { padding: 10px 16px; }
+      .nav.scrolled { padding: 10px 16px; }
       .nav-menu { display: none; }
       .nav-hamburger { display: flex; }
-      .nav-logo { width: 110px; }
-      .logo-color, .logo-white { height: 22px; }
-      .dots { right: 8px; }
+      .nav-logo { width: 90px; }
+      .logo-color, .logo-white { height: 20px; }
+      .dots { right: 6px; }
       .dot { width: 5px; height: 5px; }
-      .lang-wrap { margin-right: 8px; gap: 2px; }
-      .lang-btn { font-size: 10px; padding: 4px 7px; }
+      .lang-wrap { display: none; }
+      .nav-cta { font-size: 11px; padding: 7px 14px; }
     }
   </style>
 </head>
@@ -280,12 +280,41 @@ import SecContact    from '../components/SecContact.astro';
     goTo(e.deltaY > 0 ? cur + 1 : cur - 1);
   }, { passive: false });
 
-  // 터치 이벤트
-  let ts = 0;
-  document.getElementById('fp').addEventListener('touchstart', e => { ts = e.touches[0].clientY; }, { passive: true });
+  // 터치 이벤트 — PC처럼 멈춤 후 재스와이프해야 섹션 전환
+  let ts = 0, te = 0;
+  let touchEdgeHit = false;
+  let touchEdgeReady = false;
+  let touchEdgeTimer = null;
+
+  document.getElementById('fp').addEventListener('touchstart', e => {
+    ts = e.touches[0].clientY;
+  }, { passive: true });
+
   document.getElementById('fp').addEventListener('touchend', e => {
     const d = ts - e.changedTouches[0].clientY;
-    if (Math.abs(d) > 50) goTo(d > 0 ? cur + 1 : cur - 1);
+    if (Math.abs(d) < 40) return; // 너무 짧은 스와이프 무시
+    const dir = d > 0 ? 1 : -1;
+
+    const scrollEl = getScrollEl(cur);
+    if (scrollEl) {
+      const atTop = scrollEl.scrollTop <= 1;
+      const atBot = scrollEl.scrollTop + scrollEl.clientHeight >= scrollEl.scrollHeight - 4;
+      if (dir > 0 && !atBot) { scrollEl.scrollTop += Math.abs(d); touchEdgeHit = false; touchEdgeReady = false; return; }
+      if (dir < 0 && !atTop) { scrollEl.scrollTop -= Math.abs(d); touchEdgeHit = false; touchEdgeReady = false; return; }
+    }
+
+    if (!touchEdgeHit) {
+      touchEdgeHit = true;
+      touchEdgeReady = false;
+      clearTimeout(touchEdgeTimer);
+      touchEdgeTimer = setTimeout(() => { touchEdgeReady = true; }, 400);
+      return;
+    }
+    if (!touchEdgeReady) return;
+    touchEdgeHit = false;
+    touchEdgeReady = false;
+    clearTimeout(touchEdgeTimer);
+    goTo(cur + dir);
   });
 
   // 키보드 이벤트
