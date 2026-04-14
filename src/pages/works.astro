@@ -172,14 +172,22 @@ const adminProjectsJson = JSON.stringify(adminProjects);
     </div>
   </div>
 
+  <script id="admin-projects-data" type="application/json" set:html={adminProjectsJson}></script>
+
   <footer class="footer">
     <img src="/images/logo.png" alt="EDS" />
     <span class="footer-copy">© 2025 이담에스티 주식회사. All rights reserved.</span>
   </footer>
 
 <script is:inline>
-// 관리자가 추가한 프로젝트 (맨 앞에 추가)
-const adminProjects = {adminProjectsJson};
+// admin-projects-data 태그에서 관리자 추가 프로젝트 읽기
+let adminProjects = [];
+try {
+  const el = document.getElementById('admin-projects-data');
+  if (el && el.textContent.trim()) {
+    adminProjects = JSON.parse(el.textContent);
+  }
+} catch(e) { adminProjects = []; }
 
 const hardcodedProjects = [
   { id:16585, title:'한국외국어대학교 스튜디오 첨단화', date:'2025.02', service:'LED 디스플레이', client:'교육기관', overview:'신규 LED 설치 및 유튜브 부스 설치를 통한 이러닝 컨텐츠 및 미디어 컨텐츠 제작 첨단 방송시스템', images:["/images/portfolio/HUFS_ST_04.jpg"] },
@@ -354,7 +362,12 @@ const hardcodedProjects = [
   { id:12034, title:'대구디지털산업진흥원 스튜디오', date:'2007.01', service:'방송제작 스튜디오', client:'공공기관', overview:'스튜디오 부스, 부조정실 구조의 촬영 스튜디오', images:["/images/portfolio/DIP_2.jpg", "/images/portfolio/DIP_1.jpg", "/images/portfolio/DIP_3.jpg"] },
 ];
 
-// 관리자 추가분 + 기존 데이터 합치기 (중복 제거)
+// 관리자 추가분 + 기존 데이터 합치기
+let adminProjects = [];
+try {
+  const raw = document.getElementById('admin-projects-data').textContent;
+  adminProjects = JSON.parse(raw);
+} catch(e) { adminProjects = []; }
 const hardcodedIds = new Set(hardcodedProjects.map(p => p.id));
 const newProjects = adminProjects.filter(p => !hardcodedIds.has(p.id));
 const allProjects = [...newProjects, ...hardcodedProjects];
