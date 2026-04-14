@@ -79,24 +79,28 @@ const history = [
         </div>
       </div>
     </div>
-
-    <footer class="eds-footer">
-      <div class="eds-footer-top">
-        <img class="eds-footer-logo" src="/images/logo.png" alt="EDS 이담에스티" />
-        <span class="eds-footer-copy">Copyright 2022. EDAMST. All rights reserved.</span>
-      </div>
-      <div class="eds-footer-bottom">
-        <span class="eds-footer-info">대표 최명순</span>
-        <span class="eds-footer-div">|</span>
-        <span class="eds-footer-info">서울시 구로구 디지털로31길 19, 406호 (에이스테크노타워Ⅱ)</span>
-        <span class="eds-footer-div">|</span>
-        <span class="eds-footer-info">Tel 02-857-7744</span>
-        <span class="eds-footer-div">|</span>
-        <span class="eds-footer-info">Fax 02-857-7321</span>
-        <span class="eds-footer-div">|</span>
-        <a class="eds-footer-mail" href="mailto:pub@edamst.com">pub@edamst.com</a>
-      </div>
-    </footer>
+  </div>
+  <footer class="eds-footer">
+    <div class="eds-footer-top">
+      <img class="eds-footer-logo" src="/images/logo.png" alt="EDS 이담에스티" />
+      <span class="eds-footer-copy">Copyright 2022. EDAMST. All rights reserved.</span>
+    </div>
+    <div class="eds-footer-bottom">
+      <span class="eds-footer-info">대표 최명순</span>
+      <span class="eds-footer-div">|</span>
+      <span class="eds-footer-info">서울시 구로구 디지털로31길 19, 406호 (에이스테크노타워Ⅱ)</span>
+      <span class="eds-footer-div">|</span>
+      <span class="eds-footer-info">Tel 02-857-7744</span>
+      <span class="eds-footer-div">|</span>
+      <span class="eds-footer-info">Fax 02-857-7321</span>
+      <span class="eds-footer-div">|</span>
+      <a class="eds-footer-mail" href="mailto:pub@edamst.com">pub@edamst.com</a>
+    </div>
+  </footer>
+  <!-- 스크롤 힌트 -->
+  <div class="scroll-hint-sec">
+    <div class="sh-mouse"><div class="sh-wheel"></div></div>
+    <span class="sh-text">scroll</span>
   </div>
 </section>
 
@@ -104,7 +108,7 @@ const history = [
   .s5 { background: #fff; display: flex; flex-direction: column; }
   .hist-scroll { flex: 1; overflow-y: auto; overflow-x: hidden; scrollbar-width: none; min-height: 0; }
   .hist-scroll::-webkit-scrollbar { display: none; }
-  .hist-inner { max-width: 860px; margin: 0 auto; padding: 72px 52px 0; }
+  .hist-inner { max-width: 860px; margin: 0 auto; padding: 72px 52px 60px; }
 
   .h-header { text-align: center; margin-bottom: 64px; }
   .h-eyebrow {
@@ -146,7 +150,7 @@ const history = [
   .h-header.visible { opacity: 1; transform: translateY(0); }
 
   @media (max-width: 768px) {
-    .hist-inner { padding: 64px 24px 0; }
+    .hist-inner { padding: 64px 24px 48px; }
     .tl-line { left: 60px; }
     .tl-row { grid-template-columns: 60px 0 1fr; gap: 0 18px; }
     .tl-year-col { padding-right: 16px; }
@@ -155,7 +159,7 @@ const history = [
     .tl-end { padding-left: 48px; }
   }
   @media (max-width: 480px) {
-    .hist-inner { padding: 56px 16px 0; }
+    .hist-inner { padding: 56px 16px 40px; }
     .tl-line { left: 52px; }
     .tl-row { grid-template-columns: 52px 0 1fr; gap: 0 12px; }
   }
@@ -163,8 +167,8 @@ const history = [
   .eds-footer {
     background: #0A0A0A;
     padding: 24px 56px 28px;
-    margin-top: 40px;
     border-top: 1px solid rgba(255,255,255,0.07);
+    flex-shrink: 0;
   }
   .eds-footer-top {
     display: flex;
@@ -215,6 +219,48 @@ const history = [
     .eds-footer-info, .eds-footer-mail { font-size: 10px; }
     .eds-footer-copy { font-size: 9px; }
   }
+  /* ── 스크롤 힌트 ── */
+  .scroll-hint-sec {
+    position: absolute;
+    bottom: 22px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 20;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    pointer-events: none;
+  }
+  .scroll-hint-sec .sh-mouse {
+    width: 20px; height: 30px;
+    border-radius: 10px;
+    display: flex; align-items: flex-start;
+    justify-content: center; padding-top: 4px;
+  }
+  .scroll-hint-sec .sh-wheel {
+    width: 2px; height: 5px;
+    border-radius: 1px;
+    animation: shw-sec 1.8s ease infinite;
+  }
+  @keyframes shw-sec {
+    0%  { opacity: 1; transform: translateY(0); }
+    100%{ opacity: 0; transform: translateY(9px); }
+  }
+  .scroll-hint-sec .sh-text {
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+  }
+  .s4 .scroll-hint-sec .sh-mouse,
+  .s5 .scroll-hint-sec .sh-mouse,
+  .s6 .scroll-hint-sec .sh-mouse { border: 1.5px solid rgba(0,0,0,0.2); }
+  .s4 .scroll-hint-sec .sh-wheel,
+  .s5 .scroll-hint-sec .sh-wheel,
+  .s6 .scroll-hint-sec .sh-wheel { background: rgba(0,0,0,0.3); }
+  .s4 .scroll-hint-sec .sh-text,
+  .s5 .scroll-hint-sec .sh-text,
+  .s6 .scroll-hint-sec .sh-text  { color: rgba(0,0,0,0.25); }
 </style>
 
 <script is:inline>
