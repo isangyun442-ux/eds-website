@@ -899,7 +899,52 @@ const urls = [
   "http://www.edamst.com/wp-content/uploads/2007/09/DreamOnTV_4.jpg",
   "http://www.edamst.com/wp-content/uploads/2007/01/DIP_2.jpg",
   "http://www.edamst.com/wp-content/uploads/2007/01/DIP_1.jpg",
-  "http://www.edamst.com/wp-content/uploads/2007/01/DIP_3.jpg"
+  "http://www.edamst.com/wp-content/uploads/2007/01/DIP_3.jpg",
+  // CHUF 추가
+  "http://www.edamst.com/wp-content/uploads/2025/03/CHUF_AV_01.jpg",
+  "http://www.edamst.com/wp-content/uploads/2025/03/CHUF_AV_02.jpg",
+  "http://www.edamst.com/wp-content/uploads/2025/03/CHUF_AV_03.jpg",
+  "http://www.edamst.com/wp-content/uploads/2025/03/CHUF_AV_04.jpg",
+  "http://www.edamst.com/wp-content/uploads/2025/03/CHUF_AV_05.jpg",
+  "http://www.edamst.com/wp-content/uploads/2025/03/CHUF_AV_06.jpg",
+  "http://www.edamst.com/wp-content/uploads/2025/03/CHUF_AV_07.jpg",
+  "http://www.edamst.com/wp-content/uploads/2025/03/CHUF_AV_08.jpg",
+  "http://www.edamst.com/wp-content/uploads/2025/03/CHUF_AV_09.jpg",
+  "http://www.edamst.com/wp-content/uploads/2025/03/CHUF_AV_10.jpg",
+  "http://www.edamst.com/wp-content/uploads/2025/03/CHUF_AV_11.jpg",
+  // DDIS 추가
+  "http://www.edamst.com/wp-content/uploads/2025/03/DDIS_DY_01.jpg",
+  "http://www.edamst.com/wp-content/uploads/2025/03/DDIS_DY_02.jpg",
+  "http://www.edamst.com/wp-content/uploads/2025/03/DDIS_DY_03.jpg",
+  "http://www.edamst.com/wp-content/uploads/2025/03/DDIS_DY_04.jpg",
+  "http://www.edamst.com/wp-content/uploads/2025/03/DDIS_DY_05.jpg",
+  "http://www.edamst.com/wp-content/uploads/2025/03/DDIS_DY_06.jpg",
+  // KTV 추가
+  "http://www.edamst.com/wp-content/uploads/2025/03/KTV_BS_02.jpg",
+  "http://www.edamst.com/wp-content/uploads/2025/03/KTV_BS_03.jpg",
+  "http://www.edamst.com/wp-content/uploads/2025/03/KTV_BS_04.jpg",
+  "http://www.edamst.com/wp-content/uploads/2025/03/KTV_BS_05.jpg",
+  // GD_LED 추가
+  "http://www.edamst.com/wp-content/uploads/2025/03/GD_LED_01.jpg",
+  "http://www.edamst.com/wp-content/uploads/2025/03/GD_LED_02.jpg",
+  "http://www.edamst.com/wp-content/uploads/2025/03/GD_LED_03.jpg",
+  "http://www.edamst.com/wp-content/uploads/2025/03/GD_LED_04.jpg",
+  "http://www.edamst.com/wp-content/uploads/2025/03/GD_LED_05.jpg",
+  "http://www.edamst.com/wp-content/uploads/2025/03/GD_LED_06.jpg",
+  // SBA XR03 추가
+  "http://www.edamst.com/wp-content/uploads/2025/03/SBA_XR03_01.jpg",
+  "http://www.edamst.com/wp-content/uploads/2025/03/SBA_XR03_02.jpg",
+  "http://www.edamst.com/wp-content/uploads/2025/03/SBA_XR03_03.jpg",
+  "http://www.edamst.com/wp-content/uploads/2025/03/SBA_XR03_05.jpg",
+  "http://www.edamst.com/wp-content/uploads/2025/03/SBA_XR03_06.jpg",
+  // MG_DAS 추가
+  "http://www.edamst.com/wp-content/uploads/2025/03/MG_DAS_01.jpg",
+  "http://www.edamst.com/wp-content/uploads/2025/03/MG_DAS_03.jpg",
+  "http://www.edamst.com/wp-content/uploads/2025/03/MG_DAS_04.jpg",
+  // GKDC 추가
+  "http://www.edamst.com/wp-content/uploads/2025/03/GKDC_B_01.jpg",
+  "http://www.edamst.com/wp-content/uploads/2025/03/GKDC_B_03.jpg",
+  "http://www.edamst.com/wp-content/uploads/2025/03/GKDC_B_04.jpg",
 ];
 
 const outputDir = path.join(__dirname, 'public', 'images', 'portfolio');
