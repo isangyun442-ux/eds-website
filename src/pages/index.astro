@@ -142,7 +142,9 @@ import SecContact    from '../components/SecContact.astro';
   const DARK_SECS = [0, 1, 7];
   const SCROLLABLE_SECS = { 2: 'ab-scroll', 5: 'hist-scroll', 6: 's6scroll' };
 
-  let cur = 0, busy = false;
+  // 모바일이면 sec0 건너뛰고 sec1부터 시작
+  let cur = (window.__mobileCurOverride !== undefined) ? window.__mobileCurOverride : 0;
+  let busy = false;
   const N = 8;
   const secs   = Array.from({length: N}, (_, i) => document.getElementById('sec' + i));
   const dots   = document.querySelectorAll('.dot');

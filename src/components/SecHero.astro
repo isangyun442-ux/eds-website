@@ -65,13 +65,26 @@
   @keyframes shw { 0%{opacity:1;transform:translateY(0)} 100%{opacity:0;transform:translateY(9px)} }
   .sh-text { font-size: 9px; color: rgba(255,255,255,0.35); letter-spacing: 0.2em; text-transform: uppercase; }
 
+  /* 모바일 — Hero 섹션 완전히 숨김 */
   @media (max-width: 768px) {
-    .video-wrap { display: none; }
-    .s0 { background-image: url('/images/HUFS_ST_04.jpg'); background-size: cover; background-position: center; }
-    .hero-content { padding: 0 24px 52px; }
-    .hero-title { font-size: clamp(28px, 8vw, 42px); }
-    .hero-sub { font-size: 13px; max-width: 100%; }
-    .hero-btns { flex-direction: column; gap: 10px; }
-    .btn-white, .btn-outline { width: 100%; text-align: center; padding: 14px 20px; }
+    #sec0 { display: none !important; }
   }
 </style>
+
+<script is:inline>
+  // 모바일이면 sec0 건너뛰고 sec1(로고영상)을 첫 화면으로
+  (function() {
+    if (window.innerWidth <= 768) {
+      const sec0 = document.getElementById('sec0');
+      if (sec0) {
+        sec0.classList.remove('active');
+        sec0.style.display = 'none';
+      }
+      // sec1을 active로
+      const sec1 = document.getElementById('sec1');
+      if (sec1) sec1.classList.add('active');
+      // cur를 1로 설정 (goTo 로직용)
+      window.__mobileCurOverride = 1;
+    }
+  })();
+</script>
