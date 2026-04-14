@@ -142,8 +142,18 @@ import SecContact    from '../components/SecContact.astro';
   const DARK_SECS = [0, 1, 7];
   const SCROLLABLE_SECS = { 2: 'ab-scroll', 5: 'hist-scroll', 6: 's6scroll' };
 
-  // 모바일이면 sec0 건너뛰고 sec1부터 시작
-  let cur = (window.__mobileCurOverride !== undefined) ? window.__mobileCurOverride : 0;
+  // 모바일 여부 확인
+  const isMobile = window.innerWidth <= 768;
+
+  // 모바일이면 sec0 숨기고 sec1부터 시작
+  if (isMobile) {
+    const sec0 = document.getElementById('sec0');
+    if (sec0) { sec0.classList.remove('active'); sec0.style.cssText = 'display:none !important'; }
+    const sec1 = document.getElementById('sec1');
+    if (sec1) sec1.classList.add('active');
+  }
+
+  let cur = isMobile ? 1 : 0;
   let busy = false;
   const N = 8;
   const secs   = Array.from({length: N}, (_, i) => document.getElementById('sec' + i));
@@ -198,7 +208,14 @@ import SecContact    from '../components/SecContact.astro';
   };
 
   // 초기 상태
-  nav.classList.remove('scrolled');
+  if (isMobile) {
+    nav.classList.remove('scrolled');
+    dotsEl.classList.add('dark');
+    dots[0].classList.remove('active');
+    dots[1].classList.add('active');
+  } else {
+    nav.classList.remove('scrolled');
+  }
 
   // 휠 이벤트 — 스크롤 끝 도달 후 멈췄다가 다시 내리면 섹션 전환
   let edgeHit = false;      // 끝에 닿은 적 있는지
