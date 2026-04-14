@@ -104,7 +104,7 @@ const history = [
   .s5 { background: #fff; display: flex; flex-direction: column; }
   .hist-scroll { flex: 1; overflow-y: auto; overflow-x: hidden; scrollbar-width: none; min-height: 0; }
   .hist-scroll::-webkit-scrollbar { display: none; }
-  .hist-inner { max-width: 860px; margin: 0 auto; padding: 72px 52px 60px; }
+  .hist-inner { max-width: 860px; margin: 0 auto; padding: 72px 52px 0; }
 
   .h-header { text-align: center; margin-bottom: 64px; }
   .h-eyebrow {
@@ -146,7 +146,7 @@ const history = [
   .h-header.visible { opacity: 1; transform: translateY(0); }
 
   @media (max-width: 768px) {
-    .hist-inner { padding: 64px 24px 48px; }
+    .hist-inner { padding: 64px 24px 0; }
     .tl-line { left: 60px; }
     .tl-row { grid-template-columns: 60px 0 1fr; gap: 0 18px; }
     .tl-year-col { padding-right: 16px; }
@@ -155,7 +155,7 @@ const history = [
     .tl-end { padding-left: 48px; }
   }
   @media (max-width: 480px) {
-    .hist-inner { padding: 56px 16px 40px; }
+    .hist-inner { padding: 56px 16px 0; }
     .tl-line { left: 52px; }
     .tl-row { grid-template-columns: 52px 0 1fr; gap: 0 12px; }
   }
@@ -163,6 +163,7 @@ const history = [
   .eds-footer {
     background: #0A0A0A;
     padding: 24px 56px 28px;
+    margin-top: 40px;
     border-top: 1px solid rgba(255,255,255,0.07);
   }
   .eds-footer-top {
