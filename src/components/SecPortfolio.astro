@@ -2,70 +2,378 @@
 // src/components/SecPortfolio.astro
 ---
 <section class="sec s4" id="sec4">
-  <div class="sec-header">
-    <span class="sec-tag">Portfolio</span>
-    <h2 class="sec-title">구축 사례</h2>
+  <div class="port-header">
+    <div class="port-header-left">
+      <span class="sec-tag">Portfolio</span>
+      <h2 class="sec-title">구축 사례</h2>
+    </div>
+    <a href="/works" class="port-all">전체 보기 →</a>
   </div>
-  <div class="port-grid">
-    <div class="pc pc-big" onclick="location.href='/works'">
-      <div class="pc-bg" style="background-image:url('/images/HUFS_ST_04.jpg')"></div>
-      <div class="pc-ov"></div>
-      <div class="pc-info">
-        <span class="pc-cat">LED 디스플레이</span>
-        <p class="pc-name">한국외국어대학교 스튜디오 첨단화</p>
-        <p class="pc-meta">2025.02 · 교육기관</p>
+
+  <!-- 필름스트립 레이블 -->
+  <div class="film-label">
+    <span class="film-dot"></span>
+    <span class="film-text">EDS WORKS · <span id="film-year">2007</span>–2025</span>
+    <span class="film-dot"></span>
+  </div>
+
+  <div class="film-wrap" id="film-wrap">
+    <div class="film-track" id="film-track">
+
+      <div class="film-item film-wide" onclick="location.href='/works'">
+        <div class="film-img" style="background-image:url('/images/HUFS_ST_04.jpg')"></div>
+        <div class="film-info">
+          <span class="film-cat">LED 디스플레이</span>
+          <p class="film-name">한국외국어대학교 스튜디오 첨단화</p>
+          <p class="film-meta">2025.02 · 교육기관</p>
+        </div>
+        <div class="film-num">001</div>
       </div>
+
+      <div class="film-item" onclick="location.href='/works'">
+        <div class="film-img" style="background-image:url('/images/SC_ST_09.jpg')"></div>
+        <div class="film-info">
+          <span class="film-cat">스마트 강의실</span>
+          <p class="film-name">서울사이버대학교 고도화</p>
+          <p class="film-meta">2024.11 · 교육기관</p>
+        </div>
+        <div class="film-num">002</div>
+      </div>
+
+      <div class="film-item" onclick="location.href='/works'">
+        <div class="film-img" style="background-image:url('/images/GMC_S_01.jpg')"></div>
+        <div class="film-info">
+          <span class="film-cat">이러닝 스튜디오</span>
+          <p class="film-name">공주대학교 스튜디오</p>
+          <p class="film-meta">2024.09 · 교육기관</p>
+        </div>
+        <div class="film-num">003</div>
+      </div>
+
+      <div class="film-item" onclick="location.href='/works'">
+        <div class="film-img" style="background-image:url('/images/GKDE_S_08.jpg')"></div>
+        <div class="film-info">
+          <span class="film-cat">방송제작</span>
+          <p class="film-name">경기도교육청 UHD</p>
+          <p class="film-meta">2024.06 · 공공기관</p>
+        </div>
+        <div class="film-num">004</div>
+      </div>
+
+      <div class="film-item" onclick="location.href='/works'">
+        <div class="film-img" style="background-image:url('/images/KTV_BS_01.jpg')"></div>
+        <div class="film-info">
+          <span class="film-cat">방송 인프라</span>
+          <p class="film-name">KTV 방송시스템</p>
+          <p class="film-meta">2024.03 · 방송국</p>
+        </div>
+        <div class="film-num">005</div>
+      </div>
+
+      <div class="film-item" onclick="location.href='/works'">
+        <div class="film-img" style="background-image:url('/images/MG_DAS_02.jpg')"></div>
+        <div class="film-info">
+          <span class="film-cat">아카이브</span>
+          <p class="film-name">미디어 아카이브 구축</p>
+          <p class="film-meta">2023.11 · 공공기관</p>
+        </div>
+        <div class="film-num">006</div>
+      </div>
+
+      <!-- 전체 보기 카드 -->
+      <div class="film-item film-cta" onclick="location.href='/works'">
+        <div class="film-cta-inner">
+          <span class="film-cta-num">516+</span>
+          <p class="film-cta-label">전체 구축 사례 보기</p>
+          <span class="film-cta-arr">→</span>
+        </div>
+        <div class="film-num">···</div>
+      </div>
+
     </div>
-    <div class="pc-col">
-      <div class="pc" onclick="location.href='/works'">
-        <div class="pc-bg" style="background-image:url('/images/SC_ST_09.jpg')"></div>
-        <div class="pc-ov"></div>
-        <div class="pc-info"><span class="pc-cat">스마트 강의실</span><p class="pc-name">서울사이버대학교 고도화</p></div>
-      </div>
-      <div class="pc" onclick="location.href='/works'">
-        <div class="pc-bg" style="background-image:url('/images/GMC_S_01.jpg')"></div>
-        <div class="pc-ov"></div>
-        <div class="pc-info"><span class="pc-cat">이러닝 스튜디오</span><p class="pc-name">공주대학교 스튜디오</p></div>
-      </div>
+  </div>
+
+  <!-- 스크롤 힌트 -->
+  <div class="film-footer">
+    <div class="film-scroll-hint">
+      <div class="film-scroll-line" id="film-scroll-line"></div>
     </div>
-    <div class="pc-col">
-      <div class="pc" onclick="location.href='/works'">
-        <div class="pc-bg" style="background-image:url('/images/GKDE_S_08.jpg')"></div>
-        <div class="pc-ov"></div>
-        <div class="pc-info"><span class="pc-cat">방송제작</span><p class="pc-name">경기도교육청 UHD</p></div>
-      </div>
-      <div class="pc" onclick="location.href='/works'">
-        <div class="pc-bg" style="background-image:url('/images/KTV_BS_01.jpg')"></div>
-        <div class="pc-ov"></div>
-        <div class="pc-info"><span class="pc-cat">방송 인프라</span><p class="pc-name">KTV 방송시스템</p></div>
-      </div>
-    </div>
+    <span class="film-hint-text">좌우로 스크롤하세요</span>
   </div>
 </section>
 
 <style>
-  .s4 { background: #fff; display: flex; flex-direction: column; padding: 72px 48px 28px; }
-  .sec-header { margin-bottom: 20px; flex-shrink: 0; }
-  .sec-tag { font-size: 10px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: #bbb; display: block; margin-bottom: 5px; }
-  .sec-title { font-size: clamp(24px,3.5vw,40px); font-weight: 800; letter-spacing: -0.03em; color: #0A0A0A; }
-  .port-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 2px; flex: 1; background: #f0f0f0; min-height: 0; }
-  .pc { overflow: hidden; position: relative; cursor: pointer; background: #C8D8E0; }
-  .pc-col { display: grid; grid-template-rows: 1fr 1fr; gap: 2px; }
-  .pc-big { grid-row: span 1; }
-  .pc-bg { position: absolute; inset: 0; background-size: cover; background-position: center; transition: transform 0.5s ease; }
-  .pc:hover .pc-bg { transform: scale(1.04); }
-  .pc-ov { position: absolute; inset: 0; background: linear-gradient(transparent 35%, rgba(0,0,0,0.65)); }
-  .pc-info { position: absolute; bottom: 0; left: 0; right: 0; padding: 16px 18px; }
-  .pc-cat { font-size: 9px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: #00B8D9; display: block; margin-bottom: 4px; }
-  .pc-name { font-size: 13px; font-weight: 700; color: #fff; line-height: 1.35; }
-  .pc-meta { font-size: 10px; color: rgba(255,255,255,0.45); margin-top: 2px; }
-
-  @media (max-width: 768px) {
-    .s4 { padding: 64px 20px 20px; }
-    .port-grid { grid-template-columns: 1fr; }
-    .pc-col { grid-template-rows: 160px 160px; }
-    .pc-big { height: 220px; }
-    .pc { height: 160px; }
+  /* ── Section ── */
+  .s4 {
+    background: #fff;
+    display: flex;
+    flex-direction: column;
+    padding: 80px 0 52px;
+    overflow: hidden;
   }
-  @media (max-width: 480px) { .port-grid { grid-template-columns: 1fr; } }
+
+  /* ── Header ── */
+  .port-header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    padding: 0 56px 20px;
+  }
+  .sec-tag {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: #00B8D9;
+    display: block;
+    margin-bottom: 8px;
+  }
+  .sec-title {
+    font-size: clamp(28px, 3.5vw, 44px);
+    font-weight: 800;
+    letter-spacing: -0.04em;
+    color: #0A0A0A;
+    line-height: 1;
+  }
+  .port-all {
+    font-size: 12px;
+    font-weight: 600;
+    color: #0A0A0A;
+    text-decoration: none;
+    letter-spacing: 0.04em;
+    padding-bottom: 4px;
+    border-bottom: 1px solid #0A0A0A;
+    transition: color 0.2s, border-color 0.2s;
+  }
+  .port-all:hover { color: #00B8D9; border-color: #00B8D9; }
+
+  /* ── Film label ── */
+  .film-label {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 0 56px 16px;
+  }
+  .film-dot {
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: #C8C8C8;
+    flex-shrink: 0;
+  }
+  .film-text {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    color: #B8B8B8;
+    text-transform: uppercase;
+  }
+
+  /* ── Film track ── */
+  .film-wrap {
+    overflow-x: auto;
+    overflow-y: hidden;
+    cursor: grab;
+    padding: 0 56px 0;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  .film-wrap::-webkit-scrollbar { display: none; }
+  .film-wrap:active { cursor: grabbing; }
+  .film-track {
+    display: flex;
+    gap: 2px;
+    width: max-content;
+    padding-right: 56px;
+  }
+
+  /* ── Film item ── */
+  .film-item {
+    position: relative;
+    width: 260px;
+    height: 340px;
+    flex-shrink: 0;
+    cursor: pointer;
+    overflow: hidden;
+    background: #E8EDF0;
+  }
+  .film-wide {
+    width: 400px;
+  }
+  .film-img {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+    transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 0.3s;
+  }
+  .film-item:hover .film-img { transform: scale(1.04); opacity: 0.9; }
+  .film-item::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.72) 0%, rgba(0,0,0,0.08) 50%, transparent 100%);
+  }
+
+  /* ── Film info ── */
+  .film-info {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 20px 20px 24px;
+    z-index: 1;
+  }
+  .film-cat {
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #00B8D9;
+    display: block;
+    margin-bottom: 6px;
+  }
+  .film-name {
+    font-size: 14px;
+    font-weight: 700;
+    color: #fff;
+    line-height: 1.35;
+    letter-spacing: -0.01em;
+  }
+  .film-meta {
+    font-size: 10px;
+    color: rgba(255,255,255,0.4);
+    margin-top: 4px;
+  }
+
+  /* ── Film number ── */
+  .film-num {
+    position: absolute;
+    top: 14px;
+    right: 16px;
+    font-size: 10px;
+    font-weight: 700;
+    color: rgba(255,255,255,0.25);
+    letter-spacing: 0.12em;
+    z-index: 1;
+  }
+
+  /* ── CTA card ── */
+  .film-cta {
+    background: #0A0A0A;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .film-cta::after { display: none; }
+  .film-cta-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    z-index: 1;
+  }
+  .film-cta-num {
+    font-size: 36px;
+    font-weight: 800;
+    color: #fff;
+    letter-spacing: -0.04em;
+    line-height: 1;
+  }
+  .film-cta-label {
+    font-size: 11px;
+    font-weight: 600;
+    color: rgba(255,255,255,0.45);
+    letter-spacing: 0.06em;
+    text-align: center;
+  }
+  .film-cta-arr {
+    font-size: 20px;
+    color: #00B8D9;
+    margin-top: 4px;
+    transition: transform 0.2s;
+  }
+  .film-cta:hover .film-cta-arr { transform: translateX(6px); }
+  .film-cta:hover { background: #0D2030; }
+
+  /* ── Footer / scroll hint ── */
+  .film-footer {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 24px 56px 0;
+  }
+  .film-scroll-hint {
+    flex: 1;
+    max-width: 200px;
+    height: 1px;
+    background: #E8E8E8;
+    position: relative;
+    overflow: hidden;
+  }
+  .film-scroll-line {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 1px;
+    width: 0%;
+    background: #0A0A0A;
+    transition: width 0.1s linear;
+  }
+  .film-hint-text {
+    font-size: 10px;
+    font-weight: 500;
+    color: #B8B8B8;
+    letter-spacing: 0.08em;
+  }
+
+  /* ── Responsive ── */
+  @media (max-width: 768px) {
+    .s4 { padding: 64px 0 40px; }
+    .port-header { padding: 0 28px 20px; }
+    .film-label { padding: 0 28px 14px; }
+    .film-wrap { padding: 0 28px 0; }
+    .film-track { padding-right: 28px; }
+    .film-footer { padding: 20px 28px 0; }
+    .film-item { width: 220px; height: 290px; }
+    .film-wide { width: 300px; }
+  }
+  @media (max-width: 480px) {
+    .film-item { width: 200px; height: 260px; }
+    .film-wide { width: 260px; }
+  }
 </style>
+
+<script is:inline>
+(function() {
+  const wrap = document.getElementById('film-wrap');
+  const line = document.getElementById('film-scroll-line');
+
+  /* 스크롤 진행 바 */
+  function updateLine() {
+    const max = wrap.scrollWidth - wrap.clientWidth;
+    if (max <= 0) return;
+    const pct = (wrap.scrollLeft / max) * 100;
+    line.style.width = pct + '%';
+  }
+  wrap.addEventListener('scroll', updateLine, { passive: true });
+  updateLine();
+
+  /* 드래그 스크롤 */
+  let isDown = false, startX = 0, scrollLeft = 0;
+  wrap.addEventListener('mousedown', function(e) {
+    isDown = true;
+    startX = e.pageX - wrap.offsetLeft;
+    scrollLeft = wrap.scrollLeft;
+  });
+  wrap.addEventListener('mouseleave', function() { isDown = false; });
+  wrap.addEventListener('mouseup', function() { isDown = false; });
+  wrap.addEventListener('mousemove', function(e) {
+    if (!isDown) return;
+    e.preventDefault();
+    const x = e.pageX - wrap.offsetLeft;
+    const walk = (x - startX) * 1.2;
+    wrap.scrollLeft = scrollLeft - walk;
+  });
+})();
+</script>

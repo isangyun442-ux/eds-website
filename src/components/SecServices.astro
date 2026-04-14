@@ -2,41 +2,80 @@
 // src/components/SecServices.astro
 ---
 <section class="sec s3" id="sec3">
-  <div class="sec-header">
-    <span class="sec-tag" data-i18n="svc.eyebrow">Services</span>
-    <h2 class="sec-title" data-i18n="svc.title">서비스</h2>
+  <div class="svc-header">
+    <div class="svc-header-left">
+      <span class="sec-tag" data-i18n="svc.eyebrow">Services</span>
+      <h2 class="sec-title" data-i18n="svc.title">서비스</h2>
+    </div>
+    <div class="svc-nav">
+      <button class="svc-btn" id="svc-prev" aria-label="이전">←</button>
+      <span class="svc-count"><span id="svc-cur">1</span> / <span id="svc-total">6</span></span>
+      <button class="svc-btn" id="svc-next" aria-label="다음">→</button>
+    </div>
   </div>
-  <div class="svc-grid">
-    <div class="svc" onclick="openSvc(0)">
-      <div class="svc-bg" style="background-image:url('/images/KTV_BS_01.jpg')"></div>
-      <div class="svc-ov"></div>
-      <div class="svc-info"><span class="svc-n">01</span><h3 class="svc-title" data-i18n="svc.1.title">방송제작 스튜디오</h3><p class="svc-desc" data-i18n="svc.1.desc">4K UHD 촬영부터 실시간 스트리밍까지</p><span class="svc-arr">→</span></div>
+
+  <div class="svc-track-wrap">
+    <div class="svc-track" id="svc-track">
+      <div class="svc-card" onclick="openSvc(0)">
+        <div class="svc-img" style="background-image:url('/images/KTV_BS_01.jpg')"></div>
+        <div class="svc-body">
+          <span class="svc-n">01</span>
+          <h3 class="svc-title" data-i18n="svc.1.title">방송제작 스튜디오</h3>
+          <p class="svc-desc" data-i18n="svc.1.desc">4K UHD 촬영부터 실시간 스트리밍까지</p>
+          <span class="svc-link">자세히 보기 →</span>
+        </div>
+      </div>
+      <div class="svc-card" onclick="openSvc(1)">
+        <div class="svc-img" style="background-image:url('/images/SC_ST_09.jpg')"></div>
+        <div class="svc-body">
+          <span class="svc-n">02</span>
+          <h3 class="svc-title" data-i18n="svc.2.title">이러닝 스튜디오</h3>
+          <p class="svc-desc" data-i18n="svc.2.desc">자동 추적 카메라와 크로마키 환경</p>
+          <span class="svc-link">자세히 보기 →</span>
+        </div>
+      </div>
+      <div class="svc-card" onclick="openSvc(2)">
+        <div class="svc-img" style="background-image:url('/images/GKDE_S_08.jpg')"></div>
+        <div class="svc-body">
+          <span class="svc-n">03</span>
+          <h3 class="svc-title" data-i18n="svc.3.title">LED 디스플레이</h3>
+          <p class="svc-desc" data-i18n="svc.3.desc">P1.5 피치 LED Wall XR 스튜디오</p>
+          <span class="svc-link">자세히 보기 →</span>
+        </div>
+      </div>
+      <div class="svc-card" onclick="openSvc(3)">
+        <div class="svc-img" style="background-image:url('/images/GMC_S_01.jpg')"></div>
+        <div class="svc-body">
+          <span class="svc-n">04</span>
+          <h3 class="svc-title" data-i18n="svc.4.title">스마트 강의실</h3>
+          <p class="svc-desc" data-i18n="svc.4.desc">온·오프라인 동시 수업 환경 구현</p>
+          <span class="svc-link">자세히 보기 →</span>
+        </div>
+      </div>
+      <div class="svc-card" onclick="openSvc(4)">
+        <div class="svc-img" style="background-image:url('/images/MG_DAS_02.jpg')"></div>
+        <div class="svc-body">
+          <span class="svc-n">05</span>
+          <h3 class="svc-title" data-i18n="svc.5.title">아카이브 시스템</h3>
+          <p class="svc-desc" data-i18n="svc.5.desc">영상 자산 디지털화 및 장기 보존</p>
+          <span class="svc-link">자세히 보기 →</span>
+        </div>
+      </div>
+      <div class="svc-card" onclick="openSvc(5)">
+        <div class="svc-img" style="background-image:url('/images/HUFS_ST_04.jpg')"></div>
+        <div class="svc-body">
+          <span class="svc-n">06</span>
+          <h3 class="svc-title" data-i18n="svc.6.title">화상회의 시스템</h3>
+          <p class="svc-desc" data-i18n="svc.6.desc">Zoom·Teams 통합 원격 회의 환경</p>
+          <span class="svc-link">자세히 보기 →</span>
+        </div>
+      </div>
     </div>
-    <div class="svc" onclick="openSvc(1)">
-      <div class="svc-bg" style="background-image:url('/images/SC_ST_09.jpg')"></div>
-      <div class="svc-ov"></div>
-      <div class="svc-info"><span class="svc-n">02</span><h3 class="svc-title" data-i18n="svc.2.title">이러닝 스튜디오</h3><p class="svc-desc" data-i18n="svc.2.desc">자동 추적 카메라와 크로마키 환경</p><span class="svc-arr">→</span></div>
-    </div>
-    <div class="svc" onclick="openSvc(2)">
-      <div class="svc-bg" style="background-image:url('/images/GKDE_S_08.jpg')"></div>
-      <div class="svc-ov"></div>
-      <div class="svc-info"><span class="svc-n">03</span><h3 class="svc-title" data-i18n="svc.3.title">LED 디스플레이</h3><p class="svc-desc" data-i18n="svc.3.desc">P1.5 피치 LED Wall XR 스튜디오</p><span class="svc-arr">→</span></div>
-    </div>
-    <div class="svc" onclick="openSvc(3)">
-      <div class="svc-bg" style="background-image:url('/images/GMC_S_01.jpg')"></div>
-      <div class="svc-ov"></div>
-      <div class="svc-info"><span class="svc-n">04</span><h3 class="svc-title" data-i18n="svc.4.title">스마트 강의실</h3><p class="svc-desc" data-i18n="svc.4.desc">온·오프라인 동시 수업 환경 구현</p><span class="svc-arr">→</span></div>
-    </div>
-    <div class="svc" onclick="openSvc(4)">
-      <div class="svc-bg" style="background-image:url('/images/MG_DAS_02.jpg')"></div>
-      <div class="svc-ov"></div>
-      <div class="svc-info"><span class="svc-n">05</span><h3 class="svc-title" data-i18n="svc.5.title">아카이브 시스템</h3><p class="svc-desc" data-i18n="svc.5.desc">영상 자산 디지털화 및 장기 보존</p><span class="svc-arr">→</span></div>
-    </div>
-    <div class="svc" onclick="openSvc(5)">
-      <div class="svc-bg" style="background-image:url('/images/HUFS_ST_04.jpg')"></div>
-      <div class="svc-ov"></div>
-      <div class="svc-info"><span class="svc-n">06</span><h3 class="svc-title" data-i18n="svc.6.title">화상회의 시스템</h3><p class="svc-desc" data-i18n="svc.6.desc">Zoom·Teams 통합 원격 회의 환경</p><span class="svc-arr">→</span></div>
-    </div>
+  </div>
+
+  <!-- 진행 바 -->
+  <div class="svc-progress-wrap">
+    <div class="svc-progress-bar" id="svc-progress-bar"></div>
   </div>
 </section>
 
@@ -56,45 +95,262 @@
 </div>
 
 <style>
-  .s3 { background: #FAFAFA; display: flex; flex-direction: column; padding: 72px 48px 28px; }
-  .sec-header { margin-bottom: 20px; flex-shrink: 0; }
-  .sec-tag { font-size: 10px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: #bbb; display: block; margin-bottom: 5px; }
-  .sec-title { font-size: clamp(24px,3.5vw,40px); font-weight: 800; letter-spacing: -0.03em; color: #0A0A0A; }
-  .svc-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 3px; background: #ddd; flex: 1; min-height: 0; }
-  .svc { position: relative; overflow: hidden; cursor: pointer; min-height: 160px; background: #0D2030; }
-  .svc-bg { position: absolute; inset: 0; background-size: cover; background-position: center; transition: transform 0.5s ease, opacity 0.3s; opacity: 0.6; }
-  .svc:hover .svc-bg { transform: scale(1.06); opacity: 0.8; }
-  .svc-ov { position: absolute; inset: 0; background: linear-gradient(transparent 20%, rgba(0,0,0,0.82)); }
-  .svc-info { position: absolute; bottom: 0; left: 0; right: 0; padding: 18px 20px; }
-  .svc-n { font-size: 10px; font-weight: 700; color: #00B8D9; letter-spacing: 0.1em; display: block; margin-bottom: 6px; }
-  .svc-title { font-size: 15px; font-weight: 700; color: #fff; margin-bottom: 6px; }
-  .svc-desc { font-size: 11px; color: rgba(255,255,255,0.55); line-height: 1.6; }
-  .svc-arr { display: inline-block; font-size: 16px; color: rgba(255,255,255,0.3); margin-top: 8px; transition: color 0.2s, transform 0.2s; }
-  .svc:hover .svc-arr { color: #00B8D9; transform: translateX(4px); }
-
-  .svc-modal-bg { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.75); z-index: 500; align-items: center; justify-content: center; }
-  .svc-modal-bg.on { display: flex; }
-  .svc-modal { background: #fff; width: 90%; max-width: 700px; display: grid; grid-template-columns: 1fr 1fr; max-height: 90vh; overflow: hidden; }
-  .svc-modal-img { background-size: cover; background-position: center; min-height: 320px; }
-  .svc-modal-body { padding: 32px 28px; position: relative; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; }
-  .svc-modal-close { position: absolute; top: 14px; right: 14px; width: 28px; height: 28px; background: #f0f0f0; border: none; cursor: pointer; font-size: 14px; display: flex; align-items: center; justify-content: center; font-family: inherit; }
-  .svc-modal-close:hover { background: #D42B2B; color: #fff; }
-  .svc-modal-n { font-size: 10px; font-weight: 700; color: #00B8D9; letter-spacing: 0.16em; }
-  .svc-modal-title { font-size: 20px; font-weight: 800; color: #0A0A0A; border-bottom: 2px solid #00B8D9; padding-bottom: 10px; }
-  .svc-modal-desc { font-size: 12px; color: #666; line-height: 1.85; }
-  .svc-modal-list { display: flex; flex-direction: column; gap: 7px; list-style: none; }
-  .svc-modal-list li { font-size: 12px; color: #444; padding-left: 14px; position: relative; line-height: 1.6; }
-  .svc-modal-list li::before { content: ""; position: absolute; left: 0; top: 7px; width: 5px; height: 5px; border-radius: 50%; background: #00B8D9; }
-  .svc-modal-cta { margin-top: auto; background: #0D3A4A; color: #fff; border: none; font-size: 12px; font-weight: 700; padding: 11px 22px; cursor: pointer; font-family: inherit; align-self: flex-start; }
-  .svc-modal-cta:hover { background: #D42B2B; }
-
-  @media (max-width: 768px) {
-    .s3 { padding: 64px 20px 20px; }
-    .svc-grid { grid-template-columns: 1fr 1fr; }
-    .svc-modal { grid-template-columns: 1fr; }
-    .svc-modal-img { min-height: 200px; }
+  /* ── Section ── */
+  .s3 {
+    background: #F8F8F6;
+    display: flex;
+    flex-direction: column;
+    padding: 80px 0 60px;
+    overflow: hidden;
   }
-  @media (max-width: 480px) { .svc-grid { grid-template-columns: 1fr; } }
+
+  /* ── Header ── */
+  .svc-header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    padding: 0 56px 36px;
+  }
+  .sec-tag {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: #00B8D9;
+    display: block;
+    margin-bottom: 8px;
+  }
+  .sec-title {
+    font-size: clamp(28px, 3.5vw, 44px);
+    font-weight: 800;
+    letter-spacing: -0.04em;
+    color: #0A0A0A;
+    line-height: 1;
+  }
+
+  /* ── Nav ── */
+  .svc-nav {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding-bottom: 4px;
+  }
+  .svc-btn {
+    width: 40px;
+    height: 40px;
+    background: none;
+    border: 1px solid #D0D0D0;
+    cursor: pointer;
+    font-size: 16px;
+    color: #0A0A0A;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s, border-color 0.2s, color 0.2s;
+    font-family: inherit;
+  }
+  .svc-btn:hover { background: #0A0A0A; border-color: #0A0A0A; color: #fff; }
+  .svc-btn:disabled { opacity: 0.25; cursor: default; }
+  .svc-btn:disabled:hover { background: none; border-color: #D0D0D0; color: #0A0A0A; }
+  .svc-count {
+    font-size: 12px;
+    font-weight: 500;
+    color: #999;
+    letter-spacing: 0.04em;
+    min-width: 36px;
+    text-align: center;
+  }
+
+  /* ── Track ── */
+  .svc-track-wrap {
+    overflow: hidden;
+    cursor: grab;
+    user-select: none;
+    -webkit-user-select: none;
+  }
+  .svc-track-wrap:active { cursor: grabbing; }
+  .svc-track {
+    display: flex;
+    gap: 0;
+    transition: transform 0.55s cubic-bezier(0.77, 0, 0.175, 1);
+    will-change: transform;
+  }
+
+  /* ── Card ── */
+  .svc-card {
+    flex: 0 0 calc(100% / 3.2);
+    min-width: 0;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    padding-left: 56px;
+  }
+  .svc-card:first-child { padding-left: 56px; }
+  .svc-img {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    background-size: cover;
+    background-position: center;
+    overflow: hidden;
+    position: relative;
+    transition: opacity 0.3s;
+  }
+  .svc-card:hover .svc-img { opacity: 0.88; }
+  .svc-body {
+    padding: 22px 24px 22px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .svc-n {
+    font-size: 10px;
+    font-weight: 700;
+    color: #00B8D9;
+    letter-spacing: 0.14em;
+  }
+  .svc-card .svc-title {
+    font-size: 16px;
+    font-weight: 700;
+    color: #0A0A0A;
+    letter-spacing: -0.02em;
+    line-height: 1.3;
+  }
+  .svc-desc {
+    font-size: 12px;
+    color: #888;
+    line-height: 1.7;
+  }
+  .svc-link {
+    font-size: 11px;
+    font-weight: 600;
+    color: #0A0A0A;
+    letter-spacing: 0.04em;
+    margin-top: 4px;
+    transition: color 0.2s;
+  }
+  .svc-card:hover .svc-link { color: #00B8D9; }
+
+  /* ── Progress ── */
+  .svc-progress-wrap {
+    margin: 32px 56px 0;
+    height: 1px;
+    background: #E0E0E0;
+    position: relative;
+  }
+  .svc-progress-bar {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 1px;
+    background: #0A0A0A;
+    transition: width 0.55s cubic-bezier(0.77, 0, 0.175, 1);
+  }
+
+  /* ── Modal ── */
+  .svc-modal-bg {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.6);
+    z-index: 500;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(4px);
+  }
+  .svc-modal-bg.on { display: flex; }
+  .svc-modal {
+    background: #fff;
+    width: 90%;
+    max-width: 720px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    max-height: 90vh;
+    overflow: hidden;
+  }
+  .svc-modal-img { background-size: cover; background-position: center; min-height: 340px; }
+  .svc-modal-body {
+    padding: 40px 32px 36px;
+    position: relative;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .svc-modal-close {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    width: 30px;
+    height: 30px;
+    background: none;
+    border: 1px solid #E0E0E0;
+    cursor: pointer;
+    font-size: 13px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: inherit;
+    transition: background 0.2s, color 0.2s;
+  }
+  .svc-modal-close:hover { background: #0A0A0A; color: #fff; border-color: #0A0A0A; }
+  .svc-modal-n { font-size: 10px; font-weight: 700; color: #00B8D9; letter-spacing: 0.16em; }
+  .svc-modal-title {
+    font-size: 22px;
+    font-weight: 800;
+    color: #0A0A0A;
+    letter-spacing: -0.03em;
+    padding-bottom: 14px;
+    border-bottom: 1px solid #F0F0F0;
+  }
+  .svc-modal-desc { font-size: 13px; color: #666; line-height: 1.9; }
+  .svc-modal-list { display: flex; flex-direction: column; gap: 8px; list-style: none; }
+  .svc-modal-list li {
+    font-size: 12px;
+    color: #444;
+    padding-left: 16px;
+    position: relative;
+    line-height: 1.65;
+  }
+  .svc-modal-list li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 8px;
+    width: 4px;
+    height: 4px;
+    background: #00B8D9;
+  }
+  .svc-modal-cta {
+    margin-top: auto;
+    background: #0A0A0A;
+    color: #fff;
+    border: none;
+    font-size: 12px;
+    font-weight: 700;
+    padding: 13px 24px;
+    cursor: pointer;
+    font-family: inherit;
+    align-self: flex-start;
+    letter-spacing: 0.04em;
+    transition: background 0.2s;
+  }
+  .svc-modal-cta:hover { background: #00B8D9; }
+
+  /* ── Responsive ── */
+  @media (max-width: 1024px) {
+    .svc-card { flex: 0 0 calc(100% / 2.2); }
+  }
+  @media (max-width: 768px) {
+    .s3 { padding: 64px 0 48px; }
+    .svc-header { padding: 0 28px 28px; }
+    .svc-card { flex: 0 0 calc(100% / 1.15); padding-left: 28px; }
+    .svc-progress-wrap { margin: 24px 28px 0; }
+    .svc-modal { grid-template-columns: 1fr; }
+    .svc-modal-img { min-height: 220px; }
+  }
+  @media (max-width: 480px) {
+    .svc-card { flex: 0 0 85%; }
+  }
 </style>
 
 <script is:inline>
@@ -118,13 +374,85 @@ const svcData = [
     desc:'Zoom, Teams, Webex 등 주요 플랫폼과 완벽 호환되는 화상회의 시스템을 구축합니다.',
     list:['Zoom·Teams·Webex 통합','자동 추적 카메라','에코 제거 마이크 어레이','대형 디스플레이 연동','다자간 화상회의실 구성'] }
 ];
+
+/* ── Slider ── */
+(function() {
+  const track = document.getElementById('svc-track');
+  const cards = track.querySelectorAll('.svc-card');
+  const total = cards.length;
+  const btnPrev = document.getElementById('svc-prev');
+  const btnNext = document.getElementById('svc-next');
+  const curEl = document.getElementById('svc-cur');
+  const totalEl = document.getElementById('svc-total');
+  const progressBar = document.getElementById('svc-progress-bar');
+  totalEl.textContent = total;
+
+  let cur = 0;
+  let visibleCount = window.innerWidth <= 768 ? 1 : window.innerWidth <= 1024 ? 2 : 3;
+
+  function getCardWidth() {
+    return cards[0].getBoundingClientRect().width;
+  }
+
+  function update() {
+    const w = getCardWidth();
+    track.style.transform = 'translateX(-' + (cur * w) + 'px)';
+    curEl.textContent = cur + 1;
+    btnPrev.disabled = cur === 0;
+    btnNext.disabled = cur >= total - visibleCount;
+    progressBar.style.width = ((cur + visibleCount) / total * 100) + '%';
+  }
+
+  btnPrev.addEventListener('click', function() { if (cur > 0) { cur--; update(); } });
+  btnNext.addEventListener('click', function() { if (cur < total - visibleCount) { cur++; update(); } });
+
+  /* drag */
+  let startX = 0, isDragging = false, prevented = false;
+  track.addEventListener('mousedown', function(e) { startX = e.clientX; isDragging = true; prevented = false; });
+  track.addEventListener('mousemove', function(e) {
+    if (!isDragging) return;
+    if (!prevented && Math.abs(e.clientX - startX) > 5) { prevented = true; }
+  });
+  track.addEventListener('mouseup', function(e) {
+    if (!isDragging) return;
+    isDragging = false;
+    const dx = e.clientX - startX;
+    if (dx < -40 && cur < total - visibleCount) { cur++; update(); }
+    else if (dx > 40 && cur > 0) { cur--; update(); }
+  });
+  track.addEventListener('mouseleave', function() { isDragging = false; });
+
+  /* touch */
+  let tx = 0;
+  track.addEventListener('touchstart', function(e) { tx = e.touches[0].clientX; }, { passive: true });
+  track.addEventListener('touchend', function(e) {
+    const dx = e.changedTouches[0].clientX - tx;
+    if (dx < -40 && cur < total - visibleCount) { cur++; update(); }
+    else if (dx > 40 && cur > 0) { cur--; update(); }
+  });
+
+  window.addEventListener('resize', function() {
+    visibleCount = window.innerWidth <= 768 ? 1 : window.innerWidth <= 1024 ? 2 : 3;
+    if (cur > total - visibleCount) cur = total - visibleCount;
+    update();
+  });
+
+  /* prevent card click on drag */
+  track.querySelectorAll('.svc-card').forEach(function(card) {
+    card.addEventListener('click', function(e) { if (prevented) { e.stopImmediatePropagation(); prevented = false; } });
+  });
+
+  update();
+})();
+
+/* ── Modal ── */
 function openSvc(i) {
   const d = svcData[i];
   document.getElementById('svc-modal-n').textContent = d.n;
   document.getElementById('svc-modal-title').textContent = d.title;
   document.getElementById('svc-modal-desc').textContent = d.desc;
   document.getElementById('svc-modal-img').style.backgroundImage = "url('" + d.img + "')";
-  document.getElementById('svc-modal-list').innerHTML = d.list.map(l => '<li>' + l + '</li>').join('');
+  document.getElementById('svc-modal-list').innerHTML = d.list.map(function(l) { return '<li>' + l + '</li>'; }).join('');
   document.getElementById('svc-modal-bg').classList.add('on');
   document.body.style.overflow = 'hidden';
 }
