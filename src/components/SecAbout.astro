@@ -129,7 +129,7 @@
     text-transform: uppercase; color: #0D3A4A; margin-bottom: 14px;
     padding-left: 14px; border-left: 3px solid #0D3A4A;
   }
-  .ab-title { font-size: clamp(22px, 2.6vw, 34px); font-weight: 800; letter-spacing: -0.03em; color: #0A0A0A; line-height: 1.25; }
+  .ab-title { font-size: clamp(22px, 2.6vw, 34px); font-weight: 800; letter-spacing: -0.03em; color: #0A0A0A; line-height: 1.25; margin-bottom: 20px; }
   .ab-body { font-size: 14px; color: #666; line-height: 2.0; margin-bottom: 14px; max-width: 480px; }
   .ab-body em { font-style: italic; color: #444; }
   .ab-body strong { color: #0A0A0A; font-weight: 700; }
@@ -155,17 +155,17 @@
   .ab-nums-block { padding: 64px 0 0; }
   .ab-nums-header { text-align: center; margin-bottom: 48px; display: flex; flex-direction: column; align-items: center; }
 
-  .ab-nums-grid { display: grid; grid-template-columns: repeat(3, 1fr); border: 1px solid #f0f0f0; }
-  .ab-numcard { padding: 44px 40px; border-right: 1px solid #f0f0f0; transition: background 0.2s; }
-  .ab-numcard:last-child { border-right: none; }
-  .ab-numcard:hover { background: #FAFCFD; }
-  .ab-nc-accent { width: 32px; height: 3px; background: #0D3A4A; margin-bottom: 22px; }
-  .ab-numcard-mid .ab-nc-accent { background: #0D3A4A; }
-  .ab-nc-n { font-size: 54px; font-weight: 900; letter-spacing: -0.04em; color: #0A0A0A; line-height: 1; margin-bottom: 14px; }
-  .ab-nc-n span { font-size: 28px; color: #0D3A4A; margin-left: 2px; }
-  .ab-numcard-mid .ab-nc-n span { color: #0D3A4A; }
-  .ab-nc-l { font-size: 14px; font-weight: 700; color: #0A0A0A; margin-bottom: 6px; }
-  .ab-nc-s { font-size: 12px; color: #aaa; line-height: 1.6; }
+  .ab-nums-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; background: #e8e8e8; }
+  .ab-numcard { padding: 44px 40px; background: #0D3A4A; transition: background 0.2s; }
+
+  .ab-numcard:hover { background: #0a2d3d; }
+  .ab-nc-accent { width: 32px; height: 3px; background: rgba(255,255,255,0.3); margin-bottom: 22px; }
+
+  .ab-nc-n { font-size: 54px; font-weight: 900; letter-spacing: -0.04em; color: #fff; line-height: 1; margin-bottom: 14px; }
+  .ab-nc-n span { font-size: 28px; color: rgba(255,255,255,0.6); margin-left: 2px; }
+
+  .ab-nc-l { font-size: 14px; font-weight: 700; color: #fff; margin-bottom: 6px; }
+  .ab-nc-s { font-size: 12px; color: rgba(255,255,255,0.45); line-height: 1.6; }
 
   .ab-message { margin-top: 40px; padding: 32px 40px; background: #F8FBFC; border-left: 4px solid #0D3A4A; }
   .ab-msg-text { font-size: 15px; color: #555; line-height: 2; font-style: italic; margin-bottom: 16px; }
@@ -176,8 +176,8 @@
     .ab-row { grid-template-columns: 1fr; gap: 36px; padding: 48px 0; }
     .ab-img { max-width: 300px; }
     .ab-nums-grid { grid-template-columns: 1fr; }
-    .ab-numcard { border-right: none; border-bottom: 1px solid #f0f0f0; padding: 28px 24px; }
-    .ab-numcard:last-child { border-bottom: none; }
+    .ab-numcard { padding: 28px 24px; }
+
     .ab-nc-n { font-size: 40px; }
   }
   @media (max-width: 480px) {
