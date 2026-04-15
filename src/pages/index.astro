@@ -38,7 +38,7 @@ import SecContact    from '../components/SecContact.astro';
     .logo-white { position: absolute; top: 0; left: 0; height: 28px; width: auto; object-fit: contain; filter: brightness(0) invert(1); opacity: 1; transition: opacity 0.4s; }
     .nav.scrolled .logo-color { opacity: 1; }
     .nav.scrolled .logo-white { opacity: 0; }
-    .nav-menu { display: flex; gap: 32px; flex-wrap: nowrap; overflow: hidden; }
+    .nav-menu { display: flex; gap: 32px; }
     .nav-menu a { font-size: 13px; font-weight: 500; text-decoration: none; transition: color 0.3s; }
     .nav.scrolled .nav-menu a { color: #444; }
     .nav:not(.scrolled) .nav-menu a { color: rgba(255,255,255,0.85); }
@@ -78,16 +78,16 @@ import SecContact    from '../components/SecContact.astro';
     }
 
     @media (max-width: 768px) {
-      .nav { padding: 10px 16px; height: 52px; }
-      .nav.scrolled { padding: 10px 16px; }
+      .nav { padding: 0 16px; height: 50px; display: flex; align-items: center; justify-content: space-between; }
+      .nav.scrolled { padding: 0 16px; }
       .nav-menu { display: none !important; }
-      .nav-hamburger { display: flex; }
-      .nav-logo { width: 90px; }
+      .nav-hamburger { display: none !important; }
+      .lang-wrap { display: none !important; }
+      .nav-logo { width: 100px; height: 50px; display: flex; align-items: center; }
       .logo-color, .logo-white { height: 20px; }
+      .nav-cta { font-size: 11px; font-weight: 700; padding: 7px 16px; white-space: nowrap; }
       .dots { right: 6px; }
       .dot { width: 5px; height: 5px; }
-      .lang-wrap { display: none; }
-      .nav-cta { font-size: 11px; padding: 7px 14px; }
     }
   </style>
 </head>
