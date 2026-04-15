@@ -101,8 +101,22 @@ const history = [
 </section>
 
 <style>
-  .s5 { background: #fff; display: flex; flex-direction: column; }
-  .hist-scroll { flex: 1; overflow-y: auto; overflow-x: hidden; scrollbar-width: none; min-height: 0; }
+  .s5 {
+    display: flex; flex-direction: column;
+    position: relative;
+    background-image: url('/images/KTV_BS_01.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+  }
+  .s5::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(8, 18, 28, 0.88);
+    z-index: 0;
+  }
+  .hist-scroll { flex: 1; overflow-y: auto; overflow-x: hidden; scrollbar-width: none; min-height: 0; position: relative; z-index: 1; }
   .hist-scroll::-webkit-scrollbar { display: none; }
   .hist-inner { max-width: 860px; margin: 0 auto; padding: 72px 52px 60px; }
 
@@ -110,34 +124,34 @@ const history = [
   .h-eyebrow {
     display: inline-flex; align-items: center; gap: 10px;
     font-size: 10px; font-weight: 700; letter-spacing: 0.22em;
-    text-transform: uppercase; color: #00B8D9; margin-bottom: 14px;
+    text-transform: uppercase; color: #E8B86D; margin-bottom: 14px;
   }
-  .h-eyebrow::before, .h-eyebrow::after { content: ''; display: block; width: 28px; height: 1px; background: #00B8D9; opacity: 0.5; }
-  .h-title { font-size: clamp(26px, 3.5vw, 40px); font-weight: 800; letter-spacing: -0.03em; color: #0A0A0A; margin-bottom: 10px; }
-  .h-sub { font-size: 14px; color: #999; line-height: 1.7; }
+  .h-eyebrow::before, .h-eyebrow::after { content: ''; display: block; width: 28px; height: 1px; background: #E8B86D; opacity: 0.5; }
+  .h-title { font-size: clamp(26px, 3.5vw, 40px); font-weight: 800; letter-spacing: -0.03em; color: #fff; margin-bottom: 10px; }
+  .h-sub { font-size: 14px; color: rgba(255,255,255,0.45); line-height: 1.7; }
 
   .timeline { position: relative; padding-bottom: 48px; }
-  .tl-line { position: absolute; top: 0; bottom: 0; left: 88px; width: 1px; background: #ebebeb; }
+  .tl-line { position: absolute; top: 0; bottom: 0; left: 88px; width: 1px; background: rgba(255,255,255,0.12); }
 
   .tl-row { display: grid; grid-template-columns: 88px 0 1fr; gap: 0 28px; align-items: flex-start; position: relative; }
 
   .tl-year-col { display: flex; justify-content: flex-end; padding-right: 24px; padding-top: 14px; }
-  .tl-year { font-size: 14px; font-weight: 800; letter-spacing: -0.02em; color: #0D3A4A; }
+  .tl-year { font-size: 14px; font-weight: 800; letter-spacing: -0.02em; color: #E8B86D; }
 
   .tl-dot-col { display: flex; justify-content: center; padding-top: 18px; position: relative; z-index: 2; }
-  .tl-dot { width: 9px; height: 9px; border-radius: 50%; background: #fff; border: 2px solid #00B8D9; flex-shrink: 0; margin-left: -4px; }
+  .tl-dot { width: 9px; height: 9px; border-radius: 50%; background: #08121C; border: 2px solid #E8B86D; flex-shrink: 0; margin-left: -4px; }
 
   .tl-content-col { padding: 10px 0 24px 0; }
   .tl-card { display: flex; flex-direction: column; }
-  .tl-item { display: flex; gap: 14px; align-items: flex-start; padding: 8px 0; border-bottom: 1px solid #f5f5f5; }
+  .tl-item { display: flex; gap: 14px; align-items: flex-start; padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.07); }
   .tl-item:last-child { border-bottom: none; }
   .tl-item:first-child { padding-top: 0; }
-  .tl-month { font-size: 11px; font-weight: 700; color: #00B8D9; letter-spacing: 0.04em; flex-shrink: 0; min-width: 32px; padding-top: 2px; }
-  .tl-desc { font-size: 13px; line-height: 1.75; color: #555; }
+  .tl-month { font-size: 11px; font-weight: 700; color: #E8B86D; letter-spacing: 0.04em; flex-shrink: 0; min-width: 32px; padding-top: 2px; }
+  .tl-desc { font-size: 13px; line-height: 1.75; color: rgba(255,255,255,0.72); }
 
   .tl-end { display: flex; flex-direction: column; align-items: flex-start; padding-left: 76px; margin-top: 4px; gap: 6px; }
-  .tl-end-dot { width: 13px; height: 13px; border-radius: 50%; background: #0D3A4A; margin-left: 7px; }
-  .tl-end-label { font-size: 10px; font-weight: 700; letter-spacing: 0.18em; color: #aaa; text-transform: uppercase; }
+  .tl-end-dot { width: 13px; height: 13px; border-radius: 50%; background: #E8B86D; margin-left: 7px; }
+  .tl-end-label { font-size: 10px; font-weight: 700; letter-spacing: 0.18em; color: rgba(255,255,255,0.3); text-transform: uppercase; }
 
   /* 스크롤 페이드업 */
   .tl-row { opacity: 0; transform: translateY(20px); transition: opacity 0.55s ease, transform 0.55s ease; }
