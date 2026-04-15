@@ -11,16 +11,16 @@
           <img src="/images/about-10000hours.svg" alt="1만 시간의 법칙" class="ab-img" />
         </div>
         <div class="ab-text-col">
-          <span class="ab-eyebrow ab-fade" style="--d:0.15s" data-i18n="about.eyebrow1">Introduce</span>
-          <h2 class="ab-title ab-fade" style="--d:0.25s" data-i18n="about.title1">"1만 시간의 법칙"</h2>
-          <p class="ab-body ab-fade" style="--d:0.35s">
+          <span class="ab-eyebrow ab-fade" style="--d:0.6s" data-i18n="about.eyebrow1">Introduce</span>
+          <h2 class="ab-title ab-fade" style="--d:0.5s" data-i18n="about.title1">"1만 시간의 법칙"</h2>
+          <p class="ab-body ab-fade" style="--d:0.7s">
             어떤 분야에서 전문성을 갖기 위해 투자해야 하는 시간을 의미합니다.
             1993년 앤더스 에릭슨의 연구를 바탕으로 말콤 글래드웰이
             <em>《아웃라이어》(2009)</em>에서 제시한 이론으로,
             하루 3시간, 주 20시간씩 10년간 한 가지 일을 반복해야
             비로소 전문가가 될 수 있다는 뜻입니다.
           </p>
-          <div class="ab-stat-row ab-fade" style="--d:0.45s">
+          <div class="ab-stat-row ab-fade" style="--d:0.9s">
             <div class="ab-stat">
               <div class="ab-stat-n">3h</div>
               <div class="ab-stat-l" data-i18n="about.stat1">하루 훈련량</div>
@@ -45,19 +45,19 @@
       <div class="ab-block ab-row">
         <div class="ab-text-col">
           <span class="ab-eyebrow ab-fade" style="--d:0s" data-i18n="about.eyebrow2">Expert Group</span>
-          <h2 class="ab-title ab-fade" style="--d:0.1s" data-i18n="about.title2">전문가 집단<br>이담에스티</h2>
-          <p class="ab-body ab-fade" style="--d:0.2s">
+          <h2 class="ab-title ab-fade" style="--d:0.8s" data-i18n="about.title2">전문가 집단<br>이담에스티</h2>
+          <p class="ab-body ab-fade" style="--d:0.8s">
             방송기술, 컴퓨터그래픽, 오디오, IT 분야에서
             <strong>20년 이상의 외길</strong>을 다져온 전문가들로 구성된 회사입니다.
             미디어 기술은 HDTV·3DTV·AR/VR을 거쳐 메타버스와 홀로그램으로
             빠르게 변화하고 있습니다.
           </p>
-          <p class="ab-body ab-fade" style="--d:0.3s">
+          <p class="ab-body ab-fade" style="--d:0.6s">
             우리 회사는 <strong>전원 엔지니어로 구성</strong>되어 있으며,
             매월 자체 사내 세미나와 기술 습득 지원을 통해
             트렌드에 뒤쳐지지 않습니다.
           </p>
-          <div class="ab-tags ab-fade" style="--d:0.4s">
+          <div class="ab-tags ab-fade" style="--d:0.8s">
             <span class="ab-tag">방송기술</span>
             <span class="ab-tag">컴퓨터그래픽</span>
             <span class="ab-tag">오디오</span>
@@ -66,7 +66,7 @@
             <span class="ab-tag">Metaverse</span>
           </div>
         </div>
-        <div class="ab-img-col ab-fade" style="--d:0.15s">
+        <div class="ab-img-col ab-fade" style="--d:0.6s">
           <img src="/images/about-expert.svg" alt="전문가 집단 이담에스티" class="ab-img" />
         </div>
       </div>
@@ -130,7 +130,7 @@
     items.forEach(function(el) { el.classList.remove('visible'); });
     // 첫 진입: sec 자체 transition(0.85s) 끝난 후 시작
     // 재진입: sec transition 후 시작
-    const base = firstVisit ? 950 : 950;
+    const base = firstVisit ? 400 : 950;
     firstVisit = false;
     items.forEach(function(el) {
       const d = parseFloat(el.style.getPropertyValue('--d') || '0') * 1000;
@@ -225,7 +225,7 @@
     opacity: 0;
     visibility: hidden;
     transform: translateY(22px);
-    transition: opacity 0.65s ease, transform 0.65s ease;
+    transition: opacity 1.6s ease, transform 1.6s ease;
   }
   .ab-fade.visible {
     opacity: 1;
