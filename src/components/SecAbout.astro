@@ -129,7 +129,7 @@
     targets.forEach(el => el.classList.remove('visible'));
     targets.forEach(function(el) {
       const delay = parseFloat(el.style.getPropertyValue('--d') || '0') * 1000;
-      setTimeout(function() { el.classList.add('visible'); }, 200 + delay);
+      setTimeout(function() { el.classList.add('visible'); }, 900 + delay);
     });
   }
 
