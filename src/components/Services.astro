@@ -1,0 +1,280 @@
+---
+// src/components/Services.astro 에 저장하세요
+---
+<section id="services" class="s3">
+  <div class="s3-header">
+    <span class="s3-tag">Services</span>
+    <h2 class="s3-title">서비스</h2>
+  </div>
+  <div class="svc-grid">
+    <div class="svc" onclick="openSvc(0)">
+      <div class="svc-bg" style="background-image:url('/images/KTV_BS_01.jpg')"></div>
+      <div class="svc-ov"></div>
+      <div class="svc-info">
+        <span class="svc-n">01</span>
+        <h3 class="svc-title">방송제작 스튜디오</h3>
+        <p class="svc-desc">4K UHD 촬영부터 실시간 스트리밍까지</p>
+        <span class="svc-arr">→</span>
+      </div>
+    </div>
+    <div class="svc" onclick="openSvc(1)">
+      <div class="svc-bg" style="background-image:url('/images/SC_ST_09.jpg')"></div>
+      <div class="svc-ov"></div>
+      <div class="svc-info">
+        <span class="svc-n">02</span>
+        <h3 class="svc-title">이러닝 스튜디오</h3>
+        <p class="svc-desc">자동 추적 카메라와 크로마키 환경</p>
+        <span class="svc-arr">→</span>
+      </div>
+    </div>
+    <div class="svc" onclick="openSvc(2)">
+      <div class="svc-bg" style="background-image:url('/images/GKDE_S_08.jpg')"></div>
+      <div class="svc-ov"></div>
+      <div class="svc-info">
+        <span class="svc-n">03</span>
+        <h3 class="svc-title">LED 디스플레이</h3>
+        <p class="svc-desc">P1.5 피치 LED Wall XR 스튜디오</p>
+        <span class="svc-arr">→</span>
+      </div>
+    </div>
+    <div class="svc" onclick="openSvc(3)">
+      <div class="svc-bg" style="background-image:url('/images/GMC_S_01.jpg')"></div>
+      <div class="svc-ov"></div>
+      <div class="svc-info">
+        <span class="svc-n">04</span>
+        <h3 class="svc-title">스마트 강의실</h3>
+        <p class="svc-desc">온·오프라인 동시 수업 환경 구현</p>
+        <span class="svc-arr">→</span>
+      </div>
+    </div>
+    <div class="svc" onclick="openSvc(4)">
+      <div class="svc-bg" style="background-image:url('/images/MG_DAS_02.jpg')"></div>
+      <div class="svc-ov"></div>
+      <div class="svc-info">
+        <span class="svc-n">05</span>
+        <h3 class="svc-title">아카이브 시스템</h3>
+        <p class="svc-desc">영상 자산 디지털화 및 장기 보존</p>
+        <span class="svc-arr">→</span>
+      </div>
+    </div>
+    <div class="svc" onclick="openSvc(5)">
+      <div class="svc-bg" style="background-image:url('/images/HUFS_ST_04.jpg')"></div>
+      <div class="svc-ov"></div>
+      <div class="svc-info">
+        <span class="svc-n">06</span>
+        <h3 class="svc-title">화상회의 시스템</h3>
+        <p class="svc-desc">Zoom·Teams 통합 원격 회의 환경</p>
+        <span class="svc-arr">→</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 서비스 모달 -->
+<div class="svc-modal-bg" id="svc-modal-bg">
+  <div class="svc-modal">
+    <div class="svc-modal-img" id="svc-modal-img"></div>
+    <div class="svc-modal-body">
+      <button class="svc-modal-close" onclick="closeSvc()">✕</button>
+      <span class="svc-modal-n" id="svc-modal-n"></span>
+      <h3 class="svc-modal-title" id="svc-modal-title"></h3>
+      <p class="svc-modal-desc" id="svc-modal-desc"></p>
+      <ul class="svc-modal-list" id="svc-modal-list"></ul>
+      <button class="svc-modal-cta" onclick="location.href='/#s5'">도입 문의하기 →</button>
+    </div>
+  </div>
+</div>
+
+<style is:global>
+  .s3 {
+    background: #FAFAFA;
+    display: flex;
+    flex-direction: column;
+    padding: 72px 48px 28px;
+  }
+  .s3-header { margin-bottom: 24px; flex-shrink: 0; }
+  .s3-tag {
+    font-size: 10px; font-weight: 700; letter-spacing: 0.18em;
+    text-transform: uppercase; color: #bbb; display: block; margin-bottom: 5px;
+  }
+  .s3-title {
+    font-size: clamp(24px, 3.5vw, 40px); font-weight: 800;
+    letter-spacing: -0.03em; color: #0A0A0A;
+  }
+  .svc-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 3px;
+    background: #ddd;
+    flex: 1;
+    min-height: 0;
+  }
+  .svc {
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    min-height: 160px;
+    background: #0D2030;
+  }
+  .svc-bg {
+    position: absolute; inset: 0;
+    background-size: cover; background-position: center;
+    transition: transform 0.5s ease, opacity 0.3s;
+    opacity: 0.6;
+  }
+  .svc:hover .svc-bg { transform: scale(1.06); opacity: 0.8; }
+  .svc-ov {
+    position: absolute; inset: 0;
+    background: linear-gradient(transparent 20%, rgba(0,0,0,0.82));
+  }
+  .svc-info {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    padding: 18px 20px;
+  }
+  .svc-n {
+    font-size: 10px; font-weight: 700; color: #00B8D9;
+    letter-spacing: 0.1em; display: block; margin-bottom: 6px;
+  }
+  .svc-title {
+    font-size: 15px; font-weight: 700; color: #fff;
+    margin-bottom: 6px; letter-spacing: -0.01em;
+  }
+  .svc-desc { font-size: 11px; color: rgba(255,255,255,0.55); line-height: 1.6; }
+  .svc-arr {
+    display: inline-block; font-size: 16px; color: rgba(255,255,255,0.3);
+    margin-top: 8px; transition: color 0.2s, transform 0.2s;
+  }
+  .svc:hover .svc-arr { color: #00B8D9; transform: translateX(4px); }
+
+  /* 서비스 모달 */
+  .svc-modal-bg {
+    display: none; position: fixed; inset: 0;
+    background: rgba(0,0,0,0.75); z-index: 500;
+    align-items: center; justify-content: center;
+  }
+  .svc-modal-bg.on { display: flex; }
+  .svc-modal {
+    background: #fff; width: 90%; max-width: 720px;
+    display: grid; grid-template-columns: 1fr 1fr;
+    max-height: 90vh; overflow: hidden;
+  }
+  .svc-modal-img {
+    background-size: cover; background-position: center;
+    min-height: 320px;
+  }
+  .svc-modal-body {
+    padding: 36px 32px; position: relative;
+    overflow-y: auto; display: flex; flex-direction: column; gap: 12px;
+  }
+  .svc-modal-close {
+    position: absolute; top: 16px; right: 16px;
+    width: 28px; height: 28px; background: #f0f0f0; border: none;
+    cursor: pointer; font-size: 14px; display: flex;
+    align-items: center; justify-content: center;
+    font-family: inherit;
+  }
+  .svc-modal-close:hover { background: #D42B2B; color: #fff; }
+  .svc-modal-n {
+    font-size: 10px; font-weight: 700; color: #00B8D9;
+    letter-spacing: 0.16em; text-transform: uppercase;
+  }
+  .svc-modal-title {
+    font-size: 22px; font-weight: 800; color: #0A0A0A;
+    letter-spacing: -0.02em; line-height: 1.2;
+    border-bottom: 2px solid #00B8D9; padding-bottom: 12px;
+  }
+  .svc-modal-desc {
+    font-size: 13px; color: #666; line-height: 1.85;
+  }
+  .svc-modal-list {
+    display: flex; flex-direction: column; gap: 8px;
+    list-style: none; margin-top: 4px;
+  }
+  .svc-modal-list li {
+    font-size: 12px; color: #444; padding-left: 14px;
+    position: relative; line-height: 1.6;
+  }
+  .svc-modal-list li::before {
+    content: ''; position: absolute; left: 0; top: 7px;
+    width: 5px; height: 5px; border-radius: 50%;
+    background: #00B8D9;
+  }
+  .svc-modal-cta {
+    margin-top: auto; background: #0D3A4A; color: #fff;
+    border: none; font-size: 12px; font-weight: 700;
+    padding: 12px 24px; cursor: pointer; font-family: inherit;
+    letter-spacing: 0.06em; align-self: flex-start;
+  }
+  .svc-modal-cta:hover { background: #D42B2B; }
+
+  @media (max-width: 768px) {
+    .s3 { padding: 64px 20px 20px; }
+    .svc-grid { grid-template-columns: 1fr 1fr; }
+    .svc-modal { grid-template-columns: 1fr; }
+    .svc-modal-img { min-height: 200px; }
+  }
+  @media (max-width: 480px) {
+    .svc-grid { grid-template-columns: 1fr; }
+  }
+</style>
+
+<script is:inline>
+  const svcData = [
+    {
+      n: '01', title: '방송제작 스튜디오',
+      img: '/images/KTV_BS_01.jpg',
+      desc: '4K UHD 카메라, 스위처, 조명 시스템을 통합하여 전문 방송 제작 환경을 구축합니다. 실시간 스트리밍과 녹화를 동시에 지원하며, 뉴스·토크쇼·강연 등 다양한 포맷에 최적화된 솔루션을 제공합니다.',
+      list: ['4K UHD 다카메라 시스템', '실시간 스트리밍 (YouTube, Zoom 등)', '자동화 조명 및 크로마키 설치', '프롬프터·부조정실 통합 구성', 'OB차량 및 야외 촬영 지원']
+    },
+    {
+      n: '02', title: '이러닝 스튜디오',
+      img: '/images/SC_ST_09.jpg',
+      desc: '온라인 교육 콘텐츠 제작에 최적화된 이러닝 스튜디오를 구축합니다. 자동 추적 카메라, 전자칠판, 크로마키 시스템으로 고품질 강의 영상을 간편하게 제작할 수 있습니다.',
+      list: ['자동 추적 PTZ 카메라 시스템', '전자칠판·태블릿 강의 연동', '크로마키 배경 시스템', '1인 셀프 스튜디오 구성', 'LMS 연동 자동 업로드 시스템']
+    },
+    {
+      n: '03', title: 'LED 디스플레이',
+      img: '/images/GKDE_S_08.jpg',
+      desc: 'P1.5~P4 피치의 LED Wall을 활용한 XR 가상 스튜디오, 전시 공간, 강당 등 다양한 공간에 맞춤형 LED 디스플레이 시스템을 설계·설치합니다.',
+      list: ['P1.5 초고해상도 LED Wall', 'XR/가상 스튜디오 배경 시스템', '실내외 대형 전광판 설치', '미디어 서버 연동 콘텐츠 제어', '공연장·전시관·강당 맞춤 설계']
+    },
+    {
+      n: '04', title: '스마트 강의실',
+      img: '/images/GMC_S_01.jpg',
+      desc: '원터치로 온·오프라인 동시 수업이 가능한 스마트 강의실을 구축합니다. 전자칠판, PTZ 카메라, 마이크 어레이를 통합하여 하이브리드 교육 환경을 실현합니다.',
+      list: ['원터치 통합 제어 시스템', '온·오프라인 동시 수업 지원', '전자칠판·인터랙티브 디스플레이', '자동 추적 카메라·마이크 어레이', '강의실 다중 연동 (멀티캠퍼스)']
+    },
+    {
+      n: '05', title: '아카이브 시스템',
+      img: '/images/MG_DAS_02.jpg',
+      desc: '방송 영상, 교육 콘텐츠, 기관 기록물 등을 장기 보존하고 효율적으로 관리할 수 있는 미디어 아카이브 시스템을 구축합니다.',
+      list: ['MAM(미디어 자산 관리) 시스템', '대용량 SAN·NAS 스토리지 구성', '자동 인제스트 및 메타데이터 관리', '검색·공유·스트리밍 통합 플랫폼', '장기 보존을 위한 LTO 테이프 아카이브']
+    },
+    {
+      n: '06', title: '화상회의 시스템',
+      img: '/images/HUFS_ST_04.jpg',
+      desc: 'Zoom, Teams, Webex 등 주요 플랫폼과 완벽 호환되는 화상회의 시스템을 구축합니다. 자동 추적 카메라와 에코 제거 마이크로 최상의 원격 회의 환경을 제공합니다.',
+      list: ['Zoom·Teams·Webex 통합 지원', '자동 추적 카메라 시스템', '에코 제거 마이크 어레이', '대형 디스플레이·터치스크린 연동', '다자간 화상회의실 구성']
+    }
+  ];
+
+  function openSvc(i) {
+    const d = svcData[i];
+    document.getElementById('svc-modal-n').textContent = d.n;
+    document.getElementById('svc-modal-title').textContent = d.title;
+    document.getElementById('svc-modal-desc').textContent = d.desc;
+    document.getElementById('svc-modal-img').style.backgroundImage = "url('" + d.img + "')";
+    document.getElementById('svc-modal-list').innerHTML = d.list.map(l => '<li>' + l + '</li>').join('');
+    document.getElementById('svc-modal-bg').classList.add('on');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeSvc() {
+    document.getElementById('svc-modal-bg').classList.remove('on');
+    document.body.style.overflow = '';
+  }
+
+  document.getElementById('svc-modal-bg').addEventListener('click', function(e) {
+    if (e.target === this) closeSvc();
+  });
+</script>

@@ -55,33 +55,29 @@
         <div class="brand"><div class="bb" style="background:#5C2D91">Mic</div><p class="bl">Microsoft</p><p class="bc">Teams</p></div>
       </div>
     </div>
-  </div>
 
-  <footer class="eds-footer">
-    <div class="eds-footer-top">
-      <img class="eds-footer-logo" src="/images/logo.png" alt="EDS 이담에스티" />
-      <span class="eds-footer-copy">Copyright 2022. EDAMST. All rights reserved.</span>
-    </div>
-    <div class="eds-footer-bottom">
-      <span class="eds-footer-info">대표 최명순</span>
-      <span class="eds-footer-div">|</span>
-      <span class="eds-footer-info">서울시 구로구 디지털로31길 19, 406호 (에이스테크노타워Ⅱ)</span>
-      <span class="eds-footer-div">|</span>
-      <span class="eds-footer-info">Tel 02-857-7744</span>
-      <span class="eds-footer-div">|</span>
-      <span class="eds-footer-info">Fax 02-857-7321</span>
-      <span class="eds-footer-div">|</span>
-      <a class="eds-footer-mail" href="mailto:pub@edamst.com">pub@edamst.com</a>
-    </div>
-  </footer>
-  <div class="scroll-hint-sec">
-    <div class="sh-mouse"><div class="sh-wheel"></div></div>
-    <span class="sh-text">scroll</span>
+    <footer class="eds-footer">
+      <div class="eds-footer-top">
+        <img class="eds-footer-logo" src="/images/logo.png" alt="EDS 이담에스티" />
+        <span class="eds-footer-copy">Copyright 2022. EDAMST. All rights reserved.</span>
+      </div>
+      <div class="eds-footer-bottom">
+        <span class="eds-footer-info">대표 최명순</span>
+        <span class="eds-footer-div">|</span>
+        <span class="eds-footer-info">서울시 구로구 디지털로31길 19, 406호 (에이스테크노타워Ⅱ)</span>
+        <span class="eds-footer-div">|</span>
+        <span class="eds-footer-info">Tel 02-857-7744</span>
+        <span class="eds-footer-div">|</span>
+        <span class="eds-footer-info">Fax 02-857-7321</span>
+        <span class="eds-footer-div">|</span>
+        <a class="eds-footer-mail" href="mailto:pub@edamst.com">pub@edamst.com</a>
+      </div>
+    </footer>
   </div>
 </section>
 
 <style>
-  .s6 { background: #fff; display: flex; flex-direction: column; position: relative; }
+  .s6 { background: #fff; display: flex; flex-direction: column; }
   .s6-scroll { flex: 1; overflow-y: auto; overflow-x: hidden; scrollbar-width: none; min-height: 0; }
   .s6-scroll::-webkit-scrollbar { display: none; }
   .s6-inner { padding: 72px 48px 48px; }
@@ -123,45 +119,57 @@
   @media (max-width: 480px) { .brands-grid { grid-template-columns: repeat(2,1fr); } }
   /* ── EDS Footer ── */
   .eds-footer {
-    background: #0A0A0A; padding: 22px 56px 26px;
-    border-top: 1px solid rgba(255,255,255,0.07); flex-shrink: 0;
+    background: #0A0A0A;
+    padding: 24px 56px 28px;
+    border-top: 1px solid rgba(255,255,255,0.07);
   }
   .eds-footer-top {
-    display: flex; align-items: center; justify-content: space-between;
-    margin-bottom: 12px; padding-bottom: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 14px;
+    padding-bottom: 14px;
     border-bottom: 1px solid rgba(255,255,255,0.06);
   }
-  .eds-footer-logo { height: 22px; width: auto; object-fit: contain; filter: brightness(0) invert(1); opacity: 0.75; }
-  .eds-footer-copy { font-size: 10px; color: rgba(255,255,255,0.25); letter-spacing: 0.06em; }
-  .eds-footer-bottom { display: flex; align-items: center; flex-wrap: wrap; gap: 4px 10px; }
-  .eds-footer-info { font-size: 11px; color: rgba(255,255,255,0.38); }
-  .eds-footer-div { font-size: 10px; color: rgba(255,255,255,0.15); }
-  .eds-footer-mail { font-size: 11px; color: #00B8D9; text-decoration: none; transition: color 0.2s; }
+  .eds-footer-logo {
+    height: 24px;
+    width: auto;
+    object-fit: contain;
+    filter: brightness(0) invert(1);
+    opacity: 0.75;
+  }
+  .eds-footer-copy {
+    font-size: 10px;
+    color: rgba(255,255,255,0.25);
+    letter-spacing: 0.06em;
+  }
+  .eds-footer-bottom {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 5px 10px;
+  }
+  .eds-footer-info {
+    font-size: 11px;
+    color: rgba(255,255,255,0.38);
+    letter-spacing: 0.02em;
+  }
+  .eds-footer-div {
+    font-size: 10px;
+    color: rgba(255,255,255,0.15);
+  }
+  .eds-footer-mail {
+    font-size: 11px;
+    color: #00B8D9;
+    text-decoration: none;
+    transition: color 0.2s;
+  }
   .eds-footer-mail:hover { color: #fff; }
-  /* ── 스크롤 힌트 ── */
-  .scroll-hint-sec {
-    position: absolute; bottom: 96px; left: 50%;
-    transform: translateX(-50%); z-index: 20;
-    display: flex; flex-direction: column; align-items: center; gap: 6px;
-    pointer-events: none;
-  }
-  .scroll-hint-sec .sh-mouse {
-    width: 20px; height: 30px; border: 1.5px solid rgba(0,0,0,0.2);
-    border-radius: 10px; display: flex; align-items: flex-start;
-    justify-content: center; padding-top: 4px;
-  }
-  .scroll-hint-sec .sh-wheel {
-    width: 2px; height: 5px; background: rgba(0,0,0,0.3);
-    border-radius: 1px; animation: shw-sec 1.8s ease infinite;
-  }
-  @keyframes shw-sec {
-    0%  { opacity:1; transform:translateY(0); }
-    100%{ opacity:0; transform:translateY(9px); }
-  }
-  .scroll-hint-sec .sh-text { font-size: 9px; color: rgba(0,0,0,0.25); letter-spacing: 0.2em; text-transform: uppercase; }
   @media (max-width: 768px) {
-    .eds-footer { padding: 18px 24px 22px; }
+    .eds-footer { padding: 20px 28px 24px; }
     .eds-footer-div { display: none; }
+    .eds-footer-bottom { gap: 3px 8px; }
     .eds-footer-info, .eds-footer-mail { font-size: 10px; }
+    .eds-footer-copy { font-size: 9px; }
   }
 </style>
