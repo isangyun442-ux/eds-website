@@ -4,7 +4,7 @@
 <section class="sec s6" id="sec6">
   <div class="s6-scroll" id="s6scroll">
     <div class="s6-inner">
-      <div class="sec-header" style="text-align:center; margin-bottom: 8px;">
+      <div class="sec-header" style="text-align:center;">
         <span class="sec-tag" style="text-align:center;">Clients & Partners</span>
         <h2 class="sec-title">신뢰받는 파트너십</h2>
       </div>
@@ -54,8 +54,8 @@
         <div class="brand"><div class="bb" style="background:#007DC3">Ext</div><p class="bl">Extron</p><p class="bc">Signal</p></div>
         <div class="brand"><div class="bb" style="background:#5C2D91">Mic</div><p class="bl">Microsoft</p><p class="bc">Teams</p></div>
       </div>
-    </div><!-- /s6-inner -->
-  </div><!-- /s6-scroll -->
+    </div>
+  </div>
 
   <footer class="eds-footer">
     <div class="eds-footer-top">
@@ -74,7 +74,6 @@
       <a class="eds-footer-mail" href="mailto:pub@edamst.com">pub@edamst.com</a>
     </div>
   </footer>
-  <!-- 스크롤 힌트 -->
   <div class="scroll-hint-sec">
     <div class="sh-mouse"><div class="sh-wheel"></div></div>
     <span class="sh-text">scroll</span>
@@ -85,14 +84,14 @@
   .s6 { background: #fff; display: flex; flex-direction: column; position: relative; }
   .s6-scroll { flex: 1; overflow-y: auto; overflow-x: hidden; scrollbar-width: none; min-height: 0; }
   .s6-scroll::-webkit-scrollbar { display: none; }
-  .s6-inner { padding: 48px 48px 24px; }
-  .s6-sub { font-size: 13px; color: #aaa; text-align: center; margin-bottom: 20px; }
+  .s6-inner { padding: 72px 48px 48px; }
+  .s6-sub { font-size: 13px; color: #aaa; text-align: center; margin-bottom: 32px; }
   .s6-sub strong { color: #D42B2B; }
   .sec-tag { font-size: 10px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: #bbb; display: block; margin-bottom: 5px; }
-  .sec-title { font-size: clamp(24px,3.5vw,40px); font-weight: 800; letter-spacing: -0.03em; color: #0A0A0A; margin-bottom: 12px; }
+  .sec-title { font-size: clamp(24px,3.5vw,40px); font-weight: 800; letter-spacing: -0.03em; color: #0A0A0A; margin-bottom: 20px; }
   .stats-row { display: grid; grid-template-columns: repeat(4,1fr); gap: 2px; background: #f0f0f0; margin-bottom: 0; }
-  .stat { background: #fff; padding: 20px 28px 16px; }
-  .stat-n { font-size: 38px; font-weight: 800; letter-spacing: -0.04em; color: #0A0A0A; line-height: 1; }
+  .stat { background: #fff; padding: 28px 28px 22px; }
+  .stat-n { font-size: 44px; font-weight: 800; letter-spacing: -0.04em; color: #0A0A0A; line-height: 1; }
   .stat-n span { color: #00B8D9; font-size: 28px; }
   .stat-l { font-size: 11px; color: #aaa; margin-top: 6px; }
   .mq-wrap { position: relative; overflow: hidden; border-top: 1px solid #f5f5f5; border-bottom: 1px solid #f5f5f5; }
@@ -104,11 +103,11 @@
   .cli { display:flex; flex-direction:column; align-items:center; justify-content:center; width:130px; height:68px; border-right:1px solid #f5f5f5; gap:5px; padding:0 16px; flex-shrink:0; }
   .cli-bar { height: 3px; border-radius: 2px; }
   .cli span { font-size:11px; font-weight:700; letter-spacing:0.06em; color:#0D3A4A; opacity:0.4; text-transform:uppercase; }
-  .brands-div { display:flex; align-items:center; gap:14px; padding:12px 0 10px; }
+  .brands-div { display:flex; align-items:center; gap:14px; padding:18px 0 14px; }
   .brands-div::before,.brands-div::after { content:''; flex:1; height:1px; background:#f0f0f0; }
   .brands-div span { font-size:9px; font-weight:700; letter-spacing:0.18em; text-transform:uppercase; color:#bbb; white-space:nowrap; }
   .brands-grid { display:grid; grid-template-columns:repeat(6,1fr); gap:1px; background:#f0f0f0; }
-  .brand { background:#fff; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:14px 10px; gap:5px; transition:background 0.2s; }
+  .brand { background:#fff; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:18px 10px; gap:6px; transition:background 0.2s; }
   .brand:hover { background:#FAFAFA; }
   .bb { width:38px; height:38px; display:flex; align-items:center; justify-content:center; font-size:9px; font-weight:800; color:#fff; clip-path:polygon(7px 0,100% 0,calc(100% - 7px) 100%,0 100%); }
   .bl { font-size:9px; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; color:#0D3A4A; opacity:0.5; text-align:center; }
@@ -116,7 +115,7 @@
   .brand:hover .bl { opacity:1; }
 
   @media (max-width: 768px) {
-    .s6-inner { padding: 64px 20px 0; }
+    .s6-inner { padding: 64px 20px 40px; }
     .stats-row { grid-template-columns: 1fr 1fr; }
     .stat-n { font-size: 34px; }
     .brands-grid { grid-template-columns: repeat(3,1fr); }
@@ -124,99 +123,45 @@
   @media (max-width: 480px) { .brands-grid { grid-template-columns: repeat(2,1fr); } }
   /* ── EDS Footer ── */
   .eds-footer {
-    background: #0A0A0A;
-    padding: 24px 56px 28px;
-    border-top: 1px solid rgba(255,255,255,0.07);
+    background: #0A0A0A; padding: 22px 56px 26px;
+    border-top: 1px solid rgba(255,255,255,0.07); flex-shrink: 0;
   }
   .eds-footer-top {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 14px;
-    padding-bottom: 14px;
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 12px; padding-bottom: 12px;
     border-bottom: 1px solid rgba(255,255,255,0.06);
   }
-  .eds-footer-logo {
-    height: 24px;
-    width: auto;
-    object-fit: contain;
-    filter: brightness(0) invert(1);
-    opacity: 0.75;
-  }
-  .eds-footer-copy {
-    font-size: 10px;
-    color: rgba(255,255,255,0.25);
-    letter-spacing: 0.06em;
-  }
-  .eds-footer-bottom {
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 5px 10px;
-  }
-  .eds-footer-info {
-    font-size: 11px;
-    color: rgba(255,255,255,0.38);
-    letter-spacing: 0.02em;
-  }
-  .eds-footer-div {
-    font-size: 10px;
-    color: rgba(255,255,255,0.15);
-  }
-  .eds-footer-mail {
-    font-size: 11px;
-    color: #00B8D9;
-    text-decoration: none;
-    transition: color 0.2s;
-  }
+  .eds-footer-logo { height: 22px; width: auto; object-fit: contain; filter: brightness(0) invert(1); opacity: 0.75; }
+  .eds-footer-copy { font-size: 10px; color: rgba(255,255,255,0.25); letter-spacing: 0.06em; }
+  .eds-footer-bottom { display: flex; align-items: center; flex-wrap: wrap; gap: 4px 10px; }
+  .eds-footer-info { font-size: 11px; color: rgba(255,255,255,0.38); }
+  .eds-footer-div { font-size: 10px; color: rgba(255,255,255,0.15); }
+  .eds-footer-mail { font-size: 11px; color: #00B8D9; text-decoration: none; transition: color 0.2s; }
   .eds-footer-mail:hover { color: #fff; }
-  @media (max-width: 768px) {
-    .eds-footer { padding: 20px 28px 24px; }
-    .eds-footer-div { display: none; }
-    .eds-footer-bottom { gap: 3px 8px; }
-    .eds-footer-info, .eds-footer-mail { font-size: 10px; }
-    .eds-footer-copy { font-size: 9px; }
-  }
   /* ── 스크롤 힌트 ── */
   .scroll-hint-sec {
-    position: absolute;
-    bottom: 110px;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 20;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 6px;
+    position: absolute; bottom: 96px; left: 50%;
+    transform: translateX(-50%); z-index: 20;
+    display: flex; flex-direction: column; align-items: center; gap: 6px;
     pointer-events: none;
   }
   .scroll-hint-sec .sh-mouse {
-    width: 20px; height: 30px;
-    border-radius: 10px;
-    display: flex; align-items: flex-start;
+    width: 20px; height: 30px; border: 1.5px solid rgba(0,0,0,0.2);
+    border-radius: 10px; display: flex; align-items: flex-start;
     justify-content: center; padding-top: 4px;
   }
   .scroll-hint-sec .sh-wheel {
-    width: 2px; height: 5px;
-    border-radius: 1px;
-    animation: shw-sec 1.8s ease infinite;
+    width: 2px; height: 5px; background: rgba(0,0,0,0.3);
+    border-radius: 1px; animation: shw-sec 1.8s ease infinite;
   }
   @keyframes shw-sec {
-    0%  { opacity: 1; transform: translateY(0); }
-    100%{ opacity: 0; transform: translateY(9px); }
+    0%  { opacity:1; transform:translateY(0); }
+    100%{ opacity:0; transform:translateY(9px); }
   }
-  .scroll-hint-sec .sh-text {
-    font-size: 9px;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
+  .scroll-hint-sec .sh-text { font-size: 9px; color: rgba(0,0,0,0.25); letter-spacing: 0.2em; text-transform: uppercase; }
+  @media (max-width: 768px) {
+    .eds-footer { padding: 18px 24px 22px; }
+    .eds-footer-div { display: none; }
+    .eds-footer-info, .eds-footer-mail { font-size: 10px; }
   }
-  .s4 .scroll-hint-sec .sh-mouse,
-  .s5 .scroll-hint-sec .sh-mouse,
-  .s6 .scroll-hint-sec .sh-mouse { border: 1.5px solid rgba(0,0,0,0.2); }
-  .s4 .scroll-hint-sec .sh-wheel,
-  .s5 .scroll-hint-sec .sh-wheel,
-  .s6 .scroll-hint-sec .sh-wheel { background: rgba(0,0,0,0.3); }
-  .s4 .scroll-hint-sec .sh-text,
-  .s5 .scroll-hint-sec .sh-text,
-  .s6 .scroll-hint-sec .sh-text  { color: rgba(0,0,0,0.25); }
 </style>

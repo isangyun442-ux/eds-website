@@ -80,6 +80,7 @@ const history = [
       </div>
     </div>
   </div>
+
   <footer class="eds-footer">
     <div class="eds-footer-top">
       <img class="eds-footer-logo" src="/images/logo.png" alt="EDS 이담에스티" />
@@ -97,7 +98,6 @@ const history = [
       <a class="eds-footer-mail" href="mailto:pub@edamst.com">pub@edamst.com</a>
     </div>
   </footer>
-  <!-- 스크롤 힌트 -->
   <div class="scroll-hint-sec">
     <div class="sh-mouse"><div class="sh-wheel"></div></div>
     <span class="sh-text">scroll</span>
@@ -122,15 +122,11 @@ const history = [
 
   .timeline { position: relative; padding-bottom: 48px; }
   .tl-line { position: absolute; top: 0; bottom: 0; left: 88px; width: 1px; background: #ebebeb; }
-
   .tl-row { display: grid; grid-template-columns: 88px 0 1fr; gap: 0 28px; align-items: flex-start; position: relative; }
-
   .tl-year-col { display: flex; justify-content: flex-end; padding-right: 24px; padding-top: 14px; }
   .tl-year { font-size: 14px; font-weight: 800; letter-spacing: -0.02em; color: #0D3A4A; }
-
   .tl-dot-col { display: flex; justify-content: center; padding-top: 18px; position: relative; z-index: 2; }
   .tl-dot { width: 9px; height: 9px; border-radius: 50%; background: #fff; border: 2px solid #00B8D9; flex-shrink: 0; margin-left: -4px; }
-
   .tl-content-col { padding: 10px 0 24px 0; }
   .tl-card { display: flex; flex-direction: column; }
   .tl-item { display: flex; gap: 14px; align-items: flex-start; padding: 8px 0; border-bottom: 1px solid #f5f5f5; }
@@ -138,12 +134,10 @@ const history = [
   .tl-item:first-child { padding-top: 0; }
   .tl-month { font-size: 11px; font-weight: 700; color: #00B8D9; letter-spacing: 0.04em; flex-shrink: 0; min-width: 32px; padding-top: 2px; }
   .tl-desc { font-size: 13px; line-height: 1.75; color: #555; }
-
   .tl-end { display: flex; flex-direction: column; align-items: flex-start; padding-left: 76px; margin-top: 4px; gap: 6px; }
   .tl-end-dot { width: 13px; height: 13px; border-radius: 50%; background: #0D3A4A; margin-left: 7px; }
   .tl-end-label { font-size: 10px; font-weight: 700; letter-spacing: 0.18em; color: #aaa; text-transform: uppercase; }
 
-  /* 스크롤 페이드업 */
   .tl-row { opacity: 0; transform: translateY(20px); transition: opacity 0.55s ease, transform 0.55s ease; }
   .tl-row.visible { opacity: 1; transform: translateY(0); }
   .h-header { opacity: 0; transform: translateY(20px); transition: opacity 0.55s ease, transform 0.55s ease; }
@@ -165,63 +159,24 @@ const history = [
   }
   /* ── EDS Footer ── */
   .eds-footer {
-    background: #0A0A0A;
-    padding: 24px 56px 28px;
-    border-top: 1px solid rgba(255,255,255,0.07);
-    flex-shrink: 0;
+    background: #0A0A0A; padding: 22px 56px 26px;
+    border-top: 1px solid rgba(255,255,255,0.07); flex-shrink: 0;
   }
   .eds-footer-top {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 14px;
-    padding-bottom: 14px;
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 12px; padding-bottom: 12px;
     border-bottom: 1px solid rgba(255,255,255,0.06);
   }
-  .eds-footer-logo {
-    height: 24px;
-    width: auto;
-    object-fit: contain;
-    filter: brightness(0) invert(1);
-    opacity: 0.75;
-  }
-  .eds-footer-copy {
-    font-size: 10px;
-    color: rgba(255,255,255,0.25);
-    letter-spacing: 0.06em;
-  }
-  .eds-footer-bottom {
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 5px 10px;
-  }
-  .eds-footer-info {
-    font-size: 11px;
-    color: rgba(255,255,255,0.38);
-    letter-spacing: 0.02em;
-  }
-  .eds-footer-div {
-    font-size: 10px;
-    color: rgba(255,255,255,0.15);
-  }
-  .eds-footer-mail {
-    font-size: 11px;
-    color: #00B8D9;
-    text-decoration: none;
-    transition: color 0.2s;
-  }
+  .eds-footer-logo { height: 22px; width: auto; object-fit: contain; filter: brightness(0) invert(1); opacity: 0.75; }
+  .eds-footer-copy { font-size: 10px; color: rgba(255,255,255,0.25); letter-spacing: 0.06em; }
+  .eds-footer-bottom { display: flex; align-items: center; flex-wrap: wrap; gap: 4px 10px; }
+  .eds-footer-info { font-size: 11px; color: rgba(255,255,255,0.38); }
+  .eds-footer-div { font-size: 10px; color: rgba(255,255,255,0.15); }
+  .eds-footer-mail { font-size: 11px; color: #00B8D9; text-decoration: none; transition: color 0.2s; }
   .eds-footer-mail:hover { color: #fff; }
-  @media (max-width: 768px) {
-    .eds-footer { padding: 20px 28px 24px; }
-    .eds-footer-div { display: none; }
-    .eds-footer-bottom { gap: 3px 8px; }
-    .eds-footer-info, .eds-footer-mail { font-size: 10px; }
-    .eds-footer-copy { font-size: 9px; }
-  }
   /* ── 스크롤 힌트 ── */
   .scroll-hint-sec {
-    position: absolute; bottom: 110px; left: 50%;
+    position: absolute; bottom: 96px; left: 50%;
     transform: translateX(-50%); z-index: 20;
     display: flex; flex-direction: column; align-items: center; gap: 6px;
     pointer-events: none;
@@ -236,8 +191,8 @@ const history = [
     border-radius: 1px; animation: shw-sec 1.8s ease infinite;
   }
   @keyframes shw-sec {
-    0%  { opacity: 1; transform: translateY(0); }
-    100%{ opacity: 0; transform: translateY(9px); }
+    0%  { opacity:1; transform:translateY(0); }
+    100%{ opacity:0; transform:translateY(9px); }
   }
   .scroll-hint-sec .sh-text { font-size: 9px; color: rgba(0,0,0,0.25); letter-spacing: 0.2em; text-transform: uppercase; }
   @media (max-width: 768px) {
