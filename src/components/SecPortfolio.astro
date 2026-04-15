@@ -115,7 +115,7 @@
     background: #F8F8F6;
     display: flex;
     flex-direction: column;
-    padding: 80px 0 52px;
+    padding: 80px 0 0;
     overflow: hidden;
   }
 
@@ -312,20 +312,23 @@
 
   /* ── Footer ── */
   .port-footer {
-    padding: 20px 56px 0;
+    padding: 20px 56px 24px;
     flex-shrink: 0;
   }
   .port-all {
-    font-size: 12px;
-    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 14px;
+    font-weight: 700;
     color: #0A0A0A;
     text-decoration: none;
-    border-bottom: 1px solid #0A0A0A;
-    padding-bottom: 2px;
     letter-spacing: 0.04em;
-    transition: color 0.2s, border-color 0.2s;
+    padding: 13px 28px;
+    border: 1.5px solid #0A0A0A;
+    transition: background 0.2s, color 0.2s;
   }
-  .port-all:hover { color: #00B8D9; border-color: #00B8D9; }
+  .port-all:hover { background: #0A0A0A; color: #fff; }
 
   /* ── Responsive ── */
   @media (max-width: 1024px) {
