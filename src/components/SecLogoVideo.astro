@@ -91,6 +91,9 @@
   const video = document.getElementById('logoVideo');
   if (!touchScreen || !video) return;
 
+  // 대기화면 보여주는 동안 미리 영상 로드
+  video.load();
+
   function startVideo() {
     touchScreen.style.display = 'none';
     videoWrap.style.cssText = 'display:block; position:absolute; inset:0; background:#000;';
