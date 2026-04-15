@@ -71,17 +71,9 @@ import SecContact    from '../components/SecContact.astro';
     .nav.scrolled .lang-btn.active { color: #0D3A4A; border-color: #0D3A4A; background: rgba(13,58,74,0.08); }
 
 
-      .site-footer-divider { display: none; }
-      .site-footer-inner { gap: 2px 8px; }
-      .site-footer-copy { font-size: 9px; width: 100%; }
-      .site-footer-info { font-size: 9px; }
-    }
-
 
     @media (max-width: 768px) {
-      .nav-pc { display: none !important; }
-      .lang-wrap { display: none !important; }
-      .lang-btn { display: none !important; }
+      .nav { display: none !important; }
       .dots { right: 6px; }
       .dot { width: 5px; height: 5px; }
     }
@@ -91,7 +83,7 @@ import SecContact    from '../components/SecContact.astro';
 <div class="fp" id="fp">
 
   <!-- NAV PC -->
-  <nav class="nav nav-pc" id="nav">
+  <nav class="nav" id="nav">
     <div class="nav-logo">
       <img class="logo-color" src="/images/logo.png" alt="EDS 이담에스티" />
       <img class="logo-white" src="/images/logo.png" alt="EDS 이담에스티" />
