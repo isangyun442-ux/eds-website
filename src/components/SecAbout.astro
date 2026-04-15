@@ -126,11 +126,13 @@
 
   function animate() {
     abScroll.scrollTop = 0;
-    const targets = Array.from(abScroll.querySelectorAll('.ab-fade'));
-    targets.forEach(el => el.classList.remove('visible'));
-    const base = firstVisit ? 100 : 900;
+    const items = Array.from(abScroll.querySelectorAll('.ab-fade'));
+    items.forEach(function(el) { el.classList.remove('visible'); });
+    // 첫 진입: sec 자체 transition(0.85s) 끝난 후 시작
+    // 재진입: sec transition 후 시작
+    const base = firstVisit ? 950 : 950;
     firstVisit = false;
-    targets.forEach(function(el) {
+    items.forEach(function(el) {
       const d = parseFloat(el.style.getPropertyValue('--d') || '0') * 1000;
       setTimeout(function() { el.classList.add('visible'); }, base + d);
     });
@@ -140,8 +142,7 @@
     if (sec2.classList.contains('active')) animate();
   }).observe(sec2, { attributes: true, attributeFilter: ['class'] });
 
-  if (sec2.classList.contains('active')) animate();
-
+  // 스크롤 시 화면 밖 요소 등장
   const obs = new IntersectionObserver(function(entries) {
     entries.forEach(function(e) {
       if (e.isIntersecting) e.target.classList.add('visible');
@@ -222,11 +223,13 @@
   /* ── 순차 등장 애니메이션 ── */
   .ab-fade {
     opacity: 0;
+    visibility: hidden;
     transform: translateY(22px);
-    transition: opacity 0.65s ease var(--d, 0s), transform 0.65s ease var(--d, 0s);
+    transition: opacity 0.65s ease, transform 0.65s ease;
   }
   .ab-fade.visible {
     opacity: 1;
+    visibility: visible;
     transform: translateY(0);
   }
 </style>
