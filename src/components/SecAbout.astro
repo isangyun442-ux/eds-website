@@ -121,26 +121,35 @@
 (function() {
   const abScroll = document.querySelector('#sec2 .ab-scroll');
   if (!abScroll) return;
-
-  // 섹션 진입 시 scrollTop 초기화
   const sec2 = document.getElementById('sec2');
+
+  function resetAndAnimate() {
+    // 스크롤 초기화
+    abScroll.scrollTop = 0;
+    // 모든 fade 요소 초기화
+    const targets = Array.from(abScroll.querySelectorAll('.ab-fade'));
+    targets.forEach(el => el.classList.remove('visible'));
+    // 순차적으로 visible 추가
+    targets.forEach(function(el, i) {
+      const delay = parseFloat(el.style.getPropertyValue('--d') || '0') * 1000;
+      setTimeout(function() { el.classList.add('visible'); }, 300 + delay * 1000 + i * 60);
+    });
+  }
+
+  // sec2 active 클래스 감지
   new MutationObserver(function() {
     if (sec2.classList.contains('active')) {
-      abScroll.scrollTop = 0;
+      resetAndAnimate();
     }
   }).observe(sec2, { attributes: true, attributeFilter: ['class'] });
 
-  // ab-fade 요소 순차 등장
-  const targets = abScroll.querySelectorAll('.ab-fade');
+  // 스크롤 중에도 아래 요소들 등장
   const obs = new IntersectionObserver((entries) => {
     entries.forEach(e => {
-      if (e.isIntersecting) {
-        e.target.classList.add('visible');
-        obs.unobserve(e.target);
-      }
+      if (e.isIntersecting) e.target.classList.add('visible');
     });
-  }, { root: abScroll, threshold: 0.1 });
-  targets.forEach(el => obs.observe(el));
+  }, { root: abScroll, threshold: 0.08 });
+  abScroll.querySelectorAll('.ab-fade').forEach(el => obs.observe(el));
 })();
 </script>
 
