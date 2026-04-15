@@ -398,6 +398,18 @@ const svcTabData = [
   ]
 ];
 
+// sec3 활성화 시 스크롤 맨 위로
+(function() {
+  const sec3 = document.getElementById('sec3');
+  const s3scroll = document.querySelector('#sec3 .s3scroll');
+  if (!sec3 || !s3scroll) return;
+  new MutationObserver(function() {
+    if (sec3.classList.contains('active')) {
+      s3scroll.scrollTop = 0;
+    }
+  }).observe(sec3, { attributes: true, attributeFilter: ['class'] });
+})();
+
 document.querySelectorAll('.svc-tabs').forEach(function(tabGroup) {
   const bi = parseInt(tabGroup.getAttribute('data-block'));
   const descEl = document.getElementById('svc-desc-' + bi);

@@ -78,29 +78,8 @@ import SecContact    from '../components/SecContact.astro';
     }
 
 
-    /* 모바일 전용 nav */
-    .nav-mobile {
-      display: none !important;
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      z-index: 300;
-      height: 50px;
-      padding: 0 16px;
-      align-items: center;
-      justify-content: space-between;
-      background: rgba(255,255,255,0.97);
-      box-shadow: 0 1px 0 rgba(0,0,0,0.07);
-    }
-    .nav-mobile-cta {
-      font-size: 11px; font-weight: 700;
-      padding: 7px 16px;
-      background: #0D3A4A; color: #fff;
-      border: none; cursor: pointer;
-      white-space: nowrap;
-    }
     @media (max-width: 768px) {
       .nav-pc { display: none !important; }
-      .nav-mobile { display: none !important; }
       .dots { right: 6px; }
       .dot { width: 5px; height: 5px; }
     }
@@ -135,13 +114,6 @@ import SecContact    from '../components/SecContact.astro';
     </button>
   </nav>
 
-  <!-- NAV 모바일 전용 -->
-  <nav class="nav-mobile" id="nav-mobile">
-    <div class="nav-logo">
-      <img src="/images/logo.png" alt="EDS 이담에스티" style="height:22px;width:auto;object-fit:contain;" />
-    </div>
-    <button class="nav-mobile-cta" onclick="goTo(7)">도입 문의</button>
-  </nav>
 
   <!-- 섹션들 -->
   <SecHero />
