@@ -38,7 +38,7 @@ import SecContact    from '../components/SecContact.astro';
     .logo-white { position: absolute; top: 0; left: 0; height: 28px; width: auto; object-fit: contain; filter: brightness(0) invert(1); opacity: 1; transition: opacity 0.4s; }
     .nav.scrolled .logo-color { opacity: 1; }
     .nav.scrolled .logo-white { opacity: 0; }
-    .nav-menu { display: flex; gap: 32px; }
+    .nav-menu { display: flex; gap: 32px; flex-wrap: nowrap; overflow: hidden; }
     .nav-menu a { font-size: 13px; font-weight: 500; text-decoration: none; transition: color 0.3s; }
     .nav.scrolled .nav-menu a { color: #444; }
     .nav:not(.scrolled) .nav-menu a { color: rgba(255,255,255,0.85); }
@@ -78,9 +78,9 @@ import SecContact    from '../components/SecContact.astro';
     }
 
     @media (max-width: 768px) {
-      .nav { padding: 10px 16px; }
+      .nav { padding: 10px 16px; height: 52px; }
       .nav.scrolled { padding: 10px 16px; }
-      .nav-menu { display: none; }
+      .nav-menu { display: none !important; }
       .nav-hamburger { display: flex; }
       .nav-logo { width: 90px; }
       .logo-color, .logo-white { height: 20px; }
