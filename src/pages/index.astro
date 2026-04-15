@@ -31,7 +31,7 @@ import SecContact    from '../components/SecContact.astro';
     .sec.exit-up { opacity: 0; transform: translateY(-24px); }
 
     /* NAV */
-    .nav { position: absolute; top: 0; left: 0; right: 0; z-index: 300; display: flex; align-items: center; justify-content: space-between; padding: 22px 52px; transition: background 0.5s, box-shadow 0.5s, padding 0.4s; }
+    .nav { position: absolute; top: 0; left: 0; right: 0; z-index: 300; display: flex; align-items: center; justify-content: space-between; flex-wrap: nowrap; overflow: hidden; padding: 22px 52px; transition: background 0.5s, box-shadow 0.5s, padding 0.4s; }
     .nav.scrolled { background: rgba(255,255,255,0.97); box-shadow: 0 1px 0 rgba(0,0,0,0.07); padding: 14px 52px; }
     .nav-logo { height: 28px; position: relative; width: 140px; }
     .logo-color { position: absolute; top: 0; left: 0; height: 28px; width: auto; object-fit: contain; opacity: 0; transition: opacity 0.4s; }
@@ -100,7 +100,7 @@ import SecContact    from '../components/SecContact.astro';
       <img class="logo-color" src="/images/logo.png" alt="EDS 이담에스티" />
       <img class="logo-white" src="/images/logo.png" alt="EDS 이담에스티" />
     </div>
-    <div class="nav-menu">
+    <div class="nav-menu" style="flex-wrap:nowrap;overflow:hidden;">
       <a href="#" data-i18n="nav.about"     onclick="goTo(2);return false;">회사소개</a>
       <a href="#" data-i18n="nav.services"  onclick="goTo(3);return false;">서비스</a>
       <a href="#" data-i18n="nav.portfolio" onclick="goTo(4);return false;">구축사례</a>
