@@ -31,7 +31,7 @@ import SecContact    from '../components/SecContact.astro';
     .sec.exit-up { opacity: 0; transform: translateY(-24px); }
 
     /* NAV */
-    .nav { position: absolute; top: 0; left: 0; right: 0; z-index: 300; display: flex; align-items: center; justify-content: space-between; flex-wrap: nowrap; overflow: hidden; padding: 22px 52px; transition: background 0.5s, box-shadow 0.5s, padding 0.4s; }
+    .nav { position: absolute; top: 0; left: 0; right: 0; z-index: 300; display: flex; align-items: center; justify-content: space-between; padding: 22px 52px; transition: background 0.5s, box-shadow 0.5s, padding 0.4s; }
     .nav.scrolled { background: rgba(255,255,255,0.97); box-shadow: 0 1px 0 rgba(0,0,0,0.07); padding: 14px 52px; }
     .nav-logo { height: 28px; position: relative; width: 140px; }
     .logo-color { position: absolute; top: 0; left: 0; height: 28px; width: auto; object-fit: contain; opacity: 0; transition: opacity 0.4s; }
@@ -78,14 +78,25 @@ import SecContact    from '../components/SecContact.astro';
     }
 
     @media (max-width: 768px) {
-      .nav { padding: 0 16px; height: 50px; display: flex; align-items: center; justify-content: space-between; }
-      .nav.scrolled { padding: 0 16px; }
-      .nav-menu { display: none !important; }
+      .nav {
+        padding: 0 16px !important;
+        height: 50px !important;
+        min-height: 50px !important;
+        max-height: 50px !important;
+        display: flex !important;
+        flex-direction: row !important;
+        align-items: center !important;
+        justify-content: space-between !important;
+        flex-wrap: nowrap !important;
+        overflow: hidden !important;
+      }
+      .nav.scrolled { padding: 0 16px !important; }
+      .nav-menu { display: none !important; width: 0 !important; height: 0 !important; overflow: hidden !important; }
       .nav-hamburger { display: none !important; }
       .lang-wrap { display: none !important; }
-      .nav-logo { width: 100px; height: 50px; display: flex; align-items: center; }
-      .logo-color, .logo-white { height: 20px; }
-      .nav-cta { font-size: 11px; font-weight: 700; padding: 7px 16px; white-space: nowrap; }
+      .nav-logo { width: 110px !important; flex-shrink: 0; }
+      .logo-color, .logo-white { height: 20px !important; }
+      .nav-cta { font-size: 11px !important; padding: 7px 14px !important; white-space: nowrap !important; flex-shrink: 0; }
       .dots { right: 6px; }
       .dot { width: 5px; height: 5px; }
     }
@@ -100,7 +111,7 @@ import SecContact    from '../components/SecContact.astro';
       <img class="logo-color" src="/images/logo.png" alt="EDS 이담에스티" />
       <img class="logo-white" src="/images/logo.png" alt="EDS 이담에스티" />
     </div>
-    <div class="nav-menu" style="flex-wrap:nowrap;overflow:hidden;">
+    <div class="nav-menu">
       <a href="#" data-i18n="nav.about"     onclick="goTo(2);return false;">회사소개</a>
       <a href="#" data-i18n="nav.services"  onclick="goTo(3);return false;">서비스</a>
       <a href="#" data-i18n="nav.portfolio" onclick="goTo(4);return false;">구축사례</a>
