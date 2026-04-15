@@ -130,7 +130,7 @@
     items.forEach(function(el) { el.classList.remove('visible'); });
     // 첫 진입: sec 자체 transition(0.85s) 끝난 후 시작
     // 재진입: sec transition 후 시작
-    const base = firstVisit ? 400 : 950;
+    const base = firstVisit ? 1200 : 950;
     firstVisit = false;
     items.forEach(function(el) {
       const d = parseFloat(el.style.getPropertyValue('--d') || '0') * 1000;
@@ -141,6 +141,11 @@
   new MutationObserver(function() {
     if (sec2.classList.contains('active')) animate();
   }).observe(sec2, { attributes: true, attributeFilter: ['class'] });
+
+  // 페이지 로드 시 이미 active면 바로 실행
+  if (sec2.classList.contains('active')) {
+    setTimeout(animate, 100);
+  }
 
   // 스크롤 시 화면 밖 요소 등장
   const obs = new IntersectionObserver(function(entries) {
