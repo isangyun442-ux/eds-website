@@ -186,9 +186,11 @@ import SecContact    from '../components/SecContact.astro';
     nav.classList.toggle('scrolled', !isDark);
     dotsEl.classList.toggle('dark', isDark);
     if (sh) sh.classList.toggle('hide', cur > 0);
-    // 섹션 이동 시 스크롤 위치 초기화
+    // 섹션 이동 시 스크롤 위치 초기화 (이전 + 현재 섹션 모두)
     const prevScroll = getScrollEl(cur === 0 ? N - 1 : cur - 1);
     if (prevScroll) prevScroll.scrollTop = 0;
+    const curScroll = getScrollEl(cur);
+    if (curScroll) curScroll.scrollTop = 0;
     // 전환 후 쿨다운 — 스크롤 섹션에서 나올 때 더 길게
     const cooldown = [2, 5, 6].includes(n) || [2, 5, 6].includes(cur) ? 1600 : 1200;
     setTimeout(() => { busy = false; }, cooldown);
