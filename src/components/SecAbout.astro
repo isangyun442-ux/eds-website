@@ -3,6 +3,15 @@
 ---
 <section class="sec s2" id="sec2">
   <div class="ab-scroll">
+
+    <!-- 모바일 전용 언어 버튼 -->
+    <div class="ab-lang-bar">
+      <button class="ab-lang-btn" data-lang="ko" onclick="__applyLang('ko')">KO</button>
+      <button class="ab-lang-btn" data-lang="en" onclick="__applyLang('en')">EN</button>
+      <button class="ab-lang-btn" data-lang="zh" onclick="__applyLang('zh')">ZH</button>
+      <button class="ab-lang-btn" data-lang="ja" onclick="__applyLang('ja')">JA</button>
+    </div>
+
     <div class="ab-wrap">
 
       <!-- ① 1만 시간의 법칙 — 이미지 왼쪽 / 텍스트 오른쪽 -->
@@ -237,4 +246,43 @@
     visibility: visible;
     transform: translateY(0);
   }
+  /* ── 모바일 언어 버튼 ── */
+  .ab-lang-bar { display: none; }
+  @media (max-width: 768px) {
+    .ab-lang-bar {
+      display: flex;
+      gap: 6px;
+      padding: 12px 24px;
+      justify-content: flex-end;
+      border-bottom: 1px solid #f0f0f0;
+    }
+    .ab-lang-btn {
+      font-size: 11px; font-weight: 700;
+      padding: 5px 10px;
+      background: transparent;
+      border: 1px solid #ddd;
+      color: #aaa; cursor: pointer;
+      letter-spacing: 0.06em;
+      font-family: inherit;
+      transition: all 0.2s;
+    }
+    .ab-lang-btn:hover { border-color: #0D3A4A; color: #0D3A4A; }
+    .ab-lang-btn.active { border-color: #0D3A4A; color: #0D3A4A; background: rgba(13,58,74,0.08); }
+  }
 </style>
+
+
+<script is:inline>
+(function() {
+  // 현재 언어에 맞게 버튼 활성화
+  const btns = document.querySelectorAll('.ab-lang-btn');
+  const curLang = localStorage.getItem('eds-lang') || 'ko';
+  btns.forEach(function(btn) {
+    btn.classList.toggle('active', btn.getAttribute('data-lang') === curLang);
+    btn.addEventListener('click', function() {
+      btns.forEach(function(b) { b.classList.remove('active'); });
+      btn.classList.add('active');
+    });
+  });
+})();
+</script>
