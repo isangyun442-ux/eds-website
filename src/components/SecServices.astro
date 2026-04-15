@@ -6,11 +6,6 @@
   <!-- 내부 스크롤 컨테이너 — index.astro의 SCROLLABLE_SECS에서 감지 -->
   <div class="s3scroll">
 
-    <div class="s3-header">
-      <span class="sec-tag" data-i18n="svc.eyebrow">Services</span>
-      <h2 class="sec-title" data-i18n="svc.title">서비스</h2>
-    </div>
-
     <!-- ── 블록 1: 방송 SI ── -->
     <div class="svc-block">
       <div class="svc-hero" style="background-image:url('/images/KTV_BS_01.jpg')">
@@ -174,32 +169,6 @@
   .s3scroll::-webkit-scrollbar-track { background: transparent; }
   .s3scroll::-webkit-scrollbar-thumb { background: #D0D0D0; border-radius: 2px; }
 
-  /* ── Header ── */
-  .s3-header {
-    padding: 32px 56px 24px;
-    background: #F8F8F6;
-    position: sticky;
-    top: 0;
-    z-index: 10;
-    border-bottom: 1px solid #EEEEEE;
-  }
-  .sec-tag {
-    font-size: 10px;
-    font-weight: 600;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-    color: #00B8D9;
-    display: block;
-    margin-bottom: 6px;
-  }
-  .sec-title {
-    font-size: clamp(24px, 3vw, 38px);
-    font-weight: 800;
-    letter-spacing: -0.04em;
-    color: #0A0A0A;
-    line-height: 1;
-  }
-
   /* ── 서비스 블록 ── */
   .svc-block { display: block; }
 
@@ -287,7 +256,6 @@
 
   /* ── 반응형 ── */
   @media (max-width: 768px) {
-    .s3-header { padding: 40px 24px 24px; }
     .svc-hero { height: 260px; }
     .svc-tab { padding: 13px 18px; font-size: 12px; }
     .svc-desc-bar { padding: 18px 24px; }
