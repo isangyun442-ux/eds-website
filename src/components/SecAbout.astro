@@ -124,15 +124,12 @@
   const sec2 = document.getElementById('sec2');
 
   function resetAndAnimate() {
-    // 스크롤 초기화
     abScroll.scrollTop = 0;
-    // 모든 fade 요소 초기화
     const targets = Array.from(abScroll.querySelectorAll('.ab-fade'));
     targets.forEach(el => el.classList.remove('visible'));
-    // 순차적으로 visible 추가
-    targets.forEach(function(el, i) {
+    targets.forEach(function(el) {
       const delay = parseFloat(el.style.getPropertyValue('--d') || '0') * 1000;
-      setTimeout(function() { el.classList.add('visible'); }, 300 + delay * 1000 + i * 60);
+      setTimeout(function() { el.classList.add('visible'); }, 200 + delay);
     });
   }
 
