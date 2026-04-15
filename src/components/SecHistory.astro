@@ -226,6 +226,16 @@ const history = [
   (function() {
     const histScroll = document.querySelector('#sec5 .hist-scroll');
     if (!histScroll) return;
+
+    // sec5 활성화될 때 스크롤 맨 위로 초기화
+    const sec5 = document.getElementById('sec5');
+    const secObs = new MutationObserver(function() {
+      if (sec5.classList.contains('active')) {
+        histScroll.scrollTop = 0;
+      }
+    });
+    secObs.observe(sec5, { attributes: true, attributeFilter: ['class'] });
+
     const targets = histScroll.querySelectorAll('.tl-row, .h-header');
     const obs = new IntersectionObserver((entries) => {
       entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
