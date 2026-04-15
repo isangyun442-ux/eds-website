@@ -150,6 +150,10 @@
       </div>
     </footer>
   </div><!-- /s3scroll -->
+  <div class="scroll-hint-s3">
+    <div class="sh-mouse"><div class="sh-wheel"></div></div>
+    <span class="sh-text">scroll</span>
+  </div>
 </section>
 
 <style>
@@ -172,7 +176,7 @@
 
   /* ── Header ── */
   .s3-header {
-    padding: 56px 56px 36px;
+    padding: 32px 56px 24px;
     background: #F8F8F6;
     position: sticky;
     top: 0;
@@ -347,6 +351,42 @@
     .eds-footer-bottom { gap: 3px 8px; }
     .eds-footer-info, .eds-footer-mail { font-size: 10px; }
     .eds-footer-copy { font-size: 9px; }
+  }
+  /* ── 스크롤 힌트 ── */
+  .scroll-hint-s3 {
+    position: fixed;
+    bottom: 22px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 20;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    pointer-events: none;
+  }
+  .scroll-hint-s3 .sh-mouse {
+    width: 20px; height: 30px;
+    border: 1.5px solid rgba(255,255,255,0.35);
+    border-radius: 10px;
+    display: flex; align-items: flex-start;
+    justify-content: center; padding-top: 4px;
+  }
+  .scroll-hint-s3 .sh-wheel {
+    width: 2px; height: 5px;
+    background: rgba(255,255,255,0.4);
+    border-radius: 1px;
+    animation: shw-s3 1.8s ease infinite;
+  }
+  @keyframes shw-s3 {
+    0%  { opacity:1; transform:translateY(0); }
+    100%{ opacity:0; transform:translateY(9px); }
+  }
+  .scroll-hint-s3 .sh-text {
+    font-size: 9px;
+    color: rgba(255,255,255,0.35);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
   }
 </style>
 
