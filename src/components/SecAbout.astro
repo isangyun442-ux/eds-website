@@ -121,38 +121,56 @@
       </div>
     </div>
 
-    <!-- 구축 사례 이미지 그리드 -->
-    <div class="ab-cases-wrap">
-      <div class="ab-cases-left fade-up">
+    <!-- 구축 사례 — 오코랩스 포스터 스타일 -->
+    <div class="ab-cases-wrap fade-up">
+      <div class="ab-cases-left">
         <span class="ab-point">구축 사례</span>
-        <h3 class="ab-cases-title">이담에스티가<br>만들어온 공간들</h3>
+        <h3 class="ab-cases-title">이담에스티는<br>이런 공간을<br>만들어갑니다</h3>
         <p class="ab-cases-sub">91개 공공기관, 115개 교육기관을 포함한<br><strong>516개 이상</strong>의 고객사와 함께했습니다.</p>
         <a href="#sec4" class="ab-cases-btn" onclick="event.preventDefault();document.getElementById('sec4').scrollIntoView({behavior:'smooth'})">전체 구축사례 보기 →</a>
       </div>
       <div class="ab-cases-grid">
-        <div class="ab-case-img fade-up fade-up-d1" style="background-image:url('/images/HUFS_ST_04.jpg')">
-          <div class="ab-case-ov"></div>
-          <span class="ab-case-label">한국외국어대학교</span>
+        <div class="ab-poster fade-up fade-up-d1">
+          <div class="ab-poster-img" style="background-image:url('/images/HUFS_ST_04.jpg')"></div>
+          <div class="ab-poster-body">
+            <span class="ab-poster-tag">EDS 이담에스티</span>
+            <h4 class="ab-poster-title">한국외국어대학교<br><em>스튜디오 첨단화</em></h4>
+          </div>
         </div>
-        <div class="ab-case-img fade-up fade-up-d2" style="background-image:url('/images/SC_ST_09.jpg')">
-          <div class="ab-case-ov"></div>
-          <span class="ab-case-label">서울사이버대학교</span>
+        <div class="ab-poster fade-up fade-up-d2">
+          <div class="ab-poster-img" style="background-image:url('/images/SC_ST_09.jpg')"></div>
+          <div class="ab-poster-body">
+            <span class="ab-poster-tag">EDS 이담에스티</span>
+            <h4 class="ab-poster-title">서울사이버대학교<br><em>스마트 강의실</em></h4>
+          </div>
         </div>
-        <div class="ab-case-img fade-up fade-up-d3" style="background-image:url('/images/KTV_BS_01.jpg')">
-          <div class="ab-case-ov"></div>
-          <span class="ab-case-label">KTV 방송 인프라</span>
+        <div class="ab-poster fade-up fade-up-d3">
+          <div class="ab-poster-img" style="background-image:url('/images/KTV_BS_01.jpg')"></div>
+          <div class="ab-poster-body">
+            <span class="ab-poster-tag">EDS 이담에스티</span>
+            <h4 class="ab-poster-title">KTV<br><em>방송 인프라 시스템</em></h4>
+          </div>
         </div>
-        <div class="ab-case-img fade-up fade-up-d4" style="background-image:url('/images/GKDE_S_08.jpg')">
-          <div class="ab-case-ov"></div>
-          <span class="ab-case-label">경기도교육청</span>
+        <div class="ab-poster fade-up fade-up-d1">
+          <div class="ab-poster-img" style="background-image:url('/images/GKDE_S_08.jpg')"></div>
+          <div class="ab-poster-body">
+            <span class="ab-poster-tag">EDS 이담에스티</span>
+            <h4 class="ab-poster-title">경기도교육청<br><em>UHD 방송제작</em></h4>
+          </div>
         </div>
-        <div class="ab-case-img fade-up fade-up-d2" style="background-image:url('/images/GMC_S_01.jpg')">
-          <div class="ab-case-ov"></div>
-          <span class="ab-case-label">공주대학교</span>
+        <div class="ab-poster fade-up fade-up-d2">
+          <div class="ab-poster-img" style="background-image:url('/images/GMC_S_01.jpg')"></div>
+          <div class="ab-poster-body">
+            <span class="ab-poster-tag">EDS 이담에스티</span>
+            <h4 class="ab-poster-title">공주대학교<br><em>이러닝 스튜디오</em></h4>
+          </div>
         </div>
-        <div class="ab-case-img fade-up fade-up-d3" style="background-image:url('/images/MG_DAS_02.jpg')">
-          <div class="ab-case-ov"></div>
-          <span class="ab-case-label">아카이브 시스템</span>
+        <div class="ab-poster fade-up fade-up-d3">
+          <div class="ab-poster-img" style="background-image:url('/images/MG_DAS_02.jpg')"></div>
+          <div class="ab-poster-body">
+            <span class="ab-poster-tag">EDS 이담에스티</span>
+            <h4 class="ab-poster-title">미디어<br><em>아카이브 시스템</em></h4>
+          </div>
         </div>
       </div>
     </div>
@@ -280,49 +298,69 @@
   }
   .ab-str-desc { font-size: 14px; color: #666; line-height: 1.85; }
 
-  /* 구축 사례 이미지 */
+  /* 구축 사례 — 포스터 스타일 */
   .ab-cases-wrap {
-    display: grid; grid-template-columns: 320px 1fr;
-    gap: 0; max-width: 1400px; margin: 0 auto;
-    background: #0a0a0a;
+    display: grid; grid-template-columns: 340px 1fr;
+    background: #3d4f3a; border-radius: 16px;
+    overflow: hidden; margin: 0 48px;
   }
   .ab-cases-left {
-    padding: 60px 48px; display: flex; flex-direction: column;
-    justify-content: center; gap: 16px;
+    padding: 64px 48px; display: flex; flex-direction: column;
+    justify-content: center; gap: 18px;
   }
-  .ab-cases-left .ab-point { color: rgba(255,255,255,0.4); }
+  .ab-cases-left .ab-point { color: rgba(255,255,255,0.5); }
   .ab-cases-title {
-    font-size: clamp(22px, 2vw, 32px); font-weight: 800;
+    font-size: clamp(26px, 2.2vw, 38px); font-weight: 800;
     color: #fff; letter-spacing: -0.03em; line-height: 1.3;
   }
-  .ab-cases-sub { font-size: 13px; color: rgba(255,255,255,0.45); line-height: 1.8; }
-  .ab-cases-sub strong { color: #00B8D9; }
+  .ab-cases-sub { font-size: 13px; color: rgba(255,255,255,0.5); line-height: 1.9; }
+  .ab-cases-sub strong { color: #7dc97a; }
   .ab-cases-btn {
     display: inline-flex; align-items: center;
-    font-size: 12px; font-weight: 700; color: #fff;
-    text-decoration: none; letter-spacing: 0.08em;
-    padding: 12px 24px; border: 1px solid rgba(255,255,255,0.25);
+    font-size: 13px; font-weight: 700; color: #fff;
+    text-decoration: none; letter-spacing: 0.04em;
+    padding: 13px 28px; background: #5a8c56;
     margin-top: 8px; transition: all 0.2s; width: fit-content;
+    border-radius: 4px;
   }
-  .ab-cases-btn:hover { background: #00B8D9; border-color: #00B8D9; }
+  .ab-cases-btn:hover { background: #4a7a46; transform: translateY(-1px); }
 
+  /* 포스터 그리드 */
   .ab-cases-grid {
     display: grid; grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: repeat(2, 200px); gap: 2px; background: #333;
+    grid-template-rows: repeat(2, 1fr); gap: 3px;
+    background: #2a3a27; padding: 3px;
   }
-  .ab-case-img {
-    background-size: cover; background-position: center;
+  .ab-poster {
     position: relative; overflow: hidden; cursor: pointer;
+    aspect-ratio: 1 / 1;
   }
-  .ab-case-img:hover .ab-case-ov { opacity: 0.4; }
-  .ab-case-ov {
+  .ab-poster:hover .ab-poster-img { transform: scale(1.05); }
+  .ab-poster-img {
     position: absolute; inset: 0;
-    background: rgba(0,0,0,0.45); transition: opacity 0.3s;
+    background-size: cover; background-position: center;
+    transition: transform 0.5s cubic-bezier(0.16,1,0.3,1);
   }
-  .ab-case-label {
-    position: absolute; bottom: 14px; left: 16px;
-    font-size: 11px; font-weight: 700; color: #fff;
-    letter-spacing: 0.04em; z-index: 2;
+  .ab-poster-img::after {
+    content: '';
+    position: absolute; inset: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.2) 50%, transparent 100%);
+  }
+  .ab-poster-body {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    padding: 16px 18px; z-index: 2;
+  }
+  .ab-poster-tag {
+    display: block; font-size: 9px; font-weight: 700;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    color: #7dc97a; margin-bottom: 6px;
+  }
+  .ab-poster-title {
+    font-size: clamp(13px, 1.2vw, 16px); font-weight: 800;
+    color: #fff; line-height: 1.3; letter-spacing: -0.01em;
+  }
+  .ab-poster-title em {
+    font-style: normal; color: #7dc97a;
   }
 
   /* 마무리 메시지 */
@@ -340,9 +378,9 @@
   /* ── 반응형 ── */
   @media (max-width: 1024px) {
     .ab-strength-grid { grid-template-columns: repeat(2, 1fr); }
-    .ab-cases-wrap { grid-template-columns: 1fr; }
-    .ab-cases-left { padding: 48px 32px; }
-    .ab-cases-grid { grid-template-columns: repeat(3, 1fr); grid-template-rows: repeat(2, 160px); }
+    .ab-cases-wrap { grid-template-columns: 1fr; margin: 0 24px; }
+    .ab-cases-left { padding: 48px 36px; }
+    .ab-cases-grid { grid-template-columns: repeat(3, 1fr); }
   }
   @media (max-width: 768px) {
     .ab-block { padding: 0 24px; }
@@ -353,12 +391,13 @@
     .ab-worry-header { padding: 72px 24px 48px; }
     .ab-strength-grid { grid-template-columns: 1fr 1fr; }
     .ab-str-card { padding: 28px 20px; }
-    .ab-cases-grid { grid-template-columns: repeat(2, 1fr); grid-template-rows: repeat(3, 140px); }
+    .ab-cases-wrap { margin: 0; border-radius: 0; }
+    .ab-cases-grid { grid-template-columns: repeat(2, 1fr); }
     .ab-message { padding: 28px 24px; }
   }
   @media (max-width: 480px) {
     .ab-strength-grid { grid-template-columns: 1fr; }
-    .ab-cases-grid { grid-template-columns: repeat(2, 1fr); grid-template-rows: repeat(3, 120px); }
+    .ab-cases-grid { grid-template-columns: repeat(2, 1fr); }
   }
 
   /* 모바일 언어 버튼 */
