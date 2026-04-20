@@ -270,5 +270,207 @@ import SecContact    from '../components/SecContact.astro';
   }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
   document.querySelectorAll('.fade-up').forEach(function(el) { fadeObs.observe(el); });
 </script>
+
+<!-- ── 플로팅 문의 버튼 + 팝업 ── -->
+<div class="float-btn" id="floatBtn" onclick="document.getElementById('inquiryModal').classList.add('open')">
+  <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+    <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>
+  <span>문의하기</span>
+</div>
+
+<!-- 팝업 모달 -->
+<div class="inq-modal" id="inquiryModal">
+  <div class="inq-overlay" onclick="document.getElementById('inquiryModal').classList.remove('open')"></div>
+  <div class="inq-box">
+    <div class="inq-head">
+      <div>
+        <div class="inq-title">도입 문의</div>
+        <div class="inq-sub">전문 상담팀이 빠르게 답변드립니다</div>
+      </div>
+      <button class="inq-close" onclick="document.getElementById('inquiryModal').classList.remove('open')">✕</button>
+    </div>
+
+    <div class="inq-body">
+      <div class="inq-field">
+        <label class="inq-label">회사명 <span class="req">*</span></label>
+        <input class="inq-input" type="text" placeholder="회사명을 입력해주세요" />
+      </div>
+      <div class="inq-field">
+        <label class="inq-label">담당자 이름 <span class="req">*</span></label>
+        <input class="inq-input" type="text" placeholder="홍길동" />
+      </div>
+      <div class="inq-field">
+        <label class="inq-label">연락처 <span class="req">*</span></label>
+        <div class="inq-tel">
+          <input class="inq-input" type="tel" placeholder="010" maxlength="4"/>
+          <span>-</span>
+          <input class="inq-input" type="tel" placeholder="0000" maxlength="4"/>
+          <span>-</span>
+          <input class="inq-input" type="tel" placeholder="0000" maxlength="4"/>
+        </div>
+      </div>
+      <div class="inq-field">
+        <label class="inq-label">이메일</label>
+        <input class="inq-input" type="email" placeholder="example@company.com" />
+      </div>
+      <div class="inq-field">
+        <label class="inq-label">상담 분야 <span class="req">*</span></label>
+        <div class="inq-checks">
+          <label class="inq-check"><input type="checkbox" /><span>방송 SI</span></label>
+          <label class="inq-check"><input type="checkbox" /><span>스튜디오 구축</span></label>
+          <label class="inq-check"><input type="checkbox" /><span>LED 디스플레이</span></label>
+          <label class="inq-check"><input type="checkbox" /><span>스마트 강의실</span></label>
+          <label class="inq-check"><input type="checkbox" /><span>아카이브 시스템</span></label>
+          <label class="inq-check"><input type="checkbox" /><span>화상회의 시스템</span></label>
+          <label class="inq-check"><input type="checkbox" /><span>유지보수</span></label>
+          <label class="inq-check"><input type="checkbox" /><span>기타</span></label>
+        </div>
+      </div>
+      <div class="inq-field">
+        <label class="inq-label">문의 내용</label>
+        <textarea class="inq-input inq-textarea" placeholder="문의하실 내용을 자유롭게 입력해주세요"></textarea>
+      </div>
+    </div>
+
+    <div class="inq-foot">
+      <button class="inq-submit">문의 보내기 →</button>
+      <p class="inq-privacy">평일 09:00 – 18:00 운영 · Tel. 02-857-7744</p>
+    </div>
+  </div>
+</div>
+
+<style>
+  /* 플로팅 버튼 */
+  .float-btn {
+    position: fixed; bottom: 32px; right: 32px;
+    z-index: 400;
+    display: flex; align-items: center; gap: 8px;
+    background: #0D3A4A; color: #fff;
+    padding: 14px 22px; border-radius: 50px;
+    cursor: pointer; font-size: 14px; font-weight: 700;
+    box-shadow: 0 4px 24px rgba(13,58,74,0.35);
+    transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+    letter-spacing: 0.02em;
+  }
+  .float-btn:hover {
+    background: #00B8D9;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 32px rgba(0,184,217,0.4);
+  }
+
+  /* 오버레이 */
+  .inq-modal {
+    position: fixed; inset: 0; z-index: 500;
+    display: flex; align-items: flex-end; justify-content: flex-end;
+    padding: 0 32px 100px;
+    pointer-events: none; opacity: 0;
+    transition: opacity 0.25s;
+  }
+  .inq-modal.open { pointer-events: all; opacity: 1; }
+  .inq-overlay {
+    position: absolute; inset: 0;
+    background: rgba(0,0,0,0.4);
+    backdrop-filter: blur(4px);
+  }
+  .inq-box {
+    position: relative; z-index: 1;
+    background: #fff; border-radius: 16px;
+    width: 440px; max-height: 80vh;
+    display: flex; flex-direction: column;
+    box-shadow: 0 24px 80px rgba(0,0,0,0.2);
+    transform: translateY(20px);
+    transition: transform 0.3s cubic-bezier(0.16,1,0.3,1);
+    overflow: hidden;
+  }
+  .inq-modal.open .inq-box { transform: translateY(0); }
+
+  /* 헤더 */
+  .inq-head {
+    display: flex; align-items: flex-start; justify-content: space-between;
+    padding: 24px 28px 20px;
+    border-bottom: 1px solid #f0f0f0;
+    flex-shrink: 0;
+  }
+  .inq-title { font-size: 20px; font-weight: 800; color: #0a0a0a; letter-spacing: -0.03em; margin-bottom: 4px; }
+  .inq-sub { font-size: 12px; color: #999; }
+  .inq-close {
+    background: none; border: none; cursor: pointer;
+    font-size: 16px; color: #aaa; padding: 4px; line-height: 1;
+    transition: color 0.2s;
+  }
+  .inq-close:hover { color: #0a0a0a; }
+
+  /* 바디 스크롤 */
+  .inq-body {
+    overflow-y: auto; padding: 20px 28px;
+    display: flex; flex-direction: column; gap: 18px;
+    flex: 1; min-height: 0;
+  }
+  .inq-body::-webkit-scrollbar { width: 4px; }
+  .inq-body::-webkit-scrollbar-thumb { background: #e0e0e0; border-radius: 2px; }
+
+  /* 필드 */
+  .inq-field { display: flex; flex-direction: column; gap: 7px; }
+  .inq-label { font-size: 12px; font-weight: 700; color: #333; letter-spacing: 0.02em; }
+  .req { color: #e53e3e; }
+  .inq-input {
+    width: 100%; padding: 10px 14px;
+    border: 1px solid #e0e0e0; border-radius: 8px;
+    font-size: 14px; color: #0a0a0a; font-family: inherit;
+    outline: none; transition: border-color 0.2s;
+    background: #fafafa;
+  }
+  .inq-input:focus { border-color: #00B8D9; background: #fff; }
+  .inq-input::placeholder { color: #bbb; }
+
+  /* 전화번호 */
+  .inq-tel { display: flex; align-items: center; gap: 6px; }
+  .inq-tel span { color: #aaa; font-weight: 500; }
+  .inq-tel .inq-input { text-align: center; }
+
+  /* 텍스트에리어 */
+  .inq-textarea { resize: none; height: 90px; }
+
+  /* 체크박스 */
+  .inq-checks { display: flex; flex-wrap: wrap; gap: 8px; }
+  .inq-check {
+    display: flex; align-items: center; gap: 6px;
+    font-size: 13px; color: #555; cursor: pointer;
+    padding: 7px 14px;
+    border: 1px solid #e0e0e0; border-radius: 20px;
+    transition: all 0.15s;
+  }
+  .inq-check:hover { border-color: #00B8D9; color: #00B8D9; }
+  .inq-check input { display: none; }
+  .inq-check input:checked + span { color: #0D3A4A; font-weight: 700; }
+  .inq-check:has(input:checked) { border-color: #0D3A4A; background: rgba(13,58,74,0.05); }
+
+  /* 푸터 */
+  .inq-foot {
+    padding: 16px 28px 24px;
+    border-top: 1px solid #f0f0f0;
+    flex-shrink: 0;
+  }
+  .inq-submit {
+    width: 100%; padding: 14px;
+    background: #0D3A4A; color: #fff;
+    border: none; border-radius: 8px;
+    font-size: 14px; font-weight: 700;
+    cursor: pointer; letter-spacing: 0.06em;
+    font-family: inherit;
+    transition: background 0.2s;
+    margin-bottom: 10px;
+  }
+  .inq-submit:hover { background: #00B8D9; }
+  .inq-privacy { font-size: 11px; color: #bbb; text-align: center; }
+
+  @media (max-width: 480px) {
+    .float-btn span { display: none; }
+    .float-btn { padding: 14px; border-radius: 50%; }
+    .inq-modal { padding: 0 0 90px; align-items: flex-end; justify-content: center; }
+    .inq-box { width: 100%; border-radius: 16px 16px 0 0; max-height: 90vh; }
+  }
+</style>
 </body>
 </html>
