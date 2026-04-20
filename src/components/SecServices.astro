@@ -144,9 +144,7 @@
         <a class="eds-footer-mail" href="mailto:pub@edamst.com">pub@edamst.com</a>
       </div>
     </footer>
-  </div><!-- /s3scroll -->
-  <div class="scroll-hint-s3">
-    <div class="sh-mouse"><div class="sh-wheel"></div></div>
+  </div><!-- /s3scroll --></div>
     <span class="sh-text">scroll</span>
   </div>
 </section>
@@ -155,19 +153,8 @@
   /* ── Section ── */
   .s3 { background: #F8F8F6; }
 
-  /* ── 내부 스크롤 컨테이너 ── */
-  .s3scroll {
-    position: absolute;
-    inset: 0;
-    overflow-y: auto;
-    overflow-x: hidden;
-    scrollbar-width: thin;
-    scrollbar-color: #D0D0D0 transparent;
-    -webkit-overflow-scrolling: touch;
-  }
-  .s3scroll::-webkit-scrollbar { width: 4px; }
-  .s3scroll::-webkit-scrollbar-track { background: transparent; }
-  .s3scroll::-webkit-scrollbar-thumb { background: #D0D0D0; border-radius: 2px; }
+  /* ── 내부 컨테이너 ── */
+  .s3scroll { width: 100%; }
 
   /* ── 서비스 블록 ── */
   .svc-block { display: block; }
@@ -320,41 +307,7 @@
     .eds-footer-info, .eds-footer-mail { font-size: 10px; }
     .eds-footer-copy { font-size: 9px; }
   }
-  /* ── 스크롤 힌트 ── */
-  .scroll-hint-s3 {
-    position: fixed;
-    bottom: 22px;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 20;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 6px;
-    pointer-events: none;
-  }
-  .scroll-hint-s3 .sh-mouse {
-    width: 20px; height: 30px;
-    border: 1.5px solid rgba(255,255,255,0.35);
-    border-radius: 10px;
-    display: flex; align-items: flex-start;
-    justify-content: center; padding-top: 4px;
-  }
-  .scroll-hint-s3 .sh-wheel {
-    width: 2px; height: 5px;
-    background: rgba(255,255,255,0.4);
-    border-radius: 1px;
-    animation: shw-s3 1.8s ease infinite;
-  }
-  @keyframes shw-s3 {
-    0%  { opacity:1; transform:translateY(0); }
     100%{ opacity:0; transform:translateY(9px); }
-  }
-  .scroll-hint-s3 .sh-text {
-    font-size: 9px;
-    color: rgba(255,255,255,0.35);
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
   }
 </style>
 
@@ -397,18 +350,6 @@ const svcTabData = [
     '소규모 허들룸부터 대형 회의실까지 다자간 화상회의가 가능한 맞춤형 환경을 구축합니다.'
   ]
 ];
-
-// sec3 활성화 시 스크롤 맨 위로
-(function() {
-  const sec3 = document.getElementById('sec3');
-  const s3scroll = document.querySelector('#sec3 .s3scroll');
-  if (!sec3 || !s3scroll) return;
-  new MutationObserver(function() {
-    if (sec3.classList.contains('active')) {
-      s3scroll.scrollTop = 0;
-    }
-  }).observe(sec3, { attributes: true, attributeFilter: ['class'] });
-})();
 
 document.querySelectorAll('.svc-tabs').forEach(function(tabGroup) {
   const bi = parseInt(tabGroup.getAttribute('data-block'));
