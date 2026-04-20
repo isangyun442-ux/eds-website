@@ -17,7 +17,7 @@
 </section>
 
 <style>
-  .s1 { background: #fff; overflow: hidden; }
+  .s1 { background: #fff; overflow: hidden; height: 100vh; position: relative; }
 
   .logo-touch-screen {
     position: absolute; inset: 0;
@@ -71,11 +71,12 @@
   }
 
   @media (min-width: 769px) {
-    .s1 { background: #000; }
+    .s1 { background: #000; height: 100vh; }
     .logo-touch-screen { display: none !important; }
     .logo-video-wrap { display: block !important; }
   }
   @media (max-width: 768px) {
+    .s1 { height: 100vh; }
     .logo-touch-screen { display: flex; }
     .logo-video-wrap { display: none; }
   }
