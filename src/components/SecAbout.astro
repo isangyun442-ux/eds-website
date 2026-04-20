@@ -238,13 +238,12 @@
     background: #f5f7f9;
     overflow: hidden;
   }
-  /* 배경 이미지 — 어둡고 흐리게 */
+  /* 배경 이미지 — 선명하고 어둡게 */
   .ab-strength-bg {
     position: absolute; inset: 0;
     background-image: url('/images/GD_LED_06.jpg');
     background-size: cover; background-position: center;
-    filter: blur(2px) brightness(0.35);
-    transform: scale(1.05);
+    filter: brightness(0.2);
     z-index: 0;
   }
   /* 자식 요소들 z-index 올리기 */
