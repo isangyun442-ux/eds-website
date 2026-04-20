@@ -180,7 +180,7 @@ import SecContact    from '../components/SecContact.astro';
         <span class="nav-link">회사소개</span>
         <div class="nav-drop">
           <a href="#sec2" class="drop-link" onclick="event.preventDefault();document.getElementById('sec2').scrollIntoView({behavior:'smooth'})">인사말</a>
-          <a href="#sec5" class="drop-link" onclick="event.preventDefault();document.getElementById('sec5').scrollIntoView({behavior:'smooth'})">연혁</a>
+          <a href="#sec6" class="drop-link" onclick="event.preventDefault();document.getElementById('sec6').scrollIntoView({behavior:'smooth'})">연혁</a>
           <a href="#sec2" class="drop-link" onclick="event.preventDefault();document.getElementById('sec2').scrollIntoView({behavior:'smooth'})">인증현황</a>
           <a href="#sec7" class="drop-link" onclick="event.preventDefault();document.getElementById('sec7').scrollIntoView({behavior:'smooth'})">오시는 길</a>
         </div>
@@ -202,10 +202,10 @@ import SecContact    from '../components/SecContact.astro';
       <div class="nav-item has-drop">
         <span class="nav-link">조달청 등록제품</span>
         <div class="nav-drop">
-          <a href="#" class="drop-link">미디어박스</a>
-          <a href="#" class="drop-link">컴퓨터 서버</a>
-          <a href="#" class="drop-link">디스크 어레이</a>
-          <a href="#" class="drop-link">LED 전광판</a>
+          <a href="#sec5" class="drop-link" onclick="event.preventDefault();document.getElementById('sec5').scrollIntoView({behavior:'smooth'})">미디어박스</a>
+          <a href="#sec5" class="drop-link" onclick="event.preventDefault();document.getElementById('sec5').scrollIntoView({behavior:'smooth'})">컴퓨터 서버</a>
+          <a href="#sec5" class="drop-link" onclick="event.preventDefault();document.getElementById('sec5').scrollIntoView({behavior:'smooth'})">디스크 어레이</a>
+          <a href="#sec5" class="drop-link" onclick="event.preventDefault();document.getElementById('sec5').scrollIntoView({behavior:'smooth'})">LED 전광판</a>
         </div>
       </div>
 
@@ -234,8 +234,8 @@ import SecContact    from '../components/SecContact.astro';
   <SecAbout />
   <SecServices />
   <SecPortfolio />
-  <SecHistory />
   <SecClients />
+  <SecHistory />
   <SecContact />
 
 <script is:inline>
