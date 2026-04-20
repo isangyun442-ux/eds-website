@@ -20,19 +20,36 @@ import SecContact    from '../components/SecContact.astro';
   <script is:inline src="/i18n/translations.js"></script>
   <style is:global>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html, body { width: 100%; height: 100%; overflow: hidden; font-family: 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', sans-serif; background: #fff; -webkit-font-smoothing: antialiased; }
+    html, body {
+      width: 100%;
+      font-family: 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', sans-serif;
+      background: #fff;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
 
-    /* 풀페이지 컨테이너 */
-    .fp { position: fixed; inset: 0; overflow: hidden; }
+    /* 공통 섹션 */
+    .sec {
+      width: 100%;
+      position: relative;
+    }
 
-    /* 공통 섹션 — is:global 로 모든 컴포넌트에 적용 */
-    .sec { position: absolute; inset: 0; opacity: 0; transform: translateY(24px); pointer-events: none; transition: opacity 0.85s cubic-bezier(0.4,0,0.2,1), transform 0.85s cubic-bezier(0.4,0,0.2,1); }
-    .sec.active  { opacity: 1; transform: translateY(0); pointer-events: all; }
-    .sec.exit-up { opacity: 0; transform: translateY(-24px); }
-
-    /* NAV */
-    .nav { position: absolute; top: 0; left: 0; right: 0; z-index: 300; display: flex; align-items: center; justify-content: space-between; padding: 22px 52px; transition: background 0.5s, box-shadow 0.5s, padding 0.4s; }
-    .nav.scrolled { background: rgba(255,255,255,0.97); box-shadow: 0 1px 0 rgba(0,0,0,0.07); padding: 14px 52px; }
+    /* NAV — 스크롤 고정 */
+    .nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 300;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 22px 52px;
+      transition: background 0.5s, box-shadow 0.5s, padding 0.4s;
+    }
+    .nav.scrolled {
+      background: rgba(255,255,255,0.97);
+      box-shadow: 0 1px 0 rgba(0,0,0,0.07);
+      padding: 14px 52px;
+    }
     .nav-logo { height: 28px; position: relative; width: 140px; }
     .logo-color { position: absolute; top: 0; left: 0; height: 28px; width: auto; object-fit: contain; opacity: 0; transition: opacity 0.4s; }
     .logo-white { position: absolute; top: 0; left: 0; height: 28px; width: auto; object-fit: contain; filter: brightness(0) invert(1); opacity: 1; transition: opacity 0.4s; }
@@ -45,16 +62,6 @@ import SecContact    from '../components/SecContact.astro';
     .nav-cta { font-size: 12px; font-weight: 700; padding: 9px 22px; border: none; cursor: pointer; letter-spacing: 0.06em; transition: all 0.3s; }
     .nav.scrolled .nav-cta { background: #0D3A4A; color: #fff; }
     .nav:not(.scrolled) .nav-cta { background: rgba(255,255,255,0.13); color: #fff; border: 1px solid rgba(255,255,255,0.25); }
-    .nav-hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; background: none; border: none; }
-    .nav-hamburger span { display: block; width: 22px; height: 2px; background: #fff; transition: background 0.3s; }
-    .nav.scrolled .nav-hamburger span { background: #0D3A4A; }
-
-    /* DOTS */
-    .dots { position: absolute; right: 22px; top: 50%; transform: translateY(-50%); display: flex; flex-direction: column; gap: 8px; z-index: 300; }
-    .dot { width: 6px; height: 6px; border-radius: 50%; background: rgba(0,0,0,0.18); border: none; cursor: pointer; transition: background 0.3s, transform 0.3s; padding: 0; }
-    .dot.active { background: #0D3A4A; transform: scale(1.6); }
-    .dots.dark .dot { background: rgba(255,255,255,0.3); }
-    .dots.dark .dot.active { background: #fff; }
 
     /* 언어 버튼 */
     .lang-wrap { display: flex; gap: 4px; margin-right: 16px; }
@@ -70,31 +77,26 @@ import SecContact    from '../components/SecContact.astro';
     .lang-btn.active { color: #fff; border-color: #00B8D9; background: rgba(0,184,217,0.15); }
     .nav.scrolled .lang-btn.active { color: #0D3A4A; border-color: #0D3A4A; background: rgba(13,58,74,0.08); }
 
-
-
     @media (max-width: 768px) {
       .nav { display: none !important; }
-      .dots { right: 6px; }
-      .dot { width: 5px; height: 5px; }
     }
   </style>
 </head>
 <body>
-<div class="fp" id="fp">
 
-  <!-- NAV PC -->
+  <!-- NAV -->
   <nav class="nav" id="nav">
     <div class="nav-logo">
       <img class="logo-color" src="/images/logo.png" alt="EDS 이담에스티" />
       <img class="logo-white" src="/images/logo.png" alt="EDS 이담에스티" />
     </div>
     <div class="nav-menu">
-      <a href="#" data-i18n="nav.about"     onclick="goTo(2);return false;">회사소개</a>
-      <a href="#" data-i18n="nav.services"  onclick="goTo(3);return false;">서비스</a>
-      <a href="#" data-i18n="nav.portfolio" onclick="goTo(4);return false;">구축사례</a>
-      <a href="#" data-i18n="nav.history"   onclick="goTo(5);return false;">회사연혁</a>
-      <a href="#" data-i18n="nav.clients"   onclick="goTo(6);return false;">파트너스</a>
-      <a href="#" data-i18n="nav.contact"   onclick="goTo(7);return false;">도입 문의</a>
+      <a href="#sec2" data-i18n="nav.about">회사소개</a>
+      <a href="#sec3" data-i18n="nav.services">서비스</a>
+      <a href="#sec4" data-i18n="nav.portfolio">구축사례</a>
+      <a href="#sec5" data-i18n="nav.history">회사연혁</a>
+      <a href="#sec6" data-i18n="nav.clients">파트너스</a>
+      <a href="#sec7" data-i18n="nav.contact">도입 문의</a>
     </div>
     <div class="lang-wrap">
       <button class="lang-btn active" data-lang="ko" onclick="__applyLang('ko')">KO</button>
@@ -102,12 +104,8 @@ import SecContact    from '../components/SecContact.astro';
       <button class="lang-btn" data-lang="zh" onclick="__applyLang('zh')">ZH</button>
       <button class="lang-btn" data-lang="ja" onclick="__applyLang('ja')">JA</button>
     </div>
-    <button class="nav-cta" data-i18n="nav.contact" onclick="goTo(7)">도입 문의</button>
-    <button class="nav-hamburger" id="hamburger">
-      <span></span><span></span><span></span>
-    </button>
+    <button class="nav-cta" data-i18n="nav.contact" onclick="document.getElementById('sec7').scrollIntoView({behavior:'smooth'})">도입 문의</button>
   </nav>
-
 
   <!-- 섹션들 -->
   <SecHero />
@@ -119,223 +117,36 @@ import SecContact    from '../components/SecContact.astro';
   <SecClients />
   <SecContact />
 
-  <!-- DOTS: 총 8섹션 (0~7) -->
-  <div class="dots dark" id="dots">
-    <button class="dot active" onclick="goTo(0)"></button>
-    <button class="dot" onclick="goTo(1)"></button>
-    <button class="dot" onclick="goTo(2)"></button>
-    <button class="dot" onclick="goTo(3)"></button>
-    <button class="dot" onclick="goTo(4)"></button>
-    <button class="dot" onclick="goTo(5)"></button>
-    <button class="dot" onclick="goTo(6)"></button>
-    <button class="dot" onclick="goTo(7)"></button>
-  </div>
-
-</div>
-
 <script is:inline>
-  // 어두운 배경 섹션 (nav/dots 흰색 모드)
-  const DARK_SECS = [0, 1, 7];
-  const SCROLLABLE_SECS = { 2: 'ab-scroll', 3: 's3scroll', 5: 'hist-scroll', 6: 's6scroll' };
+  const nav = document.getElementById('nav');
 
-  // 모바일 여부 확인
-  const isMobile = window.innerWidth <= 768;
+  // 스크롤에 따라 nav 스타일 변경
+  window.addEventListener('scroll', function() {
+    const hero = document.getElementById('sec0');
+    const heroHeight = hero ? hero.offsetHeight : 0;
+    if (window.scrollY > heroHeight - 60) {
+      nav.classList.add('scrolled');
+    } else {
+      nav.classList.remove('scrolled');
+    }
+  });
 
-  // 모바일이면 sec0 숨기고 sec1부터 시작
-  if (isMobile) {
-    const sec0 = document.getElementById('sec0');
-    if (sec0) { sec0.classList.remove('active'); sec0.style.cssText = 'display:none !important'; }
-    const sec1 = document.getElementById('sec1');
-    if (sec1) sec1.classList.add('active');
-  }
-
-  let cur = isMobile ? 1 : 0;
-  let busy = false;
-  const N = 8;
-  const secs   = Array.from({length: N}, (_, i) => document.getElementById('sec' + i));
-  const dots   = document.querySelectorAll('.dot');
-  const nav    = document.getElementById('nav');
-  const dotsEl = document.getElementById('dots');
-  const sh     = document.getElementById('sh');
-
-  function getScrollEl(n) {
-    const cls = SCROLLABLE_SECS[n];
-    if (!cls) return null;
-    return document.querySelector('#sec' + n + ' .' + cls) || document.getElementById(cls);
-  }
-
-  function goTo(n) {
-    // 모바일에서는 sec0(Hero) 접근 불가
-    if (isMobile && n === 0) return;
-    if (busy || n === cur || n < 0 || n >= N) return;
-    busy = true;
-    secs[cur].classList.remove('active');
-    secs[cur].classList.add('exit-up');
-    dots[cur].classList.remove('active');
-    setTimeout(() => secs[cur].classList.remove('exit-up'), 900);
-    cur = n;
-    secs[cur].classList.add('active');
-    dots[cur].classList.add('active');
-    const isDark = DARK_SECS.includes(cur);
-    nav.classList.toggle('scrolled', !isDark);
-    dotsEl.classList.toggle('dark', isDark);
-    if (sh) sh.classList.toggle('hide', cur > 0);
-    // 섹션 이동 시 스크롤 위치 초기화 (이전 + 현재 섹션 모두)
-    const prevScroll = getScrollEl(cur === 0 ? N - 1 : cur - 1);
-    if (prevScroll) prevScroll.scrollTop = 0;
-    const curScroll = getScrollEl(cur);
-    if (curScroll) curScroll.scrollTop = 0;
-    // 전환 후 쿨다운 — 스크롤 섹션에서 나올 때 더 길게
-    const cooldown = [2, 5, 6].includes(n) || [2, 5, 6].includes(cur) ? 1600 : 1200;
-    setTimeout(() => { busy = false; }, cooldown);
-  }
-
-  window.goTo = goTo;
-
-  // 로고 영상 처리
+  // 로고 영상 끝나면 다음 섹션으로 스크롤
   const logoVideo = document.getElementById('logoVideo');
   if (logoVideo) {
-    logoVideo.addEventListener('ended', () => goTo(2));
+    logoVideo.addEventListener('ended', function() {
+      const sec2 = document.getElementById('sec2');
+      if (sec2) sec2.scrollIntoView({ behavior: 'smooth' });
+    });
   }
 
-  // sec1 활성화 시 영상 재생
-  const _origGoTo = window.goTo;
-  window.goTo = function(n) {
-    _origGoTo(n);
-    if (n === 1 && logoVideo) {
-      setTimeout(() => { logoVideo.currentTime = 0; logoVideo.play(); }, 100);
-    }
-  };
-
-  // 초기 상태
-  nav.classList.remove('scrolled');
-  dotsEl.classList.add('dark');
-
-  if (isMobile) {
-    // dot[0] 숨기기
-    if (dots[0]) dots[0].style.display = 'none';
-    if (dots[1]) dots[1].classList.add('active');
-    // 로고영상 자동재생
-    if (logoVideo) {
-      logoVideo.play().catch(() => {
-        // 자동재생 실패시 화면 터치하면 재생
-        document.addEventListener('touchstart', function playOnTouch() {
-          logoVideo.play();
-          document.removeEventListener('touchstart', playOnTouch);
-        }, { once: true });
-      });
-    }
-  }
-
-  // 휠 이벤트 — 스크롤 끝 도달 후 멈췄다가 다시 내리면 섹션 전환
-  let edgeHit = false;      // 끝에 닿은 적 있는지
-  let edgeDir = 0;          // 어느 방향으로 끝에 닿았는지
-  let edgeStopTimer = null; // 휠 멈춤 감지 타이머
-  let edgeReady = false;    // 멈춤 감지 후 다음 휠 허용 여부
-
-  document.getElementById('fp').addEventListener('wheel', e => {
-    e.preventDefault();
-    const scrollEl = getScrollEl(cur);
-    if (scrollEl) {
-      const atTop = scrollEl.scrollTop <= 1;
-      const atBot = scrollEl.scrollTop + scrollEl.clientHeight >= scrollEl.scrollHeight - 4;
-
-      // 아직 끝에 안 닿은 경우 — 그냥 스크롤, 상태 초기화
-      if (e.deltaY > 0 && !atBot) {
-        scrollEl.scrollTop += e.deltaY;
-        edgeHit = false;
-        edgeReady = false;
-        clearTimeout(edgeStopTimer);
-        return;
-      }
-      if (e.deltaY < 0 && !atTop) {
-        scrollEl.scrollTop += e.deltaY;
-        edgeHit = false;
-        edgeReady = false;
-        clearTimeout(edgeStopTimer);
-        return;
-      }
-
-      // 끝에 도달한 상태
-      const dir = e.deltaY > 0 ? 1 : -1;
-
-      // 방향이 바뀌면 초기화
-      if (edgeDir !== dir) {
-        edgeHit = false;
-        edgeReady = false;
-        clearTimeout(edgeStopTimer);
-      }
-      edgeDir = dir;
-
-      if (!edgeHit) {
-        // 처음 끝에 닿은 순간 — 멈춤 감지 시작
-        edgeHit = true;
-        edgeReady = false;
-        clearTimeout(edgeStopTimer);
-        // 300ms 동안 휠이 없으면 "멈췄다"고 판단 → 다음 휠 허용
-        edgeStopTimer = setTimeout(() => {
-          edgeReady = true;
-        }, 300);
-        return;
-      }
-
-      // edgeReady 아직 false = 아직 멈추지 않은 연속 스크롤 → 무시
-      if (!edgeReady) return;
-
-      // edgeReady = true → 멈췄다가 다시 내린 것 → 섹션 전환!
-      edgeHit = false;
-      edgeReady = false;
-      clearTimeout(edgeStopTimer);
-    }
-    goTo(e.deltaY > 0 ? cur + 1 : cur - 1);
-  }, { passive: false });
-
-  // 터치 이벤트 — PC처럼 멈춤 후 재스와이프해야 섹션 전환
-  let ts = 0, te = 0;
-  let touchEdgeHit = false;
-  let touchEdgeReady = false;
-  let touchEdgeTimer = null;
-
-  document.getElementById('fp').addEventListener('touchstart', e => {
-    ts = e.touches[0].clientY;
-  }, { passive: true });
-
-  document.getElementById('fp').addEventListener('touchend', e => {
-    const d = ts - e.changedTouches[0].clientY;
-    if (Math.abs(d) < 40) return; // 너무 짧은 스와이프 무시
-    const dir = d > 0 ? 1 : -1;
-
-    const scrollEl = getScrollEl(cur);
-    if (scrollEl) {
-      const atTop = scrollEl.scrollTop <= 1;
-      const atBot = scrollEl.scrollTop + scrollEl.clientHeight >= scrollEl.scrollHeight - 4;
-      if (dir > 0 && !atBot) { scrollEl.scrollTop += Math.abs(d); touchEdgeHit = false; touchEdgeReady = false; return; }
-      if (dir < 0 && !atTop) { scrollEl.scrollTop -= Math.abs(d); touchEdgeHit = false; touchEdgeReady = false; return; }
-    }
-
-    if (!touchEdgeHit) {
-      touchEdgeHit = true;
-      touchEdgeReady = false;
-      clearTimeout(touchEdgeTimer);
-      touchEdgeTimer = setTimeout(() => { touchEdgeReady = true; }, 400);
-      return;
-    }
-    if (!touchEdgeReady) return;
-    touchEdgeHit = false;
-    touchEdgeReady = false;
-    clearTimeout(touchEdgeTimer);
-    goTo(cur + dir);
-  });
-
-  // 키보드 이벤트
-  document.addEventListener('keydown', e => {
-    if (e.key === 'ArrowDown' || e.key === 'PageDown') { e.preventDefault(); goTo(cur + 1); }
-    if (e.key === 'ArrowUp'   || e.key === 'PageUp')   { e.preventDefault(); goTo(cur - 1); }
-  });
-
-  // 햄버거 메뉴 (모바일)
-  document.getElementById('hamburger').addEventListener('click', () => {
-    document.querySelector('.nav-menu').classList.toggle('open');
+  // 앵커 링크 smooth scroll
+  document.querySelectorAll('a[href^="#"]').forEach(function(a) {
+    a.addEventListener('click', function(e) {
+      e.preventDefault();
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) target.scrollIntoView({ behavior: 'smooth' });
+    });
   });
 </script>
 </body>
