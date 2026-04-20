@@ -1,7 +1,7 @@
 ---
 // src/components/SecHero.astro
 ---
-<section class="sec s0 active" id="sec0">
+<section class="sec s0" id="sec0">
   <div class="video-wrap">
     <video src="https://res.cloudinary.com/dlaty4qsq/video/upload/v1776229521/hero_j11upy.mp4" autoplay muted loop playsinline preload="auto"></video>
   </div>
@@ -11,8 +11,8 @@
     <h1 class="hero-title" data-i18n="hero.title">스마트한 공간,<br><em>이담에스티</em>가<br>만듭니다</h1>
     <p class="hero-sub" data-i18n="hero.sub">방송 스튜디오부터 LED 디스플레이까지.<br>17년의 경험으로 최적의 공간을 설계합니다.</p>
     <div class="hero-btns">
-      <button class="btn-white" data-i18n="hero.btn1" onclick="goTo(4)">구축사례 보기 →</button>
-      <button class="btn-outline" data-i18n="hero.btn2" onclick="goTo(7)">무료 상담 신청</button>
+      <button class="btn-white" data-i18n="hero.btn1" onclick="document.getElementById('sec4').scrollIntoView({behavior:'smooth'})">구축사례 보기 →</button>
+      <button class="btn-outline" data-i18n="hero.btn2" onclick="document.getElementById('sec7').scrollIntoView({behavior:'smooth'})">무료 상담 신청</button>
     </div>
   </div>
   <div class="scroll-hint" id="sh">
@@ -22,7 +22,7 @@
 </section>
 
 <style>
-  .s0 { background: #000; display: flex; align-items: flex-end; }
+  .s0 { background: #000; display: flex; align-items: flex-end; height: 100vh; position: relative; overflow: hidden; }
   .video-wrap { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
   .video-wrap video {
     position: absolute; top: 50%; left: 50%;
