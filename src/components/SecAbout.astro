@@ -128,48 +128,23 @@
 
 <script is:inline>
 (function() {
-  const abScroll = document.querySelector('#sec2 .ab-scroll');
-  if (!abScroll) return;
-  const sec2 = document.getElementById('sec2');
-  let firstVisit = true;
-
-  function animate() {
-    abScroll.scrollTop = 0;
-    const items = Array.from(abScroll.querySelectorAll('.ab-fade'));
-    items.forEach(function(el) { el.classList.remove('visible'); });
-    // 첫 진입: sec 자체 transition(0.85s) 끝난 후 시작
-    // 재진입: sec transition 후 시작
-    const base = firstVisit ? 1200 : 950;
-    firstVisit = false;
-    items.forEach(function(el) {
-      const d = parseFloat(el.style.getPropertyValue('--d') || '0') * 1000;
-      setTimeout(function() { el.classList.add('visible'); }, base + d);
-    });
-  }
-
-  new MutationObserver(function() {
-    if (sec2.classList.contains('active')) animate();
-  }).observe(sec2, { attributes: true, attributeFilter: ['class'] });
-
-  // 페이지 로드 시 이미 active면 바로 실행
-  if (sec2.classList.contains('active')) {
-    setTimeout(animate, 100);
-  }
-
-  // 스크롤 시 화면 밖 요소 등장
+  // 스크롤 시 순차 등장
   const obs = new IntersectionObserver(function(entries) {
     entries.forEach(function(e) {
-      if (e.isIntersecting) e.target.classList.add('visible');
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        obs.unobserve(e.target);
+      }
     });
-  }, { root: abScroll, threshold: 0.08 });
-  abScroll.querySelectorAll('.ab-fade').forEach(function(el) { obs.observe(el); });
+  }, { threshold: 0.15 });
+  document.querySelectorAll('#sec2 .ab-fade').forEach(function(el) { obs.observe(el); });
 })();
 </script>
 
 <style>
-  .s2 { background: #fff; display: flex; flex-direction: column; }
-  .ab-scroll { flex: 1; overflow-y: auto; overflow-x: hidden; scrollbar-width: none; min-height: 0; }
-  .ab-scroll::-webkit-scrollbar { display: none; }
+  .s2 { background: #fff; }
+  .ab-scroll { width: 100%; }
+
   .ab-wrap { max-width: 1080px; margin: 0 auto; padding: 80px 60px; }
 
   .ab-eyebrow {
