@@ -89,7 +89,7 @@ import SecContact    from '../components/SecContact.astro';
     }
     .nav-link {
       display: block;
-      font-size: 15px; font-weight: 600;
+      font-size: 17px; font-weight: 600;
       letter-spacing: -0.01em;
       text-decoration: none; cursor: pointer;
       padding: 8px 16px;
@@ -112,9 +112,12 @@ import SecContact    from '../components/SecContact.astro';
       position: absolute;
       top: calc(100% + 8px);
       left: 0;
-      background: #fff;
+      background: rgba(10, 20, 30, 0.75);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
       border-radius: 10px;
-      box-shadow: 0 8px 40px rgba(0,0,0,0.12), 0 0 0 1px rgba(0,0,0,0.06);
+      border: 1px solid rgba(255,255,255,0.1);
+      box-shadow: 0 8px 40px rgba(0,0,0,0.3);
       padding: 8px;
       min-width: 160px;
       opacity: 0;
@@ -131,15 +134,15 @@ import SecContact    from '../components/SecContact.astro';
     .drop-link {
       display: block;
       font-size: 14px; font-weight: 500;
-      color: #333; text-decoration: none;
+      color: rgba(255,255,255,0.8); text-decoration: none;
       padding: 9px 14px;
       border-radius: 6px;
       transition: background 0.15s, color 0.15s;
       white-space: nowrap;
     }
     .drop-link:hover {
-      background: #f0f8fa;
-      color: #0D3A4A;
+      background: rgba(255,255,255,0.1);
+      color: #fff;
     }
 
     /* 언어 버튼 */
