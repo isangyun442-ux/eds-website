@@ -2,254 +2,264 @@
 // src/components/SecAbout.astro
 ---
 <section class="sec s2" id="sec2">
-  <div class="ab-scroll">
 
-    <!-- 모바일 전용 언어 버튼 -->
-    <div class="ab-lang-bar">
-      <button class="ab-lang-btn" data-lang="ko" onclick="__applyLang('ko')">KO</button>
-      <button class="ab-lang-btn" data-lang="en" onclick="__applyLang('en')">EN</button>
-      <button class="ab-lang-btn" data-lang="zh" onclick="__applyLang('zh')">ZH</button>
-      <button class="ab-lang-btn" data-lang="ja" onclick="__applyLang('ja')">JA</button>
+  <!-- 모바일 전용 언어 버튼 -->
+  <div class="ab-lang-bar">
+    <button class="ab-lang-btn" data-lang="ko" onclick="__applyLang('ko')">KO</button>
+    <button class="ab-lang-btn" data-lang="en" onclick="__applyLang('en')">EN</button>
+    <button class="ab-lang-btn" data-lang="zh" onclick="__applyLang('zh')">ZH</button>
+    <button class="ab-lang-btn" data-lang="ja" onclick="__applyLang('ja')">JA</button>
+  </div>
+
+  <div class="ab-wrap">
+
+    <!-- ① 1만 시간의 법칙 -->
+    <div class="ab-block ab-row">
+      <div class="ab-img-col fade-up">
+        <img src="/images/about-10000hours.svg" alt="1만 시간의 법칙" class="ab-img" />
+      </div>
+      <div class="ab-text-col">
+        <span class="ab-eyebrow fade-up" data-i18n="about.eyebrow1">Introduce</span>
+        <h2 class="ab-title fade-up fade-up-d1" data-i18n="about.title1">"1만 시간의 법칙"</h2>
+        <p class="ab-body fade-up fade-up-d2">
+          어떤 분야에서 전문성을 갖기 위해 투자해야 하는 시간을 의미합니다.
+          1993년 앤더스 에릭슨의 연구를 바탕으로 말콤 글래드웰이
+          <em>《아웃라이어》(2009)</em>에서 제시한 이론으로,
+          하루 3시간, 주 20시간씩 10년간 한 가지 일을 반복해야
+          비로소 전문가가 될 수 있다는 뜻입니다.
+        </p>
+        <div class="ab-stat-row fade-up fade-up-d3">
+          <div class="ab-stat">
+            <div class="ab-stat-n">3h</div>
+            <div class="ab-stat-l" data-i18n="about.stat1">하루 훈련량</div>
+          </div>
+          <div class="ab-stat-sep"></div>
+          <div class="ab-stat">
+            <div class="ab-stat-n">20h</div>
+            <div class="ab-stat-l" data-i18n="about.stat2">주간 훈련량</div>
+          </div>
+          <div class="ab-stat-sep"></div>
+          <div class="ab-stat">
+            <div class="ab-stat-n">10Y</div>
+            <div class="ab-stat-l" data-i18n="about.stat3">지속 기간</div>
+          </div>
+        </div>
+      </div>
     </div>
 
-    <div class="ab-wrap">
+    <div class="ab-section-sep"></div>
 
-      <!-- ① 1만 시간의 법칙 — 이미지 왼쪽 / 텍스트 오른쪽 -->
-      <div class="ab-block ab-row">
-        <div class="ab-img-col ab-fade" style="--d:0s">
-          <img src="/images/about-10000hours.svg" alt="1만 시간의 법칙" class="ab-img" />
-        </div>
-        <div class="ab-text-col">
-          <span class="ab-eyebrow ab-fade" style="--d:0.6s" data-i18n="about.eyebrow1">Introduce</span>
-          <h2 class="ab-title ab-fade" style="--d:0.5s" data-i18n="about.title1">"1만 시간의 법칙"</h2>
-          <p class="ab-body ab-fade" style="--d:0.7s">
-            어떤 분야에서 전문성을 갖기 위해 투자해야 하는 시간을 의미합니다.
-            1993년 앤더스 에릭슨의 연구를 바탕으로 말콤 글래드웰이
-            <em>《아웃라이어》(2009)</em>에서 제시한 이론으로,
-            하루 3시간, 주 20시간씩 10년간 한 가지 일을 반복해야
-            비로소 전문가가 될 수 있다는 뜻입니다.
-          </p>
-          <div class="ab-stat-row ab-fade" style="--d:0.9s">
-            <div class="ab-stat">
-              <div class="ab-stat-n">3h</div>
-              <div class="ab-stat-l" data-i18n="about.stat1">하루 훈련량</div>
-            </div>
-            <div class="ab-stat-sep"></div>
-            <div class="ab-stat">
-              <div class="ab-stat-n">20h</div>
-              <div class="ab-stat-l" data-i18n="about.stat2">주간 훈련량</div>
-            </div>
-            <div class="ab-stat-sep"></div>
-            <div class="ab-stat">
-              <div class="ab-stat-n">10Y</div>
-              <div class="ab-stat-l" data-i18n="about.stat3">지속 기간</div>
-            </div>
-          </div>
+    <!-- ② 전문가 집단 -->
+    <div class="ab-block ab-row ab-row-reverse">
+      <div class="ab-text-col">
+        <span class="ab-eyebrow fade-up" data-i18n="about.eyebrow2">Expert Group</span>
+        <h2 class="ab-title fade-up fade-up-d1" data-i18n="about.title2">전문가 집단<br>이담에스티</h2>
+        <p class="ab-body fade-up fade-up-d2">
+          방송기술, 컴퓨터그래픽, 오디오, IT 분야에서
+          <strong>20년 이상의 외길</strong>을 다져온 전문가들로 구성된 회사입니다.
+          미디어 기술은 HDTV·3DTV·AR/VR을 거쳐 메타버스와 홀로그램으로
+          빠르게 변화하고 있습니다.
+        </p>
+        <p class="ab-body fade-up fade-up-d3">
+          우리 회사는 <strong>전원 엔지니어로 구성</strong>되어 있으며,
+          매월 자체 사내 세미나와 기술 습득 지원을 통해
+          트렌드에 뒤쳐지지 않습니다.
+        </p>
+        <div class="ab-tags fade-up fade-up-d4">
+          <span class="ab-tag">방송기술</span>
+          <span class="ab-tag">컴퓨터그래픽</span>
+          <span class="ab-tag">오디오</span>
+          <span class="ab-tag">IT 인프라</span>
+          <span class="ab-tag">AR / VR</span>
+          <span class="ab-tag">Metaverse</span>
         </div>
       </div>
-
-      <div class="ab-section-sep"></div>
-
-      <!-- ② 전문가 집단 — 텍스트 왼쪽 / 이미지 오른쪽 -->
-      <div class="ab-block ab-row">
-        <div class="ab-text-col">
-          <span class="ab-eyebrow ab-fade" style="--d:0s" data-i18n="about.eyebrow2">Expert Group</span>
-          <h2 class="ab-title ab-fade" style="--d:0.8s" data-i18n="about.title2">전문가 집단<br>이담에스티</h2>
-          <p class="ab-body ab-fade" style="--d:0.8s">
-            방송기술, 컴퓨터그래픽, 오디오, IT 분야에서
-            <strong>20년 이상의 외길</strong>을 다져온 전문가들로 구성된 회사입니다.
-            미디어 기술은 HDTV·3DTV·AR/VR을 거쳐 메타버스와 홀로그램으로
-            빠르게 변화하고 있습니다.
-          </p>
-          <p class="ab-body ab-fade" style="--d:0.6s">
-            우리 회사는 <strong>전원 엔지니어로 구성</strong>되어 있으며,
-            매월 자체 사내 세미나와 기술 습득 지원을 통해
-            트렌드에 뒤쳐지지 않습니다.
-          </p>
-          <div class="ab-tags ab-fade" style="--d:0.8s">
-            <span class="ab-tag">방송기술</span>
-            <span class="ab-tag">컴퓨터그래픽</span>
-            <span class="ab-tag">오디오</span>
-            <span class="ab-tag">IT 인프라</span>
-            <span class="ab-tag">AR / VR</span>
-            <span class="ab-tag">Metaverse</span>
-          </div>
-        </div>
-        <div class="ab-img-col ab-fade" style="--d:0.6s">
-          <img src="/images/about-expert.svg" alt="전문가 집단 이담에스티" class="ab-img" />
-        </div>
+      <div class="ab-img-col fade-up fade-up-d2">
+        <img src="/images/about-expert.svg" alt="전문가 집단 이담에스티" class="ab-img" />
       </div>
-
-      <div class="ab-section-sep"></div>
-
-      <!-- ③ 고객 실적 -->
-      <div class="ab-block ab-nums-block ab-fade" style="--d:0s">
-        <div class="ab-nums-header">
-          <span class="ab-eyebrow" data-i18n="about.eyebrow3">Customer Service</span>
-          <h2 class="ab-title" data-i18n="about.title3">다양하고 만족도 높은 고객 서비스</h2>
-          <p class="ab-body ab-body-center">
-            준비된 기술 서비스를 바탕으로 수많은 국내외 고객에게
-            상호 소개와 재구매를 통해 이담에스티의 서비스를 검증받았습니다.
-          </p>
-        </div>
-        <div class="ab-nums-grid">
-          <div class="ab-numcard">
-            <div class="ab-nc-accent"></div>
-            <div class="ab-nc-n">91<span>개</span></div>
-            <div class="ab-nc-l" data-i18n="about.num1.l">관공서 · 공공기관</div>
-            <div class="ab-nc-s" data-i18n="about.num1.s">중앙정부, 지자체, 공기업 포함</div>
-          </div>
-          <div class="ab-numcard ab-numcard-mid">
-            <div class="ab-nc-accent"></div>
-            <div class="ab-nc-n">115<span>개</span></div>
-            <div class="ab-nc-l" data-i18n="about.num2.l">교육기관</div>
-            <div class="ab-nc-s" data-i18n="about.num2.s">대학교, 학교, 교육청</div>
-          </div>
-          <div class="ab-numcard">
-            <div class="ab-nc-accent"></div>
-            <div class="ab-nc-n">516<span>+</span></div>
-            <div class="ab-nc-l" data-i18n="about.num3.l">총 고객사</div>
-            <div class="ab-nc-s" data-i18n="about.num3.s">방송국, 병원, 기업, 종교단체</div>
-          </div>
-        </div>
-        <div class="ab-message">
-          <p class="ab-msg-text">
-            이담에스티는 다양한 미디어 시스템 구축 노하우와
-            끊임없는 사내 연구 및 대외 기술 습득 활동을 통해
-            트렌디한 구축 서비스를 제공하겠습니다.
-          </p>
-          <div class="ab-msg-sign" data-i18n="about.sign">— 임직원 일동</div>
-        </div>
-      </div>
-
     </div>
+
+    <div class="ab-section-sep"></div>
+
+    <!-- ③ 고객 실적 -->
+    <div class="ab-block ab-nums-block">
+      <div class="ab-nums-header">
+        <span class="ab-eyebrow fade-up" data-i18n="about.eyebrow3">Customer Service</span>
+        <h2 class="ab-title fade-up fade-up-d1" data-i18n="about.title3">다양하고 만족도 높은<br>고객 서비스</h2>
+        <p class="ab-body ab-body-center fade-up fade-up-d2">
+          준비된 기술 서비스를 바탕으로 수많은 국내외 고객에게
+          상호 소개와 재구매를 통해 이담에스티의 서비스를 검증받았습니다.
+        </p>
+      </div>
+      <div class="ab-nums-grid">
+        <div class="ab-numcard fade-up fade-up-d1">
+          <div class="ab-nc-accent"></div>
+          <div class="ab-nc-n">91<span>개</span></div>
+          <div class="ab-nc-l" data-i18n="about.num1.l">관공서 · 공공기관</div>
+          <div class="ab-nc-s" data-i18n="about.num1.s">중앙정부, 지자체, 공기업 포함</div>
+        </div>
+        <div class="ab-numcard fade-up fade-up-d2">
+          <div class="ab-nc-accent"></div>
+          <div class="ab-nc-n">115<span>개</span></div>
+          <div class="ab-nc-l" data-i18n="about.num2.l">교육기관</div>
+          <div class="ab-nc-s" data-i18n="about.num2.s">대학교, 학교, 교육청</div>
+        </div>
+        <div class="ab-numcard fade-up fade-up-d3">
+          <div class="ab-nc-accent"></div>
+          <div class="ab-nc-n">516<span>+</span></div>
+          <div class="ab-nc-l" data-i18n="about.num3.l">총 고객사</div>
+          <div class="ab-nc-s" data-i18n="about.num3.s">방송국, 병원, 기업, 종교단체</div>
+        </div>
+      </div>
+      <div class="ab-message fade-up fade-up-d2">
+        <p class="ab-msg-text">
+          이담에스티는 다양한 미디어 시스템 구축 노하우와
+          끊임없는 사내 연구 및 대외 기술 습득 활동을 통해
+          트렌디한 구축 서비스를 제공하겠습니다.
+        </p>
+        <div class="ab-msg-sign" data-i18n="about.sign">— 임직원 일동</div>
+      </div>
+    </div>
+
   </div>
 </section>
 
-<script is:inline>
-(function() {
-  // 스크롤 시 순차 등장
-  const obs = new IntersectionObserver(function(entries) {
-    entries.forEach(function(e) {
-      if (e.isIntersecting) {
-        e.target.classList.add('visible');
-        obs.unobserve(e.target);
-      }
-    });
-  }, { threshold: 0.15 });
-  document.querySelectorAll('#sec2 .ab-fade').forEach(function(el) { obs.observe(el); });
-})();
-</script>
-
 <style>
   .s2 { background: #fff; }
-  .ab-scroll { width: 100%; }
 
-  .ab-wrap { max-width: 1080px; margin: 0 auto; padding: 80px 60px; }
+  .ab-wrap { max-width: 1120px; margin: 0 auto; padding: 120px 80px; }
 
   .ab-eyebrow {
     display: inline-flex; align-items: center;
-    font-size: 11px; font-weight: 700; letter-spacing: 0.22em;
-    text-transform: uppercase; color: #0D3A4A; margin-bottom: 14px;
-    padding-left: 14px; border-left: 3px solid #0D3A4A;
+    font-size: 11px; font-weight: 700; letter-spacing: 0.24em;
+    text-transform: uppercase; color: #00B8D9; margin-bottom: 18px;
+    gap: 10px;
   }
-  .ab-title { font-size: clamp(22px, 2.6vw, 34px); font-weight: 800; letter-spacing: -0.03em; color: #0A0A0A; line-height: 1.25; margin-bottom: 20px; }
-  .ab-body { font-size: 14px; color: #666; line-height: 2.0; margin-bottom: 14px; max-width: 480px; }
-  .ab-body em { font-style: italic; color: #444; }
-  .ab-body strong { color: #0A0A0A; font-weight: 700; }
-  .ab-body-center { max-width: 600px; text-align: center; margin: 0 auto; }
+  .ab-eyebrow::before { content: ''; display: block; width: 20px; height: 2px; background: #00B8D9; }
 
-  .ab-row { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; padding: 64px 0; }
+  .ab-title {
+    font-size: clamp(28px, 3.2vw, 48px);
+    font-weight: 800;
+    letter-spacing: -0.04em;
+    color: #0a0a0a;
+    line-height: 1.15;
+    margin-bottom: 28px;
+  }
+  .ab-body {
+    font-size: 15px; color: #666; line-height: 2.1;
+    margin-bottom: 16px; max-width: 500px;
+  }
+  .ab-body em { font-style: italic; color: #444; }
+  .ab-body strong { color: #0a0a0a; font-weight: 700; }
+  .ab-body-center { max-width: 560px; text-align: center; margin: 0 auto; }
+
+  .ab-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 100px;
+    align-items: center;
+    padding: 80px 0;
+  }
+  .ab-row-reverse { direction: rtl; }
+  .ab-row-reverse > * { direction: ltr; }
+
   .ab-img-col { display: flex; align-items: center; justify-content: center; }
-  .ab-img { width: 100%; max-width: 400px; height: auto; }
+  .ab-img { width: 100%; max-width: 420px; height: auto; }
   .ab-text-col { display: flex; flex-direction: column; }
 
-  .ab-stat-row { display: flex; align-items: center; margin-top: 32px; padding-top: 28px; border-top: 1px solid #f0f0f0; }
+  .ab-stat-row {
+    display: flex; align-items: center;
+    margin-top: 40px; padding-top: 32px;
+    border-top: 1px solid #f0f0f0;
+  }
   .ab-stat { text-align: center; flex: 1; }
-  .ab-stat-n { font-size: 20px; font-weight: 800; color: #0D3A4A; letter-spacing: -0.02em; }
-  .ab-stat-l { font-size: 11px; color: #bbb; margin-top: 5px; letter-spacing: 0.04em; }
-  .ab-stat-sep { width: 1px; height: 32px; background: #eee; flex-shrink: 0; }
+  .ab-stat-n { font-size: 22px; font-weight: 900; color: #0D3A4A; letter-spacing: -0.03em; }
+  .ab-stat-l { font-size: 11px; color: #bbb; margin-top: 6px; letter-spacing: 0.04em; }
+  .ab-stat-sep { width: 1px; height: 36px; background: #eee; flex-shrink: 0; }
 
-  .ab-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 24px; }
-  .ab-tag { font-size: 11px; font-weight: 600; padding: 5px 14px; border: 1px solid #e8e8e8; color: #666; letter-spacing: 0.04em; transition: border-color 0.2s, color 0.2s; }
-  .ab-tag:hover { border-color: #0D3A4A; color: #0D3A4A; }
+  .ab-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 28px; }
+  .ab-tag {
+    font-size: 11px; font-weight: 600; padding: 6px 16px;
+    border: 1px solid #e0e0e0; color: #888; letter-spacing: 0.04em;
+    transition: all 0.2s;
+  }
+  .ab-tag:hover { border-color: #0D3A4A; color: #0D3A4A; background: rgba(13,58,74,0.04); }
 
   .ab-section-sep { height: 1px; background: #f0f0f0; }
 
-  .ab-nums-block { padding: 64px 0 0; }
-  .ab-nums-header { text-align: center; margin-bottom: 48px; display: flex; flex-direction: column; align-items: center; }
+  /* 고객 실적 */
+  .ab-nums-block { padding: 80px 0 0; }
+  .ab-nums-header {
+    text-align: center; margin-bottom: 60px;
+    display: flex; flex-direction: column; align-items: center;
+  }
 
-  .ab-nums-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; background: #e8e8e8; }
-  .ab-numcard { padding: 44px 40px; background: #0D3A4A; transition: background 0.2s; }
-
+  .ab-nums-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 2px; background: #e8e8e8;
+  }
+  .ab-numcard {
+    padding: 52px 44px; background: #0D3A4A;
+    transition: background 0.25s;
+  }
   .ab-numcard:hover { background: #0a2d3d; }
-  .ab-nc-accent { width: 32px; height: 3px; background: rgba(255,255,255,0.3); margin-bottom: 22px; }
+  .ab-nc-accent { width: 36px; height: 3px; background: rgba(255,255,255,0.25); margin-bottom: 28px; }
+  .ab-nc-n {
+    font-size: 60px; font-weight: 900;
+    letter-spacing: -0.05em; color: #fff;
+    line-height: 1; margin-bottom: 16px;
+  }
+  .ab-nc-n span { font-size: 30px; color: rgba(255,255,255,0.5); margin-left: 2px; }
+  .ab-nc-l { font-size: 15px; font-weight: 700; color: #fff; margin-bottom: 8px; }
+  .ab-nc-s { font-size: 12px; color: rgba(255,255,255,0.42); line-height: 1.6; }
 
-  .ab-nc-n { font-size: 54px; font-weight: 900; letter-spacing: -0.04em; color: #fff; line-height: 1; margin-bottom: 14px; }
-  .ab-nc-n span { font-size: 28px; color: rgba(255,255,255,0.6); margin-left: 2px; }
+  .ab-message {
+    margin-top: 48px; padding: 36px 48px;
+    background: #F5F8FA;
+    border-left: 4px solid #0D3A4A;
+  }
+  .ab-msg-text {
+    font-size: 15px; color: #555; line-height: 2.1;
+    font-style: italic; margin-bottom: 18px;
+  }
+  .ab-msg-sign { font-size: 13px; font-weight: 700; color: #0D3A4A; letter-spacing: 0.08em; }
 
-  .ab-nc-l { font-size: 14px; font-weight: 700; color: #fff; margin-bottom: 6px; }
-  .ab-nc-s { font-size: 12px; color: rgba(255,255,255,0.45); line-height: 1.6; }
-
-  .ab-message { margin-top: 40px; padding: 32px 40px; background: #F8FBFC; border-left: 4px solid #0D3A4A; }
-  .ab-msg-text { font-size: 15px; color: #555; line-height: 2; font-style: italic; margin-bottom: 16px; }
-  .ab-msg-sign { font-size: 13px; font-weight: 700; color: #0D3A4A; letter-spacing: 0.06em; }
-
-  @media (max-width: 900px) {
-    .ab-wrap { padding: 56px 28px; }
-    .ab-row { grid-template-columns: 1fr; gap: 36px; padding: 48px 0; }
-    .ab-img { max-width: 300px; }
+  @media (max-width: 960px) {
+    .ab-wrap { padding: 80px 40px; }
+    .ab-row { grid-template-columns: 1fr; gap: 48px; padding: 60px 0; }
+    .ab-row-reverse { direction: ltr; }
+    .ab-img { max-width: 320px; }
     .ab-nums-grid { grid-template-columns: 1fr; }
-    .ab-numcard { padding: 28px 24px; }
-
-    .ab-nc-n { font-size: 40px; }
+    .ab-numcard { padding: 36px 28px; }
+    .ab-nc-n { font-size: 44px; }
   }
   @media (max-width: 480px) {
-    .ab-wrap { padding: 40px 18px; }
-    .ab-message { padding: 24px 20px; }
-    .ab-stat-n { font-size: 17px; }
+    .ab-wrap { padding: 60px 24px; }
+    .ab-message { padding: 28px 24px; }
+    .ab-title { font-size: clamp(24px, 6vw, 36px); }
   }
-  /* ── 순차 등장 애니메이션 ── */
-  .ab-fade {
-    opacity: 0;
-    visibility: hidden;
-    transform: translateY(22px);
-    transition: opacity 1.6s ease, transform 1.6s ease;
-  }
-  .ab-fade.visible {
-    opacity: 1;
-    visibility: visible;
-    transform: translateY(0);
-  }
-  /* ── 모바일 언어 버튼 ── */
+
+  /* 모바일 언어 버튼 */
   .ab-lang-bar { display: none; }
   @media (max-width: 768px) {
     .ab-lang-bar {
-      display: flex;
-      gap: 6px;
-      padding: 12px 24px;
+      display: flex; gap: 6px; padding: 14px 24px;
       justify-content: flex-end;
       border-bottom: 1px solid #f0f0f0;
     }
     .ab-lang-btn {
-      font-size: 11px; font-weight: 700;
-      padding: 5px 10px;
-      background: transparent;
-      border: 1px solid #ddd;
-      color: #aaa; cursor: pointer;
-      letter-spacing: 0.06em;
-      font-family: inherit;
-      transition: all 0.2s;
+      font-size: 11px; font-weight: 700; padding: 5px 10px;
+      background: transparent; border: 1px solid #ddd;
+      color: #aaa; cursor: pointer; letter-spacing: 0.06em;
+      font-family: inherit; transition: all 0.2s;
     }
     .ab-lang-btn:hover { border-color: #0D3A4A; color: #0D3A4A; }
-    .ab-lang-btn.active { border-color: #0D3A4A; color: #0D3A4A; background: rgba(13,58,74,0.08); }
+    .ab-lang-btn.active { border-color: #0D3A4A; color: #0D3A4A; background: rgba(13,58,74,0.07); }
   }
 </style>
 
-
 <script is:inline>
 (function() {
-  // 현재 언어에 맞게 버튼 활성화
   const btns = document.querySelectorAll('.ab-lang-btn');
   const curLang = localStorage.getItem('eds-lang') || 'ko';
   btns.forEach(function(btn) {

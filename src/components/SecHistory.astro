@@ -48,198 +48,135 @@ const history = [
 ];
 ---
 <section class="sec s5" id="sec5">
-  <div class="hist-scroll">
-    <div class="hist-inner">
-      <div class="h-header">
-        <span class="h-eyebrow" data-i18n="hist.eyebrow">Company History</span>
-        <h2 class="h-title" data-i18n="hist.title">EDS의 걸어온 길</h2>
-        <p class="h-sub" data-i18n="hist.sub">2007년 창립 이래 끊임없이 성장해온 이담에스티의 연혁입니다</p>
-      </div>
-      <div class="timeline">
-        <div class="tl-line"></div>
-        {history.map((h) => (
-          <div class="tl-row">
-            <div class="tl-year-col"><div class="tl-year">{h.year}</div></div>
-            <div class="tl-dot-col"><div class="tl-dot"></div></div>
-            <div class="tl-content-col">
-              <div class="tl-card">
-                {h.items.map((item) => (
-                  <div class="tl-item">
-                    <span class="tl-month">{item.month}</span>
-                    <span class="tl-desc">{item.desc}</span>
-                  </div>
-                ))}
-              </div>
+  <div class="hist-inner">
+    <div class="h-header">
+      <span class="h-eyebrow fade-up" data-i18n="hist.eyebrow">Company History</span>
+      <h2 class="h-title fade-up fade-up-d1" data-i18n="hist.title">EDS의 걸어온 길</h2>
+      <p class="h-sub fade-up fade-up-d2" data-i18n="hist.sub">2007년 창립 이래 끊임없이 성장해온 이담에스티의 연혁입니다</p>
+    </div>
+    <div class="timeline">
+      <div class="tl-line"></div>
+      {history.map((h) => (
+        <div class="tl-row fade-up">
+          <div class="tl-year-col"><div class="tl-year">{h.year}</div></div>
+          <div class="tl-dot-col"><div class="tl-dot"></div></div>
+          <div class="tl-content-col">
+            <div class="tl-card">
+              {h.items.map((item) => (
+                <div class="tl-item">
+                  <span class="tl-month">{item.month}</span>
+                  <span class="tl-desc">{item.desc}</span>
+                </div>
+              ))}
             </div>
           </div>
-        ))}
-        <div class="tl-end">
-          <div class="tl-end-dot"></div>
-          <span class="tl-end-label" data-i18n="hist.founded">FOUNDED 2007</span>
         </div>
+      ))}
+      <div class="tl-end">
+        <div class="tl-end-dot"></div>
+        <span class="tl-end-label" data-i18n="hist.founded">FOUNDED 2007</span>
       </div>
     </div>
-
-    <footer class="eds-footer">
-      <div class="eds-footer-top">
-        <img class="eds-footer-logo" src="/images/logo.png" alt="EDS 이담에스티" />
-        <span class="eds-footer-copy">Copyright 2022. EDAMST. All rights reserved.</span>
-      </div>
-      <div class="eds-footer-bottom">
-        <span class="eds-footer-info">대표 최명순</span>
-        <span class="eds-footer-div">|</span>
-        <span class="eds-footer-info">서울시 구로구 디지털로31길 19, 406호 (에이스테크노타워Ⅱ)</span>
-        <span class="eds-footer-div">|</span>
-        <span class="eds-footer-info">Tel 02-857-7744</span>
-        <span class="eds-footer-div">|</span>
-        <span class="eds-footer-info">Fax 02-857-7321</span>
-        <span class="eds-footer-div">|</span>
-        <a class="eds-footer-mail" href="mailto:pub@edamst.com">pub@edamst.com</a>
-      </div>
-    </footer>
   </div>
 </section>
 
 <style>
   .s5 {
-    display: flex;
-    flex-direction: column;
     background-image: url('/images/history-bg.png');
     background-size: cover;
     background-position: center;
+    background-attachment: fixed;
   }
-  .hist-scroll { flex: 1; overflow-y: auto; overflow-x: hidden; scrollbar-width: none; min-height: 0; background: rgba(8,18,28,0.88); }
-  .hist-scroll::-webkit-scrollbar { display: none; }
-  .hist-inner { max-width: 860px; margin: 0 auto; padding: 72px 52px 60px; }
+  .hist-inner {
+    max-width: 900px; margin: 0 auto;
+    padding: 120px 80px 120px;
+    background: rgba(6,14,22,0.90);
+    backdrop-filter: blur(4px);
+  }
 
-  .h-header { text-align: center; margin-bottom: 64px; }
+  .h-header { text-align: center; margin-bottom: 80px; }
   .h-eyebrow {
-    display: inline-flex; align-items: center; gap: 10px;
-    font-size: 10px; font-weight: 700; letter-spacing: 0.22em;
-    text-transform: uppercase; color: #E8B86D; margin-bottom: 14px;
+    display: inline-flex; align-items: center; gap: 12px;
+    font-size: 11px; font-weight: 700; letter-spacing: 0.24em;
+    text-transform: uppercase; color: #E8B86D; margin-bottom: 18px;
   }
-  .h-eyebrow::before, .h-eyebrow::after { content: ''; display: block; width: 28px; height: 1px; background: #E8B86D; opacity: 0.5; }
-  .h-title { font-size: clamp(26px, 3.5vw, 40px); font-weight: 800; letter-spacing: -0.03em; color: #fff; margin-bottom: 10px; }
-  .h-sub { font-size: 14px; color: rgba(255,255,255,0.45); line-height: 1.7; }
+  .h-eyebrow::before, .h-eyebrow::after {
+    content: ''; display: block; width: 32px; height: 1px;
+    background: #E8B86D; opacity: 0.5;
+  }
+  .h-title {
+    font-size: clamp(28px, 3.5vw, 48px);
+    font-weight: 800; letter-spacing: -0.04em;
+    color: #fff; margin-bottom: 14px;
+  }
+  .h-sub { font-size: 15px; color: rgba(255,255,255,0.4); line-height: 1.7; }
 
-  .timeline { position: relative; padding-bottom: 48px; }
-  .tl-line { position: absolute; top: 0; bottom: 0; left: 88px; width: 1px; background: rgba(255,255,255,0.12); }
+  .timeline { position: relative; padding-bottom: 56px; }
+  .tl-line {
+    position: absolute; top: 0; bottom: 0; left: 92px;
+    width: 1px; background: rgba(255,255,255,0.08);
+  }
 
-  .tl-row { display: grid; grid-template-columns: 88px 0 1fr; gap: 0 28px; align-items: flex-start; position: relative; }
+  .tl-row {
+    display: grid; grid-template-columns: 92px 0 1fr;
+    gap: 0 32px; align-items: flex-start; position: relative;
+  }
 
   .tl-year-col { display: flex; justify-content: flex-end; padding-right: 24px; padding-top: 14px; }
-  .tl-year { font-size: 14px; font-weight: 800; letter-spacing: -0.02em; color: #E8B86D; }
+  .tl-year { font-size: 13px; font-weight: 800; letter-spacing: -0.01em; color: #E8B86D; }
 
-  .tl-dot-col { display: flex; justify-content: center; padding-top: 18px; position: relative; z-index: 2; }
-  .tl-dot { width: 9px; height: 9px; border-radius: 50%; background: #08121C; border: 2px solid #E8B86D; flex-shrink: 0; margin-left: -4px; }
+  .tl-dot-col { display: flex; justify-content: center; padding-top: 19px; position: relative; z-index: 2; }
+  .tl-dot {
+    width: 9px; height: 9px; border-radius: 50%;
+    background: #060e16; border: 2px solid #E8B86D; flex-shrink: 0; margin-left: -4px;
+  }
 
-  .tl-content-col { padding: 10px 0 24px 0; }
+  .tl-content-col { padding: 10px 0 28px 0; }
   .tl-card { display: flex; flex-direction: column; }
-  .tl-item { display: flex; gap: 14px; align-items: flex-start; padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.07); }
+  .tl-item {
+    display: flex; gap: 16px; align-items: flex-start;
+    padding: 9px 0; border-bottom: 1px solid rgba(255,255,255,0.05);
+  }
   .tl-item:last-child { border-bottom: none; }
   .tl-item:first-child { padding-top: 0; }
-  .tl-month { font-size: 11px; font-weight: 700; color: #E8B86D; letter-spacing: 0.04em; flex-shrink: 0; min-width: 32px; padding-top: 2px; }
-  .tl-desc { font-size: 13px; line-height: 1.75; color: rgba(255,255,255,0.72); }
+  .tl-month {
+    font-size: 11px; font-weight: 700; color: #E8B86D;
+    letter-spacing: 0.04em; flex-shrink: 0; min-width: 34px; padding-top: 2px;
+  }
+  .tl-desc { font-size: 14px; line-height: 1.8; color: rgba(255,255,255,0.65); }
 
-  .tl-end { display: flex; flex-direction: column; align-items: flex-start; padding-left: 76px; margin-top: 4px; gap: 6px; }
-  .tl-end-dot { width: 13px; height: 13px; border-radius: 50%; background: #E8B86D; margin-left: 7px; }
-  .tl-end-label { font-size: 10px; font-weight: 700; letter-spacing: 0.18em; color: rgba(255,255,255,0.3); text-transform: uppercase; }
-
-  /* 스크롤 페이드업 */
-  .tl-row { opacity: 0; transform: translateY(20px); transition: opacity 0.55s ease, transform 0.55s ease; }
-  .tl-row.visible { opacity: 1; transform: translateY(0); }
-  .h-header { opacity: 0; transform: translateY(20px); transition: opacity 0.55s ease, transform 0.55s ease; }
-  .h-header.visible { opacity: 1; transform: translateY(0); }
+  .tl-end {
+    display: flex; flex-direction: column;
+    align-items: flex-start; padding-left: 80px;
+    margin-top: 8px; gap: 8px;
+  }
+  .tl-end-dot { width: 14px; height: 14px; border-radius: 50%; background: #E8B86D; margin-left: 5px; }
+  .tl-end-label {
+    font-size: 10px; font-weight: 700; letter-spacing: 0.22em;
+    color: rgba(255,255,255,0.25); text-transform: uppercase;
+  }
 
   @media (max-width: 768px) {
-    .hist-inner { padding: 64px 24px 48px; }
-    .tl-line { left: 60px; }
-    .tl-row { grid-template-columns: 60px 0 1fr; gap: 0 18px; }
-    .tl-year-col { padding-right: 16px; }
+    .hist-inner { padding: 80px 32px 80px; }
+    .tl-line { left: 64px; }
+    .tl-row { grid-template-columns: 64px 0 1fr; gap: 0 20px; }
+    .tl-year-col { padding-right: 18px; }
     .tl-year { font-size: 12px; }
-    .tl-dot-col { padding-top: 16px; }
-    .tl-end { padding-left: 48px; }
+    .tl-end { padding-left: 52px; }
   }
   @media (max-width: 480px) {
-    .hist-inner { padding: 56px 16px 40px; }
-    .tl-line { left: 52px; }
-    .tl-row { grid-template-columns: 52px 0 1fr; gap: 0 12px; }
-  }
-  /* ── EDS Footer ── */
-  .eds-footer {
-    background: #0A0A0A;
-    padding: 24px 56px 28px;
-    border-top: 1px solid rgba(255,255,255,0.07);
-  }
-  .eds-footer-top {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 14px;
-    padding-bottom: 14px;
-    border-bottom: 1px solid rgba(255,255,255,0.06);
-  }
-  .eds-footer-logo {
-    height: 24px;
-    width: auto;
-    object-fit: contain;
-    filter: brightness(0) invert(1);
-    opacity: 0.75;
-  }
-  .eds-footer-copy {
-    font-size: 10px;
-    color: rgba(255,255,255,0.25);
-    letter-spacing: 0.06em;
-  }
-  .eds-footer-bottom {
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 5px 10px;
-  }
-  .eds-footer-info {
-    font-size: 11px;
-    color: rgba(255,255,255,0.38);
-    letter-spacing: 0.02em;
-  }
-  .eds-footer-div {
-    font-size: 10px;
-    color: rgba(255,255,255,0.15);
-  }
-  .eds-footer-mail {
-    font-size: 11px;
-    color: #00B8D9;
-    text-decoration: none;
-    transition: color 0.2s;
-  }
-  .eds-footer-mail:hover { color: #fff; }
-  @media (max-width: 768px) {
-    .eds-footer { padding: 20px 28px 24px; }
-    .eds-footer-div { display: none; }
-    .eds-footer-bottom { gap: 3px 8px; }
-    .eds-footer-info, .eds-footer-mail { font-size: 10px; }
-    .eds-footer-copy { font-size: 9px; }
+    .hist-inner { padding: 60px 20px 60px; }
+    .tl-line { left: 54px; }
+    .tl-row { grid-template-columns: 54px 0 1fr; gap: 0 14px; }
   }
 </style>
 
 <script is:inline>
   (function() {
-    const histScroll = document.querySelector('#sec5 .hist-scroll');
-    if (!histScroll) return;
-
-    // sec5 활성화될 때 스크롤 맨 위로 초기화
-    const sec5 = document.getElementById('sec5');
-    const secObs = new MutationObserver(function() {
-      if (sec5.classList.contains('active')) {
-        histScroll.scrollTop = 0;
-      }
-    });
-    secObs.observe(sec5, { attributes: true, attributeFilter: ['class'] });
-
-    const targets = histScroll.querySelectorAll('.tl-row, .h-header');
+    const targets = document.querySelectorAll('#sec5 .tl-row, #sec5 .h-header .fade-up');
     const obs = new IntersectionObserver((entries) => {
       entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
-    }, { root: histScroll, threshold: 0.1, rootMargin: '0px 0px -20px 0px' });
+    }, { threshold: 0.08, rootMargin: '0px 0px -20px 0px' });
     targets.forEach(el => obs.observe(el));
   })();
 </script>

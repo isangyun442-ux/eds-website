@@ -16,12 +16,15 @@ import SecContact    from '../components/SecContact.astro';
   <title>EDS 이담에스티 — Beyond The Future | 스마트 공간 솔루션</title>
   <meta name="description" content="방송 스튜디오부터 LED 디스플레이까지. 17년의 경험으로 최적의 스마트 공간을 설계합니다." />
   <link rel="icon" href="/favicon.ico" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
   <script is:inline src="/i18n/translations.js"></script>
   <style is:global>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html, body {
       width: 100%;
-      font-family: 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', sans-serif;
+      font-family: 'Inter', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
       background: #fff;
       -webkit-font-smoothing: antialiased;
       overflow-x: hidden;
@@ -33,7 +36,23 @@ import SecContact    from '../components/SecContact.astro';
       position: relative;
     }
 
-    /* NAV — 스크롤 고정 */
+    /* ── 전역 페이드업 애니메이션 ── */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.9s cubic-bezier(0.16,1,0.3,1), transform 0.9s cubic-bezier(0.16,1,0.3,1);
+    }
+    .fade-up.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .fade-up-d1 { transition-delay: 0.1s; }
+    .fade-up-d2 { transition-delay: 0.2s; }
+    .fade-up-d3 { transition-delay: 0.3s; }
+    .fade-up-d4 { transition-delay: 0.4s; }
+    .fade-up-d5 { transition-delay: 0.5s; }
+
+    /* NAV */
     .nav {
       position: fixed;
       top: 0; left: 0; right: 0;
@@ -41,40 +60,54 @@ import SecContact    from '../components/SecContact.astro';
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 22px 52px;
-      transition: background 0.5s, box-shadow 0.5s, padding 0.4s;
+      padding: 24px 60px;
+      transition: background 0.4s, box-shadow 0.4s, padding 0.3s;
     }
     .nav.scrolled {
       background: rgba(255,255,255,0.97);
-      box-shadow: 0 1px 0 rgba(0,0,0,0.07);
-      padding: 14px 52px;
+      box-shadow: 0 1px 0 rgba(0,0,0,0.06);
+      padding: 16px 60px;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
     }
     .nav-logo { height: 28px; position: relative; width: 140px; }
     .logo-color { position: absolute; top: 0; left: 0; height: 28px; width: auto; object-fit: contain; opacity: 0; transition: opacity 0.4s; }
     .logo-white { position: absolute; top: 0; left: 0; height: 28px; width: auto; object-fit: contain; filter: brightness(0) invert(1); opacity: 1; transition: opacity 0.4s; }
     .nav.scrolled .logo-color { opacity: 1; }
     .nav.scrolled .logo-white { opacity: 0; }
-    .nav-menu { display: flex; gap: 32px; }
-    .nav-menu a { font-size: 13px; font-weight: 500; text-decoration: none; transition: color 0.3s; }
-    .nav.scrolled .nav-menu a { color: #444; }
+    .nav-menu { display: flex; gap: 36px; }
+    .nav-menu a {
+      font-size: 13px; font-weight: 500; text-decoration: none;
+      letter-spacing: 0.01em;
+      transition: color 0.2s, opacity 0.2s;
+    }
+    .nav-menu a:hover { opacity: 0.6; }
+    .nav.scrolled .nav-menu a { color: #1a1a1a; }
     .nav:not(.scrolled) .nav-menu a { color: rgba(255,255,255,0.85); }
-    .nav-cta { font-size: 12px; font-weight: 700; padding: 9px 22px; border: none; cursor: pointer; letter-spacing: 0.06em; transition: all 0.3s; }
+    .nav-right { display: flex; align-items: center; gap: 16px; }
+    .nav-cta {
+      font-size: 12px; font-weight: 700; padding: 10px 24px;
+      border: none; cursor: pointer; letter-spacing: 0.08em;
+      text-transform: uppercase;
+      transition: all 0.25s;
+    }
     .nav.scrolled .nav-cta { background: #0D3A4A; color: #fff; }
-    .nav:not(.scrolled) .nav-cta { background: rgba(255,255,255,0.13); color: #fff; border: 1px solid rgba(255,255,255,0.25); }
+    .nav:not(.scrolled) .nav-cta { background: rgba(255,255,255,0.13); color: #fff; border: 1px solid rgba(255,255,255,0.3); }
+    .nav.scrolled .nav-cta:hover { background: #0a2d3d; }
 
     /* 언어 버튼 */
-    .lang-wrap { display: flex; gap: 4px; margin-right: 16px; }
+    .lang-wrap { display: flex; gap: 4px; }
     .lang-btn {
       font-size: 11px; font-weight: 700; padding: 5px 9px;
-      background: transparent; border: 1px solid rgba(255,255,255,0.25);
-      color: rgba(255,255,255,0.55); cursor: pointer; letter-spacing: 0.06em;
+      background: transparent; border: 1px solid rgba(255,255,255,0.2);
+      color: rgba(255,255,255,0.5); cursor: pointer; letter-spacing: 0.06em;
       transition: all 0.2s;
     }
-    .nav.scrolled .lang-btn { border-color: rgba(0,0,0,0.15); color: #aaa; }
-    .lang-btn:hover { color: #fff; border-color: rgba(255,255,255,0.6); }
+    .nav.scrolled .lang-btn { border-color: rgba(0,0,0,0.12); color: #999; }
+    .lang-btn:hover { color: #fff; border-color: rgba(255,255,255,0.5); }
     .nav.scrolled .lang-btn:hover { color: #0D3A4A; border-color: #0D3A4A; }
-    .lang-btn.active { color: #fff; border-color: #00B8D9; background: rgba(0,184,217,0.15); }
-    .nav.scrolled .lang-btn.active { color: #0D3A4A; border-color: #0D3A4A; background: rgba(13,58,74,0.08); }
+    .lang-btn.active { color: #fff; border-color: #00B8D9; background: rgba(0,184,217,0.12); }
+    .nav.scrolled .lang-btn.active { color: #0D3A4A; border-color: #0D3A4A; background: rgba(13,58,74,0.07); }
 
     @media (max-width: 768px) {
       .nav { display: none !important; }
@@ -97,13 +130,15 @@ import SecContact    from '../components/SecContact.astro';
       <a href="#sec6" data-i18n="nav.clients">파트너스</a>
       <a href="#sec7" data-i18n="nav.contact">도입 문의</a>
     </div>
-    <div class="lang-wrap">
-      <button class="lang-btn active" data-lang="ko" onclick="__applyLang('ko')">KO</button>
-      <button class="lang-btn" data-lang="en" onclick="__applyLang('en')">EN</button>
-      <button class="lang-btn" data-lang="zh" onclick="__applyLang('zh')">ZH</button>
-      <button class="lang-btn" data-lang="ja" onclick="__applyLang('ja')">JA</button>
+    <div class="nav-right">
+      <div class="lang-wrap">
+        <button class="lang-btn active" data-lang="ko" onclick="__applyLang('ko')">KO</button>
+        <button class="lang-btn" data-lang="en" onclick="__applyLang('en')">EN</button>
+        <button class="lang-btn" data-lang="zh" onclick="__applyLang('zh')">ZH</button>
+        <button class="lang-btn" data-lang="ja" onclick="__applyLang('ja')">JA</button>
+      </div>
+      <button class="nav-cta" data-i18n="nav.contact" onclick="document.getElementById('sec7').scrollIntoView({behavior:'smooth'})">도입 문의</button>
     </div>
-    <button class="nav-cta" data-i18n="nav.contact" onclick="document.getElementById('sec7').scrollIntoView({behavior:'smooth'})">도입 문의</button>
   </nav>
 
   <!-- 섹션들 -->
@@ -118,7 +153,6 @@ import SecContact    from '../components/SecContact.astro';
 <script is:inline>
   const nav = document.getElementById('nav');
 
-  // 스크롤에 따라 nav 스타일 변경
   window.addEventListener('scroll', function() {
     const hero = document.getElementById('sec0');
     const heroHeight = hero ? hero.offsetHeight : 0;
@@ -129,7 +163,6 @@ import SecContact    from '../components/SecContact.astro';
     }
   });
 
-  // 앵커 링크 smooth scroll
   document.querySelectorAll('a[href^="#"]').forEach(function(a) {
     a.addEventListener('click', function(e) {
       e.preventDefault();
@@ -137,6 +170,17 @@ import SecContact    from '../components/SecContact.astro';
       if (target) target.scrollIntoView({ behavior: 'smooth' });
     });
   });
+
+  // 전역 fade-up IntersectionObserver
+  const fadeObs = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e) {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        fadeObs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+  document.querySelectorAll('.fade-up').forEach(function(el) { fadeObs.observe(el); });
 </script>
 </body>
 </html>

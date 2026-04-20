@@ -3,7 +3,12 @@
 ---
 <section class="sec s3" id="sec3">
 
-  <!-- 내부 스크롤 컨테이너 — index.astro의 SCROLLABLE_SECS에서 감지 -->
+  <!-- 섹션 헤더 -->
+  <div class="svc-header">
+    <span class="svc-eyebrow fade-up">Services</span>
+    <h2 class="svc-section-title fade-up fade-up-d1">이담에스티의<br>전문 서비스</h2>
+  </div>
+
   <div class="s3scroll">
 
     <!-- ── 블록 1: 방송 SI ── -->
@@ -127,31 +132,28 @@
     </div>
 
 
-    <footer class="eds-footer">
-      <div class="eds-footer-top">
-        <img class="eds-footer-logo" src="/images/logo.png" alt="EDS 이담에스티" />
-        <span class="eds-footer-copy">Copyright 2022. EDAMST. All rights reserved.</span>
-      </div>
-      <div class="eds-footer-bottom">
-        <span class="eds-footer-info">대표 최명순</span>
-        <span class="eds-footer-div">|</span>
-        <span class="eds-footer-info">서울시 구로구 디지털로31길 19, 406호 (에이스테크노타워Ⅱ)</span>
-        <span class="eds-footer-div">|</span>
-        <span class="eds-footer-info">Tel 02-857-7744</span>
-        <span class="eds-footer-div">|</span>
-        <span class="eds-footer-info">Fax 02-857-7321</span>
-        <span class="eds-footer-div">|</span>
-        <a class="eds-footer-mail" href="mailto:pub@edamst.com">pub@edamst.com</a>
-      </div>
-    </footer>
-  </div><!-- /s3scroll --></div>
-    <span class="sh-text">scroll</span>
-  </div>
+  </div><!-- /s3scroll -->
 </section>
 
 <style>
   /* ── Section ── */
   .s3 { background: #F8F8F6; }
+
+  /* ── 섹션 헤더 ── */
+  .svc-header {
+    padding: 120px 80px 60px;
+  }
+  .svc-eyebrow {
+    display: inline-flex; align-items: center; gap: 10px;
+    font-size: 11px; font-weight: 700; letter-spacing: 0.24em;
+    text-transform: uppercase; color: #00B8D9; margin-bottom: 16px;
+  }
+  .svc-eyebrow::before { content: ''; display: block; width: 20px; height: 2px; background: #00B8D9; }
+  .svc-section-title {
+    font-size: clamp(28px, 3.2vw, 52px);
+    font-weight: 800; letter-spacing: -0.04em;
+    color: #0a0a0a; line-height: 1.15;
+  }
 
   /* ── 내부 컨테이너 ── */
   .s3scroll { width: 100%; }
@@ -163,7 +165,7 @@
   .svc-hero {
     position: relative;
     width: 100%;
-    height: 360px;
+    height: 420px;
     background-size: cover;
     background-position: center;
     display: flex;
@@ -172,142 +174,68 @@
     overflow: hidden;
   }
   .svc-hero-ov {
-    position: absolute;
-    inset: 0;
-    background: rgba(0,0,0,0.50);
+    position: absolute; inset: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.35) 60%, rgba(0,0,0,0.2) 100%);
   }
   .svc-hero-text {
-    position: relative;
-    z-index: 1;
-    text-align: center;
-    padding: 0 40px;
-    max-width: 760px;
+    position: relative; z-index: 1;
+    text-align: center; padding: 0 60px; max-width: 800px;
   }
   .svc-hero-title {
-    font-size: clamp(24px, 3.5vw, 40px);
-    font-weight: 800;
-    color: #fff;
-    letter-spacing: -0.03em;
-    margin-bottom: 12px;
-    line-height: 1.1;
+    font-size: clamp(26px, 4vw, 52px);
+    font-weight: 800; color: #fff;
+    letter-spacing: -0.04em; margin-bottom: 14px; line-height: 1.1;
   }
   .svc-hero-sub {
-    font-size: clamp(12px, 1.4vw, 15px);
-    color: rgba(255,255,255,0.75);
-    line-height: 1.7;
+    font-size: clamp(13px, 1.4vw, 16px);
+    color: rgba(255,255,255,0.7); line-height: 1.75;
   }
 
   /* ── 탭 바 ── */
   .svc-tabs {
-    display: flex;
-    background: #1A1A1A;
-    overflow-x: auto;
-    scrollbar-width: none;
+    display: flex; background: #111;
+    overflow-x: auto; scrollbar-width: none;
     -ms-overflow-style: none;
   }
   .svc-tabs::-webkit-scrollbar { display: none; }
   .svc-tab {
-    flex: 0 0 auto;
-    padding: 15px 28px;
-    font-size: 13px;
-    font-weight: 600;
-    color: rgba(255,255,255,0.4);
-    background: none;
-    border: none;
+    flex: 0 0 auto; padding: 17px 32px;
+    font-size: 13px; font-weight: 600;
+    color: rgba(255,255,255,0.38);
+    background: none; border: none;
     border-bottom: 2px solid transparent;
-    cursor: pointer;
-    font-family: inherit;
-    letter-spacing: 0.02em;
-    white-space: nowrap;
+    cursor: pointer; font-family: inherit;
+    letter-spacing: 0.02em; white-space: nowrap;
     transition: color 0.2s, border-color 0.2s, background 0.2s;
   }
-  .svc-tab:hover { color: rgba(255,255,255,0.8); background: rgba(255,255,255,0.05); }
-  .svc-tab.on { color: #fff; border-bottom-color: #00B8D9; background: rgba(0,184,217,0.08); }
+  .svc-tab:hover { color: rgba(255,255,255,0.75); background: rgba(255,255,255,0.04); }
+  .svc-tab.on { color: #fff; border-bottom-color: #00B8D9; background: rgba(0,184,217,0.07); }
 
   /* ── 설명 텍스트 바 ── */
   .svc-desc-bar {
-    background: #111111;
-    padding: 20px 56px;
-    min-height: 66px;
-    display: flex;
-    align-items: center;
+    background: #0a0a0a; padding: 24px 80px; min-height: 72px;
+    display: flex; align-items: center;
   }
   .svc-desc-text {
-    font-size: 13px;
-    color: rgba(255,255,255,0.58);
-    line-height: 1.85;
-    max-width: 900px;
+    font-size: 14px; color: rgba(255,255,255,0.52);
+    line-height: 1.9; max-width: 860px;
     transition: opacity 0.22s ease;
   }
   .svc-desc-text.fade { opacity: 0; }
 
   /* ── 반응형 ── */
   @media (max-width: 768px) {
-    .svc-hero { height: 260px; }
-    .svc-tab { padding: 13px 18px; font-size: 12px; }
-    .svc-desc-bar { padding: 18px 24px; }
-    .svc-desc-text { font-size: 12px; }
+    .svc-header { padding: 80px 32px 40px; }
+    .svc-hero { height: 280px; }
+    .svc-hero-text { padding: 0 32px; }
+    .svc-tab { padding: 14px 20px; font-size: 12px; }
+    .svc-desc-bar { padding: 20px 28px; }
+    .svc-desc-text { font-size: 13px; }
   }
   @media (max-width: 480px) {
-    .svc-hero { height: 220px; }
+    .svc-header { padding: 60px 20px 32px; }
+    .svc-hero { height: 240px; }
     .svc-tab { padding: 12px 14px; font-size: 11px; }
-  }
-  /* ── EDS Footer ── */
-  .eds-footer {
-    background: #0A0A0A;
-    padding: 24px 56px 28px;
-    border-top: 1px solid rgba(255,255,255,0.07);
-  }
-  .eds-footer-top {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 14px;
-    padding-bottom: 14px;
-    border-bottom: 1px solid rgba(255,255,255,0.06);
-  }
-  .eds-footer-logo {
-    height: 24px;
-    width: auto;
-    object-fit: contain;
-    filter: brightness(0) invert(1);
-    opacity: 0.75;
-  }
-  .eds-footer-copy {
-    font-size: 10px;
-    color: rgba(255,255,255,0.25);
-    letter-spacing: 0.06em;
-  }
-  .eds-footer-bottom {
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 5px 10px;
-  }
-  .eds-footer-info {
-    font-size: 11px;
-    color: rgba(255,255,255,0.38);
-    letter-spacing: 0.02em;
-  }
-  .eds-footer-div {
-    font-size: 10px;
-    color: rgba(255,255,255,0.15);
-  }
-  .eds-footer-mail {
-    font-size: 11px;
-    color: #00B8D9;
-    text-decoration: none;
-    transition: color 0.2s;
-  }
-  .eds-footer-mail:hover { color: #fff; }
-  @media (max-width: 768px) {
-    .eds-footer { padding: 20px 28px 24px; }
-    .eds-footer-div { display: none; }
-    .eds-footer-bottom { gap: 3px 8px; }
-    .eds-footer-info, .eds-footer-mail { font-size: 10px; }
-    .eds-footer-copy { font-size: 9px; }
-  }
-    100%{ opacity:0; transform:translateY(9px); }
   }
 </style>
 

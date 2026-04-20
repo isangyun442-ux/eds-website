@@ -88,34 +88,13 @@
   <div class="port-footer">
     <a href="/works" class="port-all">전체 구축사례 보기 →</a>
   </div>
-
-
-    <footer class="eds-footer">
-      <div class="eds-footer-top">
-        <img class="eds-footer-logo" src="/images/logo.png" alt="EDS 이담에스티" />
-        <span class="eds-footer-copy">Copyright 2022. EDAMST. All rights reserved.</span>
-      </div>
-      <div class="eds-footer-bottom">
-        <span class="eds-footer-info">대표 최명순</span>
-        <span class="eds-footer-div">|</span>
-        <span class="eds-footer-info">서울시 구로구 디지털로31길 19, 406호 (에이스테크노타워Ⅱ)</span>
-        <span class="eds-footer-div">|</span>
-        <span class="eds-footer-info">Tel 02-857-7744</span>
-        <span class="eds-footer-div">|</span>
-        <span class="eds-footer-info">Fax 02-857-7321</span>
-        <span class="eds-footer-div">|</span>
-        <a class="eds-footer-mail" href="mailto:pub@edamst.com">pub@edamst.com</a>
-      </div>
-    </footer></div>
-    <span class="sh-text">scroll</span>
-  </div>
 </section>
 
 <style>
   /* ── Section ── */
   .s4 {
     background: #F8F8F6;
-    padding: 80px 0;
+    padding: 120px 0 0;
   }
 
   /* ── Header ── */
@@ -123,20 +102,21 @@
     display: flex;
     align-items: flex-end;
     justify-content: space-between;
-    padding: 16px 56px 16px;
+    padding: 0 80px 40px;
     flex-shrink: 0;
   }
   .sec-tag {
-    font-size: 10px;
-    font-weight: 600;
-    letter-spacing: 0.22em;
+    display: inline-flex; align-items: center; gap: 10px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.24em;
     text-transform: uppercase;
     color: #00B8D9;
     display: block;
-    margin-bottom: 8px;
+    margin-bottom: 14px;
   }
   .sec-title {
-    font-size: clamp(20px, 2.5vw, 30px);
+    font-size: clamp(28px, 3.2vw, 48px);
     font-weight: 800;
     letter-spacing: -0.04em;
     color: #0A0A0A;
@@ -151,8 +131,8 @@
     padding-bottom: 4px;
   }
   .port-btn {
-    width: 40px;
-    height: 40px;
+    width: 44px;
+    height: 44px;
     background: none;
     border: 1px solid #D0D0D0;
     cursor: pointer;
@@ -200,7 +180,7 @@
     cursor: pointer;
     display: flex;
     flex-direction: column;
-    padding-left: 56px;
+    padding-left: 80px;
     height: 100%;
   }
   .port-img {
@@ -208,44 +188,45 @@
     aspect-ratio: 4 / 3;
     background-size: cover;
     background-position: center;
-    transition: opacity 0.3s;
+    transition: opacity 0.3s, transform 0.6s cubic-bezier(0.16,1,0.3,1);
     flex-shrink: 0;
+    overflow: hidden;
   }
-  .port-card:hover .port-img { opacity: 0.85; }
+  .port-card:hover .port-img { opacity: 0.88; transform: scale(1.02); }
   .port-body {
-    padding: 22px 24px 22px 0;
+    padding: 24px 28px 24px 0;
     display: flex;
     flex-direction: column;
-    gap: 6px;
+    gap: 7px;
   }
   .port-n {
     font-size: 10px;
     font-weight: 700;
     color: #00B8D9;
-    letter-spacing: 0.14em;
+    letter-spacing: 0.16em;
   }
   .port-title {
-    font-size: 16px;
+    font-size: 17px;
     font-weight: 700;
     color: #0A0A0A;
-    letter-spacing: -0.02em;
+    letter-spacing: -0.03em;
     line-height: 1.4;
   }
   .port-desc {
-    font-size: 11px;
+    font-size: 12px;
     color: #999;
     line-height: 1.6;
   }
   .port-link {
     font-size: 11px;
-    font-weight: 600;
+    font-weight: 700;
     color: #0A0A0A;
-    letter-spacing: 0.04em;
-    margin-top: 4px;
-    transition: color 0.2s;
+    letter-spacing: 0.06em;
+    margin-top: 6px;
+    transition: color 0.2s, transform 0.2s;
+    display: inline-block;
   }
-  .port-card:hover .port-link { color: #00B8D9; }
-
+  .port-card:hover .port-link { color: #00B8D9; transform: translateX(3px); }
 
   /* ── CTA 카드 ── */
   .port-cta-card {
@@ -255,47 +236,48 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding-left: 56px;
+    padding-left: 80px;
+    transition: background 0.25s;
   }
   .port-cta-inner {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 10px;
-    padding: 0 24px 0 0;
+    gap: 12px;
+    padding: 0 28px 0 0;
   }
   .port-cta-num {
-    font-size: 52px;
-    font-weight: 800;
+    font-size: 56px;
+    font-weight: 900;
     color: #fff;
-    letter-spacing: -0.04em;
+    letter-spacing: -0.05em;
     line-height: 1;
   }
   .port-cta-plus {
-    font-size: 36px;
+    font-size: 38px;
     color: #00B8D9;
   }
   .port-cta-label {
-    font-size: 12px;
+    font-size: 11px;
     font-weight: 500;
-    color: rgba(255,255,255,0.4);
-    letter-spacing: 0.1em;
+    color: rgba(255,255,255,0.35);
+    letter-spacing: 0.12em;
     text-transform: uppercase;
   }
   .port-cta-arr {
     font-size: 12px;
     font-weight: 700;
     color: #00B8D9;
-    letter-spacing: 0.06em;
+    letter-spacing: 0.08em;
     margin-top: 4px;
     transition: transform 0.2s;
   }
-  .port-cta-card:hover .port-cta-arr { transform: translateX(4px); }
+  .port-cta-card:hover .port-cta-arr { transform: translateX(5px); }
   .port-cta-card:hover { background: #0D2030; }
 
   /* ── Progress ── */
   .port-progress-wrap {
-    margin: 24px 56px 0;
+    margin: 28px 80px 0;
     height: 1px;
     background: #E0E0E0;
     position: relative;
@@ -311,19 +293,20 @@
 
   /* ── Footer ── */
   .port-footer {
-    padding: 20px 56px 24px;
+    padding: 28px 80px 40px;
     flex-shrink: 0;
   }
   .port-all {
     display: inline-flex;
     align-items: center;
     gap: 10px;
-    font-size: 14px;
+    font-size: 13px;
     font-weight: 700;
     color: #0A0A0A;
     text-decoration: none;
-    letter-spacing: 0.04em;
-    padding: 13px 28px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 14px 32px;
     border: 1.5px solid #0A0A0A;
     transition: background 0.2s, color 0.2s;
   }
@@ -334,73 +317,16 @@
     .port-card { flex: 0 0 calc(100% / 2.2); }
   }
   @media (max-width: 768px) {
-    .s4 { padding: 64px 0 40px; }
-    .port-header { padding: 0 28px 28px; }
-    .port-card { flex: 0 0 calc(100% / 1.15); padding-left: 28px; }
-    .port-progress-wrap { margin: 20px 28px 0; }
-    .port-footer { padding: 16px 28px 0; }
+    .s4 { padding: 80px 0 0; }
+    .port-header { padding: 0 32px 28px; }
+    .port-card { flex: 0 0 calc(100% / 1.15); padding-left: 32px; }
+    .port-progress-wrap { margin: 20px 32px 0; }
+    .port-footer { padding: 20px 32px 32px; }
+    .port-cta-card { padding-left: 32px; }
   }
   @media (max-width: 480px) {
     .port-card { flex: 0 0 85%; }
   }
-  /* ── EDS Footer ── */
-  .eds-footer {
-    background: #0A0A0A;
-    padding: 24px 56px 28px;
-    border-top: 1px solid rgba(255,255,255,0.07);
-  }
-  .eds-footer-top {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 14px;
-    padding-bottom: 14px;
-    border-bottom: 1px solid rgba(255,255,255,0.06);
-  }
-  .eds-footer-logo {
-    height: 24px;
-    width: auto;
-    object-fit: contain;
-    filter: brightness(0) invert(1);
-    opacity: 0.75;
-  }
-  .eds-footer-copy {
-    font-size: 10px;
-    color: rgba(255,255,255,0.25);
-    letter-spacing: 0.06em;
-  }
-  .eds-footer-bottom {
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 5px 10px;
-  }
-  .eds-footer-info {
-    font-size: 11px;
-    color: rgba(255,255,255,0.38);
-    letter-spacing: 0.02em;
-  }
-  .eds-footer-div {
-    font-size: 10px;
-    color: rgba(255,255,255,0.15);
-  }
-  .eds-footer-mail {
-    font-size: 11px;
-    color: #00B8D9;
-    text-decoration: none;
-    transition: color 0.2s;
-  }
-  .eds-footer-mail:hover { color: #fff; }
-  @media (max-width: 768px) {
-    .eds-footer { padding: 20px 28px 24px; }
-    .eds-footer-div { display: none; }
-    .eds-footer-bottom { gap: 3px 8px; }
-    .eds-footer-info, .eds-footer-mail { font-size: 10px; }
-    .eds-footer-copy { font-size: 9px; }
-  }
-    100%{ opacity:0; transform:translateY(9px); }
-  }
-
 </style>
 
 <script is:inline>
