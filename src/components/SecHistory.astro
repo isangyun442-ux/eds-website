@@ -86,12 +86,20 @@ const history = [
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
+    background-color: rgba(6,14,22,0.90);
+  }
+  .s5::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(6,14,22,0.90);
+    z-index: 0;
   }
   .hist-inner {
+    position: relative;
+    z-index: 1;
     max-width: 900px; margin: 0 auto;
     padding: 120px 80px 120px;
-    background: rgba(6,14,22,0.90);
-    backdrop-filter: blur(4px);
   }
 
   .h-header { text-align: center; margin-bottom: 80px; }
