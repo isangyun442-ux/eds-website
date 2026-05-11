@@ -25,13 +25,18 @@
   nav {
     position: fixed; top: 0; left: 0; right: 0; z-index: 200;
     height: 64px;
-    background: var(--navy3);
+    background: transparent;
     display: flex; align-items: center; justify-content: space-between;
     padding: 0 60px;
-    border-bottom: 2px solid var(--cyan);
-    transition: box-shadow 0.3s;
+    border-bottom: none;
+    transition: background 0.4s, box-shadow 0.4s;
   }
-  nav.scrolled { box-shadow: 0 4px 24px rgba(0,184,217,0.15); }
+  nav.scrolled {
+    background: rgba(10, 25, 40, 0.92);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid rgba(0,184,217,0.2);
+    box-shadow: 0 4px 24px rgba(0,0,0,0.3);
+  }
 
   .nav-logo img {
     height: 38px; width: auto; object-fit: contain;
@@ -80,9 +85,9 @@
     .nav-links {
       display: none;
       position: absolute; top: 64px; left: 0; right: 0;
-      background: var(--navy3);
+      background: rgba(10, 25, 40, 0.95); backdrop-filter: blur(8px);
       flex-direction: column; gap: 0;
-      border-bottom: 2px solid var(--cyan);
+      border-bottom: 1px solid rgba(0,184,217,0.2);
       padding: 12px 0;
     }
     .nav-links.open { display: flex; }
