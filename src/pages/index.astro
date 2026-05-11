@@ -63,6 +63,18 @@ import SecContact    from '../components/SecContact.astro';
       padding: 20px 60px;
       transition: background 0.4s, box-shadow 0.4s, padding 0.3s;
     }
+    /* Hero 위쪽 그라데이션 오버레이 */
+    .nav::before {
+      content: '';
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      height: 160px;
+      background: linear-gradient(to bottom, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0) 100%);
+      z-index: -1;
+      pointer-events: none;
+      transition: opacity 0.4s;
+    }
+    .nav.scrolled::before { opacity: 0; }
     .nav.scrolled {
       background: rgba(255,255,255,0.97);
       box-shadow: 0 1px 0 rgba(0,0,0,0.06);
