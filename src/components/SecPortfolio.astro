@@ -93,7 +93,7 @@
 <style>
   /* ── Section ── */
   .s4 {
-    background: #F8F8F6;
+    background: #fff;
     padding: 120px 0 0;
   }
 
@@ -111,7 +111,7 @@
     font-weight: 700;
     letter-spacing: 0.24em;
     text-transform: uppercase;
-    color: #00B8D9;
+    color: #1a2f8a;
     display: block;
     margin-bottom: 14px;
   }
@@ -119,7 +119,7 @@
     font-size: clamp(28px, 3.2vw, 48px);
     font-weight: 800;
     letter-spacing: -0.04em;
-    color: #0A0A0A;
+    color: #1a2f8a;
     line-height: 1;
   }
 
@@ -134,19 +134,19 @@
     width: 44px;
     height: 44px;
     background: none;
-    border: 1px solid #D0D0D0;
+    border: 1.5px solid #1a2f8a;
     cursor: pointer;
     font-size: 16px;
-    color: #0A0A0A;
+    color: #1a2f8a;
     display: flex;
     align-items: center;
     justify-content: center;
     transition: background 0.2s, border-color 0.2s, color 0.2s;
     font-family: inherit;
   }
-  .port-btn:hover { background: #0A0A0A; border-color: #0A0A0A; color: #fff; }
+  .port-btn:hover { background: #1a2f8a; border-color: #1a2f8a; color: #fff; }
   .port-btn:disabled { opacity: 0.25; cursor: default; }
-  .port-btn:disabled:hover { background: none; border-color: #D0D0D0; color: #0A0A0A; }
+  .port-btn:disabled:hover { background: none; border-color: #D0D0D0; color: #1a2f8a; }
   .port-count {
     font-size: 12px;
     font-weight: 500;
@@ -180,57 +180,68 @@
     cursor: pointer;
     display: flex;
     flex-direction: column;
-    padding-left: 80px;
+    padding-left: 20px;
     height: 100%;
   }
+  .port-card { position: relative; }
   .port-img {
     width: 100%;
     aspect-ratio: 4 / 3;
     background-size: cover;
     background-position: center;
-    transition: opacity 0.3s, transform 0.6s cubic-bezier(0.16,1,0.3,1);
+    transition: transform 0.6s cubic-bezier(0.16,1,0.3,1);
     flex-shrink: 0;
     overflow: hidden;
+    position: relative;
   }
-  .port-card:hover .port-img { opacity: 0.88; transform: scale(1.02); }
+  .port-img::after {
+    content: '';
+    position: absolute; inset: 0;
+    background: linear-gradient(to top, rgba(10,20,60,0.85) 0%, rgba(10,20,60,0.2) 50%, rgba(0,0,0,0) 100%);
+    transition: opacity 0.3s;
+  }
+  .port-card:hover .port-img { transform: scale(1.02); }
   .port-body {
-    padding: 24px 28px 24px 0;
+    position: absolute;
+    bottom: 0; left: 20px; right: 0;
+    padding: 24px 28px;
     display: flex;
     flex-direction: column;
-    gap: 7px;
+    gap: 6px;
+    z-index: 2;
   }
   .port-n {
     font-size: 10px;
     font-weight: 700;
-    color: #00B8D9;
+    color: rgba(255,255,255,0.6);
     letter-spacing: 0.16em;
   }
   .port-title {
     font-size: 17px;
     font-weight: 700;
-    color: #0A0A0A;
+    color: #fff;
     letter-spacing: -0.03em;
     line-height: 1.4;
   }
   .port-desc {
     font-size: 12px;
-    color: #999;
+    color: rgba(255,255,255,0.6);
     line-height: 1.6;
   }
   .port-link {
     font-size: 11px;
     font-weight: 700;
-    color: #0A0A0A;
+    color: rgba(255,255,255,0.8);
     letter-spacing: 0.06em;
-    margin-top: 6px;
+    margin-top: 4px;
     transition: color 0.2s, transform 0.2s;
     display: inline-block;
   }
-  .port-card:hover .port-link { color: #00B8D9; transform: translateX(3px); }
+  .port-card:hover .port-link { color: #fff; transform: translateX(3px); }
 
   /* ── CTA 카드 ── */
   .port-cta-card {
-    background: #0A0A0A;
+    background: #1a2f8a;
     cursor: pointer;
     display: flex !important;
     flex-direction: column;
@@ -255,7 +266,7 @@
   }
   .port-cta-plus {
     font-size: 38px;
-    color: #00B8D9;
+    color: #1a2f8a;
   }
   .port-cta-label {
     font-size: 11px;
@@ -267,13 +278,13 @@
   .port-cta-arr {
     font-size: 12px;
     font-weight: 700;
-    color: #00B8D9;
+    color: #1a2f8a;
     letter-spacing: 0.08em;
     margin-top: 4px;
     transition: transform 0.2s;
   }
   .port-cta-card:hover .port-cta-arr { transform: translateX(5px); }
-  .port-cta-card:hover { background: #0D2030; }
+  .port-cta-card:hover { background: #142580; }
 
   /* ── Progress ── */
   .port-progress-wrap {
@@ -287,7 +298,7 @@
     position: absolute;
     left: 0; top: 0;
     height: 1px;
-    background: #0A0A0A;
+    background: #1a2f8a;
     transition: width 0.55s cubic-bezier(0.77, 0, 0.175, 1);
   }
 
@@ -302,15 +313,16 @@
     gap: 10px;
     font-size: 13px;
     font-weight: 700;
-    color: #0A0A0A;
+    color: #fff;
     text-decoration: none;
     letter-spacing: 0.06em;
     text-transform: uppercase;
     padding: 14px 32px;
-    border: 1.5px solid #0A0A0A;
+    background: #1a2f8a;
+    border: 1.5px solid #1a2f8a;
     transition: background 0.2s, color 0.2s;
   }
-  .port-all:hover { background: #0A0A0A; color: #fff; }
+  .port-all:hover { background: #142580; color: #fff; }
 
   /* ── Responsive ── */
   @media (max-width: 1024px) {
