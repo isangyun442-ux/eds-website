@@ -15,8 +15,8 @@ import SecContact    from '../components/SecContact.astro';
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>EDS ?�담?�스????Beyond The Future | ?�마??공간 ?�루??/title>
-  <meta name="description" content="방송 ?�튜?�오부??LED ?�스?�레?�까지. 17?�의 경험?�로 최적???�마??공간???�계?�니??" />
+  <title>EDS ?�담?�스????Beyond The Future | ?�마??공간 ?�루??/title>
+  <meta name="description" content="방송 ?�튜?�오부??LED ?�스?�레?�까지. 17?�의 경험?�로 최적???�마??공간???�계?�니??" />
   <link rel="icon" href="/favicon.ico" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -32,13 +32,13 @@ import SecContact    from '../components/SecContact.astro';
       overflow-x: hidden;
     }
 
-    /* 공통 ?�션 */
+    /* 공통 ?�션 */
     .sec {
       width: 100%;
       position: relative;
     }
 
-    /* ?�?� ?�역 ?�이?�업 ?�니메이???�?� */
+    /* ?�?� ?�역 ?�이?�업 ?�니메이???�?� */
     .fade-up {
       opacity: 0;
       transform: translateY(40px);
@@ -65,9 +65,6 @@ import SecContact    from '../components/SecContact.astro';
       padding: 20px 60px;
       transition: background 0.4s, box-shadow 0.4s, padding 0.3s;
     }
-    /* Hero ?�쪽 그라?�이???�버?�이 */
-    
-    .nav.scrolled::before { opacity: 0; }
     .nav.scrolled {
       background: rgba(255,255,255,0.97);
       box-shadow: 0 1px 0 rgba(0,0,0,0.06);
@@ -112,7 +109,7 @@ import SecContact    from '../components/SecContact.astro';
       color: #0D3A4A;
     }
 
-    /* ?�롭?�운 */
+    /* ?�롭?�운 */
     .nav-drop {
       position: absolute;
       top: calc(100% + 8px);
@@ -150,7 +147,7 @@ import SecContact    from '../components/SecContact.astro';
       color: #fff;
     }
 
-    /* ?�어 버튼 */
+    /* ?�어 버튼 */
     .lang-wrap { display: flex; gap: 4px; flex-shrink: 0; }
     .lang-btn {
       font-size: 11px; font-weight: 700; padding: 5px 9px;
@@ -174,49 +171,49 @@ import SecContact    from '../components/SecContact.astro';
   <!-- NAV -->
   <nav class="nav" id="nav">
     <a href="/" class="nav-logo">
-      <img class="logo-color" src="/images/logo.png" alt="EDS ?�담?�스?? />
-      <img class="logo-white" src="/images/logo.png" alt="EDS ?�담?�스?? />
+      <img class="logo-color" src="/images/logo.png" alt="EDS ?�담?�스?? />
+      <img class="logo-white" src="/images/logo.png" alt="EDS ?�담?�스?? />
     </a>
 
     <div class="nav-menu">
 
-      <!-- ?�사?�개 -->
+      <!-- ?�사?�개 -->
       <div class="nav-item has-drop">
-        <span class="nav-link">?�사?�개</span>
+        <span class="nav-link">?�사?�개</span>
         <div class="nav-drop">
-          <a href="#sec2" class="drop-link" onclick="event.preventDefault();document.getElementById('sec2').scrollIntoView({behavior:'smooth'})">?�사�?/a>
-          <a href="#sec6" class="drop-link" onclick="event.preventDefault();document.getElementById('sec6').scrollIntoView({behavior:'smooth'})">?�혁</a>
-          <a href="#sec-cert" class="drop-link" onclick="event.preventDefault();document.getElementById('sec-cert').scrollIntoView({behavior:'smooth'})">?�증?�황</a>
-          <a href="#sec7" class="drop-link" onclick="event.preventDefault();document.getElementById('sec7').scrollIntoView({behavior:'smooth'})">?�시??�?/a>
+          <a href="#sec2" class="drop-link" onclick="event.preventDefault();document.getElementById('sec2').scrollIntoView({behavior:'smooth'})">?�사�?/a>
+          <a href="#sec6" class="drop-link" onclick="event.preventDefault();document.getElementById('sec6').scrollIntoView({behavior:'smooth'})">?�혁</a>
+          <a href="#sec-cert" class="drop-link" onclick="event.preventDefault();document.getElementById('sec-cert').scrollIntoView({behavior:'smooth'})">?�증?�황</a>
+          <a href="#sec7" class="drop-link" onclick="event.preventDefault();document.getElementById('sec7').scrollIntoView({behavior:'smooth'})">?�시??�?/a>
         </div>
       </div>
 
-      <!-- ?�업분야 -->
+      <!-- ?�업분야 -->
       <div class="nav-item has-drop">
-        <span class="nav-link">?�업분야</span>
+        <span class="nav-link">?�업분야</span>
         <div class="nav-drop">
-          <a href="#svc-public" class="drop-link" onclick="event.preventDefault();document.getElementById('svc-public').scrollIntoView({behavior:'smooth'})">공공기�?</a>
-          <a href="#svc-edu" class="drop-link" onclick="event.preventDefault();document.getElementById('svc-edu').scrollIntoView({behavior:'smooth'})">교육기�?</a>
+          <a href="#svc-public" class="drop-link" onclick="event.preventDefault();document.getElementById('svc-public').scrollIntoView({behavior:'smooth'})">공공기�?</a>
+          <a href="#svc-edu" class="drop-link" onclick="event.preventDefault();document.getElementById('svc-edu').scrollIntoView({behavior:'smooth'})">교육기�?</a>
           <a href="#svc-corp" class="drop-link" onclick="event.preventDefault();document.getElementById('svc-corp').scrollIntoView({behavior:'smooth'})">기업</a>
-          <a href="#svc-media" class="drop-link" onclick="event.preventDefault();document.getElementById('svc-media').scrollIntoView({behavior:'smooth'})">미디?�센??/a>
+          <a href="#svc-media" class="drop-link" onclick="event.preventDefault();document.getElementById('svc-media').scrollIntoView({behavior:'smooth'})">미디?�센??/a>
           <a href="#svc-religion" class="drop-link" onclick="event.preventDefault();document.getElementById('svc-religion').scrollIntoView({behavior:'smooth'})">종교</a>
         </div>
       </div>
 
-      <!-- 조달�??�록?�품 -->
+      <!-- 조달�??�록?�품 -->
       <div class="nav-item has-drop">
-        <span class="nav-link">조달�??�록?�품</span>
+        <span class="nav-link">조달�??�록?�품</span>
         <div class="nav-drop">
-          <a href="#sec5" class="drop-link" onclick="event.preventDefault();document.getElementById('sec5').scrollIntoView({behavior:'smooth'})">미디?�박??/a>
-          <a href="#sec5" class="drop-link" onclick="event.preventDefault();document.getElementById('sec5').scrollIntoView({behavior:'smooth'})">컴퓨???�버</a>
-          <a href="#sec5" class="drop-link" onclick="event.preventDefault();document.getElementById('sec5').scrollIntoView({behavior:'smooth'})">?�스???�레??/a>
-          <a href="#sec5" class="drop-link" onclick="event.preventDefault();document.getElementById('sec5').scrollIntoView({behavior:'smooth'})">LED ?�광??/a>
+          <a href="#sec5" class="drop-link" onclick="event.preventDefault();document.getElementById('sec5').scrollIntoView({behavior:'smooth'})">미디?�박??/a>
+          <a href="#sec5" class="drop-link" onclick="event.preventDefault();document.getElementById('sec5').scrollIntoView({behavior:'smooth'})">컴퓨???�버</a>
+          <a href="#sec5" class="drop-link" onclick="event.preventDefault();document.getElementById('sec5').scrollIntoView({behavior:'smooth'})">?�스???�레??/a>
+          <a href="#sec5" class="drop-link" onclick="event.preventDefault();document.getElementById('sec5').scrollIntoView({behavior:'smooth'})">LED ?�광??/a>
         </div>
       </div>
 
-      <!-- 구축?��? -->
+      <!-- 구축?��? -->
       <div class="nav-item">
-        <a href="#sec4" class="nav-link" onclick="event.preventDefault();document.getElementById('sec4').scrollIntoView({behavior:'smooth'})">구축?��?</a>
+        <a href="#sec4" class="nav-link" onclick="event.preventDefault();document.getElementById('sec4').scrollIntoView({behavior:'smooth'})">구축?��?</a>
       </div>
 
       <!-- 문의 -->
@@ -234,7 +231,7 @@ import SecContact    from '../components/SecContact.astro';
     </div>
   </nav>
 
-  <!-- ?�션??-->
+  <!-- ?�션??-->
   <SecHero />
   <SecAbout />
   <SecHistory />
@@ -266,7 +263,7 @@ import SecContact    from '../components/SecContact.astro';
     });
   });
 
-  // ?�역 fade-up IntersectionObserver
+  // ?�역 fade-up IntersectionObserver
   const fadeObs = new IntersectionObserver(function(entries) {
     entries.forEach(function(e) {
       if (e.isIntersecting) {
@@ -278,37 +275,37 @@ import SecContact    from '../components/SecContact.astro';
   document.querySelectorAll('.fade-up').forEach(function(el) { fadeObs.observe(el); });
 </script>
 
-<!-- ?�?� ?�로??문의 버튼 + ?�업 ?�?� -->
+<!-- ?�?� ?�로??문의 버튼 + ?�업 ?�?� -->
 <div class="float-btn" id="floatBtn" onclick="document.getElementById('inquiryModal').classList.add('open')">
   <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
     <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
   </svg>
-  <span>문의?�기</span>
+  <span>문의?�기</span>
 </div>
 
-<!-- ?�업 모달 -->
+<!-- ?�업 모달 -->
 <div class="inq-modal" id="inquiryModal">
   <div class="inq-overlay" onclick="document.getElementById('inquiryModal').classList.remove('open')"></div>
   <div class="inq-box">
     <div class="inq-head">
       <div>
-        <div class="inq-title">?�입 문의</div>
-        <div class="inq-sub">?�문 ?�담?�??빠르�??��??�립?�다</div>
+        <div class="inq-title">?�입 문의</div>
+        <div class="inq-sub">?�문 ?�담?�??빠르�??��??�립?�다</div>
       </div>
       <button class="inq-close" onclick="document.getElementById('inquiryModal').classList.remove('open')">??/button>
     </div>
 
     <div class="inq-body">
       <div class="inq-field">
-        <label class="inq-label">?�사�?<span class="req">*</span></label>
-        <input class="inq-input" type="text" placeholder="?�사명을 ?�력?�주?�요" />
+        <label class="inq-label">?�사�?<span class="req">*</span></label>
+        <input class="inq-input" type="text" placeholder="?�사명을 ?�력?�주?�요" />
       </div>
       <div class="inq-field">
-        <label class="inq-label">?�당???�름 <span class="req">*</span></label>
-        <input class="inq-input" type="text" placeholder="?�길?? />
+        <label class="inq-label">?�당???�름 <span class="req">*</span></label>
+        <input class="inq-input" type="text" placeholder="?�길?? />
       </div>
       <div class="inq-field">
-        <label class="inq-label">?�락�?<span class="req">*</span></label>
+        <label class="inq-label">?�락�?<span class="req">*</span></label>
         <div class="inq-tel">
           <input class="inq-input" type="tel" placeholder="010" maxlength="4"/>
           <span>-</span>
@@ -318,37 +315,37 @@ import SecContact    from '../components/SecContact.astro';
         </div>
       </div>
       <div class="inq-field">
-        <label class="inq-label">?�메??/label>
+        <label class="inq-label">?�메??/label>
         <input class="inq-input" type="email" placeholder="example@company.com" />
       </div>
       <div class="inq-field">
-        <label class="inq-label">?�담 분야 <span class="req">*</span></label>
+        <label class="inq-label">?�담 분야 <span class="req">*</span></label>
         <div class="inq-checks">
           <label class="inq-check"><input type="checkbox" /><span>방송 SI</span></label>
-          <label class="inq-check"><input type="checkbox" /><span>?�튜?�오 구축</span></label>
-          <label class="inq-check"><input type="checkbox" /><span>LED ?�스?�레??/span></label>
-          <label class="inq-check"><input type="checkbox" /><span>?�마??강의??/span></label>
-          <label class="inq-check"><input type="checkbox" /><span>?�카?�브 ?�스??/span></label>
-          <label class="inq-check"><input type="checkbox" /><span>?�상?�의 ?�스??/span></label>
-          <label class="inq-check"><input type="checkbox" /><span>?��?보수</span></label>
-          <label class="inq-check"><input type="checkbox" /><span>기�?</span></label>
+          <label class="inq-check"><input type="checkbox" /><span>?�튜?�오 구축</span></label>
+          <label class="inq-check"><input type="checkbox" /><span>LED ?�스?�레??/span></label>
+          <label class="inq-check"><input type="checkbox" /><span>?�마??강의??/span></label>
+          <label class="inq-check"><input type="checkbox" /><span>?�카?�브 ?�스??/span></label>
+          <label class="inq-check"><input type="checkbox" /><span>?�상?�의 ?�스??/span></label>
+          <label class="inq-check"><input type="checkbox" /><span>?��?보수</span></label>
+          <label class="inq-check"><input type="checkbox" /><span>기�?</span></label>
         </div>
       </div>
       <div class="inq-field">
-        <label class="inq-label">문의 ?�용</label>
-        <textarea class="inq-input inq-textarea" placeholder="문의?�실 ?�용???�유�?�� ?�력?�주?�요"></textarea>
+        <label class="inq-label">문의 ?�용</label>
+        <textarea class="inq-input inq-textarea" placeholder="문의?�실 ?�용???�유�?�� ?�력?�주?�요"></textarea>
       </div>
     </div>
 
     <div class="inq-foot">
-      <button class="inq-submit">문의 보내�???/button>
-      <p class="inq-privacy">?�일 09:00 ??18:00 ?�영 · Tel. 02-857-7744</p>
+      <button class="inq-submit">문의 보내�???/button>
+      <p class="inq-privacy">?�일 09:00 ??18:00 ?�영 · Tel. 02-857-7744</p>
     </div>
   </div>
 </div>
 
 <style>
-  /* ?�로??버튼 */
+  /* ?�로??버튼 */
   .float-btn {
     position: fixed; bottom: 32px; right: 32px;
     z-index: 400;
@@ -366,7 +363,7 @@ import SecContact    from '../components/SecContact.astro';
     box-shadow: 0 8px 32px rgba(0,184,217,0.4);
   }
 
-  /* ?�버?�이 */
+  /* ?�버?�이 */
   .inq-modal {
     position: fixed; inset: 0; z-index: 500;
     display: flex; align-items: flex-end; justify-content: flex-end;
@@ -392,7 +389,7 @@ import SecContact    from '../components/SecContact.astro';
   }
   .inq-modal.open .inq-box { transform: translateY(0); }
 
-  /* ?�더 */
+  /* ?�더 */
   .inq-head {
     display: flex; align-items: flex-start; justify-content: space-between;
     padding: 24px 28px 20px;
@@ -408,7 +405,7 @@ import SecContact    from '../components/SecContact.astro';
   }
   .inq-close:hover { color: #0a0a0a; }
 
-  /* 바디 ?�크�?*/
+  /* 바디 ?�크�?*/
   .inq-body {
     overflow-y: auto; padding: 20px 28px;
     display: flex; flex-direction: column; gap: 18px;
@@ -417,7 +414,7 @@ import SecContact    from '../components/SecContact.astro';
   .inq-body::-webkit-scrollbar { width: 4px; }
   .inq-body::-webkit-scrollbar-thumb { background: #e0e0e0; border-radius: 2px; }
 
-  /* ?�드 */
+  /* ?�드 */
   .inq-field { display: flex; flex-direction: column; gap: 7px; }
   .inq-label { font-size: 12px; font-weight: 700; color: #333; letter-spacing: 0.02em; }
   .req { color: #e53e3e; }
@@ -431,12 +428,12 @@ import SecContact    from '../components/SecContact.astro';
   .inq-input:focus { border-color: #00B8D9; background: #fff; }
   .inq-input::placeholder { color: #bbb; }
 
-  /* ?�화번호 */
+  /* ?�화번호 */
   .inq-tel { display: flex; align-items: center; gap: 6px; }
   .inq-tel span { color: #aaa; font-weight: 500; }
   .inq-tel .inq-input { text-align: center; }
 
-  /* ?�스?�에리어 */
+  /* ?�스?�에리어 */
   .inq-textarea { resize: none; height: 90px; }
 
   /* 체크박스 */
@@ -453,7 +450,7 @@ import SecContact    from '../components/SecContact.astro';
   .inq-check input:checked + span { color: #0D3A4A; font-weight: 700; }
   .inq-check:has(input:checked) { border-color: #0D3A4A; background: rgba(13,58,74,0.05); }
 
-  /* ?�터 */
+  /* ?�터 */
   .inq-foot {
     padding: 16px 28px 24px;
     border-top: 1px solid #f0f0f0;
