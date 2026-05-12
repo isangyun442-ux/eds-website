@@ -2,413 +2,234 @@
 // src/components/SecPortfolio.astro
 ---
 <section class="sec s4" id="sec4">
-  <div class="port-header">
-    <div class="port-header-left">
-      <span class="sec-tag">Portfolio</span>
-      <h2 class="sec-title">구축 사례</h2>
-    </div>
-    <div class="port-nav">
-      <button class="port-btn" id="port-prev" aria-label="이전">←</button>
-      <span class="port-count"><span id="port-cur">1</span> / <span id="port-total">6</span></span>
-      <button class="port-btn" id="port-next" aria-label="다음">→</button>
-    </div>
+
+  <!-- 배경 이미지들 -->
+  <div class="port-bg" id="port-bg">
+    <div class="port-bg-slide active" style="background-image:url('/images/HUFS_ST_04.jpg')"></div>
+    <div class="port-bg-slide" style="background-image:url('/images/SC_ST_09.jpg')"></div>
+    <div class="port-bg-slide" style="background-image:url('/images/GMC_S_01.jpg')"></div>
+    <div class="port-bg-slide" style="background-image:url('/images/GKDE_S_08.jpg')"></div>
+    <div class="port-bg-slide" style="background-image:url('/images/KTV_BS_01.jpg')"></div>
   </div>
 
-  <div class="port-track-wrap">
-    <div class="port-track" id="port-track">
+  <!-- 오버레이 -->
+  <div class="port-overlay"></div>
 
-      <div class="port-card" onclick="location.href='/works'">
-        <div class="port-img" style="background-image:url('/images/HUFS_ST_04.jpg')"></div>
-        <div class="port-body">
-          <span class="port-n">01</span>
+  <!-- 콘텐츠 -->
+  <div class="port-content">
+
+    <!-- 상단 라벨 -->
+    <div class="port-eyebrow">
+      <span class="port-tag">Portfolio</span>
+      <h2 class="port-heading">구축 사례</h2>
+    </div>
+
+    <!-- 중앙 텍스트 -->
+    <div class="port-center">
+      <div class="port-slides" id="port-slides">
+
+        <div class="port-slide active">
+          <span class="port-n">01 / 05</span>
           <h3 class="port-title">한국외국어대학교<br>스튜디오 첨단화</h3>
-          <p class="port-desc">LED 디스플레이 · 2025.02 · 교육기관</p>
-          <span class="port-link">사례 보기 →</span>
+          <p class="port-desc">LED 디스플레이 &nbsp;·&nbsp; 2025.02 &nbsp;·&nbsp; 교육기관</p>
         </div>
-      </div>
 
-      <div class="port-card" onclick="location.href='/works'">
-        <div class="port-img" style="background-image:url('/images/SC_ST_09.jpg')"></div>
-        <div class="port-body">
-          <span class="port-n">02</span>
+        <div class="port-slide">
+          <span class="port-n">02 / 05</span>
           <h3 class="port-title">서울사이버대학교<br>스마트 강의실 고도화</h3>
-          <p class="port-desc">스마트 강의실 · 2024.11 · 교육기관</p>
-          <span class="port-link">사례 보기 →</span>
+          <p class="port-desc">스마트 강의실 &nbsp;·&nbsp; 2024.11 &nbsp;·&nbsp; 교육기관</p>
         </div>
-      </div>
 
-      <div class="port-card" onclick="location.href='/works'">
-        <div class="port-img" style="background-image:url('/images/GMC_S_01.jpg')"></div>
-        <div class="port-body">
-          <span class="port-n">03</span>
+        <div class="port-slide">
+          <span class="port-n">03 / 05</span>
           <h3 class="port-title">공주대학교<br>이러닝 스튜디오</h3>
-          <p class="port-desc">이러닝 스튜디오 · 2024.09 · 교육기관</p>
-          <span class="port-link">사례 보기 →</span>
+          <p class="port-desc">이러닝 스튜디오 &nbsp;·&nbsp; 2024.09 &nbsp;·&nbsp; 교육기관</p>
         </div>
-      </div>
 
-      <div class="port-card" onclick="location.href='/works'">
-        <div class="port-img" style="background-image:url('/images/GKDE_S_08.jpg')"></div>
-        <div class="port-body">
-          <span class="port-n">04</span>
+        <div class="port-slide">
+          <span class="port-n">04 / 05</span>
           <h3 class="port-title">경기도교육청<br>UHD 방송제작</h3>
-          <p class="port-desc">방송제작 · 2024.06 · 공공기관</p>
-          <span class="port-link">사례 보기 →</span>
+          <p class="port-desc">방송제작 &nbsp;·&nbsp; 2024.06 &nbsp;·&nbsp; 공공기관</p>
         </div>
-      </div>
 
-      <div class="port-card" onclick="location.href='/works'">
-        <div class="port-img" style="background-image:url('/images/KTV_BS_01.jpg')"></div>
-        <div class="port-body">
-          <span class="port-n">05</span>
+        <div class="port-slide">
+          <span class="port-n">05 / 05</span>
           <h3 class="port-title">KTV<br>방송 인프라 시스템</h3>
-          <p class="port-desc">방송 인프라 · 2024.03 · 방송국</p>
-          <span class="port-link">사례 보기 →</span>
+          <p class="port-desc">방송 인프라 &nbsp;·&nbsp; 2024.03 &nbsp;·&nbsp; 방송국</p>
         </div>
-      </div>
 
-      <!-- CTA 카드 -->
-      <div class="port-card port-cta-card" onclick="location.href='/works'">
-        <div class="port-cta-inner">
-          <span class="port-cta-num">516<span class="port-cta-plus">+</span></span>
-          <p class="port-cta-label">전체 구축 사례</p>
-          <span class="port-cta-arr">전체 보기 →</span>
-        </div>
       </div>
-
     </div>
+
+    <!-- 하단: 화살표 + 도트 + 전체보기 -->
+    <div class="port-bottom">
+      <div class="port-dots" id="port-dots">
+        <span class="port-dot active"></span>
+        <span class="port-dot"></span>
+        <span class="port-dot"></span>
+        <span class="port-dot"></span>
+        <span class="port-dot"></span>
+      </div>
+      <div class="port-arrows">
+        <button class="port-btn" id="port-prev">←</button>
+        <button class="port-btn" id="port-next">→</button>
+      </div>
+      <a href="/works" class="port-all">전체 구축사례 보기 →</a>
+    </div>
+
   </div>
 
-  <!-- 진행 바 -->
-  <div class="port-progress-wrap">
-    <div class="port-progress-bar" id="port-progress-bar"></div>
-  </div>
-
-  <!-- 전체 보기 -->
-  <div class="port-footer">
-    <a href="/works" class="port-all">전체 구축사례 보기 →</a>
-  </div>
 </section>
 
 <style>
-  /* ── Section ── */
   .s4 {
-    background: #fff;
-    padding: 120px 0 0;
-  }
-
-  /* ── Header ── */
-  .port-header {
-    display: flex;
-    align-items: flex-end;
-    justify-content: space-between;
-    padding: 0 80px 40px;
-    flex-shrink: 0;
-  }
-  .sec-tag {
-    display: inline-flex; align-items: center; gap: 10px;
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 0.24em;
-    text-transform: uppercase;
-    color: #1a2f8a;
-    display: block;
-    margin-bottom: 14px;
-  }
-  .sec-title {
-    font-size: clamp(28px, 3.2vw, 48px);
-    font-weight: 800;
-    letter-spacing: -0.04em;
-    color: #1a2f8a;
-    line-height: 1;
-  }
-
-  /* ── Nav ── */
-  .port-nav {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    padding-bottom: 4px;
-  }
-  .port-btn {
-    width: 44px;
-    height: 44px;
-    background: none;
-    border: 1.5px solid #1a2f8a;
-    cursor: pointer;
-    font-size: 16px;
-    color: #1a2f8a;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: background 0.2s, border-color 0.2s, color 0.2s;
-    font-family: inherit;
-  }
-  .port-btn:hover { background: #1a2f8a; border-color: #1a2f8a; color: #fff; }
-  .port-btn:disabled { opacity: 0.25; cursor: default; }
-  .port-btn:disabled:hover { background: none; border-color: #D0D0D0; color: #1a2f8a; }
-  .port-count {
-    font-size: 12px;
-    font-weight: 500;
-    color: #999;
-    letter-spacing: 0.04em;
-    min-width: 36px;
-    text-align: center;
-  }
-
-  /* ── Track ── */
-  .port-track-wrap {
-    overflow: hidden;
-    cursor: grab;
-    user-select: none;
-    -webkit-user-select: none;
-    flex: 1;
-    min-height: 0;
-  }
-  .port-track-wrap:active { cursor: grabbing; }
-  .port-track {
-    display: flex;
-    height: 100%;
-    transition: transform 0.55s cubic-bezier(0.77, 0, 0.175, 1);
-    will-change: transform;
-  }
-
-  /* ── Card ── */
-  .port-card {
-    flex: 0 0 calc(100% / 3.2);
-    min-width: 0;
-    cursor: pointer;
-    display: flex;
-    flex-direction: column;
-    padding-left: 20px;
-    height: 100%;
-  }
-  .port-card { position: relative; }
-  .port-img {
-    width: 100%;
-    aspect-ratio: 4 / 3;
-    background-size: cover;
-    background-position: center;
-    transition: transform 0.6s cubic-bezier(0.16,1,0.3,1);
-    flex-shrink: 0;
-    overflow: hidden;
     position: relative;
+    height: 100vh;
+    overflow: hidden;
+    display: flex; align-items: stretch;
   }
-  .port-img::after {
-    content: '';
+
+  /* ── 배경 ── */
+  .port-bg { position: absolute; inset: 0; }
+  .port-bg-slide {
     position: absolute; inset: 0;
-    background: linear-gradient(to top, rgba(10,20,60,0.85) 0%, rgba(10,20,60,0.2) 50%, rgba(0,0,0,0) 100%);
-    transition: opacity 0.3s;
+    background-size: cover; background-position: center;
+    opacity: 0;
+    transition: opacity 0.8s cubic-bezier(0.4,0,0.2,1);
   }
-  .port-card:hover .port-img { transform: scale(1.02); }
-  .port-body {
-    position: absolute;
-    bottom: 0; left: 20px; right: 0;
-    padding: 24px 28px;
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-    z-index: 2;
+  .port-bg-slide.active { opacity: 1; }
+
+  /* ── 오버레이 ── */
+  .port-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(
+      to right,
+      rgba(10,20,60,0.75) 0%,
+      rgba(10,20,60,0.4) 60%,
+      rgba(10,20,60,0.2) 100%
+    );
+    z-index: 1;
+  }
+
+  /* ── 콘텐츠 ── */
+  .port-content {
+    position: relative; z-index: 2;
+    width: 100%; display: flex; flex-direction: column;
+    justify-content: space-between;
+    padding: 80px 80px 60px;
+    max-width: 900px;
+  }
+
+  /* ── 상단 라벨 ── */
+  .port-tag {
+    font-size: 11px; font-weight: 800; letter-spacing: 0.24em;
+    text-transform: uppercase; color: rgba(255,255,255,0.5);
+    display: flex; align-items: center; gap: 10px; margin-bottom: 10px;
+  }
+  .port-heading {
+    font-size: clamp(14px, 1.4vw, 20px); font-weight: 700;
+    color: rgba(255,255,255,0.7); letter-spacing: -0.02em;
+  }
+
+  /* ── 중앙 슬라이드 텍스트 ── */
+  .port-slides { position: relative; min-height: 160px; }
+  .port-slide {
+    position: absolute; top: 0; left: 0;
+    opacity: 0; transform: translateY(20px);
+    transition: opacity 0.6s, transform 0.6s;
+    pointer-events: none;
+  }
+  .port-slide.active {
+    opacity: 1; transform: translateY(0);
+    position: relative; pointer-events: auto;
   }
   .port-n {
-    font-size: 10px;
-    font-weight: 700;
-    color: rgba(255,255,255,0.6);
-    letter-spacing: 0.16em;
+    font-size: 11px; font-weight: 700; letter-spacing: 0.2em;
+    color: rgba(255,255,255,0.45); display: block; margin-bottom: 16px;
   }
   .port-title {
-    font-size: 17px;
-    font-weight: 700;
-    color: #fff;
-    letter-spacing: -0.03em;
-    line-height: 1.4;
+    font-size: clamp(32px, 5vw, 72px);
+    font-weight: 900; letter-spacing: -0.04em;
+    color: #fff; line-height: 1.1; margin-bottom: 20px;
   }
   .port-desc {
-    font-size: 12px;
-    color: rgba(255,255,255,0.6);
-    line-height: 1.6;
-  }
-  .port-link {
-    font-size: 11px;
-    font-weight: 700;
-    color: rgba(255,255,255,0.8);
-    letter-spacing: 0.06em;
-    margin-top: 4px;
-    transition: color 0.2s, transform 0.2s;
-    display: inline-block;
-  }
-  .port-card:hover .port-link { color: #fff; transform: translateX(3px); }
-
-  /* ── CTA 카드 ── */
-  .port-cta-card {
-    background: #1a2f8a;
-    cursor: pointer;
-    display: flex !important;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding-left: 80px;
-    transition: background 0.25s;
-  }
-  .port-cta-inner {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 12px;
-    padding: 0 28px 0 0;
-  }
-  .port-cta-num {
-    font-size: 56px;
-    font-weight: 900;
-    color: #fff;
-    letter-spacing: -0.05em;
-    line-height: 1;
-  }
-  .port-cta-plus {
-    font-size: 38px;
-    color: #1a2f8a;
-  }
-  .port-cta-label {
-    font-size: 11px;
-    font-weight: 500;
-    color: rgba(255,255,255,0.35);
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-  }
-  .port-cta-arr {
-    font-size: 12px;
-    font-weight: 700;
-    color: #1a2f8a;
-    letter-spacing: 0.08em;
-    margin-top: 4px;
-    transition: transform 0.2s;
-  }
-  .port-cta-card:hover .port-cta-arr { transform: translateX(5px); }
-  .port-cta-card:hover { background: #142580; }
-
-  /* ── Progress ── */
-  .port-progress-wrap {
-    margin: 28px 80px 0;
-    height: 1px;
-    background: #E0E0E0;
-    position: relative;
-    flex-shrink: 0;
-  }
-  .port-progress-bar {
-    position: absolute;
-    left: 0; top: 0;
-    height: 1px;
-    background: #1a2f8a;
-    transition: width 0.55s cubic-bezier(0.77, 0, 0.175, 1);
+    font-size: 14px; color: rgba(255,255,255,0.6); letter-spacing: 0.02em;
   }
 
-  /* ── Footer ── */
-  .port-footer {
-    padding: 28px 80px 40px;
-    flex-shrink: 0;
+  /* ── 하단 ── */
+  .port-bottom {
+    display: flex; align-items: center; gap: 32px; flex-wrap: wrap;
   }
+  .port-dots { display: flex; gap: 8px; }
+  .port-dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: rgba(255,255,255,0.3); cursor: pointer;
+    transition: background 0.3s, transform 0.3s;
+  }
+  .port-dot.active { background: #fff; transform: scale(1.4); }
+
+  .port-arrows { display: flex; gap: 10px; }
+  .port-btn {
+    width: 48px; height: 48px;
+    background: rgba(255,255,255,0.1);
+    border: 1.5px solid rgba(255,255,255,0.35);
+    color: #fff; font-size: 16px; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    transition: background 0.2s, border-color 0.2s;
+    font-family: inherit;
+  }
+  .port-btn:hover { background: rgba(255,255,255,0.2); border-color: #fff; }
+  .port-btn:disabled { opacity: 0.2; cursor: default; }
+
   .port-all {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    font-size: 13px;
-    font-weight: 700;
-    color: #fff;
-    text-decoration: none;
-    letter-spacing: 0.06em;
+    margin-left: auto;
+    font-size: 12px; font-weight: 800; color: #fff;
+    text-decoration: none; letter-spacing: 0.1em;
     text-transform: uppercase;
     padding: 14px 32px;
-    background: #1a2f8a;
-    border: 1.5px solid #1a2f8a;
-    transition: background 0.2s, color 0.2s;
+    border: 1.5px solid rgba(255,255,255,0.5);
+    transition: background 0.2s, border-color 0.2s;
   }
-  .port-all:hover { background: #142580; color: #fff; }
+  .port-all:hover { background: rgba(255,255,255,0.1); border-color: #fff; }
 
-  /* ── Responsive ── */
-  @media (max-width: 1024px) {
-    .port-card { flex: 0 0 calc(100% / 2.2); }
-  }
   @media (max-width: 768px) {
-    .s4 { padding: 80px 0 0; }
-    .port-header { padding: 0 32px 28px; }
-    .port-card { flex: 0 0 calc(100% / 1.15); padding-left: 32px; }
-    .port-progress-wrap { margin: 20px 32px 0; }
-    .port-footer { padding: 20px 32px 32px; }
-    .port-cta-card { padding-left: 32px; }
-  }
-  @media (max-width: 480px) {
-    .port-card { flex: 0 0 85%; }
+    .port-content { padding: 60px 32px 40px; }
+    .port-all { margin-left: 0; }
   }
 </style>
 
 <script is:inline>
 (function () {
-  const track   = document.getElementById('port-track');
-  const cards   = track.querySelectorAll('.port-card');
-  const total   = cards.length;
+  const bgs    = document.querySelectorAll('.port-bg-slide');
+  const slides = document.querySelectorAll('.port-slide');
+  const dots   = document.querySelectorAll('.port-dot');
   const btnPrev = document.getElementById('port-prev');
   const btnNext = document.getElementById('port-next');
-  const curEl   = document.getElementById('port-cur');
-  const totalEl = document.getElementById('port-total');
-  const progBar = document.getElementById('port-progress-bar');
-
-  totalEl.textContent = total;
-
+  const total  = slides.length;
   let cur = 0;
-  let vis = window.innerWidth <= 768 ? 1 : window.innerWidth <= 1024 ? 2 : 3;
 
-  function getW() { return cards[0].getBoundingClientRect().width; }
-
-  function update() {
-    track.style.transform = 'translateX(-' + (cur * getW()) + 'px)';
-    curEl.textContent = cur + 1;
+  function go(n) {
+    bgs[cur].classList.remove('active');
+    slides[cur].classList.remove('active');
+    dots[cur].classList.remove('active');
+    cur = (n + total) % total;
+    bgs[cur].classList.add('active');
+    slides[cur].classList.add('active');
+    dots[cur].classList.add('active');
     btnPrev.disabled = cur === 0;
-    btnNext.disabled = cur >= total - vis;
-    progBar.style.width = ((cur + vis) / total * 100) + '%';
+    btnNext.disabled = cur === total - 1;
   }
 
-  btnPrev.addEventListener('click', function () { if (cur > 0) { cur--; update(); } });
-  btnNext.addEventListener('click', function () { if (cur < total - vis) { cur++; update(); } });
+  btnPrev.addEventListener('click', function () { go(cur - 1); });
+  btnNext.addEventListener('click', function () { go(cur + 1); });
+  dots.forEach(function (dot, i) { dot.addEventListener('click', function () { go(i); }); });
 
-  /* 드래그 */
-  let startX = 0, isDragging = false, prevented = false;
-  track.addEventListener('mousedown', function (e) { startX = e.clientX; isDragging = true; prevented = false; });
-  track.addEventListener('mousemove', function (e) {
-    if (!isDragging) return;
-    if (!prevented && Math.abs(e.clientX - startX) > 5) prevented = true;
-  });
-  track.addEventListener('mouseup', function (e) {
-    if (!isDragging) return;
-    isDragging = false;
-    const dx = e.clientX - startX;
-    if (dx < -40 && cur < total - vis) { cur++; update(); }
-    else if (dx > 40 && cur > 0) { cur--; update(); }
-  });
-  track.addEventListener('mouseleave', function () { isDragging = false; });
-
-  /* 터치 */
-  let tx = 0;
-  track.addEventListener('touchstart', function (e) { tx = e.touches[0].clientX; }, { passive: true });
-  track.addEventListener('touchend', function (e) {
-    const dx = e.changedTouches[0].clientX - tx;
-    if (dx < -40 && cur < total - vis) { cur++; update(); }
-    else if (dx > 40 && cur > 0) { cur--; update(); }
+  // 키보드
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'ArrowLeft') go(cur - 1);
+    if (e.key === 'ArrowRight') go(cur + 1);
   });
 
-  /* 리사이즈 */
-  window.addEventListener('resize', function () {
-    vis = window.innerWidth <= 768 ? 1 : window.innerWidth <= 1024 ? 2 : 3;
-    if (cur > total - vis) cur = total - vis;
-    update();
-  });
-
-  /* 드래그 중 클릭 방지 */
-  cards.forEach(function (card) {
-    card.addEventListener('click', function (e) {
-      if (prevented) { e.stopImmediatePropagation(); prevented = false; }
-    });
-  });
-
-  update();
+  go(0);
 })();
 </script>
