@@ -6,6 +6,7 @@ import SecServices   from '../components/SecServices.astro';
 import SecPortfolio  from '../components/SecPortfolio.astro';
 import SecCert       from '../components/SecCert.astro';
 import SecHistory    from '../components/SecHistory.astro';
+import SecStrength   from '../components/SecStrength.astro';
 import SecClients    from '../components/SecClients.astro';
 import SecContact    from '../components/SecContact.astro';
 ---
@@ -194,7 +195,7 @@ import SecContact    from '../components/SecContact.astro';
         <div class="nav-drop">
           <a href="#sec2" class="drop-link" onclick="event.preventDefault();document.getElementById('sec2').scrollIntoView({behavior:'smooth'})">인사말</a>
           <a href="#sec6" class="drop-link" onclick="event.preventDefault();document.getElementById('sec6').scrollIntoView({behavior:'smooth'})">연혁</a>
-          <a href="#sec2" class="drop-link" onclick="event.preventDefault();document.getElementById('sec2').scrollIntoView({behavior:'smooth'})">인증현황</a>
+          <a href="#sec-cert" class="drop-link" onclick="event.preventDefault();document.getElementById('sec-cert').scrollIntoView({behavior:'smooth'})">인증현황</a>
           <a href="#sec7" class="drop-link" onclick="event.preventDefault();document.getElementById('sec7').scrollIntoView({behavior:'smooth'})">오시는 길</a>
         </div>
       </div>
@@ -203,11 +204,11 @@ import SecContact    from '../components/SecContact.astro';
       <div class="nav-item has-drop">
         <span class="nav-link">사업분야</span>
         <div class="nav-drop">
-          <a href="#sec3" class="drop-link" onclick="event.preventDefault();document.getElementById('sec3').scrollIntoView({behavior:'smooth'})">공공기관</a>
-          <a href="#sec3" class="drop-link" onclick="event.preventDefault();document.getElementById('sec3').scrollIntoView({behavior:'smooth'})">교육기관</a>
-          <a href="#sec3" class="drop-link" onclick="event.preventDefault();document.getElementById('sec3').scrollIntoView({behavior:'smooth'})">기업</a>
-          <a href="#sec3" class="drop-link" onclick="event.preventDefault();document.getElementById('sec3').scrollIntoView({behavior:'smooth'})">미디어센터</a>
-          <a href="#sec3" class="drop-link" onclick="event.preventDefault();document.getElementById('sec3').scrollIntoView({behavior:'smooth'})">종교</a>
+          <a href="#svc-public" class="drop-link" onclick="event.preventDefault();document.getElementById('svc-public').scrollIntoView({behavior:'smooth'})">공공기관</a>
+          <a href="#svc-edu" class="drop-link" onclick="event.preventDefault();document.getElementById('svc-edu').scrollIntoView({behavior:'smooth'})">교육기관</a>
+          <a href="#svc-corp" class="drop-link" onclick="event.preventDefault();document.getElementById('svc-corp').scrollIntoView({behavior:'smooth'})">기업</a>
+          <a href="#svc-media" class="drop-link" onclick="event.preventDefault();document.getElementById('svc-media').scrollIntoView({behavior:'smooth'})">미디어센터</a>
+          <a href="#svc-religion" class="drop-link" onclick="event.preventDefault();document.getElementById('svc-religion').scrollIntoView({behavior:'smooth'})">종교</a>
         </div>
       </div>
 
@@ -245,11 +246,12 @@ import SecContact    from '../components/SecContact.astro';
   <!-- 섹션들 -->
   <SecHero />
   <SecAbout />
-  <SecServices />
-  <SecCert />
-  <SecPortfolio />
-  <SecClients />
   <SecHistory />
+  <SecCert />
+  <SecServices />
+  <SecPortfolio />
+  <SecStrength />
+  <SecClients />
   <SecContact />
 
 <script is:inline>
