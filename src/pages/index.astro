@@ -65,19 +65,7 @@ import SecContact    from '../components/SecContact.astro';
       padding: 20px 60px;
       transition: background 0.4s, box-shadow 0.4s, padding 0.3s;
     }
-    
-    .nav::before {
-      content: '';
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      height: 160px;
-      background: linear-gradient(to bottom, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0) 100%);
-      z-index: -1;
-      pointer-events: none;
-      transition: opacity 0.4s;
-    }
-    .nav.scrolled::before { opacity: 0; }
-    .nav.scrolled {
+.nav.scrolled {
       background: rgba(255,255,255,0.97);
       box-shadow: 0 1px 0 rgba(0,0,0,0.06);
       padding: 14px 60px;
@@ -95,7 +83,7 @@ import SecContact    from '../components/SecContact.astro';
     .nav.scrolled .logo-color { opacity: 1; }
     .nav.scrolled .logo-white { opacity: 0; }
 
-    /* 硫붾돱 */
+    
     .nav-menu { display: flex; align-items: center; gap: 4px; }
 
     .nav-item {
@@ -401,7 +389,7 @@ import SecContact    from '../components/SecContact.astro';
   }
   .inq-modal.open .inq-box { transform: translateY(0); }
 
-  /* ?ㅻ뜑 */
+  
   .inq-head {
     display: flex; align-items: flex-start; justify-content: space-between;
     padding: 24px 28px 20px;
@@ -426,7 +414,7 @@ import SecContact    from '../components/SecContact.astro';
   .inq-body::-webkit-scrollbar { width: 4px; }
   .inq-body::-webkit-scrollbar-thumb { background: #e0e0e0; border-radius: 2px; }
 
-  /* ?꾨뱶 */
+  
   .inq-field { display: flex; flex-direction: column; gap: 7px; }
   .inq-label { font-size: 12px; font-weight: 700; color: #333; letter-spacing: 0.02em; }
   .req { color: #e53e3e; }
@@ -462,7 +450,7 @@ import SecContact    from '../components/SecContact.astro';
   .inq-check input:checked + span { color: #0D3A4A; font-weight: 700; }
   .inq-check:has(input:checked) { border-color: #0D3A4A; background: rgba(13,58,74,0.05); }
 
-  /* ?명꽣 */
+  
   .inq-foot {
     padding: 16px 28px 24px;
     border-top: 1px solid #f0f0f0;
