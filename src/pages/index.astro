@@ -15,15 +15,16 @@ import SecContact    from '../components/SecContact.astro';
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>EDS ?대떞?먯뒪????Beyond The Future | ?ㅻ쭏??怨듦컙 ?붾（??/title>
-  <meta name="description" content="諛⑹넚 ?ㅽ뒠?붿삤遺??LED ?붿뒪?뚮젅?닿퉴吏. 17?꾩쓽 寃쏀뿕?쇰줈 理쒖쟻???ㅻ쭏??怨듦컙???ㅺ퀎?⑸땲??" />
+  <title>EDS ????癒?뮞????Beyond The Future | ??살춳???⑤벀而??遺억펷??/title>
+  <meta name="description" content="獄쎻뫗????쎈뮔?遺우궎?봔??LED ?遺용뮞???쟿??욱돱筌왖. 17?袁⑹벥 野껋?肉??곗쨮 筌ㅼ뮇?????살춳???⑤벀而????블??몃빍??" />
   <link rel="icon" href="/favicon.ico" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
   <script is:inline src="/i18n/translations.js"></script>
   <style is:global>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    *::before, *::after { box-sizing: border-box; }
     html, body {
       width: 100%;
       font-family: 'Inter', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
@@ -65,7 +66,7 @@ import SecContact    from '../components/SecContact.astro';
       padding: 20px 60px;
       transition: background 0.4s, box-shadow 0.4s, padding 0.3s;
     }
-.nav.scrolled {
+    .nav.scrolled {
       background: rgba(255,255,255,0.97);
       box-shadow: 0 1px 0 rgba(0,0,0,0.06);
       padding: 14px 60px;
@@ -171,54 +172,54 @@ import SecContact    from '../components/SecContact.astro';
   <!-- NAV -->
   <nav class="nav" id="nav">
     <a href="/" class="nav-logo">
-      <img class="logo-color" src="/images/logo.png" alt="EDS ?대떞?먯뒪?? />
-      <img class="logo-white" src="/images/logo.png" alt="EDS ?대떞?먯뒪?? />
+      <img class="logo-color" src="/images/logo.png" alt="EDS ????癒?뮞?? />
+      <img class="logo-white" src="/images/logo.png" alt="EDS ????癒?뮞?? />
     </a>
 
     <div class="nav-menu">
 
-      <!-- ?뚯궗?뚭컻 -->
+      <!-- ???텢???뻣 -->
       <div class="nav-item has-drop">
-        <span class="nav-link">?뚯궗?뚭컻</span>
+        <span class="nav-link">???텢???뻣</span>
         <div class="nav-drop">
-          <a href="#sec2" class="drop-link" onclick="event.preventDefault();document.getElementById('sec2').scrollIntoView({behavior:'smooth'})">?몄궗留?/a>
-          <a href="#sec6" class="drop-link" onclick="event.preventDefault();document.getElementById('sec6').scrollIntoView({behavior:'smooth'})">?고쁺</a>
-          <a href="#sec-cert" class="drop-link" onclick="event.preventDefault();document.getElementById('sec-cert').scrollIntoView({behavior:'smooth'})">?몄쬆?꾪솴</a>
-          <a href="#sec7" class="drop-link" onclick="event.preventDefault();document.getElementById('sec7').scrollIntoView({behavior:'smooth'})">?ㅼ떆??湲?/a>
+          <a href="#sec2" class="drop-link" onclick="event.preventDefault();document.getElementById('sec2').scrollIntoView({behavior:'smooth'})">?紐꾧텢筌?/a>
+          <a href="#sec6" class="drop-link" onclick="event.preventDefault();document.getElementById('sec6').scrollIntoView({behavior:'smooth'})">?怨좎겫</a>
+          <a href="#sec-cert" class="drop-link" onclick="event.preventDefault();document.getElementById('sec-cert').scrollIntoView({behavior:'smooth'})">?紐꾩쵄?袁れ넺</a>
+          <a href="#sec7" class="drop-link" onclick="event.preventDefault();document.getElementById('sec7').scrollIntoView({behavior:'smooth'})">??쇰뻻??疫?/a>
         </div>
       </div>
 
-      <!-- ?ъ뾽遺꾩빞 -->
+      <!-- ??毓썽겫袁⑸튊 -->
       <div class="nav-item has-drop">
-        <span class="nav-link">?ъ뾽遺꾩빞</span>
+        <span class="nav-link">??毓썽겫袁⑸튊</span>
         <div class="nav-drop">
-          <a href="#svc-public" class="drop-link" onclick="event.preventDefault();document.getElementById('svc-public').scrollIntoView({behavior:'smooth'})">怨듦났湲곌?</a>
-          <a href="#svc-edu" class="drop-link" onclick="event.preventDefault();document.getElementById('svc-edu').scrollIntoView({behavior:'smooth'})">援먯쑁湲곌?</a>
-          <a href="#svc-corp" class="drop-link" onclick="event.preventDefault();document.getElementById('svc-corp').scrollIntoView({behavior:'smooth'})">湲곗뾽</a>
-          <a href="#svc-media" class="drop-link" onclick="event.preventDefault();document.getElementById('svc-media').scrollIntoView({behavior:'smooth'})">誘몃뵒?댁꽱??/a>
-          <a href="#svc-religion" class="drop-link" onclick="event.preventDefault();document.getElementById('svc-religion').scrollIntoView({behavior:'smooth'})">醫낃탳</a>
+          <a href="#svc-public" class="drop-link" onclick="event.preventDefault();document.getElementById('svc-public').scrollIntoView({behavior:'smooth'})">?⑤벀?ф묾怨?</a>
+          <a href="#svc-edu" class="drop-link" onclick="event.preventDefault();document.getElementById('svc-edu').scrollIntoView({behavior:'smooth'})">?대Ŋ?곫묾怨?</a>
+          <a href="#svc-corp" class="drop-link" onclick="event.preventDefault();document.getElementById('svc-corp').scrollIntoView({behavior:'smooth'})">疫꿸퀣毓?/a>
+          <a href="#svc-media" class="drop-link" onclick="event.preventDefault();document.getElementById('svc-media').scrollIntoView({behavior:'smooth'})">沃섎챶逾??곴쉽??/a>
+          <a href="#svc-religion" class="drop-link" onclick="event.preventDefault();document.getElementById('svc-religion').scrollIntoView({behavior:'smooth'})">?ル굛??/a>
         </div>
       </div>
 
-      <!-- 議곕떖泥??깅줉?쒗뭹 -->
+      <!-- 鈺곌퀡?뽳㎗??源낆쨯??쀫? -->
       <div class="nav-item has-drop">
-        <span class="nav-link">議곕떖泥??깅줉?쒗뭹</span>
+        <span class="nav-link">鈺곌퀡?뽳㎗??源낆쨯??쀫?</span>
         <div class="nav-drop">
-          <a href="#sec5" class="drop-link" onclick="event.preventDefault();document.getElementById('sec5').scrollIntoView({behavior:'smooth'})">誘몃뵒?대컯??/a>
-          <a href="#sec5" class="drop-link" onclick="event.preventDefault();document.getElementById('sec5').scrollIntoView({behavior:'smooth'})">而댄벂???쒕쾭</a>
-          <a href="#sec5" class="drop-link" onclick="event.preventDefault();document.getElementById('sec5').scrollIntoView({behavior:'smooth'})">?붿뒪???대젅??/a>
-          <a href="#sec5" class="drop-link" onclick="event.preventDefault();document.getElementById('sec5').scrollIntoView({behavior:'smooth'})">LED ?꾧킅??/a>
+          <a href="#sec5" class="drop-link" onclick="event.preventDefault();document.getElementById('sec5').scrollIntoView({behavior:'smooth'})">沃섎챶逾??而??/a>
+          <a href="#sec5" class="drop-link" onclick="event.preventDefault();document.getElementById('sec5').scrollIntoView({behavior:'smooth'})">?뚮똾踰????뺤쒔</a>
+          <a href="#sec5" class="drop-link" onclick="event.preventDefault();document.getElementById('sec5').scrollIntoView({behavior:'smooth'})">?遺용뮞???????/a>
+          <a href="#sec5" class="drop-link" onclick="event.preventDefault();document.getElementById('sec5').scrollIntoView({behavior:'smooth'})">LED ?袁㏉굝??/a>
         </div>
       </div>
 
-      <!-- 援ъ텞?щ? -->
+      <!-- ?닌딇뀧??? -->
       <div class="nav-item">
-        <a href="#sec4" class="nav-link" onclick="event.preventDefault();document.getElementById('sec4').scrollIntoView({behavior:'smooth'})">援ъ텞?щ?</a>
+        <a href="#sec4" class="nav-link" onclick="event.preventDefault();document.getElementById('sec4').scrollIntoView({behavior:'smooth'})">?닌딇뀧???</a>
       </div>
 
-      <!-- 臾몄쓽 -->
+      <!-- ?얜챷??-->
       <div class="nav-item">
-        <a href="#sec7" class="nav-link" onclick="event.preventDefault();document.getElementById('sec7').scrollIntoView({behavior:'smooth'})">臾몄쓽</a>
+        <a href="#sec7" class="nav-link" onclick="event.preventDefault();document.getElementById('sec7').scrollIntoView({behavior:'smooth'})">?얜챷??/a>
       </div>
 
     </div>
@@ -231,7 +232,7 @@ import SecContact    from '../components/SecContact.astro';
     </div>
   </nav>
 
-  <!-- ?뱀뀡??-->
+  <!-- ?諭???-->
   <SecHero />
   <SecAbout />
   <SecHistory />
@@ -263,7 +264,7 @@ import SecContact    from '../components/SecContact.astro';
     });
   });
 
-  // ?꾩뿭 fade-up IntersectionObserver
+  // ?袁⑸열 fade-up IntersectionObserver
   const fadeObs = new IntersectionObserver(function(entries) {
     entries.forEach(function(e) {
       if (e.isIntersecting) {
@@ -275,37 +276,37 @@ import SecContact    from '../components/SecContact.astro';
   document.querySelectorAll('.fade-up').forEach(function(el) { fadeObs.observe(el); });
 </script>
 
-<!-- ?? ?뚮줈??臾몄쓽 踰꾪듉 + ?앹뾽 ?? -->
+<!-- ???? ???쨮???얜챷??甕곌쑵??+ ??밸씜 ???? -->
 <div class="float-btn" id="floatBtn" onclick="document.getElementById('inquiryModal').classList.add('open')">
   <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
     <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
   </svg>
-  <span>臾몄쓽?섍린</span>
+  <span>?얜챷???띾┛</span>
 </div>
 
-<!-- ?앹뾽 紐⑤떖 -->
+<!-- ??밸씜 筌뤴뫀??-->
 <div class="inq-modal" id="inquiryModal">
   <div class="inq-overlay" onclick="document.getElementById('inquiryModal').classList.remove('open')"></div>
   <div class="inq-box">
     <div class="inq-head">
       <div>
-        <div class="inq-title">?꾩엯 臾몄쓽</div>
-        <div class="inq-sub">?꾨Ц ?곷떞???鍮좊Ⅴ寃??듬??쒕┰?덈떎</div>
+        <div class="inq-title">?袁⑹뿯 ?얜챷??/div>
+        <div class="inq-sub">?袁ⓓ??怨룸뼖??????쥓?ㅵ칰??????뺚뵲??덈뼄</div>
       </div>
       <button class="inq-close" onclick="document.getElementById('inquiryModal').classList.remove('open')">??/button>
     </div>
 
     <div class="inq-body">
       <div class="inq-field">
-        <label class="inq-label">?뚯궗紐?<span class="req">*</span></label>
-        <input class="inq-input" type="text" placeholder="?뚯궗紐낆쓣 ?낅젰?댁＜?몄슂" />
+        <label class="inq-label">???텢筌?<span class="req">*</span></label>
+        <input class="inq-input" type="text" placeholder="???텢筌뤿굞????낆젾??곻폒?紐꾩뒄" />
       </div>
       <div class="inq-field">
-        <label class="inq-label">?대떦???대쫫 <span class="req">*</span></label>
-        <input class="inq-input" type="text" placeholder="?띻만?? />
+        <label class="inq-label">???????已?<span class="req">*</span></label>
+        <input class="inq-input" type="text" placeholder="??삳쭔?? />
       </div>
       <div class="inq-field">
-        <label class="inq-label">?곕씫泥?<span class="req">*</span></label>
+        <label class="inq-label">?怨뺤뵭筌?<span class="req">*</span></label>
         <div class="inq-tel">
           <input class="inq-input" type="tel" placeholder="010" maxlength="4"/>
           <span>-</span>
@@ -315,31 +316,31 @@ import SecContact    from '../components/SecContact.astro';
         </div>
       </div>
       <div class="inq-field">
-        <label class="inq-label">?대찓??/label>
+        <label class="inq-label">??李??/label>
         <input class="inq-input" type="email" placeholder="example@company.com" />
       </div>
       <div class="inq-field">
-        <label class="inq-label">?곷떞 遺꾩빞 <span class="req">*</span></label>
+        <label class="inq-label">?怨룸뼖 ?브쑴鍮?<span class="req">*</span></label>
         <div class="inq-checks">
-          <label class="inq-check"><input type="checkbox" /><span>諛⑹넚 SI</span></label>
-          <label class="inq-check"><input type="checkbox" /><span>?ㅽ뒠?붿삤 援ъ텞</span></label>
-          <label class="inq-check"><input type="checkbox" /><span>LED ?붿뒪?뚮젅??/span></label>
-          <label class="inq-check"><input type="checkbox" /><span>?ㅻ쭏??媛뺤쓽??/span></label>
-          <label class="inq-check"><input type="checkbox" /><span>?꾩뭅?대툕 ?쒖뒪??/span></label>
-          <label class="inq-check"><input type="checkbox" /><span>?붿긽?뚯쓽 ?쒖뒪??/span></label>
-          <label class="inq-check"><input type="checkbox" /><span>?좎?蹂댁닔</span></label>
-          <label class="inq-check"><input type="checkbox" /><span>湲고?</span></label>
+          <label class="inq-check"><input type="checkbox" /><span>獄쎻뫗??SI</span></label>
+          <label class="inq-check"><input type="checkbox" /><span>??쎈뮔?遺우궎 ?닌딇뀧</span></label>
+          <label class="inq-check"><input type="checkbox" /><span>LED ?遺용뮞???쟿??/span></label>
+          <label class="inq-check"><input type="checkbox" /><span>??살춳??揶쏅벡???/span></label>
+          <label class="inq-check"><input type="checkbox" /><span>?袁⑸춦??????뽯뮞??/span></label>
+          <label class="inq-check"><input type="checkbox" /><span>?遺욧맒???벥 ??뽯뮞??/span></label>
+          <label class="inq-check"><input type="checkbox" /><span>?醫?癰귣똻??/span></label>
+          <label class="inq-check"><input type="checkbox" /><span>疫꿸퀬?</span></label>
         </div>
       </div>
       <div class="inq-field">
-        <label class="inq-label">臾몄쓽 ?댁슜</label>
-        <textarea class="inq-input inq-textarea" placeholder="臾몄쓽?섏떎 ?댁슜???먯쑀濡?쾶 ?낅젰?댁＜?몄슂"></textarea>
+        <label class="inq-label">?얜챷????곸뒠</label>
+        <textarea class="inq-input inq-textarea" placeholder="?얜챷???뤿뼄 ??곸뒠???癒??嚥?苡???낆젾??곻폒?紐꾩뒄"></textarea>
       </div>
     </div>
 
     <div class="inq-foot">
-      <button class="inq-submit">臾몄쓽 蹂대궡湲???/button>
-      <p class="inq-privacy">?됱씪 09:00 ??18:00 ?댁쁺 쨌 Tel. 02-857-7744</p>
+      <button class="inq-submit">?얜챷??癰귣?沅→묾???/button>
+      <p class="inq-privacy">??깆뵬 09:00 ??18:00 ??곸겫 夷?Tel. 02-857-7744</p>
     </div>
   </div>
 </div>
@@ -478,3 +479,4 @@ import SecContact    from '../components/SecContact.astro';
 </style>
 </body>
 </html>
+
