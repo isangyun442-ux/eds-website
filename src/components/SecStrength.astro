@@ -101,14 +101,26 @@
 <style>
   .ab-strength-section {
     position: relative;
-    background: linear-gradient(135deg, #f0f4ff 0%, #e8edf8 50%, #f4f6ff 100%);
+    background: #fff;
     overflow: hidden;
   }
-  .ab-strength-bg { display: none; }
+  .ab-strength-bg {
+    position: absolute; inset: 0;
+    background-image: url('/images/GD_LED_06.jpg');
+    background-size: cover; background-position: center;
+    filter: brightness(0.35) saturate(0.4);
+    z-index: 0;
+  }
+  .ab-strength-section::after {
+    content: '';
+    position: absolute; inset: 0;
+    background: rgba(240,244,255,0.82);
+    z-index: 0;
+  }
   /* 자식 요소들 z-index 올리기 */
   .ab-strength-header,
   .ab-str-grid,
-  .ab-message { position: relative; z-index: 1; }
+  .ab-message { position: relative; z-index: 2; }
 
   /* 헤더 */
   .ab-strength-header {
