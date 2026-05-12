@@ -101,10 +101,10 @@ const history = [
     position: relative;
     z-index: 1;
     max-width: 900px; margin: 0 auto;
-    padding: 120px 80px 120px;
+    padding: 60px 80px 60px;
   }
 
-  .h-header { text-align: center; margin-bottom: 80px; }
+  .h-header { text-align: center; margin-bottom: 48px; }
   .h-eyebrow {
     display: inline-flex; align-items: center; gap: 12px;
     font-size: 11px; font-weight: 700; letter-spacing: 0.24em;
@@ -121,7 +121,7 @@ const history = [
   }
   .h-sub { font-size: 15px; color: rgba(255,255,255,0.55); line-height: 1.7; }
 
-  .timeline { position: relative; padding-bottom: 56px; }
+  .timeline { position: relative; padding-bottom: 32px; }
   .tl-line {
     position: absolute; top: 0; bottom: 0; left: 92px;
     width: 1px; background: rgba(255,255,255,0.12);
@@ -141,11 +141,11 @@ const history = [
     background: #0a1628; border: 2px solid #1a2f8a; flex-shrink: 0; margin-left: -4px;
   }
 
-  .tl-content-col { padding: 10px 0 28px 0; }
+  .tl-content-col { padding: 8px 0 18px 0; }
   .tl-card { display: flex; flex-direction: column; }
   .tl-item {
     display: flex; gap: 16px; align-items: flex-start;
-    padding: 9px 0; border-bottom: 1px solid rgba(255,255,255,0.08);
+    padding: 6px 0; border-bottom: 1px solid rgba(255,255,255,0.08);
   }
   .tl-item:last-child { border-bottom: none; }
   .tl-item:first-child { padding-top: 0; }
@@ -167,7 +167,7 @@ const history = [
   }
 
   @media (max-width: 768px) {
-    .hist-inner { padding: 80px 32px 80px; }
+    .hist-inner { padding: 48px 32px 48px; }
     .tl-line { left: 64px; }
     .tl-row { grid-template-columns: 64px 0 1fr; gap: 0 20px; }
     .tl-year-col { padding-right: 18px; }
@@ -175,7 +175,7 @@ const history = [
     .tl-end { padding-left: 52px; }
   }
   @media (max-width: 480px) {
-    .hist-inner { padding: 60px 20px 60px; }
+    .hist-inner { padding: 40px 20px 40px; }
     .tl-line { left: 54px; }
     .tl-row { grid-template-columns: 54px 0 1fr; gap: 0 14px; }
   }
