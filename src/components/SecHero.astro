@@ -3,7 +3,7 @@
 ---
 <section class="sec s0" id="sec0">
 
-  <!-- 영상 영역 (75vh) -->
+  <!-- 영상 영역 85vh -->
   <div class="hero-video-wrap">
     <video src="https://res.cloudinary.com/dlaty4qsq/video/upload/v1778474387/2025_%ED%99%8D%EB%B3%B4%EC%98%81%EC%83%81_%EB%A9%94%EC%9D%B8_olhpma.mp4" autoplay muted loop playsinline preload="auto"></video>
     <div class="hero-overlay"></div>
@@ -12,19 +12,19 @@
   <!-- 텍스트 영역 (네이비 배경) -->
   <div class="hero-text-wrap">
     <div class="hero-text-inner">
-      <div class="hero-quote-left">&ldquo;</div>
       <div class="hero-text-body">
-        <p class="hero-text-light" data-i18n="hero.sub">방송 스튜디오부터 LED 디스플레이까지<br>최적의 공간을 설계합니다</p>
-        <h1 class="hero-title" data-i18n="hero.title"><em>스마트한 공간,</em><br>이담에스티가 만듭니다</h1>
+        <p class="hero-text-light">방송 스튜디오부터 LED 디스플레이까지<br>최적의 공간을 설계합니다</p>
+        <h1 class="hero-title">
+          <span class="hero-quote-open">&ldquo;</span>스마트한 공간,<br>이담에스티가 만듭니다<span class="hero-quote-close">&rdquo;</span>
+        </h1>
       </div>
-      <div class="hero-quote-right">&rdquo;</div>
       <div class="hero-cta">
         <button class="hero-cta-btn" onclick="document.getElementById('sec2').scrollIntoView({behavior:'smooth'})">
           About Us &nbsp;→
         </button>
       </div>
     </div>
-      <div class="scroll-hint" id="sh">
+    <div class="scroll-hint" id="sh">
       <div class="sh-mouse"><div class="sh-wheel"></div></div>
       <span class="sh-text">scroll</span>
     </div>
@@ -33,17 +33,15 @@
 </section>
 
 <style>
-  .s0 {
-    display: flex; flex-direction: column;
-    position: relative;
-  }
+  .s0 { display: flex; flex-direction: column; position: relative; }
 
-  /* ── 영상 영역 75vh ── */
+  /* ── 영상 85vh ── */
   .hero-video-wrap {
     position: relative;
     height: 85vh;
     overflow: hidden;
     background: #000;
+    flex-shrink: 0;
   }
   .hero-video-wrap video {
     position: absolute; top: 50%; left: 50%;
@@ -54,66 +52,51 @@
   }
   .hero-overlay {
     position: absolute; inset: 0;
-    background: linear-gradient(to top, rgba(0,0,0,0.35) 0%, rgba(0,0,0,0.0) 60%, rgba(0,0,0,0.25) 100%);
+    background: linear-gradient(to top, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.0) 60%, rgba(0,0,0,0.25) 100%);
   }
-
-  /* scroll hint */
-  .scroll-hint {
-    display: flex; flex-direction: column; align-items: center; gap: 6px;
-    margin-top: 20px;
-    transition: opacity 0.5s;
-  }
-  .scroll-hint.hide { opacity: 0; pointer-events: none; }
-  .sh-mouse { width: 20px; height: 30px; border: 1.5px solid rgba(255,255,255,0.3); border-radius: 10px; display: flex; align-items: flex-start; justify-content: center; padding-top: 4px; }
-  .sh-wheel { width: 2px; height: 5px; background: rgba(255,255,255,0.5); border-radius: 1px; animation: shw 1.8s ease infinite; }
-  @keyframes shw { 0%{opacity:1;transform:translateY(0)} 100%{opacity:0;transform:translateY(9px)} }
-  .sh-text { font-size: 9px; color: rgba(255,255,255,0.3); letter-spacing: 0.2em; text-transform: uppercase; }
 
   /* ── 텍스트 영역 ── */
   .hero-text-wrap {
     background: #1a2f8a;
-    padding: 28px 80px 36px;
+    padding: 32px 80px 28px;
+    display: flex; flex-direction: column; align-items: center; gap: 16px;
   }
   .hero-text-inner {
-    max-width: 1300px; margin: 0 auto;
-    display: flex; align-items: center;
-    gap: 0; position: relative;
+    max-width: 1300px; width: 100%; margin: 0 auto;
+    display: flex; align-items: center; justify-content: space-between; gap: 40px;
   }
-  .hero-quote-left, .hero-quote-right {
-    font-size: 80px; font-weight: 900; line-height: 1;
-    color: rgba(255,255,255,0.1); flex-shrink: 0;
-    font-family: Georgia, serif;
-    margin-top: -20px;
-  }
-  .hero-quote-left { margin-right: 24px; }
-  .hero-quote-right { margin-left: 24px; }
-
   .hero-text-body { flex: 1; }
   .hero-text-light {
     font-size: 14px; color: rgba(255,255,255,0.6);
-    line-height: 1.7; margin-bottom: 12px;
-    font-weight: 400;
+    line-height: 1.7; margin-bottom: 10px;
   }
   .hero-title {
-    font-size: clamp(22px, 2.8vw, 42px);
+    font-size: clamp(24px, 2.8vw, 42px);
     font-weight: 900; letter-spacing: -0.04em;
     color: #fff; line-height: 1.1;
   }
-  .hero-title em {
-    font-style: normal; color: #fff;
-    font-weight: 400; font-size: 0.85em;
+  .hero-quote-open {
+    font-size: 1.2em; color: rgba(255,255,255,0.4);
+    font-family: Georgia, serif; font-weight: 900;
+    margin-right: 4px; vertical-align: -0.1em;
+  }
+  .hero-quote-close {
+    font-size: 1.2em; color: rgba(255,255,255,0.4);
+    font-family: Georgia, serif; font-weight: 900;
+    margin-left: 4px; vertical-align: -0.1em;
   }
 
-  .hero-cta { flex-shrink: 0; margin-left: 60px; }
+  .hero-cta { flex-shrink: 0; }
   .hero-cta-btn {
     display: inline-flex; align-items: center;
-    background: #1a2f8a; color: #fff;
+    background: transparent; color: #fff;
     border: 2px solid rgba(255,255,255,0.4);
     font-size: 14px; font-weight: 700;
-    padding: 18px 40px; cursor: pointer;
-    letter-spacing: 0.08em; font-family: inherit;
+    padding: 16px 36px; cursor: pointer;
+    letter-spacing: 0.06em; font-family: inherit;
     border-radius: 50px;
     transition: background 0.2s, border-color 0.2s, transform 0.2s;
+    white-space: nowrap;
   }
   .hero-cta-btn:hover {
     background: rgba(255,255,255,0.1);
@@ -121,7 +104,16 @@
     transform: translateX(4px);
   }
 
-  /* 모바일 */
+  /* scroll hint */
+  .scroll-hint {
+    display: flex; flex-direction: column; align-items: center; gap: 5px;
+  }
+  .scroll-hint.hide { opacity: 0; pointer-events: none; }
+  .sh-mouse { width: 20px; height: 30px; border: 1.5px solid rgba(255,255,255,0.3); border-radius: 10px; display: flex; align-items: flex-start; justify-content: center; padding-top: 4px; }
+  .sh-wheel { width: 2px; height: 5px; background: rgba(255,255,255,0.4); border-radius: 1px; animation: shw 1.8s ease infinite; }
+  @keyframes shw { 0%{opacity:1;transform:translateY(0)} 100%{opacity:0;transform:translateY(9px)} }
+  .sh-text { font-size: 9px; color: rgba(255,255,255,0.3); letter-spacing: 0.2em; text-transform: uppercase; }
+
   @media (max-width: 768px) {
     #sec0, #sec0.active, #sec0.sec {
       display: none !important;
