@@ -3,14 +3,11 @@
 ---
 <section class="sec s7" id="sec7">
 
-  <!-- Contact 메인 영역 -->
-  <div class="ct-main">
-    <div class="ct-top fade-up">
-      <div class="ct-top-left">
-        <div class="ct-side-line"></div>
-        <div class="ct-side-num">07<br>↓</div>
-      </div>
-      <div class="ct-top-content">
+  <div class="ct-wrap">
+
+    <!-- 왼쪽: 타이틀 + 연락처 -->
+    <div class="ct-left fade-up">
+      <div class="ct-left-inner">
         <h2 class="ct-title">Contact Us</h2>
         <p class="ct-sub">스마트 공간 구축에 관하여 문의 바랍니다.</p>
         <div class="ct-info">
@@ -23,40 +20,30 @@
             <span>pub@edamst.com</span>
           </div>
         </div>
-      </div>
-      <div class="ct-arrow" aria-hidden="true">
-        <svg viewBox="0 0 160 160" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <line x1="10" y1="150" x2="150" y2="10" stroke="white" stroke-width="18" stroke-linecap="round" opacity="0.25"/>
-          <polyline points="70,10 150,10 150,90" stroke="white" stroke-width="18" stroke-linecap="round" stroke-linejoin="round" opacity="0.2"/>
-        </svg>
+        <div class="ct-arrow" aria-hidden="true">
+          <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <line x1="10" y1="190" x2="190" y2="10" stroke="white" stroke-width="16" stroke-linecap="round" opacity="0.2"/>
+            <polyline points="90,10 190,10 190,110" stroke="white" stroke-width="16" stroke-linecap="round" stroke-linejoin="round" opacity="0.2"/>
+          </svg>
+        </div>
       </div>
     </div>
 
-    <div class="ct-divider"></div>
-
-    <!-- 하단: 폼 영역 -->
-    <div class="ct-bottom fade-up fade-up-d2">
-      <div class="ct-address">
-        <div class="ct-addr-row">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
-          <span>서울시 구로구 디지털로31길 19, 406호</span>
+    <!-- 오른쪽: 폼 -->
+    <div class="ct-right fade-up fade-up-d2">
+      <div class="ct-right-inner">
+        <div class="ct-form">
+          <div class="ct-field"><label>이름</label><input type="text" placeholder="담당자 이름" /></div>
+          <div class="ct-field"><label>연락처</label><input type="tel" placeholder="010-0000-0000" /></div>
+          <div class="ct-field"><label>이메일</label><input type="email" placeholder="example@company.com" /></div>
+          <div class="ct-field"><label>문의 내용</label><input type="text" placeholder="방송제작 스튜디오, LED 디스플레이..." /></div>
         </div>
-        <div class="ct-addr-row">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
-          <span>평일 09:00 – 18:00</span>
-        </div>
-      </div>
-      <div class="ct-form">
-        <div class="ct-field"><label>이름</label><input type="text" placeholder="담당자 이름" /></div>
-        <div class="ct-field"><label>연락처</label><input type="tel" placeholder="010-0000-0000" /></div>
-        <div class="ct-field"><label>이메일</label><input type="email" placeholder="example@company.com" /></div>
-        <div class="ct-field"><label>문의 내용</label><input type="text" placeholder="방송제작 스튜디오, LED 디스플레이..." /></div>
         <button class="ct-btn">문의 보내기 →</button>
       </div>
     </div>
+
   </div>
 
-  <!-- Footer -->
   <footer class="eds-footer">
     <div class="eds-footer-inner">
       <div class="eds-footer-left">
@@ -76,68 +63,55 @@
 </section>
 
 <style>
-  .s7 { background: #1a2f8a; position: relative; overflow: hidden; }
+  .s7 { background: #1a2f8a; }
 
-  /* ── 메인 ── */
-  .ct-main {
-    max-width: 1400px; margin: 0 auto;
-    padding: 80px 60px 80px;
+  .ct-wrap {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 520px;
   }
 
-  /* ── 상단 타이틀 영역 ── */
-  .ct-top {
-    display: flex; align-items: flex-start;
-    gap: 0; position: relative; padding-bottom: 48px;
+  .ct-left {
+    padding: 80px 60px;
+    border-right: 1px solid rgba(255,255,255,0.12);
+    position: relative;
   }
-  .ct-top-left { display: none; }
-  .ct-side-line {
-    width: 1px; height: 48px; background: rgba(255,255,255,0.25);
-    margin-bottom: 8px;
+  .ct-left-inner {
+    height: 100%;
+    display: flex; flex-direction: column; justify-content: center;
+    position: relative;
   }
-  .ct-side-num {
-    font-size: 10px; font-weight: 700; color: rgba(255,255,255,0.4);
-    letter-spacing: 0.1em; text-align: center; line-height: 1.6;
-  }
-  .ct-top-content { flex: 1; }
   .ct-title {
-    font-size: clamp(48px, 8vw, 100px);
+    font-size: clamp(48px, 6vw, 88px);
     font-weight: 900; letter-spacing: -0.04em;
     color: #fff; line-height: 1.0; margin-bottom: 20px;
   }
   .ct-sub {
     font-size: 15px; font-weight: 600;
-    color: rgba(255,255,255,0.85); margin-bottom: 28px;
+    color: rgba(255,255,255,0.8); margin-bottom: 36px;
   }
-  .ct-info { display: flex; flex-direction: column; gap: 12px; }
+  .ct-info { display: flex; flex-direction: column; gap: 14px; }
   .ct-info-row {
     display: flex; align-items: center; gap: 12px;
-    font-size: 14px; color: rgba(255,255,255,0.75);
+    font-size: 14px; color: rgba(255,255,255,0.7);
   }
-  .ct-info-row svg { color: rgba(255,255,255,0.5); flex-shrink: 0; }
+  .ct-info-row svg { color: rgba(255,255,255,0.45); flex-shrink: 0; }
 
-  /* 화살표: 오른쪽 상단에만 */
   .ct-arrow {
-    width: 160px; height: 160px;
-    flex-shrink: 0; align-self: flex-start;
+    position: absolute;
+    top: 0; right: 20px;
+    width: 140px; height: 140px;
+    pointer-events: none;
   }
 
-  /* ── 구분선 ── */
-  .ct-divider { height: 1px; background: rgba(255,255,255,0.15); margin-bottom: 48px; }
-
-  /* ── 하단 폼 영역 ── */
-  .ct-bottom {
-    display: grid; grid-template-columns: 1fr 2fr; gap: 60px; align-items: start;
+  .ct-right { padding: 80px 60px; }
+  .ct-right-inner {
+    height: 100%;
+    display: flex; flex-direction: column; justify-content: center;
   }
-  .ct-address { display: flex; flex-direction: column; gap: 14px; padding-top: 8px; }
-  .ct-addr-row {
-    display: flex; align-items: flex-start; gap: 10px;
-    font-size: 13px; color: rgba(255,255,255,0.55); line-height: 1.6;
-  }
-  .ct-addr-row svg { color: rgba(255,255,255,0.35); flex-shrink: 0; margin-top: 2px; }
 
-  /* 폼 */
-  .ct-form { display: flex; flex-direction: column; border-top: 1px solid rgba(255,255,255,0.15); }
-  .ct-field { border-bottom: 1px solid rgba(255,255,255,0.1); padding: 16px 0; }
+  .ct-form { display: flex; flex-direction: column; border-top: 1px solid rgba(255,255,255,0.15); margin-bottom: 32px; }
+  .ct-field { border-bottom: 1px solid rgba(255,255,255,0.1); padding: 18px 0; }
   .ct-field label {
     display: block; font-size: 9px; font-weight: 800;
     letter-spacing: 0.18em; text-transform: uppercase;
@@ -149,7 +123,7 @@
   }
   .ct-field input::placeholder { color: rgba(255,255,255,0.2); }
   .ct-btn {
-    margin-top: 24px; background: #fff; color: #1a2f8a; border: none;
+    background: #fff; color: #1a2f8a; border: none;
     font-size: 12px; font-weight: 800; padding: 16px 40px;
     cursor: pointer; letter-spacing: 0.12em; text-transform: uppercase;
     font-family: inherit; transition: background 0.2s, color 0.2s, transform 0.2s;
@@ -157,11 +131,10 @@
   }
   .ct-btn:hover { background: #00B8D9; color: #fff; transform: translateY(-2px); }
 
-  /* ── Footer ── */
   .eds-footer { background: rgba(0,0,0,0.25); border-top: 1px solid rgba(255,255,255,0.08); }
   .eds-footer-inner {
-    max-width: 1200px; margin: 0 auto; padding: 24px 80px;
-    display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px;
+    padding: 22px 60px;
+    display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px;
   }
   .eds-footer-left { display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
   .eds-footer-logo { height: 20px; width: auto; filter: brightness(0) invert(1); opacity: 0.5; }
@@ -174,18 +147,16 @@
   .eds-footer-info-wrap a:hover { color: #fff; }
   .eds-footer-copy { font-size: 10px; color: rgba(255,255,255,0.2); letter-spacing: 0.06em; }
 
-  /* ── 반응형 ── */
   @media (max-width: 900px) {
-    .ct-main { padding: 60px 40px; }
-    .ct-bottom { grid-template-columns: 1fr; gap: 36px; }
-    .ct-arrow { width: 100px; height: 100px; }
+    .ct-wrap { grid-template-columns: 1fr; }
+    .ct-left { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.12); padding: 60px 40px; }
+    .ct-right { padding: 60px 40px; }
+    .ct-arrow { display: none; }
     .eds-footer-inner { padding: 20px 40px; }
   }
   @media (max-width: 480px) {
-    .ct-main { padding: 48px 24px; }
-    .ct-top-left { display: none; }
-    .ct-title { font-size: clamp(40px, 12vw, 64px); }
-    .ct-arrow { display: none; }
+    .ct-left, .ct-right { padding: 48px 24px; }
+    .ct-title { font-size: clamp(40px, 12vw, 60px); }
     .eds-footer-inner { padding: 18px 24px; flex-direction: column; align-items: flex-start; }
     .eds-footer-info-wrap .div { display: none; }
   }
