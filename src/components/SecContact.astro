@@ -3,57 +3,67 @@
 ---
 <section class="sec s7" id="sec7">
 
-  <div class="ct-wrap">
+  <!-- 물결 배경 SVG -->
+  <div class="ct-bg-waves" aria-hidden="true">
+    <svg class="wave-svg" viewBox="0 0 1440 560" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+      <path d="M-100 280 Q200 100 500 280 Q800 460 1100 280 Q1300 160 1540 280" stroke="#1a2f8a" stroke-width="1" fill="none" opacity="0.06"/>
+      <path d="M-100 320 Q200 140 500 320 Q800 500 1100 320 Q1300 200 1540 320" stroke="#1a2f8a" stroke-width="1" fill="none" opacity="0.05"/>
+      <path d="M-100 360 Q200 180 500 360 Q800 540 1100 360 Q1300 240 1540 360" stroke="#1a2f8a" stroke-width="0.8" fill="none" opacity="0.04"/>
+      <path d="M-100 240 Q200 60 500 240 Q800 420 1100 240 Q1300 120 1540 240" stroke="#1a2f8a" stroke-width="0.8" fill="none" opacity="0.04"/>
+      <path d="M-100 200 Q300 380 600 200 Q900 20 1200 200 Q1380 320 1540 200" stroke="#1a2f8a" stroke-width="1.2" fill="none" opacity="0.07"/>
+      <path d="M-100 160 Q300 340 600 160 Q900 -20 1200 160 Q1380 280 1540 160" stroke="#1a2f8a" stroke-width="1" fill="none" opacity="0.05"/>
+      <path d="M-100 400 Q300 580 600 400 Q900 220 1200 400 Q1380 520 1540 400" stroke="#1a2f8a" stroke-width="1" fill="none" opacity="0.05"/>
+      <path d="M0 280 Q360 80 720 280 Q1080 480 1440 280" stroke="#1a2f8a" stroke-width="1.5" fill="none" opacity="0.08"/>
+      <path d="M0 320 Q360 520 720 320 Q1080 120 1440 320" stroke="#1a2f8a" stroke-width="1.5" fill="none" opacity="0.08"/>
+      <ellipse cx="1200" cy="200" rx="300" ry="200" stroke="#1a2f8a" stroke-width="0.8" fill="none" opacity="0.04"/>
+      <ellipse cx="1200" cy="200" rx="220" ry="150" stroke="#1a2f8a" stroke-width="0.6" fill="none" opacity="0.03"/>
+      <ellipse cx="200" cy="400" rx="250" ry="180" stroke="#1a2f8a" stroke-width="0.8" fill="none" opacity="0.04"/>
+    </svg>
+  </div>
 
-    <!-- 왼쪽: 타이틀 + 연락처 -->
-    <div class="ct-left fade-up">
-      <div class="ct-left-inner">
-        <h2 class="ct-title">Contact Us</h2>
-        <p class="ct-sub">스마트 공간 구축에 관하여 문의 바랍니다.</p>
-        <div class="ct-info">
-          <div class="ct-info-row">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.01 1.18 2 2 0 012 .01h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92z"/></svg>
-            <span>02-857-7744</span>
-          </div>
-          <div class="ct-info-row">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 8l10 6 10-6"/></svg>
-            <span>pub@edamst.com</span>
-          </div>
-        </div>
-        <div class="ct-arrow" aria-hidden="true">
-          <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <line x1="10" y1="190" x2="190" y2="10" stroke="white" stroke-width="16" stroke-linecap="round" opacity="0.2"/>
-            <polyline points="90,10 190,10 190,110" stroke="white" stroke-width="16" stroke-linecap="round" stroke-linejoin="round" opacity="0.2"/>
-          </svg>
-        </div>
-      </div>
+  <!-- 콘텐츠 -->
+  <div class="ct-content">
+
+    <!-- 로고 -->
+    <div class="ct-logo fade-up">
+      <img src="/images/logo.png" alt="EDS 이담에스티" />
     </div>
 
-    <!-- 오른쪽: 폼 -->
-    <div class="ct-right fade-up fade-up-d2">
-      <div class="ct-right-inner">
-        <div class="ct-form">
-          <div class="ct-field"><label>이름</label><input type="text" placeholder="담당자 이름" /></div>
-          <div class="ct-field"><label>연락처</label><input type="tel" placeholder="010-0000-0000" /></div>
-          <div class="ct-field"><label>이메일</label><input type="email" placeholder="example@company.com" /></div>
-          <div class="ct-field"><label>문의 내용</label><input type="text" placeholder="방송제작 스튜디오, LED 디스플레이..." /></div>
-        </div>
-        <button class="ct-btn">문의 보내기 →</button>
-      </div>
+    <!-- 제목 -->
+    <div class="ct-header fade-up fade-up-d1">
+      <h2 class="ct-title">Contact Us</h2>
+      <p class="ct-sub">제품 문의 · 기술문의</p>
+    </div>
+
+    <!-- 문의하기 버튼 -->
+    <div class="ct-btn-wrap fade-up fade-up-d2">
+      <button class="ct-btn" onclick="document.getElementById('inquiryModal').classList.add('open')">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+          <line x1="22" y1="2" x2="11" y2="13" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          <polygon points="22 2 15 22 11 13 2 9 22 2" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+        </svg>
+        문의하기
+      </button>
     </div>
 
   </div>
 
+  <!-- Footer (네이비 배경) -->
   <footer class="eds-footer">
     <div class="eds-footer-inner">
       <div class="eds-footer-left">
         <img class="eds-footer-logo" src="/images/logo.png" alt="EDS 이담에스티" />
-        <div class="eds-footer-info-wrap">
-          <span>대표 최명순</span><span class="div">|</span>
-          <span>서울시 구로구 디지털로31길 19, 406호</span><span class="div">|</span>
-          <span>Tel 02-857-7744</span><span class="div">|</span>
-          <span>Fax 02-857-7321</span><span class="div">|</span>
-          <a href="mailto:pub@edamst.com">pub@edamst.com</a>
+        <div class="eds-footer-info">
+          <div class="eds-footer-company">(주)이담에스티</div>
+          <div class="eds-footer-details">
+            <span>주소 서울시 구로구 디지털로31길 19, 406호</span>
+            <span class="div">|</span>
+            <span>TEL 02-857-7744</span>
+            <span class="div">|</span>
+            <span>FAX 02-857-7321</span>
+            <span class="div">|</span>
+            <span>E-mail pub@edamst.com</span>
+          </div>
         </div>
       </div>
       <span class="eds-footer-copy">Copyright 2022. EDAMST. All rights reserved.</span>
@@ -63,101 +73,96 @@
 </section>
 
 <style>
-  .s7 { background: #1a2f8a; }
-
-  .ct-wrap {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    min-height: 520px;
+  .s7 {
+    position: relative;
+    background: #fff;
+    overflow: hidden;
   }
 
-  .ct-left {
-    padding: 80px 60px;
-    border-right: 1px solid rgba(255,255,255,0.12);
-    position: relative;
+  /* 물결 배경 */
+  .ct-bg-waves {
+    position: absolute; inset: 0;
+    pointer-events: none; z-index: 0;
   }
-  .ct-left-inner {
-    height: 100%;
-    display: flex; flex-direction: column; justify-content: center;
-    position: relative;
+  .wave-svg { width: 100%; height: 100%; }
+
+  /* 콘텐츠 */
+  .ct-content {
+    position: relative; z-index: 1;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    padding: 80px 60px 60px;
+    min-height: 360px;
+    text-align: center;
   }
+
+  /* 로고 */
+  .ct-logo { margin-bottom: 32px; }
+  .ct-logo img { height: 48px; width: auto; }
+
+  /* 제목 */
   .ct-title {
-    font-size: clamp(48px, 6vw, 88px);
+    font-size: clamp(48px, 7vw, 88px);
     font-weight: 900; letter-spacing: -0.04em;
-    color: #fff; line-height: 1.0; margin-bottom: 20px;
+    color: #1a2f8a; line-height: 1.0; margin-bottom: 12px;
   }
   .ct-sub {
-    font-size: 15px; font-weight: 600;
-    color: rgba(255,255,255,0.8); margin-bottom: 36px;
-  }
-  .ct-info { display: flex; flex-direction: column; gap: 14px; }
-  .ct-info-row {
-    display: flex; align-items: center; gap: 12px;
-    font-size: 14px; color: rgba(255,255,255,0.7);
-  }
-  .ct-info-row svg { color: rgba(255,255,255,0.45); flex-shrink: 0; }
-
-  .ct-arrow {
-    position: absolute;
-    top: 0; right: 20px;
-    width: 140px; height: 140px;
-    pointer-events: none;
+    font-size: 18px; color: #6b7a8d;
+    letter-spacing: 0.02em; margin-bottom: 0;
   }
 
-  .ct-right { padding: 80px 60px; }
-  .ct-right-inner {
-    height: 100%;
-    display: flex; flex-direction: column; justify-content: center;
-  }
-
-  .ct-form { display: flex; flex-direction: column; border-top: 1px solid rgba(255,255,255,0.15); margin-bottom: 32px; }
-  .ct-field { border-bottom: 1px solid rgba(255,255,255,0.1); padding: 18px 0; }
-  .ct-field label {
-    display: block; font-size: 9px; font-weight: 800;
-    letter-spacing: 0.18em; text-transform: uppercase;
-    color: rgba(255,255,255,0.35); margin-bottom: 8px;
-  }
-  .ct-field input {
-    background: none; border: none; outline: none;
-    font-size: 14px; color: #fff; width: 100%; font-family: inherit;
-  }
-  .ct-field input::placeholder { color: rgba(255,255,255,0.2); }
+  /* 버튼 */
+  .ct-btn-wrap { margin-top: 40px; }
   .ct-btn {
-    background: #fff; color: #1a2f8a; border: none;
-    font-size: 12px; font-weight: 800; padding: 16px 40px;
-    cursor: pointer; letter-spacing: 0.12em; text-transform: uppercase;
-    font-family: inherit; transition: background 0.2s, color 0.2s, transform 0.2s;
-    align-self: flex-start;
+    display: inline-flex; align-items: center; gap: 10px;
+    background: transparent; color: #1a2f8a;
+    border: 2px solid #1a2f8a;
+    font-size: 16px; font-weight: 700;
+    padding: 18px 52px; cursor: pointer;
+    letter-spacing: 0.06em; font-family: inherit;
+    border-radius: 50px;
+    transition: background 0.2s, color 0.2s, transform 0.2s;
   }
-  .ct-btn:hover { background: #00B8D9; color: #fff; transform: translateY(-2px); }
+  .ct-btn:hover {
+    background: #1a2f8a; color: #fff;
+    transform: translateY(-2px);
+  }
 
-  .eds-footer { background: rgba(0,0,0,0.25); border-top: 1px solid rgba(255,255,255,0.08); }
+  /* Footer */
+  .eds-footer {
+    position: relative; z-index: 1;
+    background: #1a2f8a;
+  }
   .eds-footer-inner {
-    padding: 22px 60px;
-    display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px;
+    padding: 32px 60px;
+    display: flex; align-items: center;
+    justify-content: space-between; flex-wrap: wrap; gap: 16px;
   }
-  .eds-footer-left { display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
-  .eds-footer-logo { height: 20px; width: auto; filter: brightness(0) invert(1); opacity: 0.5; }
-  .eds-footer-info-wrap {
+  .eds-footer-left {
+    display: flex; align-items: center; gap: 24px; flex-wrap: wrap;
+  }
+  .eds-footer-logo {
+    height: 28px; width: auto;
+    filter: brightness(0) invert(1); opacity: 0.8;
+  }
+  .eds-footer-info { display: flex; flex-direction: column; gap: 4px; }
+  .eds-footer-company {
+    font-size: 13px; font-weight: 700; color: #fff;
+  }
+  .eds-footer-details {
     display: flex; align-items: center; flex-wrap: wrap; gap: 4px 8px;
-    font-size: 11px; color: rgba(255,255,255,0.3);
+    font-size: 12px; color: rgba(255,255,255,0.5);
   }
-  .eds-footer-info-wrap .div { color: rgba(255,255,255,0.12); }
-  .eds-footer-info-wrap a { color: rgba(255,255,255,0.35); text-decoration: none; transition: color 0.2s; }
-  .eds-footer-info-wrap a:hover { color: #fff; }
-  .eds-footer-copy { font-size: 10px; color: rgba(255,255,255,0.2); letter-spacing: 0.06em; }
+  .eds-footer-details .div { color: rgba(255,255,255,0.2); }
+  .eds-footer-copy {
+    font-size: 11px; color: rgba(255,255,255,0.3); letter-spacing: 0.04em;
+  }
 
-  @media (max-width: 900px) {
-    .ct-wrap { grid-template-columns: 1fr; }
-    .ct-left { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.12); padding: 60px 40px; }
-    .ct-right { padding: 60px 40px; }
-    .ct-arrow { display: none; }
-    .eds-footer-inner { padding: 20px 40px; }
-  }
-  @media (max-width: 480px) {
-    .ct-left, .ct-right { padding: 48px 24px; }
-    .ct-title { font-size: clamp(40px, 12vw, 60px); }
-    .eds-footer-inner { padding: 18px 24px; flex-direction: column; align-items: flex-start; }
-    .eds-footer-info-wrap .div { display: none; }
+  @media (max-width: 768px) {
+    .ct-content { padding: 60px 32px 48px; min-height: 280px; }
+    .ct-logo img { height: 36px; }
+    .eds-footer-inner { padding: 24px 32px; flex-direction: column; align-items: flex-start; }
+    .eds-footer-details .div { display: none; }
+    .eds-footer-details { flex-direction: column; gap: 4px; }
   }
 </style>
