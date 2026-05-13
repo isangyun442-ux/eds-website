@@ -2,10 +2,10 @@
 // src/pages/index.astro
 import SecHero       from '../components/SecHero.astro';
 import SecAbout      from '../components/SecAbout.astro';
+import SecHistory    from '../components/SecHistory.astro';
+import SecCert       from '../components/SecCert.astro';
 import SecServices   from '../components/SecServices.astro';
 import SecPortfolio  from '../components/SecPortfolio.astro';
-import SecCert       from '../components/SecCert.astro';
-import SecHistory    from '../components/SecHistory.astro';
 import SecStrength   from '../components/SecStrength.astro';
 import SecClients    from '../components/SecClients.astro';
 import SecContact    from '../components/SecContact.astro';
@@ -15,72 +15,140 @@ import SecContact    from '../components/SecContact.astro';
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>EDS ????癒?뮞????Beyond The Future | ??살춳???⑤벀而??遺억펷??/title>
-  <meta name="description" content="獄쎻뫗????쎈뮔?遺우궎?봔??LED ?遺용뮞???쟿??욱돱筌왖. 17?袁⑹벥 野껋?肉??곗쨮 筌ㅼ뮇?????살춳???⑤벀而????블??몃빍??" />
+  <title>EDS (주)이담에스티 | Beyond The Future | 스마트한 공간 이담에스티가 만듭니다</title>
+  <meta name="description" content="방송 스튜디오부터 LED 디스플레이까지. 17년의 경험으로 최적의 스마트 공간을 설계합니다." />
   <link rel="icon" href="/favicon.ico" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
   <script is:inline src="/i18n/translations.js"></script>
-  <link rel="stylesheet" href="/global.css" />
+  <style is:global>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body {
+      width: 100%;
+      font-family: 'Inter', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+      background: #fff;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+    .sec { width: 100%; position: relative; }
+    .fade-up {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.9s cubic-bezier(0.16,1,0.3,1), transform 0.9s cubic-bezier(0.16,1,0.3,1);
+    }
+    .fade-up.visible { opacity: 1; transform: translateY(0); }
+    .fade-up-d1 { transition-delay: 0.1s; }
+    .fade-up-d2 { transition-delay: 0.2s; }
+    .fade-up-d3 { transition-delay: 0.3s; }
+    .fade-up-d4 { transition-delay: 0.4s; }
+    .fade-up-d5 { transition-delay: 0.5s; }
+    .nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 300;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px 60px;
+      transition: background 0.4s, box-shadow 0.4s, padding 0.3s;
+    }
+    .nav.scrolled {
+      background: rgba(255,255,255,0.97);
+      box-shadow: 0 1px 0 rgba(0,0,0,0.06);
+      padding: 14px 60px;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+    .nav-logo { height: 28px; position: relative; width: 140px; flex-shrink: 0; text-decoration: none; }
+    .logo-color { position: absolute; top: 0; left: 0; height: 28px; width: auto; object-fit: contain; opacity: 0; transition: opacity 0.4s; }
+    .logo-white { position: absolute; top: 0; left: 0; height: 28px; width: auto; object-fit: contain; filter: brightness(0) invert(1); opacity: 1; transition: opacity 0.4s; }
+    .nav.scrolled .logo-color { opacity: 1; }
+    .nav.scrolled .logo-white { opacity: 0; }
+    .nav-menu { display: flex; align-items: center; gap: 4px; }
+    .nav-item { position: relative; }
+    .nav-link {
+      display: block; font-size: 17px; font-weight: 600;
+      letter-spacing: -0.01em; text-decoration: none; cursor: pointer;
+      padding: 8px 16px; border-radius: 6px; transition: all 0.2s; white-space: nowrap;
+    }
+    .nav.scrolled .nav-link { color: #1a1a1a; }
+    .nav:not(.scrolled) .nav-link { color: rgba(255,255,255,0.9); }
+    .nav-item.has-drop:hover .nav-link { background: rgba(255,255,255,0.1); }
+    .nav.scrolled .nav-item.has-drop:hover .nav-link { background: rgba(13,58,74,0.06); }
+    .nav-drop {
+      position: absolute; top: 100%; left: 0; min-width: 160px;
+      background: rgba(10, 20, 30, 0.75); backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px); border-radius: 10px;
+      border: 1px solid rgba(255,255,255,0.1); box-shadow: 0 8px 40px rgba(0,0,0,0.3);
+      padding: 8px 0; opacity: 0; visibility: hidden; transform: translateY(-6px);
+      transition: opacity 0.2s, transform 0.2s, visibility 0.2s;
+    }
+    .nav-item.has-drop:hover .nav-drop { opacity: 1; visibility: visible; transform: translateY(0); }
+    .drop-link {
+      display: block; font-size: 14px; font-weight: 500;
+      color: rgba(255,255,255,0.8); text-decoration: none;
+      padding: 10px 20px; border-radius: 6px; transition: background 0.15s, color 0.15s; white-space: nowrap;
+    }
+    .drop-link:hover { background: rgba(255,255,255,0.1); }
+    .lang-wrap { display: flex; gap: 4px; flex-shrink: 0; }
+    .lang-btn {
+      font-size: 11px; font-weight: 700; padding: 5px 9px;
+      background: transparent; border: 1px solid rgba(255,255,255,0.2);
+      color: rgba(255,255,255,0.5); cursor: pointer; letter-spacing: 0.06em;
+      transition: all 0.2s; border-radius: 4px;
+    }
+    .nav.scrolled .lang-btn { border-color: rgba(0,0,0,0.12); color: #999; }
+    .lang-btn:hover { color: #fff; border-color: rgba(255,255,255,0.5); }
+    .nav.scrolled .lang-btn:hover { color: #0D3A4A; border-color: #0D3A4A; }
+    .lang-btn.active { color: #fff; border-color: #00B8D9; background: rgba(0,184,217,0.12); }
+    .nav.scrolled .lang-btn.active { color: #0D3A4A; border-color: #0D3A4A; background: rgba(13,58,74,0.07); }
+    @media (max-width: 768px) { .nav { display: none !important; } }
+  </style>
 </head>
 <body>
 
-  <!-- NAV -->
   <nav class="nav" id="nav">
     <a href="/" class="nav-logo">
-      <img class="logo-color" src="/images/logo.png" alt="EDS ????癒?뮞?? />
-      <img class="logo-white" src="/images/logo.png" alt="EDS ????癒?뮞?? />
+      <img class="logo-color" src="/images/logo.png" alt="EDS 이담에스티" />
+      <img class="logo-white" src="/images/logo.png" alt="EDS 이담에스티" />
     </a>
-
     <div class="nav-menu">
-
-      <!-- ???텢???뻣 -->
       <div class="nav-item has-drop">
-        <span class="nav-link">???텢???뻣</span>
+        <span class="nav-link">회사소개</span>
         <div class="nav-drop">
-          <a href="#sec2" class="drop-link" onclick="event.preventDefault();document.getElementById('sec2').scrollIntoView({behavior:'smooth'})">?紐꾧텢筌?/a>
-          <a href="#sec6" class="drop-link" onclick="event.preventDefault();document.getElementById('sec6').scrollIntoView({behavior:'smooth'})">?怨좎겫</a>
-          <a href="#sec-cert" class="drop-link" onclick="event.preventDefault();document.getElementById('sec-cert').scrollIntoView({behavior:'smooth'})">?紐꾩쵄?袁れ넺</a>
-          <a href="#sec7" class="drop-link" onclick="event.preventDefault();document.getElementById('sec7').scrollIntoView({behavior:'smooth'})">??쇰뻻??疫?/a>
+          <a href="#sec2" class="drop-link" onclick="event.preventDefault();document.getElementById('sec2').scrollIntoView({behavior:'smooth'})">인사말</a>
+          <a href="#sec6" class="drop-link" onclick="event.preventDefault();document.getElementById('sec6').scrollIntoView({behavior:'smooth'})">연혁</a>
+          <a href="#sec-cert" class="drop-link" onclick="event.preventDefault();document.getElementById('sec-cert').scrollIntoView({behavior:'smooth'})">인증현황</a>
+          <a href="#sec7" class="drop-link" onclick="event.preventDefault();document.getElementById('sec7').scrollIntoView({behavior:'smooth'})">오시는 길</a>
         </div>
       </div>
-
-      <!-- ??毓썽겫袁⑸튊 -->
       <div class="nav-item has-drop">
-        <span class="nav-link">??毓썽겫袁⑸튊</span>
+        <span class="nav-link">사업분야</span>
         <div class="nav-drop">
-          <a href="#svc-public" class="drop-link" onclick="event.preventDefault();document.getElementById('svc-public').scrollIntoView({behavior:'smooth'})">?⑤벀?ф묾怨?</a>
-          <a href="#svc-edu" class="drop-link" onclick="event.preventDefault();document.getElementById('svc-edu').scrollIntoView({behavior:'smooth'})">?대Ŋ?곫묾怨?</a>
-          <a href="#svc-corp" class="drop-link" onclick="event.preventDefault();document.getElementById('svc-corp').scrollIntoView({behavior:'smooth'})">疫꿸퀣毓?/a>
-          <a href="#svc-media" class="drop-link" onclick="event.preventDefault();document.getElementById('svc-media').scrollIntoView({behavior:'smooth'})">沃섎챶逾??곴쉽??/a>
-          <a href="#svc-religion" class="drop-link" onclick="event.preventDefault();document.getElementById('svc-religion').scrollIntoView({behavior:'smooth'})">?ル굛??/a>
+          <a href="#svc-public" class="drop-link" onclick="event.preventDefault();document.getElementById('svc-public').scrollIntoView({behavior:'smooth'})">공공기관</a>
+          <a href="#svc-edu" class="drop-link" onclick="event.preventDefault();document.getElementById('svc-edu').scrollIntoView({behavior:'smooth'})">교육기관</a>
+          <a href="#svc-corp" class="drop-link" onclick="event.preventDefault();document.getElementById('svc-corp').scrollIntoView({behavior:'smooth'})">기업</a>
+          <a href="#svc-media" class="drop-link" onclick="event.preventDefault();document.getElementById('svc-media').scrollIntoView({behavior:'smooth'})">미디어센터</a>
+          <a href="#svc-religion" class="drop-link" onclick="event.preventDefault();document.getElementById('svc-religion').scrollIntoView({behavior:'smooth'})">종교</a>
         </div>
       </div>
-
-      <!-- 鈺곌퀡?뽳㎗??源낆쨯??쀫? -->
       <div class="nav-item has-drop">
-        <span class="nav-link">鈺곌퀡?뽳㎗??源낆쨯??쀫?</span>
+        <span class="nav-link">조달청 등록제품</span>
         <div class="nav-drop">
-          <a href="#sec5" class="drop-link" onclick="event.preventDefault();document.getElementById('sec5').scrollIntoView({behavior:'smooth'})">沃섎챶逾??而??/a>
-          <a href="#sec5" class="drop-link" onclick="event.preventDefault();document.getElementById('sec5').scrollIntoView({behavior:'smooth'})">?뚮똾踰????뺤쒔</a>
-          <a href="#sec5" class="drop-link" onclick="event.preventDefault();document.getElementById('sec5').scrollIntoView({behavior:'smooth'})">?遺용뮞???????/a>
-          <a href="#sec5" class="drop-link" onclick="event.preventDefault();document.getElementById('sec5').scrollIntoView({behavior:'smooth'})">LED ?袁㏉굝??/a>
+          <a href="#sec5" class="drop-link" onclick="event.preventDefault();document.getElementById('sec5').scrollIntoView({behavior:'smooth'})">미디어박스</a>
+          <a href="#sec5" class="drop-link" onclick="event.preventDefault();document.getElementById('sec5').scrollIntoView({behavior:'smooth'})">컴퓨터 서버</a>
+          <a href="#sec5" class="drop-link" onclick="event.preventDefault();document.getElementById('sec5').scrollIntoView({behavior:'smooth'})">디스크 어레이</a>
+          <a href="#sec5" class="drop-link" onclick="event.preventDefault();document.getElementById('sec5').scrollIntoView({behavior:'smooth'})">LED 전광판</a>
         </div>
       </div>
-
-      <!-- ?닌딇뀧??? -->
       <div class="nav-item">
-        <a href="#sec4" class="nav-link" onclick="event.preventDefault();document.getElementById('sec4').scrollIntoView({behavior:'smooth'})">?닌딇뀧???</a>
+        <a href="#sec4" class="nav-link" onclick="event.preventDefault();document.getElementById('sec4').scrollIntoView({behavior:'smooth'})">구축사례</a>
       </div>
-
-      <!-- ?얜챷??-->
       <div class="nav-item">
-        <a href="#sec7" class="nav-link" onclick="event.preventDefault();document.getElementById('sec7').scrollIntoView({behavior:'smooth'})">?얜챷??/a>
+        <a href="#sec7" class="nav-link" onclick="event.preventDefault();document.getElementById('sec7').scrollIntoView({behavior:'smooth'})">문의</a>
       </div>
-
     </div>
-
     <div class="lang-wrap">
       <button class="lang-btn active" data-lang="ko" onclick="__applyLang('ko')">KO</button>
       <button class="lang-btn" data-lang="en" onclick="__applyLang('en')">EN</button>
@@ -89,7 +157,6 @@ import SecContact    from '../components/SecContact.astro';
     </div>
   </nav>
 
-  <!-- ?諭???-->
   <SecHero />
   <SecAbout />
   <SecHistory />
@@ -100,240 +167,150 @@ import SecContact    from '../components/SecContact.astro';
   <SecClients />
   <SecContact />
 
-<script is:inline>
-  const nav = document.getElementById('nav');
+  <div class="float-btn" id="floatBtn" onclick="document.getElementById('inquiryModal').classList.add('open')">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+      <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+    <span>문의하기</span>
+  </div>
 
+  <div class="inq-modal" id="inquiryModal">
+    <div class="inq-overlay" onclick="document.getElementById('inquiryModal').classList.remove('open')"></div>
+    <div class="inq-box">
+      <div class="inq-head">
+        <div>
+          <div class="inq-title">도입 문의</div>
+          <div class="inq-sub">스마트 공간 구축에 관하여 문의 바랍니다.</div>
+        </div>
+        <button class="inq-close" onclick="document.getElementById('inquiryModal').classList.remove('open')">&#x2715;</button>
+      </div>
+      <div class="inq-body">
+        <div class="inq-field">
+          <label class="inq-label">회사명 <span class="req">*</span></label>
+          <input class="inq-input" type="text" placeholder="회사명 또는 기관명을 입력해 주세요" />
+        </div>
+        <div class="inq-field">
+          <label class="inq-label">담당자 이름 <span class="req">*</span></label>
+          <input class="inq-input" type="text" placeholder="이름" />
+        </div>
+        <div class="inq-field">
+          <label class="inq-label">연락처 <span class="req">*</span></label>
+          <div class="inq-tel">
+            <input class="inq-input" type="tel" placeholder="010" maxlength="4"/>
+            <span>-</span>
+            <input class="inq-input" type="tel" placeholder="0000" maxlength="4"/>
+            <span>-</span>
+            <input class="inq-input" type="tel" placeholder="0000" maxlength="4"/>
+          </div>
+        </div>
+        <div class="inq-field">
+          <label class="inq-label">이메일</label>
+          <input class="inq-input" type="email" placeholder="example@company.com" />
+        </div>
+        <div class="inq-field">
+          <label class="inq-label">상담 분야 <span class="req">*</span></label>
+          <div class="inq-checks">
+            <label class="inq-check"><input type="checkbox" /><span>방송 SI</span></label>
+            <label class="inq-check"><input type="checkbox" /><span>이러닝 스튜디오</span></label>
+            <label class="inq-check"><input type="checkbox" /><span>LED 디스플레이</span></label>
+            <label class="inq-check"><input type="checkbox" /><span>스마트 강의실</span></label>
+            <label class="inq-check"><input type="checkbox" /><span>화상회의 시스템</span></label>
+            <label class="inq-check"><input type="checkbox" /><span>미디어 아카이브</span></label>
+            <label class="inq-check"><input type="checkbox" /><span>조달청 등록제품</span></label>
+            <label class="inq-check"><input type="checkbox" /><span>기타</span></label>
+          </div>
+        </div>
+        <div class="inq-field">
+          <label class="inq-label">문의내용</label>
+          <textarea class="inq-input inq-textarea" placeholder="구체적인 내용을 입력해 주시면 빠르게 도움드리겠습니다."></textarea>
+        </div>
+      </div>
+      <div class="inq-foot">
+        <button class="inq-submit">상담 신청하기</button>
+        <p class="inq-privacy">운영시간 09:00 ~ 18:00 (평일) &nbsp;Tel. 02-857-7744</p>
+      </div>
+    </div>
+  </div>
+
+  <script is:inline>
+  const nav = document.getElementById('nav');
+  const hero = document.getElementById('sec0');
   window.addEventListener('scroll', function() {
-    const hero = document.getElementById('sec0');
     const heroHeight = hero ? hero.offsetHeight : 0;
     if (window.scrollY > heroHeight - 60) {
       nav.classList.add('scrolled');
     } else {
       nav.classList.remove('scrolled');
     }
+    const fb = document.getElementById('floatBtn');
+    if (fb) {
+      fb.style.opacity = window.scrollY > 200 ? '1' : '0';
+      fb.style.pointerEvents = window.scrollY > 200 ? 'auto' : 'none';
+    }
   });
-
-  document.querySelectorAll('a[href^="#"]').forEach(function(a) {
-    a.addEventListener('click', function(e) {
-      e.preventDefault();
-      const target = document.querySelector(a.getAttribute('href'));
-      if (target) target.scrollIntoView({ behavior: 'smooth' });
-    });
-  });
-
-  // ?袁⑸열 fade-up IntersectionObserver
   const fadeObs = new IntersectionObserver(function(entries) {
     entries.forEach(function(e) {
-      if (e.isIntersecting) {
-        e.target.classList.add('visible');
-        fadeObs.unobserve(e.target);
-      }
+      if (e.isIntersecting) { e.target.classList.add('visible'); fadeObs.unobserve(e.target); }
     });
-  }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+  }, { threshold: 0.12 });
   document.querySelectorAll('.fade-up').forEach(function(el) { fadeObs.observe(el); });
-</script>
-
-<!-- ???? ???쨮???얜챷??甕곌쑵??+ ??밸씜 ???? -->
-<div class="float-btn" id="floatBtn" onclick="document.getElementById('inquiryModal').classList.add('open')">
-  <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
-    <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-  </svg>
-  <span>?얜챷???띾┛</span>
-</div>
-
-<!-- ??밸씜 筌뤴뫀??-->
-<div class="inq-modal" id="inquiryModal">
-  <div class="inq-overlay" onclick="document.getElementById('inquiryModal').classList.remove('open')"></div>
-  <div class="inq-box">
-    <div class="inq-head">
-      <div>
-        <div class="inq-title">?袁⑹뿯 ?얜챷??/div>
-        <div class="inq-sub">?袁ⓓ??怨룸뼖??????쥓?ㅵ칰??????뺚뵲??덈뼄</div>
-      </div>
-      <button class="inq-close" onclick="document.getElementById('inquiryModal').classList.remove('open')">??/button>
-    </div>
-
-    <div class="inq-body">
-      <div class="inq-field">
-        <label class="inq-label">???텢筌?<span class="req">*</span></label>
-        <input class="inq-input" type="text" placeholder="???텢筌뤿굞????낆젾??곻폒?紐꾩뒄" />
-      </div>
-      <div class="inq-field">
-        <label class="inq-label">???????已?<span class="req">*</span></label>
-        <input class="inq-input" type="text" placeholder="??삳쭔?? />
-      </div>
-      <div class="inq-field">
-        <label class="inq-label">?怨뺤뵭筌?<span class="req">*</span></label>
-        <div class="inq-tel">
-          <input class="inq-input" type="tel" placeholder="010" maxlength="4"/>
-          <span>-</span>
-          <input class="inq-input" type="tel" placeholder="0000" maxlength="4"/>
-          <span>-</span>
-          <input class="inq-input" type="tel" placeholder="0000" maxlength="4"/>
-        </div>
-      </div>
-      <div class="inq-field">
-        <label class="inq-label">??李??/label>
-        <input class="inq-input" type="email" placeholder="example@company.com" />
-      </div>
-      <div class="inq-field">
-        <label class="inq-label">?怨룸뼖 ?브쑴鍮?<span class="req">*</span></label>
-        <div class="inq-checks">
-          <label class="inq-check"><input type="checkbox" /><span>獄쎻뫗??SI</span></label>
-          <label class="inq-check"><input type="checkbox" /><span>??쎈뮔?遺우궎 ?닌딇뀧</span></label>
-          <label class="inq-check"><input type="checkbox" /><span>LED ?遺용뮞???쟿??/span></label>
-          <label class="inq-check"><input type="checkbox" /><span>??살춳??揶쏅벡???/span></label>
-          <label class="inq-check"><input type="checkbox" /><span>?袁⑸춦??????뽯뮞??/span></label>
-          <label class="inq-check"><input type="checkbox" /><span>?遺욧맒???벥 ??뽯뮞??/span></label>
-          <label class="inq-check"><input type="checkbox" /><span>?醫?癰귣똻??/span></label>
-          <label class="inq-check"><input type="checkbox" /><span>疫꿸퀬?</span></label>
-        </div>
-      </div>
-      <div class="inq-field">
-        <label class="inq-label">?얜챷????곸뒠</label>
-        <textarea class="inq-input inq-textarea" placeholder="?얜챷???뤿뼄 ??곸뒠???癒??嚥?苡???낆젾??곻폒?紐꾩뒄"></textarea>
-      </div>
-    </div>
-
-    <div class="inq-foot">
-      <button class="inq-submit">?얜챷??癰귣?沅→묾???/button>
-      <p class="inq-privacy">??깆뵬 09:00 ??18:00 ??곸겫 夷?Tel. 02-857-7744</p>
-    </div>
-  </div>
-</div>
-
-<style>
-  
-  .float-btn {
-    position: fixed; bottom: 32px; right: 32px;
-    z-index: 400;
-    display: flex; align-items: center; gap: 8px;
-    background: #0D3A4A; color: #fff;
-    padding: 14px 22px; border-radius: 50px;
-    cursor: pointer; font-size: 14px; font-weight: 700;
-    box-shadow: 0 4px 24px rgba(13,58,74,0.35);
-    transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
-    letter-spacing: 0.02em;
+  const sh = document.getElementById('sh');
+  if (sh) {
+    window.addEventListener('scroll', function() {
+      if (window.scrollY > 80) sh.classList.add('hide');
+    }, { passive: true });
   }
-  .float-btn:hover {
-    background: #00B8D9;
-    transform: translateY(-3px);
-    box-shadow: 0 8px 32px rgba(0,184,217,0.4);
-  }
+  </script>
 
-  
-  .inq-modal {
-    position: fixed; inset: 0; z-index: 500;
-    display: flex; align-items: flex-end; justify-content: flex-end;
-    padding: 0 32px 100px;
-    pointer-events: none; opacity: 0;
-    transition: opacity 0.25s;
-  }
-  .inq-modal.open { pointer-events: all; opacity: 1; }
-  .inq-overlay {
-    position: absolute; inset: 0;
-    background: rgba(0,0,0,0.4);
-    backdrop-filter: blur(4px);
-  }
-  .inq-box {
-    position: relative; z-index: 1;
-    background: #fff; border-radius: 16px;
-    width: 440px; max-height: 80vh;
-    display: flex; flex-direction: column;
-    box-shadow: 0 24px 80px rgba(0,0,0,0.2);
-    transform: translateY(20px);
-    transition: transform 0.3s cubic-bezier(0.16,1,0.3,1);
-    overflow: hidden;
-  }
-  .inq-modal.open .inq-box { transform: translateY(0); }
-
-  
-  .inq-head {
-    display: flex; align-items: flex-start; justify-content: space-between;
-    padding: 24px 28px 20px;
-    border-bottom: 1px solid #f0f0f0;
-    flex-shrink: 0;
-  }
-  .inq-title { font-size: 20px; font-weight: 800; color: #0a0a0a; letter-spacing: -0.03em; margin-bottom: 4px; }
-  .inq-sub { font-size: 12px; color: #999; }
-  .inq-close {
-    background: none; border: none; cursor: pointer;
-    font-size: 16px; color: #aaa; padding: 4px; line-height: 1;
-    transition: color 0.2s;
-  }
-  .inq-close:hover { color: #0a0a0a; }
-
-  
-  .inq-body {
-    overflow-y: auto; padding: 20px 28px;
-    display: flex; flex-direction: column; gap: 18px;
-    flex: 1; min-height: 0;
-  }
-  .inq-body::-webkit-scrollbar { width: 4px; }
-  .inq-body::-webkit-scrollbar-thumb { background: #e0e0e0; border-radius: 2px; }
-
-  
-  .inq-field { display: flex; flex-direction: column; gap: 7px; }
-  .inq-label { font-size: 12px; font-weight: 700; color: #333; letter-spacing: 0.02em; }
-  .req { color: #e53e3e; }
-  .inq-input {
-    width: 100%; padding: 10px 14px;
-    border: 1px solid #e0e0e0; border-radius: 8px;
-    font-size: 14px; color: #0a0a0a; font-family: inherit;
-    outline: none; transition: border-color 0.2s;
-    background: #fafafa;
-  }
-  .inq-input:focus { border-color: #00B8D9; background: #fff; }
-  .inq-input::placeholder { color: #bbb; }
-
-  
-  .inq-tel { display: flex; align-items: center; gap: 6px; }
-  .inq-tel span { color: #aaa; font-weight: 500; }
-  .inq-tel .inq-input { text-align: center; }
-
-  
-  .inq-textarea { resize: none; height: 90px; }
-
-  
-  .inq-checks { display: flex; flex-wrap: wrap; gap: 8px; }
-  .inq-check {
-    display: flex; align-items: center; gap: 6px;
-    font-size: 13px; color: #555; cursor: pointer;
-    padding: 7px 14px;
-    border: 1px solid #e0e0e0; border-radius: 20px;
-    transition: all 0.15s;
-  }
-  .inq-check:hover { border-color: #00B8D9; color: #00B8D9; }
-  .inq-check input { display: none; }
-  .inq-check input:checked + span { color: #0D3A4A; font-weight: 700; }
-  .inq-check:has(input:checked) { border-color: #0D3A4A; background: rgba(13,58,74,0.05); }
-
-  
-  .inq-foot {
-    padding: 16px 28px 24px;
-    border-top: 1px solid #f0f0f0;
-    flex-shrink: 0;
-  }
-  .inq-submit {
-    width: 100%; padding: 14px;
-    background: #0D3A4A; color: #fff;
-    border: none; border-radius: 8px;
-    font-size: 14px; font-weight: 700;
-    cursor: pointer; letter-spacing: 0.06em;
-    font-family: inherit;
-    transition: background 0.2s;
-    margin-bottom: 10px;
-  }
-  .inq-submit:hover { background: #00B8D9; }
-  .inq-privacy { font-size: 11px; color: #bbb; text-align: center; }
-
-  @media (max-width: 480px) {
-    .float-btn span { display: none; }
-    .float-btn { padding: 14px; border-radius: 50%; }
-    .inq-modal { padding: 0 0 90px; align-items: flex-end; justify-content: center; }
-    .inq-box { width: 100%; border-radius: 16px 16px 0 0; max-height: 90vh; }
-  }
-</style>
 </body>
 </html>
 
+<style>
+  .float-btn {
+    position: fixed; bottom: 32px; right: 32px; z-index: 400;
+    background: #1a2f8a; color: #fff; border: none; cursor: pointer;
+    display: flex; align-items: center; gap: 8px; padding: 14px 22px;
+    border-radius: 50px; font-size: 14px; font-weight: 700;
+    box-shadow: 0 4px 24px rgba(13,58,74,0.35); opacity: 0; pointer-events: none;
+    transition: opacity 0.3s, transform 0.2s, box-shadow 0.2s; font-family: inherit;
+  }
+  .float-btn:hover { transform: translateY(-3px); box-shadow: 0 8px 32px rgba(0,184,217,0.4); }
+  .inq-modal {
+    position: fixed; inset: 0; z-index: 500;
+    display: flex; align-items: center; justify-content: center;
+    pointer-events: none; opacity: 0; transition: opacity 0.25s;
+  }
+  .inq-modal.open { pointer-events: all; opacity: 1; }
+  .inq-overlay { position: absolute; inset: 0; background: rgba(0,0,0,0.4); }
+  .inq-box {
+    position: relative; z-index: 1; background: #fff; border-radius: 16px;
+    width: 90%; max-width: 520px; max-height: 88vh; overflow-y: auto;
+    box-shadow: 0 24px 80px rgba(0,0,0,0.2); display: flex; flex-direction: column;
+    transform: translateY(20px); transition: transform 0.3s cubic-bezier(0.16,1,0.3,1); overflow: hidden;
+  }
+  .inq-modal.open .inq-box { transform: translateY(0); }
+  .inq-head { display: flex; align-items: flex-start; justify-content: space-between; padding: 24px 28px 20px; border-bottom: 1px solid #f0f0f0; flex-shrink: 0; }
+  .inq-title { font-size: 20px; font-weight: 800; color: #0a0a0a; letter-spacing: -0.03em; margin-bottom: 4px; }
+  .inq-sub { font-size: 13px; color: #999; }
+  .inq-close { background: none; border: none; cursor: pointer; font-size: 18px; color: #bbb; line-height: 1; padding: 4px; margin-top: -2px; transition: color 0.2s; }
+  .inq-close:hover { color: #333; }
+  .inq-body { padding: 20px 28px; overflow-y: auto; flex: 1; }
+  .inq-field { margin-bottom: 16px; }
+  .inq-label { display: block; font-size: 12px; font-weight: 700; color: #555; margin-bottom: 8px; }
+  .req { color: #e74c3c; margin-left: 2px; }
+  .inq-input { width: 100%; border: 1.5px solid #e8e8e8; border-radius: 8px; padding: 11px 14px; font-size: 14px; color: #1a1a1a; outline: none; font-family: inherit; transition: border-color 0.2s; }
+  .inq-input:focus { border-color: #1a2f8a; }
+  .inq-textarea { min-height: 80px; resize: none; }
+  .inq-tel { display: flex; align-items: center; gap: 6px; }
+  .inq-tel .inq-input { text-align: center; }
+  .inq-tel span { color: #bbb; font-weight: 700; }
+  .inq-checks { display: flex; flex-wrap: wrap; gap: 8px; }
+  .inq-check { display: flex; align-items: center; gap: 6px; font-size: 13px; color: #555; cursor: pointer; padding: 7px 14px; border: 1.5px solid #e8e8e8; border-radius: 6px; transition: all 0.15s; }
+  .inq-check:hover { border-color: #1a2f8a; color: #1a2f8a; }
+  .inq-check input { display: none; }
+  .inq-check:has(input:checked) { border-color: #0D3A4A; background: rgba(13,58,74,0.05); }
+  .inq-foot { padding: 16px 28px 24px; border-top: 1px solid #f0f0f0; flex-shrink: 0; }
+  .inq-submit { width: 100%; padding: 14px; background: #1a2f8a; color: #fff; border: none; border-radius: 8px; font-size: 15px; font-weight: 700; cursor: pointer; font-family: inherit; transition: background 0.2s; }
+  .inq-submit:hover { background: #142580; }
+  .inq-privacy { font-size: 11px; color: #bbb; text-align: center; margin-top: 10px; }
+</style>
