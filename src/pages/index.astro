@@ -73,7 +73,8 @@ import SecContact    from '../components/SecContact.astro';
       padding: 8px 16px; border-radius: 6px; transition: all 0.2s; white-space: nowrap;
     }
     .nav.scrolled .nav-link { color: #1a1a1a; }
-    .nav:not(.scrolled) .nav-link { color: rgba(255,255,255,0.9); }
+    .nav:not(.scrolled) .nav-link { color: rgba(255,255,255,0.5); }
+    .nav:not(.scrolled) .nav-link:hover { color: #fff; background: rgba(255,255,255,0.12); }
     .nav-item.has-drop:hover .nav-link { background: rgba(255,255,255,0.1); }
     .nav.scrolled .nav-item.has-drop:hover .nav-link { background: rgba(13,58,74,0.06); }
     .nav-drop {
@@ -99,7 +100,7 @@ import SecContact    from '../components/SecContact.astro';
       transition: all 0.2s; border-radius: 4px;
     }
     .nav.scrolled .lang-btn { border-color: rgba(0,0,0,0.12); color: #999; }
-    .lang-btn:hover { color: #fff; border-color: rgba(255,255,255,0.5); }
+    .lang-btn:hover { color: #fff; border-color: rgba(255,255,255,0.8); background: rgba(255,255,255,0.1); }
     .nav.scrolled .lang-btn:hover { color: #0D3A4A; border-color: #0D3A4A; }
     .lang-btn.active { color: #fff; border-color: #00B8D9; background: rgba(0,184,217,0.12); }
     .nav.scrolled .lang-btn.active { color: #0D3A4A; border-color: #0D3A4A; background: rgba(13,58,74,0.07); }
