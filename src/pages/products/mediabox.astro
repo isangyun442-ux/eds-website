@@ -36,8 +36,22 @@
     .hero-model{display:inline-block;font-size:12px;font-weight:700;background:#1a2f8a;color:#fff;padding:5px 14px;border-radius:4px;letter-spacing:0.06em;}
     .hero-img{width:100%;border-radius:12px;overflow:hidden;box-shadow:0 24px 80px rgba(26,47,138,0.12);}
     .hero-img img{width:100%;height:auto;display:block;}
-    .hero-img-ph{width:100%;aspect-ratio:4/3;background:linear-gradient(135deg,#e8edf8,#dce3f5);border-radius:12px;display:flex;align-items:center;justify-content:center;}
-    .hero-img-ph span{font-size:13px;color:#a0aec0;}
+    .hero-img-ph{
+      width:100%;aspect-ratio:4/3;
+      background:linear-gradient(160deg,#0d1a3a 0%,#1a2f8a 100%);
+      border-radius:12px;display:flex;flex-direction:column;
+      align-items:center;justify-content:center;gap:16px;
+      position:relative;overflow:hidden;
+    }
+    .hero-img-ph::before{
+      content:'';position:absolute;inset:0;
+      background:repeating-linear-gradient(90deg,rgba(255,255,255,0.03) 0px,rgba(255,255,255,0.03) 1px,transparent 1px,transparent 40px),
+                 repeating-linear-gradient(0deg,rgba(255,255,255,0.03) 0px,rgba(255,255,255,0.03) 1px,transparent 1px,transparent 40px);
+    }
+    .hero-img-ph-logo{font-size:32px;font-weight:900;color:#fff;letter-spacing:-0.04em;position:relative;}
+    .hero-img-ph-model{font-size:12px;font-weight:600;color:rgba(255,255,255,0.5);letter-spacing:0.12em;position:relative;}
+    .hero-img-ph-bar{width:80px;height:3px;background:rgba(255,255,255,0.2);border-radius:2px;position:relative;}
+    .hero-img-ph-coming{font-size:11px;color:rgba(255,255,255,0.35);letter-spacing:0.1em;position:relative;}
     @media(max-width:900px){.hero{padding:100px 24px 60px;}.hero-inner{grid-template-columns:1fr;gap:40px;}.hero-img{order:-1;}}
 
     /* SECTION 공통 */
@@ -117,7 +131,7 @@
         <span class="hero-model">MB-HD8000</span>
       </div>
       <div class="hero-img">
-        <div class="hero-img-ph"><span>제품 이미지 준비 중</span></div>
+        <img src="/images/products/mediabox.jpg" alt="mediabox MB-HD8000" />
       </div>
     </div>
   </section>
