@@ -1,0 +1,275 @@
+---
+// src/pages/products/mediabox.astro
+---
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" href="/favicon.ico" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <title>mediabox — EDS 이담에스티</title>
+  <style>
+    *{box-sizing:border-box;margin:0;padding:0;}
+    body{font-family:'Inter','Apple SD Gothic Neo','Noto Sans KR',sans-serif;background:#fff;color:#0a0a0a;-webkit-font-smoothing:antialiased;}
+
+    /* NAV */
+    .nav{position:fixed;top:0;left:0;right:0;z-index:300;display:flex;align-items:center;justify-content:space-between;padding:14px 60px;background:rgba(255,255,255,0.97);box-shadow:0 1px 0 rgba(0,0,0,0.07);backdrop-filter:blur(12px);}
+    .nav-logo{height:28px;display:flex;align-items:center;text-decoration:none;}
+    .nav-logo img{height:26px;width:auto;}
+    .nav-back{font-size:13px;font-weight:600;color:#1a2f8a;text-decoration:none;display:flex;align-items:center;gap:6px;transition:gap 0.2s;}
+    .nav-back:hover{gap:10px;}
+    .nav-cta{font-size:13px;font-weight:700;padding:9px 20px;background:#1a2f8a;color:#fff;border:none;cursor:pointer;border-radius:6px;font-family:inherit;transition:background 0.2s;text-decoration:none;}
+    .nav-cta:hover{background:#142580;}
+    @media(max-width:768px){.nav{padding:12px 20px;}}
+
+    /* HERO */
+    .hero{padding:120px 60px 80px;background:linear-gradient(170deg,#f7f9ff 0%,#edf1fb 100%);}
+    .hero-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;}
+    .hero-badge{display:inline-flex;align-items:center;gap:8px;font-size:10px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:#1a2f8a;margin-bottom:20px;}
+    .hero-badge::before{content:'';width:20px;height:1.5px;background:#1a2f8a;}
+    .hero-title{font-size:clamp(32px,4vw,52px);font-weight:900;letter-spacing:-0.04em;color:#0d1a3a;line-height:1.1;margin-bottom:12px;}
+    .hero-title em{color:#1a2f8a;font-style:normal;}
+    .hero-sub{font-size:15px;color:#6b7a8d;line-height:1.8;margin-bottom:32px;}
+    .hero-model{display:inline-block;font-size:12px;font-weight:700;background:#1a2f8a;color:#fff;padding:5px 14px;border-radius:4px;letter-spacing:0.06em;}
+    .hero-img{width:100%;border-radius:12px;overflow:hidden;box-shadow:0 24px 80px rgba(26,47,138,0.12);}
+    .hero-img img{width:100%;height:auto;display:block;}
+    .hero-img-ph{width:100%;aspect-ratio:4/3;background:linear-gradient(135deg,#e8edf8,#dce3f5);border-radius:12px;display:flex;align-items:center;justify-content:center;}
+    .hero-img-ph span{font-size:13px;color:#a0aec0;}
+    @media(max-width:900px){.hero{padding:100px 24px 60px;}.hero-inner{grid-template-columns:1fr;gap:40px;}.hero-img{order:-1;}}
+
+    /* SECTION 공통 */
+    .sec{padding:80px 60px;}
+    .sec-inner{max-width:1200px;margin:0 auto;}
+    .sec-label{font-size:10px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:#1a2f8a;margin-bottom:12px;}
+    .sec-title{font-size:clamp(22px,2.8vw,36px);font-weight:800;letter-spacing:-0.03em;color:#0d1a3a;margin-bottom:16px;}
+    .sec-desc{font-size:14px;color:#6b7a8d;line-height:1.9;max-width:640px;}
+    @media(max-width:768px){.sec{padding:60px 24px;}}
+
+    /* OVERVIEW */
+    .overview{background:#fff;}
+    .overview-box{background:#f7f9ff;border-left:4px solid #1a2f8a;border-radius:0 10px 10px 0;padding:28px 32px;margin-top:32px;}
+    .overview-box p{font-size:14px;color:#444;line-height:2;font-weight:500;}
+
+    /* FEATURES */
+    .features{background:#f7f9ff;}
+    .feat-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;margin-top:48px;}
+    .feat-card{background:#fff;border:1px solid #e8edf4;border-radius:12px;padding:28px 28px 24px;transition:box-shadow 0.25s,transform 0.25s;}
+    .feat-card:hover{box-shadow:0 10px 36px rgba(26,47,138,0.1);transform:translateY(-3px);}
+    .feat-tag{display:inline-block;font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#1a2f8a;background:rgba(26,47,138,0.08);padding:3px 10px;border-radius:4px;margin-bottom:12px;}
+    .feat-title{font-size:16px;font-weight:800;color:#0d1a3a;margin-bottom:12px;}
+    .feat-list{display:flex;flex-direction:column;gap:6px;}
+    .feat-item{font-size:13px;color:#555;line-height:1.7;padding-left:14px;position:relative;}
+    .feat-item::before{content:'·';position:absolute;left:0;color:#1a2f8a;font-weight:700;}
+    @media(max-width:768px){.feat-grid{grid-template-columns:1fr;}}
+
+    /* SPECS */
+    .specs{background:#fff;}
+    .specs-table{width:100%;border-collapse:collapse;margin-top:40px;border-radius:12px;overflow:hidden;box-shadow:0 2px 20px rgba(26,47,138,0.06);}
+    .specs-table thead{background:#0d1a3a;}
+    .specs-table thead th{padding:16px 24px;font-size:12px;font-weight:700;color:#fff;text-align:left;letter-spacing:0.06em;text-transform:uppercase;}
+    .specs-table tbody tr{border-bottom:1px solid #f0f4fb;}
+    .specs-table tbody tr:last-child{border-bottom:none;}
+    .specs-table tbody tr:hover{background:#f7f9ff;}
+    .specs-table td{padding:16px 24px;font-size:14px;color:#333;}
+    .specs-table td:first-child{font-weight:700;color:#1a2f8a;width:30%;}
+
+    /* CTA */
+    .cta-sec{background:linear-gradient(135deg,#0d1a3a 0%,#1a2f8a 100%);padding:80px 60px;}
+    .cta-inner{max-width:700px;margin:0 auto;text-align:center;}
+    .cta-title{font-size:clamp(22px,3vw,36px);font-weight:900;color:#fff;letter-spacing:-0.03em;margin-bottom:16px;}
+    .cta-sub{font-size:14px;color:rgba(255,255,255,0.65);line-height:1.8;margin-bottom:36px;}
+    .cta-btns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;}
+    .cta-btn{font-size:14px;font-weight:700;padding:14px 36px;border-radius:6px;cursor:pointer;font-family:inherit;text-decoration:none;transition:all 0.2s;}
+    .cta-btn--primary{background:#fff;color:#1a2f8a;}
+    .cta-btn--primary:hover{background:#e8edf8;}
+    .cta-btn--outline{background:transparent;color:#fff;border:1.5px solid rgba(255,255,255,0.4);}
+    .cta-btn--outline:hover{background:rgba(255,255,255,0.1);border-color:#fff;}
+    @media(max-width:768px){.cta-sec{padding:60px 24px;}}
+
+    /* FOOTER */
+    .footer{background:#0d1a3a;padding:28px 60px;display:flex;justify-content:space-between;align-items:center;gap:16px;}
+    .footer-logo img{height:20px;filter:brightness(0) invert(1);opacity:0.6;}
+    .footer-info{display:flex;flex-direction:column;gap:4px;text-align:right;}
+    .footer-copy{font-size:11px;color:rgba(255,255,255,0.3);}
+    .footer-contact{font-size:12px;color:rgba(255,255,255,0.45);}
+    @media(max-width:768px){.footer{padding:20px 24px;flex-direction:column;text-align:center;}.footer-info{text-align:center;}}
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="nav">
+    <a href="/" class="nav-logo"><img src="/images/logo.png" alt="EDS 이담에스티" /></a>
+    <a href="/#sec5" class="nav-back">← 조달청 등록제품으로</a>
+    <a href="/#sec7" class="nav-cta">도입 문의</a>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-inner">
+      <div>
+        <div class="hero-badge">조달청 등록제품</div>
+        <h1 class="hero-title"><em>mediabox</em></h1>
+        <p class="hero-sub">HDTV 동시녹화 녹화영상<br>키워드 검색 및 편집 시스템</p>
+        <span class="hero-model">MB-HD8000</span>
+      </div>
+      <div class="hero-img">
+        <div class="hero-img-ph"><span>제품 이미지 준비 중</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- OVERVIEW -->
+  <section class="sec overview">
+    <div class="sec-inner">
+      <div class="sec-label">Overview</div>
+      <h2 class="sec-title">미디어박스란?</h2>
+      <p class="sec-desc">HD 방송 녹화의 새로운 기준을 제시하는 미디어박스는 원하는 시간대에 원하는 방송 프로그램을 최대 8개 채널까지 동시에 녹화할 수 있으며, 특화된 검색 알고리즘을 통해 특정 키워드가 언급된 방송 영상을 빠르고 정확하게 검색할 수 있습니다.</p>
+      <div class="overview-box">
+        <p>또한 검색된 영상을 원하는 대로 편집하고 다양한 해상도와 포맷으로 추출하여 활용할 수 있도록 설계된 혁신적인 시스템입니다. 미디어박스를 통해 사용자는 편리하게 방송 프로그램을 녹화, 검색, 편집, 추출할 수 있습니다.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURES -->
+  <section class="sec features">
+    <div class="sec-inner">
+      <div class="sec-label">Features</div>
+      <h2 class="sec-title">제품 특징</h2>
+
+      <div class="feat-grid">
+
+        <div class="feat-card">
+          <div class="feat-tag">Record</div>
+          <div class="feat-title">녹화 기능</div>
+          <div class="feat-list">
+            <div class="feat-item">최대 8채널 HDTV(1080i) 동시녹화</div>
+            <div class="feat-item">채널별 독립적인 녹화 스케줄 설정</div>
+            <div class="feat-item">녹화일자로 저장폴더 생성</div>
+            <div class="feat-item">녹화 예약 설정을 한번, 매일, 매주로 선택</div>
+            <div class="feat-item">녹화영상이 저장되는 폴더를 지정</div>
+            <div class="feat-item">녹화시간 표시 및 녹화상태 표시</div>
+            <div class="feat-item">채널별 녹화상태 표시</div>
+          </div>
+        </div>
+
+        <div class="feat-card">
+          <div class="feat-tag">Search</div>
+          <div class="feat-title">검색 기능</div>
+          <div class="feat-list">
+            <div class="feat-item">키워드 입력으로 녹화된 영상을 검색</div>
+            <div class="feat-item">키워드검색에 대해 결과내 재검색 제공</div>
+            <div class="feat-item">기간지정, 채널 지정, 프로그래밍 등 고급검색 제공</div>
+            <div class="feat-item">검색 결과물을 파일별, 채널별, 시간별, 프로그램명으로 정렬</div>
+            <div class="feat-item">키워드가 언급된 녹화영상 장면으로 정밀 이동</div>
+            <div class="feat-item">EPG를 이용한 프로그램명 자동 저장</div>
+          </div>
+        </div>
+
+        <div class="feat-card">
+          <div class="feat-tag">Play & Export</div>
+          <div class="feat-title">재생 및 내보내기</div>
+          <div class="feat-list">
+            <div class="feat-item">직관적인 GUI로 간편한 사용이 가능</div>
+            <div class="feat-item">녹화 영상 재생 시 해당 자막 화면 표시</div>
+            <div class="feat-item">In/out point를 지정하여 영상 및 자막 추출</div>
+            <div class="feat-item">추출영상의 해상도(480, 720, 1080) 선택 가능</div>
+            <div class="feat-item">추출 포맷 변형 지원 (mpeg, mpegts, avi, mp4, mov 등)</div>
+            <div class="feat-item">Snap shot 기능 (jpg, bmp)</div>
+          </div>
+        </div>
+
+        <div class="feat-card">
+          <div class="feat-tag">Management</div>
+          <div class="feat-title">관리 기능</div>
+          <div class="feat-list">
+            <div class="feat-item">채널검색, 채널 설정 및 tuner 상태 관리</div>
+            <div class="feat-item">클라이언트 소프트웨어로 네트워크상에서 운영 가능</div>
+            <div class="feat-item">자동 스토리지 관리 (오래된 녹화 영상부터 자동 삭제)</div>
+            <div class="feat-item">Freespace 설정으로 디스크 사용량 제어 가능</div>
+            <div class="feat-item">날짜별로 저장된 파일 수, 데이터 크기를 표시</div>
+            <div class="feat-item">로그기록을 통해 시스템정보 확인</div>
+          </div>
+        </div>
+
+        <div class="feat-card">
+          <div class="feat-tag">Supports recording TV</div>
+          <div class="feat-title">방송 수신 지원</div>
+          <div class="feat-list">
+            <div class="feat-item">지상파 및 CATV 완벽지원</div>
+            <div class="feat-item">최대 8채널 HDTV 동시 녹화</div>
+            <div class="feat-item">지역별, SO별 관계없이 간단한 채널 설정</div>
+            <div class="feat-item">최대 약 4개월 연속녹화 가능 (8VSB, QAM, Raid 5 기준)</div>
+            <div class="feat-item">RF케이블 1개를 이용하여 최대 8채널 녹화지원</div>
+          </div>
+        </div>
+
+        <div class="feat-card">
+          <div class="feat-tag">Hardware Platform</div>
+          <div class="feat-title">하드웨어 플랫폼</div>
+          <div class="feat-list">
+            <div class="feat-item">Microsoft BDA(Broadcast Driver Architecture) 사용으로 안정적인 하드웨어 환경 제공</div>
+            <div class="feat-item">서버용 Intel Xeon Processor 적용</div>
+            <div class="feat-item">Hot-Swap Disk로 손쉬운 관리</div>
+            <div class="feat-item">전원공급장치 이중화로 시스템 안정성확보</div>
+            <div class="feat-item">2개의 Gigabit 이더넷 제공</div>
+            <div class="feat-item">RAID 시스템 제공 (RAID 5 또는 RAID 6)</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- SPECS -->
+  <section class="sec specs">
+    <div class="sec-inner">
+      <div class="sec-label">Specifications</div>
+      <h2 class="sec-title">제품 사양</h2>
+      <table class="specs-table">
+        <thead>
+          <tr>
+            <th>항목</th>
+            <th>사양</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>모델명</td><td>MB-HD8000</td></tr>
+          <tr><td>Processor</td><td>Xeon Silver 4510 2.4G 12Core × 2</td></tr>
+          <tr><td>GPU</td><td>Nvidia GT1030 2G</td></tr>
+          <tr><td>RAM</td><td>32GB</td></tr>
+          <tr><td>SSD</td><td>500GB (NVMe)</td></tr>
+          <tr><td>HDD</td><td>80TB</td></tr>
+          <tr><td>RAID</td><td>Broadcom LSI9560-8I</td></tr>
+          <tr><td>PSU</td><td>800W Redundant</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-sec">
+    <div class="cta-inner">
+      <h2 class="cta-title">도입 문의를 환영합니다</h2>
+      <p class="cta-sub">미디어박스는 조달청 나라장터를 통해 공공기관 직접 구매가 가능합니다.<br>자세한 사양 및 견적은 문의를 통해 확인하세요.</p>
+      <div class="cta-btns">
+        <a href="/#sec7" class="cta-btn cta-btn--primary">도입 문의하기 →</a>
+        <a href="/works" class="cta-btn cta-btn--outline">구축사례 보기</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-logo"><img src="/images/logo.png" alt="EDS 이담에스티" /></div>
+    <div class="footer-info">
+      <span class="footer-contact">Tel. 02-857-7744 &nbsp;·&nbsp; 평일 09:00 – 18:00</span>
+      <span class="footer-copy">© 2025 이담에스티 주식회사. All rights reserved.</span>
+    </div>
+  </footer>
+
+</body>
+</html>
