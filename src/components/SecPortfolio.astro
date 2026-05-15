@@ -57,8 +57,8 @@ import { projects } from '../data/projects.js';
           <span class="port-sep"> / </span>
           <span class="port-total-num">170</span>
         </div>
-        <a href="/works" class="port-all">전체 구축사례 보기 →</a>
       </div>
+      <a href="/works" class="port-all">전체 구축사례 보기 →</a>
     </div>
 
   </div>
@@ -146,6 +146,10 @@ import { projects } from '../data/projects.js';
     padding: 80px 40px 60px 60px;
     display: flex; flex-direction: column;
     justify-content: center; gap: 0;
+    /* 전체 높이 고정 — 내부 요소 움직임 방지 */
+    height: 100vh;
+    min-height: 600px;
+    box-sizing: border-box;
   }
   .port-eyebrow {
     font-size: 20px; font-weight: 900; letter-spacing: 0.28em;
@@ -155,8 +159,13 @@ import { projects } from '../data/projects.js';
   }
   .port-eyebrow::before { content: ''; width: 28px; height: 2px; background: #fff; display: block; }
 
-  /* 슬라이드 텍스트 */
-  .port-slides { position: relative; min-height: 220px; margin-bottom: 40px; }
+  /* 슬라이드 텍스트 — 고정 높이로 레이아웃 이동 방지 */
+  .port-slides {
+    position: relative;
+    height: 200px;
+    margin-bottom: 40px;
+    flex-shrink: 0;
+  }
   .port-slide {
     position: absolute; top: 0; left: 0; width: 100%;
     opacity: 0; transform: translateY(16px);
@@ -165,7 +174,7 @@ import { projects } from '../data/projects.js';
   }
   .port-slide.active {
     opacity: 1; transform: translateY(0);
-    position: relative; pointer-events: auto;
+    pointer-events: auto;
   }
   .port-title {
     font-size: clamp(20px, 2.4vw, 38px);
@@ -209,14 +218,15 @@ import { projects } from '../data/projects.js';
   .port-cur-num { color: #fff; font-size: 18px; font-weight: 900; }
 
   .port-all {
-    margin-left: auto;
+    display: inline-flex; align-items: center;
+    margin-top: 16px;
     font-size: 12px; font-weight: 800; color: #fff;
     text-decoration: none; letter-spacing: 0.1em; text-transform: uppercase;
     height: 48px; padding: 0 28px;
-    display: inline-flex; align-items: center;
     border: 1.5px solid rgba(255,255,255,0.4);
     transition: background 0.2s, border-color 0.2s;
     white-space: nowrap;
+    align-self: flex-start;
   }
   .port-all:hover { background: rgba(255,255,255,0.1); border-color: #fff; }
 
