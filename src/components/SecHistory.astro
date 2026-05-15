@@ -50,6 +50,44 @@ const history = [
 ];
 ---
 <section class="sec s5" id="sec6">
+
+  <!-- 웨이브 SVG 배경 -->
+  <div class="hist-waves" aria-hidden="true">
+    <svg class="waves-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice">
+      <defs>
+        <linearGradient id="wg1" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%"   stop-color="rgba(255,255,255,0)" />
+          <stop offset="30%"  stop-color="rgba(255,255,255,0.07)" />
+          <stop offset="70%"  stop-color="rgba(100,160,255,0.09)" />
+          <stop offset="100%" stop-color="rgba(255,255,255,0)" />
+        </linearGradient>
+        <linearGradient id="wg2" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%"   stop-color="rgba(255,255,255,0)" />
+          <stop offset="40%"  stop-color="rgba(180,210,255,0.06)" />
+          <stop offset="60%"  stop-color="rgba(255,255,255,0.08)" />
+          <stop offset="100%" stop-color="rgba(255,255,255,0)" />
+        </linearGradient>
+        <linearGradient id="wg3" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%"   stop-color="rgba(255,255,255,0)" />
+          <stop offset="50%"  stop-color="rgba(120,180,255,0.05)" />
+          <stop offset="100%" stop-color="rgba(255,255,255,0)" />
+        </linearGradient>
+      </defs>
+      <!-- 굵은 메인 웨이브들 -->
+      <path d="M-100,120 C200,60 400,200 700,140 C1000,80 1200,220 1540,160" stroke="url(#wg1)" stroke-width="3.5" fill="none"/>
+      <path d="M-100,260 C150,180 450,340 750,260 C1050,180 1300,300 1540,240" stroke="url(#wg2)" stroke-width="4" fill="none"/>
+      <path d="M-100,420 C200,340 500,480 800,380 C1100,280 1350,420 1540,360" stroke="url(#wg1)" stroke-width="3" fill="none"/>
+      <path d="M-100,560 C250,480 550,620 850,520 C1150,420 1350,560 1540,500" stroke="url(#wg2)" stroke-width="4.5" fill="none"/>
+      <path d="M-100,700 C200,620 480,760 780,660 C1080,560 1300,700 1540,640" stroke="url(#wg3)" stroke-width="3" fill="none"/>
+      <path d="M-100,820 C300,740 600,880 900,780 C1200,680 1380,820 1540,760" stroke="url(#wg1)" stroke-width="3.5" fill="none"/>
+      <!-- 가는 보조 웨이브들 -->
+      <path d="M-100,180 C300,120 600,260 900,180 C1200,100 1380,240 1540,200" stroke="rgba(255,255,255,0.03)" stroke-width="1.5" fill="none"/>
+      <path d="M-100,340 C250,260 550,400 850,300 C1150,200 1350,360 1540,300" stroke="rgba(180,220,255,0.04)" stroke-width="1.5" fill="none"/>
+      <path d="M-100,490 C200,410 500,550 800,450 C1100,350 1350,490 1540,430" stroke="rgba(255,255,255,0.03)" stroke-width="1.5" fill="none"/>
+      <path d="M-100,640 C300,560 600,700 900,600 C1200,500 1400,640 1540,580" stroke="rgba(180,220,255,0.04)" stroke-width="1.5" fill="none"/>
+    </svg>
+  </div>
+
   <div class="hist-inner">
     <div class="h-header">
       <span class="h-eyebrow fade-up" data-i18n="hist.eyebrow">Company History</span>
@@ -84,19 +122,24 @@ const history = [
 
 <style>
   .s5 {
-    background-image: url('/images/history-bg.png');
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
-    background-color: rgba(6,14,22,0.85);
+    background: linear-gradient(170deg, #060e18 0%, #0a1628 35%, #0d1c38 65%, #070f1e 100%);
+    position: relative;
+    overflow: hidden;
   }
-  .s5::before {
-    content: '';
+  /* 웨이브 배경 */
+  .hist-waves {
     position: absolute;
     inset: 0;
-    background: rgba(6,14,22,0.82);
     z-index: 0;
+    pointer-events: none;
   }
+  .waves-svg {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0; left: 0;
+  }
+
   .hist-inner {
     position: relative;
     z-index: 1;
@@ -108,11 +151,11 @@ const history = [
   .h-eyebrow {
     display: inline-flex; align-items: center; gap: 12px;
     font-size: 11px; font-weight: 700; letter-spacing: 0.24em;
-    text-transform: uppercase; color: #1a2f8a; margin-bottom: 18px;
+    text-transform: uppercase; color: rgba(255,255,255,0.6); margin-bottom: 18px;
   }
   .h-eyebrow::before, .h-eyebrow::after {
     content: ''; display: block; width: 32px; height: 1px;
-    background: #1a2f8a; opacity: 0.8;
+    background: rgba(255,255,255,0.4); opacity: 1;
   }
   .h-title {
     font-size: clamp(28px, 3.5vw, 48px);
@@ -133,12 +176,12 @@ const history = [
   }
 
   .tl-year-col { display: flex; justify-content: flex-end; padding-right: 24px; padding-top: 14px; }
-  .tl-year { font-size: 14px; font-weight: 900; letter-spacing: -0.02em; color: #1a2f8a; }
+  .tl-year { font-size: 14px; font-weight: 900; letter-spacing: -0.02em; color: #fff; font-weight: 900; }
 
   .tl-dot-col { display: flex; justify-content: center; padding-top: 19px; position: relative; z-index: 2; }
   .tl-dot {
     width: 9px; height: 9px; border-radius: 50%;
-    background: #0a1628; border: 2px solid #1a2f8a; flex-shrink: 0; margin-left: -4px;
+    background: #0a1628; border: 2px solid rgba(255,255,255,0.5); flex-shrink: 0; margin-left: -4px;
   }
 
   .tl-content-col { padding: 8px 0 18px 0; }
@@ -150,7 +193,7 @@ const history = [
   .tl-item:last-child { border-bottom: none; }
   .tl-item:first-child { padding-top: 0; }
   .tl-month {
-    font-size: 11px; font-weight: 700; color: #1a2f8a;
+    font-size: 11px; font-weight: 700; color: rgba(255,255,255,0.55);
     letter-spacing: 0.04em; flex-shrink: 0; min-width: 34px; padding-top: 2px;
   }
   .tl-desc { font-size: 14px; line-height: 1.9; color: rgba(255,255,255,0.80); letter-spacing: 0.01em; }
@@ -160,7 +203,7 @@ const history = [
     align-items: flex-start; padding-left: 80px;
     margin-top: 8px; gap: 8px;
   }
-  .tl-end-dot { width: 14px; height: 14px; border-radius: 50%; background: #1a2f8a; margin-left: 5px; }
+  .tl-end-dot { width: 14px; height: 14px; border-radius: 50%; background: rgba(255,255,255,0.4); margin-left: 5px; }
   .tl-end-label {
     font-size: 10px; font-weight: 700; letter-spacing: 0.22em;
     color: rgba(255,255,255,0.35); text-transform: uppercase;
