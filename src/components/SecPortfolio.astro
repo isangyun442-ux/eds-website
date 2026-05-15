@@ -122,7 +122,7 @@
 
   /* ── 왼쪽 Peek 슬라이더 ── */
   .port-left {
-    flex: 0 0 700px;
+    flex: 0 0 760px;
     display: flex; align-items: center;
     overflow: hidden;
     padding: 20px 0;
@@ -134,14 +134,13 @@
   }
   .port-track {
     display: flex;
-    gap: 16px;
+    gap: 20px;
     transition: transform 0.65s cubic-bezier(0.4, 0, 0.2, 1);
-    /* 첫 카드가 중앙에 오도록 offset */
-    padding: 0 160px;
+    padding: 0 60px;
   }
   .port-card {
-    flex: 0 0 340px;
-    height: 480px;
+    flex: 0 0 620px;
+    height: 560px;
     background-size: cover;
     background-position: center;
     border-radius: 6px;
@@ -149,7 +148,7 @@
                 opacity 0.65s,
                 box-shadow 0.65s;
     opacity: 0.35;
-    transform: scale(0.88);
+    transform: scale(0.92);
     box-shadow: 0 8px 32px rgba(0,0,0,0.3);
   }
   .port-card.active {
@@ -258,7 +257,7 @@
   let cur = 0;
 
   // 카드 너비 + gap
-  const CARD_W = 340 + 16;
+  const CARD_W = 620 + 20;
 
   function go(n) {
     cards[cur].classList.remove('active');
@@ -287,11 +286,6 @@
     if (e.key === 'ArrowLeft') go(cur - 1);
     if (e.key === 'ArrowRight') go(cur + 1);
   });
-
-  // 자동 재생
-  setInterval(function () {
-    go((cur + 1) % total);
-  }, 4000);
 
   go(0);
 })();
