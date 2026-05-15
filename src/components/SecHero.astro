@@ -8,19 +8,6 @@
     <video src="https://res.cloudinary.com/dlaty4qsq/video/upload/v1778474387/2025_%ED%99%8D%EB%B3%B4%EC%98%81%EC%83%81_%EB%A9%94%EC%9D%B8_olhpma.mp4" autoplay muted loop playsinline preload="auto"></video>
   </div>
 
-  <!-- 텍스트 영역 (영상 아래 네이비) -->
-  <div class="hero-text-wrap">
-    <div class="hero-text-inner">
-      <div class="hero-text-body">
-        <p class="hero-sub">방송 스튜디오부터 LED 디스플레이까지. 최적의 공간을 설계합니다</p>
-        <h1 class="hero-title">&ldquo;스마트한 공간, 이담에스티가 만듭니다&rdquo;</h1>
-      </div>
-      <button class="hero-cta-btn" onclick="document.getElementById('sec2').scrollIntoView({behavior:'smooth'})">
-        About Us &nbsp;&#8594;
-      </button>
-    </div>
-  </div>
-
 </section>
 
 <style>
@@ -37,44 +24,6 @@
     width: auto; height: auto;
     transform: translate(-50%, -50%);
     object-fit: cover;
-  }
-
-  /* 텍스트 영역 */
-  .hero-text-wrap {
-    background: #1a2f8a;
-    padding: 28px 60px;
-  }
-  .hero-text-inner {
-    max-width: 1300px; width: 100%; margin: 0 auto;
-    display: flex; align-items: center;
-    justify-content: space-between; gap: 48px;
-  }
-  .hero-text-body { flex: 1; }
-  .hero-sub {
-    font-size: 13px; color: rgba(255,255,255,0.55);
-    line-height: 1.6; margin-bottom: 8px; letter-spacing: 0.01em;
-  }
-  .hero-title {
-    font-size: clamp(18px, 2vw, 30px);
-    font-weight: 900; letter-spacing: -0.02em;
-    color: #fff; line-height: 1.2;
-  }
-
-  /* About Us 버튼 */
-  .hero-cta-btn {
-    display: inline-flex; align-items: center; gap: 8px;
-    background: transparent; color: #fff;
-    border: 2px solid rgba(255,255,255,0.5);
-    font-size: 16px; font-weight: 700;
-    padding: 18px 48px; cursor: pointer;
-    letter-spacing: 0.06em; font-family: inherit;
-    border-radius: 50px; white-space: nowrap; flex-shrink: 0;
-    transition: background 0.2s, border-color 0.2s, transform 0.2s;
-  }
-  .hero-cta-btn:hover {
-    background: rgba(255,255,255,0.1);
-    border-color: #fff;
-    transform: translateX(4px);
   }
 
   @media (max-width: 768px) {
