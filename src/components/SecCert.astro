@@ -1,21 +1,56 @@
 ---
 // src/components/SecCert.astro
 ---
+
+<!-- 라이트박스 -->
+<div class="cert-lb" id="certLb">
+  <div class="cert-lb-overlay" id="certLbOverlay"></div>
+  <div class="cert-lb-box">
+    <button class="cert-lb-close" id="certLbClose">✕</button>
+    <img class="cert-lb-img" id="certLbImg" src="" alt="" />
+    <div class="cert-lb-caption" id="certLbCaption"></div>
+  </div>
+</div>
+
 <section class="sec s-cert" id="sec-cert">
   <div class="cert-inner">
     <div class="cert-label fade-up">CERTIFICATION</div>
     <h2 class="cert-title fade-up fade-up-d1">인증현황</h2>
-    <p class="cert-sub fade-up fade-up-d2">이담에스티가 보유한 공인 인증 및 특허 현황입니다</p>
+    <p class="cert-sub fade-up fade-up-d2">이담에스티가 보유한 공인 인증 및 등록 현황입니다</p>
 
     <div class="cert-grid fade-up fade-up-d3">
 
-      <div class="cert-card">
+      <div class="cert-card" data-img="/images/cert/cert_01.jpg" data-name="공장등록증명서">
         <div class="cert-img-wrap">
-          <div class="cert-img-placeholder">
-            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
-              <rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/>
-            </svg>
-            <span>인증서 이미지</span>
+          <img src="/images/cert/cert_01.jpg" alt="공장등록증명서" loading="lazy" />
+          <div class="cert-zoom">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35M11 8v6M8 11h6"/></svg>
+          </div>
+        </div>
+        <div class="cert-info">
+          <div class="cert-name">공장등록증명서</div>
+          <div class="cert-desc">제조업 공장 공식 등록</div>
+        </div>
+      </div>
+
+      <div class="cert-card" data-img="/images/cert/cert_02.jpg" data-name="정보통신공사등록증">
+        <div class="cert-img-wrap">
+          <img src="/images/cert/cert_02.jpg" alt="정보통신공사등록증" loading="lazy" />
+          <div class="cert-zoom">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35M11 8v6M8 11h6"/></svg>
+          </div>
+        </div>
+        <div class="cert-info">
+          <div class="cert-name">정보통신공사등록증</div>
+          <div class="cert-desc">정보통신공사업 면허 보유</div>
+        </div>
+      </div>
+
+      <div class="cert-card" data-img="/images/cert/cert_03.jpg" data-name="이노비즈 인증">
+        <div class="cert-img-wrap">
+          <img src="/images/cert/cert_03.jpg" alt="이노비즈 인증" loading="lazy" />
+          <div class="cert-zoom">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35M11 8v6M8 11h6"/></svg>
           </div>
         </div>
         <div class="cert-info">
@@ -24,78 +59,81 @@
         </div>
       </div>
 
-      <div class="cert-card">
+      <div class="cert-card" data-img="/images/cert/cert_04.jpg" data-name="경영혁신형중소기업확인서">
         <div class="cert-img-wrap">
-          <div class="cert-img-placeholder">
-            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
-              <rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/>
-            </svg>
-            <span>인증서 이미지</span>
+          <img src="/images/cert/cert_04.jpg" alt="경영혁신형중소기업확인서" loading="lazy" />
+          <div class="cert-zoom">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35M11 8v6M8 11h6"/></svg>
           </div>
         </div>
         <div class="cert-info">
-          <div class="cert-name">ISO 9001</div>
-          <div class="cert-desc">품질경영시스템 국제인증</div>
+          <div class="cert-name">경영혁신형중소기업확인서</div>
+          <div class="cert-desc">메인비즈 공식 인증</div>
         </div>
       </div>
 
-      <div class="cert-card">
+      <div class="cert-card" data-img="/images/cert/cert_05.jpg" data-name="소프트웨어사업자">
         <div class="cert-img-wrap">
-          <div class="cert-img-placeholder">
-            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
-              <rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/>
-            </svg>
-            <span>인증서 이미지</span>
+          <img src="/images/cert/cert_05.jpg" alt="소프트웨어사업자" loading="lazy" />
+          <div class="cert-zoom">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35M11 8v6M8 11h6"/></svg>
           </div>
         </div>
         <div class="cert-info">
-          <div class="cert-name">벤처기업 확인</div>
-          <div class="cert-desc">벤처기업 공식 인증</div>
+          <div class="cert-name">소프트웨어사업자</div>
+          <div class="cert-desc">SW 사업자 신고 확인서</div>
         </div>
       </div>
 
-      <div class="cert-card">
+      <div class="cert-card" data-img="/images/cert/cert_06.jpg" data-name="직접생산증명 · 디스크어레이">
         <div class="cert-img-wrap">
-          <div class="cert-img-placeholder">
-            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
-              <rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/>
-            </svg>
-            <span>인증서 이미지</span>
-          </div>
-        </div>
-        <div class="cert-info">
-          <div class="cert-name">정보통신공사업</div>
-          <div class="cert-desc">정보통신공사업 면허 보유</div>
-        </div>
-      </div>
-
-      <div class="cert-card">
-        <div class="cert-img-wrap">
-          <div class="cert-img-placeholder">
-            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
-              <rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/>
-            </svg>
-            <span>인증서 이미지</span>
-          </div>
-        </div>
-        <div class="cert-info">
-          <div class="cert-name">특허 제1호</div>
-          <div class="cert-desc">특허 등록증</div>
-        </div>
-      </div>
-
-      <div class="cert-card">
-        <div class="cert-img-wrap">
-          <div class="cert-img-placeholder">
-            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
-              <rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/>
-            </svg>
-            <span>인증서 이미지</span>
+          <img src="/images/cert/cert_06.jpg" alt="직접생산증명 디스크어레이" loading="lazy" />
+          <div class="cert-zoom">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35M11 8v6M8 11h6"/></svg>
           </div>
         </div>
         <div class="cert-info">
           <div class="cert-name">직접생산증명</div>
-          <div class="cert-desc">조달청 직접생산 확인증</div>
+          <div class="cert-desc">디스크어레이</div>
+        </div>
+      </div>
+
+      <div class="cert-card" data-img="/images/cert/cert_07.jpg" data-name="직접생산증명 · 정보시스템유지관리서비스">
+        <div class="cert-img-wrap">
+          <img src="/images/cert/cert_07.jpg" alt="직접생산증명 정보시스템유지관리서비스" loading="lazy" />
+          <div class="cert-zoom">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35M11 8v6M8 11h6"/></svg>
+          </div>
+        </div>
+        <div class="cert-info">
+          <div class="cert-name">직접생산증명</div>
+          <div class="cert-desc">정보시스템유지관리서비스</div>
+        </div>
+      </div>
+
+      <div class="cert-card" data-img="/images/cert/cert_08.jpg" data-name="직접생산증명 · 컴퓨터 서버">
+        <div class="cert-img-wrap">
+          <img src="/images/cert/cert_08.jpg" alt="직접생산증명 컴퓨터 서버" loading="lazy" />
+          <div class="cert-zoom">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35M11 8v6M8 11h6"/></svg>
+          </div>
+        </div>
+        <div class="cert-info">
+          <div class="cert-name">직접생산증명</div>
+          <div class="cert-desc">컴퓨터 서버</div>
+        </div>
+      </div>
+
+      <div class="cert-card" data-img="/images/cert/cert_09.jpg" data-name="직접생산증명 · 안내전광판">
+        <div class="cert-img-wrap">
+          <img src="/images/cert/cert_09.jpg" alt="직접생산증명 안내전광판" loading="lazy" />
+          <div class="cert-zoom">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35M11 8v6M8 11h6"/></svg>
+          </div>
+        </div>
+        <div class="cert-info">
+          <div class="cert-name">직접생산증명</div>
+          <div class="cert-desc">안내전광판</div>
         </div>
       </div>
 
@@ -104,12 +142,55 @@
 </section>
 
 <style>
+  /* ── 라이트박스 ── */
+  .cert-lb {
+    display: none;
+    position: fixed; inset: 0; z-index: 1000;
+    align-items: center; justify-content: center;
+    padding: 24px;
+  }
+  .cert-lb.on { display: flex; }
+  .cert-lb-overlay {
+    position: absolute; inset: 0;
+    background: rgba(5, 12, 35, 0.85);
+    backdrop-filter: blur(6px);
+    cursor: pointer;
+  }
+  .cert-lb-box {
+    position: relative; z-index: 1;
+    max-width: 720px; width: 100%;
+    background: #fff;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 40px 100px rgba(0,0,0,0.4);
+  }
+  .cert-lb-close {
+    position: absolute; top: 14px; right: 14px;
+    width: 34px; height: 34px;
+    background: rgba(0,0,0,0.06); border: none;
+    border-radius: 50%; font-size: 15px; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    transition: background 0.2s; z-index: 2; color: #333;
+  }
+  .cert-lb-close:hover { background: rgba(0,0,0,0.14); }
+  .cert-lb-img {
+    width: 100%; display: block;
+    max-height: 80vh; object-fit: contain;
+    background: #f5f7fa;
+  }
+  .cert-lb-caption {
+    padding: 14px 20px;
+    font-size: 13px; font-weight: 700; color: #0d1a3a;
+    text-align: center; border-top: 1px solid #f0f0f5;
+  }
+
+  /* ── 섹션 ── */
   .s-cert {
-    background: #f7f9fb;
-    padding: 100px 0 80px;
+    background: #fff;
+    padding: 100px 0 90px;
   }
   .cert-inner {
-    max-width: 1100px;
+    max-width: 1200px;
     margin: 0 auto;
     padding: 0 40px;
     text-align: center;
@@ -121,65 +202,128 @@
     display: flex; align-items: center; justify-content: center; gap: 10px;
   }
   .cert-label::before,
-  .cert-label::after { content: ''; width: 28px; height: 2px; background: #1a2f8a; display: block; }
+  .cert-label::after { content: ''; width: 28px; height: 1px; background: #1a2f8a; display: block; opacity: 0.5; }
   .cert-title {
     font-size: clamp(28px, 3.5vw, 44px); font-weight: 800;
-    color: #0D1F2D; letter-spacing: -0.03em; margin-bottom: 14px;
+    color: #0d1a3a; letter-spacing: -0.03em; margin-bottom: 14px;
   }
   .cert-sub {
-    font-size: 15px; color: #6b7a8d; line-height: 1.7;
+    font-size: 14px; color: #8896a4; line-height: 1.7;
     margin-bottom: 56px;
   }
+
+  /* ── 그리드 ── */
   .cert-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 20px;
   }
+
+  /* ── 카드 ── */
   .cert-card {
     background: #fff;
-    border: 1px solid #e8edf2;
-    border-radius: 8px;
+    border: 1px solid #e8edf4;
+    border-radius: 10px;
     overflow: hidden;
-    transition: box-shadow 0.25s, transform 0.25s;
+    cursor: pointer;
+    transition: box-shadow 0.25s, transform 0.25s, border-color 0.25s;
   }
   .cert-card:hover {
-    box-shadow: 0 8px 32px rgba(0,0,0,0.08);
-    transform: translateY(-3px);
+    box-shadow: 0 12px 40px rgba(26,47,138,0.10);
+    transform: translateY(-4px);
+    border-color: #c8d4f0;
   }
+
+  /* 이미지 영역 */
   .cert-img-wrap {
     width: 100%;
-    aspect-ratio: 3/2;
+    aspect-ratio: 3/4;
     overflow: hidden;
-    background: #f0f3f7;
+    background: #f5f7fb;
+    position: relative;
   }
   .cert-img-wrap img {
     width: 100%; height: 100%;
     object-fit: cover;
+    object-position: top;
+    transition: transform 0.4s;
   }
-  .cert-img-placeholder {
-    width: 100%; height: 100%;
-    display: flex; flex-direction: column;
-    align-items: center; justify-content: center;
-    gap: 8px; color: #b0bcc9;
-    font-size: 11px;
+  .cert-card:hover .cert-img-wrap img { transform: scale(1.03); }
+
+  /* 줌 아이콘 */
+  .cert-zoom {
+    position: absolute; inset: 0;
+    display: flex; align-items: center; justify-content: center;
+    background: rgba(26,47,138,0.0);
+    transition: background 0.3s;
+    color: #fff;
+    opacity: 0;
+    transition: opacity 0.3s, background 0.3s;
   }
-  .cert-info {
-    padding: 16px 18px;
-    text-align: left;
-  }
-  .cert-name {
-    font-size: 14px; font-weight: 700; color: #0D1F2D;
-    margin-bottom: 4px;
-  }
-  .cert-desc {
-    font-size: 12px; color: #8896a4;
+  .cert-card:hover .cert-zoom {
+    opacity: 1;
+    background: rgba(26,47,138,0.22);
   }
 
-  @media (max-width: 768px) {
-    .cert-grid { grid-template-columns: repeat(2, 1fr); gap: 14px; }
-    .s-cert { padding: 70px 0 60px; }
+  /* 카드 하단 텍스트 */
+  .cert-info {
+    padding: 14px 16px 16px;
+    text-align: left;
+    border-top: 1px solid #f0f3fa;
   }
-  @media (max-width: 480px) {
-    .cert-grid { grid-template-columns: 1fr; }
+  .cert-name {
+    font-size: 13px; font-weight: 700; color: #0d1a3a;
+    margin-bottom: 3px; line-height: 1.4;
+  }
+  .cert-desc {
+    font-size: 11px; color: #9aa4b8; font-weight: 500;
+  }
+
+  @media (max-width: 900px) {
+    .cert-grid { grid-template-columns: repeat(3, 1fr); gap: 14px; }
+  }
+  @media (max-width: 600px) {
+    .cert-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+    .s-cert { padding: 70px 0 60px; }
+    .cert-inner { padding: 0 20px; }
   }
 </style>
+
+<script is:inline>
+(function () {
+  const lb       = document.getElementById('certLb');
+  const lbImg    = document.getElementById('certLbImg');
+  const lbCap    = document.getElementById('certLbCaption');
+  const lbClose  = document.getElementById('certLbClose');
+  const lbOverlay = document.getElementById('certLbOverlay');
+
+  document.querySelectorAll('.cert-card').forEach(function (card) {
+    card.addEventListener('click', function () {
+      lbImg.src = card.dataset.img;
+      lbImg.alt = card.dataset.name;
+      lbCap.textContent = card.dataset.name;
+      lb.classList.add('on');
+      document.body.style.overflow = 'hidden';
+    });
+  });
+
+  function close() {
+    lb.classList.remove('on');
+    document.body.style.overflow = '';
+  }
+  lbClose.addEventListener('click', close);
+  lbOverlay.addEventListener('click', close);
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') close();
+  });
+
+  /* 스크롤 fade-up */
+  const targets = document.querySelectorAll('#sec-cert .fade-up');
+  const obs = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }
+    });
+  }, { threshold: 0.08 });
+  targets.forEach(function (el) { obs.observe(el); });
+})();
+</script>
