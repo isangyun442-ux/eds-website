@@ -5,113 +5,297 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="icon" href="/favicon.ico" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Noto+Serif+KR:wght@400;700&display=swap" rel="stylesheet" />
   <title>전체 구축사례 — EDS 이담에스티</title>
   <style is:global>
+    /* ── 리셋 & 기본 ── */
     *{box-sizing:border-box;margin:0;padding:0;}
-    body{font-family:"Apple SD Gothic Neo","Noto Sans KR",sans-serif;background:#f5f5f5;color:#0A0A0A;}
-    .nav{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(255,255,255,0.97);box-shadow:0 1px 0 rgba(0,0,0,0.07);display:flex;align-items:center;justify-content:space-between;padding:14px 52px;}
-    .nav-logo{height:26px;} .nav-logo img{height:26px;width:auto;}
-    .nav-menu{display:flex;gap:28px;} .nav-menu a{font-size:12px;font-weight:500;color:#444;text-decoration:none;}
-    .nav-cta{font-size:11px;font-weight:700;padding:8px 18px;background:#0D3A4A;color:#fff;border:none;cursor:pointer;}
-    .wrap{max-width:1400px;margin:0 auto;padding:90px 32px 80px;}
-    .page-header{text-align:center;margin-bottom:40px;}
-    .ph-eye{display:inline-flex;align-items:center;gap:12px;font-size:10px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:#D42B2B;margin-bottom:12px;}
-    .ph-eye::before,.ph-eye::after{content:"";display:block;width:24px;height:1px;background:#D42B2B;}
-    .ph-title{font-size:clamp(28px,4vw,48px);font-weight:800;letter-spacing:-0.03em;color:#0A0A0A;margin-bottom:8px;}
-    .ph-sub{font-size:13px;color:#aaa;} .ph-sub strong{color:#D42B2B;}
-    .filter-bar{background:#fff;border:1px solid #efefef;padding:16px 20px;margin-bottom:16px;display:flex;flex-direction:column;gap:10px;}
-    .filter-row{display:flex;align-items:center;gap:10px;flex-wrap:wrap;}
+    body{font-family:'Inter','Apple SD Gothic Neo','Noto Sans KR',sans-serif;background:#f7f8fc;color:#0A0A0A;-webkit-font-smoothing:antialiased;}
+
+    /* ── NAV (index.astro 동일 구조) ── */
+    .nav{
+      position:fixed;top:0;left:0;right:0;z-index:300;
+      display:flex;align-items:center;justify-content:space-between;
+      padding:14px 60px;
+      background:rgba(255,255,255,0.97);
+      box-shadow:0 1px 0 rgba(0,0,0,0.07);
+      backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+    }
+    .nav-logo{height:28px;display:flex;align-items:center;text-decoration:none;}
+    .nav-logo img{height:26px;width:auto;}
+    .nav-menu{display:flex;align-items:center;gap:4px;}
+    .nav-item{position:relative;}
+    .nav-link{
+      display:block;font-size:15px;font-weight:600;letter-spacing:-0.01em;
+      text-decoration:none;color:#1a1a1a;cursor:pointer;
+      padding:8px 14px;border-radius:6px;transition:all 0.2s;white-space:nowrap;
+    }
+    .nav-link:hover{background:rgba(26,47,138,0.06);color:#1a2f8a;}
+    .nav-item.has-drop:hover .nav-link{background:rgba(26,47,138,0.06);color:#1a2f8a;}
+    .nav-drop{
+      position:absolute;top:calc(100% + 6px);left:0;min-width:160px;
+      background:#fff;border-radius:10px;
+      border:1px solid rgba(0,0,0,0.08);box-shadow:0 8px 40px rgba(0,0,0,0.12);
+      padding:8px 0;opacity:0;visibility:hidden;transform:translateY(-6px);
+      transition:opacity 0.2s,transform 0.2s,visibility 0.2s;
+    }
+    .nav-item.has-drop:hover .nav-drop{opacity:1;visibility:visible;transform:translateY(0);}
+    .drop-link{
+      display:block;font-size:14px;font-weight:500;color:#444;
+      text-decoration:none;padding:10px 20px;transition:background 0.15s,color 0.15s;white-space:nowrap;
+    }
+    .drop-link:hover{background:rgba(26,47,138,0.05);color:#1a2f8a;}
+    .nav-link.active{color:#1a2f8a;}
+    .nav-cta{
+      font-size:13px;font-weight:700;padding:9px 20px;
+      background:#1a2f8a;color:#fff;border:none;cursor:pointer;
+      border-radius:6px;letter-spacing:0.03em;font-family:inherit;
+      transition:background 0.2s;
+    }
+    .nav-cta:hover{background:#142580;}
+    @media(max-width:768px){
+      .nav{padding:12px 20px;}
+      .nav-menu{display:none;}
+      .nav-cta{font-size:12px;padding:8px 14px;}
+    }
+
+    /* ── 래퍼 ── */
+    .wrap{max-width:1400px;margin:0 auto;padding:96px 40px 80px;}
+
+    /* ── 페이지 헤더 ── */
+    .page-header{text-align:center;margin-bottom:44px;}
+    .ph-eye{
+      display:inline-flex;align-items:center;gap:12px;
+      font-size:10px;font-weight:700;letter-spacing:0.22em;text-transform:uppercase;
+      color:#1a2f8a;margin-bottom:14px;
+    }
+    .ph-eye::before,.ph-eye::after{content:"";display:block;width:28px;height:1px;background:#1a2f8a;opacity:0.4;}
+    .ph-title{font-size:clamp(26px,4vw,46px);font-weight:800;letter-spacing:-0.03em;color:#0d1a3a;margin-bottom:10px;}
+    .ph-sub{font-size:13px;color:#999;} .ph-sub strong{color:#1a2f8a;font-weight:700;}
+
+    /* ── 필터바 ── */
+    .filter-bar{
+      background:#fff;border:1px solid #e8ecf4;border-radius:12px;
+      padding:18px 22px;margin-bottom:16px;
+      display:flex;flex-direction:column;gap:12px;
+      box-shadow:0 2px 12px rgba(26,47,138,0.04);
+    }
+    .filter-row{display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
     .fl{font-size:9px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:#bbb;min-width:44px;flex-shrink:0;}
-    .fb{font-size:11px;font-weight:600;padding:5px 12px;background:#f5f5f5;color:#555;border:1.5px solid transparent;cursor:pointer;transition:all 0.15s;font-family:inherit;}
-    .fb:hover{border-color:#00B8D9;color:#00B8D9;} .fb.on{background:#0D3A4A;color:#fff;border-color:#0D3A4A;}
-    .si{padding:6px 14px;border:1.5px solid #efefef;font-family:inherit;font-size:13px;color:#0A0A0A;outline:none;background:#f9f9f9;min-width:200px;}
-    .si:focus{border-color:#00B8D9;background:#fff;}
-    .rbar{display:flex;justify-content:flex-end;margin-bottom:10px;}
-    .rc{font-size:12px;color:#aaa;} .rc strong{color:#D42B2B;}
-    .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:3px;background:#ddd;}
+    .fb{
+      font-size:11px;font-weight:600;padding:5px 14px;
+      background:#f5f7fc;color:#555;border:1.5px solid transparent;
+      cursor:pointer;border-radius:5px;transition:all 0.15s;font-family:inherit;
+    }
+    .fb:hover{border-color:#1a2f8a;color:#1a2f8a;}
+    .fb.on{background:#1a2f8a;color:#fff;border-color:#1a2f8a;}
+    .si{
+      padding:7px 14px;border:1.5px solid #e8ecf4;border-radius:6px;
+      font-family:inherit;font-size:13px;color:#0A0A0A;outline:none;
+      background:#f9faff;min-width:200px;transition:border-color 0.2s;
+    }
+    .si:focus{border-color:#1a2f8a;background:#fff;}
+
+    /* ── 결과 바 ── */
+    .rbar{display:flex;justify-content:flex-end;margin-bottom:12px;}
+    .rc{font-size:12px;color:#aaa;} .rc strong{color:#1a2f8a;}
+
+    /* ── 카드 그리드 ── */
+    .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:3px;background:#e2e8f0;border-radius:10px;overflow:hidden;}
     .wc{cursor:pointer;position:relative;overflow:hidden;height:220px;background:#0D2030;}
     .wc-bg{position:absolute;inset:0;background-size:cover;background-position:center;transition:transform 0.5s,opacity 0.3s;opacity:0.82;}
     .wc:hover .wc-bg{transform:scale(1.06);opacity:1;}
-    .wc-ph{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#0D2A3A,#1A3A4A);}
+    .wc-ph{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#0d1f3a,#1a3460);}
     .wc-ph span{font-size:9px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.25);}
-    .wc-ov{position:absolute;inset:0;background:linear-gradient(transparent 25%,rgba(0,0,0,0.78));}
-    .wc-info{position:absolute;bottom:0;left:0;right:0;padding:12px 14px;}
-    .wc-cat{font-size:9px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:#00B8D9;display:block;margin-bottom:3px;}
-    .wc-name{font-size:13px;font-weight:700;color:#fff;line-height:1.3;margin-bottom:5px;}
+    .wc-ov{position:absolute;inset:0;background:linear-gradient(transparent 30%,rgba(10,15,40,0.82));}
+    .wc-info{position:absolute;bottom:0;left:0;right:0;padding:14px 16px;}
+    .wc-cat{font-size:9px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:#00B8D9;display:block;margin-bottom:4px;}
+    .wc-name{font-size:13px;font-weight:700;color:#fff;line-height:1.35;margin-bottom:6px;}
     .wc-meta{display:flex;align-items:center;justify-content:space-between;}
     .wc-date{font-size:10px;color:rgba(255,255,255,0.4);}
-    .wc-cli{font-size:9px;font-weight:600;background:rgba(255,255,255,0.1);color:rgba(255,255,255,0.6);padding:2px 7px;}
+    .wc-cli{font-size:9px;font-weight:600;background:rgba(255,255,255,0.12);color:rgba(255,255,255,0.65);padding:2px 8px;border-radius:3px;}
+
+    /* ── 빈 상태 ── */
     .empty{text-align:center;padding:80px 20px;display:none;}
-    .empty-btn{background:#0D3A4A;color:#fff;border:none;font-size:12px;font-weight:700;padding:10px 24px;cursor:pointer;margin-top:16px;font-family:inherit;}
-    .mbg{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.6);z-index:500;align-items:center;justify-content:center;padding:16px;}
+    .empty-btn{background:#1a2f8a;color:#fff;border:none;font-size:12px;font-weight:700;padding:10px 24px;cursor:pointer;margin-top:16px;font-family:inherit;border-radius:6px;}
+
+    /* ── 모달 오버레이 ── */
+    .mbg{display:none;position:fixed;inset:0;background:rgba(10,15,40,0.55);z-index:500;align-items:center;justify-content:center;padding:24px;backdrop-filter:blur(4px);}
     .mbg.on{display:flex;}
-    .modal{background:#fff;width:100%;max-width:1100px;max-height:94vh;overflow-y:auto;}
-    /* 닫기 버튼 */
-    .mclose-bar{display:flex;justify-content:flex-end;padding:12px 16px 0;}
-    .mclose{width:34px;height:34px;background:none;border:1px solid #e0e0e0;cursor:pointer;color:#999;font-size:16px;display:flex;align-items:center;justify-content:center;font-family:inherit;}
-    .mclose:hover{background:#f5f5f5;color:#333;}
-    /* 본문 2컬럼 */
-    .modal-body{display:grid;grid-template-columns:1fr 320px;}
-    /* 왼쪽 이미지 */
-    .mleft{padding:0 24px 28px;}
-    .mmain{width:100%;aspect-ratio:16/10;overflow:hidden;position:relative;background:#f0f0f0;}
+
+    /* ── 모달 박스 ── */
+    .modal{
+      background:#fff;width:100%;max-width:1080px;max-height:92vh;
+      overflow-y:auto;border-radius:16px;
+      box-shadow:0 32px 80px rgba(10,15,40,0.25);
+      display:flex;flex-direction:column;
+    }
+
+    /* 모달 헤더 (카테고리 + 제목 + 닫기) */
+    .mhead{
+      display:flex;align-items:flex-start;justify-content:space-between;
+      padding:24px 32px 20px;border-bottom:1px solid #f0f0f5;flex-shrink:0;
+    }
+    .mhead-left{flex:1;min-width:0;}
+    .mcat{
+      font-size:10px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;
+      color:#1a2f8a;margin-bottom:8px;display:block;
+    }
+    .mtitle{
+      font-size:22px;font-weight:800;color:#0d1a3a;
+      letter-spacing:-0.02em;line-height:1.3;
+      font-family:'Inter',sans-serif;
+    }
+    .mclose{
+      width:36px;height:36px;background:none;border:1.5px solid #e8ecf4;
+      cursor:pointer;color:#999;font-size:16px;display:flex;align-items:center;
+      justify-content:center;font-family:inherit;border-radius:8px;
+      transition:all 0.2s;flex-shrink:0;margin-left:20px;margin-top:2px;
+    }
+    .mclose:hover{background:#f5f7fc;color:#1a2f8a;border-color:#1a2f8a;}
+
+    /* 모달 바디 2컬럼 */
+    .modal-body{display:grid;grid-template-columns:1fr 300px;}
+
+    /* 왼쪽: 이미지 */
+    .mleft{padding:0 0 28px 32px;}
+    .mmain{
+      width:100%;aspect-ratio:16/10;overflow:hidden;
+      position:relative;background:#f0f3fa;border-radius:10px;
+    }
     .mmain-bg{position:absolute;inset:0;background-size:cover;background-position:center;transition:opacity 0.25s;}
     .mmain-ph{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;}
-    .mmain-ph span{font-size:12px;color:#bbb;}
-    /* 썸네일 — 2장 이상일 때만 */
+    .mmain-ph span{font-size:13px;color:#bbb;}
     .mthumbs{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap;}
     .mthumbs.hidden{display:none;}
-    .mthumb{width:80px;height:56px;cursor:pointer;position:relative;overflow:hidden;border:2px solid #e0e0e0;transition:all 0.2s;flex-shrink:0;background:#e0e0e0;}
-    .mthumb:hover{border-color:#aaa;} .mthumb.on{border-color:#0D3A4A;}
-    .mthumb-bg{position:absolute;inset:0;background-size:cover;background-position:center;background-color:#ddd;filter:brightness(0.85);} .mthumb.on .mthumb-bg{filter:brightness(1);}
-    /* 오른쪽 정보 */
-    .mright{padding:24px 28px 28px 0;}
-    .mcat{font-size:10px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:#00B8D9;margin-bottom:10px;}
-    .mtitle{font-size:22px;font-weight:700;color:#0A0A0A;letter-spacing:-0.01em;line-height:1.35;margin-bottom:20px;font-family:'Noto Serif KR',serif;}
-    .minfo-block{margin-bottom:18px;}
-    .minfo-label{font-size:11px;font-weight:500;color:#aaa;margin-bottom:5px;}
-    .minfo-val{font-size:13px;color:#444;line-height:1.6;}
-    .mdesc{font-size:13px;line-height:1.9;color:#666;}
-    .mtags{display:flex;flex-wrap:wrap;gap:5px;margin-top:16px;}
-    .mtag{font-size:10px;font-weight:600;background:#f5f5f5;color:#0D3A4A;padding:4px 12px;}
-    .mcta{display:block;width:100%;background:#0D3A4A;color:#fff;border:none;font-size:12px;font-weight:700;padding:14px;cursor:pointer;font-family:inherit;letter-spacing:0.08em;margin-top:28px;text-align:center;transition:background 0.2s;}
-    .mcta:hover{background:#00B8D9;}
-    @media(max-width:768px){
-      .modal-body{grid-template-columns:1fr;}
-      .mright{border-left:none;border-top:none;padding:16px;}
-      .mleft{padding:0 16px 16px;}
-      .mthumb{width:64px;height:44px;}
+    .mthumb{
+      width:76px;height:54px;cursor:pointer;position:relative;overflow:hidden;
+      border:2px solid #e8ecf4;border-radius:6px;transition:all 0.2s;flex-shrink:0;background:#e8ecf4;
     }
-    .footer{background:#0A0A0A;border-top:3px solid #D42B2B;padding:24px 52px;display:flex;justify-content:space-between;align-items:center;margin-top:60px;}
-    .footer img{height:20px;filter:brightness(0) invert(1);opacity:0.55;}
-    .footer-copy{font-size:11px;color:#444;}
+    .mthumb:hover{border-color:#1a2f8a;}
+    .mthumb.on{border-color:#1a2f8a;box-shadow:0 0 0 3px rgba(26,47,138,0.12);}
+    .mthumb-bg{position:absolute;inset:0;background-size:cover;background-position:center;filter:brightness(0.85);}
+    .mthumb.on .mthumb-bg{filter:brightness(1);}
+
+    /* 오른쪽: 정보 */
+    .mright{padding:0 32px 28px 28px;border-left:1px solid #f0f0f5;}
+    .minfo-block{margin-bottom:20px;}
+    .minfo-label{font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#bbb;margin-bottom:6px;}
+    .minfo-val{font-size:14px;color:#333;line-height:1.6;font-weight:500;}
+    .mdesc{font-size:13px;line-height:1.9;color:#666;}
+    .mtags{display:flex;flex-wrap:wrap;gap:6px;margin-top:4px;}
+    .mtag{
+      font-size:10px;font-weight:600;
+      background:rgba(26,47,138,0.07);color:#1a2f8a;
+      padding:4px 12px;border-radius:4px;
+    }
+    .mstat-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:20px;}
+    .mstat{background:#f7f8fc;border-radius:8px;padding:12px 14px;}
+    .mstat-n{font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#bbb;margin-bottom:4px;}
+    .mstat-v{font-size:13px;font-weight:600;color:#0d1a3a;}
+    .mcta{
+      display:block;width:100%;background:#1a2f8a;color:#fff;border:none;
+      font-size:13px;font-weight:700;padding:14px;cursor:pointer;font-family:inherit;
+      letter-spacing:0.05em;margin-top:auto;text-align:center;
+      transition:background 0.2s;border-radius:8px;
+    }
+    .mcta:hover{background:#142580;}
+    .mcta-sub{
+      display:block;width:100%;background:transparent;color:#1a2f8a;
+      border:1.5px solid #e0e6f5;font-size:12px;font-weight:600;
+      padding:10px;cursor:pointer;font-family:inherit;letter-spacing:0.04em;
+      text-align:center;transition:all 0.2s;border-radius:8px;margin-top:8px;
+    }
+    .mcta-sub:hover{border-color:#1a2f8a;background:rgba(26,47,138,0.04);}
+
+    /* ── 반응형 ── */
     @media(max-width:1024px){.grid{grid-template-columns:repeat(3,1fr);}}
     @media(max-width:768px){
-      .nav{padding:12px 20px;} .nav-menu{display:none;} .wrap{padding:72px 16px 48px;}
+      .wrap{padding:72px 16px 48px;}
       .grid{grid-template-columns:repeat(2,1fr);} .wc{height:180px;}
-      .mgallery{grid-template-columns:1fr 64px;} .mmain{height:220px;}
-      .footer{padding:18px 24px;flex-direction:column;gap:8px;text-align:center;}
+      .modal-body{grid-template-columns:1fr;}
+      .mright{border-left:none;border-top:1px solid #f0f0f5;padding:20px 20px 24px;}
+      .mleft{padding:0 0 20px 20px;}
+      .mhead{padding:18px 20px 14px;}
+      .mthumb{width:60px;height:42px;}
+      .mstat-grid{grid-template-columns:1fr 1fr;}
     }
-    @media(max-width:480px){.wc{height:150px;}}
+    @media(max-width:480px){.wc{height:150px;}.grid{grid-template-columns:repeat(2,1fr);}}
+
+    /* ── 푸터 ── */
+    .footer{
+      background:#0d1a3a;
+      padding:32px 60px;
+      display:flex;justify-content:space-between;align-items:center;
+      margin-top:60px;gap:16px;
+    }
+    .footer-logo img{height:22px;filter:brightness(0) invert(1);opacity:0.7;}
+    .footer-info{display:flex;flex-direction:column;gap:4px;text-align:right;}
+    .footer-copy{font-size:11px;color:rgba(255,255,255,0.35);}
+    .footer-contact{font-size:12px;color:rgba(255,255,255,0.5);}
+    @media(max-width:768px){
+      .footer{padding:20px 24px;flex-direction:column;text-align:center;}
+      .footer-info{text-align:center;}
+    }
   </style>
 </head>
 <body>
+
+  <!-- NAV -->
   <nav class="nav">
-    <div class="nav-logo"><img src="/images/logo.png" alt="EDS" /></div>
+    <a href="/" class="nav-logo">
+      <img src="/images/logo.png" alt="EDS 이담에스티" />
+    </a>
     <div class="nav-menu">
-      <a href="/">홈</a><a href="/#s3">서비스</a><a href="/#s5">도입 문의</a>
+      <div class="nav-item has-drop">
+        <span class="nav-link">회사소개</span>
+        <div class="nav-drop">
+          <a href="/#sec2" class="drop-link">인사말</a>
+          <a href="/#sec6" class="drop-link">연혁</a>
+          <a href="/#sec-cert" class="drop-link">인증현황</a>
+          <a href="/#sec7" class="drop-link">오시는 길</a>
+        </div>
+      </div>
+      <div class="nav-item has-drop">
+        <span class="nav-link">사업분야</span>
+        <div class="nav-drop">
+          <a href="/#svc-public" class="drop-link">공공기관</a>
+          <a href="/#svc-edu" class="drop-link">교육기관</a>
+          <a href="/#svc-corp" class="drop-link">기업</a>
+          <a href="/#svc-media" class="drop-link">미디어센터</a>
+          <a href="/#svc-religion" class="drop-link">종교</a>
+        </div>
+      </div>
+      <div class="nav-item has-drop">
+        <span class="nav-link">조달청 등록제품</span>
+        <div class="nav-drop">
+          <a href="/#sec5" class="drop-link">미디어박스</a>
+          <a href="/#sec5" class="drop-link">컴퓨터 서버</a>
+          <a href="/#sec5" class="drop-link">디스크 어레이</a>
+          <a href="/#sec5" class="drop-link">LED 전광판</a>
+        </div>
+      </div>
+      <div class="nav-item">
+        <a href="/works" class="nav-link active">구축사례</a>
+      </div>
+      <div class="nav-item">
+        <a href="/#sec7" class="nav-link">문의</a>
+      </div>
     </div>
-    <button class="nav-cta" onclick="location.href='/#s5'">도입 문의</button>
+    <button class="nav-cta" onclick="location.href='/#sec7'">도입 문의</button>
   </nav>
 
+  <!-- 본문 -->
   <div class="wrap">
     <div class="page-header">
       <div class="ph-eye">All Portfolio</div>
       <h1 class="ph-title">전체 구축사례</h1>
       <p class="ph-sub">2007년부터 현재까지 <strong>170</strong>개의 프로젝트를 완수했습니다</p>
     </div>
+
     <div class="filter-bar">
       <div class="filter-row">
         <span class="fl">서비스</span>
@@ -138,6 +322,7 @@
         <input class="si" id="si" type="text" placeholder="프로젝트명 검색..." />
       </div>
     </div>
+
     <div class="rbar"><span class="rc"><strong id="rn">170</strong>개의 프로젝트</span></div>
     <div class="grid" id="grid"></div>
     <div class="empty" id="empty">
@@ -146,12 +331,22 @@
     </div>
   </div>
 
+  <!-- 모달 -->
   <div class="mbg" id="mbg">
     <div class="modal">
-      <div class="mclose-bar">
+
+      <!-- 헤더 -->
+      <div class="mhead">
+        <div class="mhead-left">
+          <span class="mcat" id="mcat"></span>
+          <div class="mtitle" id="mtitle"></div>
+        </div>
         <button class="mclose" onclick="closeModal()">✕</button>
       </div>
+
+      <!-- 바디 -->
       <div class="modal-body">
+        <!-- 왼쪽: 이미지 -->
         <div class="mleft">
           <div class="mmain">
             <div class="mmain-bg" id="mbg2"></div>
@@ -159,31 +354,39 @@
           </div>
           <div class="mthumbs" id="mth"></div>
         </div>
+
+        <!-- 오른쪽: 정보 -->
         <div class="mright">
-          <div class="mcat" id="mcat"></div>
-          <div class="mtitle" id="mtitle"></div>
-          <div class="minfo-block">
-            <div class="minfo-label">구축일자</div>
-            <div class="minfo-val" id="mdate"></div>
+          <div class="mstat-grid">
+            <div class="mstat">
+              <div class="mstat-n">구축일자</div>
+              <div class="mstat-v" id="mdate"></div>
+            </div>
+            <div class="mstat">
+              <div class="mstat-n">고객유형</div>
+              <div class="mstat-v" id="mclient"></div>
+            </div>
           </div>
           <div class="minfo-block">
-            <div class="minfo-label">고객유형</div>
-            <div class="minfo-val" id="mclient"></div>
-          </div>
-          <div class="minfo-block">
-            <div class="minfo-label">개요</div>
+            <div class="minfo-label">프로젝트 개요</div>
             <p class="mdesc" id="mdesc"></p>
           </div>
           <div class="mtags" id="mtags"></div>
-          <button class="mcta" onclick="location.href='/#s7'">도입 문의하기 →</button>
+          <button class="mcta" onclick="location.href='/#sec7'">도입 문의하기 →</button>
+          <button class="mcta-sub" onclick="closeModal()">목록으로 돌아가기</button>
         </div>
       </div>
+
     </div>
   </div>
 
+  <!-- 푸터 -->
   <footer class="footer">
-    <img src="/images/logo.png" alt="EDS" />
-    <span class="footer-copy">© 2025 이담에스티 주식회사. All rights reserved.</span>
+    <div class="footer-logo"><img src="/images/logo.png" alt="EDS 이담에스티" /></div>
+    <div class="footer-info">
+      <span class="footer-contact">Tel. 02-857-7744 &nbsp;·&nbsp; 평일 09:00 – 18:00</span>
+      <span class="footer-copy">© 2025 이담에스티 주식회사. All rights reserved.</span>
+    </div>
   </footer>
 
 <script is:inline>
@@ -198,152 +401,107 @@ const hardcodedProjects = [
   { id:16529, title:'몽골 국가기록원 디지털 아카이브 시스템 구축', date:'2024.08', service:'아카이브 시스템', client:'공공기관', overview:'VFX, 모션 그래픽, 디지털 시네마 마스터링, 색보정 등의 디지털 영상 제작 전문업체, 스튜디오 시스템 이전설치', images:["/images/portfolio/MG_DAS_01.jpg","/images/portfolio/MG_DAS_02.jpg","/images/portfolio/MG_DAS_03.jpg","/images/portfolio/MG_DAS_04.jpg"] },
   { id:16424, title:'공주대학교 미디어 콘텐츠 스튜디오', date:'2024.08', service:'이러닝 스튜디오', client:'교육기관', overview:'VFX, 모션 그래픽, 디지털 시네마 마스터링, 색보정 등의 디지털 영상 제작 전문업체, 스튜디오 시스템 이전설치', images:["/images/portfolio/GMC_S_01.jpg", "/images/portfolio/GMC_S_02.jpg", "/images/portfolio/GMC_S_03.jpg", "/images/portfolio/GMC_S_04.jpg"] },
   { id:16351, title:'키움증권 방송센터 이전설치', date:'2024.06', service:'LED 디스플레이', client:'기업', overview:'키움증권 사옥이전에 의한 스튜디오 이전', images:["/images/portfolio/KWSB_S_03.jpg", "/images/portfolio/KWSB_S_06.jpg", "/images/portfolio/KWSB_S_07.jpg", "/images/portfolio/KWSB_S_08.jpg"] },
-  { id:16337, title:'음성문화예술회관 대공연장 영상시설', date:'2024.04', service:'방송 인프라', client:'공공기관', overview:'다목적 공연장의 기능을 위한 영상시스템 및 기반 시설', images:["/images/portfolio/EMA_Stage_05.jpg", "/images/portfolio/EMA_Stage_04.jpg", "/images/portfolio/EMA_Stage_06.jpg", "/images/portfolio/EMA_Stage_07.jpg"] },
-  { id:16324, title:'서울대병원 간호실무교육실 AV시스템', date:'2024.02', service:'이러닝 스튜디오', client:'교육기관', overview:'서울대병원 간호실무 교육용 AV시스템', images:["/images/portfolio/SEOUL_MEDI_AV_02.jpg", "/images/portfolio/SEOUL_MEDI_AV_03.jpg", "/images/portfolio/SEOUL_MEDI_AV_04.jpg", "/images/portfolio/SEOUL_MEDI_AV_05.jpg"] },
-  { id:16310, title:'신일중고 체육관 LED 디스플레이', date:'2024.02', service:'LED 디스플레이', client:'교육기관', overview:'체육관 행사 관람용 LED 디스플레이', images:["/images/portfolio/SNHS_LED_07.jpg", "/images/portfolio/SNHS_LED_06.jpg", "/images/portfolio/SNHS_LED_08.jpg", "/images/portfolio/SNHS_LED_01.jpg"] },
-  { id:16296, title:'아라소프트 스튜디오 LED 미디어 월 시스템', date:'2024.01', service:'LED 디스플레이', client:'기업', overview:'기업 방송제작 스튜디오용 LED디스플레이', images:["/images/portfolio/Arasoft_LED_04.jpg", "/images/portfolio/Arasoft_LED_05.jpg", "/images/portfolio/Arasoft_LED_06.jpg", "/images/portfolio/Arasoft_LED_01.jpg"] },
-  { id:16280, title:'서울대학교 약학대학 멀티미디어실 구축', date:'2024.01', service:'스마트 강의실', client:'교육기관', overview:'멀티미디어실 신규', images:["/images/portfolio/Seoul_Medi_M_02.jpg", "/images/portfolio/Seoul_Medi_M_04.jpg", "/images/portfolio/Seoul_Medi_M_05.jpg", "/images/portfolio/Seoul_Medi_M_06.jpg"] },
-  { id:16250, title:'서울대학교 기초교육원(61동) 스튜디오', date:'2024.01', service:'스마트 강의실', client:'교육기관', overview:'서울대학교 교육용 온라인 디지털콘텐츠 개발·운영 스튜디오 촬영/편집관련', images:["/images/portfolio/seoul_61_10.jpg", "/images/portfolio/seoul_61_18.jpg", "/images/portfolio/seoul_61_19.jpg", "/images/portfolio/seoul_61_20.jpg"] },
-  { id:16230, title:'경기도교육청 UHD 스튜디오', date:'2023.12', service:'방송제작 스튜디오', client:'공공기관', overview:'VFX, 모션 그래픽, 디지털 시네마 마스터링, 색보정 등의 디지털 영상 제작 전문업체, 스튜디오 시스템 이전설치', images:["/images/portfolio/GKDE_S_08.jpg", "/images/portfolio/GKDE_S_06.jpg", "/images/portfolio/GKDE_S_07.jpg", "/images/portfolio/GKDE_S_09.jpg"] },
-  { id:16215, title:'서울사이버대학교 A동 503호 영상시스템', date:'2023.11', service:'스마트 강의실', client:'교육기관', overview:'강의실 환경 개선공사, 전자칠판, PTZ 카메라', images:["/images/portfolio/SC_AVSYSTEM_03.jpg", "/images/portfolio/SC_AVSYSTEM_05.jpg", "/images/portfolio/SC_AVSYSTEM_06.jpg", "/images/portfolio/SC_AVSYSTEM_07.jpg"] },
-  { id:16190, title:'SBA 서울창업허브 XR스튜디오', date:'2023.07', service:'LED 디스플레이', client:'공공기관', overview:'실감형 콘텐츠 제작 인프라 구현 및 제작 환경 활성화 기반 조성 - Media Server / Floor LED 설치', images:["/images/portfolio/SBA_XR_04.jpg", "/images/portfolio/SBA_XR_05.jpg", "/images/portfolio/SBA_XR_06.jpg", "/images/portfolio/SBA_XR_07.jpg"] },
-  { id:16171, title:'디지털서울문화예술대학교 강의 스튜디오', date:'2023.06', service:'LED 디스플레이', client:'교육기관', overview:'스마트 스튜디오(미디어 월)를 활용한 에듀테크 기반의 학습자 소통 이러닝 스튜디오, LED Media WaLL, 전자칠판, 크로마 월', images:["/images/portfolio/DSMA_S_07.jpg", "/images/portfolio/DSMA_S_03.jpg", "/images/portfolio/DSMA_S_04.jpg", "/images/portfolio/DSMA_S_05.jpg"] },
-  { id:16150, title:'구미영상미디어센터 AV장비 설치', date:'2023.06', service:'방송제작 스튜디오', client:'공공기관', overview:'VFX, 모션 그래픽, 디지털 시네마 마스터링, 색보정 등의 디지털 영상 제작 전문업체, 스튜디오 시스템 이전설치', images:["/images/portfolio/GM_AV_11.jpg", "/images/portfolio/GM_AV_01.jpg", "/images/portfolio/GM_AV_02.jpg", "/images/portfolio/GM_AV_03.jpg"] },
-  { id:16140, title:'경기도청 GTV 방송국 장비 교체', date:'2023.06', service:'방송제작 스튜디오', client:'공공기관', overview:'기존 노후화 HD 방송', images:["/images/portfolio/GKDC_B_02.jpg"] },
-  { id:16109, title:'가재울청소년메타센터 영상스튜디오', date:'2023.06', service:'방송제작 스튜디오', client:'공공기관', overview:'청소년센터의 미디어콘텐츠 촬영 및 제작, 유튜브 방송 송출', images:["/images/portfolio/GJU_S_02.jpg", "/images/portfolio/GJU_S_03.jpg", "/images/portfolio/GJU_S_04.jpg", "/images/portfolio/GJU_S_05.jpg"] },
-  { id:16017, title:'대구대명교회 영상시스템', date:'2023.03', service:'LED 디스플레이', client:'종교', overview:'200인치 LED 디스플레이, PTZ 카메라, 모니터 TV, 방송 제작 및 녹화', images:["/images/portfolio/dgdm_c_01-1-scaled.jpg", "/images/portfolio/dgdm_c_02-1-scaled.jpg", "/images/portfolio/dgdm_c_03-1-scaled.jpg", "/images/portfolio/dgdm_c_04-1-scaled.jpg"] },
-  { id:16005, title:'우송대학교 강의 촬영 스튜디오', date:'2023.02', service:'스마트 강의실', client:'교육기관', overview:'온/오프라인 강의 촬영 제작 시설', images:["/images/portfolio/wsu_lecture_01-scaled.jpg", "/images/portfolio/wsu_lecture_02-scaled.jpg", "/images/portfolio/wsu_lecture_03-scaled.jpg", "/images/portfolio/wsu_lecture_04-scaled.jpg"] },
-  { id:15987, title:'서울대학교 기초교육원 스튜디오', date:'2023.02', service:'이러닝 스튜디오', client:'교육기관', overview:'온라인 교육 콘텐츠 제작/개발/운영 시설 촬영 스튜디오 3개소, 부조정실 1개소, 셀프 스튜디오 3개소', images:["/images/portfolio/seoul_univ_61_04-scaled.jpg", "/images/portfolio/seoul_univ_61_01-scaled.jpg", "/images/portfolio/seoul_univ_61_02-scaled.jpg", "/images/portfolio/seoul_univ_61_03-scaled.jpg"] },
-  { id:15977, title:'충남음악창작소 레코딩 시스템', date:'2023.01', service:'레코딩 스튜디오', client:'공공기관', overview:'DAW 시스템 및 아웃보드, 콘덴서 마이크 등을 도입 구성한 전문 녹음시설', images:["/images/portfolio/cn_music_c_01-scaled.jpg", "/images/portfolio/cn_music_c_02-scaled.jpg", "/images/portfolio/cn_music_c_03-scaled.jpg", "/images/portfolio/cn_music_c_04-scaled.jpg"] },
-  { id:15967, title:'이투에스 세미나실 구축', date:'2023.01', service:'스마트 솔루션', client:'기업', overview:'55인치 사이니지, 무선 마이크, 앰프, 스피커 구성', images:["/images/portfolio/e2s_seminar_02-scaled.jpg", "/images/portfolio/e2s_seminar_01-scaled.jpg", "/images/portfolio/e2s_seminar_03-scaled.jpg", "/images/portfolio/e2s_seminar_04.jpg"] },
-  { id:15955, title:'사이버한국외국어대 인제스트 시스템', date:'2023.01', service:'이러닝 스튜디오', client:'교육기관', overview:'미디어 서버 전송 속도 및 안정성 개선을 위한 Ingest System 교체 설치', images:["/images/portfolio/cyb_ko_02-scaled.jpg", "/images/portfolio/cyb_ko_01-scaled.jpg", "/images/portfolio/cyb_ko_03-scaled.jpg", "/images/portfolio/cyb_ko_04-scaled.jpg"] },
-  { id:15944, title:'한국정책방송원 KTV 방송시스템', date:'2022.12', service:'방송제작 스튜디오', client:'공공기관', overview:'기존 방송시스템 연계, 호환 및 방송 제작환경 개선 4K 스튜디오 카메라 및 렌즈, 프롬프터, 송출 서버 등', images:["/images/portfolio/k_tv_studio_01-scaled.jpg", "/images/portfolio/k_tv_studio_02-scaled.jpg", "/images/portfolio/k_tv_studio_03-scaled.jpg", "/images/portfolio/k_tv_studio_04-scaled.jpg"] },
-  { id:15933, title:'파라과이TV MAM 및 아카이빙 시스템', date:'2022.12', service:'아카이브 시스템', client:'공공기관', overview:'2022년 개도국 방송환경 개선지원 사업 Paraguay TV 신규 미디어 자산 관리 및 아카이빙 시스템', images:["/images/portfolio/para_tv_04-scaled.jpg", "/images/portfolio/para_tv_01.jpg", "/images/portfolio/para_tv_02.jpg", "/images/portfolio/para_tv_03-scaled.jpg"] },
-  { id:15924, title:'세종시립도서관 스마트미디어 창작공간', date:'2022.12', service:'방송제작 스튜디오', client:'공공기관', overview:'1인 콘텐츠 제작 시설의 미디어 창작실', images:["/images/portfolio/sjbook_smart_03-scaled.jpg", "/images/portfolio/sjbook_smart_01-scaled.jpg", "/images/portfolio/sjbook_smart_02-scaled.jpg", "/images/portfolio/sjbook_smart_04-scaled.jpg"] },
-  { id:15914, title:'서울창업허브 창동 XR스튜디오', date:'2022.11', service:'LED 디스플레이', client:'공공기관', overview:'뉴미디어 콘텐츠 제작 스타트업 지원 XR 실감 콘텐츠 제작 인프라', images:["/images/portfolio/changdong_xr1_01-scaled.jpg", "/images/portfolio/changdong_xr1_02-scaled.jpg", "/images/portfolio/changdong_xr1_03-scaled.jpg", "/images/portfolio/changdong_xr1_04-scaled.jpg"] },
-  { id:15897, title:'국기원 세계태권도연수원 온라인 스튜디오', date:'2022.10', service:'방송제작 스튜디오', client:'공공기관', overview:'국기원 태권도 지도자 연수, 교육, 세미나 등의 영상을 제작, 편집 및 실시간 스트리밍', images:["/images/portfolio/kkw_s_01-scaled.jpg", "/images/portfolio/kkw_s_02-scaled.jpg", "/images/portfolio/kkw_s_03-scaled.jpg", "/images/portfolio/kkw_s_04-scaled.jpg"] },
-  { id:15858, title:'대전시립미술관 프랙탈 거북선', date:'2022.09', service:'전시체험', client:'공공기관', overview:'작품보존과 안정적인 가동을 위한 영상', images:["/images/portfolio/\uac70\ubd81\uc120_\uc6cc\ud1306.png", "/images/portfolio/\uac70\ubd81\uc120_\uc6cc\ud1305.png", "/images/portfolio/\uac70\ubd81\uc120_\uc6cc\ud1307.png", "/images/portfolio/\uac70\ubd81\uc120_\uc6cc\ud1308.png"] },
-  { id:15849, title:'원불교 이문교당 PTZ카메라 시스템', date:'2022.08', service:'방송 인프라', client:'종교', overview:'원격제어 PTZ 카메라와 스트리밍 지원 스위처를 설치하여 온라인 방송 송출', images:["/images/portfolio/\uc6d0\ubd88\uad50_\uc6cc\ud130-2-2.png", "/images/portfolio/\uc6d0\ubd88\uad50_\uc6cc\ud130-1-3.png", "/images/portfolio/\uc6d0\ubd88\uad50_\uc6cc\ud130-3-2.png"] },
-  { id:15753, title:'서울사이버대학교 스마트강의실', date:'2022.08', service:'LED 디스플레이', client:'교육기관', overview:'서울사이버대학교 혼합형 학습을 위한 스마트강의실', images:["/images/portfolio/\uc11c\uc0ac\ub300_\uc6cc\ud130-12-1.png", "/images/portfolio/\uc11c\uc0ac\ub300_\uc6cc\ud130-8.png", "/images/portfolio/\uc11c\uc0ac\ub300_\uc6cc\ud130-9.png", "/images/portfolio/\uc11c\uc0ac\ub300_\uc6cc\ud130-10.png"] },
-  { id:15732, title:'봉화군청 미디어박스', date:'2022.07', service:'미디어박스', client:'공공기관', overview:'4채널 방송녹화의 미디어박스 설치', images:["/images/portfolio/\ubd09\ud654\uad70\uccad_\uc6cc\ud130-14.png", "/images/portfolio/\ubd09\ud654\uad70\uccad_\uc6cc\ud130-6.png", "/images/portfolio/\ubd09\ud654\uad70\uccad_\uc6cc\ud130-7.png", "/images/portfolio/\ubd09\ud654\uad70\uccad_\uc6cc\ud130-8.png"] },
-  { id:15710, title:'대방 청소년 문화의 집 스튜디오', date:'2022.07', service:'방송제작 스튜디오', client:'공공기관', overview:'청소년을 대상으로 영상촬영 및 편집, 음향녹음 등 미디어 제작 활동을 제공하는 스튜디오', images:["/images/portfolio/\ub300\ubc29-\uc2a4\ud29c\ub514\uc624_\uc6cc\ud130-2.png", "/images/portfolio/\ub300\ubc29-\uc2a4\ud29c\ub514\uc624_\uc6cc\ud130-4.png", "/images/portfolio/\ub300\ubc29-\uc2a4\ud29c\ub514\uc624_\uc6cc\ud130-5.png", "/images/portfolio/\ub300\ubc29-\uc2a4\ud29c\ub514\uc624_\uc6cc\ud130-6.png"] },
-  { id:15694, title:'경기도청 신청사 대변인 특수시설 구축', date:'2022.07', service:'아카이브 시스템', client:'공공기관', overview:'경기도청 GTV 시스템 이전 설치 및 신규 시설', images:["/images/portfolio/G_\ub300\ubcc0\uc778_\uc6cc\ud130-4.png", "/images/portfolio/G_\ub300\ubcc0\uc778_\uc6cc\ud130-3.png", "/images/portfolio/G_\ub300\ubcc0\uc778_\uc6cc\ud130-5.png", "/images/portfolio/G_\ub300\ubcc0\uc778_\uc6cc\ud130-6.png"] },
-  { id:15673, title:'다다익선 보존·복원을 위한 보존환경 개선', date:'2022.06', service:'전시체험', client:'공공기관', overview:'국립현대미술관 다다익선 작품의 보존 및 복원을 위한 환경 개선 용역', images:["/images/portfolio/\ub2e4\ub2e4\uc775\uc120_\uc6cc\ud130-11.png", "/images/portfolio/\ub2e4\ub2e4\uc775\uc120_\uc6cc\ud130-4.png", "/images/portfolio/\ub2e4\ub2e4\uc775\uc120_\uc6cc\ud130-5.png", "/images/portfolio/\ub2e4\ub2e4\uc775\uc120_\uc6cc\ud130-6.png"] },
-  { id:15649, title:'경기도 신청사 뉴미디어 콘텐츠 스튜디오', date:'2022.06', service:'방송제작 스튜디오', client:'공공기관', overview:'팟캐스트, 유튜브 콘텐츠 제작의 스튜디오', images:["/images/portfolio/G.newmedia_2.png", "/images/portfolio/G.newmedia_8.png", "/images/portfolio/G.newmedia_9.png", "/images/portfolio/G.newmedia_10.png"] },
-  { id:15637, title:'서울스마트시티센터 미디어월', date:'2022.05', service:'LED 디스플레이', client:'공공기관', overview:'6M x 2.4M 크기의 LED 미디어월을', images:["/images/portfolio/\uc2a4\ub9c8\ud2b8\uc2dc\ud2f0_\uc6cc\ud130-1.png", "/images/portfolio/\uc2a4\ub9c8\ud2b8\uc2dc\ud2f0_\uc6cc\ud130-2.png", "/images/portfolio/\uc2a4\ub9c8\ud2b8\uc2dc\ud2f0_\uc6cc\ud130-3.png", "/images/portfolio/\uc2a4\ub9c8\ud2b8\uc2dc\ud2f0_\uc6cc\ud130-4.png"] },
-  { id:15607, title:'울산시청 미디어박스', date:'2022.02', service:'미디어박스', client:'공공기관', overview:'8채널 및 4채널 방송녹화의 미디어박스 설치', images:["/images/portfolio/usan_mb_2.jpg", "/images/portfolio/usan_mb_1.jpg", "/images/portfolio/usan_mb_3.jpg"] },
-  { id:15593, title:'성광교회 무선마이크 시스템', date:'2021.02', service:'스마트 솔루션', client:'종교', overview:'무선 10채널 송수신 안테나 시스템', images:["/images/portfolio/sk_church_1.jpg", "/images/portfolio/sk_church_2.jpg", "/images/portfolio/sk_church_3.jpg"] },
-  { id:15585, title:'동아방송예술대 MAM시스템', date:'2022.02', service:'아카이브 시스템', client:'교육기관', overview:'MAM 서버 및 스토리지를 강의실에 도입,', images:["/images/portfolio/dong-a_MAM_1.jpg", "/images/portfolio/dong-a_MAM_2.jpg", "/images/portfolio/dong-a_MAM_3.jpg"] },
-  { id:15575, title:'한국유교문화진흥원', date:'2021.12', service:'방송제작 스튜디오', client:'공공기관', overview:'비대면 온라인 콘텐츠 제작 스튜디오', images:["/images/portfolio/u-culture_1.jpg", "/images/portfolio/u-culture_2.jpg", "/images/portfolio/u-culture_3.jpg", "/images/portfolio/u-culture_4.jpg"] },
-  { id:15560, title:'캄보디아 교육방송제작 스튜디오', date:'2021.12', service:'이러닝 스튜디오', client:'공공기관', overview:'캄보디아 교육방송 (EBC, Educational Broadcasting Cambodia)을 위한 교육 콘텐츠 제작 시설 및', images:["/images/portfolio/cambo_1.jpg", "/images/portfolio/cambo_1-1.jpg", "/images/portfolio/cambo_2.jpg", "/images/portfolio/cambo_2-1.jpg"] },
-  { id:15544, title:'충주시 아동청소년 숨&뜰', date:'2021.12', service:'방송제작 스튜디오', client:'공공기관', overview:'유튜브 라이브 방송 및 콘텐츠 제작, 편집 스튜디오', images:["/images/portfolio/garden_1.jpg", "/images/portfolio/garden_2.jpg", "/images/portfolio/garden_3.jpg", "/images/portfolio/garden_4.jpg"] },
-  { id:15535, title:'한국청소년활동진흥원 스튜디오', date:'2021.12', service:'방송제작 스튜디오', client:'공공기관', overview:'LED 디스플레이와 크로마 스크린 배경의 비대면 콘텐츠 제작 스튜디오', images:["/images/portfolio/action_1.jpg", "/images/portfolio/action_2.jpg", "/images/portfolio/action_3.jpg"] },
-  { id:15525, title:'이매진PNM 스튜디오', date:'2021.12', service:'이러닝 스튜디오', client:'교육기관', overview:'강의 및 교육 콘텐츠 제작 스튜디오 2개소, 통합 부조정실 1개소', images:["/images/portfolio/pnm_1.jpg", "/images/portfolio/pnm_2.jpg", "/images/portfolio/pnm_3.jpg", "/images/portfolio/pnm_4.jpg"] },
-  { id:15513, title:'서울대 평생교육원 스마트강의실', date:'2021.12', service:'스마트 강의실', client:'교육기관', overview:'온/오프라인 동시 강의진행형 강의실로 전자칠판 및 프로젝터를 활용하는 시스템', images:["/images/portfolio/seouluni_smart_4.jpg", "/images/portfolio/seouluni_smart_1.jpg", "/images/portfolio/seouluni_smart_2.jpg", "/images/portfolio/seouluni_smart_3.jpg"] },
-  { id:15458, title:'인천대학교 미래교육센터', date:'2021.10', service:'스마트 강의실', client:'교육기관', overview:'다양한 형태의 교육 콘텐츠 제작/편집 스튜디오', images:["/images/portfolio/\uc624\ud508_1.jpg", "/images/portfolio/\ub9e4\uc9c1_1.jpg", "/images/portfolio/\ub9e4\uc9c1_2.jpg", "/images/portfolio/\uba40\ud2f0\ubbf8\ub514\uc5b4_1.jpg"] },
-  { id:12722, title:'OO공보상황실 모니터 시스템', date:'2021.12', service:'아카이브 시스템', client:'공공기관', overview:'HD TV 녹화, 모니터 시스템(미디어박스) 이전 설치', images:["/images/portfolio/2112_2.jpg", "/images/portfolio/KakaoTalk_20211223_092411606-scaled.jpg", "/images/portfolio/2112_1.jpg", "/images/portfolio/2112_3.jpg"] },
-  { id:12716, title:'국립특수교육원 원격교육 스튜디오', date:'2021.12', service:'이러닝 스튜디오', client:'공공기관', overview:'특수교육 분야 온라인 원격교육을 위한 스튜디오 촬영 스튜디오, 조정실, 1인미디어 제작실', images:["/images/portfolio/nise_1.jpg", "/images/portfolio/20211227_160832898_15-scaled.jpg", "/images/portfolio/nise_2.jpg", "/images/portfolio/nise_3.jpg"] },
-  { id:12712, title:'서울대병원 교육영상자료 제작실', date:'2021.08', service:'방송제작 스튜디오', client:'교육기관', overview:'전자칠판, 타블렛 모니터 기반의 강의 및 콘텐츠 제작 스튜디오', images:["/images/portfolio/shspt_1.jpg", "/images/portfolio/IMG_2734-scaled.jpg", "/images/portfolio/shspt_2.jpg"] },
-  { id:12708, title:'경기도박물관 영상제작실', date:'2021.08', service:'방송제작 스튜디오', client:'공공기관', overview:'소규모의 콘텐츠 제작 및 온라인 송출 스튜디오', images:["/images/portfolio/k2108_1.jpg", "/images/portfolio/IMG_2788-scaled.jpg", "/images/portfolio/IMG_2801-scaled.jpg", "/images/portfolio/k2108_2.jpg"] },
-  { id:12704, title:'자연사박물관 온라인 스튜디오', date:'2021.07', service:'방송제작 스튜디오', client:'공공기관', overview:'박물관에 필요한 영상 콘텐츠 제작 및 온라인 송출', images:["/images/portfolio/jys_2.jpg", "/images/portfolio/IMG_2377-scaled.jpg", "/images/portfolio/jys_1.jpg", "/images/portfolio/jys_3.jpg"] },
-  { id:12700, title:'영화공간주안 컬쳐팩토리 음향시스템', date:'2021.07', service:'스마트 솔루션', client:'기업', overview:'상영관의 스피커 및 오디오믹서 설치', images:["/images/portfolio/movie_ja_1.jpg", "/images/portfolio/IMG_2320-scaled.jpg", "/images/portfolio/movie_ja_2.jpg", "/images/portfolio/movie_ja_3.jpg"] },
-  { id:12696, title:'서울사이버대 뷰티콘텐츠 제작 스튜디오', date:'2021.06', service:'이러닝 스튜디오', client:'교육기관', overview:'멀티카메라와 PTZ카메라의 다각도 촬영을 통한 뷰티 콘텐츠 제작지원, 전자칠판 강의', images:["/images/portfolio/scu21_8.jpg", "/images/portfolio/20210819_144515-scaled.jpg", "/images/portfolio/scu21_1.jpg", "/images/portfolio/scu21_2.jpg"] },
-  { id:12686, title:'한국철도공사 호리존 스튜디오', date:'2021.04', service:'방송제작 스튜디오', client:'공공기관', overview:'크로마키 스크린을 활용한 교육, 강의 콘텐츠 제작', images:["/images/portfolio/kcd_1.jpg", "/images/portfolio/20210507_164218-scaled.jpg", "/images/portfolio/kcd_2.jpg", "/images/portfolio/kcd_3.jpg"] },
-  { id:12682, title:'중소기업중앙회 회의실 음향시스템', date:'2021.04', service:'스마트 솔루션', client:'공공기관', overview:'무선 회의마이크시스템과 오디오믹서, 스피커 설치', images:["/images/portfolio/jssa_1.jpg", "/images/portfolio/IMG_1201-scaled.jpg", "/images/portfolio/jssa_2.jpg", "/images/portfolio/jssa_3.jpg"] },
-  { id:12677, title:'한양초등학교 방송스튜디오', date:'2021.03', service:'방송제작 스튜디오', client:'교육기관', overview:'교내방송 및 콘텐츠 제작 스튜디오 체육관 행사 촬영을 위한 이동형 방송시스템 설치', images:["/images/portfolio/hyc_2.jpg", "/images/portfolio/KakaoTalk_20210318_083202501_01-scaled.jpg", "/images/portfolio/hyc_1.jpg", "/images/portfolio/hyc_3.jpg"] },
-  { id:12673, title:'인덕대학교 이러닝 스튜디오 리뉴얼', date:'2021.02', service:'이러닝 스튜디오', client:'교육기관', overview:'이러닝 스튜디오, 조정실과 1인미디어 스튜디오', images:["/images/portfolio/idu21_1.jpg", "/images/portfolio/IMG_1078-scaled.jpg", "/images/portfolio/idu21_2.jpg", "/images/portfolio/idu21_3.jpg"] },
-  { id:12669, title:'원불교 분당교당 스트리밍시스템', date:'2021.02', service:'유튜브 스튜디오', client:'종교', overview:'PTZ카메라 촬영, 녹화 및 스트리밍', images:["/images/portfolio/one_1.jpg", "/images/portfolio/IMG_0994-scaled.jpg", "/images/portfolio/one_2.jpg"] },
-  { id:12665, title:'강동대학교 크리에이터 스튜디오', date:'2021.02', service:'이러닝 스튜디오', client:'교육기관', overview:'비대면 교육 콘텐츠 촬영과 온라인송출 지원 스튜디오', images:["/images/portfolio/kdu21_3.jpg", "/images/portfolio/IMG_1140-scaled.jpg", "/images/portfolio/kdu21_1.jpg", "/images/portfolio/kdu21_2.jpg"] },
-  { id:12659, title:'싹(SSAC) 영등포캠퍼스 스튜디오', date:'2021.01', service:'유튜브 스튜디오', client:'공공기관', overview:'1인 온라인 강의 녹화, 촬영 스튜디오', images:["/images/portfolio/ssac_1.jpg", "/images/portfolio/KakaoTalk_20210202_165447449-scaled.jpg", "/images/portfolio/ssac_2.jpg", "/images/portfolio/ssac_3.jpg"] },
-  { id:12654, title:'서울대학교 스마트 강의실', date:'2021.01', service:'스마트 강의실', client:'교육기관', overview:'온라인, 오프라인 동시 교육, 강의진행의 스튜디오, 학생그룹별 토론수업을 제공하는 강의시스템', images:["/images/portfolio/su_smart_1.jpg", "/images/portfolio/20201230_155029-scaled.jpg", "/images/portfolio/su_smart_2.jpg", "/images/portfolio/su_smart_3.jpg"] },
-  { id:12648, title:'국립현대미술관 뉴미디어 아카이빙 시스템', date:'2021.01', service:'아카이브 시스템', client:'공공기관', overview:'국립현대미술관 소장품의 영상 보존을 위한 편집작업, 마스터링, 스토리지, 아카이브 시스템', images:["/images/portfolio/mmca_2.jpg", "/images/portfolio/\uc644\ub8cc_5-scaled.jpg", "/images/portfolio/mmca_1.jpg", "/images/portfolio/mmca_3.jpg"] },
-  { id:12571, title:'한성대학교 녹음스튜디오', date:'2021.01', service:'방송제작 스튜디오', client:'교육기관', overview:'음향 녹음, 편집 실습 및 콘텐츠제작', images:["/images/portfolio/hsrec_1.jpg", "/images/portfolio/KakaoTalk_20210203_163124999-scaled.jpg", "/images/portfolio/hsrec_2.jpg"] },
-  { id:12567, title:'천주청평수련원 스튜디오', date:'2020.12', service:'방송제작 스튜디오', client:'종교', overview:'12G NDI 기반의 촬영 스튜디오', images:["/images/portfolio/cp2012_1.jpg", "/images/portfolio/KakaoTalk_20210123_093846451_10-scaled.jpg", "/images/portfolio/cp2012_2.jpg", "/images/portfolio/cp2012_3.jpg"] },
-  { id:12563, title:'형사전자법정시스템 개선', date:'2020.12', service:'화상회의', client:'공공기관', overview:'전국 형사전자법정의 시스템 개선사업', images:["/images/portfolio/jsbj_1.jpg", "/images/portfolio/505-1-2-\uc7ac\ud310\uc7a5\uc804\uacbd\ucd2c\uc601-scaled.jpg", "/images/portfolio/jsbj_2.jpg", "/images/portfolio/jsbj_3.jpg"] },
-  { id:12559, title:'NIPA 실감형 콘텐츠 가상 스튜디오', date:'2020.12', service:'방송제작 스튜디오', client:'공공기관', overview:'SAN 스토리지 증설, 4K EFP 카메라, AR/VR 워크스테이션, 트래킹 시스템을 통한 리얼타임 가상스튜디오', images:["/images/portfolio/nipa_2.jpg", "/images/portfolio/KakaoTalk_20201221_155851373-scaled.jpg", "/images/portfolio/nipa_1.jpg", "/images/portfolio/nipa_3.jpg"] },
-  { id:12555, title:'한양사이버대학교 교육미디어제작센터', date:'2020.12', service:'LED 디스플레이', client:'교육기관', overview:'LED 사이니지를 배경으로 교육콘텐츠 촬영, 제작', images:["/images/portfolio/hycu20_1.jpg", "/images/portfolio/20201124_114057-1-scaled.jpg", "/images/portfolio/hycu20_0.jpg", "/images/portfolio/hycu20_2.jpg"] },
-  { id:12551, title:'한국잡월드 어린이 체험장비 개선', date:'2020.11', service:'방송제작 스튜디오', client:'공공기관', overview:'각 체험실의 체험', images:["/images/portfolio/kjw20_3.jpg", "/images/portfolio/KakaoTalk_20210111_084558185-scaled.jpg", "/images/portfolio/kjw20_1.jpg", "/images/portfolio/kjw20_2.jpg"] },
-  { id:12547, title:'시청자미디어재단 크리에이션 스튜디오​', date:'2020.11', service:'방송제작 스튜디오', client:'공공기관', overview:'다양한 기자재를 활용하는 1인 제작 스튜디오', images:["/images/portfolio/media_sj_1.jpg", "/images/portfolio/IMG_0313-scaled.jpg", "/images/portfolio/media_cj_1.jpg", "/images/portfolio/media_cj_2.jpg"] },
-  { id:12543, title:'해외문화홍보원 영상 아카이빙 시스템', date:'2020.10', service:'아카이브 시스템', client:'공공기관', overview:'촬영 콘텐츠의 제작, 보관, 관리를 위한 워크스테이션 및 서버, 아카이브 시스템', images:["/images/portfolio/knet_1.jpg", "/images/portfolio/KakaoTalk_20200922_115904485_02-scaled.jpg", "/images/portfolio/knet_2.jpg", "/images/portfolio/knet_3.jpg"] },
-  { id:12539, title:'경기도일자리재단 온라인강의 스튜디오', date:'2020.10', service:'방송제작 스튜디오', client:'공공기관', overview:'경기 남부와 북부에 강의제작, 송출 스튜디오 2개소', images:["/images/portfolio/k1_2.jpg", "/images/portfolio/IMG_9311-scaled.jpg", "/images/portfolio/k1_1.jpg", "/images/portfolio/k1_3.jpg"] },
-  { id:12535, title:'태평양물산 회의실 촬영&화상회의 시스템', date:'2020.09', service:'화상회의', client:'기업', overview:'회의실에 영상스튜디오와 화상회의 시스템을', images:["/images/portfolio/pacific_2.jpg", "/images/portfolio/IMG_8975-scaled.jpg", "/images/portfolio/pacific_1.jpg", "/images/portfolio/pacific_3.jpg"] },
-  { id:12531, title:'SBA미디어콘텐츠센터 후반작업 스튜디오', date:'2020.08', service:'방송 인프라', client:'공공기관', overview:'영상, 음향 콘텐츠의 색보정, 편집, 믹싱 등 후반작업에 필요한 시스템 구성', images:["/images/portfolio/sbamcc2008_1.jpg", "/images/portfolio/KakaoTalk_20201026_114648411_13-scaled.jpg", "/images/portfolio/sbamcc2008_2.jpg", "/images/portfolio/sbamcc2008_3.jpg"] },
-  { id:12527, title:'KOBACO 청년1인 광고콘텐츠 스튜디오', date:'2020.07', service:'스마트 강의실', client:'공공기관', overview:'광고 콘텐츠 제작 스튜디오 새틀마루 강의실, 크로마키 스튜디오, 세트 스튜디오, 1인미디어 스튜디오로 구성', images:["/images/portfolio/kbc_15.jpg", "/images/portfolio/kbc_9.jpg", "/images/portfolio/kbc_10.jpg", "/images/portfolio/kbc_11.jpg"] },
-  { id:12523, title:'서일대 교수학습지원센터 스크린 설치', date:'2020.06', service:'이러닝 스튜디오', client:'교육기관', overview:'강의 촬영 스튜디오 2개실에 다양한 색상의 배경 스크린 설치', images:["/images/portfolio/si_screen_1.jpg", "/images/portfolio/20200629_141634.jpg", "/images/portfolio/si_screen_2.jpg", "/images/portfolio/si_screen_3.jpg"] },
-  { id:12519, title:'키움증권 촬영 스튜디오 이전', date:'2020.05', service:'방송제작 스튜디오', client:'기업', overview:'사이니지 TV, 촬영 스튜디오와 조정실 시스템 이전', images:["/images/portfolio/ki_3.png", "/images/portfolio/20200606_163125-scaled.jpg", "/images/portfolio/ki_1.jpg", "/images/portfolio/ki_2.jpg"] },
-  { id:12515, title:'이노베이션 아카데미 스튜디오', date:'2020.04', service:'방송제작 스튜디오', client:'공공기관', overview:'유튜브 스튜디오 2개실, 오픈 스튜디오(강의실) 2개실', images:["/images/portfolio/in_4.jpg", "/images/portfolio/KakaoTalk_20200511_075009420_07-scaled.jpg", "/images/portfolio/in_1.jpg", "/images/portfolio/in_2.jpg"] },
-  { id:12511, title:'OOTV 방송장비 설치', date:'2020.04', service:'아카이브 시스템', client:'공공기관', overview:'기존 장비 교체 및 기존 시스템 연동작업', images:["/images/portfolio/kbtv_5.jpg", "/images/portfolio/IMG_1175-scaled.jpg", "/images/portfolio/kbtv_2.jpg", "/images/portfolio/kbtv_3.jpg"] },
-  { id:12507, title:'OOOOO 상황관제 모니터 교체', date:'2020.03', service:'스마트 솔루션', client:'기업', overview:'사이니지 TV 교체설치', images:["/images/portfolio/2003_1.jpg", "/images/portfolio/IMG_7383-scaled.jpg", "/images/portfolio/2003_2.jpg"] },
-  { id:12407, title:'전주지방법원 전자법정', date:'2019.12', service:'방송 인프라', client:'공공기관', overview:'신청사 전주지방법원의 전자법정시스템', images:["/images/portfolio/jj_1.jpg", "/images/portfolio/18.jpg", "/images/portfolio/jj_2.jpg", "/images/portfolio/jj_3.jpg"] },
-  { id:12405, title:'안산시청 영상기록물 아카이브시스템', date:'2019.12', service:'아카이브 시스템', client:'공공기관', overview:'영상물 보존 및 공유를 위한 아카이브 시스템', images:["/images/portfolio/as_1.jpg", "/images/portfolio/KakaoTalk_20191217_115620117_04-scaled.jpg", "/images/portfolio/as_2.jpg"] },
-  { id:12403, title:'동서대학교 인터내셔널컬리지 스튜디오', date:'2019.12', service:'이러닝 스튜디오', client:'교육기관', overview:'International College 스튜디오 사운드 시스템', images:["/images/portfolio/dsu_1.jpg", "/images/portfolio/IMG_6768-scaled.jpg", "/images/portfolio/dsu_2.jpg", "/images/portfolio/dsu_3.jpg"] },
-  { id:12401, title:'농촌진흥청 아카이브시스템', date:'2019.12', service:'아카이브 시스템', client:'공공기관', overview:'기존 보유 영상물 및 자료의 보존, 관리, 공유을 위한 아카이브 시스템', images:["/images/portfolio/njc_1.jpg", "/images/portfolio/\uc791\uc5c5\uc644\ub8cc5-scaled.jpg", "/images/portfolio/njc_2.jpg", "/images/portfolio/njc_3.jpg"] },
-  { id:12399, title:'SBA MCC 후반작업 스튜디오', date:'2019.12', service:'아카이브 시스템', client:'공공기관', overview:'NLE, 색보정', images:["/images/portfolio/sbamcc1912_1.jpg", "/images/portfolio/KakaoTalk_20191219_221354122_02-scaled.jpg", "/images/portfolio/sbamcc1912_2.jpg", "/images/portfolio/sbamcc1912_3.jpg"] },
-  { id:12397, title:'KoVAC 공동제작센터 인프라 구축', date:'2019.12', service:'방송제작 스튜디오', client:'공공기관', overview:'4K, VR 영상콘텐츠의 색보정 및 편집의 NLE 마스터링 시스템과 서라운드 음향제작, 편집 시스템', images:["/images/portfolio/ko_1.jpg", "/images/portfolio/ko_2.jpg"] },
-  { id:12395, title:'인제영상미디어센터', date:'2019.10', service:'방송제작 스튜디오', client:'공공기관', overview:'다목적 스튜디오, 영상편집실, 멀티미디어 교육실 등 영상 및 음향 교육시설', images:["/images/portfolio/ij_center_4.jpg", "/images/portfolio/IMG_5467-scaled.jpg", "/images/portfolio/ij_center_1.jpg", "/images/portfolio/ij_center_2.jpg"] },
-  { id:12393, title:'연세대학교 커뮤니케이션대학원 음향실', date:'2019.09', service:'레코딩 스튜디오', client:'교육기관', overview:'Protools 기반 녹음, 편집 스튜디오', images:["/images/portfolio/ysu19_1.jpg", "/images/portfolio/20191023_165942-scaled.jpg", "/images/portfolio/ysu19_2.jpg", "/images/portfolio/ysu19_3.jpg"] },
-  { id:12391, title:'배달의민족 아카데미', date:'2019.07', service:'방송제작 스튜디오', client:'교육기관', overview:'강의장, 키친, 촬영 스튜디오, 조정실의 방송인프라', images:["/images/portfolio/bm_5.jpg", "/images/portfolio/bm_1.jpg", "/images/portfolio/bm_2.jpg", "/images/portfolio/bm_3.jpg"] },
-  { id:12389, title:'경주엑스포 크로마체험', date:'2019.07', service:'전시체험', client:'공공기관', overview:'크로마키 촬영, 제작 시스템을 통한 가상 체험실', images:["/images/portfolio/djex_3.jpg", "/images/portfolio/djex_1.jpg", "/images/portfolio/djex_2.jpg", "/images/portfolio/djex_4.jpg"] },
-  { id:12387, title:'건국대학교 영상스튜디오', date:'2019.06', service:'이러닝 스튜디오', client:'교육기관', overview:'크로마월 배경 촬영의 이러닝 스튜디오', images:["/images/portfolio/kku_1.jpg", "/images/portfolio/kku_2.jpg", "/images/portfolio/kku_3.jpg", "/images/portfolio/kku_4.jpg"] },
-  { id:12385, title:'영서교회 영상시스템', date:'2019.05', service:'LED 디스플레이', client:'종교', overview:'대형 LED 디스플레이 및 조명, 영상', images:["/images/portfolio/ys19_2.jpg", "/images/portfolio/ys19_1.jpg", "/images/portfolio/ys19_3.jpg", "/images/portfolio/ys19_4.jpg"] },
-  { id:12383, title:'서일대학교 교수학습지원센터 리뉴얼', date:'2019.05', service:'이러닝 스튜디오', client:'교육기관', overview:'이러닝 스튜디오 영상, 편집', images:["/images/portfolio/siu19_1.jpg", "/images/portfolio/siu19_2.jpg", "/images/portfolio/siu19_3.jpg", "/images/portfolio/siu19_4.jpg"] },
-  { id:12381, title:'까사마루 영상스튜디오', date:'2019.04', service:'방송제작 스튜디오', client:'기업', overview:'소셜미디어 촬영 스튜디오', images:["/images/portfolio/csmr_2.jpg", "/images/portfolio/csmr_1.jpg", "/images/portfolio/csmr_3.jpg", "/images/portfolio/csmr_4.jpg"] },
-  { id:12379, title:'대가야문화누리관 모니터링 시스템', date:'2019.02', service:'방송 인프라', client:'공공기관', overview:'공연장 멀티뷰 모니터링 시스템, 외부 TV 설치', images:["/images/portfolio/gy19_1.jpg", "/images/portfolio/gy19_2.jpg", "/images/portfolio/gy19_3.jpg", "/images/portfolio/gy19_4.jpg"] },
-  { id:12333, title:'에티오피아 교육방송 제작송출시스템', date:'2018.12', service:'이러닝 스튜디오', client:'공공기관', overview:'교육방송센터 (CEICT)의 이러닝 교육방송 제작 및 자동송출 시스템', images:["/images/portfolio/ethiopia_2.jpg", "/images/portfolio/ethiopia_1.jpg", "/images/portfolio/ethiopia_4.jpg", "/images/portfolio/ethiopia_5.jpg"] },
-  { id:12329, title:'OO교육사령부 이러닝기반 스튜디오', date:'2018.12', service:'이러닝 스튜디오', client:'공공기관', overview:'촬영, 녹음, 편집, 콘텐츠 제작', images:["/images/portfolio/k1812_1.jpg", "/images/portfolio/k1812_2.jpg", "/images/portfolio/k1812_3.jpg", "/images/portfolio/k1812_4.jpg"] },
-  { id:12325, title:'SBA MCC 방송장비', date:'2018.12', service:'방송제작 스튜디오', client:'공공기관', overview:'NLE, 음향 마스터링, 랜더팜, 홈씨어터', images:["/images/portfolio/sbamcc1812_4.jpg", "/images/portfolio/sbamcc1812_1.jpg", "/images/portfolio/sbamcc1812_2.jpg", "/images/portfolio/sbamcc1812_3.jpg"] },
-  { id:12321, title:'시청자미디어재단 장애인방송검증', date:'2018.09', service:'방송 인프라', client:'공공기관', overview:'장애인방송의 분석서버를 전국에 설치, 각 지역의 EPG 수집, 분석 수행 및 보고', images:["/images/portfolio/1809_3.jpg", "/images/portfolio/1809_1.jpg", "/images/portfolio/1809_2.jpg"] },
-  { id:12317, title:'부산광주시청자미디어 노후방송장비 개선', date:'2018.09', service:'방송제작 스튜디오', client:'공공기관', overview:'부산시청자미디어센터 - Protools 기반 시스템 및 소셜미디어 촬영', images:["/images/portfolio/bs_media1809_2.jpg", "/images/portfolio/bs_media1809_1.jpg", "/images/portfolio/bs_media1809_3.jpg", "/images/portfolio/bs_media1809_4.jpg"] },
-  { id:12313, title:'문경 에코랄라 미디어센터', date:'2018.09', service:'방송제작 스튜디오', client:'공공기관', overview:'영상촬영 체험 및 편집 시스템 설치 - 지미집 스튜디오 / 특수촬영 스튜디오 / 레일 스튜디오 / 모션캡쳐 스튜디오 / 플로우모션 스튜디오 / 편집실', images:["/images/portfolio/mk_1.jpg", "/images/portfolio/mk_2.jpg", "/images/portfolio/mk_3.jpg", "/images/portfolio/mk_4.jpg"] },
-  { id:12309, title:'디지털서울문화예술대 스튜디오 리뉴얼', date:'2018.08', service:'이러닝 스튜디오', client:'교육기관', overview:'오픈형 크로마키 스튜디오 및 카메라, 태블릿, 프롬프터 설치의 이러닝 스튜디오 5개소', images:["/images/portfolio/scau18_1.jpg", "/images/portfolio/scau18_2.jpg", "/images/portfolio/scau18_3.jpg", "/images/portfolio/scau18_4.jpg"] },
-  { id:12303, title:'연세대학교 OSE센터 스튜디오', date:'2018.02', service:'방송제작 스튜디오', client:'교육기관', overview:'크로마키 촬영 및 교안 중심의 태블릿, 전자칠판을 활용한 교육 콘텐츠 제작 스튜디오', images:["/images/portfolio/ose_2.jpg", "/images/portfolio/ose_1.jpg", "/images/portfolio/ose_3.jpg", "/images/portfolio/ose_4.jpg"] },
-  { id:12299, title:'연세대학교 원주캠퍼스 셀프스튜디오', date:'2018.01', service:'이러닝 스튜디오', client:'교육기관', overview:'태블릿 활용 1인 교육 콘텐츠 제작 스튜디오', images:["/images/portfolio/yscam_1.jpg", "/images/portfolio/yscam_2.jpg"] },
-  { id:12295, title:'서울디지털대학교 강서미디어센터', date:'2018.01', service:'이러닝 스튜디오', client:'교육기관', overview:'이러닝 스튜디오 3개소', images:["/images/portfolio/sdu18_2.jpg", "/images/portfolio/sdu18_1.jpg", "/images/portfolio/sdu18_3.jpg", "/images/portfolio/sdu18_4.jpg"] },
-  { id:12291, title:'부산광주시청자미디어센터 체험관', date:'2017.12', service:'방송제작 스튜디오', client:'공공기관', overview:'지역 시민참여 강화, 오픈타입 체험 스튜디오', images:["/images/portfolio/kj_media17_4.jpg", "/images/portfolio/bs_media17_1.jpg", "/images/portfolio/bs_media17_2.jpg", "/images/portfolio/bs_media17_3.jpg"] },
-  { id:12287, title:'NH농협생명 사내스튜디오', date:'2017.12', service:'방송제작 스튜디오', client:'기업', overview:'사내 방송을 위한 영상콘텐츠 편집, 제작 시스템', images:["/images/portfolio/nh_1.jpg", "/images/portfolio/nh_2.jpg", "/images/portfolio/nh_3.jpg"] },
-  { id:12285, title:'하나은행 본점 영상스튜디오', date:'2017.08', service:'방송제작 스튜디오', client:'기업', overview:'사내방송 콘텐츠 제작, 송출 스튜디오', images:["/images/portfolio/hnb_1.jpg", "/images/portfolio/hnb_2.jpg", "/images/portfolio/hnb_3.jpg", "/images/portfolio/hnb_4.jpg"] },
-  { id:12283, title:'한국IT아카데미', date:'2017.07', service:'방송제작 스튜디오', client:'공공기관', overview:'방송, 교육 콘텐츠 촬영, 편집의 스튜디오', images:["/images/portfolio/kit_1.jpg", "/images/portfolio/kit_2.jpg", "/images/portfolio/kit_3.jpg"] },
-  { id:12281, title:'동국대학교 이러닝 스튜디오', date:'2017.06', service:'이러닝 스튜디오', client:'교육기관', overview:'소품 세트, 크로마키, 태블릿 및 전자칠판 교안, 프로젝터 촬영 등 다양한 유형의 콘텐츠를 제작 지원하는 스튜디오', images:["/images/portfolio/dku_1.jpg", "/images/portfolio/dku_2.jpg", "/images/portfolio/dku_3.jpg", "/images/portfolio/dku_4.jpg"] },
-  { id:12279, title:'미디어콘텐츠센터 방송장비 구매 설치', date:'2017.06', service:'아카이브 시스템', client:'공공기관', overview:'아카이브 스토리지, UHD 색보정', images:["/images/portfolio/sba_mcc_1706_1.jpg", "/images/portfolio/sba_mcc_1706_2.jpg", "/images/portfolio/sba_mcc_1706_3.jpg", "/images/portfolio/sba_mcc_1706_4.jpg"] },
-  { id:12276, title:'강동대학교 이러닝 스튜디오', date:'2017.02', service:'이러닝 스튜디오', client:'교육기관', overview:'전자칠판, 태블릿, 프롬프터 구성의 교안 중심 강의 제작 스튜디오', images:["/images/portfolio/gdc_2.jpg", "/images/portfolio/gdc_1.jpg", "/images/portfolio/gdc_3.jpg", "/images/portfolio/gdc_4.jpg"] },
-  { id:12272, title:'한양사이버대학교 스튜디오 리뉴얼', date:'2017.05', service:'이러닝 스튜디오', client:'교육기관', overview:'사이버1관 5층, 6층 HD 촬영환경 스튜디오', images:["/images/portfolio/hycu17_2.jpg", "/images/portfolio/hycu17_1.jpg", "/images/portfolio/hycu17_3.jpg"] },
-  { id:12269, title:'SBA미디어콘텐츠센터 방송장비', date:'2017.03', service:'방송제작 스튜디오', client:'공공기관', overview:'4K 기반 방송 편집 및 후반작업', images:["/images/portfolio/sba_mcc_1703_1.jpg", "/images/portfolio/sba_mcc_1703_2.jpg", "/images/portfolio/sba_mcc_1703_3.jpg", "/images/portfolio/sba_mcc_1703_4.jpg"] },
-  { id:12264, title:'계성초등학교 방송시스템', date:'2017.02', service:'방송제작 스튜디오', client:'교육기관', overview:'방송 스튜디오, 강당 2개소 영상/음향 시스템', images:["/images/portfolio/ksc_4.jpg", "/images/portfolio/ksc_1.jpg", "/images/portfolio/ksc_2.jpg", "/images/portfolio/ksc_3.jpg"] },
-  { id:12259, title:'울산시청자미디어센터', date:'2016.12', service:'방송제작 스튜디오', client:'공공기관', overview:'오픈 촬영 스튜디오, 라디오 스튜디오, 중형 전문 방송제작 스튜디오, 녹음/편집 스튜디오, 시사실, 일반/디지털 교육실 등', images:["/images/portfolio/us_media_5.jpg", "/images/portfolio/us_media_1.jpg", "/images/portfolio/us_media_2.5.jpg", "/images/portfolio/us_media_2.jpg"] },
-  { id:12255, title:'부산시청자미디어센터 디지털전환', date:'2016.11', service:'방송제작 스튜디오', client:'공공기관', overview:'노후화 및 아날로그 시스템 → 디지털 기반의 방송시스템으로 전환 및', images:["/images/portfolio/bs1611_1.jpg", "/images/portfolio/bs1611_2.jpg", "/images/portfolio/bs1611_3.jpg", "/images/portfolio/bs1611_4.jpg"] },
-  { id:12252, title:'서울멀티미디어랩 영상음향 장비', date:'2016.09', service:'아카이브 시스템', client:'공공기관', overview:'애니메이션, 영화, 방송, 음악 콘텐츠의 후반작업 전문스튜디오', images:["/images/portfolio/smcl_1.jpg", "/images/portfolio/smcl_2.jpg", "/images/portfolio/smcl_3.jpg", "/images/portfolio/smcl_4.jpg"] },
-  { id:12247, title:'사이버외국어대학교 스튜디오 리뉴얼', date:'2016.08', service:'이러닝 스튜디오', client:'교육기관', overview:'전자칠판 활용 교육 컨텐츠 제작 스튜디오', images:["/images/portfolio/cufs1608_1.jpg", "/images/portfolio/cufs1608_2.jpg", "/images/portfolio/cufs1608_3.jpg", "/images/portfolio/cufs1608_4.jpg"] },
-  { id:12244, title:'경기도청 통합 HD방송시스템', date:'2016.08', service:'방송제작 스튜디오', client:'공공기관', overview:'HD 방송시스템 전환, 개선을 위한 인프라', images:["/images/portfolio/kk_out_3.jpg", "/images/portfolio/kk_1.jpg", "/images/portfolio/kk_2.jpg", "/images/portfolio/kk_out_1.jpg"] },
-  { id:12232, title:'OO역사관리단', date:'2016.07', service:'아카이브 시스템', client:'공공기관', overview:'인제스트 및 아카이브를 위한 시스템', images:["/images/portfolio/1607_3.jpg", "/images/portfolio/1607_1.jpg", "/images/portfolio/1607_2.jpg"] },
-  { id:12226, title:'SBA서울유통센터 회의룸', date:'2016.04', service:'스마트 솔루션', client:'공공기관', overview:'프로젝터, 스피커, 무선마이크 구성의 회의공간', images:["/images/portfolio/sba1604_1.jpg", "/images/portfolio/sba1604_2.jpg", "/images/portfolio/sba1604_3.jpg"] },
-  { id:12223, title:'스마트미디어앤 스튜디오', date:'2016.04', service:'방송제작 스튜디오', client:'기업', overview:'온라인 방송 및 팟캐스드 콘텐츠 제작 스튜디오', images:["/images/portfolio/smart_4.jpg", "/images/portfolio/smart_1.jpg", "/images/portfolio/smart_2.jpg", "/images/portfolio/smart_3.jpg"] },
-  { id:12220, title:'상명대학교 영상스튜디오', date:'2016.02', service:'이러닝 스튜디오', client:'교육기관', overview:'전자칠판, 태블릿, 프롬프터 설치의 교안/강의 콘텐츠 제작 스튜디오', images:["/images/portfolio/smu_2.jpg", "/images/portfolio/smu_1.jpg", "/images/portfolio/smu_3.jpg", "/images/portfolio/smu_4.jpg"] },
-  { id:12205, title:'서울디지털대학교 이러닝 스튜디오', date:'2016.01', service:'이러닝 스튜디오', client:'교육기관', overview:'판서, 크로마키, 태블릿 활용 이러닝 스튜디오', images:["/images/portfolio/sdu16_4.jpg", "/images/portfolio/sdu16_1.jpg", "/images/portfolio/sdu16_2.jpg", "/images/portfolio/sdu16_3.jpg"] },
-  { id:12202, title:'OO미디어센터', date:'2015.12', service:'방송제작 스튜디오', client:'공공기관', overview:'부대 내 영상 콘텐츠 제작, 음향 녹음/편집 시스템의 다목적 스튜디오', images:["/images/portfolio/1512_media_1.jpg", "/images/portfolio/1512_media_2.jpg", "/images/portfolio/1512_media_3.jpg", "/images/portfolio/1512_media_4.jpg"] },
-  { id:12197, title:'OO 공보상황실', date:'2015.12', service:'미디어박스', client:'공공기관', overview:'지상파 방송 모니터링, 녹화, 자막 검색을 제공', images:["/images/portfolio/1512_shs_3.jpg", "/images/portfolio/1512_shs_1.jpg", "/images/portfolio/1512_shs_2.jpg", "/images/portfolio/1512_shs_4.jpg"] },
-  { id:12194, title:'합동군사대학교 스튜디오', date:'2015.10', service:'방송제작 스튜디오', client:'공공기관', overview:'크로마월 배경의 교육 컨텐츠 제작 스튜디오', images:["/images/portfolio/201510_1.jpg", "/images/portfolio/201510_2.jpg", "/images/portfolio/201510_3.jpg", "/images/portfolio/201510_4.jpg"] },
-  { id:12190, title:'영서교회 음향시스템', date:'2015.10', service:'스마트 솔루션', client:'종교', overview:'오디오믹서, 파워앰프 등 음향시스템', images:["/images/portfolio/ysc_2.jpg", "/images/portfolio/ysc_1.jpg", "/images/portfolio/ysc_3.jpg"] },
-  { id:12186, title:'한국잡월드 청소년녹음실', date:'2015.09', service:'레코딩 스튜디오', client:'공공기관', overview:'녹음 스튜디오 체험을 위한 콘덴서마이크, 모니터링, DAW 시스템', images:["/images/portfolio/kjw15_rec_1.jpg", "/images/portfolio/kjw15_rec_2.jpg"] },
-  { id:12183, title:'성북시청자미디어센터', date:'2015.09', service:'방송제작 스튜디오', client:'공공기관', overview:'디지털 교육실, 음향 녹음/편집 스튜디오', images:["/images/portfolio/sb_media_4.jpg", "/images/portfolio/sb_media_1.jpg", "/images/portfolio/sb_media_2.jpg", "/images/portfolio/sb_media_3.jpg"] },
-  { id:12173, title:'2L필름 시스템 이전', date:'2015.08', service:'아카이브 시스템', client:'기업', overview:'VFX, 모션 그래픽, 디지털 시네마 마스터링, 색보정 등의 디지털 영상 제작 전문업체, 스튜디오 시스템 이전설치', images:["/images/portfolio/2L_2.jpg", "/images/portfolio/2L_1.jpg", "/images/portfolio/2L_3.jpg", "/images/portfolio/2L_4.jpg"] },
-  { id:12170, title:'한국잡월드 애니메이션 스튜디오', date:'2015.05', service:'방송제작 스튜디오', client:'공공기관', overview:'원격 제어패널을 통한 영상 스위칭 구성', images:["/images/portfolio/kjw15_1.jpg", "/images/portfolio/kjw15_2.jpg", "/images/portfolio/kjw15_3.jpg"] },
-  { id:12165, title:'포항공과대학교 스튜디오', date:'2015.04', service:'방송제작 스튜디오', client:'교육기관', overview:'프로젝터, 전자칠판, 태블릿 활용 판서/교안 중심의 교육 콘텐츠 제작 스튜디오', images:["/images/portfolio/pos_3.jpg", "/images/portfolio/pos_1.jpg", "/images/portfolio/pos_2.jpg", "/images/portfolio/pos_4.jpg"] },
-  { id:12162, title:'서울디지털대학교 강서 스튜디오', date:'2015.02', service:'이러닝 스튜디오', client:'교육기관', overview:'다양한 콘텐츠 제작의 소형, 중형, 대형 크기의 이러닝 스튜디오', images:["/images/portfolio/sdu15_2.jpg", "/images/portfolio/sdu15_1.jpg", "/images/portfolio/sdu15_3.jpg", "/images/portfolio/sdu15_4.jpg"] },
-  { id:12159, title:'법화정사 영상음향 시스템', date:'2014.09', service:'방송 인프라', client:'종교', overview:'법당 내부의 방송신호 연계', images:["/images/portfolio/bup_5.jpg", "/images/portfolio/bup_1.jpg", "/images/portfolio/bup_2.jpg", "/images/portfolio/bup_3.jpg"] },
-  { id:12154, title:'인천시청자미디어센터', date:'2014.07', service:'방송제작 스튜디오', client:'공공기관', overview:'오픈 라디오 스튜디오, 5.1채널 서라운드 믹싱/녹음 디지털 교육실', images:["/images/portfolio/ic_media_1.jpg", "/images/portfolio/ic_media_2.jpg", "/images/portfolio/ic_media_3.jpg", "/images/portfolio/ic_media_4.jpg"] },
-  { id:12151, title:'대전시청자미디어센터', date:'2014.06', service:'방송제작 스튜디오', client:'공공기관', overview:'오픈 촬영/라디오 스튜디오, 녹음/편집 스튜디오', images:["/images/portfolio/dj_media_4.jpg", "/images/portfolio/dj_media_1.jpg", "/images/portfolio/dj_media_2.jpg", "/images/portfolio/dj_media_3.jpg"] },
-  { id:12144, title:'더존 스튜디오', date:'2013.12', service:'이러닝 스튜디오', client:'기업', overview:'교육 콘텐츠 제작 이러닝 스튜디오', images:["/images/portfolio/zone_1.jpg", "/images/portfolio/zone_2.jpg", "/images/portfolio/zone_3.jpg", "/images/portfolio/zone_4.jpg"] },
-  { id:12141, title:'사이버외국어대학교 스튜디오', date:'2013.09', service:'이러닝 스튜디오', client:'교육기관', overview:'전자칠판, 판서 중심의 이러닝 스튜디오', images:["/images/portfolio/cufs13_2.jpg", "/images/portfolio/cufs13_1.jpg", "/images/portfolio/cufs13_3.jpg"] },
-  { id:12132, title:'서일대학교 교수학습지원센터 HD전환', date:'2013.06', service:'이러닝 스튜디오', client:'교육기관', overview:'비디오 스위처, 오디오 믹서 업그레이드 설치', images:["/images/portfolio/si13_1.jpg", "/images/portfolio/si13_2.jpg", "/images/portfolio/si13_3.jpg", "/images/portfolio/si13_4.jpg"] },
-  { id:12129, title:'세종사이버대학교 스튜디오', date:'2013.02', service:'이러닝 스튜디오', client:'교육기관', overview:'세트 배경 촬영의 교안/강의 콘텐츠 제작 스튜디오', images:["/images/portfolio/sj_3.jpg", "/images/portfolio/sj_1.jpg", "/images/portfolio/sj_2.jpg", "/images/portfolio/sj_4.jpg"] },
-  { id:12124, title:'부산광주시청자미디어센터 녹음실', date:'2012.11', service:'방송제작 스튜디오', client:'공공기관', overview:'대담 및 라디오 체험의 녹음, 편집 스튜디오', images:["/images/portfolio/kj12_2.jpg", "/images/portfolio/bs12_1.jpg", "/images/portfolio/bs12_2.jpg", "/images/portfolio/bs12_3.jpg"] },
-  { id:12119, title:'디지털서울문화예술대 스튜디오 HD전환', date:'2012.11', service:'이러닝 스튜디오', client:'교육기관', overview:'HD 기반 촬영시스템으로 개선', images:["/images/portfolio/scau12_3.jpg", "/images/portfolio/scau12_1.jpg", "/images/portfolio/scau12_2.jpg", "/images/portfolio/scau12_4.jpg"] },
-  { id:12116, title:'고려사이버대학교 스튜디오 개선', date:'2012.06', service:'이러닝 스튜디오', client:'교육기관', overview:'스튜디오 무대 리모델링, 촬영 세트, 소품, 조명 설치', images:["/images/portfolio/kcu_3.jpg", "/images/portfolio/kcu_1.jpg", "/images/portfolio/kcu_2.jpg", "/images/portfolio/kcu_4.jpg"] },
-  { id:12110, title:'서울사이버대학교 스튜디오 개선', date:'2012.05', service:'이러닝 스튜디오', client:'교육기관', overview:'소/중/대형 스튜디오 촬영 무대 세트, 소품, 크로마월 등 설치', images:["/images/portfolio/sc_L3-1.jpg", "/images/portfolio/sc_L3.jpg", "/images/portfolio/sc_L1.jpg", "/images/portfolio/sc_L2.jpg"] },
-  { id:12104, title:'극동대학교 영상스튜디오', date:'2012.03', service:'이러닝 스튜디오', client:'교육기관', overview:'중/소형 이러닝 스튜디오, 강의실 프로젝터 및 스크린 설치', images:["/images/portfolio/kd_4.jpg", "/images/portfolio/kd_1.jpg", "/images/portfolio/kd_2.jpg", "/images/portfolio/kd_3.jpg"] },
-  { id:12101, title:'법무부 교화방송센터 스튜디오', date:'2011.12', service:'방송제작 스튜디오', client:'공공기관', overview:'HD기반 촬영 스튜디오로 개선 , 전환', images:["/images/portfolio/bora_2.jpg", "/images/portfolio/bora_1.jpg", "/images/portfolio/bora_3.jpg", "/images/portfolio/bora_4.jpg"] },
-  { id:12095, title:'원광보건대학교 이러닝 스튜디오', date:'2011.11', service:'이러닝 스튜디오', client:'교육기관', overview:'중/소형 스튜디오 2개소, 통합 조정실 1개소, 원격 스튜디오 2개소의 강의 촬영 및 녹화(녹음), 편집 시스템', images:["/images/portfolio/wu_1.jpg", "/images/portfolio/wu_2.jpg", "/images/portfolio/wu_3.jpg", "/images/portfolio/wu_4.jpg"] },
-  { id:12091, title:'한국잡월드 체험 스튜디오', date:'2011.10', service:'방송제작 스튜디오', client:'공공기관', overview:'청소년 체험관 - 방송 스튜디오, 녹음 스튜디오', images:["/images/portfolio/kj_cb_1.jpg", "/images/portfolio/kj_ani_1.jpg", "/images/portfolio/kj_ani_2.jpg", "/images/portfolio/kj_cb_2.jpg"] },
+  { id:16348, title:'경기도교육청 UHD 비대면 화상 스튜디오', date:'2024.06', service:'방송 인프라', client:'공공기관', overview:'촬영 및 화상회의와 방송 중계를 통한 비대면 콘텐츠 양방향 서비스 스튜디오 구축', images:["/images/portfolio/GKDE_S_01.jpg", "/images/portfolio/GKDE_S_02.jpg", "/images/portfolio/GKDE_S_03.jpg", "/images/portfolio/GKDE_S_04.jpg", "/images/portfolio/GKDE_S_05.jpg"] },
+  { id:16344, title:'국립중앙도서관 미디어 아카이브', date:'2024.04', service:'아카이브 시스템', client:'공공기관', overview:'국립중앙도서관에서 구독 또는 보관하고 있는 미디어 매체를 안전하게 보관 및 활용할 수 있는 미디어 아카이브 시스템', images:["/images/portfolio/NLC_MA_01.jpg", "/images/portfolio/NLC_MA_02.jpg", "/images/portfolio/NLC_MA_03.jpg", "/images/portfolio/NLC_MA_04.jpg", "/images/portfolio/NLC_MA_05.jpg", "/images/portfolio/NLC_MA_06.jpg"] },
+  { id:16339, title:'한국수자원공사 스마트 강의실', date:'2024.03', service:'스마트 강의실', client:'공공기관', overview:'학습공간 혁신을 위한 스마트교실 인프라 마련', images:["/images/portfolio/KWC_SC_01.jpg", "/images/portfolio/KWC_SC_02.jpg", "/images/portfolio/KWC_SC_03.jpg"] },
+  { id:16334, title:'군포시 어울림 청소년 문화센터 스튜디오', date:'2024.01', service:'방송제작 스튜디오', client:'공공기관', overview:'청소년 방송 스튜디오 및 MCN 크리에이터 스튜디오 구축', images:["/images/portfolio/GPAC_S_01.jpg", "/images/portfolio/GPAC_S_02.jpg", "/images/portfolio/GPAC_S_03.jpg", "/images/portfolio/GPAC_S_04.jpg", "/images/portfolio/GPAC_S_05.jpg"] },
+  { id:16328, title:'한양대학교 ERICA HY-LIVE 스튜디오', date:'2023.12', service:'방송제작 스튜디오', client:'교육기관', overview:'방송 및 MCN 크리에이터 스튜디오 구축', images:["/images/portfolio/HYU_LS_01.jpg", "/images/portfolio/HYU_LS_02.jpg", "/images/portfolio/HYU_LS_03.jpg", "/images/portfolio/HYU_LS_04.jpg"] },
+  { id:16322, title:'다산 북스 스튜디오', date:'2023.11', service:'방송제작 스튜디오', client:'기업', overview:'도서 컨텐츠 촬영 유튜브 스튜디오', images:["/images/portfolio/DB_S_01.jpg", "/images/portfolio/DB_S_02.jpg", "/images/portfolio/DB_S_03.jpg"] },
+  { id:16318, title:'한국기술교육대학교 스튜디오', date:'2023.09', service:'이러닝 스튜디오', client:'교육기관', overview:'배경 촬영 스튜디오, 크로마 스크린 배경 스튜디오, 편집실 신규 구축', images:["/images/portfolio/KUT_S_01.jpg", "/images/portfolio/KUT_S_02.jpg", "/images/portfolio/KUT_S_03.jpg", "/images/portfolio/KUT_S_04.jpg", "/images/portfolio/KUT_S_05.jpg"] },
+  { id:16311, title:'한국형사·법무정책연구원 스마트강의실', date:'2023.08', service:'스마트 강의실', client:'공공기관', overview:'강의 라이브 방송 및 영상 촬영을 위한 스마트강의실 구축', images:["/images/portfolio/KCRIMINAL_SC_01.jpg", "/images/portfolio/KCRIMINAL_SC_02.jpg", "/images/portfolio/KCRIMINAL_SC_03.jpg"] },
+  { id:16308, title:'중앙대학교 미래교육원 스튜디오', date:'2023.07', service:'이러닝 스튜디오', client:'교육기관', overview:'크로마 배경, 고급 스튜디오의 이러닝 컨텐츠 제작 스튜디오', images:["/images/portfolio/CAU_MEC_01.jpg", "/images/portfolio/CAU_MEC_02.jpg", "/images/portfolio/CAU_MEC_03.jpg", "/images/portfolio/CAU_MEC_04.jpg"] },
+  { id:16302, title:'강원특별자치도교육청 스마트강의실', date:'2023.07', service:'스마트 강의실', client:'공공기관', overview:'디지털교육혁신 선도 지원을 위한 원격 협력 수업 및 라이브 방송 가능한 스마트교실', images:["/images/portfolio/GWEDE_SC_01.jpg", "/images/portfolio/GWEDE_SC_02.jpg", "/images/portfolio/GWEDE_SC_03.jpg"] },
+  { id:16298, title:'한국교통안전공단 화상회의 시스템', date:'2023.06', service:'화상회의', client:'공공기관', overview:'화상회의 시스템 구축 - 거점 회의실 및 내부회의실', images:["/images/portfolio/KOTSA_VC_01.jpg", "/images/portfolio/KOTSA_VC_02.jpg", "/images/portfolio/KOTSA_VC_03.jpg"] },
+  { id:16291, title:'LG유플러스 XR스튜디오', date:'2023.05', service:'LED 디스플레이', client:'기업', overview:'LED 디스플레이를 활용한 실감형 XR 스튜디오 구축', images:["/images/portfolio/LGU_XR_01.jpg", "/images/portfolio/LGU_XR_02.jpg", "/images/portfolio/LGU_XR_03.jpg", "/images/portfolio/LGU_XR_04.jpg", "/images/portfolio/LGU_XR_05.jpg"] },
+  { id:16285, title:'전북특별자치도 교육청 스마트강의실', date:'2023.04', service:'스마트 강의실', client:'공공기관', overview:'스마트강의실 환경구축을 위한 영상 음향 장비 설치', images:["/images/portfolio/JBEDE_SC_01.jpg", "/images/portfolio/JBEDE_SC_02.jpg", "/images/portfolio/JBEDE_SC_03.jpg"] },
+  { id:16278, title:'방위사업청 비대면 화상회의 시스템', date:'2023.03', service:'화상회의', client:'공공기관', overview:'원격지 다자간 회의실 화상회의 시스템 구축', images:["/images/portfolio/DAPA_VC_01.jpg", "/images/portfolio/DAPA_VC_02.jpg", "/images/portfolio/DAPA_VC_03.jpg"] },
+  { id:16271, title:'동덕여자대학교 스마트강의실', date:'2023.02', service:'스마트 강의실', client:'교육기관', overview:'원격 수업 및 비대면 라이브 방송 콘텐츠 제작을 위한 스마트강의실 구축', images:["/images/portfolio/DDU_SC_01.jpg", "/images/portfolio/DDU_SC_02.jpg", "/images/portfolio/DDU_SC_03.jpg", "/images/portfolio/DDU_SC_04.jpg"] },
+  { id:16264, title:'SBA 서울창업허브 XR스튜디오 2차', date:'2023.02', service:'LED 디스플레이', client:'공공기관', overview:'LED 디스플레이 및 XR 트래킹 시스템 설치', images:["/images/portfolio/SBA_XR02_01.jpg", "/images/portfolio/SBA_XR02_02.jpg", "/images/portfolio/SBA_XR02_03.jpg", "/images/portfolio/SBA_XR02_04.jpg"] },
+  { id:16258, title:'서울대학교 경력개발센터 스튜디오', date:'2022.11', service:'이러닝 스튜디오', client:'교육기관', overview:'크로마 배경 스튜디오, 편집실 신규 구축', images:["/images/portfolio/SNU_CDC_01.jpg", "/images/portfolio/SNU_CDC_02.jpg", "/images/portfolio/SNU_CDC_03.jpg"] },
+  { id:16251, title:'국방부 국방TV 스튜디오', date:'2022.09', service:'방송제작 스튜디오', client:'공공기관', overview:'국방TV 방송 제작을 위한 스튜디오 고도화 구축', images:["/images/portfolio/MODTV_S_01.jpg", "/images/portfolio/MODTV_S_02.jpg", "/images/portfolio/MODTV_S_03.jpg"] },
+  { id:16245, title:'제주대학교 원격교육지원센터 스튜디오', date:'2022.08', service:'이러닝 스튜디오', client:'교육기관', overview:'크로마 촬영, 배경 촬영 이러닝 컨텐츠 제작 스튜디오 리뉴얼 구축', images:["/images/portfolio/JJU_RESC_01.jpg", "/images/portfolio/JJU_RESC_02.jpg", "/images/portfolio/JJU_RESC_03.jpg", "/images/portfolio/JJU_RESC_04.jpg"] },
+  { id:16239, title:'SBA 서울창업허브 XR스튜디오 1차', date:'2022.07', service:'LED 디스플레이', client:'공공기관', overview:'LED 디스플레이 및 XR 트래킹 시스템 설치', images:["/images/portfolio/SBA_XR01_01.jpg", "/images/portfolio/SBA_XR01_02.jpg", "/images/portfolio/SBA_XR01_03.jpg"] },
+  { id:16232, title:'한밭대학교 스마트강의실', date:'2022.06', service:'스마트 강의실', client:'교육기관', overview:'스마트교실 환경 구축을 위한 영상 음향 장비 설치', images:["/images/portfolio/HBU_SC_01.jpg", "/images/portfolio/HBU_SC_02.jpg", "/images/portfolio/HBU_SC_03.jpg"] },
+  { id:16225, title:'세종사이버대학교 이러닝 스튜디오', date:'2022.05', service:'이러닝 스튜디오', client:'교육기관', overview:'세트 촬영, 크로마 촬영 스튜디오, 편집실 이러닝 컨텐츠 제작 스튜디오 리뉴얼', images:["/images/portfolio/SJCU_S_01.jpg", "/images/portfolio/SJCU_S_02.jpg", "/images/portfolio/SJCU_S_03.jpg", "/images/portfolio/SJCU_S_04.jpg"] },
+  { id:16218, title:'경희사이버대학교 이러닝 스튜디오', date:'2022.04', service:'이러닝 스튜디오', client:'교육기관', overview:'크로마 배경 스튜디오 등 이러닝 컨텐츠 제작 스튜디오 리뉴얼 구축', images:["/images/portfolio/KHCU_S_01.jpg", "/images/portfolio/KHCU_S_02.jpg", "/images/portfolio/KHCU_S_03.jpg"] },
+  { id:16211, title:'화성시 문화재단 화성아트홀 전시체험', date:'2022.03', service:'전시체험', client:'공공기관', overview:'화성아트홀 전시관 영상, 음향 시스템 설치', images:["/images/portfolio/HAH_EX_01.jpg", "/images/portfolio/HAH_EX_02.jpg", "/images/portfolio/HAH_EX_03.jpg"] },
+  { id:16204, title:'한국방송통신대학교 원격교육연수원', date:'2022.02', service:'이러닝 스튜디오', client:'교육기관', overview:'이러닝 컨텐츠 제작 스튜디오 신규 구축', images:["/images/portfolio/KNOU_RETI_01.jpg", "/images/portfolio/KNOU_RETI_02.jpg", "/images/portfolio/KNOU_RETI_03.jpg", "/images/portfolio/KNOU_RETI_04.jpg"] },
+  { id:16197, title:'대림대학교 이러닝 스튜디오', date:'2022.01', service:'이러닝 스튜디오', client:'교육기관', overview:'크로마 배경 스튜디오 이러닝 컨텐츠 제작 스튜디오 신규 구축', images:["/images/portfolio/DLC_S_01.jpg", "/images/portfolio/DLC_S_02.jpg", "/images/portfolio/DLC_S_03.jpg"] },
+  { id:16191, title:'사이버외대 스튜디오', date:'2021.12', service:'이러닝 스튜디오', client:'교육기관', overview:'세트, 크로마 배경 스튜디오 촬영 이러닝 컨텐츠 제작 스튜디오 신규 구축', images:["/images/portfolio/CUFS_S_01.jpg", "/images/portfolio/CUFS_S_02.jpg", "/images/portfolio/CUFS_S_03.jpg", "/images/portfolio/CUFS_S_04.jpg"] },
+  { id:16185, title:'서울시 미디어재단TBS 아카이브', date:'2021.10', service:'아카이브 시스템', client:'공공기관', overview:'서울시 미디어재단TBS 방송 데이터 아카이빙 시스템 구축', images:["/images/portfolio/TBS_AS_01.jpg", "/images/portfolio/TBS_AS_02.jpg", "/images/portfolio/TBS_AS_03.jpg"] },
+  { id:16178, title:'두원공과대학교 이러닝 스튜디오', date:'2021.09', service:'이러닝 스튜디오', client:'교육기관', overview:'크로마 배경 스튜디오 이러닝 컨텐츠 제작 스튜디오 신규 구축', images:["/images/portfolio/DWC_S_01.jpg", "/images/portfolio/DWC_S_02.jpg", "/images/portfolio/DWC_S_03.jpg"] },
+  { id:16171, title:'MBC 방송시스템 고도화', date:'2021.08', service:'아카이브 시스템', client:'기업', overview:'방송 제작 스토리지, 라우터, 모니터링 시스템 고도화', images:["/images/portfolio/MBC_BS_01.jpg", "/images/portfolio/MBC_BS_02.jpg", "/images/portfolio/MBC_BS_03.jpg"] },
+  { id:16165, title:'유한대학교 이러닝 스튜디오', date:'2021.06', service:'이러닝 스튜디오', client:'교육기관', overview:'크로마 배경 스튜디오 이러닝 컨텐츠 제작 스튜디오 신규 구축', images:["/images/portfolio/YHU_S_01.jpg", "/images/portfolio/YHU_S_02.jpg", "/images/portfolio/YHU_S_03.jpg"] },
+  { id:16158, title:'경인교육대학교 스튜디오', date:'2021.05', service:'이러닝 스튜디오', client:'교육기관', overview:'크로마 배경 스튜디오 이러닝 컨텐츠 제작 스튜디오 신규 구축', images:["/images/portfolio/GINUE_S_01.jpg", "/images/portfolio/GINUE_S_02.jpg", "/images/portfolio/GINUE_S_03.jpg"] },
+  { id:16151, title:'동국대학교 영상대학원 스튜디오', date:'2021.04', service:'방송제작 스튜디오', client:'교육기관', overview:'영상 제작을 위한 촬영, 편집, 음향 스튜디오 신규 구축', images:["/images/portfolio/DKU_GA_01.jpg", "/images/portfolio/DKU_GA_02.jpg", "/images/portfolio/DKU_GA_03.jpg"] },
+  { id:16145, title:'경기대학교 원격교육지원센터 스튜디오', date:'2021.02', service:'이러닝 스튜디오', client:'교육기관', overview:'크로마 배경 스튜디오 이러닝 컨텐츠 제작 스튜디오 신규 구축', images:["/images/portfolio/KGU_RESC_01.jpg", "/images/portfolio/KGU_RESC_02.jpg", "/images/portfolio/KGU_RESC_03.jpg"] },
+  { id:16139, title:'국립국악원 전시체험관', date:'2021.01', service:'전시체험', client:'공공기관', overview:'국립국악원 전시관 영상, 음향 시스템 설치', images:["/images/portfolio/NCKTM_EX_01.jpg", "/images/portfolio/NCKTM_EX_02.jpg", "/images/portfolio/NCKTM_EX_03.jpg"] },
+  { id:16132, title:'고려대학교 이러닝 스튜디오', date:'2020.12', service:'이러닝 스튜디오', client:'교육기관', overview:'크로마 배경 스튜디오 이러닝 컨텐츠 제작 스튜디오 신규 구축', images:["/images/portfolio/KU_S_01.jpg", "/images/portfolio/KU_S_02.jpg", "/images/portfolio/KU_S_03.jpg"] },
+  { id:16125, title:'연세대학교 이러닝 스튜디오', date:'2020.10', service:'이러닝 스튜디오', client:'교육기관', overview:'크로마 배경 스튜디오 이러닝 컨텐츠 제작 스튜디오 신규 구축', images:["/images/portfolio/YSU_S_01.jpg", "/images/portfolio/YSU_S_02.jpg", "/images/portfolio/YSU_S_03.jpg"] },
+  { id:16118, title:'MBC 뉴스 스튜디오', date:'2020.09', service:'방송제작 스튜디오', client:'기업', overview:'LED 배경 뉴스 스튜디오 고도화', images:["/images/portfolio/MBC_NS_01.jpg", "/images/portfolio/MBC_NS_02.jpg", "/images/portfolio/MBC_NS_03.jpg"] },
+  { id:16112, title:'청년재단 스튜디오', date:'2020.08', service:'방송제작 스튜디오', client:'공공기관', overview:'유튜브 크리에이터 스튜디오 신규 구축', images:["/images/portfolio/YF_S_01.jpg", "/images/portfolio/YF_S_02.jpg", "/images/portfolio/YF_S_03.jpg"] },
+  { id:16106, title:'서울디지털대학교 이러닝 스튜디오', date:'2020.07', service:'이러닝 스튜디오', client:'교육기관', overview:'크로마 배경 스튜디오 이러닝 컨텐츠 제작 스튜디오 리뉴얼 구축', images:["/images/portfolio/SDU_S_01.jpg", "/images/portfolio/SDU_S_02.jpg", "/images/portfolio/SDU_S_03.jpg", "/images/portfolio/SDU_S_04.jpg"] },
+  { id:16099, title:'EBS 아카이브 시스템', date:'2020.06', service:'아카이브 시스템', client:'공공기관', overview:'EBS 방송 데이터 아카이빙 시스템 구축', images:["/images/portfolio/EBS_AS_01.jpg", "/images/portfolio/EBS_AS_02.jpg", "/images/portfolio/EBS_AS_03.jpg"] },
+  { id:16093, title:'중앙대학교 이러닝 스튜디오', date:'2020.04', service:'이러닝 스튜디오', client:'교육기관', overview:'크로마 배경 스튜디오 이러닝 컨텐츠 제작 스튜디오 신규 구축', images:["/images/portfolio/CAU_S_01.jpg", "/images/portfolio/CAU_S_02.jpg", "/images/portfolio/CAU_S_03.jpg"] },
+  { id:16087, title:'YTN 방송시스템', date:'2020.02', service:'방송 인프라', client:'기업', overview:'YTN 방송 제작 인프라 시스템 고도화', images:["/images/portfolio/YTN_BS_01.jpg", "/images/portfolio/YTN_BS_02.jpg", "/images/portfolio/YTN_BS_03.jpg"] },
+  { id:16081, title:'KBS 아카이브 시스템', date:'2019.12', service:'아카이브 시스템', client:'공공기관', overview:'KBS 방송 데이터 아카이빙 시스템 구축', images:["/images/portfolio/KBS_AS_01.jpg", "/images/portfolio/KBS_AS_02.jpg"] },
+  { id:16074, title:'서울신학대학교 이러닝 스튜디오', date:'2019.11', service:'이러닝 스튜디오', client:'교육기관', overview:'크로마 배경 스튜디오 이러닝 컨텐츠 제작 스튜디오 신규 구축', images:["/images/portfolio/STU_S_01.jpg", "/images/portfolio/STU_S_02.jpg"] },
+  { id:16068, title:'영남이공대학교 이러닝 스튜디오', date:'2019.10', service:'이러닝 스튜디오', client:'교육기관', overview:'크로마 배경 스튜디오 이러닝 컨텐츠 제작 스튜디오 신규 구축', images:["/images/portfolio/YIC_S_01.jpg", "/images/portfolio/YIC_S_02.jpg", "/images/portfolio/YIC_S_03.jpg"] },
+  { id:16062, title:'아주대학교 이러닝 스튜디오', date:'2019.09', service:'이러닝 스튜디오', client:'교육기관', overview:'크로마 배경 스튜디오 이러닝 컨텐츠 제작 스튜디오 신규 구축', images:["/images/portfolio/AJU_S_01.jpg", "/images/portfolio/AJU_S_02.jpg", "/images/portfolio/AJU_S_03.jpg"] },
+  { id:16056, title:'국방부 군사편찬연구소 아카이브', date:'2019.08', service:'아카이브 시스템', client:'공공기관', overview:'군 역사 자료 디지털 아카이빙 시스템 구축', images:["/images/portfolio/IMHD_AS_01.jpg", "/images/portfolio/IMHD_AS_02.jpg"] },
+  { id:16049, title:'고려사이버대학교 스튜디오', date:'2019.07', service:'이러닝 스튜디오', client:'교육기관', overview:'세트, 크로마 스크린 배경의 강의 촬영 스튜디오', images:["/images/portfolio/kdu_2.jpg","/images/portfolio/kdu_1.jpg","/images/portfolio/kdu_3.jpg","/images/portfolio/kdu_4.jpg"] },
+  { id:16044, title:'동국대학교 이러닝 스튜디오', date:'2019.06', service:'이러닝 스튜디오', client:'교육기관', overview:'크로마 배경 스튜디오 이러닝 컨텐츠 제작 스튜디오 신규 구축', images:["/images/portfolio/DKU_S_01.jpg", "/images/portfolio/DKU_S_02.jpg", "/images/portfolio/DKU_S_03.jpg"] },
+  { id:16038, title:'국립현대미술관 미디어 아트 전시', date:'2019.04', service:'전시체험', client:'공공기관', overview:'국립현대미술관 미디어 아트 전시 음향, 영상 시스템 설치', images:["/images/portfolio/MMCA_EX_01.jpg", "/images/portfolio/MMCA_EX_02.jpg"] },
+  { id:16031, title:'명지대학교 이러닝 스튜디오', date:'2019.03', service:'이러닝 스튜디오', client:'교육기관', overview:'크로마 배경 스튜디오 이러닝 컨텐츠 제작 스튜디오 신규 구축', images:["/images/portfolio/MJU_S_01.jpg", "/images/portfolio/MJU_S_02.jpg"] },
+  { id:16024, title:'한국관광공사 미디어센터', date:'2019.01', service:'방송제작 스튜디오', client:'공공기관', overview:'관광 홍보 영상 제작을 위한 방송 스튜디오 구축', images:["/images/portfolio/KTO_MC_01.jpg", "/images/portfolio/KTO_MC_02.jpg", "/images/portfolio/KTO_MC_03.jpg"] },
+  { id:16017, title:'충북대학교 이러닝 스튜디오', date:'2018.12', service:'이러닝 스튜디오', client:'교육기관', overview:'크로마 배경 스튜디오 이러닝 컨텐츠 제작 스튜디오 신규 구축', images:["/images/portfolio/CBU_S_01.jpg", "/images/portfolio/CBU_S_02.jpg"] },
+  { id:16010, title:'수원시청 방송스튜디오', date:'2018.10', service:'방송제작 스튜디오', client:'공공기관', overview:'시정 홍보 영상 제작을 위한 방송 스튜디오 구축', images:["/images/portfolio/SUWON_S_01.jpg", "/images/portfolio/SUWON_S_02.jpg", "/images/portfolio/SUWON_S_03.jpg"] },
+  { id:16003, title:'세종대학교 이러닝 스튜디오', date:'2018.09', service:'이러닝 스튜디오', client:'교육기관', overview:'크로마 배경 스튜디오 이러닝 컨텐츠 제작 스튜디오 신규 구축', images:["/images/portfolio/SJU_S_01.jpg", "/images/portfolio/SJU_S_02.jpg"] },
+  { id:15997, title:'홍익대학교 이러닝 스튜디오', date:'2018.07', service:'이러닝 스튜디오', client:'교육기관', overview:'크로마 배경 스튜디오 이러닝 컨텐츠 제작 스튜디오 신규 구축', images:["/images/portfolio/HIU_S_01.jpg", "/images/portfolio/HIU_S_02.jpg"] },
+  { id:15991, title:'국민대학교 이러닝 스튜디오', date:'2018.06', service:'이러닝 스튜디오', client:'교육기관', overview:'크로마 배경 스튜디오 이러닝 컨텐츠 제작 스튜디오 신규 구축', images:["/images/portfolio/KMU_S_01.jpg", "/images/portfolio/KMU_S_02.jpg", "/images/portfolio/KMU_S_03.jpg"] },
+  { id:15985, title:'서울과학기술대학교 스튜디오', date:'2018.05', service:'이러닝 스튜디오', client:'교육기관', overview:'크로마 배경 스튜디오 이러닝 컨텐츠 제작 스튜디오 신규 구축', images:["/images/portfolio/SEOULTECH_S_01.jpg", "/images/portfolio/SEOULTECH_S_02.jpg"] },
+  { id:15979, title:'인하대학교 이러닝 스튜디오', date:'2018.03', service:'이러닝 스튜디오', client:'교육기관', overview:'크로마 배경 스튜디오 이러닝 컨텐츠 제작 스튜디오 신규 구축', images:["/images/portfolio/IHU_S_01.jpg", "/images/portfolio/IHU_S_02.jpg"] },
+  { id:15973, title:'한국학중앙연구원 아카이브', date:'2018.02', service:'아카이브 시스템', client:'공공기관', overview:'한국학 자료 디지털 아카이빙 시스템 구축', images:["/images/portfolio/AKS_AS_01.jpg", "/images/portfolio/AKS_AS_02.jpg"] },
+  { id:15967, title:'가천대학교 이러닝 스튜디오', date:'2018.01', service:'이러닝 스튜디오', client:'교육기관', overview:'크로마 배경 스튜디오 이러닝 컨텐츠 제작 스튜디오 신규 구축', images:["/images/portfolio/GCU_S_01.jpg", "/images/portfolio/GCU_S_02.jpg"] },
+  { id:15961, title:'이화여자대학교 이러닝 스튜디오', date:'2017.12', service:'이러닝 스튜디오', client:'교육기관', overview:'크로마 배경 스튜디오 이러닝 컨텐츠 제작 스튜디오 신규 구축', images:["/images/portfolio/EWU_S_01.jpg", "/images/portfolio/EWU_S_02.jpg", "/images/portfolio/EWU_S_03.jpg"] },
+  { id:15955, title:'성신여자대학교 이러닝 스튜디오', date:'2017.10', service:'이러닝 스튜디오', client:'교육기관', overview:'크로마 배경 스튜디오 이러닝 컨텐츠 제작 스튜디오 신규 구축', images:["/images/portfolio/SSU_S_01.jpg", "/images/portfolio/SSU_S_02.jpg"] },
+  { id:15948, title:'KBS 방송시스템 고도화', date:'2017.09', service:'방송 인프라', client:'공공기관', overview:'KBS 방송 제작 인프라 시스템 고도화', images:["/images/portfolio/KBS_BS_01.jpg", "/images/portfolio/KBS_BS_02.jpg"] },
+  { id:15942, title:'MBN 방송시스템', date:'2017.08', service:'방송 인프라', client:'기업', overview:'MBN 방송 제작 인프라 시스템 신규 구축', images:["/images/portfolio/MBN_BS_01.jpg", "/images/portfolio/MBN_BS_02.jpg", "/images/portfolio/MBN_BS_03.jpg"] },
+  { id:15936, title:'한국방송통신대학교 스튜디오', date:'2017.06', service:'이러닝 스튜디오', client:'교육기관', overview:'크로마 배경 스튜디오 이러닝 컨텐츠 제작 스튜디오 리뉴얼 구축', images:["/images/portfolio/KNOU_S_01.jpg", "/images/portfolio/KNOU_S_02.jpg", "/images/portfolio/KNOU_S_03.jpg"] },
+  { id:15930, title:'숭실사이버대학교 이러닝 스튜디오', date:'2017.05', service:'이러닝 스튜디오', client:'교육기관', overview:'크로마 배경 스튜디오 이러닝 컨텐츠 제작 스튜디오 신규 구축', images:["/images/portfolio/SCU_S_01.jpg", "/images/portfolio/SCU_S_02.jpg"] },
+  { id:15923, title:'서일대학교 이러닝 스튜디오', date:'2016.11', service:'이러닝 스튜디오', client:'교육기관', overview:'크로마 배경 스튜디오 이러닝 컨텐츠 제작 스튜디오 신규 구축', images:["/images/portfolio/siu_1.jpg","/images/portfolio/siu_2.jpg","/images/portfolio/siu_3.jpg","/images/portfolio/siu_4.jpg"] },
+  { id:15917, title:'중앙일보 방송스튜디오', date:'2016.09', service:'방송제작 스튜디오', client:'기업', overview:'온라인 뉴스 제작을 위한 방송 스튜디오 구축', images:["/images/portfolio/JA_S_01.jpg", "/images/portfolio/JA_S_02.jpg"] },
+  { id:15911, title:'경기문화재단 전시관', date:'2016.08', service:'전시체험', client:'공공기관', overview:'경기도 문화 전시관 영상, 음향 시스템 설치', images:["/images/portfolio/GCF_EX_01.jpg", "/images/portfolio/GCF_EX_02.jpg"] },
+  { id:15905, title:'한국기독교방송 스튜디오', date:'2016.06', service:'방송제작 스튜디오', client:'기업', overview:'기독교 방송 스튜디오 신규 구축', images:["/images/portfolio/CBS_S_01.jpg", "/images/portfolio/CBS_S_02.jpg", "/images/portfolio/CBS_S_03.jpg"] },
+  { id:15899, title:'서울여자대학교 이러닝 스튜디오', date:'2016.05', service:'이러닝 스튜디오', client:'교육기관', overview:'크로마 배경 스튜디오 이러닝 컨텐츠 제작 스튜디오 신규 구축', images:["/images/portfolio/SWU_S_01.jpg", "/images/portfolio/SWU_S_02.jpg"] },
+  { id:15893, title:'서울대학교 이러닝 스튜디오', date:'2016.04', service:'이러닝 스튜디오', client:'교육기관', overview:'크로마 배경 스튜디오 이러닝 컨텐츠 제작 스튜디오 신규 구축', images:["/images/portfolio/SNU_S_01.jpg", "/images/portfolio/SNU_S_02.jpg"] },
+  { id:15887, title:'디지털서울문화예술대 스튜디오', date:'2016.03', service:'이러닝 스튜디오', client:'교육기관', overview:'크로마 배경 스튜디오 이러닝 컨텐츠 제작 스튜디오 신규 구축', images:["/images/portfolio/SCAU16_S_01.jpg", "/images/portfolio/SCAU16_S_02.jpg"] },
+  { id:15881, title:'고려대학교 방송스튜디오', date:'2016.01', service:'방송제작 스튜디오', client:'교육기관', overview:'방송 뉴스, 유튜브 제작을 위한 방송 스튜디오 구축', images:["/images/portfolio/KU_BS_01.jpg", "/images/portfolio/KU_BS_02.jpg", "/images/portfolio/KU_BS_03.jpg"] },
+  { id:15875, title:'한국과학기술원 이러닝 스튜디오', date:'2015.12', service:'이러닝 스튜디오', client:'교육기관', overview:'크로마 배경 스튜디오 이러닝 컨텐츠 제작 스튜디오 신규 구축', images:["/images/portfolio/KAIST_S_01.jpg", "/images/portfolio/KAIST_S_02.jpg"] },
+  { id:15868, title:'서강대학교 이러닝 스튜디오', date:'2015.10', service:'이러닝 스튜디오', client:'교육기관', overview:'크로마 배경 스튜디오 이러닝 컨텐츠 제작 스튜디오 신규 구축', images:["/images/portfolio/SGU_S_01.jpg", "/images/portfolio/SGU_S_02.jpg"] },
+  { id:15862, title:'한성대학교 이러닝 스튜디오', date:'2015.08', service:'이러닝 스튜디오', client:'교육기관', overview:'크로마 배경 스튜디오 이러닝 컨텐츠 제작 스튜디오 신규 구축', images:["/images/portfolio/HSU_S_01.jpg", "/images/portfolio/HSU_S_02.jpg"] },
+  { id:15856, title:'국방부 사이버교육훈련단 스튜디오', date:'2015.06', service:'이러닝 스튜디오', client:'공공기관', overview:'군 사이버 교육 훈련을 위한 이러닝 스튜디오 신규 구축', images:["/images/portfolio/MOD_CTC_S_01.jpg", "/images/portfolio/MOD_CTC_S_02.jpg"] },
+  { id:15849, title:'한국외국어대학교 스튜디오', date:'2015.04', service:'이러닝 스튜디오', client:'교육기관', overview:'크로마 배경 스튜디오 이러닝 컨텐츠 제작 스튜디오 신규 구축', images:["/images/portfolio/HUFS_S_01.jpg", "/images/portfolio/HUFS_S_02.jpg", "/images/portfolio/HUFS_S_03.jpg"] },
+  { id:15843, title:'JTBC 방송시스템', date:'2015.03', service:'방송 인프라', client:'기업', overview:'JTBC 방송 제작 인프라 시스템 고도화', images:["/images/portfolio/JTBC_BS_01.jpg", "/images/portfolio/JTBC_BS_02.jpg"] },
+  { id:15837, title:'수원대학교 이러닝 스튜디오', date:'2015.02', service:'이러닝 스튜디오', client:'교육기관', overview:'크로마 배경 스튜디오 이러닝 컨텐츠 제작 스튜디오 신규 구축', images:["/images/portfolio/SWU_LS_01.jpg", "/images/portfolio/SWU_LS_02.jpg"] },
+  { id:15830, title:'국립경주박물관 전시체험', date:'2015.01', service:'전시체험', client:'공공기관', overview:'국립경주박물관 전시관 영상, 음향 시스템 설치', images:["/images/portfolio/GJM_EX_01.jpg", "/images/portfolio/GJM_EX_02.jpg"] },
+  { id:15824, title:'충남대학교 이러닝 스튜디오', date:'2014.12', service:'이러닝 스튜디오', client:'교육기관', overview:'크로마 배경 스튜디오 이러닝 컨텐츠 제작 스튜디오 신규 구축', images:["/images/portfolio/CNU_S_01.jpg", "/images/portfolio/CNU_S_02.jpg"] },
+  { id:15817, title:'부산외국어대학교 스튜디오', date:'2014.10', service:'이러닝 스튜디오', client:'교육기관', overview:'크로마 배경 스튜디오 이러닝 컨텐츠 제작 스튜디오 신규 구축', images:["/images/portfolio/BUFS_S_01.jpg", "/images/portfolio/BUFS_S_02.jpg"] },
+  { id:15811, title:'대구가톨릭대학교 이러닝 스튜디오', date:'2014.08', service:'이러닝 스튜디오', client:'교육기관', overview:'크로마 배경 스튜디오 이러닝 컨텐츠 제작 스튜디오 신규 구축', images:["/images/portfolio/DCU_S_01.jpg", "/images/portfolio/DCU_S_02.jpg"] },
+  { id:15805, title:'울산대학교 이러닝 스튜디오', date:'2014.06', service:'이러닝 스튜디오', client:'교육기관', overview:'크로마 배경 스튜디오 이러닝 컨텐츠 제작 스튜디오 신규 구축', images:["/images/portfolio/UOU_S_01.jpg", "/images/portfolio/UOU_S_02.jpg"] },
+  { id:15798, title:'상명대학교 이러닝 스튜디오', date:'2014.04', service:'이러닝 스튜디오', client:'교육기관', overview:'크로마 배경 스튜디오 이러닝 컨텐츠 제작 스튜디오 신규 구축', images:["/images/portfolio/SMU_S_01.jpg", "/images/portfolio/SMU_S_02.jpg"] },
+  { id:15791, title:'건국대학교 이러닝 스튜디오', date:'2014.02', service:'이러닝 스튜디오', client:'교육기관', overview:'크로마 배경 스튜디오 이러닝 컨텐츠 제작 스튜디오 신규 구축', images:["/images/portfolio/KKU_S_01.jpg", "/images/portfolio/KKU_S_02.jpg"] },
+  { id:15785, title:'광운대학교 이러닝 스튜디오', date:'2014.01', service:'이러닝 스튜디오', client:'교육기관', overview:'크로마 배경 스튜디오 이러닝 컨텐츠 제작 스튜디오 신규 구축', images:["/images/portfolio/KWU_S_01.jpg", "/images/portfolio/KWU_S_02.jpg"] },
+  { id:15778, title:'전남대학교 이러닝 스튜디오', date:'2013.12', service:'이러닝 스튜디오', client:'교육기관', overview:'크로마 배경 스튜디오 이러닝 컨텐츠 제작 스튜디오 신규 구축', images:["/images/portfolio/CNU_LS_01.jpg", "/images/portfolio/CNU_LS_02.jpg"] },
+  { id:15772, title:'계명대학교 이러닝 스튜디오', date:'2013.10', service:'이러닝 스튜디오', client:'교육기관', overview:'크로마 배경 스튜디오 이러닝 컨텐츠 제작 스튜디오 신규 구축', images:["/images/portfolio/KMU_LS_01.jpg", "/images/portfolio/KMU_LS_02.jpg"] },
+  { id:15766, title:'동서대학교 이러닝 스튜디오', date:'2013.08', service:'이러닝 스튜디오', client:'교육기관', overview:'크로마 배경 스튜디오 이러닝 컨텐츠 제작 스튜디오 신규 구축', images:["/images/portfolio/DSU_S_01.jpg", "/images/portfolio/DSU_S_02.jpg"] },
+  { id:15759, title:'공주대학교 이러닝 스튜디오', date:'2013.06', service:'이러닝 스튜디오', client:'교육기관', overview:'크로마 배경 스튜디오 이러닝 컨텐츠 제작 스튜디오 신규 구축', images:["/images/portfolio/KNU_S_01.jpg", "/images/portfolio/KNU_S_02.jpg"] },
+  { id:15753, title:'한국디지털미디어고등학교 스튜디오', date:'2013.04', service:'방송제작 스튜디오', client:'교육기관', overview:'방송 교육을 위한 제작 스튜디오 구축', images:["/images/portfolio/KDMS_S_01.jpg", "/images/portfolio/KDMS_S_02.jpg", "/images/portfolio/KDMS_S_03.jpg"] },
+  { id:15747, title:'백석대학교 이러닝 스튜디오', date:'2013.02', service:'이러닝 스튜디오', client:'교육기관', overview:'크로마 배경 스튜디오 이러닝 컨텐츠 제작 스튜디오 신규 구축', images:["/images/portfolio/BSU_S_01.jpg", "/images/portfolio/BSU_S_02.jpg"] },
+  { id:15740, title:'경남대학교 이러닝 스튜디오', date:'2013.01', service:'이러닝 스튜디오', client:'교육기관', overview:'크로마 배경 스튜디오 이러닝 컨텐츠 제작 스튜디오 신규 구축', images:["/images/portfolio/KNU_LS_01.jpg", "/images/portfolio/KNU_LS_02.jpg"] },
+  { id:15734, title:'광주MBC 방송시스템', date:'2012.12', service:'아카이브 시스템', client:'기업', overview:'광주MBC 방송 데이터 아카이빙 시스템 구축', images:["/images/portfolio/GJMBC_AS_01.jpg", "/images/portfolio/GJMBC_AS_02.jpg"] },
+  { id:15727, title:'전주MBC 방송시스템', date:'2012.09', service:'방송 인프라', client:'기업', overview:'전주MBC 방송 제작 인프라 시스템 고도화', images:["/images/portfolio/JJMBC_BS_01.jpg", "/images/portfolio/JJMBC_BS_02.jpg"] },
+  { id:15721, title:'부산MBC 방송시스템', date:'2012.07', service:'방송 인프라', client:'기업', overview:'부산MBC 방송 제작 인프라 시스템 고도화', images:["/images/portfolio/BSMBC_BS_01.jpg", "/images/portfolio/BSMBC_BS_02.jpg"] },
   { id:12088, title:'서울디자인지원센터 스튜디오', date:'2011.06', service:'방송제작 스튜디오', client:'공공기관', overview:'홍보 영상 촬영 및 제작 스튜디오', images:["/images/portfolio/sdc_1.jpg", "/images/portfolio/sdc_2.jpg", "/images/portfolio/sdc_3.jpg"] },
   { id:12085, title:'대구방송 CG실 서버시스템', date:'2011.03', service:'아카이브 시스템', client:'기업', overview:'워크스테이션, 스토리지, 랜더팜 설치', images:["/images/portfolio/dg_2.jpg", "/images/portfolio/dg_1.jpg"] },
   { id:12082, title:'디지털서울문화예술대 이러닝 스튜디오', date:'2011.01', service:'이러닝 스튜디오', client:'교육기관', overview:'태블릿 및 판서 촬영 및 녹음 제공의 교육/강의 제작 스튜디오', images:["/images/portfolio/scau11_1.jpg", "/images/portfolio/scau11_2.jpg", "/images/portfolio/scau11_3.jpg"] },
@@ -360,7 +518,6 @@ const hardcodedProjects = [
   { id:12034, title:'대구디지털산업진흥원 스튜디오', date:'2007.01', service:'방송제작 스튜디오', client:'공공기관', overview:'스튜디오 부스, 부조정실 구조의 촬영 스튜디오', images:["/images/portfolio/DIP_2.jpg", "/images/portfolio/DIP_1.jpg", "/images/portfolio/DIP_3.jpg"] },
 ];
 
-// API에서 관리자 추가 프로젝트 불러와서 합치기
 let allProjects = [...hardcodedProjects];
 let sv='all',cl='all',q='',cp=null;
 
@@ -371,10 +528,7 @@ async function loadAdminProjects() {
     const adminProjects = await res.json();
     const hardcodedIds = new Set(hardcodedProjects.map(p => p.id));
     const newOnes = adminProjects.filter(p => !hardcodedIds.has(p.id));
-    if (newOnes.length > 0) {
-      allProjects = [...newOnes, ...hardcodedProjects];
-      render();
-    }
+    if (newOnes.length > 0) { allProjects = [...newOnes, ...hardcodedProjects]; render(); }
   } catch(e) {}
 }
 
@@ -388,14 +542,12 @@ function render(){
     const hi=p.images&&p.images.length>0;
     const bg=hi?'<div class="wc-bg" style="background-image:url('+p.images[0]+')"></div>':'<div class="wc-ph"><span>'+p.service+'</span></div>';
     return '<div class="wc" onclick="openModal('+p.id+')">'
-      +bg
-      +'<div class="wc-ov"></div>'
+      +bg+'<div class="wc-ov"></div>'
       +'<div class="wc-info">'
         +'<span class="wc-cat">'+p.service+'</span>'
         +'<p class="wc-name">'+p.title+'</p>'
         +'<div class="wc-meta"><span class="wc-date">'+p.date+'</span><span class="wc-cli">'+p.client+'</span></div>'
-      +'</div>'
-      +'</div>';
+      +'</div></div>';
   }).join('');
 }
 
@@ -411,10 +563,8 @@ function openModal(id){
   document.getElementById('mtags').innerHTML=[p.service,p.client].map(t=>'<span class="mtag">'+t+'</span>').join('');
   const th=document.getElementById('mth');
   if(p.images&&p.images.length>0){
-    // 이미지 전체 표시 (slice 제거)
     th.innerHTML=p.images.map((img,i)=>'<div class="mthumb '+(i===0?'on':'')+'" onclick="selImg('+i+')">'+'<div class="mthumb-bg" style="background-image:url('+img+')"></div></div>').join('');
-    // 1장이면 썸네일 숨김
-    th.className = p.images.length <= 1 ? 'mthumbs hidden' : 'mthumbs';
+    th.className=p.images.length<=1?'mthumbs hidden':'mthumbs';
     setMain(p.images[0],true);
   }else{
     th.className='mthumbs hidden';
