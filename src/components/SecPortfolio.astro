@@ -16,21 +16,27 @@
   <!-- 콘텐츠 -->
   <div class="port-content">
 
-    <!-- 왼쪽: Peek 슬라이더 -->
+    <!-- 왼쪽: 메인 이미지 -->
     <div class="port-left">
-      <div class="port-track-wrap">
-        <div class="port-track" id="port-track">
-          <div class="port-card" style="background-image:url('/images/HUFS_ST_04.jpg')"></div>
-          <div class="port-card" style="background-image:url('/images/SC_ST_09.jpg')"></div>
-          <div class="port-card" style="background-image:url('/images/GMC_S_01.jpg')"></div>
-          <div class="port-card" style="background-image:url('/images/GKDE_S_08.jpg')"></div>
-          <div class="port-card" style="background-image:url('/images/KTV_BS_01.jpg')"></div>
-        </div>
+      <div class="port-img-wrap" id="port-img-wrap">
+        <div class="port-img-slide active" style="background-image:url('/images/HUFS_ST_04.jpg')"></div>
+        <div class="port-img-slide" style="background-image:url('/images/SC_ST_09.jpg')"></div>
+        <div class="port-img-slide" style="background-image:url('/images/GMC_S_01.jpg')"></div>
+        <div class="port-img-slide" style="background-image:url('/images/GKDE_S_08.jpg')"></div>
+        <div class="port-img-slide" style="background-image:url('/images/KTV_BS_01.jpg')"></div>
       </div>
     </div>
 
     <!-- 오른쪽: 텍스트 -->
     <div class="port-right">
+      <!-- 썸네일 미리보기 -->
+      <div class="port-thumbs" id="port-thumbs">
+        <div class="port-thumb active" data-idx="0" style="background-image:url('/images/HUFS_ST_04.jpg')"></div>
+        <div class="port-thumb" data-idx="1" style="background-image:url('/images/SC_ST_09.jpg')"></div>
+        <div class="port-thumb" data-idx="2" style="background-image:url('/images/GMC_S_01.jpg')"></div>
+        <div class="port-thumb" data-idx="3" style="background-image:url('/images/GKDE_S_08.jpg')"></div>
+        <div class="port-thumb" data-idx="4" style="background-image:url('/images/KTV_BS_01.jpg')"></div>
+      </div>
       <div class="port-eyebrow">Portfolio</div>
       <div class="port-slides" id="port-slides">
 
@@ -120,41 +126,45 @@
     padding: 0;
   }
 
-  /* ── 왼쪽 Peek 슬라이더 ── */
+  /* ── 왼쪽 이미지 패널 ── */
   .port-left {
-    flex: 0 0 760px;
+    flex: 0 0 680px;
+    padding: 20px 20px 20px 0;
     display: flex; align-items: center;
-    overflow: hidden;
-    padding: 20px 0;
   }
-  .port-track-wrap {
-    width: 100%;
-    overflow: hidden;
+  .port-img-wrap {
     position: relative;
+    width: 100%; height: 560px;
+    box-shadow: 0 32px 80px rgba(0,0,0,0.5);
   }
-  .port-track {
-    display: flex;
-    gap: 20px;
-    transition: transform 0.65s cubic-bezier(0.4, 0, 0.2, 1);
-    padding: 0 60px;
+  .port-img-slide {
+    position: absolute; inset: 0;
+    background-size: cover; background-position: center;
+    opacity: 0;
+    transition: opacity 0.8s cubic-bezier(0.4,0,0.2,1);
   }
-  .port-card {
-    flex: 0 0 620px;
-    height: 560px;
-    background-size: cover;
-    background-position: center;
-    border-radius: 6px;
-    transition: transform 0.65s cubic-bezier(0.4,0,0.2,1),
-                opacity 0.65s,
-                box-shadow 0.65s;
-    opacity: 0.35;
-    transform: scale(0.92);
-    box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+  .port-img-slide.active { opacity: 1; }
+
+  /* ── 썸네일 ── */
+  .port-thumbs {
+    display: flex; gap: 10px;
+    margin-bottom: 28px;
   }
-  .port-card.active {
+  .port-thumb {
+    width: 90px; height: 60px;
+    background-size: cover; background-position: center;
+    border-radius: 4px;
+    cursor: pointer;
+    opacity: 0.4;
+    border: 2px solid transparent;
+    transition: opacity 0.3s, border-color 0.3s, transform 0.3s;
+    flex-shrink: 0;
+  }
+  .port-thumb:hover { opacity: 0.75; transform: translateY(-2px); }
+  .port-thumb.active {
     opacity: 1;
-    transform: scale(1);
-    box-shadow: 0 32px 80px rgba(0,0,0,0.6);
+    border-color: #fff;
+    transform: translateY(-2px);
   }
 
   /* ── 오른쪽 텍스트 ── */
@@ -246,35 +256,28 @@
 
 <script is:inline>
 (function () {
-  const bgs     = document.querySelectorAll('.port-bg-slide');
-  const cards   = document.querySelectorAll('.port-card');
-  const slides  = document.querySelectorAll('.port-slide');
-  const dots    = document.querySelectorAll('.port-dot');
-  const track   = document.getElementById('port-track');
+  const bgs    = document.querySelectorAll('.port-bg-slide');
+  const imgs   = document.querySelectorAll('.port-img-slide');
+  const slides = document.querySelectorAll('.port-slide');
+  const dots   = document.querySelectorAll('.port-dot');
+  const thumbs = document.querySelectorAll('.port-thumb');
   const btnPrev = document.getElementById('port-prev');
   const btnNext = document.getElementById('port-next');
-  const total   = slides.length;
+  const total  = slides.length;
   let cur = 0;
 
-  // 카드 너비 + gap
-  const CARD_W = 620 + 20;
-
   function go(n) {
-    cards[cur].classList.remove('active');
     bgs[cur].classList.remove('active');
+    imgs[cur].classList.remove('active');
     slides[cur].classList.remove('active');
     dots[cur].classList.remove('active');
-
-    cur = (n + total) % total;
-
-    cards[cur].classList.add('active');
+    thumbs[cur].classList.remove('active');
+    cur = Math.max(0, Math.min(n, total - 1));
     bgs[cur].classList.add('active');
+    imgs[cur].classList.add('active');
     slides[cur].classList.add('active');
     dots[cur].classList.add('active');
-
-    // 트랙 이동: 활성 카드가 중앙에 오도록
-    track.style.transform = 'translateX(' + (-cur * CARD_W) + 'px)';
-
+    thumbs[cur].classList.add('active');
     btnPrev.disabled = cur === 0;
     btnNext.disabled = cur === total - 1;
   }
@@ -282,6 +285,7 @@
   btnPrev.addEventListener('click', function () { go(cur - 1); });
   btnNext.addEventListener('click', function () { go(cur + 1); });
   dots.forEach(function (dot, i) { dot.addEventListener('click', function () { go(i); }); });
+  thumbs.forEach(function (th, i) { th.addEventListener('click', function () { go(i); }); });
   document.addEventListener('keydown', function (e) {
     if (e.key === 'ArrowLeft') go(cur - 1);
     if (e.key === 'ArrowRight') go(cur + 1);
@@ -290,5 +294,3 @@
   go(0);
 })();
 </script>
- 
- 
