@@ -1,15 +1,14 @@
 ---
 // src/components/SecPortfolio.astro
+import { projects } from '../data/projects.js';
 ---
 <section class="sec s4" id="sec4">
 
   <!-- 배경 (블러 + 어둡게) -->
   <div class="port-bg" id="port-bg">
-    <div class="port-bg-slide active" style="background-image:url('/images/HUFS_ST_04.jpg')"></div>
-    <div class="port-bg-slide" style="background-image:url('/images/SC_ST_09.jpg')"></div>
-    <div class="port-bg-slide" style="background-image:url('/images/GMC_S_01.jpg')"></div>
-    <div class="port-bg-slide" style="background-image:url('/images/GKDE_S_08.jpg')"></div>
-    <div class="port-bg-slide" style="background-image:url('/images/KTV_BS_01.jpg')"></div>
+    {projects.map((p, i) => (
+      <div class={`port-bg-slide${i === 0 ? ' active' : ''}`} style={`background-image:url('${p.images && p.images[0] ? p.images[0] : ''}')`}></div>
+    ))}
   </div>
   <div class="port-overlay"></div>
 
@@ -19,57 +18,32 @@
     <!-- 왼쪽: 메인 이미지 -->
     <div class="port-left">
       <div class="port-img-wrap" id="port-img-wrap">
-        <div class="port-img-slide active" style="background-image:url('/images/HUFS_ST_04.jpg')"></div>
-        <div class="port-img-slide" style="background-image:url('/images/SC_ST_09.jpg')"></div>
-        <div class="port-img-slide" style="background-image:url('/images/GMC_S_01.jpg')"></div>
-        <div class="port-img-slide" style="background-image:url('/images/GKDE_S_08.jpg')"></div>
-        <div class="port-img-slide" style="background-image:url('/images/KTV_BS_01.jpg')"></div>
+        {projects.map((p, i) => (
+          <div class={`port-img-slide${i === 0 ? ' active' : ''}`} style={`background-image:url('${p.images && p.images[0] ? p.images[0] : ''}')`}></div>
+        ))}
       </div>
     </div>
 
     <!-- 오른쪽: 텍스트 -->
     <div class="port-right">
-      <!-- 썸네일 미리보기 -->
+
+      <!-- 썸네일 3장 (이전/현재/다음) -->
       <div class="port-thumbs" id="port-thumbs">
-        <div class="port-thumb active" data-idx="0" style="background-image:url('/images/HUFS_ST_04.jpg')"></div>
-        <div class="port-thumb" data-idx="1" style="background-image:url('/images/SC_ST_09.jpg')"></div>
-        <div class="port-thumb" data-idx="2" style="background-image:url('/images/GMC_S_01.jpg')"></div>
-        <div class="port-thumb" data-idx="3" style="background-image:url('/images/GKDE_S_08.jpg')"></div>
-        <div class="port-thumb" data-idx="4" style="background-image:url('/images/KTV_BS_01.jpg')"></div>
+        <div class="port-thumb" id="port-thumb-prev"></div>
+        <div class="port-thumb active" id="port-thumb-cur"></div>
+        <div class="port-thumb" id="port-thumb-next"></div>
       </div>
+
       <div class="port-eyebrow">Portfolio</div>
+
       <div class="port-slides" id="port-slides">
-
-        <div class="port-slide active">
-          <h3 class="port-title">한국외국어대학교 스튜디오 첨단화</h3>
-          <p class="port-sub">LED 디스플레이 &nbsp;·&nbsp; 2025.02</p>
-          <p class="port-desc">최신 LED 디스플레이 시스템으로 방송 스튜디오를 첨단화하여 고품질 교육 콘텐츠 제작 환경을 구축하였습니다.</p>
-        </div>
-
-        <div class="port-slide">
-          <h3 class="port-title">서울사이버대학교<br>스마트 강의실 고도화</h3>
-          <p class="port-sub">스마트 강의실 &nbsp;·&nbsp; 2024.11</p>
-          <p class="port-desc">원터치 하이브리드 수업이 가능한 스마트 강의실로 고도화하여 온·오프라인 동시 수업 환경을 완성하였습니다.</p>
-        </div>
-
-        <div class="port-slide">
-          <h3 class="port-title">공주대학교<br>이러닝 스튜디오</h3>
-          <p class="port-sub">이러닝 스튜디오 &nbsp;·&nbsp; 2024.09</p>
-          <p class="port-desc">전문 이러닝 콘텐츠 제작을 위한 최적화된 스튜디오 환경을 구축하여 교육 품질 향상에 기여하였습니다.</p>
-        </div>
-
-        <div class="port-slide">
-          <h3 class="port-title">경기도교육청<br>UHD 방송제작</h3>
-          <p class="port-sub">방송제작 &nbsp;·&nbsp; 2024.06</p>
-          <p class="port-desc">UHD 급 방송제작 시스템을 구축하여 공공 교육 방송의 품질을 한 단계 향상시켰습니다.</p>
-        </div>
-
-        <div class="port-slide">
-          <h3 class="port-title">KTV<br>방송 인프라 시스템</h3>
-          <p class="port-sub">방송 인프라 &nbsp;·&nbsp; 2024.03</p>
-          <p class="port-desc">국가 공식 방송 채널의 안정적인 방송 인프라 시스템 구축으로 24시간 무중단 방송을 지원합니다.</p>
-        </div>
-
+        {projects.map((p, i) => (
+          <div class={`port-slide${i === 0 ? ' active' : ''}`}>
+            <h3 class="port-title">{p.title}</h3>
+            <p class="port-sub">{p.service}&nbsp;·&nbsp;{p.date}</p>
+            <p class="port-desc">{p.overview || ''}</p>
+          </div>
+        ))}
       </div>
 
       <!-- 하단 컨트롤 -->
@@ -78,12 +52,10 @@
           <button class="port-btn" id="port-prev">←</button>
           <button class="port-btn" id="port-next">→</button>
         </div>
-        <div class="port-dots" id="port-dots">
-          <span class="port-dot active"></span>
-          <span class="port-dot"></span>
-          <span class="port-dot"></span>
-          <span class="port-dot"></span>
-          <span class="port-dot"></span>
+        <div class="port-counter">
+          <span class="port-cur-num" id="port-cur-num">01</span>
+          <span class="port-sep"> / </span>
+          <span class="port-total-num">170</span>
         </div>
         <a href="/works" class="port-all">전체 구축사례 보기 →</a>
       </div>
@@ -101,7 +73,7 @@
     display: flex; align-items: center;
   }
 
-  /* ── 배경: 블러 + 어둡게 ── */
+  /* ── 배경 ── */
   .port-bg { position: absolute; inset: 0; }
   .port-bg-slide {
     position: absolute; inset: 0;
@@ -145,7 +117,7 @@
   }
   .port-img-slide.active { opacity: 1; }
 
-  /* ── 썸네일 ── */
+  /* ── 썸네일 3장 ── */
   .port-thumbs {
     display: flex; gap: 10px;
     margin-bottom: 28px;
@@ -166,6 +138,7 @@
     border-color: #fff;
     transform: translateY(-2px);
   }
+  .port-thumb.hidden { opacity: 0; pointer-events: none; }
 
   /* ── 오른쪽 텍스트 ── */
   .port-right {
@@ -195,9 +168,9 @@
     position: relative; pointer-events: auto;
   }
   .port-title {
-    font-size: clamp(24px, 2.8vw, 44px);
+    font-size: clamp(20px, 2.4vw, 38px);
     font-weight: 900; letter-spacing: -0.04em;
-    color: #fff; line-height: 1.1; margin-bottom: 16px;
+    color: #fff; line-height: 1.2; margin-bottom: 16px;
   }
   .port-sub {
     font-size: 13px; font-weight: 600;
@@ -205,8 +178,10 @@
     margin-bottom: 20px;
   }
   .port-desc {
-    font-size: 14px; color: rgba(255,255,255,0.6);
+    font-size: 13px; color: rgba(255,255,255,0.6);
     line-height: 1.9; max-width: 400px;
+    display: -webkit-box; -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical; overflow: hidden;
   }
 
   /* ── 하단 컨트롤 ── */
@@ -226,16 +201,15 @@
   .port-btn:hover { background: rgba(255,255,255,0.18); border-color: #fff; }
   .port-btn:disabled { opacity: 0.2; cursor: default; }
 
-  .port-dots { display: flex; gap: 8px; }
-  .port-dot {
-    width: 6px; height: 6px; border-radius: 50%;
-    background: rgba(255,255,255,0.3); cursor: pointer;
-    transition: background 0.3s, transform 0.3s;
+  /* 카운터 */
+  .port-counter {
+    font-size: 13px; color: rgba(255,255,255,0.5);
+    font-weight: 600; letter-spacing: 0.05em;
   }
-  .port-dot.active { background: #fff; transform: scale(1.4); }
+  .port-cur-num { color: #fff; font-size: 18px; font-weight: 900; }
 
   .port-all {
-    margin-left: 0;
+    margin-left: auto;
     font-size: 12px; font-weight: 800; color: #fff;
     text-decoration: none; letter-spacing: 0.1em; text-transform: uppercase;
     padding: 14px 32px;
@@ -259,35 +233,59 @@
   const bgs    = document.querySelectorAll('.port-bg-slide');
   const imgs   = document.querySelectorAll('.port-img-slide');
   const slides = document.querySelectorAll('.port-slide');
-  const dots   = document.querySelectorAll('.port-dot');
-  const thumbs = document.querySelectorAll('.port-thumb');
-  const btnPrev = document.getElementById('port-prev');
-  const btnNext = document.getElementById('port-next');
   const total  = slides.length;
   let cur = 0;
+
+  const btnPrev  = document.getElementById('port-prev');
+  const btnNext  = document.getElementById('port-next');
+  const curNum   = document.getElementById('port-cur-num');
+  const tPrev    = document.getElementById('port-thumb-prev');
+  const tCur     = document.getElementById('port-thumb-cur');
+  const tNext    = document.getElementById('port-thumb-next');
+
+  // 전체 프로젝트 이미지 목록 (bg/img 슬라이드에서 추출)
+  const imgUrls = Array.from(imgs).map(el => el.style.backgroundImage);
+
+  function setThumb(el, idx) {
+    if (idx < 0 || idx >= total) {
+      el.classList.add('hidden');
+      el.style.backgroundImage = '';
+    } else {
+      el.classList.remove('hidden');
+      el.style.backgroundImage = imgUrls[idx];
+    }
+  }
 
   function go(n) {
     bgs[cur].classList.remove('active');
     imgs[cur].classList.remove('active');
     slides[cur].classList.remove('active');
-    dots[cur].classList.remove('active');
-    thumbs[cur].classList.remove('active');
     cur = Math.max(0, Math.min(n, total - 1));
     bgs[cur].classList.add('active');
     imgs[cur].classList.add('active');
     slides[cur].classList.add('active');
-    dots[cur].classList.add('active');
-    thumbs[cur].classList.add('active');
+
+    // 카운터 업데이트
+    curNum.textContent = String(cur + 1).padStart(2, '0');
+
+    // 썸네일 3장 업데이트
+    setThumb(tPrev, cur - 1);
+    setThumb(tCur,  cur);
+    setThumb(tNext, cur + 1);
+
     btnPrev.disabled = cur === 0;
     btnNext.disabled = cur === total - 1;
   }
 
+  // 썸네일 클릭
+  tPrev.addEventListener('click', function () { go(cur - 1); });
+  tCur.addEventListener('click',  function () { go(cur); });
+  tNext.addEventListener('click', function () { go(cur + 1); });
+
   btnPrev.addEventListener('click', function () { go(cur - 1); });
   btnNext.addEventListener('click', function () { go(cur + 1); });
-  dots.forEach(function (dot, i) { dot.addEventListener('click', function () { go(i); }); });
-  thumbs.forEach(function (th, i) { th.addEventListener('click', function () { go(i); }); });
   document.addEventListener('keydown', function (e) {
-    if (e.key === 'ArrowLeft') go(cur - 1);
+    if (e.key === 'ArrowLeft')  go(cur - 1);
     if (e.key === 'ArrowRight') go(cur + 1);
   });
 
