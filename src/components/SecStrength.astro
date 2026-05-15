@@ -90,16 +90,22 @@
     <!-- 마무리 메시지 -->
     <div class="ab-message fade-up fade-up-d2">
       <div class="ab-message-inner">
-        <div class="ab-msg-quote">"</div>
+        <!-- 위 따옴표 -->
+        <svg class="ab-quote-top" width="52" height="40" viewBox="0 0 52 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M0 40V24.8C0 15.467 4.267 8.267 12.8 3.2L16 8C12.267 10.133 9.867 13.067 8.8 16.8H16V40H0ZM28 40V24.8C28 15.467 32.267 8.267 40.8 3.2L44 8C40.267 10.133 37.867 13.067 36.8 16.8H44V40H28Z" fill="rgba(255,255,255,0.15)"/>
+        </svg>
+
         <p class="ab-msg-text">
           이담에스티는 다양한 미디어 시스템 구축 노하우와<br>
           끊임없는 사내 연구 및 대외 기술 습득 활동을 통해<br>
           <strong>트렌디한 구축 서비스</strong>를 제공하겠습니다.
         </p>
         <div class="ab-msg-sig">— 이담에스티 임직원 일동</div>
-        <a href="#sec7" class="ab-msg-cta" onclick="event.preventDefault();document.getElementById('sec7').scrollIntoView({behavior:'smooth'})">
-          지금 바로 문의하기 →
-        </a>
+
+        <!-- 아래 따옴표 -->
+        <svg class="ab-quote-bot" width="52" height="40" viewBox="0 0 52 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M0 40V24.8C0 15.467 4.267 8.267 12.8 3.2L16 8C12.267 10.133 9.867 13.067 8.8 16.8H16V40H0ZM28 40V24.8C28 15.467 32.267 8.267 40.8 3.2L44 8C40.267 10.133 37.867 13.067 36.8 16.8H44V40H28Z" fill="rgba(255,255,255,0.15)"/>
+        </svg>
       </div>
     </div>
 
@@ -195,12 +201,14 @@
       transparent 1px, transparent 60px
     );
   }
-  .ab-msg-quote {
-    font-size: 120px; line-height: 0.6;
-    color: rgba(255,255,255,0.08);
-    font-family: Georgia, serif;
-    margin-bottom: 24px;
-    position: relative;
+  .ab-quote-top {
+    display: block;
+    margin: 0 auto 28px;
+  }
+  .ab-quote-bot {
+    display: block;
+    margin: 24px auto 0;
+    transform: rotate(180deg);
   }
   .ab-msg-text {
     font-size: clamp(16px, 2vw, 22px);
@@ -230,22 +238,7 @@
     margin-bottom: 36px;
     position: relative;
   }
-  .ab-msg-cta {
-    display: inline-flex; align-items: center;
-    font-size: 14px; font-weight: 700;
-    color: #0d1a3a;
-    background: #fff;
-    padding: 14px 36px;
-    border-radius: 6px;
-    text-decoration: none;
-    letter-spacing: 0.04em;
-    transition: background 0.2s, transform 0.2s;
-    position: relative;
-  }
-  .ab-msg-cta:hover {
-    background: #e8edf8;
-    transform: translateY(-2px);
-  }
+
 
   /* ── 반응형 ── */
   @media (max-width: 1200px) {
