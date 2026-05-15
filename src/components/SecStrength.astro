@@ -88,12 +88,20 @@
     </div>
 
     <!-- 마무리 메시지 -->
-    <div class="ab-message fade-up fade-up-d2"><div class="ab-message-inner">
-      <p class="ab-msg-text">
-        이담에스티는 다양한 미디어 시스템 구축 노하우와 끊임없는 사내 연구 및 대외 기술 습득 활동을 통해
-        트렌디한 구축 서비스를 제공하겠습니다.
-      </p>
-    </div></div>
+    <div class="ab-message fade-up fade-up-d2">
+      <div class="ab-message-inner">
+        <div class="ab-msg-quote">"</div>
+        <p class="ab-msg-text">
+          이담에스티는 다양한 미디어 시스템 구축 노하우와<br>
+          끊임없는 사내 연구 및 대외 기술 습득 활동을 통해<br>
+          <strong>트렌디한 구축 서비스</strong>를 제공하겠습니다.
+        </p>
+        <div class="ab-msg-sig">— 이담에스티 임직원 일동</div>
+        <a href="#sec7" class="ab-msg-cta" onclick="event.preventDefault();document.getElementById('sec7').scrollIntoView({behavior:'smooth'})">
+          지금 바로 문의하기 →
+        </a>
+      </div>
+    </div>
 
   </div>
 </section>
@@ -168,18 +176,75 @@
 
   /* 마무리 메시지 */
   .ab-message {
-    max-width: 1400px; margin: 0 auto;
-    padding: 0 48px 80px;
+    position: relative; z-index: 3;
+    margin: 0; padding: 0;
   }
   .ab-message-inner {
-    background: rgba(26,47,138,0.04);
-    border-left: 4px solid #1a2f8a;
-    padding: 32px 40px;
-    border-radius: 0 8px 8px 0;
+    background: linear-gradient(135deg, #0d1a3a 0%, #1a2f8a 100%);
+    padding: 64px 48px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .ab-message-inner::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: repeating-linear-gradient(
+      -45deg,
+      rgba(255,255,255,0.015) 0px, rgba(255,255,255,0.015) 1px,
+      transparent 1px, transparent 60px
+    );
+  }
+  .ab-msg-quote {
+    font-size: 120px; line-height: 0.6;
+    color: rgba(255,255,255,0.08);
+    font-family: Georgia, serif;
+    margin-bottom: 24px;
+    position: relative;
   }
   .ab-msg-text {
-    font-size: 15px; color: #4a5568;
-    line-height: 2.1; font-style: italic;
+    font-size: clamp(16px, 2vw, 22px);
+    color: rgba(255,255,255,0.9);
+    line-height: 1.9;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    position: relative;
+    margin-bottom: 20px;
+  }
+  .ab-msg-text strong {
+    color: #fff;
+    font-weight: 800;
+    position: relative;
+  }
+  .ab-msg-text strong::after {
+    content: '';
+    position: absolute; left: 0; right: 0; bottom: -2px;
+    height: 2px;
+    background: rgba(255,255,255,0.4);
+    border-radius: 2px;
+  }
+  .ab-msg-sig {
+    font-size: 13px;
+    color: rgba(255,255,255,0.45);
+    letter-spacing: 0.06em;
+    margin-bottom: 36px;
+    position: relative;
+  }
+  .ab-msg-cta {
+    display: inline-flex; align-items: center;
+    font-size: 14px; font-weight: 700;
+    color: #0d1a3a;
+    background: #fff;
+    padding: 14px 36px;
+    border-radius: 6px;
+    text-decoration: none;
+    letter-spacing: 0.04em;
+    transition: background 0.2s, transform 0.2s;
+    position: relative;
+  }
+  .ab-msg-cta:hover {
+    background: #e8edf8;
+    transform: translateY(-2px);
   }
 
   /* ── 반응형 ── */
