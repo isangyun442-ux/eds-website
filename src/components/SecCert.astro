@@ -18,132 +18,99 @@
     <h2 class="cert-title fade-up fade-up-d1">인증현황</h2>
     <p class="cert-sub fade-up fade-up-d2">이담에스티가 보유한 공인 인증 및 등록 현황입니다</p>
 
-    <!-- 캐러셀 -->
-    <div class="cert-carousel-wrap fade-up fade-up-d3">
+    <div class="cert-grid fade-up fade-up-d3">
 
-      <!-- 왼쪽 화살표 -->
-      <button class="cert-arrow cert-arrow--l" id="certPrev" aria-label="이전">
-        <span class="cert-arrow-glow"></span>
-        <i class="ti ti-chevron-left" aria-hidden="true"></i>
-      </button>
-
-      <!-- 트랙 -->
-      <div class="cert-track-outer">
-        <div class="cert-track" id="certTrack">
-
-          <div class="cert-card" data-img="/images/cert/cert_01.jpg" data-name="공장등록증명서">
-            <div class="cert-img-wrap">
-              <img src="/images/cert/cert_01.jpg" alt="공장등록증명서" loading="lazy" />
-              <div class="cert-overlay"><i class="ti ti-zoom-in" aria-hidden="true"></i></div>
-            </div>
-            <div class="cert-info">
-              <p class="cert-name">공장등록증명서</p>
-              <p class="cert-desc">제조업 공장 공식 등록</p>
-            </div>
-          </div>
-
-          <div class="cert-card" data-img="/images/cert/cert_02.jpg" data-name="정보통신공사등록증">
-            <div class="cert-img-wrap">
-              <img src="/images/cert/cert_02.jpg" alt="정보통신공사등록증" loading="lazy" />
-              <div class="cert-overlay"><i class="ti ti-zoom-in" aria-hidden="true"></i></div>
-            </div>
-            <div class="cert-info">
-              <p class="cert-name">정보통신공사등록증</p>
-              <p class="cert-desc">공사업 면허 보유</p>
-            </div>
-          </div>
-
-          <div class="cert-card" data-img="/images/cert/cert_03.jpg" data-name="이노비즈 인증">
-            <div class="cert-img-wrap">
-              <img src="/images/cert/cert_03.jpg" alt="이노비즈 인증" loading="lazy" />
-              <div class="cert-overlay"><i class="ti ti-zoom-in" aria-hidden="true"></i></div>
-            </div>
-            <div class="cert-info">
-              <p class="cert-name">이노비즈 인증</p>
-              <p class="cert-desc">기술혁신형 중소기업</p>
-            </div>
-          </div>
-
-          <div class="cert-card" data-img="/images/cert/cert_04.jpg" data-name="경영혁신형중소기업확인서">
-            <div class="cert-img-wrap">
-              <img src="/images/cert/cert_04.jpg" alt="경영혁신형중소기업확인서" loading="lazy" />
-              <div class="cert-overlay"><i class="ti ti-zoom-in" aria-hidden="true"></i></div>
-            </div>
-            <div class="cert-info">
-              <p class="cert-name">경영혁신형중소기업확인서</p>
-              <p class="cert-desc">메인비즈 공식 인증</p>
-            </div>
-          </div>
-
-          <div class="cert-card" data-img="/images/cert/cert_05.jpg" data-name="소프트웨어사업자">
-            <div class="cert-img-wrap">
-              <img src="/images/cert/cert_05.jpg" alt="소프트웨어사업자" loading="lazy" />
-              <div class="cert-overlay"><i class="ti ti-zoom-in" aria-hidden="true"></i></div>
-            </div>
-            <div class="cert-info">
-              <p class="cert-name">소프트웨어사업자</p>
-              <p class="cert-desc">SW 사업자 확인서</p>
-            </div>
-          </div>
-
-          <div class="cert-card" data-img="/images/cert/cert_06.jpg" data-name="직접생산증명 · 디스크어레이">
-            <div class="cert-img-wrap">
-              <img src="/images/cert/cert_06.jpg" alt="직접생산증명 디스크어레이" loading="lazy" />
-              <div class="cert-overlay"><i class="ti ti-zoom-in" aria-hidden="true"></i></div>
-            </div>
-            <div class="cert-info">
-              <p class="cert-name">직접생산증명</p>
-              <p class="cert-desc">디스크어레이</p>
-            </div>
-          </div>
-
-          <div class="cert-card" data-img="/images/cert/cert_07.jpg" data-name="직접생산증명 · 정보시스템유지관리서비스">
-            <div class="cert-img-wrap">
-              <img src="/images/cert/cert_07.jpg" alt="직접생산증명 정보시스템유지관리서비스" loading="lazy" />
-              <div class="cert-overlay"><i class="ti ti-zoom-in" aria-hidden="true"></i></div>
-            </div>
-            <div class="cert-info">
-              <p class="cert-name">직접생산증명</p>
-              <p class="cert-desc">정보시스템유지관리서비스</p>
-            </div>
-          </div>
-
-          <div class="cert-card" data-img="/images/cert/cert_08.jpg" data-name="직접생산증명 · 컴퓨터 서버">
-            <div class="cert-img-wrap">
-              <img src="/images/cert/cert_08.jpg" alt="직접생산증명 컴퓨터 서버" loading="lazy" />
-              <div class="cert-overlay"><i class="ti ti-zoom-in" aria-hidden="true"></i></div>
-            </div>
-            <div class="cert-info">
-              <p class="cert-name">직접생산증명</p>
-              <p class="cert-desc">컴퓨터 서버</p>
-            </div>
-          </div>
-
-          <div class="cert-card" data-img="/images/cert/cert_09.jpg" data-name="직접생산증명 · 안내전광판">
-            <div class="cert-img-wrap">
-              <img src="/images/cert/cert_09.jpg" alt="직접생산증명 안내전광판" loading="lazy" />
-              <div class="cert-overlay"><i class="ti ti-zoom-in" aria-hidden="true"></i></div>
-            </div>
-            <div class="cert-info">
-              <p class="cert-name">직접생산증명</p>
-              <p class="cert-desc">안내전광판</p>
-            </div>
-          </div>
-
+      <div class="cert-card" data-img="/images/cert/cert_01.jpg" data-name="공장등록증명서">
+        <div class="cert-img-wrap">
+          <img src="/images/cert/cert_01.jpg" alt="공장등록증명서" loading="lazy" />
+        </div>
+        <div class="cert-info">
+          <p class="cert-name">공장등록증명서</p>
+          <p class="cert-desc">제조업 공장 공식 등록</p>
         </div>
       </div>
 
-      <!-- 오른쪽 화살표 -->
-      <button class="cert-arrow cert-arrow--r" id="certNext" aria-label="다음">
-        <span class="cert-arrow-glow"></span>
-        <i class="ti ti-chevron-right" aria-hidden="true"></i>
-      </button>
+      <div class="cert-card" data-img="/images/cert/cert_02.jpg" data-name="정보통신공사등록증">
+        <div class="cert-img-wrap">
+          <img src="/images/cert/cert_02.jpg" alt="정보통신공사등록증" loading="lazy" />
+        </div>
+        <div class="cert-info">
+          <p class="cert-name">정보통신공사등록증</p>
+          <p class="cert-desc">공사업 면허 보유</p>
+        </div>
+      </div>
+
+      <div class="cert-card" data-img="/images/cert/cert_03.jpg" data-name="이노비즈 인증">
+        <div class="cert-img-wrap">
+          <img src="/images/cert/cert_03.jpg" alt="이노비즈 인증" loading="lazy" />
+        </div>
+        <div class="cert-info">
+          <p class="cert-name">이노비즈 인증</p>
+          <p class="cert-desc">기술혁신형 중소기업</p>
+        </div>
+      </div>
+
+      <div class="cert-card" data-img="/images/cert/cert_04.jpg" data-name="경영혁신형중소기업확인서">
+        <div class="cert-img-wrap">
+          <img src="/images/cert/cert_04.jpg" alt="경영혁신형중소기업확인서" loading="lazy" />
+        </div>
+        <div class="cert-info">
+          <p class="cert-name">경영혁신형중소기업확인서</p>
+          <p class="cert-desc">메인비즈 공식 인증</p>
+        </div>
+      </div>
+
+      <div class="cert-card" data-img="/images/cert/cert_05.jpg" data-name="소프트웨어사업자">
+        <div class="cert-img-wrap">
+          <img src="/images/cert/cert_05.jpg" alt="소프트웨어사업자" loading="lazy" />
+        </div>
+        <div class="cert-info">
+          <p class="cert-name">소프트웨어사업자</p>
+          <p class="cert-desc">SW 사업자 확인서</p>
+        </div>
+      </div>
+
+      <div class="cert-card" data-img="/images/cert/cert_06.jpg" data-name="직접생산증명 · 디스크어레이">
+        <div class="cert-img-wrap">
+          <img src="/images/cert/cert_06.jpg" alt="직접생산증명 디스크어레이" loading="lazy" />
+        </div>
+        <div class="cert-info">
+          <p class="cert-name">직접생산증명</p>
+          <p class="cert-desc">디스크어레이</p>
+        </div>
+      </div>
+
+      <div class="cert-card" data-img="/images/cert/cert_07.jpg" data-name="직접생산증명 · 정보시스템유지관리서비스">
+        <div class="cert-img-wrap">
+          <img src="/images/cert/cert_07.jpg" alt="직접생산증명 정보시스템유지관리서비스" loading="lazy" />
+        </div>
+        <div class="cert-info">
+          <p class="cert-name">직접생산증명</p>
+          <p class="cert-desc">정보시스템유지관리서비스</p>
+        </div>
+      </div>
+
+      <div class="cert-card" data-img="/images/cert/cert_08.jpg" data-name="직접생산증명 · 컴퓨터 서버">
+        <div class="cert-img-wrap">
+          <img src="/images/cert/cert_08.jpg" alt="직접생산증명 컴퓨터 서버" loading="lazy" />
+        </div>
+        <div class="cert-info">
+          <p class="cert-name">직접생산증명</p>
+          <p class="cert-desc">컴퓨터 서버</p>
+        </div>
+      </div>
+
+      <div class="cert-card" data-img="/images/cert/cert_09.jpg" data-name="직접생산증명 · 안내전광판">
+        <div class="cert-img-wrap">
+          <img src="/images/cert/cert_09.jpg" alt="직접생산증명 안내전광판" loading="lazy" />
+        </div>
+        <div class="cert-info">
+          <p class="cert-name">직접생산증명</p>
+          <p class="cert-desc">안내전광판</p>
+        </div>
+      </div>
 
     </div>
-
-    <!-- 도트 인디케이터 -->
-    <div class="cert-dots" id="certDots"></div>
-
   </div>
 </section>
 
@@ -174,12 +141,19 @@
     color: #333; transition: background 0.2s;
   }
   .cert-lb-close:hover { background: rgba(0,0,0,0.15); }
-  .cert-lb-img { width: 100%; display: block; max-height: 78vh; object-fit: contain; background: #f5f7fb; }
-  .cert-lb-caption { padding: 12px 20px; font-size: 13px; font-weight: 700; color: #0d1a3a; text-align: center; border-top: 1px solid #f0f0f5; }
+  .cert-lb-img {
+    width: 100%; display: block;
+    max-height: 80vh; object-fit: contain;
+    background: #f5f7fb;
+  }
+  .cert-lb-caption {
+    padding: 12px 20px; font-size: 13px; font-weight: 700;
+    color: #0d1a3a; text-align: center; border-top: 1px solid #f0f0f5;
+  }
 
   /* ── 섹션 ── */
   .s-cert { background: #fff; padding: 100px 0 90px; }
-  .cert-inner { max-width: 1200px; margin: 0 auto; padding: 0 40px; text-align: center; }
+  .cert-inner { max-width: 1100px; margin: 0 auto; padding: 0 40px; text-align: center; }
 
   .cert-label {
     font-size: 11px; font-weight: 700; letter-spacing: 0.22em;
@@ -189,178 +163,69 @@
   .cert-label::before,
   .cert-label::after { content: ''; width: 28px; height: 1px; background: #1a2f8a; display: block; opacity: 0.5; }
   .cert-title { font-size: clamp(28px,3.5vw,44px); font-weight: 800; color: #0d1a3a; letter-spacing: -0.03em; margin-bottom: 14px; }
-  .cert-sub { font-size: 14px; color: #8896a4; line-height: 1.7; margin-bottom: 56px; }
+  .cert-sub { font-size: 14px; color: #8896a4; line-height: 1.7; margin-bottom: 48px; }
 
-  /* ── 캐러셀 래퍼 ── */
-  .cert-carousel-wrap {
-    display: flex; align-items: center; gap: 0;
-    position: relative;
-  }
-  .cert-track-outer { flex: 1; overflow: hidden; }
-  .cert-track {
-    display: flex; gap: 24px;
-    transition: transform 0.55s cubic-bezier(0.4, 0, 0.2, 1);
-    will-change: transform;
+  /* ── 3×3 그리드 ── */
+  .cert-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
   }
 
   /* ── 카드 ── */
   .cert-card {
-    flex: 0 0 calc((100% - 48px) / 3);
     background: #fff;
     border: 1px solid #e8edf4;
-    border-radius: 12px; overflow: hidden; cursor: pointer;
-    transition: box-shadow 0.3s, transform 0.3s, border-color 0.3s;
+    border-radius: 10px; overflow: hidden; cursor: pointer;
+    transition: box-shadow 0.25s, transform 0.25s, border-color 0.25s;
   }
   .cert-card:hover {
-    box-shadow: 0 16px 48px rgba(26,47,138,0.12);
-    transform: translateY(-5px);
+    box-shadow: 0 10px 36px rgba(26,47,138,0.11);
+    transform: translateY(-4px);
     border-color: #c5d0ed;
   }
+
+  /* 이미지 영역 — contain으로 전체 보이게 */
   .cert-img-wrap {
-    width: 100%; aspect-ratio: 3/4;
-    overflow: hidden; background: #f5f7fb;
-    position: relative;
+    width: 100%;
+    aspect-ratio: 3/4;
+    background: #f5f7fb;
+    display: flex; align-items: center; justify-content: center;
+    overflow: hidden;
+    padding: 12px;
+    box-sizing: border-box;
   }
   .cert-img-wrap img {
     width: 100%; height: 100%;
-    object-fit: cover; object-position: top;
-    transition: transform 0.4s;
+    object-fit: contain;
+    transition: transform 0.35s;
   }
-  .cert-card:hover .cert-img-wrap img { transform: scale(1.04); }
-  .cert-overlay {
-    position: absolute; inset: 0;
-    background: rgba(26,47,138,0);
-    display: flex; align-items: center; justify-content: center;
-    color: #fff; font-size: 28px;
-    opacity: 0; transition: opacity 0.3s, background 0.3s;
-  }
-  .cert-card:hover .cert-overlay { opacity: 1; background: rgba(26,47,138,0.22); }
-  .cert-info { padding: 14px 16px 16px; text-align: left; border-top: 1px solid #f0f4fb; }
-  .cert-name { font-size: 13px; font-weight: 700; color: #0d1a3a; margin: 0 0 3px; line-height: 1.4; }
+  .cert-card:hover .cert-img-wrap img { transform: scale(1.03); }
+
+  /* 카드 하단 */
+  .cert-info { padding: 12px 14px 14px; text-align: left; border-top: 1px solid #f0f4fb; }
+  .cert-name { font-size: 12px; font-weight: 700; color: #0d1a3a; margin: 0 0 2px; line-height: 1.4; }
   .cert-desc { font-size: 11px; color: #9aa4b8; margin: 0; }
 
-  /* ── 화살표 ── */
-  .cert-arrow {
-    flex-shrink: 0;
-    width: 48px; height: 48px; border-radius: 50%;
-    border: 1.5px solid rgba(26,47,138,0.2);
-    background: #fff; cursor: pointer;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 20px; color: #1a2f8a;
-    position: relative; overflow: visible;
-    transition: border-color 0.25s, color 0.25s, box-shadow 0.25s, transform 0.2s;
-    z-index: 2;
-  }
-  .cert-arrow--l { margin-right: 16px; }
-  .cert-arrow--r { margin-left: 16px; }
-  .cert-arrow:hover {
-    border-color: #1a2f8a;
-    box-shadow: 0 0 0 4px rgba(26,47,138,0.08), 0 0 20px rgba(26,47,138,0.18);
-    transform: scale(1.08);
-  }
-  .cert-arrow:disabled { opacity: 0.25; cursor: default; transform: none; box-shadow: none; }
-
-  /* 빛나는 글로우 링 */
-  .cert-arrow-glow {
-    position: absolute; inset: -6px; border-radius: 50%;
-    border: 1.5px solid rgba(26,47,138,0);
-    transition: border-color 0.3s, box-shadow 0.3s;
-    pointer-events: none;
-  }
-  .cert-arrow:hover .cert-arrow-glow {
-    border-color: rgba(26,47,138,0.15);
-    box-shadow: 0 0 16px rgba(26,47,138,0.2);
-  }
-
-  /* ── 도트 ── */
-  .cert-dots { display: flex; gap: 7px; justify-content: center; margin-top: 28px; }
-  .cert-dot {
-    width: 7px; height: 7px; border-radius: 50%;
-    background: rgba(26,47,138,0.18); cursor: pointer;
-    transition: background 0.3s, transform 0.3s, width 0.3s;
-    border: none;
-  }
-  .cert-dot.on { background: #1a2f8a; transform: scale(1.3); width: 20px; border-radius: 4px; }
-
   @media (max-width: 768px) {
-    .cert-track { gap: 14px; }
-    .cert-card { flex: 0 0 calc((100% - 14px) / 2); }
-    .cert-arrow { width: 38px; height: 38px; font-size: 16px; }
-    .cert-arrow--l { margin-right: 10px; }
-    .cert-arrow--r { margin-left: 10px; }
-    .cert-inner { padding: 0 16px; }
+    .cert-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
     .s-cert { padding: 70px 0 60px; }
+    .cert-inner { padding: 0 20px; }
   }
   @media (max-width: 480px) {
-    .cert-card { flex: 0 0 75%; }
+    .cert-grid { grid-template-columns: repeat(2, 1fr); }
   }
 </style>
 
 <script is:inline>
 (function () {
-  const track   = document.getElementById('certTrack');
-  const btnPrev = document.getElementById('certPrev');
-  const btnNext = document.getElementById('certNext');
-  const dotsWrap = document.getElementById('certDots');
-  const cards   = document.querySelectorAll('.cert-card');
-  const total   = cards.length;
-
-  /* 한 번에 보여줄 카드 수 */
-  function visCount() { return window.innerWidth <= 480 ? 1 : window.innerWidth <= 768 ? 2 : 3; }
-
-  let cur = 0;
-
-  /* 도트 생성 */
-  const pageCount = () => Math.ceil(total / visCount());
-  function buildDots() {
-    dotsWrap.innerHTML = '';
-    const pc = pageCount();
-    for (let i = 0; i < pc; i++) {
-      const d = document.createElement('button');
-      d.className = 'cert-dot' + (i === 0 ? ' on' : '');
-      d.setAttribute('aria-label', (i + 1) + '페이지');
-      d.addEventListener('click', function () { go(i * visCount()); });
-      dotsWrap.appendChild(d);
-    }
-  }
-
-  function updateDots() {
-    const idx = Math.floor(cur / visCount());
-    document.querySelectorAll('.cert-dot').forEach(function (d, i) {
-      d.classList.toggle('on', i === idx);
-    });
-  }
-
-  function go(n) {
-    const vc = visCount();
-    const max = total - vc;
-    cur = Math.max(0, Math.min(n, max));
-
-    /* 카드 너비 + gap 계산 */
-    const cardW = cards[0].offsetWidth;
-    const gap = 24;
-    track.style.transform = 'translateX(' + (-(cur * (cardW + gap))) + 'px)';
-
-    btnPrev.disabled = cur === 0;
-    btnNext.disabled = cur >= max;
-    updateDots();
-  }
-
-  btnPrev.addEventListener('click', function () { go(cur - visCount()); });
-  btnNext.addEventListener('click', function () { go(cur + visCount()); });
-  window.addEventListener('resize', function () { buildDots(); go(cur); });
-
-  buildDots();
-  go(0);
-
-  /* 라이트박스 */
   const lb        = document.getElementById('certLb');
   const lbImg     = document.getElementById('certLbImg');
   const lbCap     = document.getElementById('certLbCaption');
   const lbClose   = document.getElementById('certLbClose');
   const lbOverlay = document.getElementById('certLbOverlay');
 
-  cards.forEach(function (card) {
+  document.querySelectorAll('.cert-card').forEach(function (card) {
     card.addEventListener('click', function () {
       lbImg.src = card.dataset.img;
       lbImg.alt = card.dataset.name;
@@ -369,6 +234,7 @@
       document.body.style.overflow = 'hidden';
     });
   });
+
   function closeLb() { lb.classList.remove('on'); document.body.style.overflow = ''; }
   lbClose.addEventListener('click', closeLb);
   lbOverlay.addEventListener('click', closeLb);
@@ -377,7 +243,9 @@
   /* fade-up */
   const targets = document.querySelectorAll('#sec-cert .fade-up');
   const obs = new IntersectionObserver(function (entries) {
-    entries.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+    entries.forEach(function (e) {
+      if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }
+    });
   }, { threshold: 0.08 });
   targets.forEach(function (el) { obs.observe(el); });
 })();
