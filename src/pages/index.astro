@@ -52,14 +52,14 @@ import SecContact    from '../components/SecContact.astro';
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 20px 60px;
+      padding: 22px 80px;
       background: rgba(0, 0, 0, 0.22);
       transition: background 0.4s, box-shadow 0.4s, padding 0.3s;
     }
     .nav.scrolled {
       background: rgba(255,255,255,0.97);
       box-shadow: 0 1px 0 rgba(0,0,0,0.06);
-      padding: 14px 60px;
+      padding: 18px 80px;
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
     }
@@ -68,14 +68,14 @@ import SecContact    from '../components/SecContact.astro';
     .logo-white { position: absolute; top: 0; left: 0; height: 28px; width: auto; object-fit: contain; filter: brightness(0) invert(1); opacity: 1; transition: opacity 0.4s; }
     .nav.scrolled .logo-color { opacity: 1; }
     .nav.scrolled .logo-white { opacity: 0; }
-    .nav-menu { display: flex; align-items: center; gap: 32px; }
+    .nav-menu { display: flex; align-items: center; gap: 48px; }
     .nav-item { position: relative; }
     .nav-link {
       display: block;
       font-family: 'Nanum Square', 'Apple SD Gothic Neo', sans-serif;
-      font-size: 18px; font-weight: 800;
-      letter-spacing: 0.06em; text-decoration: none; cursor: pointer;
-      padding: 10px 6px; border-radius: 6px; transition: all 0.2s; white-space: nowrap;
+      font-size: 20px; font-weight: 400;
+      letter-spacing: 0.05em; text-decoration: none; cursor: pointer;
+      padding: 8px 4px; border-radius: 6px; transition: all 0.2s; white-space: nowrap;
     }
     .nav.scrolled .nav-link { color: #1a1a1a; }
     .nav:not(.scrolled) .nav-link { color: rgba(255,255,255,0.9); }
