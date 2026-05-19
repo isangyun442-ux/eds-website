@@ -36,7 +36,9 @@
     </div>
 
     <!-- 패널 -->
-    <div class="svc-panels fade-up fade-up-d3">
+    <div class="svc-panels-wrap fade-up fade-up-d3">
+      <button class="svc-arrow svc-arrow--l" id="svcPrev" aria-label="이전">&#8249;</button>
+      <div class="svc-panels">
 
       <div class="svc-panel active" data-idx="0">
         <div class="svc-panel-img" style="background-image:url('/images/services/public.jpg')">
@@ -128,6 +130,8 @@
         </div>
       </div>
 
+      </div>
+      <button class="svc-arrow svc-arrow--r" id="svcNext" aria-label="다음">&#8250;</button>
     </div>
   </div>
 </section>
@@ -220,6 +224,29 @@
   }
   .svc-chip:hover { border-color: #1a2f8a; color: #1a2f8a; }
 
+  /* 화살표 */
+  .svc-panels-wrap {
+    position: relative;
+    display: flex; align-items: center; gap: 0;
+  }
+  .svc-panels { flex: 1; }
+  .svc-arrow {
+    position: absolute; top: 50%; transform: translateY(-50%);
+    width: 48px; height: 80px;
+    background: rgba(255,255,255,0.75);
+    border: none; cursor: pointer; z-index: 10;
+    font-size: 32px; color: #1a2f8a;
+    display: flex; align-items: center; justify-content: center;
+    backdrop-filter: blur(6px);
+    transition: background 0.2s, color 0.2s, opacity 0.2s;
+    border-radius: 4px;
+    opacity: 0.7;
+  }
+  .svc-arrow:hover { background: rgba(255,255,255,0.95); opacity: 1; }
+  .svc-arrow:disabled { opacity: 0.2; cursor: default; }
+  .svc-arrow--l { left: -24px; }
+  .svc-arrow--r { right: -24px; }
+
   /* 반응형 */
   @media (max-width: 900px) {
     .svc-inner { padding: 72px 32px; }
@@ -239,17 +266,24 @@
 (function () {
   const tabs   = document.querySelectorAll('.svc-tab');
   const panels = document.querySelectorAll('.svc-panel');
+  let cur = 0;
 
   function go(idx) {
+    cur = idx;
     tabs.forEach(function (el) { el.classList.remove('active'); });
     panels.forEach(function (el) { el.classList.remove('active'); });
-    tabs[idx].classList.add('active');
-    panels[idx].classList.add('active');
+    tabs[cur].classList.add('active');
+    panels[cur].classList.add('active');
   }
 
   tabs.forEach(function (el) {
     el.addEventListener('click', function () { go(parseInt(el.dataset.idx)); });
   });
+
+  const btnPrev = document.getElementById('svcPrev');
+  const btnNext = document.getElementById('svcNext');
+  if (btnPrev) btnPrev.addEventListener('click', function () { go((cur - 1 + 5) % 5); });
+  if (btnNext) btnNext.addEventListener('click', function () { go((cur + 1) % 5); });
 
   const targets = document.querySelectorAll('#sec3 .fade-up');
   const obs = new IntersectionObserver(function (entries) {
