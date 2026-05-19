@@ -68,7 +68,7 @@
           </svg>
         </div>
         <h4 class="ab-str-title">일정 준수</h4>
-        <p class="ab-str-desc">17년간 쌓아온 노하우로 프로젝트 일정을 철저히 관리합니다. 약속한 날짜는 반드시 지킵니다.</p>
+        <p class="ab-str-desc"><span id="eds-years"></span>년간 쌓아온 노하우로 프로젝트 일정을 철저히 관리합니다. 약속한 날짜는 반드시 지킵니다.</p>
       </div>
 
       <!-- 검증된 퀄리티 -->
@@ -82,7 +82,7 @@
           </svg>
         </div>
         <h4 class="ab-str-title">검증된 퀄리티</h4>
-        <p class="ab-str-desc">516개 이상의 구축 사례가 증명합니다. 공공기관부터 방송국까지 신뢰받는 17년의 기술력입니다.</p>
+        <p class="ab-str-desc">516개 이상의 구축 사례가 증명합니다. 공공기관부터 방송국까지 신뢰받는 <span class="eds-years"></span>년의 기술력입니다.</p>
       </div>
 
     </div>
@@ -265,6 +265,12 @@
 
 <script is:inline>
 (function () {
+  /* 창립년도 2007 기준 자동 계산 */
+  const yrs = new Date().getFullYear() - 2007;
+  document.querySelectorAll('#eds-years, .eds-years').forEach(function(el) {
+    el.textContent = yrs;
+  });
+
   /* 웨이브 리본 */
   function drawMsgWave() {
     const canvas = document.getElementById('abMsgCanvas');
