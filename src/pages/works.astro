@@ -15,26 +15,28 @@
     *{box-sizing:border-box;margin:0;padding:0;}
     body{font-family:'Inter','Apple SD Gothic Neo','Noto Sans KR',sans-serif;background:#f7f8fc;color:#0A0A0A;-webkit-font-smoothing:antialiased;}
 
-    /* ── NAV (index.astro 동일 구조) ── */
-    .nav{
-      position:fixed;top:0;left:0;right:0;z-index:300;
-      display:flex;align-items:center;justify-content:space-between;
-      padding:14px 60px;
+    .nav {
+      position:fixed; top:0; left:0; right:0; z-index:300;
+      display:flex; align-items:center; justify-content:space-between;
+      padding:18px 80px;
       background:rgba(255,255,255,0.97);
       box-shadow:0 1px 0 rgba(0,0,0,0.07);
-      backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+      backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px);
     }
     .nav-logo{height:28px;display:flex;align-items:center;text-decoration:none;}
-    .nav-logo img{height:26px;width:auto;}
-    .nav-menu{display:flex;align-items:center;gap:4px;}
+    .nav-logo img{height:28px;width:auto;object-fit:contain;}
+    .nav-menu{display:flex;align-items:center;gap:48px;}
     .nav-item{position:relative;}
     .nav-link{
-      display:block;font-size:15px;font-weight:600;letter-spacing:-0.01em;
-      text-decoration:none;color:#1a1a1a;cursor:pointer;
-      padding:8px 14px;border-radius:6px;transition:all 0.2s;white-space:nowrap;
+      display:block;
+      font-family:'Nanum Square','Apple SD Gothic Neo',sans-serif;
+      font-size:20px;font-weight:400;letter-spacing:0.05em;
+      text-decoration:none;cursor:pointer;color:#1a1a1a;
+      padding:8px 4px;border-radius:6px;transition:all 0.2s;white-space:nowrap;
     }
-    .nav-link:hover{background:rgba(26,47,138,0.06);color:#1a2f8a;}
-    .nav-item.has-drop:hover .nav-link{background:rgba(26,47,138,0.06);color:#1a2f8a;}
+    .nav-link:hover{color:#1a2f8a;}
+    .nav-link.active{color:#1a2f8a;}
+    .nav-item.has-drop:hover .nav-link{color:#1a2f8a;}
     .nav-drop{
       position:absolute;top:calc(100% + 6px);left:0;min-width:160px;
       background:#fff;border-radius:10px;
@@ -45,22 +47,17 @@
     .nav-item.has-drop:hover .nav-drop{opacity:1;visibility:visible;transform:translateY(0);}
     .drop-link{
       display:block;font-size:14px;font-weight:500;color:#444;
-      text-decoration:none;padding:10px 20px;transition:background 0.15s,color 0.15s;white-space:nowrap;
+      text-decoration:none;padding:10px 20px;
+      transition:background 0.15s,color 0.15s;white-space:nowrap;
     }
     .drop-link:hover{background:rgba(26,47,138,0.05);color:#1a2f8a;}
-    .nav-link.active{color:#1a2f8a;}
     .nav-cta{
       font-size:13px;font-weight:700;padding:9px 20px;
       background:#1a2f8a;color:#fff;border:none;cursor:pointer;
-      border-radius:6px;letter-spacing:0.03em;font-family:inherit;
-      transition:background 0.2s;
+      border-radius:6px;font-family:inherit;transition:background 0.2s;text-decoration:none;
     }
     .nav-cta:hover{background:#142580;}
-    @media(max-width:768px){
-      .nav{padding:12px 20px;}
-      .nav-menu{display:none;}
-      .nav-cta{font-size:12px;padding:8px 14px;}
-    }
+    @media(max-width:768px){.nav{padding:12px 20px;}.nav-menu{display:none;}}
 
     /* ── 래퍼 ── */
     .wrap{max-width:1400px;margin:0 auto;padding:96px 40px 80px;}
@@ -246,9 +243,7 @@
 
   <!-- NAV -->
   <nav class="nav">
-    <a href="/" class="nav-logo">
-      <img src="/images/logo.png" alt="EDS 이담에스티" />
-    </a>
+    <a href="/" class="nav-logo"><img src="/images/logo.png" alt="EDS 이담에스티" /></a>
     <div class="nav-menu">
       <div class="nav-item has-drop">
         <span class="nav-link">회사소개</span>
@@ -259,15 +254,8 @@
           <a href="/#sec7" class="drop-link">오시는 길</a>
         </div>
       </div>
-      <div class="nav-item has-drop">
-        <span class="nav-link">사업분야</span>
-        <div class="nav-drop">
-          <a href="/#svc-public" class="drop-link">공공기관</a>
-          <a href="/#svc-edu" class="drop-link">교육기관</a>
-          <a href="/#svc-corp" class="drop-link">기업</a>
-          <a href="/#svc-media" class="drop-link">미디어센터</a>
-          <a href="/#svc-religion" class="drop-link">종교</a>
-        </div>
+      <div class="nav-item">
+        <a href="/#sec3" class="nav-link">사업분야</a>
       </div>
       <div class="nav-item has-drop">
         <span class="nav-link">조달청 등록제품</span>
@@ -285,7 +273,7 @@
         <a href="/#sec7" class="nav-link">문의</a>
       </div>
     </div>
-    <button class="nav-cta" onclick="location.href='/#sec7'">도입 문의</button>
+    <a href="/#sec7" class="nav-cta">도입 문의</a>
   </nav>
 
   <!-- 본문 -->
