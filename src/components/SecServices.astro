@@ -224,28 +224,26 @@
   }
   .svc-chip:hover { border-color: #1a2f8a; color: #1a2f8a; }
 
-  /* 화살표 */
-  .svc-panels-wrap {
-    position: relative;
-    display: flex; align-items: center; gap: 0;
-  }
-  .svc-panels { flex: 1; }
+  /* 화살표 — svc-inner 기준 절대 배치 */
+  .svc-inner { position: relative; }
+  .svc-panels-wrap { position: relative; }
+  .svc-panels { width: 100%; }
   .svc-arrow {
     position: absolute; top: 50%; transform: translateY(-50%);
-    width: 48px; height: 80px;
-    background: rgba(255,255,255,0.75);
+    width: 48px; height: 100px;
+    background: rgba(255,255,255,0.7);
     border: none; cursor: pointer; z-index: 10;
-    font-size: 32px; color: #1a2f8a;
+    font-size: 36px; color: #1a2f8a;
     display: flex; align-items: center; justify-content: center;
     backdrop-filter: blur(6px);
-    transition: background 0.2s, color 0.2s, opacity 0.2s;
-    border-radius: 4px;
-    opacity: 0.7;
+    transition: background 0.2s, opacity 0.2s;
+    border-radius: 6px;
+    opacity: 0.65;
   }
   .svc-arrow:hover { background: rgba(255,255,255,0.95); opacity: 1; }
-  .svc-arrow:disabled { opacity: 0.2; cursor: default; }
-  .svc-arrow--l { left: -24px; }
-  .svc-arrow--r { right: -24px; }
+  .svc-arrow:disabled { opacity: 0.15; cursor: default; }
+  .svc-arrow--l { left: -64px; }
+  .svc-arrow--r { right: -64px; }
 
   /* 반응형 */
   @media (max-width: 900px) {
