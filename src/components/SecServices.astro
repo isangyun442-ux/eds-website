@@ -133,7 +133,7 @@
 </section>
 
 <style>
-  .s3 { background: #fff; }
+  .s3 { background: linear-gradient(180deg, #dce6f8 0%, #eef2fb 40%, #ffffff 100%); }
   .svc-inner { max-width: 1300px; margin: 0 auto; padding: 100px 60px; }
 
   /* 헤더 */
@@ -167,7 +167,7 @@
     white-space: nowrap; flex-shrink: 0;
   }
   .svc-tab:hover { background: #f7f9ff; }
-  .svc-tab.active { border-bottom-color: #1a2f8a; background: #fff; }
+  .svc-tab.active { border-bottom-color: #1a2f8a; background: rgba(255,255,255,0.95); }
   .svc-tab-num { font-size: 10px; font-weight: 700; color: #ccc; letter-spacing: 0.1em; }
   .svc-tab.active .svc-tab-num { color: #1a2f8a; }
   .svc-tab-name { font-size: 15px; font-weight: 700; color: #999; }
@@ -175,11 +175,11 @@
 
   /* 패널 영역 */
   .svc-panels {
-    border: 1px solid #e8edf4;
+    border: 1px solid rgba(26,47,138,0.12);
     border-top: none;
     border-radius: 0 0 16px 16px;
     overflow: hidden;
-    box-shadow: 0 8px 40px rgba(26,47,138,0.06);
+    box-shadow: 0 8px 40px rgba(26,47,138,0.08);
   }
   .svc-panel { display: none; grid-template-columns: 1fr 1fr; }
   .svc-panel.active { display: grid; }
@@ -198,7 +198,7 @@
   .svc-panel-text {
     padding: 52px 48px;
     display: flex; flex-direction: column; justify-content: center;
-    background: #fff;
+    background: rgba(255,255,255,0.95);
   }
   .svc-tag {
     font-size: 10px; font-weight: 700; letter-spacing: 0.18em;
