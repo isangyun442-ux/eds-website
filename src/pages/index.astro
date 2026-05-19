@@ -21,6 +21,7 @@ import SecContact    from '../components/SecContact.astro';
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Nanum+Square:wght@400;700;800&display=swap" rel="stylesheet" />
   <script is:inline src="/i18n/translations.js"></script>
   <style is:global>
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -67,12 +68,14 @@ import SecContact    from '../components/SecContact.astro';
     .logo-white { position: absolute; top: 0; left: 0; height: 28px; width: auto; object-fit: contain; filter: brightness(0) invert(1); opacity: 1; transition: opacity 0.4s; }
     .nav.scrolled .logo-color { opacity: 1; }
     .nav.scrolled .logo-white { opacity: 0; }
-    .nav-menu { display: flex; align-items: center; gap: 4px; }
+    .nav-menu { display: flex; align-items: center; gap: 12px; }
     .nav-item { position: relative; }
     .nav-link {
-      display: block; font-size: 17px; font-weight: 600;
-      letter-spacing: -0.01em; text-decoration: none; cursor: pointer;
-      padding: 8px 16px; border-radius: 6px; transition: all 0.2s; white-space: nowrap;
+      display: block;
+      font-family: 'Nanum Square', 'Apple SD Gothic Neo', sans-serif;
+      font-size: 16px; font-weight: 800;
+      letter-spacing: 0.04em; text-decoration: none; cursor: pointer;
+      padding: 10px 20px; border-radius: 6px; transition: all 0.2s; white-space: nowrap;
     }
     .nav.scrolled .nav-link { color: #1a1a1a; }
     .nav:not(.scrolled) .nav-link { color: rgba(255,255,255,0.9); }
