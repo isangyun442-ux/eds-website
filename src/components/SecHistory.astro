@@ -100,6 +100,7 @@ const history = [
     inset: 0;
     z-index: 0;
     pointer-events: none;
+    will-change: transform;
   }
   .waves-canvas {
     width: 100%;
@@ -195,11 +196,29 @@ const history = [
 <script is:inline>
 (function() {
   /* 타임라인 fade-up */
+  /* 스크롤 재실행 fade-up */
   const targets = document.querySelectorAll('#sec6 .tl-row, #sec6 .h-header .fade-up');
   const obs = new IntersectionObserver((entries) => {
-    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+      } else {
+        e.target.classList.remove('visible');
+      }
+    });
   }, { threshold: 0.08, rootMargin: '0px 0px -20px 0px' });
   targets.forEach(el => obs.observe(el));
+
+  /* 패럴렉스 */
+  function onScroll() {
+    const section = document.getElementById('sec6');
+    const waves = section ? section.querySelector('.hist-waves') : null;
+    if (!section || !waves) return;
+    const rect = section.getBoundingClientRect();
+    const scrolled = -rect.top;
+    waves.style.transform = 'translateY(' + (scrolled * 0.25) + 'px)';
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
 
   /* 리본 웨이브 캔버스 */
   function drawWaves() {
