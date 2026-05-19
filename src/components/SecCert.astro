@@ -27,63 +27,56 @@
     </h2>
     <p class="cert-sub fade-up fade-up-d2">이담에스티가 보유한 공인 인증 및 등록 현황입니다</p>
 
-    <div class="cert-grid fade-up fade-up-d3">
-
+    <!-- 1열: 5개 -->
+    <div class="cert-grid cert-grid-5 fade-up fade-up-d3">
       <div class="cert-card" data-img="/images/cert/cert_01.jpg" data-name="공장등록증명서">
         <div class="cert-img-wrap"><img src="/images/cert/cert_01.jpg" alt="공장등록증명서" loading="lazy" /></div>
         <div class="cert-info"><p class="cert-name">공장등록증명서</p><p class="cert-desc">제조업 공장 공식 등록</p></div>
       </div>
-
       <div class="cert-card" data-img="/images/cert/cert_02.jpg" data-name="정보통신공사등록증">
         <div class="cert-img-wrap"><img src="/images/cert/cert_02.jpg" alt="정보통신공사등록증" loading="lazy" /></div>
         <div class="cert-info"><p class="cert-name">정보통신공사등록증</p><p class="cert-desc">공사업 면허 보유</p></div>
       </div>
-
       <div class="cert-card" data-img="/images/cert/cert_03.jpg" data-name="이노비즈 인증">
         <div class="cert-img-wrap"><img src="/images/cert/cert_03.jpg" alt="이노비즈 인증" loading="lazy" /></div>
         <div class="cert-info"><p class="cert-name">이노비즈 인증</p><p class="cert-desc">기술혁신형 중소기업</p></div>
       </div>
-
       <div class="cert-card" data-img="/images/cert/cert_04.jpg" data-name="경영혁신형중소기업확인서">
         <div class="cert-img-wrap"><img src="/images/cert/cert_04.jpg" alt="경영혁신형중소기업확인서" loading="lazy" /></div>
         <div class="cert-info"><p class="cert-name">경영혁신형중소기업확인서</p><p class="cert-desc">메인비즈 공식 인증</p></div>
       </div>
-
       <div class="cert-card" data-img="/images/cert/cert_05.jpg" data-name="소프트웨어사업자">
         <div class="cert-img-wrap"><img src="/images/cert/cert_05.jpg" alt="소프트웨어사업자" loading="lazy" /></div>
         <div class="cert-info"><p class="cert-name">소프트웨어사업자</p><p class="cert-desc">SW 사업자 확인서</p></div>
       </div>
+    </div>
 
+    <!-- 2열: 6개 -->
+    <div class="cert-grid cert-grid-6 fade-up fade-up-d3">
       <div class="cert-card" data-img="/images/cert/cert_06.jpg" data-name="품질경영시스템인증서">
         <div class="cert-img-wrap"><img src="/images/cert/cert_06.jpg" alt="품질경영시스템인증서" loading="lazy" /></div>
         <div class="cert-info"><p class="cert-name">품질경영시스템인증서</p><p class="cert-desc">ISO 9001</p></div>
       </div>
-
       <div class="cert-card" data-img="/images/cert/cert_07.jpg" data-name="환경경영시스템인증서">
         <div class="cert-img-wrap"><img src="/images/cert/cert_07.jpg" alt="환경경영시스템인증서" loading="lazy" /></div>
         <div class="cert-info"><p class="cert-name">환경경영시스템인증서</p><p class="cert-desc">ISO 14001</p></div>
       </div>
-
       <div class="cert-card" data-img="/images/cert/cert_08.jpg" data-name="안전보건경영시스템인증서">
         <div class="cert-img-wrap"><img src="/images/cert/cert_08.jpg" alt="안전보건경영시스템인증서" loading="lazy" /></div>
         <div class="cert-info"><p class="cert-name">안전보건경영시스템인증서</p><p class="cert-desc">ISO 45001</p></div>
       </div>
-
       <div class="cert-card" data-img="/images/cert/cert_09.jpg" data-name="특허증 · 다중 영상 스트림 녹화 방법 및 그 장치">
         <div class="cert-img-wrap"><img src="/images/cert/cert_09.jpg" alt="특허증 다중 영상 스트림 녹화" loading="lazy" /></div>
         <div class="cert-info"><p class="cert-name">특허증</p><p class="cert-desc">다중 영상 스트림 녹화 방법 및 그 장치</p></div>
       </div>
-
       <div class="cert-card" data-img="/images/cert/cert_10.jpg" data-name="특허증 · 내용기반 영상검색 장치 및 방법">
         <div class="cert-img-wrap"><img src="/images/cert/cert_10.jpg" alt="특허증 내용기반 영상검색" loading="lazy" /></div>
         <div class="cert-info"><p class="cert-name">특허증</p><p class="cert-desc">내용기반 영상검색 장치 및 방법</p></div>
       </div>
-
       <div class="cert-card" data-img="/images/cert/cert_11.jpg" data-name="특허증 · 디지털 방송 모니터링 시스템">
         <div class="cert-img-wrap"><img src="/images/cert/cert_11.jpg" alt="특허증 디지털 방송 모니터링" loading="lazy" /></div>
         <div class="cert-info"><p class="cert-name">특허증</p><p class="cert-desc">디지털 방송 모니터링 시스템</p></div>
       </div>
-
     </div>
   </div>
 </section>
@@ -110,7 +103,10 @@
   .cert-sub { font-size:14px; color:#8896a4; line-height:1.7; margin-bottom:48px; }
 
   /* 5열 그리드 */
-  .cert-grid { display:grid; grid-template-columns:repeat(5,1fr); gap:14px; }
+  .cert-grid { display:grid; gap:14px; margin-bottom:14px; }
+  .cert-grid:last-of-type { margin-bottom:0; }
+  .cert-grid-5 { grid-template-columns:repeat(5,1fr); }
+  .cert-grid-6 { grid-template-columns:repeat(6,1fr); }
 
   /* 카드 */
   .cert-card { background:#fff; border:1px solid #e8edf4; border-radius:10px; overflow:hidden; cursor:pointer; transition:box-shadow 0.25s, transform 0.25s, border-color 0.25s; }
@@ -133,9 +129,9 @@
   .fade-up-d2 { transition-delay:0.35s; }
   .fade-up-d3 { transition-delay:0.45s; }
 
-  @media (max-width:1100px) { .cert-grid { grid-template-columns:repeat(4,1fr); } }
-  @media (max-width:768px) { .cert-grid { grid-template-columns:repeat(3,1fr); gap:10px; } .s-cert { padding:70px 0 60px; } .cert-inner { padding:0 20px; } }
-  @media (max-width:480px) { .cert-grid { grid-template-columns:repeat(2,1fr); } }
+  @media (max-width:1100px) { .cert-grid-5 { grid-template-columns:repeat(5,1fr); } .cert-grid-6 { grid-template-columns:repeat(4,1fr); } }
+  @media (max-width:768px) { .cert-grid-5, .cert-grid-6 { grid-template-columns:repeat(3,1fr); gap:10px; } .s-cert { padding:70px 0 60px; } .cert-inner { padding:0 20px; } }
+  @media (max-width:480px) { .cert-grid-5, .cert-grid-6 { grid-template-columns:repeat(2,1fr); } }
 </style>
 
 <script is:inline>
