@@ -1,342 +1,305 @@
 ---
-const projects = [
-  {
-    id: 1,
-    cat: 'LED 디스플레이',
-    name: '한국외국어대학교 스튜디오 첨단화',
-    meta: '2025.02 · 교육기관',
-    desc: '신규 LED 설치 및 유튜브 부스 설치를 통한 이러닝 컨텐츠 및 미디어 컨텐츠 제작 첨단 방송시스템 구축',
-    tags: ['LED Wall', '유튜브 스튜디오', '이러닝', '방송제작시스템'],
-    images: ['/images/HUFS_ST_04.jpg', '', '', ''],
-    big: true,
-  },
-  {
-    id: 2,
-    cat: '스마트 강의실',
-    name: '서울사이버대학교 스튜디오 고도화',
-    meta: '2024.12 · 교육기관',
-    desc: '기존 방송시스템 장비 전면 고도화. 최신 UHD 촬영 환경과 스마트 강의실 시스템으로 업그레이드',
-    tags: ['스마트 강의실', 'UHD 스튜디오', '방송제작시스템', '이러닝'],
-    images: ['/images/SC_ST_09.jpg', '', '', ''],
-    big: false,
-  },
-  {
-    id: 3,
-    cat: '이러닝 스튜디오',
-    name: '공주대학교 미디어 콘텐츠 스튜디오',
-    meta: '2024.08 · 교육기관',
-    desc: '온라인 교육 콘텐츠 제작에 최적화된 이러닝 스튜디오. 크로마키·자동 추적 카메라·실시간 스트리밍 지원',
-    tags: ['이러닝 스튜디오', '자동 추적 카메라', '크로마키', '스트리밍'],
-    images: ['/images/GMC_S_01.jpg', '', '', ''],
-    big: false,
-  },
-  {
-    id: 4,
-    cat: '방송제작 스튜디오',
-    name: '경기도교육청 UHD 스튜디오',
-    meta: '2023.12 · 공공기관',
-    desc: '경기도 교육청 남부청사 UHD 방송 스튜디오 구축. 4K UHD 촬영 및 실시간 방송제작 환경 완성',
-    tags: ['UHD 스튜디오', '방송제작', '공공기관', '4K'],
-    images: ['/images/GKDE_S_08.jpg', '', '', ''],
-    big: false,
-  },
-  {
-    id: 5,
-    cat: '방송 인프라',
-    name: 'KTV 방송시스템 장비 설치',
-    meta: '2024.12 · 공공기관',
-    desc: '한국정책방송원 KTV 방송시스템 장비 구매 및 설치. 기존 시스템과 연계·호환되는 방송 제작환경 개선',
-    tags: ['방송 인프라', '방송시스템', '공공기관', '시스템 통합'],
-    images: ['/images/KTV_BS_01.jpg', '', '', ''],
-    big: false,
-  },
-  {
-    id: 6,
-    cat: '아카이브 시스템',
-    name: '몽골 국가기록원 디지털 아카이브',
-    meta: '2024.08 · 해외',
-    desc: '몽골 국가기록원 디지털 아카이브 시스템 구축. 영상 자산 디지털화 및 장기 보존 시스템 완성',
-    tags: ['아카이브 시스템', '디지털 보존', '해외 사업', '미디어 자산'],
-    images: ['/images/MG_DAS_02.jpg', '', '', ''],
-    big: false,
-  },
-];
+// src/components/SecPortfolio.astro
+import { projects } from '../data/projects.js';
 ---
+<section class="sec s4" id="sec4">
 
-<section id="portfolio">
-  <div class="reveal">
-    <div class="s-eyebrow">Portfolio</div>
-    <h2 class="s-title">구축 사례</h2>
-    <p class="s-sub">2007년부터 쌓아온 <strong>170개+</strong> 구축 경험을 확인하세요</p>
-  </div>
-
-  <div class="port-grid">
-    {projects.map((p) => (
-      <div
-        class={`port-card reveal ${p.big ? 'big' : ''}`}
-        onclick={`openModal(${p.id})`}
-        role="button"
-        tabindex="0"
-      >
-        <div class="port-bg" style={p.images[0] ? `background-image:url('${p.images[0]}')` : ''}></div>
-        {!p.images[0] && (
-          <div class="port-pixels">
-            {Array.from({length: 80}).map(() => <div class="pp"></div>)}
-          </div>
-        )}
-        <div class="port-overlay"></div>
-        <div class="port-hover-icon">🔍</div>
-        <div class="port-info">
-          <div class="pi-cat">{p.cat}</div>
-          <div class="pi-name">{p.name}</div>
-          <div class="pi-meta">{p.meta}</div>
-        </div>
-      </div>
+  <!-- 배경 (블러 + 어둡게) -->
+  <div class="port-bg" id="port-bg">
+    {projects.map((p, i) => (
+      <div class={`port-bg-slide${i === 0 ? ' active' : ''}`} style={`background-image:url('${p.images && p.images[0] ? p.images[0] : ''}')`}></div>
     ))}
   </div>
+  <div class="port-overlay"></div>
+
+  <!-- 콘텐츠 -->
+  <div class="port-content">
+
+    <!-- 왼쪽: 메인 이미지 -->
+    <div class="port-left">
+      <div class="port-img-wrap" id="port-img-wrap">
+        {projects.map((p, i) => (
+          <div class={`port-img-slide${i === 0 ? ' active' : ''}`} style={`background-image:url('${p.images && p.images[0] ? p.images[0] : ''}')`}></div>
+        ))}
+      </div>
+    </div>
+
+    <!-- 오른쪽: 텍스트 -->
+    <div class="port-right">
+
+      <!-- 썸네일 3장 (이전/현재/다음) -->
+      <div class="port-thumbs" id="port-thumbs">
+        <div class="port-thumb" id="port-thumb-prev"></div>
+        <div class="port-thumb active" id="port-thumb-cur"></div>
+        <div class="port-thumb" id="port-thumb-next"></div>
+      </div>
+
+      <div class="port-eyebrow">Portfolio</div>
+
+      <div class="port-slides" id="port-slides">
+        {projects.map((p, i) => (
+          <div class={`port-slide${i === 0 ? ' active' : ''}`}>
+            <h3 class="port-title">{p.title}</h3>
+            <p class="port-sub">{p.service}&nbsp;·&nbsp;{p.date}</p>
+            <p class="port-desc">{p.overview || ''}</p>
+          </div>
+        ))}
+      </div>
+
+      <!-- 하단 컨트롤 -->
+      <div class="port-bottom">
+        <div class="port-arrows">
+          <button class="port-btn" id="port-prev">←</button>
+          <button class="port-btn" id="port-next">→</button>
+        </div>
+        <div class="port-counter">
+          <span class="port-cur-num" id="port-cur-num">01</span>
+          <span class="port-sep"> / </span>
+          <span class="port-total-num">170</span>
+        </div>
+      </div>
+      <a href="/works" class="port-all">전체 구축사례 보기 →</a>
+    </div>
+
+  </div>
+
 </section>
 
-<div class="modal-backdrop" id="modal-backdrop" onclick="closeModal()"></div>
-<div class="modal-wrap" id="modal-wrap">
-  <div class="modal-header">
-    <div>
-      <div class="modal-cat"  id="modal-cat"></div>
-      <div class="modal-title" id="modal-title"></div>
-      <div class="modal-meta"  id="modal-meta"></div>
-    </div>
-    <button class="modal-close" onclick="closeModal()">✕</button>
-  </div>
-  <div class="modal-content">
-    <div class="modal-main-img" id="modal-main-img">
-      <div class="modal-pixels" id="modal-pixels">
-        {Array.from({length: 36}).map(() => <div class="mpp"></div>)}
-      </div>
-      <img id="modal-img" src="" alt="" />
-    </div>
-    <div class="modal-thumbs" id="modal-thumbs">
-      {[0,1,2,3].map((i) => (
-        <div class="thumb" id={`thumb-${i}`} onclick={`selectThumb(${i})`}>
-          <div class="thumb-inner" id={`thumb-inner-${i}`}></div>
-          <div class="thumb-num">{i+1}</div>
-        </div>
-      ))}
-    </div>
-  </div>
-  <div class="modal-body">
-    <p class="modal-desc" id="modal-desc"></p>
-    <div class="modal-tags" id="modal-tags"></div>
-  </div>
-  <div class="modal-footer">
-    <button class="modal-nav-btn" onclick="closeModal()">← 목록으로</button>
-    <a class="modal-contact-btn" href="#contact">도입 문의하기 →</a>
-  </div>
-</div>
-
 <style>
-  #portfolio { padding: 100px 60px; background: var(--navy3); }
-  #portfolio .s-eyebrow { color: var(--cyan); }
-  #portfolio .s-eyebrow::before { background: var(--cyan); }
-  #portfolio .s-title { color: #fff; }
-  #portfolio .s-sub { color: rgba(255,255,255,0.4); }
-  #portfolio .s-sub strong { color: var(--cyan); }
-  .s-eyebrow {
-    display: inline-flex; align-items: center; gap: 10px;
-    font-size: 11px; font-weight: 700; letter-spacing: .2em; text-transform: uppercase;
-    margin-bottom: 16px;
+  .s4 {
+    position: relative;
+    height: 100vh; min-height: 600px;
+    overflow: hidden;
+    display: flex; align-items: center;
   }
-  .s-eyebrow::before { content: ''; display: block; width: 24px; height: 2px; }
-  .s-title {
-    font-family: var(--sans); font-size: clamp(28px, 4vw, 44px);
-    font-weight: 800; font-style: italic;
-    line-height: 1.1; letter-spacing: -0.02em; margin-bottom: 16px;
-  }
-  .s-sub { font-family: var(--kr); font-size: 15px; line-height: 1.85; color: var(--gray); max-width: 520px; }
 
-  .port-grid {
-    display: grid; grid-template-columns: repeat(3,1fr);
-    grid-template-rows: 260px 200px;
-    gap: 3px; margin-top: 56px;
-  }
-  .port-card { position: relative; overflow: hidden; background: var(--navy2); cursor: pointer; }
-  .port-card.big { grid-row: 1/3; }
-  .port-bg {
+  /* ── 배경 ── */
+  .port-bg { position: absolute; inset: 0; }
+  .port-bg-slide {
     position: absolute; inset: 0;
-    background: linear-gradient(135deg, #061828, #0D2E45, #0A4060);
     background-size: cover; background-position: center;
-    transition: transform 0.5s cubic-bezier(0.25,0.46,0.45,0.94);
+    opacity: 0; filter: blur(12px);
+    transform: scale(1.08);
+    transition: opacity 0.8s;
   }
-  .port-card:hover .port-bg { transform: scale(1.04); }
-  .port-pixels {
-    position: absolute; inset: 0;
-    display: grid; grid-template-columns: repeat(10,1fr); grid-template-rows: repeat(8,1fr);
-    gap: 3px; padding: 16px; opacity: 0.4;
-  }
-  .pp { border-radius: 1px; background: var(--cyan); animation: ppa 3s ease-in-out infinite; }
-  .pp:nth-child(3n) { animation-delay:.4s; background: var(--red); }
-  .pp:nth-child(5n) { animation-delay:.8s; opacity:.2; }
-  @keyframes ppa { 0%,100%{opacity:.6} 50%{opacity:.15} }
+  .port-bg-slide.active { opacity: 1; }
   .port-overlay {
     position: absolute; inset: 0;
-    background: linear-gradient(transparent 40%, rgba(6,18,28,0.9));
-    transition: background 0.3s;
+    background: rgba(8, 16, 48, 0.72);
+    z-index: 1;
   }
-  .port-card:hover .port-overlay { background: linear-gradient(rgba(13,58,74,0.35), rgba(6,18,28,0.92)); }
-  .port-hover-icon {
-    position: absolute; top: 50%; left: 50%;
-    transform: translate(-50%,-50%) scale(0);
-    font-size: 28px; opacity: 0; z-index: 2;
-    transition: transform 0.3s, opacity 0.3s;
-  }
-  .port-card:hover .port-hover-icon { transform: translate(-50%,-50%) scale(1); opacity: 1; }
-  .port-card::after {
-    content: ''; position: absolute; top: 0; right: 0;
-    border-top: 24px solid var(--cyan); border-left: 24px solid transparent; opacity: .6;
-  }
-  .port-card:nth-child(even)::after { border-top-color: var(--red); }
-  .port-info { position: absolute; bottom: 0; left: 0; right: 0; padding: 18px 20px; }
-  .pi-cat  { font-size: 10px; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; color: var(--cyan); margin-bottom: 5px; }
-  .pi-name { font-family: var(--sans); font-size: 15px; font-weight: 700; color: #fff; margin-bottom: 3px; }
-  .pi-meta { font-size: 11px; color: rgba(255,255,255,0.35); }
 
-  .modal-backdrop {
-    display: none; position: fixed; inset: 0;
-    background: rgba(0,0,0,0.8); z-index: 900;
+  /* ── 콘텐츠 ── */
+  .port-content {
+    position: relative; z-index: 2;
+    width: 100%; display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
   }
-  .modal-backdrop.open { display: block; }
-  .modal-wrap {
-    display: none; position: fixed;
-    top: 50%; left: 50%;
-    transform: translate(-50%,-50%);
-    width: 90%; max-width: 780px;
-    background: var(--white); z-index: 901;
-    max-height: 90vh; overflow-y: auto;
-  }
-  .modal-wrap.open { display: block; }
-  .modal-header {
-    background: var(--navy); padding: 18px 22px;
-    display: flex; align-items: center; justify-content: space-between;
-    border-bottom: 3px solid var(--red);
-    position: sticky; top: 0; z-index: 10;
-  }
-  .modal-cat   { font-size: 10px; font-weight: 700; letter-spacing: .15em; text-transform: uppercase; color: var(--cyan); margin-bottom: 4px; }
-  .modal-title { font-family: var(--sans); font-size: 20px; font-weight: 800; font-style: italic; color: #fff; }
-  .modal-meta  { font-size: 11px; color: rgba(255,255,255,0.4); margin-top: 3px; }
-  .modal-close {
-    width: 34px; height: 34px; background: rgba(255,255,255,0.08);
-    border: 1px solid rgba(255,255,255,0.15); cursor: pointer;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 14px; color: rgba(255,255,255,0.6); flex-shrink: 0;
-    clip-path: polygon(6px 0,100% 0,calc(100% - 6px) 100%,0 100%);
-    transition: background 0.2s;
-  }
-  .modal-close:hover { background: rgba(212,43,43,0.5); color: #fff; }
-  .modal-content { display: grid; grid-template-columns: 1fr 90px; }
-  .modal-main-img {
-    height: 320px; position: relative; overflow: hidden;
-    background: linear-gradient(135deg, #061828, #0D2E45);
-    display: flex; align-items: center; justify-content: center;
-  }
-  #modal-img { display: none; width: 100%; height: 100%; object-fit: cover; position: absolute; inset: 0; }
-  .modal-pixels {
-    position: absolute; inset: 12px;
-    display: grid; grid-template-columns: repeat(12,1fr); gap: 3px; opacity: 0.2;
-  }
-  .mpp { border-radius: 1px; background: var(--cyan); animation: ppa 3s ease-in-out infinite; }
-  .mpp:nth-child(3n) { animation-delay:.4s; background: var(--red); }
-  .modal-thumbs {
-    display: flex; flex-direction: column; gap: 3px;
-    padding: 3px; background: var(--navy2);
-    border-left: 1px solid rgba(0,184,217,0.15);
-  }
-  .thumb { flex: 1; cursor: pointer; position: relative; overflow: hidden; border: 1.5px solid transparent; transition: border-color 0.2s; min-height: 0; }
-  .thumb.active { border-color: var(--cyan); }
-  .thumb-inner { width: 100%; height: 100%; background: #0A2D3A; background-size: cover; background-position: center; }
-  .thumb-num { position: absolute; bottom: 2px; right: 4px; font-size: 8px; color: rgba(255,255,255,0.4); font-weight: 700; }
-  .modal-body { padding: 18px 22px; background: var(--white); border-top: 1px solid var(--line); }
-  .modal-desc { font-family: var(--kr); font-size: 13px; line-height: 1.9; color: #607080; margin-bottom: 14px; }
-  .modal-tags { display: flex; flex-wrap: wrap; gap: 6px; }
-  .modal-tag  { font-size: 10px; font-weight: 600; background: var(--light); color: var(--navy); padding: 3px 10px; }
-  .modal-footer {
-    padding: 12px 22px; background: var(--bg);
-    border-top: 1px solid var(--line);
-    display: flex; justify-content: space-between; align-items: center;
-  }
-  .modal-nav-btn { font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--gray); cursor: pointer; background: none; border: none; transition: color 0.2s; }
-  .modal-nav-btn:hover { color: var(--navy); }
-  .modal-contact-btn {
-    font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
-    background: var(--red); color: #fff; border: none; cursor: pointer;
-    padding: 9px 22px; text-decoration: none;
-    clip-path: polygon(6px 0,100% 0,calc(100% - 6px) 100%,0 100%);
-    transition: background 0.2s; display: inline-flex; align-items: center;
-  }
-  .modal-contact-btn:hover { background: var(--red2); }
 
-  @media (max-width: 768px) {
-    #portfolio { padding: 72px 24px; }
-    .port-grid { grid-template-columns: 1fr 1fr; grid-template-rows: auto; }
-    .port-card.big { grid-row: auto; height: 200px; }
-    .port-card { height: 180px; }
-    .modal-wrap { width: 95%; }
-    .modal-content { grid-template-columns: 1fr 70px; }
-    .modal-main-img { height: 220px; }
+  /* ── 왼쪽 이미지 패널 ── */
+  .port-left {
+    flex: 0 0 680px;
+    padding: 20px 20px 20px 0;
+    display: flex; align-items: center;
   }
-  @media (max-width: 480px) {
-    .port-grid { grid-template-columns: 1fr; }
+  .port-img-wrap {
+    position: relative;
+    width: 100%; height: 560px;
+    box-shadow: 0 32px 80px rgba(0,0,0,0.5);
+  }
+  .port-img-slide {
+    position: absolute; inset: 0;
+    background-size: cover; background-position: center;
+    opacity: 0;
+    transition: opacity 0.8s cubic-bezier(0.4,0,0.2,1);
+  }
+  .port-img-slide.active { opacity: 1; }
+
+  /* ── 썸네일 3장 ── */
+  .port-thumbs {
+    display: flex; gap: 10px;
+    margin-bottom: 28px;
+  }
+  .port-thumb {
+    width: 90px; height: 60px;
+    background-size: cover; background-position: center;
+    border-radius: 4px;
+    cursor: pointer;
+    opacity: 0.4;
+    border: 2px solid transparent;
+    transition: opacity 0.3s, border-color 0.3s, transform 0.3s;
+    flex-shrink: 0;
+  }
+  .port-thumb:hover { opacity: 0.75; transform: translateY(-2px); }
+  .port-thumb.active {
+    opacity: 1;
+    border-color: #fff;
+    transform: translateY(-2px);
+  }
+  .port-thumb.hidden { opacity: 0; pointer-events: none; }
+
+  /* ── 오른쪽 텍스트 ── */
+  .port-right {
+    flex: 0 0 480px;
+    padding: 80px 40px 60px 60px;
+    display: flex; flex-direction: column;
+    justify-content: center; gap: 0;
+    /* 전체 높이 고정 — 내부 요소 움직임 방지 */
+    height: 100vh;
+    min-height: 600px;
+    box-sizing: border-box;
+  }
+  .port-eyebrow {
+    font-size: 20px; font-weight: 900; letter-spacing: 0.28em;
+    text-transform: uppercase; color: #fff;
+    margin-bottom: 28px;
+    display: flex; align-items: center; gap: 12px;
+  }
+  .port-eyebrow::before { content: ''; width: 28px; height: 2px; background: #fff; display: block; }
+
+  /* 슬라이드 텍스트 — 고정 높이로 레이아웃 이동 방지 */
+  .port-slides {
+    position: relative;
+    height: 200px;
+    margin-bottom: 40px;
+    flex-shrink: 0;
+  }
+  .port-slide {
+    position: absolute; top: 0; left: 0; width: 100%;
+    opacity: 0; transform: translateY(16px);
+    transition: opacity 0.6s, transform 0.6s;
+    pointer-events: none;
+  }
+  .port-slide.active {
+    opacity: 1; transform: translateY(0);
+    pointer-events: auto;
+  }
+  .port-title {
+    font-size: clamp(20px, 2.4vw, 38px);
+    font-weight: 900; letter-spacing: -0.04em;
+    color: #fff; line-height: 1.2; margin-bottom: 16px;
+  }
+  .port-sub {
+    font-size: 13px; font-weight: 600;
+    color: rgba(255,255,255,0.5); letter-spacing: 0.04em;
+    margin-bottom: 20px;
+  }
+  .port-desc {
+    font-size: 13px; color: rgba(255,255,255,0.6);
+    line-height: 1.9; max-width: 400px;
+    display: -webkit-box; -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical; overflow: hidden;
+  }
+
+  /* ── 하단 컨트롤 ── */
+  .port-bottom {
+    display: flex; align-items: center; gap: 16px; flex-wrap: wrap;
+  }
+  .port-arrows { display: flex; gap: 10px; }
+  .port-btn {
+    width: 48px; height: 48px;
+    background: rgba(255,255,255,0.08);
+    border: 1.5px solid rgba(255,255,255,0.3);
+    color: #fff; font-size: 16px; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    transition: background 0.2s, border-color 0.2s;
+    font-family: inherit;
+  }
+  .port-btn:hover { background: rgba(255,255,255,0.18); border-color: #fff; }
+  .port-btn:disabled { opacity: 0.2; cursor: default; }
+
+  /* 카운터 */
+  .port-counter {
+    font-size: 13px; color: rgba(255,255,255,0.5);
+    font-weight: 600; letter-spacing: 0.05em;
+  }
+  .port-cur-num { color: #fff; font-size: 18px; font-weight: 900; }
+
+  .port-all {
+    display: inline-flex; align-items: center;
+    margin-top: 16px;
+    font-size: 12px; font-weight: 800; color: #fff;
+    text-decoration: none; letter-spacing: 0.1em; text-transform: uppercase;
+    height: 48px; padding: 0 28px;
+    border: 1.5px solid rgba(255,255,255,0.4);
+    transition: background 0.2s, border-color 0.2s;
+    white-space: nowrap;
+    align-self: flex-start;
+  }
+  .port-all:hover { background: rgba(255,255,255,0.1); border-color: #fff; }
+
+  @media (max-width: 900px) {
+    .port-content { flex-direction: column; }
+    .port-left { flex: 0 0 auto; width: 100%; height: 40vh; padding: 20px; }
+    .port-img-wrap { height: 100%; }
+    .port-right { padding: 40px 32px; }
+    .port-all { margin-left: 0; }
   }
 </style>
 
 <script is:inline>
-  const projects = [
-    { id:1, cat:'LED 디스플레이',    name:'한국외국어대학교 스튜디오 첨단화',      meta:'2025.02 · 교육기관', desc:'신규 LED 설치 및 유튜브 부스 설치를 통한 이러닝 컨텐츠 및 미디어 컨텐츠 제작 첨단 방송시스템 구축', tags:['LED Wall','유튜브 스튜디오','이러닝','방송제작시스템'], images:['/images/HUFS_ST_04.jpg','/images/HUFS_ST_01.jpg','/images/HUFS_ST_02.jpg','/images/HUFS_ST_03.jpg'] },
-    { id:2, cat:'스마트 강의실',     name:'서울사이버대학교 스튜디오 고도화',      meta:'2024.12 · 교육기관', desc:'기존 방송시스템 장비 전면 고도화. 최신 UHD 촬영 환경과 스마트 강의실 시스템으로 업그레이드', tags:['스마트 강의실','UHD 스튜디오','방송제작시스템','이러닝'], images:['/images/SC_ST_09.jpg','/images/SC_ST_01.jpg','/images/SC_ST_02.jpg','/images/SC_ST_03.jpg'] },
-    { id:3, cat:'이러닝 스튜디오',   name:'공주대학교 미디어 콘텐츠 스튜디오',    meta:'2024.08 · 교육기관', desc:'온라인 교육 콘텐츠 제작에 최적화된 이러닝 스튜디오. 크로마키·자동 추적 카메라·실시간 스트리밍 지원', tags:['이러닝 스튜디오','자동 추적 카메라','크로마키','스트리밍'], images:['/images/GMC_S_01.jpg','/images/GMC_S_02.jpg','/images/GMC_S_03.jpg','/images/GMC_S_04.jpg'] },
-    { id:4, cat:'방송제작 스튜디오', name:'경기도교육청 UHD 스튜디오',            meta:'2023.12 · 공공기관', desc:'경기도 교육청 남부청사 UHD 방송 스튜디오 구축. 4K UHD 촬영 및 실시간 방송제작 환경 완성', tags:['UHD 스튜디오','방송제작','공공기관','4K'], images:['/images/GKDE_S_08.jpg','/images/GKDE_S_06.jpg','/images/GKDE_S_07.jpg','/images/GKDE_S_09.jpg'] },
-    { id:5, cat:'방송 인프라',       name:'KTV 방송시스템 장비 설치',             meta:'2024.12 · 공공기관', desc:'한국정책방송원 KTV 방송시스템 장비 구매 및 설치. 기존 시스템과 연계·호환되는 방송 제작환경 개선', tags:['방송 인프라','방송시스템','공공기관','시스템 통합'], images:['/images/KTV_BS_01.jpg','/images/KTV_BS_02.jpg','/images/KTV_BS_03.jpg','/images/KTV_BS_04.jpg'] },
-    { id:6, cat:'아카이브 시스템',   name:'몽골 국가기록원 디지털 아카이브',      meta:'2024.08 · 해외', desc:'몽골 국가기록원 디지털 아카이브 시스템 구축. 영상 자산 디지털화 및 장기 보존 시스템 완성', tags:['아카이브 시스템','디지털 보존','해외 사업','미디어 자산'], images:['/images/MG_DAS_02.jpg','/images/MG_DAS_03.jpg','/images/MG_DAS_04.jpg','/images/MG_DAS_05.jpg'] },
-  ];
+(function () {
+  const bgs    = document.querySelectorAll('.port-bg-slide');
+  const imgs   = document.querySelectorAll('.port-img-slide');
+  const slides = document.querySelectorAll('.port-slide');
+  const total  = slides.length;
+  let cur = 0;
 
-  let currentImages = [];
+  const btnPrev  = document.getElementById('port-prev');
+  const btnNext  = document.getElementById('port-next');
+  const curNum   = document.getElementById('port-cur-num');
+  const tPrev    = document.getElementById('port-thumb-prev');
+  const tCur     = document.getElementById('port-thumb-cur');
+  const tNext    = document.getElementById('port-thumb-next');
 
-  function openModal(id) {
-    const p = projects.find(x => x.id === id);
-    if (!p) return;
-    currentImages = p.images;
-    document.getElementById('modal-cat').textContent   = p.cat;
-    document.getElementById('modal-title').textContent = p.name;
-    document.getElementById('modal-meta').textContent  = p.meta;
-    document.getElementById('modal-desc').textContent  = p.desc;
-    document.getElementById('modal-tags').innerHTML = p.tags.map(t => `<span class="modal-tag">${t}</span>`).join('');
-    p.images.forEach((img, i) => {
-      const el = document.getElementById(`thumb-inner-${i}`);
-      if (el) el.style.backgroundImage = img ? `url('${img}')` : 'none';
-    });
-    selectThumb(0);
-    document.getElementById('modal-backdrop').classList.add('open');
-    document.getElementById('modal-wrap').classList.add('open');
-    document.body.style.overflow = 'hidden';
-  }
+  // 전체 프로젝트 이미지 목록 (bg/img 슬라이드에서 추출)
+  const imgUrls = Array.from(imgs).map(el => el.style.backgroundImage);
 
-  function closeModal() {
-    document.getElementById('modal-backdrop').classList.remove('open');
-    document.getElementById('modal-wrap').classList.remove('open');
-    document.body.style.overflow = '';
-  }
-
-  function selectThumb(i) {
-    document.querySelectorAll('.thumb').forEach(t => t.classList.remove('active'));
-    document.getElementById(`thumb-${i}`)?.classList.add('active');
-    const src = currentImages[i];
-    const img = document.getElementById('modal-img');
-    const pixels = document.getElementById('modal-pixels');
-    if (src) {
-      img.src = src; img.style.display = 'block';
-      if (pixels) pixels.style.display = 'none';
+  function setThumb(el, idx) {
+    if (idx < 0 || idx >= total) {
+      el.classList.add('hidden');
+      el.style.backgroundImage = '';
     } else {
-      img.style.display = 'none';
-      if (pixels) pixels.style.display = 'grid';
+      el.classList.remove('hidden');
+      el.style.backgroundImage = imgUrls[idx];
     }
   }
 
-  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+  function go(n) {
+    bgs[cur].classList.remove('active');
+    imgs[cur].classList.remove('active');
+    slides[cur].classList.remove('active');
+    cur = Math.max(0, Math.min(n, total - 1));
+    bgs[cur].classList.add('active');
+    imgs[cur].classList.add('active');
+    slides[cur].classList.add('active');
+
+    // 카운터 업데이트
+    curNum.textContent = String(cur + 1).padStart(2, '0');
+
+    // 썸네일 3장 업데이트
+    setThumb(tPrev, cur - 1);
+    setThumb(tCur,  cur);
+    setThumb(tNext, cur + 1);
+
+    btnPrev.disabled = cur === 0;
+    btnNext.disabled = cur === total - 1;
+  }
+
+  // 썸네일 클릭
+  tPrev.addEventListener('click', function () { go(cur - 1); });
+  tCur.addEventListener('click',  function () { go(cur); });
+  tNext.addEventListener('click', function () { go(cur + 1); });
+
+  btnPrev.addEventListener('click', function () { go(cur - 1); });
+  btnNext.addEventListener('click', function () { go(cur + 1); });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'ArrowLeft')  go(cur - 1);
+    if (e.key === 'ArrowRight') go(cur + 1);
+  });
+
+  go(0);
+})();
 </script>
