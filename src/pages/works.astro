@@ -12,7 +12,7 @@
   <title>ALL PORTFOLIO — EDS 이담에스티</title>
   <style is:global>
     *{box-sizing:border-box;margin:0;padding:0;}
-    body{font-family:'Inter','Apple SD Gothic Neo','Noto Sans KR',sans-serif;background:#f7f8fc;color:#0A0A0A;-webkit-font-smoothing:antialiased;}
+    body{font-family:'Inter','Apple SD Gothic Neo','Noto Sans KR',sans-serif;background:#fff;color:#0A0A0A;-webkit-font-smoothing:antialiased;}
 
     /* NAV */
     .nav{position:fixed;top:0;left:0;right:0;z-index:300;display:flex;align-items:center;justify-content:space-between;padding:18px 80px;background:rgba(255,255,255,0.97);box-shadow:0 1px 0 rgba(0,0,0,0.07);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);}
@@ -46,10 +46,10 @@
     .works-hero-count strong{color:#fff;}
 
     /* MAIN LAYOUT */
-    .works-body{display:grid;grid-template-columns:260px 1fr;gap:0;max-width:1600px;margin:0 auto;padding:0 40px 80px;}
+    .works-body{display:grid;grid-template-columns:260px 1fr;gap:0;max-width:1600px;margin:0 auto;padding:0 60px 100px;background:#fff;}
 
     /* SIDEBAR */
-    .works-sidebar{padding:40px 32px 40px 0;border-right:1px solid #e8ecf4;position:sticky;top:66px;height:calc(100vh - 66px);overflow-y:auto;}
+    .works-sidebar{padding:48px 40px 40px 0;border-right:1px solid #ebebeb;position:sticky;top:66px;height:calc(100vh - 66px);overflow-y:auto;}
     .sidebar-search{
       display:flex;align-items:center;gap:10px;
       background:#fff;border:1.5px solid #e8ecf4;border-radius:10px;
@@ -62,39 +62,37 @@
     .sidebar-search input::placeholder{color:#bbb;}
 
     .sidebar-section{margin-bottom:28px;}
-    .sidebar-label{font-size:10px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:#bbb;margin-bottom:12px;}
+    .sidebar-label{font-size:11px;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:#333;margin-bottom:16px;}
     .sidebar-btn{
       display:block;width:100%;text-align:left;
-      font-size:14px;font-weight:500;color:#888;
+      font-size:15px;font-weight:400;color:#aaa;
       background:none;border:none;cursor:pointer;font-family:inherit;
-      padding:8px 12px;border-radius:6px;
-      transition:all 0.15s;
+      padding:9px 0;border-radius:0;
+      transition:color 0.15s;letter-spacing:0.01em;
     }
-    .sidebar-btn:hover{color:#1a2f8a;background:rgba(26,47,138,0.04);}
-    .sidebar-btn.on{color:#1a2f8a;background:rgba(26,47,138,0.08);font-weight:700;}
-    .sidebar-divider{height:1px;background:#f0f4fb;margin:8px 0;}
+    .sidebar-btn:hover{color:#0d1a3a;}
+    .sidebar-btn.on{color:#0d1a3a;font-weight:700;}
+    .sidebar-divider{height:1px;background:#ebebeb;margin:20px 0;}
 
     /* 결과 카운트 */
-    .works-topbar{display:flex;align-items:center;justify-content:space-between;padding:28px 0 20px 40px;}
-    .works-count{font-size:13px;color:#aaa;} .works-count strong{color:#1a2f8a;font-size:16px;font-weight:800;}
+    .works-topbar{display:flex;align-items:center;justify-content:space-between;padding:0 0 28px;}
+    .works-count{font-size:14px;color:#aaa;} .works-count strong{color:#0d1a3a;font-size:20px;font-weight:800;margin-right:4px;}
 
     /* 카드 그리드 */
-    .works-main{padding-left:40px;}
-    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
-    .wc{cursor:pointer;border-radius:10px;background:#fff;box-shadow:0 2px 16px rgba(0,0,0,0.07);overflow:hidden;transition:box-shadow 0.25s,transform 0.25s;}
-    .wc:hover{box-shadow:0 8px 32px rgba(26,47,138,0.12);transform:translateY(-4px);}
-    .wc-img-wrap{position:relative;width:100%;aspect-ratio:4/3;overflow:hidden;background:#0D2030;}
-    .wc-bg{position:absolute;inset:0;background-size:cover;background-position:center;transition:transform 0.55s,opacity 0.3s;opacity:0.88;}
-    .wc:hover .wc-bg{transform:scale(1.05);opacity:1;}
-    .wc-ph{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#0d1f3a,#1a3460);}
-    .wc-ph span{font-size:9px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.25);}
+    .works-main{padding-left:60px;padding-top:48px;}
+    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px 32px;}
+    .wc{cursor:pointer;background:#fff;overflow:hidden;transition:opacity 0.2s;}
+    .wc:hover .wc-bg{transform:scale(1.03);}
+    .wc:hover .wc-name{color:#1a2f8a;}
+    .wc-img-wrap{position:relative;width:100%;aspect-ratio:4/3;overflow:hidden;background:#e8ecf4;}
+    .wc-bg{position:absolute;inset:0;background-size:cover;background-position:center;transition:transform 0.5s;}
+    .wc-ph{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:#e8ecf4;}
+    .wc-ph span{font-size:9px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:#bbb;}
     .wc-ov{display:none;}
-    .wc-info{padding:14px 16px 16px;background:#fff;}
-    .wc-cat{font-size:9px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:#1a2f8a;display:block;margin-bottom:5px;}
-    .wc-name{font-size:14px;font-weight:700;color:#0d1a3a;line-height:1.4;margin-bottom:8px;}
-    .wc-meta{display:flex;align-items:center;justify-content:space-between;}
-    .wc-date{font-size:11px;color:#aaa;}
-    .wc-cli{font-size:10px;font-weight:600;background:rgba(26,47,138,0.07);color:#1a2f8a;padding:2px 9px;border-radius:3px;}
+    .wc-info{padding:16px 4px 24px;}
+    .wc-cat{font-size:11px;font-weight:500;color:#aaa;display:block;margin-bottom:8px;letter-spacing:0.02em;}
+    .wc-name{font-size:16px;font-weight:700;color:#0d1a3a;line-height:1.4;margin-bottom:0;transition:color 0.2s;}
+    .wc-meta{display:none;}
 
     /* 빈 상태 */
     .empty{text-align:center;padding:80px 20px;display:none;}
