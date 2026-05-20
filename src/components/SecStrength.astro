@@ -97,9 +97,7 @@
         </svg>
 
         <p class="ab-msg-text">
-          이담에스티는 다양한 미디어 시스템 구축 노하우와<br>
-          끊임없는 사내 연구 및 대외 기술 습득 활동을 통해<br>
-          <strong>트렌디한 구축 서비스</strong>를 제공하겠습니다.
+          이담에스티는 다양한 미디어 시스템 구축 노하우와 끊임없는 사내 연구 및 대외 기술 습득 활동을 통해 <strong>트렌디한 구축 서비스</strong>를 제공하겠습니다.
         </p>
         <div class="ab-msg-sig">— 이담에스티 임직원 일동</div>
 
@@ -208,6 +206,7 @@
     transform: rotate(180deg);
   }
   .ab-msg-text {
+    word-break: keep-all;
     font-size: clamp(16px, 2vw, 22px);
     color: rgba(255,255,255,0.9);
     line-height: 1.9;
@@ -258,6 +257,8 @@
     .ab-str-card { padding: 28px 24px; }
     .ab-strength-header { padding: 56px 20px 40px; }
     .ab-message { padding: 16px 20px 48px; }
+    .ab-message-inner { padding: 48px 24px; }
+    .ab-msg-text { font-size: 17px; line-height: 1.9; }
   }
 
   .s-strength { display: block; }
