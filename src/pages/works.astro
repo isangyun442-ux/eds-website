@@ -33,7 +33,9 @@
 
     /* HERO BANNER */
     .works-hero{
-      position:relative;height:320px;margin-top:66px;
+      position:relative;
+      margin-top:66px;
+      aspect-ratio:16/7;
       background:url('/images/works-hero.jpg') center/cover no-repeat;
       display:flex;align-items:flex-end;
       overflow:hidden;
@@ -155,7 +157,7 @@
       .sidebar-search{width:100%;}
     }
     @media(max-width:600px){.grid{grid-template-columns:repeat(2,1fr);gap:12px;}.wc-name{font-size:12px;}}
-    @media(max-width:480px){.works-hero{height:220px;}.works-hero-content{padding:0 24px 32px;}}
+    @media(max-width:480px){.works-hero{aspect-ratio:4/3;}.works-hero-content{padding:0 24px 28px;}}
   </style>
 </head>
 <body>
