@@ -14,6 +14,17 @@ import SecContact    from '../components/SecContact.astro';
 <html lang="ko">
 <head>
   <meta charset="UTF-8" />
+  <script>
+    // 모바일 기기 감지 → /mobile로 리다이렉트
+    (function() {
+      var ua = navigator.userAgent || navigator.vendor || window.opera;
+      var isMobile = /android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i.test(ua.toLowerCase());
+      var isSmall = window.innerWidth <= 768;
+      if (isMobile || isSmall) {
+        window.location.replace('/mobile');
+      }
+    })();
+  </script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>EDS (주)이담에스티 | Beyond The Future | 스마트한 공간 이담에스티가 만듭니다</title>
   <meta name="description" content="방송 스튜디오부터 LED 디스플레이까지. 17년의 경험으로 최적의 스마트 공간을 설계합니다." />
