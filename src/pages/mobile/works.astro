@@ -371,7 +371,7 @@ function render(){
   g.style.display='grid';e.style.display='none';
   g.innerHTML=fl.map(p=>{
     const hi=p.images&&p.images.length>0;
-    const bg=hi?'<div class="wc-bg" style="background-image:url('+p.images[0]+')"></div>':'<div class="wc-ph"><span>'+p.service+'</span></div>';
+    const bg=hi?'<div class="wc-bg" style="background-image:url(\'' + p.images[0] + '\')"></div>':'<div class="wc-ph"><span>'+p.service+'</span></div>';
     return '<div class="wc" onclick="openModal('+p.id+')">'
       +'<div class="wc-img">'+bg+'</div>'
       +'<div class="wc-info">'
@@ -394,15 +394,15 @@ function openModal(id){
   document.getElementById('mdesc').textContent=p.overview||'';
   const th=document.getElementById('mth');
   if(p.images&&p.images.length>0){
-    document.getElementById('mbg2').style.backgroundImage='url('+p.images[0]+')';
-    th.innerHTML=p.images.map((img,i)=>'<div class="mthumb '+(i===0?'on':'')+'" onclick="selImg(\''+img+'\')" ><div class="mthumb-bg" style="background-image:url('+img+')"></div></div>').join('');
+    document.getElementById('mbg2').style.backgroundImage="url('"+p.images[0]+"')";
+    th.innerHTML=p.images.map((img,i)=>'<div class="mthumb '+(i===0?'on':'')+'" onclick="selImg(\'' + img + '\')" ><div class="mthumb-bg" style="background-image:url(\'' + img + '\')"></div></div>').join('');
   }
   document.getElementById('mbg').classList.add('on');
   document.body.style.overflow='hidden';
 }
 
 function selImg(url){
-  document.getElementById('mbg2').style.backgroundImage='url('+url+')';
+  document.getElementById('mbg2').style.backgroundImage="url('"+url+"')";
   document.querySelectorAll('.mthumb').forEach(t=>t.classList.remove('on'));
   event.currentTarget.classList.add('on');
 }
