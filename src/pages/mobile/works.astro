@@ -78,7 +78,7 @@
     .mcat{font-size:9px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:#1a2f8a;display:block;margin-bottom:6px;}
     .mtitle{font-size:18px;font-weight:800;color:#0d1a3a;letter-spacing:-0.02em;line-height:1.3;padding-right:12px;}
     .mclose{width:32px;height:32px;background:#f5f7fc;border:none;cursor:pointer;color:#999;font-size:14px;display:flex;align-items:center;justify-content:center;border-radius:8px;flex-shrink:0;}
-    .mmain{width:100%;aspect-ratio:16/10;overflow:hidden;position:relative;background:#f0f3fa;}
+    .mmain{width:100%;height:200px;overflow:hidden;position:relative;background:#f0f3fa;}
     .mmain-bg{position:absolute;inset:0;background-size:cover;background-position:center;}
     .mthumbs{display:flex;gap:6px;padding:12px 20px;overflow-x:auto;scrollbar-width:none;}
     .mthumbs::-webkit-scrollbar{display:none;}
@@ -372,7 +372,7 @@ function render(){
   g.innerHTML=fl.map(p=>{
     const hi=p.images&&p.images.length>0;
     const cardImg = hi ? p.images[0] : '';
-    const cardStyle = hi ? 'background-image:url(' + cardImg + ');background-size:cover;background-position:center;' : '';
+    const cardStyle = hi ? 'height:140px;background-image:url(' + cardImg + ');background-size:cover;background-position:center;' : 'height:140px;';
     return '<div class="wc" onclick="openModal(' + p.id + ')">' + '<div class="wc-img" style="' + cardStyle + '"></div>'
       +'<div class="wc-info">'
         +'<span class="wc-cat">'+p.service+'</span>'
