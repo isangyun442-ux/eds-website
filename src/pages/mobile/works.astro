@@ -371,9 +371,9 @@ function render(){
   g.style.display='grid';e.style.display='none';
   g.innerHTML=fl.map(p=>{
     const hi=p.images&&p.images.length>0;
-    const imgAttr = hi ? ' style="background-image:url(\'" + p.images[0] + "\');background-size:cover;background-position:center;"' : '';
-    const imgInner = hi ? '' : '<span style="font-size:8px;color:#bbb;">'+p.service+'</span>';
-      +'<div class="wc-img"'+imgAttr+'>'+imgInner+'</div>'
+    const cardImg = hi ? p.images[0] : '';
+    const cardStyle = hi ? 'background-image:url(' + cardImg + ');background-size:cover;background-position:center;' : '';
+    return '<div class="wc" onclick="openModal(' + p.id + ')">' + '<div class="wc-img" style="' + cardStyle + '"></div>'
       +'<div class="wc-info">'
         +'<span class="wc-cat">'+p.service+'</span>'
         +'<p class="wc-name">'+p.title+'</p>'
