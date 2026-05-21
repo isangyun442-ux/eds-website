@@ -143,6 +143,36 @@
     .m-inquiry-email{display:block;background:#fff;color:#1a2f8a;font-size:14px;font-weight:600;padding:14px;border-radius:8px;text-decoration:none;border:1.5px solid #1a2f8a;margin-bottom:16px;}
     .m-inquiry-hours{font-size:12px;color:#aaa;}
 
+    /* ── 도입문의 모달 (PC 동일) ── */
+    .inq-modal{position:fixed;inset:0;z-index:500;display:flex;align-items:center;justify-content:center;pointer-events:none;opacity:0;transition:opacity 0.25s;}
+    .inq-modal.open{pointer-events:all;opacity:1;}
+    .inq-overlay{position:absolute;inset:0;background:rgba(0,0,0,0.4);}
+    .inq-box{position:relative;z-index:1;background:#fff;border-radius:16px;width:92%;max-width:520px;max-height:88vh;overflow-y:auto;box-shadow:0 24px 80px rgba(0,0,0,0.25);display:flex;flex-direction:column;transform:translateY(20px);transition:transform 0.25s;}
+    .inq-modal.open .inq-box{transform:translateY(0);}
+    .inq-head{display:flex;align-items:flex-start;justify-content:space-between;padding:24px 24px 20px;border-bottom:1px solid #f0f0f0;flex-shrink:0;}
+    .inq-title{font-size:20px;font-weight:800;color:#0a0a0a;letter-spacing:-0.03em;margin-bottom:4px;}
+    .inq-sub{font-size:13px;color:#999;}
+    .inq-close{background:none;border:none;cursor:pointer;font-size:18px;color:#bbb;line-height:1;padding:4px;transition:color 0.2s;}
+    .inq-close:hover{color:#333;}
+    .inq-body{padding:20px 24px;overflow-y:auto;flex:1;}
+    .inq-field{margin-bottom:16px;}
+    .inq-label{display:block;font-size:12px;font-weight:700;color:#555;margin-bottom:8px;}
+    .req{color:#e53e3e;}
+    .inq-input{width:100%;border:1.5px solid #e8e8e8;border-radius:8px;padding:11px 14px;font-size:14px;color:#1a1a1a;outline:none;font-family:inherit;transition:border-color 0.2s;}
+    .inq-input:focus{border-color:#1a2f8a;}
+    .inq-textarea{min-height:80px;resize:none;}
+    .inq-tel{display:flex;align-items:center;gap:6px;}
+    .inq-tel .inq-input{text-align:center;}
+    .inq-tel span{color:#bbb;font-weight:700;}
+    .inq-checks{display:flex;flex-wrap:wrap;gap:8px;}
+    .inq-check{display:flex;align-items:center;gap:6px;font-size:13px;color:#555;cursor:pointer;padding:7px 14px;border:1.5px solid #e8e8e8;border-radius:6px;transition:all 0.15s;}
+    .inq-check:hover{border-color:#1a2f8a;color:#1a2f8a;}
+    .inq-check input{display:none;}
+    .inq-foot{padding:16px 24px 24px;border-top:1px solid #f0f0f0;flex-shrink:0;}
+    .inq-submit{width:100%;padding:14px;background:#1a2f8a;color:#fff;border:none;border-radius:8px;font-size:15px;font-weight:700;cursor:pointer;font-family:inherit;}
+    .inq-submit:hover{background:#142580;}
+    .inq-privacy{font-size:11px;color:#bbb;text-align:center;margin-top:10px;}
+
     /* ── FOOTER ── */
     .m-footer{background:#0d1a3a;padding:28px 24px;text-align:center;}
     .m-footer-logo img{height:22px;filter:brightness(0) invert(1);opacity:0.7;margin-bottom:16px;}
@@ -154,6 +184,65 @@
   </style>
 </head>
 <body>
+
+  <!-- 도입문의 모달 (PC 버전 동일) -->
+  <div class="inq-modal" id="inquiryModal">
+    <div class="inq-overlay" onclick="document.getElementById('inquiryModal').classList.remove('open')"></div>
+    <div class="inq-box">
+      <div class="inq-head">
+        <div>
+          <div class="inq-title">도입 문의</div>
+          <div class="inq-sub">스마트 공간 구축에 관하여 문의 바랍니다.</div>
+        </div>
+        <button class="inq-close" onclick="document.getElementById('inquiryModal').classList.remove('open')">&#x2715;</button>
+      </div>
+      <div class="inq-body">
+        <div class="inq-field">
+          <label class="inq-label">회사명 <span class="req">*</span></label>
+          <input class="inq-input" type="text" placeholder="회사명 또는 기관명을 입력해 주세요" />
+        </div>
+        <div class="inq-field">
+          <label class="inq-label">담당자 이름 <span class="req">*</span></label>
+          <input class="inq-input" type="text" placeholder="이름" />
+        </div>
+        <div class="inq-field">
+          <label class="inq-label">연락처 <span class="req">*</span></label>
+          <div class="inq-tel">
+            <input class="inq-input" type="tel" placeholder="010" maxlength="4"/>
+            <span>-</span>
+            <input class="inq-input" type="tel" placeholder="0000" maxlength="4"/>
+            <span>-</span>
+            <input class="inq-input" type="tel" placeholder="0000" maxlength="4"/>
+          </div>
+        </div>
+        <div class="inq-field">
+          <label class="inq-label">이메일</label>
+          <input class="inq-input" type="email" placeholder="example@company.com" />
+        </div>
+        <div class="inq-field">
+          <label class="inq-label">상담 분야 <span class="req">*</span></label>
+          <div class="inq-checks">
+            <label class="inq-check"><input type="checkbox" /><span>방송 SI</span></label>
+            <label class="inq-check"><input type="checkbox" /><span>이러닝 스튜디오</span></label>
+            <label class="inq-check"><input type="checkbox" /><span>LED 디스플레이</span></label>
+            <label class="inq-check"><input type="checkbox" /><span>스마트 강의실</span></label>
+            <label class="inq-check"><input type="checkbox" /><span>화상회의 시스템</span></label>
+            <label class="inq-check"><input type="checkbox" /><span>미디어 아카이브</span></label>
+            <label class="inq-check"><input type="checkbox" /><span>조달청 등록제품</span></label>
+            <label class="inq-check"><input type="checkbox" /><span>기타</span></label>
+          </div>
+        </div>
+        <div class="inq-field">
+          <label class="inq-label">문의내용</label>
+          <textarea class="inq-input inq-textarea" placeholder="구체적인 내용을 입력해 주시면 빠르게 도움드리겠습니다."></textarea>
+        </div>
+      </div>
+      <div class="inq-foot">
+        <button class="inq-submit">상담 신청하기</button>
+        <p class="inq-privacy">운영시간 09:00 ~ 18:00 (평일) &nbsp;Tel. 02-857-7744</p>
+      </div>
+    </div>
+  </div>
 
   <!-- NAV -->
   <nav class="nav">
@@ -380,13 +469,7 @@
     <div class="m-contact-map">
       <iframe src="https://maps.google.com/maps?q=서울시+구로구+디지털로31길+19+에이스테크노타워2차&t=&z=16&ie=UTF8&iwloc=&output=embed" loading="lazy" title="이담에스티 위치"></iframe>
     </div>
-    <div class="m-inquiry-form">
-      <h3 class="m-inquiry-title">도입 문의하기</h3>
-      <p class="m-inquiry-sub">아래 연락처로 문의주시면 빠르게 답변드립니다</p>
-      <a href="tel:0285777744" class="m-inquiry-tel">📞 02-857-7744</a>
-      <a href="mailto:pub@edamst.com" class="m-inquiry-email">✉ pub@edamst.com</a>
-      <p class="m-inquiry-hours">평일 09:00 – 18:00</p>
-    </div>
+    <button class="m-contact-btn" onclick="document.getElementById('inquiryModal').classList.add('open')">도입 문의하기 →</button>
   </section>
 
   <!-- FOOTER -->
@@ -400,7 +483,7 @@
   </footer>
 
   <!-- 플로팅 문의 버튼 -->
-  <button class="m-fab" onclick="document.getElementById('m-contact').scrollIntoView({behavior:'smooth'})">
+  <button class="m-fab" onclick="document.getElementById('inquiryModal').classList.add('open')">
     💬 문의하기
   </button>
 
