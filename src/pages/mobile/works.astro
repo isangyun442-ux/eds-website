@@ -78,8 +78,7 @@
     .mcat{font-size:9px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:#1a2f8a;display:block;margin-bottom:6px;}
     .mtitle{font-size:18px;font-weight:800;color:#0d1a3a;letter-spacing:-0.02em;line-height:1.3;padding-right:12px;}
     .mclose{width:32px;height:32px;background:#f5f7fc;border:none;cursor:pointer;color:#999;font-size:14px;display:flex;align-items:center;justify-content:center;border-radius:8px;flex-shrink:0;}
-    .mmain{width:100%;height:120px;overflow:hidden;background:#f0f3fa;}
-    .mmain-bg{width:100%;height:120px;background-size:cover;background-position:center;display:block;}
+    .mmain{width:100%;height:120px;overflow:hidden;background-color:#f0f3fa;background-size:cover;background-position:center;}
     .mthumbs{display:flex;gap:6px;padding:12px 20px;overflow-x:auto;scrollbar-width:none;}
     .mthumbs::-webkit-scrollbar{display:none;}
     .mthumb{flex-shrink:0;width:60px;height:44px;cursor:pointer;position:relative;overflow:hidden;border:2px solid #e8ecf4;border-radius:6px;background:#e8ecf4;}
@@ -173,7 +172,7 @@
         </div>
         <button class="mclose" onclick="closeModal()">✕</button>
       </div>
-      <div class="mmain" style="height:120px;overflow:hidden;"><div class="mmain-bg" id="mbg2" style="width:100%;height:120px;background-size:cover;background-position:center;"></div></div>
+      <div class="mmain" id="mbg2"></div>
       <div class="mthumbs" id="mth"></div>
       <div class="minfo">
         <div class="minfo-row"><div class="minfo-label">구축일자</div><div class="minfo-val" id="mdate"></div></div>
@@ -394,20 +393,18 @@ function openModal(id){
   document.getElementById('mdesc').textContent=p.overview||'';
   const th=document.getElementById('mth');
   if(p.images&&p.images.length>0){
-    const mbg2=document.getElementById('mbg2');
-    mbg2.style.cssText='width:100%;height:120px;background-size:cover;background-position:center;background-image:url("'+p.images[0]+'");display:block;';
-    th.innerHTML=p.images.map((img,i)=>'<div class="mthumb '+(i===0?'on':'')+'" onclick="selImg(\'' + img + '\')" ><div class="mthumb-bg" style="width:100%;height:100%;position:absolute;inset:0;background-image:url(\'' + img + '\');background-size:cover;background-position:center;"></div></div>').join('');
+    const mm=document.getElementById('mbg2');
+    mm.style.backgroundImage="url('"+p.images[0]+"')";
+    th.innerHTML=p.images.map((img,i)=>'<div class="mthumb '+(i===0?'on':'')+'" onclick="selImg(\''+img+'\',this)"><div class="mthumb-bg" style="width:100%;height:100%;position:absolute;inset:0;background-image:url(\''+img+'\');background-size:cover;background-position:center;"></div></div>').join('');
   }
   document.getElementById('mbg').classList.add('on');
   document.body.style.overflow='hidden';
 }
 
-function selImg(url){
-  const mbg2=document.getElementById('mbg2');
-  mbg2.style.backgroundImage="url('"+url+"')";
-  mbg2.style.height='120px';
+function selImg(url,el){
+  document.getElementById('mbg2').style.backgroundImage="url('"+url+"')";
   document.querySelectorAll('.mthumb').forEach(t=>t.classList.remove('on'));
-  event.currentTarget.classList.add('on');
+  el.classList.add('on');
 }
 
 function closeModal(){
