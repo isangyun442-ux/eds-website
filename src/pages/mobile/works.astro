@@ -82,9 +82,8 @@
     .mmain img{width:100%;height:120px;object-fit:cover;display:block;}
     .mthumbs{display:flex;gap:6px;padding:12px 20px;overflow-x:auto;scrollbar-width:none;}
     .mthumbs::-webkit-scrollbar{display:none;}
-    .mthumb{flex-shrink:0;width:60px;height:44px;cursor:pointer;position:relative;overflow:hidden;border:2px solid #e8ecf4;border-radius:6px;background:#e8ecf4;}
+    .mthumb{flex-shrink:0;width:60px;height:44px;cursor:pointer;overflow:hidden;border:2px solid #e8ecf4;border-radius:6px;background-size:cover;background-position:center;background-color:#e8ecf4;}
     .mthumb.on{border-color:#1a2f8a;}
-    .mthumb-bg{position:absolute;inset:0;background-size:cover;background-position:center;}
     .minfo{padding:0 20px 20px;}
     .minfo-row{margin-bottom:16px;}
     .minfo-label{font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#bbb;margin-bottom:4px;}
@@ -173,7 +172,7 @@
         </div>
         <button class="mclose" onclick="closeModal()">✕</button>
       </div>
-      <div class="mmain"><img id="mbg2" src="data:," style="width:100%;height:120px;object-fit:cover;display:block;" alt="" /></div>
+      <div class="mmain"><img id="mbg2" src="data:," style="width:100%;height:120px;object-fit:cover;display:block;" alt=""></div>
       <div class="mthumbs" id="mth"></div>
       <div class="minfo">
         <div class="minfo-row"><div class="minfo-label">구축일자</div><div class="minfo-val" id="mdate"></div></div>
@@ -395,7 +394,9 @@ function openModal(id){
   const th=document.getElementById('mth');
   if(p.images&&p.images.length>0){
     document.getElementById('mbg2').src=p.images[0];
-    th.innerHTML=p.images.map((img,i)=>'<div class="mthumb '+(i===0?'on':'')+'" onclick="selImg(\''+img+'\',this)"><div class="mthumb-bg" style="width:100%;height:100%;position:absolute;inset:0;background-image:url(\''+img+'\');background-size:cover;background-position:center;"></div></div>').join('');
+    th.innerHTML=p.images.map((img,i)=>
+      '<div class="mthumb '+(i===0?'on':'')+'" onclick="selImg(\''+img+'\',this)" style="background-image:url(\''+img+'\');"></div>'
+    ).join('');
   }
   document.getElementById('mbg').classList.add('on');
   document.body.style.overflow='hidden';
