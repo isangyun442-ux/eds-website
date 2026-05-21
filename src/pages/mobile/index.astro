@@ -88,9 +88,9 @@
     .m-portfolio .m-label{color:rgba(255,255,255,0.5);}
     .m-portfolio .m-label::before{background:rgba(255,255,255,0.3);}
     .m-portfolio .m-title{color:#fff;}
-    .m-port-slides{position:relative;margin-top:24px;}
-    .m-port-slide{display:none;}
-    .m-port-slide.active{display:block;}
+    .m-port-slides{position:relative;margin-top:24px;overflow:hidden;}
+    .m-port-slide{display:none !important;}
+    .m-port-slide.active{display:block !important;}
     .m-port-img{width:100%;aspect-ratio:16/9;border-radius:10px;overflow:hidden;background:#0d2030;margin-bottom:12px;}
     .m-port-img img{width:100%;height:100%;object-fit:cover;}
     .m-port-thumbs{display:flex;gap:8px;margin-bottom:16px;overflow-x:auto;scrollbar-width:none;}
@@ -417,38 +417,66 @@ const projects = [
   { title:'LG유플러스 XR스튜디오', cat:'LED 디스플레이', date:'2023.05', desc:'LED 디스플레이를 활용한 실감형 XR 스튜디오 구축', imgs:['/images/portfolio/LGU_XR_01.jpg','/images/portfolio/LGU_XR_02.jpg'] },
 ];
 let cur = 0;
+let curImg = 0;
 const slidesWrap = document.getElementById('mPortSlides');
+const portMainImg = document.createElement('img');
+const portThumbsWrap = document.createElement('div');
+const portCat = document.createElement('div');
+const portName = document.createElement('div');
+const portSub = document.createElement('div');
+const portDesc = document.createElement('div');
 
-function renderSlide(p, idx) {
-  return '<div class="m-port-slide'+(idx===0?' active':'')+'" data-idx="'+idx+'">'
-    +'<div class="m-port-img"><img src="'+(p.imgs[0]||'')+'" alt="'+p.title+'" loading="lazy" /></div>'
-    +'<div class="m-port-thumbs">'
-    +p.imgs.slice(0,4).map(function(img,i){ return '<div class="m-port-thumb'+(i===0?' on':'')+'" onclick="selectThumb('+idx+','+i+')" data-slide="'+idx+'" data-img="'+i+'"><img src="'+img+'" alt="" loading="lazy" /></div>'; }).join('')
-    +'</div>'
-    +'<div class="m-port-cat">'+p.cat+'</div>'
-    +'<div class="m-port-name">'+p.title+'</div>'
-    +'<div class="m-port-sub">'+p.date+'</div>'
-    +'<div class="m-port-desc">'+p.desc+'</div>'
-    +'</div>';
+portMainImg.style.cssText = 'width:100%;height:100%;object-fit:cover;';
+portThumbsWrap.className = 'm-port-thumbs';
+portCat.className = 'm-port-cat';
+portName.className = 'm-port-name';
+portSub.className = 'm-port-sub';
+portDesc.className = 'm-port-desc';
+
+const imgWrap = document.createElement('div');
+imgWrap.className = 'm-port-img';
+imgWrap.appendChild(portMainImg);
+
+slidesWrap.appendChild(imgWrap);
+slidesWrap.appendChild(portThumbsWrap);
+slidesWrap.appendChild(portCat);
+slidesWrap.appendChild(portName);
+slidesWrap.appendChild(portSub);
+slidesWrap.appendChild(portDesc);
+
+function renderPort() {
+  const p = projects[cur];
+  curImg = 0;
+  portMainImg.src = p.imgs[0] || '';
+  portMainImg.alt = p.title;
+  portCat.textContent = p.cat;
+  portName.textContent = p.title;
+  portSub.textContent = p.date;
+  portDesc.textContent = p.desc;
+  document.getElementById('mPortCur').textContent = String(cur+1).padStart(2,'0');
+
+  // 썸네일
+  portThumbsWrap.innerHTML = p.imgs.slice(0,4).map(function(img,i){
+    return '<div class="m-port-thumb'+(i===0?' on':'')+'" data-i="'+i+'" style="cursor:pointer;">'
+      +'<img src="'+img+'" alt="" loading="lazy" style="width:100%;height:100%;object-fit:cover;" />'
+      +'</div>';
+  }).join('');
+  portThumbsWrap.querySelectorAll('.m-port-thumb').forEach(function(t) {
+    t.addEventListener('click', function() {
+      const i = parseInt(t.dataset.i);
+      portMainImg.src = p.imgs[i];
+      portThumbsWrap.querySelectorAll('.m-port-thumb').forEach(function(x,j){ x.classList.toggle('on', j===i); });
+    });
+  });
 }
-
-slidesWrap.innerHTML = projects.map(function(p,i){ return renderSlide(p,i); }).join('');
 
 function goPort(n) {
   cur = (n + projects.length) % projects.length;
-  document.querySelectorAll('.m-port-slide').forEach(function(s,i){ s.classList.toggle('active', i===cur); });
-  document.getElementById('mPortCur').textContent = String(cur+1).padStart(2,'0');
-}
-function selectThumb(slideIdx, imgIdx) {
-  const slide = document.querySelector('.m-port-slide[data-idx="'+slideIdx+'"]');
-  if (!slide) return;
-  const img = slide.querySelector('.m-port-img img');
-  const thumbs = slide.querySelectorAll('.m-port-thumb');
-  img.src = projects[slideIdx].imgs[imgIdx];
-  thumbs.forEach(function(t,i){ t.classList.toggle('on', i===imgIdx); });
+  renderPort();
 }
 document.getElementById('mPortPrev').addEventListener('click', function(){ goPort(cur-1); });
 document.getElementById('mPortNext').addEventListener('click', function(){ goPort(cur+1); });
+renderPort();
 </script>
 </body>
 </html>
