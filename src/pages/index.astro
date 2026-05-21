@@ -132,7 +132,7 @@ import SecContact    from '../components/SecContact.astro';
     </a>
     <div class="nav-menu">
       <div class="nav-item has-drop">
-        <span class="nav-link">회사소개</span>
+        <a class="nav-link" href="#sec2" onclick="event.preventDefault();document.getElementById('sec2').scrollIntoView({behavior:'smooth'})">회사소개</a>
         <div class="nav-drop">
           <a href="#sec2" class="drop-link" onclick="event.preventDefault();document.getElementById('sec2').scrollIntoView({behavior:'smooth'})">인사말</a>
           <a href="#sec6" class="drop-link" onclick="event.preventDefault();document.getElementById('sec6').scrollIntoView({behavior:'smooth'})">연혁</a>
@@ -144,7 +144,7 @@ import SecContact    from '../components/SecContact.astro';
         <a href="#sec3" class="nav-link" onclick="event.preventDefault();document.getElementById('sec3').scrollIntoView({behavior:'smooth'})">사업분야</a>
       </div>
       <div class="nav-item has-drop">
-        <span class="nav-link">조달청 등록제품</span>
+        <a class="nav-link" href="#sec5" onclick="event.preventDefault();document.getElementById('sec5').scrollIntoView({behavior:'smooth'})">조달청 등록제품</a>
         <div class="nav-drop">
           <a href="/products/mediabox" class="drop-link">미디어박스</a>
           <a href="/products/server" class="drop-link">컴퓨터 서버</a>
