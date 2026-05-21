@@ -78,14 +78,13 @@
     .mcat{font-size:9px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:#1a2f8a;display:block;margin-bottom:6px;}
     .mtitle{font-size:18px;font-weight:800;color:#0d1a3a;letter-spacing:-0.02em;line-height:1.3;padding-right:12px;}
     .mclose{width:32px;height:32px;background:#f5f7fc;border:none;cursor:pointer;color:#999;font-size:14px;display:flex;align-items:center;justify-content:center;border-radius:8px;flex-shrink:0;}
-    .mmain{width:100%;height:200px;overflow:hidden;background:#f0f3fa;}
-    .mmain img{width:100%;height:200px;object-fit:cover;display:block;}
+    #mmain-img{width:100%;height:200px;object-fit:cover;display:block;}
     .mthumbs{display:flex;gap:6px;padding:12px 20px;overflow-x:auto;scrollbar-width:none;}
     .mthumbs::-webkit-scrollbar{display:none;}
-    .mthumb{flex-shrink:0;width:72px;height:52px;cursor:pointer;overflow:hidden;border:2px solid #e8ecf4;border-radius:6px;background-color:#e8ecf4;}
-    .mthumb.on{border-color:#1a2f8a;box-shadow:0 0 0 2px rgba(26,47,138,0.2);}
-    .mthumb img{width:100%;height:100%;object-fit:cover;display:block;opacity:0.8;}
-    .mthumb.on img{opacity:1;}
+    .mthumb-item{flex-shrink:0;width:72px;height:52px;cursor:pointer;border:2px solid #e8ecf4;border-radius:6px;overflow:hidden;}
+    .mthumb-item.on{border-color:#1a2f8a;}
+    .mthumb-item img{width:72px;height:52px;object-fit:cover;display:block;opacity:0.75;}
+    .mthumb-item.on img{opacity:1;}
     .minfo{padding:0 20px 20px;}
     .minfo-row{margin-bottom:16px;}
     .minfo-label{font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#bbb;margin-bottom:4px;}
@@ -174,7 +173,7 @@
         </div>
         <button class="mclose" onclick="closeModal()">✕</button>
       </div>
-      <div class="mmain"><img id="mbg2" src="data:," style="width:100%;height:200px;object-fit:cover;display:block;" alt=""></div>
+      <img id="mmain-img" src="data:," alt="">
       <div class="mthumbs" id="mth"></div>
       <div class="minfo">
         <div class="minfo-row"><div class="minfo-label">구축일자</div><div class="minfo-val" id="mdate"></div></div>
@@ -393,20 +392,24 @@ function openModal(id){
   document.getElementById('mdate').textContent=p.date;
   document.getElementById('mclient').textContent=p.client;
   document.getElementById('mdesc').textContent=p.overview||'';
+  const mainImg=document.getElementById('mmain-img');
   const th=document.getElementById('mth');
   if(p.images&&p.images.length>0){
-    document.getElementById('mbg2').src=p.images[0];
+    mainImg.src=p.images[0];
     th.innerHTML=p.images.map((img,i)=>
-      '<div class="mthumb '+(i===0?'on':'')+'" onclick="selImg(\''+img+'\',this)"><img src="'+img+'" alt=""></div>'
+      '<div class="mthumb-item'+(i===0?' on':'')+'" onclick="selImg(\''+img+'\',this)"><img src="'+img+'" alt=""></div>'
     ).join('');
+  } else {
+    mainImg.src='data:,';
+    th.innerHTML='';
   }
   document.getElementById('mbg').classList.add('on');
   document.body.style.overflow='hidden';
 }
 
 function selImg(url,el){
-  document.getElementById('mbg2').src=url;
-  document.querySelectorAll('.mthumb').forEach(t=>t.classList.remove('on'));
+  document.getElementById('mmain-img').src=url;
+  document.querySelectorAll('.mthumb-item').forEach(t=>t.classList.remove('on'));
   el.classList.add('on');
 }
 
