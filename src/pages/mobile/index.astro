@@ -84,14 +84,14 @@
     .m-portfolio .m-title{color:#fff;}
     .m-port-slides{position:relative;margin-top:24px;}
     /* 큰 메인 이미지 */
-    .m-port-img{width:100%;aspect-ratio:4/3;border-radius:0;overflow:hidden;background:#0d2030;margin-bottom:0;position:relative;}
+    .m-port-img{width:100%;aspect-ratio:16/9;border-radius:10px;overflow:hidden;background:#0d2030;margin-bottom:12px;position:relative;}
     .m-port-img img{width:100%;height:100%;object-fit:cover;display:block;}
     .m-port-img-ov{position:absolute;inset:0;background:linear-gradient(to bottom,transparent 30%,rgba(6,14,24,0.85) 100%);}
-    .m-port-thumbs{display:flex;gap:8px;margin:12px 0 16px;overflow-x:auto;scrollbar-width:none;}
+    .m-port-thumbs{display:flex;gap:8px;margin:12px 0 16px;overflow-x:auto;scrollbar-width:none;max-height:60px;}
     .m-port-thumbs::-webkit-scrollbar{display:none;}
-    .m-port-thumb{flex-shrink:0;width:64px;height:48px;border-radius:6px;overflow:hidden;border:2px solid rgba(255,255,255,0.2);cursor:pointer;background:#0d2030;transition:border-color 0.2s;}
+    .m-port-thumb{flex-shrink:0;width:72px;height:52px;border-radius:6px;overflow:hidden;border:2px solid rgba(255,255,255,0.2);cursor:pointer;background:#0d2030;transition:border-color 0.2s;}
     .m-port-thumb.on{border-color:#fff;}
-    .m-port-thumb img{width:100%;height:100%;object-fit:cover;}
+    .m-port-thumb img{width:100%;height:100%;object-fit:cover;display:block;max-height:52px;}
     .m-port-info{padding:0;}
     .m-port-cat{font-size:10px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:#00B8D9;margin-bottom:6px;display:block;}
     .m-port-name{font-size:20px;font-weight:800;color:#fff;margin-bottom:8px;line-height:1.3;}
@@ -544,7 +544,7 @@ const portName = document.createElement('div');
 const portSub = document.createElement('div');
 const portDesc = document.createElement('div');
 
-portMainImg.style.cssText = 'width:100%;height:100%;object-fit:cover;';
+portMainImg.style.cssText = 'width:100%;height:100%;object-fit:cover;display:block;';
 portThumbsWrap.className = 'm-port-thumbs';
 portCat.className = 'm-port-cat';
 portName.className = 'm-port-name';
@@ -581,15 +581,18 @@ function renderPort() {
 
   // 썸네일
   portThumbsWrap.innerHTML = p.imgs.slice(0,4).map(function(img,i){
-    return '<div class="m-port-thumb'+(i===0?' on':'')+'" data-i="'+i+'" style="cursor:pointer;">'
-      +'<img src="'+img+'" alt="" loading="lazy" style="width:100%;height:100%;object-fit:cover;" />'
+    return '<div class="m-port-thumb'+(i===0?' on':'')+'" data-i="'+i+'" style="cursor:pointer;flex-shrink:0;width:68px;height:50px;border-radius:6px;overflow:hidden;border:2px solid '+(i===0?'#fff':'rgba(255,255,255,0.2)')+';background:#0d2030;">'
+      +'<img src="'+img+'" alt="" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;" />'
       +'</div>';
   }).join('');
   portThumbsWrap.querySelectorAll('.m-port-thumb').forEach(function(t) {
     t.addEventListener('click', function() {
       const i = parseInt(t.dataset.i);
       portMainImg.src = p.imgs[i];
-      portThumbsWrap.querySelectorAll('.m-port-thumb').forEach(function(x,j){ x.classList.toggle('on', j===i); });
+      portThumbsWrap.querySelectorAll('.m-port-thumb').forEach(function(x,j){
+        x.classList.toggle('on', j===i);
+        x.style.border = j===i ? '2px solid #fff' : '2px solid rgba(255,255,255,0.2)';
+      });
     });
   });
 }
