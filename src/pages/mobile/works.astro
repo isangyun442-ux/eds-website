@@ -53,9 +53,10 @@
     /* 카드 그리드 */
     .grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;padding:0 20px 80px;}
     .wc{cursor:pointer;background:#fff;overflow:hidden;border-radius:8px;box-shadow:0 2px 12px rgba(0,0,0,0.06);}
-    .wc-img{width:100%;aspect-ratio:3/2;overflow:hidden;background:#e8ecf4;background-size:cover;background-position:center;transition:transform 0.4s;}
-    .wc:active .wc-img{transform:scale(1.03);}
-    .wc-ph{width:100%;aspect-ratio:3/2;display:flex;align-items:center;justify-content:center;background:#e8ecf4;}
+    .wc-img{width:100%;height:140px;overflow:hidden;background:#e8ecf4;background-size:cover;background-position:center;}
+    .wc-bg{position:absolute;inset:0;width:100%;height:100%;background-size:cover;background-position:center;transition:transform 0.4s;}
+    .wc:active .wc-bg{transform:scale(1.03);}
+    .wc-ph{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:#e8ecf4;}
     .wc-ph span{font-size:8px;color:#bbb;text-transform:uppercase;letter-spacing:0.1em;}
     .wc-info{padding:10px 12px 12px;border-top:1px solid #f0f4fb;position:relative;}
     .wc-info::before{content:'';position:absolute;bottom:0;left:0;height:2px;background:#1a2f8a;width:0;transition:width 0.3s;}
@@ -370,9 +371,9 @@ function render(){
   g.style.display='grid';e.style.display='none';
   g.innerHTML=fl.map(p=>{
     const hi=p.images&&p.images.length>0;
-    const bg=hi?'<div class="wc-bg" style="background-image:url(\'' + p.images[0] + '\')"></div>':'<div class="wc-ph"><span>'+p.service+'</span></div>';
-    return '<div class="wc" onclick="openModal('+p.id+')">'
-      +'<div class="wc-img">'+bg+'</div>'
+    const imgAttr = hi ? ' style="background-image:url(\'" + p.images[0] + "\');background-size:cover;background-position:center;"' : '';
+    const imgInner = hi ? '' : '<span style="font-size:8px;color:#bbb;">'+p.service+'</span>';
+      +'<div class="wc-img"'+imgAttr+'>'+imgInner+'</div>'
       +'<div class="wc-info">'
         +'<span class="wc-cat">'+p.service+'</span>'
         +'<p class="wc-name">'+p.title+'</p>'
