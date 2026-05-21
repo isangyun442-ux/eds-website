@@ -372,7 +372,7 @@ function render(){
   g.innerHTML=fl.map(p=>{
     const hi=p.images&&p.images.length>0;
     const cardImg = hi ? p.images[0] : '';
-    const cardStyle = hi ? 'background-image:url(' + cardImg + ');background-size:cover;background-position:center;' : '';
+    const cardStyle = hi ? 'height:140px;background-image:url(' + cardImg + ');background-size:cover;background-position:center;background-repeat:no-repeat;' : 'height:140px;';
     return '<div class="wc" onclick="openModal(' + p.id + ')">' + '<div class="wc-img" style="' + cardStyle + '"></div>'
       +'<div class="wc-info">'
         +'<span class="wc-cat">'+p.service+'</span>'
