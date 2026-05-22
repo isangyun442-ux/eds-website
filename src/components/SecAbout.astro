@@ -18,11 +18,6 @@
       <!-- 음각 워터마크 -->
       <div class="ab-mark ab-mark-icon-l"></div>
       <div class="ab-mark ab-mark-logo-l"></div>
-      <!-- 단순 선 -->
-      <svg class="ab-line" viewBox="0 0 600 700" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <line x1="0" y1="600" x2="600" y2="200" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
-        <line x1="0" y1="700" x2="700" y2="0" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
-      </svg>
       <div class="ab-left-content">
         <h2 class="ab-title ab-title--light">"1만 시간의 법칙"</h2>
         <p class="ab-body ab-body--light">
@@ -42,11 +37,6 @@
       <!-- 음각 워터마크 -->
       <div class="ab-mark ab-mark-icon-r"></div>
       <div class="ab-mark ab-mark-logo-r"></div>
-      <!-- 단순 선 -->
-      <svg class="ab-line" viewBox="0 0 600 700" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <line x1="600" y1="600" x2="0" y2="200" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
-        <line x1="600" y1="700" x2="-100" y2="0" stroke="rgba(255,255,255,0.03)" stroke-width="1"/>
-      </svg>
       <div class="ab-right-content">
         <h2 class="ab-title ab-title--light">전문가 집단<br><em class="ab-em--cyan">이담에스티</em></h2>
         <p class="ab-body ab-body--light">
@@ -130,42 +120,46 @@
   .ab-mark {
     position: absolute; z-index: 1; pointer-events: none;
     background-size: contain; background-repeat: no-repeat; background-position: center;
-    /* mix-blend-mode overlay + black = 어둡게 파인 효과 */
-    mix-blend-mode: overlay;
   }
-  /* EDAM 아이콘 - 왼쪽 우하단 */
+  /* EDAM 아이콘 - 왼쪽 우상단 (스왑) */
   .ab-mark-icon-l {
-    right: -50px; bottom: -40px;
-    width: 320px; height: 320px;
+    right: -40px; top: -30px;
+    width: 300px; height: 300px;
     background-image: url('/images/EDAM_ICON.png');
-    filter: brightness(0) drop-shadow(0 2px 0px rgba(255,255,255,0.18)) drop-shadow(0 -1px 0px rgba(0,0,0,0.7));
-    opacity: 0.22;
+    filter: brightness(0) invert(1)
+            drop-shadow(0px -1px 0px rgba(255,255,255,0.25))
+            drop-shadow(0px 2px 1px rgba(0,0,0,0.55));
+    opacity: 0.09;
   }
-  /* 메인CI 로고 - 왼쪽 우상단 */
+  /* 메인CI 로고 - 왼쪽 우하단 (스왑) */
   .ab-mark-logo-l {
-    right: 20px; top: 30px;
+    right: 30px; bottom: 30px;
     width: 200px; height: 80px;
     background-image: url('/images/메인CI.png');
-    filter: brightness(0) invert(1) drop-shadow(0 1px 0px rgba(255,255,255,0.12)) drop-shadow(0 -1px 0px rgba(0,0,0,0.5));
-    opacity: 0.07;
-    mix-blend-mode: normal;
+    filter: brightness(0) invert(1)
+            drop-shadow(0px -1px 0px rgba(255,255,255,0.2))
+            drop-shadow(0px 2px 1px rgba(0,0,0,0.5));
+    opacity: 0.08;
   }
   /* EDAM 아이콘 - 오른쪽 좌상단 */
   .ab-mark-icon-r {
-    left: -50px; top: -40px;
-    width: 300px; height: 300px;
+    left: -40px; top: -30px;
+    width: 280px; height: 280px;
     background-image: url('/images/EDAM_ICON.png');
-    filter: brightness(0) drop-shadow(0 2px 0px rgba(255,255,255,0.14)) drop-shadow(0 -1px 0px rgba(0,0,0,0.8));
-    opacity: 0.18;
+    filter: brightness(0) invert(1)
+            drop-shadow(0px -1px 0px rgba(255,255,255,0.2))
+            drop-shadow(0px 2px 1px rgba(0,0,0,0.6));
+    opacity: 0.08;
   }
   /* 메인CI 로고 - 오른쪽 좌하단 */
   .ab-mark-logo-r {
-    left: 20px; bottom: 30px;
+    left: 30px; bottom: 30px;
     width: 180px; height: 72px;
     background-image: url('/images/메인CI.png');
-    filter: brightness(0) invert(1) drop-shadow(0 1px 0px rgba(255,255,255,0.10)) drop-shadow(0 -1px 0px rgba(0,0,0,0.6));
-    opacity: 0.06;
-    mix-blend-mode: normal;
+    filter: brightness(0) invert(1)
+            drop-shadow(0px -1px 0px rgba(255,255,255,0.18))
+            drop-shadow(0px 2px 1px rgba(0,0,0,0.55));
+    opacity: 0.07;
   }
 
   .ab-deco { position:absolute;inset:0;width:100%;height:100%;z-index:0; }
