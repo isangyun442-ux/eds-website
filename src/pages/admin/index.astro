@@ -43,10 +43,9 @@
     if(sessionStorage.getItem('eds-admin-token')){
       location.href='/admin/dashboard';
     }
-    function login(){
+    window.login = function(){
       const pw=document.getElementById('pw').value.trim();
       if(!pw){ document.getElementById('err').classList.add('on'); return; }
-      // POST로 인증 확인 (POST는 x-admin-token 검증함)
       fetch('/api/admin/projects',{
         method:'POST',
         headers:{'x-admin-token':pw,'Content-Type':'application/json'},
@@ -56,7 +55,6 @@
           sessionStorage.removeItem('eds-admin-token');
           document.getElementById('err').classList.add('on');
         } else {
-          // 인증 성공 (실제 저장은 안 하도록 바로 삭제하지 않고 토큰 저장 후 이동)
           sessionStorage.setItem('eds-admin-token', pw);
           location.href='/admin/dashboard';
         }
