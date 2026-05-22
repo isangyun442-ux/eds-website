@@ -241,65 +241,95 @@ import { projects } from '../data/projects.js';
 
 <script is:inline>
 (function () {
-  const bgs    = document.querySelectorAll('.port-bg-slide');
-  const imgs   = document.querySelectorAll('.port-img-slide');
-  const slides = document.querySelectorAll('.port-slide');
-  const total  = slides.length;
-  let cur = 0;
+  function initSlider(projects) {
+    const bg      = document.getElementById('port-bg');
+    const imgWrap = document.getElementById('port-img-wrap');
+    const slides  = document.getElementById('port-slides');
+    const totalEl = document.querySelector('.port-total-num');
 
-  const btnPrev  = document.getElementById('port-prev');
-  const btnNext  = document.getElementById('port-next');
-  const curNum   = document.getElementById('port-cur-num');
-  const tPrev    = document.getElementById('port-thumb-prev');
-  const tCur     = document.getElementById('port-thumb-cur');
-  const tNext    = document.getElementById('port-thumb-next');
+    // DOM 재구성
+    bg.innerHTML = projects.map((p, i) =>
+      `<div class="port-bg-slide${i===0?' active':''}" style="background-image:url('${p.images&&p.images[0]?p.images[0]:''}')"></div>`
+    ).join('');
+    imgWrap.innerHTML = projects.map((p, i) =>
+      `<div class="port-img-slide${i===0?' active':''}" style="background-image:url('${p.images&&p.images[0]?p.images[0]:''}')"></div>`
+    ).join('');
+    slides.innerHTML = projects.map((p, i) =>
+      `<div class="port-slide${i===0?' active':''}">
+        <h3 class="port-title">${p.title||''}</h3>
+        <p class="port-sub">${p.service||''}&nbsp;·&nbsp;${p.date||''}</p>
+        <p class="port-desc">${p.overview||''}</p>
+      </div>`
+    ).join('');
+    if (totalEl) totalEl.textContent = projects.length;
 
-  // 전체 프로젝트 이미지 목록 (bg/img 슬라이드에서 추출)
-  const imgUrls = Array.from(imgs).map(el => el.style.backgroundImage);
+    // 슬라이더 초기화
+    const bgs    = document.querySelectorAll('.port-bg-slide');
+    const imgs   = document.querySelectorAll('.port-img-slide');
+    const slds   = document.querySelectorAll('.port-slide');
+    const total  = slds.length;
+    let cur = 0;
 
-  function setThumb(el, idx) {
-    if (idx < 0 || idx >= total) {
-      el.classList.add('hidden');
-      el.style.backgroundImage = '';
-    } else {
-      el.classList.remove('hidden');
-      el.style.backgroundImage = imgUrls[idx];
+    const btnPrev = document.getElementById('port-prev');
+    const btnNext = document.getElementById('port-next');
+    const curNum  = document.getElementById('port-cur-num');
+    const tPrev   = document.getElementById('port-thumb-prev');
+    const tCur    = document.getElementById('port-thumb-cur');
+    const tNext   = document.getElementById('port-thumb-next');
+    const imgUrls = Array.from(imgs).map(el => el.style.backgroundImage);
+
+    function setThumb(el, idx) {
+      if (idx < 0 || idx >= total) {
+        el.classList.add('hidden');
+        el.style.backgroundImage = '';
+      } else {
+        el.classList.remove('hidden');
+        el.style.backgroundImage = imgUrls[idx];
+      }
     }
+
+    function go(n) {
+      bgs[cur].classList.remove('active');
+      imgs[cur].classList.remove('active');
+      slds[cur].classList.remove('active');
+      cur = Math.max(0, Math.min(n, total - 1));
+      bgs[cur].classList.add('active');
+      imgs[cur].classList.add('active');
+      slds[cur].classList.add('active');
+      curNum.textContent = String(cur + 1).padStart(2, '0');
+      setThumb(tPrev, cur - 1);
+      setThumb(tCur,  cur);
+      setThumb(tNext, cur + 1);
+      btnPrev.disabled = cur === 0;
+      btnNext.disabled = cur === total - 1;
+    }
+
+    tPrev.addEventListener('click', function () { go(cur - 1); });
+    tCur.addEventListener('click',  function () { go(cur); });
+    tNext.addEventListener('click', function () { go(cur + 1); });
+    btnPrev.addEventListener('click', function () { go(cur - 1); });
+    btnNext.addEventListener('click', function () { go(cur + 1); });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'ArrowLeft')  go(cur - 1);
+      if (e.key === 'ArrowRight') go(cur + 1);
+    });
+
+    go(0);
   }
 
-  function go(n) {
-    bgs[cur].classList.remove('active');
-    imgs[cur].classList.remove('active');
-    slides[cur].classList.remove('active');
-    cur = Math.max(0, Math.min(n, total - 1));
-    bgs[cur].classList.add('active');
-    imgs[cur].classList.add('active');
-    slides[cur].classList.add('active');
-
-    // 카운터 업데이트
-    curNum.textContent = String(cur + 1).padStart(2, '0');
-
-    // 썸네일 3장 업데이트
-    setThumb(tPrev, cur - 1);
-    setThumb(tCur,  cur);
-    setThumb(tNext, cur + 1);
-
-    btnPrev.disabled = cur === 0;
-    btnNext.disabled = cur === total - 1;
-  }
-
-  // 썸네일 클릭
-  tPrev.addEventListener('click', function () { go(cur - 1); });
-  tCur.addEventListener('click',  function () { go(cur); });
-  tNext.addEventListener('click', function () { go(cur + 1); });
-
-  btnPrev.addEventListener('click', function () { go(cur - 1); });
-  btnNext.addEventListener('click', function () { go(cur + 1); });
-  document.addEventListener('keydown', function (e) {
-    if (e.key === 'ArrowLeft')  go(cur - 1);
-    if (e.key === 'ArrowRight') go(cur + 1);
-  });
-
-  go(0);
+  // KV API에서 데이터 가져오기, 없으면 기존 DOM 그대로 초기화
+  fetch('/api/admin/projects')
+    .then(r => r.json())
+    .then(data => {
+      if (Array.isArray(data) && data.length > 0) {
+        initSlider(data);
+      } else {
+        // KV 비어있으면 정적 HTML 그대로 슬라이더만 초기화
+        initSlider(window.__staticProjects || []);
+      }
+    })
+    .catch(() => {
+      initSlider(window.__staticProjects || []);
+    });
 })();
 </script>
