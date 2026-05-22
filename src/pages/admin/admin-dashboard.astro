@@ -1,0 +1,415 @@
+---
+// src/pages/admin/dashboard.astro
+---
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EDS 관리자 대시보드</title>
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box;}
+    body{font-family:'Pretendard','Noto Sans KR',sans-serif;background:#f4f6fb;min-height:100vh;}
+
+    /* NAV */
+    .nav{position:fixed;top:0;left:0;right:0;height:56px;background:#0d1a3a;display:flex;align-items:center;justify-content:space-between;padding:0 28px;z-index:100;}
+    .nav-logo{display:flex;align-items:center;gap:12px;}
+    .nav-logo img{height:22px;}
+    .nav-logo span{color:#fff;font-size:13px;opacity:0.5;}
+    .nav-right{display:flex;align-items:center;gap:16px;}
+    .nav-count{color:rgba(255,255,255,0.6);font-size:13px;}
+    .nav-count strong{color:#fff;font-weight:700;}
+    .logout-btn{background:rgba(255,255,255,0.1);color:#fff;border:none;padding:7px 14px;border-radius:6px;font-size:13px;cursor:pointer;font-family:inherit;}
+    .logout-btn:hover{background:rgba(255,255,255,0.2);}
+
+    /* MAIN */
+    .main{padding:80px 28px 40px;}
+    .topbar{display:flex;align-items:center;justify-content:space-between;margin-bottom:24px;}
+    .page-title{font-size:22px;font-weight:800;color:#0d1a3a;}
+    .add-btn{background:#1a2f8a;color:#fff;border:none;padding:10px 20px;border-radius:8px;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit;display:flex;align-items:center;gap:6px;}
+    .add-btn:hover{background:#0d1a3a;}
+
+    /* TABLE */
+    .table-wrap{background:#fff;border-radius:12px;overflow:hidden;box-shadow:0 2px 12px rgba(0,0,0,0.06);}
+    table{width:100%;border-collapse:collapse;}
+    th{background:#f8faff;font-size:11px;font-weight:700;color:#888;letter-spacing:0.08em;text-transform:uppercase;padding:12px 16px;text-align:left;border-bottom:1px solid #eef0f8;}
+    td{padding:14px 16px;border-bottom:1px solid #f0f2f8;font-size:13px;color:#333;vertical-align:middle;}
+    tr:last-child td{border-bottom:none;}
+    tr:hover td{background:#fafbff;}
+    .thumb{width:56px;height:40px;object-fit:cover;border-radius:4px;background:#e8ecf4;}
+    .no-img{width:56px;height:40px;border-radius:4px;background:#e8ecf4;display:flex;align-items:center;justify-content:center;font-size:10px;color:#aaa;}
+    .tag{display:inline-block;background:#eef2ff;color:#1a2f8a;font-size:11px;font-weight:600;padding:3px 8px;border-radius:4px;}
+    .actions{display:flex;gap:6px;}
+    .edit-btn{background:#e8f0ff;color:#1a2f8a;border:none;padding:6px 12px;border-radius:6px;font-size:12px;font-weight:600;cursor:pointer;font-family:inherit;}
+    .edit-btn:hover{background:#d0dcff;}
+    .del-btn{background:#fff0f0;color:#d00;border:none;padding:6px 12px;border-radius:6px;font-size:12px;font-weight:600;cursor:pointer;font-family:inherit;}
+    .del-btn:hover{background:#ffd5d5;}
+    .empty{text-align:center;padding:60px;color:#aaa;font-size:14px;}
+    .loading{text-align:center;padding:60px;color:#aaa;font-size:14px;}
+
+    /* MODAL */
+    .modal-bg{display:none;position:fixed;inset:0;background:rgba(10,15,40,0.5);z-index:200;align-items:center;justify-content:center;backdrop-filter:blur(4px);}
+    .modal-bg.on{display:flex;}
+    .modal{background:#fff;border-radius:16px;width:100%;max-width:640px;max-height:90vh;overflow-y:auto;padding:32px;}
+    .modal-title{font-size:18px;font-weight:800;color:#0d1a3a;margin-bottom:24px;}
+    .form-row{margin-bottom:18px;}
+    .form-row label{display:block;font-size:12px;font-weight:700;color:#666;margin-bottom:6px;letter-spacing:0.05em;}
+    .form-row input,.form-row textarea,.form-row select{width:100%;padding:10px 14px;border:1.5px solid #e0e5f0;border-radius:8px;font-size:14px;outline:none;font-family:inherit;transition:border 0.2s;}
+    .form-row input:focus,.form-row textarea:focus,.form-row select:focus{border-color:#1a2f8a;}
+    .form-row textarea{height:80px;resize:vertical;}
+    .form-cols{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+    .modal-btns{display:flex;gap:10px;margin-top:24px;justify-content:flex-end;}
+    .cancel-btn{background:#f0f2f8;color:#666;border:none;padding:11px 20px;border-radius:8px;font-size:14px;font-weight:600;cursor:pointer;font-family:inherit;}
+    .save-btn{background:#1a2f8a;color:#fff;border:none;padding:11px 24px;border-radius:8px;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit;}
+    .save-btn:hover{background:#0d1a3a;}
+    .save-btn:disabled{opacity:0.5;cursor:not-allowed;}
+
+    /* IMAGE UPLOAD */
+    .img-upload-area{border:2px dashed #d0d8f0;border-radius:8px;padding:20px;text-align:center;cursor:pointer;transition:border 0.2s;margin-bottom:10px;}
+    .img-upload-area:hover{border-color:#1a2f8a;}
+    .img-upload-area input{display:none;}
+    .img-upload-area p{font-size:13px;color:#888;}
+    .img-upload-area p span{color:#1a2f8a;font-weight:600;}
+    .img-list{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px;}
+    .img-item{position:relative;width:80px;height:60px;}
+    .img-item img{width:80px;height:60px;object-fit:cover;border-radius:6px;}
+    .img-item .rm{position:absolute;top:-6px;right:-6px;width:18px;height:18px;background:#d00;color:#fff;border:none;border-radius:50%;font-size:10px;cursor:pointer;display:flex;align-items:center;justify-content:center;}
+    .uploading{font-size:12px;color:#1a2f8a;margin-top:6px;}
+
+    /* TOAST */
+    .toast{position:fixed;bottom:28px;right:28px;background:#0d1a3a;color:#fff;padding:12px 20px;border-radius:10px;font-size:14px;font-weight:600;z-index:999;opacity:0;transition:opacity 0.3s;pointer-events:none;}
+    .toast.on{opacity:1;}
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="nav">
+    <div class="nav-logo">
+      <img src="/images/logo.png" alt="EDS">
+      <span>관리자</span>
+    </div>
+    <div class="nav-right">
+      <span class="nav-count">총 <strong id="totalCount">-</strong>개 프로젝트</span>
+      <button class="logout-btn" onclick="logout()">로그아웃</button>
+    </div>
+  </nav>
+
+  <!-- MAIN -->
+  <div class="main">
+    <div class="topbar">
+      <h1 class="page-title">구축사례 관리</h1>
+      <button class="add-btn" onclick="openModal()">＋ 프로젝트 추가</button>
+    </div>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>이미지</th>
+            <th>제목</th>
+            <th>분야</th>
+            <th>고객유형</th>
+            <th>구축일자</th>
+            <th>관리</th>
+          </tr>
+        </thead>
+        <tbody id="tbody">
+          <tr><td colspan="6" class="loading">불러오는 중...</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- MODAL -->
+  <div class="modal-bg" id="modalBg">
+    <div class="modal">
+      <div class="modal-title" id="modalTitle">프로젝트 추가</div>
+      <input type="hidden" id="editId">
+
+      <div class="form-cols">
+        <div class="form-row">
+          <label>제목 *</label>
+          <input type="text" id="fTitle" placeholder="예: 서울사이버대학교 스튜디오">
+        </div>
+        <div class="form-row">
+          <label>사업분야 *</label>
+          <select id="fService">
+            <option value="">선택</option>
+            <option value="스마트 강의실">스마트 강의실</option>
+            <option value="LED 디스플레이">LED 디스플레이</option>
+            <option value="방송 시스템">방송 시스템</option>
+            <option value="영상 회의">영상 회의</option>
+            <option value="음향 시스템">음향 시스템</option>
+            <option value="보안 시스템">보안 시스템</option>
+            <option value="공공기관">공공기관</option>
+            <option value="기업">기업</option>
+            <option value="교육기관">교육기관</option>
+            <option value="종교기관">종교기관</option>
+            <option value="미디어">미디어</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-cols">
+        <div class="form-row">
+          <label>고객유형</label>
+          <input type="text" id="fClient" placeholder="예: 교육기관">
+        </div>
+        <div class="form-row">
+          <label>구축일자</label>
+          <input type="text" id="fDate" placeholder="예: 2025.03">
+        </div>
+      </div>
+
+      <div class="form-row">
+        <label>프로젝트 개요</label>
+        <textarea id="fOverview" placeholder="프로젝트 설명을 입력하세요"></textarea>
+      </div>
+
+      <div class="form-row">
+        <label>이미지 업로드</label>
+        <div class="img-upload-area" onclick="document.getElementById('fileInput').click()">
+          <input type="file" id="fileInput" accept="image/*" multiple onchange="uploadImages(this.files)">
+          <p>클릭하여 이미지 선택 <span>(여러 장 가능)</span></p>
+        </div>
+        <div class="uploading" id="uploadingMsg" style="display:none">업로드 중...</div>
+        <div class="img-list" id="imgList"></div>
+      </div>
+
+      <div class="modal-btns">
+        <button class="cancel-btn" onclick="closeModal()">취소</button>
+        <button class="save-btn" id="saveBtn" onclick="save()">저장</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOAST -->
+  <div class="toast" id="toast"></div>
+
+  <script>
+    let token = '';
+    let projects = [];
+    let editingId = null;
+    let currentImages = [];
+
+    // 인증 확인
+    token = sessionStorage.getItem('eds-admin-token') || '';
+    if (!token) location.href = '/admin';
+
+    // 프로젝트 목록 로드
+    async function loadProjects() {
+      try {
+        const r = await fetch('/api/admin/projects', {
+          headers: { 'x-admin-token': token }
+        });
+        if (r.status === 401) { logout(); return; }
+        projects = await r.json();
+        if (!Array.isArray(projects)) projects = [];
+        renderTable();
+      } catch(e) {
+        document.getElementById('tbody').innerHTML = '<tr><td colspan="6" class="empty">불러오기 실패</td></tr>';
+      }
+    }
+
+    function renderTable() {
+      document.getElementById('totalCount').textContent = projects.length;
+      const tbody = document.getElementById('tbody');
+      if (projects.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="6" class="empty">프로젝트가 없습니다. 추가해보세요!</td></tr>';
+        return;
+      }
+      tbody.innerHTML = projects.map(p => `
+        <tr>
+          <td>${p.images && p.images[0]
+            ? `<img class="thumb" src="${p.images[0]}" alt="">`
+            : `<div class="no-img">없음</div>`}
+          </td>
+          <td><strong>${p.title || '-'}</strong></td>
+          <td><span class="tag">${p.service || '-'}</span></td>
+          <td>${p.client || '-'}</td>
+          <td>${p.date || '-'}</td>
+          <td>
+            <div class="actions">
+              <button class="edit-btn" onclick="openModal(${p.id})">수정</button>
+              <button class="del-btn" onclick="deleteProject(${p.id})">삭제</button>
+            </div>
+          </td>
+        </tr>
+      `).join('');
+    }
+
+    // 모달 열기
+    function openModal(id) {
+      editingId = id || null;
+      currentImages = [];
+      document.getElementById('editId').value = id || '';
+      document.getElementById('fTitle').value = '';
+      document.getElementById('fService').value = '';
+      document.getElementById('fClient').value = '';
+      document.getElementById('fDate').value = '';
+      document.getElementById('fOverview').value = '';
+      document.getElementById('imgList').innerHTML = '';
+      document.getElementById('fileInput').value = '';
+
+      if (id) {
+        const p = projects.find(x => x.id === id);
+        if (p) {
+          document.getElementById('modalTitle').textContent = '프로젝트 수정';
+          document.getElementById('fTitle').value = p.title || '';
+          document.getElementById('fService').value = p.service || '';
+          document.getElementById('fClient').value = p.client || '';
+          document.getElementById('fDate').value = p.date || '';
+          document.getElementById('fOverview').value = p.overview || '';
+          currentImages = [...(p.images || [])];
+          renderImgList();
+        }
+      } else {
+        document.getElementById('modalTitle').textContent = '프로젝트 추가';
+      }
+      document.getElementById('modalBg').classList.add('on');
+    }
+
+    function closeModal() {
+      document.getElementById('modalBg').classList.remove('on');
+      editingId = null;
+      currentImages = [];
+    }
+
+    // 이미지 렌더
+    function renderImgList() {
+      document.getElementById('imgList').innerHTML = currentImages.map((url, i) => `
+        <div class="img-item">
+          <img src="${url}" alt="">
+          <button class="rm" onclick="removeImg(${i})">✕</button>
+        </div>
+      `).join('');
+    }
+
+    function removeImg(i) {
+      currentImages.splice(i, 1);
+      renderImgList();
+    }
+
+    // 이미지 업로드
+    async function uploadImages(files) {
+      if (!files || files.length === 0) return;
+      const msg = document.getElementById('uploadingMsg');
+      const btn = document.getElementById('saveBtn');
+      msg.style.display = 'block';
+      btn.disabled = true;
+
+      for (const file of files) {
+        const fd = new FormData();
+        fd.append('file', file);
+        try {
+          const r = await fetch('/api/admin/upload', {
+            method: 'POST',
+            headers: { 'x-admin-token': token },
+            body: fd
+          });
+          const data = await r.json();
+          if (data.url) {
+            currentImages.push(data.url);
+          }
+        } catch(e) {
+          showToast('이미지 업로드 실패');
+        }
+      }
+      renderImgList();
+      msg.style.display = 'none';
+      btn.disabled = false;
+      document.getElementById('fileInput').value = '';
+    }
+
+    // 저장
+    async function save() {
+      const title = document.getElementById('fTitle').value.trim();
+      if (!title) { showToast('제목을 입력해주세요'); return; }
+
+      const body = {
+        title,
+        service:  document.getElementById('fService').value,
+        client:   document.getElementById('fClient').value,
+        date:     document.getElementById('fDate').value,
+        overview: document.getElementById('fOverview').value,
+        images:   currentImages,
+      };
+
+      const btn = document.getElementById('saveBtn');
+      btn.disabled = true;
+      btn.textContent = '저장 중...';
+
+      try {
+        let r;
+        if (editingId) {
+          r = await fetch('/api/admin/projects', {
+            method: 'PUT',
+            headers: { 'x-admin-token': token, 'Content-Type': 'application/json' },
+            body: JSON.stringify({ ...body, id: editingId })
+          });
+        } else {
+          r = await fetch('/api/admin/projects', {
+            method: 'POST',
+            headers: { 'x-admin-token': token, 'Content-Type': 'application/json' },
+            body: JSON.stringify(body)
+          });
+        }
+
+        if (r.ok) {
+          closeModal();
+          await loadProjects();
+          showToast(editingId ? '수정 완료!' : '추가 완료!');
+        } else {
+          showToast('저장 실패. 다시 시도해주세요.');
+        }
+      } catch(e) {
+        showToast('오류가 발생했습니다.');
+      }
+
+      btn.disabled = false;
+      btn.textContent = '저장';
+    }
+
+    // 삭제
+    async function deleteProject(id) {
+      if (!confirm('정말 삭제하시겠습니까?')) return;
+      try {
+        const r = await fetch('/api/admin/projects', {
+          method: 'DELETE',
+          headers: { 'x-admin-token': token, 'Content-Type': 'application/json' },
+          body: JSON.stringify({ id })
+        });
+        if (r.ok) {
+          await loadProjects();
+          showToast('삭제 완료!');
+        }
+      } catch(e) {
+        showToast('삭제 실패');
+      }
+    }
+
+    // 토스트
+    function showToast(msg) {
+      const t = document.getElementById('toast');
+      t.textContent = msg;
+      t.classList.add('on');
+      setTimeout(() => t.classList.remove('on'), 2500);
+    }
+
+    // 로그아웃
+    function logout() {
+      sessionStorage.removeItem('eds-admin-token');
+      location.href = '/admin';
+    }
+
+    // 모달 바깥 클릭 닫기
+    document.getElementById('modalBg').addEventListener('click', function(e) {
+      if (e.target === this) closeModal();
+    });
+
+    // 초기 로드
+    loadProjects();
+  </script>
+</body>
+</html>
