@@ -36,8 +36,8 @@
     td{padding:14px 16px;border-bottom:1px solid #f0f2f8;font-size:13px;color:#333;vertical-align:middle;}
     tr:last-child td{border-bottom:none;}
     tr:hover td{background:#fafbff;}
-    .thumb{width:56px;height:40px;object-fit:cover;border-radius:4px;background:#e8ecf4;}
-    .no-img{width:56px;height:40px;border-radius:4px;background:#e8ecf4;display:flex;align-items:center;justify-content:center;font-size:10px;color:#aaa;}
+    .thumb{width:64px;height:46px;object-fit:cover;border-radius:4px;background:#e8ecf4;display:block;}
+    .no-img{width:64px;height:46px;border-radius:4px;background:#e8ecf4;display:flex;align-items:center;justify-content:center;font-size:10px;color:#aaa;}
     .tag{display:inline-block;background:#eef2ff;color:#1a2f8a;font-size:11px;font-weight:600;padding:3px 8px;border-radius:4px;}
     .actions{display:flex;gap:6px;}
     .edit-btn{background:#e8f0ff;color:#1a2f8a;border:none;padding:6px 12px;border-radius:6px;font-size:12px;font-weight:600;cursor:pointer;font-family:inherit;}
@@ -193,17 +193,15 @@
     let editingId = null;
     let currentImages = [];
 
-    // 인증 확인
     token = sessionStorage.getItem('eds-admin-token') || '';
     if (!token) location.href = '/admin';
 
-    // 프로젝트 목록 로드
     async function loadProjects() {
       try {
         const r = await fetch('/api/admin/projects', {
           headers: { 'x-admin-token': token }
         });
-        if (r.status === 401) { logout(); return; }
+        if (r.status === 401) { window.logout(); return; }
         projects = await r.json();
         if (!Array.isArray(projects)) projects = [];
         renderTable();
@@ -239,8 +237,7 @@
       `).join('');
     }
 
-    // 모달 열기
-    function openModal(id) {
+    window.openModal = function(id) {
       editingId = id || null;
       currentImages = [];
       document.getElementById('editId').value = id || '';
@@ -270,13 +267,12 @@
       document.getElementById('modalBg').classList.add('on');
     }
 
-    function closeModal() {
+    window.closeModal = function() {
       document.getElementById('modalBg').classList.remove('on');
       editingId = null;
       currentImages = [];
     }
 
-    // 이미지 렌더
     function renderImgList() {
       document.getElementById('imgList').innerHTML = currentImages.map((url, i) => `
         <div class="img-item">
@@ -286,13 +282,12 @@
       `).join('');
     }
 
-    function removeImg(i) {
+    window.removeImg = function(i) {
       currentImages.splice(i, 1);
       renderImgList();
     }
 
-    // 이미지 업로드
-    async function uploadImages(files) {
+    window.uploadImages = async function(files) {
       if (!files || files.length === 0) return;
       const msg = document.getElementById('uploadingMsg');
       const btn = document.getElementById('saveBtn');
@@ -309,9 +304,7 @@
             body: fd
           });
           const data = await r.json();
-          if (data.url) {
-            currentImages.push(data.url);
-          }
+          if (data.url) currentImages.push(data.url);
         } catch(e) {
           showToast('이미지 업로드 실패');
         }
@@ -322,8 +315,7 @@
       document.getElementById('fileInput').value = '';
     }
 
-    // 저장
-    async function save() {
+    window.save = async function() {
       const title = document.getElementById('fTitle').value.trim();
       if (!title) { showToast('제목을 입력해주세요'); return; }
 
@@ -357,7 +349,7 @@
         }
 
         if (r.ok) {
-          closeModal();
+          window.closeModal();
           await loadProjects();
           showToast(editingId ? '수정 완료!' : '추가 완료!');
         } else {
@@ -371,8 +363,7 @@
       btn.textContent = '저장';
     }
 
-    // 삭제
-    async function deleteProject(id) {
+    window.deleteProject = async function(id) {
       if (!confirm('정말 삭제하시겠습니까?')) return;
       try {
         const r = await fetch('/api/admin/projects', {
@@ -389,7 +380,6 @@
       }
     }
 
-    // 토스트
     function showToast(msg) {
       const t = document.getElementById('toast');
       t.textContent = msg;
@@ -397,18 +387,15 @@
       setTimeout(() => t.classList.remove('on'), 2500);
     }
 
-    // 로그아웃
-    function logout() {
+    window.logout = function() {
       sessionStorage.removeItem('eds-admin-token');
       location.href = '/admin';
     }
 
-    // 모달 바깥 클릭 닫기
     document.getElementById('modalBg').addEventListener('click', function(e) {
-      if (e.target === this) closeModal();
+      if (e.target === this) window.closeModal();
     });
 
-    // 초기 로드
     loadProjects();
   </script>
 </body>
