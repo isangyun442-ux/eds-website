@@ -70,7 +70,7 @@
   /* ── 왼쪽 배경 ── */
   .ab-left {
     position: relative;
-    background: linear-gradient(145deg, #3555d8 0%, #2238a8 45%, #1a2f8a 100%);
+    background: linear-gradient(145deg, #3a5ae0 0%, #2a48c0 55%, #2238a8 100%);
     overflow: hidden;
   }
   .ab-left::before {
@@ -81,8 +81,8 @@
   .ab-left::after {
     content: ''; position: absolute; inset: 0; z-index: 0;
     background:
-      radial-gradient(ellipse 70% 50% at 15% 15%, rgba(255,255,255,0.09) 0%, transparent 55%),
-      radial-gradient(ellipse 50% 70% at 85% 85%, rgba(0,0,0,0.3) 0%, transparent 55%);
+      radial-gradient(ellipse 80% 60% at 15% 15%, rgba(255,255,255,0.07) 0%, transparent 60%),
+      radial-gradient(ellipse 60% 50% at 85% 85%, rgba(0,0,0,0.15) 0%, transparent 55%);
   }
   .ab-left-content {
     position: relative; z-index: 2;
@@ -94,7 +94,7 @@
   /* ── 오른쪽 배경 (왼쪽과 동일 질감, 더 밝게) ── */
   .ab-right {
     position: relative;
-    background: linear-gradient(145deg, #4466e8 0%, #3555d8 45%, #2a45c8 100%);
+    background: linear-gradient(145deg, #3a58d8 0%, #2e4cc0 45%, #2438a8 100%);
     overflow: hidden;
   }
   .ab-right::before {
@@ -131,12 +131,12 @@
   }
   /* 메인CI - 왼쪽 왼쪽끝 원본 방향 */
   .ab-mark-logo-l {
-    left: -10px; top: 20px;
+    left: 20px; top: 20px;
     width: 220px; height: 88px;
     background-image: url('/images/메인CI.png');
     background-size: contain;
     mix-blend-mode: screen;
-    opacity: 0.22;
+    opacity: 0.32;
   }
   /* EDAM 아이콘 - 오른쪽 좌상단 (모서리 딱 맞춤) */
   .ab-mark-icon-r {
@@ -149,12 +149,12 @@
   }
   /* 메인CI - 오른쪽 오른쪽끝 */
   .ab-mark-logo-r {
-    right: -10px; bottom: 20px;
+    right: 20px; bottom: 20px;
     width: 200px; height: 80px;
     background-image: url('/images/메인CI.png');
     background-size: contain;
     mix-blend-mode: screen;
-    opacity: 0.22;
+    opacity: 0.32;
   }
 
   .ab-deco { position:absolute;inset:0;width:100%;height:100%;z-index:0; }
