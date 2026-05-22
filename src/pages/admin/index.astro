@@ -44,16 +44,21 @@
       location.href='/admin/dashboard';
     }
     function login(){
-      const pw=document.getElementById('pw').value;
-      sessionStorage.setItem('eds-admin-token',pw);
+      const pw=document.getElementById('pw').value.trim();
+      if(!pw){ document.getElementById('err').classList.add('on'); return; }
+      // POST로 인증 확인 (POST는 x-admin-token 검증함)
       fetch('/api/admin/projects',{
-        headers:{'x-admin-token':pw}
+        method:'POST',
+        headers:{'x-admin-token':pw,'Content-Type':'application/json'},
+        body:JSON.stringify({__authCheck:true})
       }).then(r=>{
-        if(r.ok){
-          location.href='/admin/dashboard';
-        } else {
+        if(r.status===401){
           sessionStorage.removeItem('eds-admin-token');
           document.getElementById('err').classList.add('on');
+        } else {
+          // 인증 성공 (실제 저장은 안 하도록 바로 삭제하지 않고 토큰 저장 후 이동)
+          sessionStorage.setItem('eds-admin-token', pw);
+          location.href='/admin/dashboard';
         }
       }).catch(()=>{
         sessionStorage.removeItem('eds-admin-token');
