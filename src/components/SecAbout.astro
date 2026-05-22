@@ -16,20 +16,6 @@
     <!-- 왼쪽: 네이비 그라데이션 + 1만 시간 -->
     <div class="ab-left fade-up">
       <div class="ab-left-bg">
-        <svg class="ab-deco" viewBox="0 0 600 700" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <!-- 사선 -->
-          <line x1="0" y1="200" x2="600" y2="500" stroke="rgba(255,255,255,0.10)" stroke-width="1"/>
-          <line x1="0" y1="400" x2="600" y2="100" stroke="rgba(255,255,255,0.10)" stroke-width="1"/>
-          <line x1="100" y1="0" x2="500" y2="700" stroke="rgba(255,255,255,0.07)" stroke-width="1"/>
-          <!-- 원형 -->
-          <circle cx="500" cy="150" r="200" stroke="rgba(255,255,255,0.08)" stroke-width="1.5" fill="none"/>
-          <circle cx="500" cy="150" r="130" stroke="rgba(255,255,255,0.12)" stroke-width="1" fill="none"/>
-          <circle cx="500" cy="150" r="70" stroke="rgba(255,255,255,0.07)" stroke-width="1" fill="none"/>
-          <!-- 도트 -->
-          <circle cx="500" cy="150" r="4" fill="rgba(255,255,255,0.2)"/>
-          <circle cx="370" cy="280" r="2.5" fill="rgba(255,255,255,0.15)"/>
-          <circle cx="80" cy="60" r="2" fill="rgba(255,255,255,0.1)"/>
-        </svg>
       </div>
       <div class="ab-left-content">
         <h2 class="ab-title ab-title--light">"1만 시간의 법칙"</h2>
@@ -48,16 +34,6 @@
     <!-- 오른쪽: 어두운 배경 + 전문가 집단 -->
     <div class="ab-right fade-up fade-up-d2">
       <div class="ab-right-bg">
-        <svg class="ab-deco" viewBox="0 0 600 700" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <line x1="600" y1="200" x2="0" y2="500" stroke="rgba(255,255,255,0.07)" stroke-width="1"/>
-          <line x1="600" y1="400" x2="0" y2="100" stroke="rgba(255,255,255,0.07)" stroke-width="1"/>
-          <circle cx="100" cy="550" r="220" stroke="rgba(255,255,255,0.07)" stroke-width="1.5" fill="none"/>
-          <circle cx="100" cy="550" r="150" stroke="rgba(255,255,255,0.10)" stroke-width="1" fill="none"/>
-          <circle cx="100" cy="550" r="80" stroke="rgba(255,255,255,0.06)" stroke-width="1" fill="none"/>
-          <circle cx="100" cy="550" r="4" fill="rgba(255,255,255,0.18)"/>
-          <circle cx="300" cy="320" r="2.5" fill="rgba(255,255,255,0.12)"/>
-          <circle cx="520" cy="640" r="2" fill="rgba(255,255,255,0.08)"/>
-        </svg>
       </div>
       <div class="ab-right-content">
         <h2 class="ab-title ab-title--light">전문가 집단<br><em class="ab-em--cyan">이담에스티</em></h2>
@@ -116,15 +92,15 @@
   .ab-left-bg {
     position: absolute; inset: 0; z-index: 1;
   }
-  /* EDAM 아이콘 워터마크 */
+  /* EDAM 아이콘 워터마크 - 파인(음각) 질감 */
   .ab-left-bg::after {
     content: '';
     position: absolute;
-    right: -60px; bottom: -40px;
-    width: 320px; height: 320px;
+    right: -40px; bottom: -30px;
+    width: 340px; height: 340px;
     background: url('/images/EDAM_ICON.png') center/contain no-repeat;
-    opacity: 0.05;
-    filter: brightness(10);
+    opacity: 1;
+    filter: brightness(0) invert(1) opacity(0.06) drop-shadow(0px 2px 1px rgba(255,255,255,0.12)) drop-shadow(0px -1px 1px rgba(0,0,0,0.6));
   }
   .ab-left-content {
     position: relative; z-index: 2;
@@ -158,15 +134,15 @@
   .ab-right-bg {
     position: absolute; inset: 0; z-index: 1;
   }
-  /* EDAM 아이콘 워터마크 */
+  /* EDAM 아이콘 워터마크 - 파인(음각) 질감 */
   .ab-right-bg::after {
     content: '';
     position: absolute;
-    left: -40px; top: -60px;
-    width: 280px; height: 280px;
+    left: -30px; top: -40px;
+    width: 300px; height: 300px;
     background: url('/images/EDAM_ICON.png') center/contain no-repeat;
-    opacity: 0.04;
-    filter: brightness(10);
+    opacity: 1;
+    filter: brightness(0) invert(1) opacity(0.05) drop-shadow(0px 2px 1px rgba(255,255,255,0.10)) drop-shadow(0px -1px 1px rgba(0,0,0,0.7));
   }
   .ab-right-content {
     position: relative; z-index: 2;
