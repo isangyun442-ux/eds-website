@@ -16,6 +16,7 @@
     <!-- 왼쪽: 네이비 그라데이션 + 1만 시간 -->
     <div class="ab-left fade-up">
       <div class="ab-mark ab-mark-icon-l"></div>
+      <div class="ab-mark ab-mark-logo-l"></div>
       <div class="ab-left-content">
         <h2 class="ab-title ab-title--light">"1만 시간의 법칙"</h2>
         <p class="ab-body ab-body--light">
@@ -33,6 +34,7 @@
     <!-- 오른쪽: 어두운 배경 + 전문가 집단 -->
     <div class="ab-right fade-up fade-up-d2">
       <div class="ab-mark ab-mark-icon-r"></div>
+      <div class="ab-mark ab-mark-logo-r"></div>
       <div class="ab-right-content">
         <h2 class="ab-title ab-title--light">전문가 집단<br><em class="ab-em--cyan">이담에스티</em></h2>
         <p class="ab-body ab-body--light">
@@ -141,6 +143,25 @@
     filter: brightness(0) invert(1)
             drop-shadow(0px -1px 0px rgba(255,255,255,0.2))
             drop-shadow(0px 2px 1px rgba(0,0,0,0.6));
+    opacity: 0.10;
+  }
+  /* 메인CI 로고 - 왼쪽 우상단 (screen으로 검정배경 제거) */
+  .ab-mark-logo-l {
+    right: 20px; top: 20px;
+    width: 220px; height: 88px;
+    background-image: url('/images/메인CI.png');
+    background-size: contain;
+    mix-blend-mode: screen;
+    opacity: 0.12;
+    transform: scaleY(-1);
+  }
+  /* 메인CI 로고 - 오른쪽 좌하단 */
+  .ab-mark-logo-r {
+    left: 20px; bottom: 20px;
+    width: 200px; height: 80px;
+    background-image: url('/images/메인CI.png');
+    background-size: contain;
+    mix-blend-mode: screen;
     opacity: 0.10;
   }
 
