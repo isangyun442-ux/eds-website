@@ -21,6 +21,10 @@
     .nav-count strong{color:#fff;font-weight:700;}
     .logout-btn{background:rgba(255,255,255,0.1);color:#fff;border:none;padding:7px 14px;border-radius:6px;font-size:13px;cursor:pointer;font-family:inherit;}
     .logout-btn:hover{background:rgba(255,255,255,0.2);}
+    .deploy-btn{background:#0070f3;color:#fff;border:none;padding:7px 16px;border-radius:6px;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit;}
+    .deploy-btn:hover{background:#0060d0;}
+    .deploy-btn:disabled{opacity:0.6;cursor:not-allowed;}
+    .deploy-btn.done{background:#00a853;}
 
     /* MAIN */
     .main{padding:80px 28px 40px;}
@@ -91,6 +95,7 @@
     </div>
     <div class="nav-right">
       <span class="nav-count">총 <strong id="totalCount">-</strong>개 프로젝트</span>
+      <button class="deploy-btn" id="deployBtn" onclick="deploysite()">🚀 사이트 배포</button>
       <button class="logout-btn" onclick="logout()">로그아웃</button>
     </div>
   </nav>
@@ -391,6 +396,37 @@
       t.textContent = msg;
       t.classList.add('on');
       setTimeout(() => t.classList.remove('on'), 2500);
+    }
+
+    window.deploysite = async function() {
+      const btn = document.getElementById('deployBtn');
+      if (!confirm('사이트를 배포하시겠습니까?\n약 1~2분 후 반영됩니다.')) return;
+      btn.disabled = true;
+      btn.textContent = '⏳ 배포 중...';
+      try {
+        const r = await fetch('/api/admin/deploy', {
+          method: 'POST',
+          headers: { 'x-admin-token': token }
+        });
+        if (r.ok) {
+          btn.textContent = '✅ 배포 완료!';
+          btn.classList.add('done');
+          showToast('배포 시작! 1~2분 후 사이트에 반영돼요.');
+          setTimeout(() => {
+            btn.textContent = '🚀 사이트 배포';
+            btn.classList.remove('done');
+            btn.disabled = false;
+          }, 5000);
+        } else {
+          showToast('배포 실패. 다시 시도해주세요.');
+          btn.textContent = '🚀 사이트 배포';
+          btn.disabled = false;
+        }
+      } catch(e) {
+        showToast('배포 오류가 발생했습니다.');
+        btn.textContent = '🚀 사이트 배포';
+        btn.disabled = false;
+      }
     }
 
     window.logout = function() {
