@@ -46,20 +46,17 @@
     window.login = function(){
       const pw=document.getElementById('pw').value.trim();
       if(!pw){ document.getElementById('err').classList.add('on'); return; }
-      fetch('/api/admin/projects',{
-        method:'POST',
-        headers:{'x-admin-token':pw,'Content-Type':'application/json'},
-        body:JSON.stringify({__authCheck:true})
+      // GET으로 인증 확인 (프로젝트 생성 없이)
+      fetch('/api/admin/auth',{
+        headers:{'x-admin-token':pw}
       }).then(r=>{
-        if(r.status===401){
-          sessionStorage.removeItem('eds-admin-token');
-          document.getElementById('err').classList.add('on');
-        } else {
+        if(r.ok){
           sessionStorage.setItem('eds-admin-token', pw);
           location.href='/admin/dashboard';
+        } else {
+          document.getElementById('err').classList.add('on');
         }
       }).catch(()=>{
-        sessionStorage.removeItem('eds-admin-token');
         document.getElementById('err').classList.add('on');
       });
     }
