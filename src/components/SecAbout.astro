@@ -120,16 +120,16 @@
     position: absolute; z-index: 1; pointer-events: none;
     background-size: contain; background-repeat: no-repeat; background-position: center;
   }
-  /* EDAM 아이콘 - 왼쪽 우하단 (잘림 없게, 위아래+좌우 반전, 색상) */
+  /* EDAM 아이콘 - 왼쪽 우하단 (모서리 딱 맞춤) */
   .ab-mark-icon-l {
-    right: 10px; bottom: 10px;
-    width: 260px; height: 260px;
+    right: -30px; bottom: -30px;
+    width: 280px; height: 280px;
     background-image: url('/images/EDAM_ICON.png');
+    background-position: bottom right;
     mix-blend-mode: screen;
     opacity: 0.28;
-    transform: scaleY(-1) scaleX(-1);
   }
-  /* 메인CI - 왼쪽 왼쪽끝 위아래+좌우 반전 */
+  /* 메인CI - 왼쪽 왼쪽끝 원본 방향 */
   .ab-mark-logo-l {
     left: -10px; top: 20px;
     width: 220px; height: 88px;
@@ -137,13 +137,13 @@
     background-size: contain;
     mix-blend-mode: screen;
     opacity: 0.22;
-    transform: scaleY(-1) scaleX(-1);
   }
-  /* EDAM 아이콘 - 오른쪽 좌상단 (잘림 없게, 색상) */
+  /* EDAM 아이콘 - 오른쪽 좌상단 (모서리 딱 맞춤) */
   .ab-mark-icon-r {
-    left: 10px; top: 10px;
-    width: 260px; height: 260px;
+    left: -30px; top: -30px;
+    width: 280px; height: 280px;
     background-image: url('/images/EDAM_ICON.png');
+    background-position: top left;
     mix-blend-mode: screen;
     opacity: 0.28;
   }
