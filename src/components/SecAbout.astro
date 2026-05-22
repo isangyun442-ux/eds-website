@@ -67,19 +67,17 @@
     min-height: 600px;
   }
 
-  /* ── 왼쪽 (네이비 그라데이션) ── */
+  /* ── 왼쪽 배경 ── */
   .ab-left {
     position: relative;
     background: linear-gradient(145deg, #3555d8 0%, #2238a8 45%, #1a2f8a 100%);
     overflow: hidden;
   }
-  /* 텍스처 오버레이 */
   .ab-left::before {
     content: ''; position: absolute; inset: 0; z-index: 0;
     background: url('/images/texture-blue.jpg') center/cover no-repeat;
     opacity: 0.13; mix-blend-mode: overlay;
   }
-  /* 빛 반사 - 입체감 */
   .ab-left::after {
     content: ''; position: absolute; inset: 0; z-index: 0;
     background:
@@ -93,24 +91,22 @@
     height: 100%;
   }
 
-  /* ── 오른쪽 (어두운 네이비) ── */
+  /* ── 오른쪽 배경 (왼쪽과 동일 질감, 더 밝게) ── */
   .ab-right {
     position: relative;
-    background: linear-gradient(145deg, #243a9e 0%, #1a2f8a 50%, #142270 100%);
+    background: linear-gradient(145deg, #4466e8 0%, #3555d8 45%, #2a45c8 100%);
     overflow: hidden;
   }
-  /* 텍스처 오버레이 */
   .ab-right::before {
     content: ''; position: absolute; inset: 0; z-index: 0;
-    background: url('/images/texture-white.jpg') center/cover no-repeat;
-    opacity: 0.09; mix-blend-mode: overlay;
+    background: url('/images/texture-blue.jpg') center/cover no-repeat;
+    opacity: 0.15; mix-blend-mode: overlay;
   }
-  /* 빛 반사 */
   .ab-right::after {
     content: ''; position: absolute; inset: 0; z-index: 0;
     background:
-      radial-gradient(ellipse 60% 40% at 85% 10%, rgba(255,255,255,0.07) 0%, transparent 55%),
-      radial-gradient(ellipse 70% 60% at 10% 90%, rgba(0,0,0,0.35) 0%, transparent 55%);
+      radial-gradient(ellipse 60% 40% at 85% 10%, rgba(255,255,255,0.10) 0%, transparent 55%),
+      radial-gradient(ellipse 70% 60% at 10% 90%, rgba(0,0,0,0.2) 0%, transparent 55%);
   }
   .ab-right-content {
     position: relative; z-index: 2;
@@ -119,57 +115,46 @@
     height: 100%;
   }
 
-  /* ── 음각 워터마크 공통 ── */
+  /* ── 워터마크 공통 ── */
   .ab-mark {
     position: absolute; z-index: 1; pointer-events: none;
     background-size: contain; background-repeat: no-repeat; background-position: center;
   }
-  /* EDAM 아이콘 - 왼쪽 우하단 (좌우 반전으로 자연스럽게) */
+  /* EDAM 아이콘 - 왼쪽 우하단 (잘림 없게, 위아래+좌우 반전, 색상) */
   .ab-mark-icon-l {
-    right: -50px; bottom: -40px;
-    width: 300px; height: 300px;
-    background-image: url('/images/EDAM_ICON.png');
-    filter: brightness(0) invert(1)
-            drop-shadow(0px -1px 0px rgba(255,255,255,0.25))
-            drop-shadow(0px 2px 1px rgba(0,0,0,0.55));
-    opacity: 0.12;
-    transform: scaleX(-1);
-  }
-  /* EDAM 아이콘 - 왼쪽 우하단 + 상하반전 + 색상 */
-  .ab-mark-icon-l {
-    right: -50px; bottom: -40px;
-    width: 300px; height: 300px;
+    right: 10px; bottom: 10px;
+    width: 260px; height: 260px;
     background-image: url('/images/EDAM_ICON.png');
     mix-blend-mode: screen;
-    opacity: 0.18;
+    opacity: 0.28;
     transform: scaleY(-1) scaleX(-1);
   }
-  /* 메인CI 로고 - 왼쪽 왼쪽끝 + 상하반전 */
+  /* 메인CI - 왼쪽 왼쪽끝 위아래+좌우 반전 */
   .ab-mark-logo-l {
     left: -10px; top: 20px;
     width: 220px; height: 88px;
     background-image: url('/images/메인CI.png');
     background-size: contain;
     mix-blend-mode: screen;
-    opacity: 0.16;
-    transform: scaleY(-1);
+    opacity: 0.22;
+    transform: scaleY(-1) scaleX(-1);
   }
-  /* EDAM 아이콘 - 오른쪽 좌상단 + 색상 */
+  /* EDAM 아이콘 - 오른쪽 좌상단 (잘림 없게, 색상) */
   .ab-mark-icon-r {
-    left: -50px; top: -40px;
-    width: 280px; height: 280px;
+    left: 10px; top: 10px;
+    width: 260px; height: 260px;
     background-image: url('/images/EDAM_ICON.png');
     mix-blend-mode: screen;
-    opacity: 0.18;
+    opacity: 0.28;
   }
-  /* 메인CI 로고 - 오른쪽 오른쪽끝 */
+  /* 메인CI - 오른쪽 오른쪽끝 */
   .ab-mark-logo-r {
     right: -10px; bottom: 20px;
     width: 200px; height: 80px;
     background-image: url('/images/메인CI.png');
     background-size: contain;
     mix-blend-mode: screen;
-    opacity: 0.16;
+    opacity: 0.22;
   }
 
   .ab-deco { position:absolute;inset:0;width:100%;height:100%;z-index:0; }
