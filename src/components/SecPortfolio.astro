@@ -239,35 +239,55 @@ import { projects } from '../data/projects.js';
   }
 </style>
 
+<!-- 정적 프로젝트 데이터 클라이언트에 전달 -->
+<script is:inline define:vars={{ staticProjectsJSON: JSON.stringify(projects) }}>
+  window.__staticProjects = JSON.parse(staticProjectsJSON);
+</script>
+
 <script is:inline>
 (function () {
-  function initSlider(projects) {
+  function initSlider(allProjects) {
+    if (!allProjects || allProjects.length === 0) return;
+
     const bg      = document.getElementById('port-bg');
     const imgWrap = document.getElementById('port-img-wrap');
-    const slides  = document.getElementById('port-slides');
+    const slidesEl = document.getElementById('port-slides');
     const totalEl = document.querySelector('.port-total-num');
 
     // DOM 재구성
-    bg.innerHTML = projects.map((p, i) =>
+    bg.innerHTML = allProjects.map((p, i) =>
       `<div class="port-bg-slide${i===0?' active':''}" style="background-image:url('${p.images&&p.images[0]?p.images[0]:''}')"></div>`
     ).join('');
-    imgWrap.innerHTML = projects.map((p, i) =>
-      `<div class="port-img-slide${i===0?' active':''}" style="background-image:url('${p.images&&p.images[0]?p.images[0]:''}')"></div>`
+
+    imgWrap.innerHTML = allProjects.map((p, i) =>
+      `<div class="port-img-slide${i===0?' active':''}"></div>`
     ).join('');
-    slides.innerHTML = projects.map((p, i) =>
+
+    // background-image를 JS로 직접 설정 (inline style 파싱 문제 방지)
+    const imgDivs = imgWrap.querySelectorAll('.port-img-slide');
+    allProjects.forEach((p, i) => {
+      if (p.images && p.images[0]) {
+        imgDivs[i].style.backgroundImage = `url('${p.images[0]}')`;
+        imgDivs[i].style.backgroundSize = 'cover';
+        imgDivs[i].style.backgroundPosition = 'center';
+      }
+    });
+
+    slidesEl.innerHTML = allProjects.map((p, i) =>
       `<div class="port-slide${i===0?' active':''}">
         <h3 class="port-title">${p.title||''}</h3>
         <p class="port-sub">${p.service||''}&nbsp;·&nbsp;${p.date||''}</p>
         <p class="port-desc">${p.overview||''}</p>
       </div>`
     ).join('');
-    if (totalEl) totalEl.textContent = projects.length;
+
+    if (totalEl) totalEl.textContent = allProjects.length;
 
     // 슬라이더 초기화
-    const bgs    = document.querySelectorAll('.port-bg-slide');
-    const imgs   = document.querySelectorAll('.port-img-slide');
-    const slds   = document.querySelectorAll('.port-slide');
-    const total  = slds.length;
+    const bgs   = document.querySelectorAll('.port-bg-slide');
+    const imgs  = document.querySelectorAll('.port-img-slide');
+    const slds  = document.querySelectorAll('.port-slide');
+    const total = slds.length;
     let cur = 0;
 
     const btnPrev = document.getElementById('port-prev');
@@ -276,7 +296,6 @@ import { projects } from '../data/projects.js';
     const tPrev   = document.getElementById('port-thumb-prev');
     const tCur    = document.getElementById('port-thumb-cur');
     const tNext   = document.getElementById('port-thumb-next');
-    const imgUrls = Array.from(imgs).map(el => el.style.backgroundImage);
 
     function setThumb(el, idx) {
       if (idx < 0 || idx >= total) {
@@ -284,7 +303,8 @@ import { projects } from '../data/projects.js';
         el.style.backgroundImage = '';
       } else {
         el.classList.remove('hidden');
-        el.style.backgroundImage = imgUrls[idx];
+        const url = allProjects[idx].images && allProjects[idx].images[0] ? allProjects[idx].images[0] : '';
+        el.style.backgroundImage = url ? `url('${url}')` : '';
       }
     }
 
@@ -317,19 +337,22 @@ import { projects } from '../data/projects.js';
     go(0);
   }
 
-  // KV API에서 데이터 가져오기, 없으면 기존 DOM 그대로 초기화
+  // KV 데이터 + 정적 데이터 합치기
+  const staticProjects = window.__staticProjects || [];
+
   fetch('/api/admin/projects')
     .then(r => r.json())
-    .then(data => {
-      if (Array.isArray(data) && data.length > 0) {
-        initSlider(data);
+    .then(kvProjects => {
+      if (Array.isArray(kvProjects) && kvProjects.length > 0) {
+        // KV 프로젝트를 앞에, 정적 프로젝트를 뒤에 합치기
+        const merged = [...kvProjects, ...staticProjects];
+        initSlider(merged);
       } else {
-        // KV 비어있으면 정적 HTML 그대로 슬라이더만 초기화
-        initSlider(window.__staticProjects || []);
+        initSlider(staticProjects);
       }
     })
     .catch(() => {
-      initSlider(window.__staticProjects || []);
+      initSlider(staticProjects);
     });
 })();
 </script>
