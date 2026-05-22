@@ -75,8 +75,14 @@
     background: linear-gradient(145deg, #2a45c8 0%, #1a2f8a 45%, #0d1a5c 100%);
     overflow: hidden;
   }
-  /* 빛 반사 - 입체감 */
+  /* 텍스처 오버레이 */
   .ab-left::before {
+    content: ''; position: absolute; inset: 0; z-index: 0;
+    background: url('/images/texture-blue.jpg') center/cover no-repeat;
+    opacity: 0.13; mix-blend-mode: overlay;
+  }
+  /* 빛 반사 - 입체감 */
+  .ab-left::after {
     content: ''; position: absolute; inset: 0; z-index: 0;
     background:
       radial-gradient(ellipse 70% 50% at 15% 15%, rgba(255,255,255,0.09) 0%, transparent 55%),
@@ -95,8 +101,14 @@
     background: linear-gradient(145deg, #111c55 0%, #0e1840 50%, #080e28 100%);
     overflow: hidden;
   }
-  /* 빛 반사 */
+  /* 텍스처 오버레이 */
   .ab-right::before {
+    content: ''; position: absolute; inset: 0; z-index: 0;
+    background: url('/images/texture-white.jpg') center/cover no-repeat;
+    opacity: 0.05; mix-blend-mode: overlay;
+  }
+  /* 빛 반사 */
+  .ab-right::after {
     content: ''; position: absolute; inset: 0; z-index: 0;
     background:
       radial-gradient(ellipse 60% 40% at 85% 10%, rgba(255,255,255,0.07) 0%, transparent 55%),
@@ -109,21 +121,14 @@
     height: 100%;
   }
 
-  /* ── 선 장식 ── */
-  .ab-line {
-    position: absolute; inset: 0;
-    width: 100%; height: 100%;
-    z-index: 1; pointer-events: none;
-  }
-
   /* ── 음각 워터마크 공통 ── */
   .ab-mark {
     position: absolute; z-index: 1; pointer-events: none;
     background-size: contain; background-repeat: no-repeat; background-position: center;
   }
-  /* EDAM 아이콘 - 왼쪽 우상단 (스왑) */
+  /* EDAM 아이콘 - 왼쪽 우하단 */
   .ab-mark-icon-l {
-    right: -40px; top: -30px;
+    right: -40px; bottom: -30px;
     width: 300px; height: 300px;
     background-image: url('/images/EDAM_ICON.png');
     filter: brightness(0) invert(1)
@@ -131,15 +136,16 @@
             drop-shadow(0px 2px 1px rgba(0,0,0,0.55));
     opacity: 0.09;
   }
-  /* 메인CI 로고 - 왼쪽 우하단 (스왑) */
+  /* 메인CI 로고 - 왼쪽 우상단 + 상하 반전 */
   .ab-mark-logo-l {
-    right: 30px; bottom: 30px;
+    right: 30px; top: 30px;
     width: 200px; height: 80px;
     background-image: url('/images/메인CI.png');
     filter: brightness(0) invert(1)
             drop-shadow(0px -1px 0px rgba(255,255,255,0.2))
             drop-shadow(0px 2px 1px rgba(0,0,0,0.5));
     opacity: 0.08;
+    transform: scaleY(-1);
   }
   /* EDAM 아이콘 - 오른쪽 좌상단 */
   .ab-mark-icon-r {
