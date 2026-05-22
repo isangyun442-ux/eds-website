@@ -136,17 +136,14 @@
           <label>사업분야 *</label>
           <select id="fService">
             <option value="">선택</option>
-            <option value="스마트 강의실">스마트 강의실</option>
+            <option value="방송제작 스튜디오">방송제작 스튜디오</option>
+            <option value="이러닝 스튜디오">이러닝 스튜디오</option>
             <option value="LED 디스플레이">LED 디스플레이</option>
-            <option value="방송 시스템">방송 시스템</option>
-            <option value="영상 회의">영상 회의</option>
-            <option value="음향 시스템">음향 시스템</option>
-            <option value="보안 시스템">보안 시스템</option>
-            <option value="공공기관">공공기관</option>
-            <option value="기업">기업</option>
-            <option value="교육기관">교육기관</option>
-            <option value="종교기관">종교기관</option>
-            <option value="미디어">미디어</option>
+            <option value="스마트 강의실">스마트 강의실</option>
+            <option value="아카이브 시스템">아카이브 시스템</option>
+            <option value="방송 인프라">방송 인프라</option>
+            <option value="전시체험">전시체험</option>
+            <option value="화상회의">화상회의</option>
           </select>
         </div>
       </div>
@@ -156,13 +153,10 @@
           <label>고객유형</label>
           <select id="fClient">
             <option value="">선택</option>
-            <option value="교육기관">교육기관</option>
             <option value="공공기관">공공기관</option>
+            <option value="교육기관">교육기관</option>
             <option value="기업">기업</option>
-            <option value="종교기관">종교기관</option>
-            <option value="미디어">미디어</option>
-            <option value="의료기관">의료기관</option>
-            <option value="기타">기타</option>
+            <option value="종교">종교</option>
           </select>
         </div>
         <div class="form-row">
@@ -229,8 +223,8 @@
       tbody.innerHTML = projects.map(p => `
         <tr>
           <td>${p.images && p.images[0]
-            ? `<img src="${p.images[0]}" alt="" style="width:56px;height:40px;object-fit:cover;border-radius:4px;display:block;flex-shrink:0;">`
-            : `<div style="width:56px;height:40px;border-radius:4px;background:#e8ecf4;display:flex;align-items:center;justify-content:center;font-size:10px;color:#aaa;">없음</div>`}
+            ? `<img src="${p.images[0]}" alt="" style="width:80px;height:58px;object-fit:cover;border-radius:6px;display:block;">`
+            : `<div style="width:80px;height:58px;border-radius:6px;background:#e8ecf4;display:flex;align-items:center;justify-content:center;font-size:10px;color:#aaa;">없음</div>`}
           </td>
           <td><strong>${p.title || '-'}</strong></td>
           <td><span class="tag">${p.service || '-'}</span></td>
