@@ -69,7 +69,7 @@
     // 섹션 끝까지 남은 거리
     const distFromBottom = rect.bottom - window.innerHeight;
     // 섹션 하단이 화면 밖으로 나가기 직전에 페이드 시작
-    const threshold = window.innerHeight * 0.15;
+    const threshold = window.innerHeight * 0.06;
 
     if(distFromBottom < threshold && distFromBottom > -100){
       const progress = 1 - (distFromBottom / threshold);
@@ -138,7 +138,7 @@
   .ab-fade {
     position: absolute;
     bottom: 0; left: 0; right: 0;
-    height: 260px;
+    height: 140px;
     background: linear-gradient(to bottom, rgba(6,14,24,0) 0%, #060e18 100%);
     z-index: 10;
     pointer-events: none;
