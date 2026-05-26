@@ -69,7 +69,7 @@
     // 섹션 끝까지 남은 거리
     const distFromBottom = rect.bottom - window.innerHeight;
     // 섹션 하단 30% 진입 시 페이드 시작
-    const threshold = sectionH * 0.1;
+    const threshold = sectionH * 0.04;
 
     if(distFromBottom < threshold && distFromBottom > -100){
       const progress = 1 - (distFromBottom / threshold);
