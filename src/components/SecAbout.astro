@@ -49,7 +49,7 @@
         <p class="ab-body ab-body--light">
           이담에스티는 다양한 미디어 시스템 구축 노하우와 끊임없는 사내 연구와 대외 기술 습득 활동을 통해 트렌디한 구축 서비스를 제공하겠습니다.
         </p>
-        <p class="ab-body ab-body--light" style="margin-top:8px;color:rgba(255,255,255,0.4);font-size:13px;">임직원 일동</p>
+        <p class="ab-body ab-body--light" style="margin-top:8px;color:#aaa;font-size:13px;">임직원 일동</p>
       </div>
     </div>
 
@@ -70,19 +70,19 @@
   /* ── 왼쪽 배경 ── */
   .ab-left {
     position: relative;
-    background: linear-gradient(145deg, #3a5ae0 0%, #2a48c0 55%, #2238a8 100%);
+    background: #ffffff;
     overflow: hidden;
   }
   .ab-left::before {
     content: ''; position: absolute; inset: 0; z-index: 0;
     background: url('/images/texture-blue.jpg') center/cover no-repeat;
-    opacity: 0.13; mix-blend-mode: overlay;
+    opacity: 0.06; mix-blend-mode: overlay;
   }
   .ab-left::after {
     content: ''; position: absolute; inset: 0; z-index: 0;
     background:
-      radial-gradient(ellipse 80% 60% at 15% 15%, rgba(255,255,255,0.07) 0%, transparent 60%),
-      radial-gradient(ellipse 60% 50% at 85% 85%, rgba(0,0,0,0.15) 0%, transparent 55%);
+      radial-gradient(ellipse 80% 60% at 15% 15%, rgba(0,0,0,0.02) 0%, transparent 60%),
+      radial-gradient(ellipse 60% 50% at 85% 85%, rgba(0,0,0,0.04) 0%, transparent 55%);
   }
   .ab-left-content {
     position: relative; z-index: 2;
@@ -94,19 +94,19 @@
   /* ── 오른쪽 배경 (왼쪽과 동일 질감, 더 밝게) ── */
   .ab-right {
     position: relative;
-    background: linear-gradient(145deg, #3a58d8 0%, #2e4cc0 45%, #2438a8 100%);
+    background: #f8f9fc;
     overflow: hidden;
   }
   .ab-right::before {
     content: ''; position: absolute; inset: 0; z-index: 0;
-    background: url('/images/texture-blue.jpg') center/cover no-repeat;
-    opacity: 0.15; mix-blend-mode: overlay;
+    background: url('/images/texture-white.jpg') center/cover no-repeat;
+    opacity: 0.08; mix-blend-mode: overlay;
   }
   .ab-right::after {
     content: ''; position: absolute; inset: 0; z-index: 0;
     background:
-      radial-gradient(ellipse 60% 40% at 85% 10%, rgba(255,255,255,0.10) 0%, transparent 55%),
-      radial-gradient(ellipse 70% 60% at 10% 90%, rgba(0,0,0,0.2) 0%, transparent 55%);
+      radial-gradient(ellipse 60% 40% at 85% 10%, rgba(0,0,0,0.02) 0%, transparent 55%),
+      radial-gradient(ellipse 70% 60% at 10% 90%, rgba(0,0,0,0.03) 0%, transparent 55%);
   }
   .ab-right-content {
     position: relative; z-index: 2;
@@ -115,11 +115,7 @@
     height: 100%;
   }
 
-  /* ── 워터마크 공통 ── */
-  .ab-mark {
-    position: absolute; z-index: 1; pointer-events: none;
-    background-size: contain; background-repeat: no-repeat; background-position: center;
-  }
+  .ab-mark { display: none; }
   /* EDAM 아이콘 - 왼쪽 우하단 (모서리 딱 맞춤) */
   .ab-mark-icon-l {
     right: -30px; bottom: -30px;
@@ -165,22 +161,22 @@
     font-size: 11px; font-weight: 800; letter-spacing: 0.2em;
     text-transform: uppercase; margin-bottom: 18px;
   }
-  .ab-point--light { color: rgba(255,255,255,0.5); }
-  .ab-point--light::before { content: ''; width: 28px; height: 2px; background: rgba(255,255,255,0.4); display: block; }
+  .ab-point--light { color: #1a2f8a; }
+  .ab-point--light::before { content: ''; width: 28px; height: 2px; background: #1a2f8a; display: block; }
 
   /* ── 제목 ── */
   .ab-title {
     font-size: clamp(26px, 2.8vw, 42px); font-weight: 900;
     letter-spacing: -0.04em; line-height: 1.15; margin-bottom: 36px;
   }
-  .ab-title--light { color: #fff; }
-  .ab-em--cyan { font-style: normal; color: rgba(255,255,255,0.7); }
+  .ab-title--light { color: #0d1a3a; }
+  .ab-em--cyan { font-style: normal; color: #1a2f8a; }
 
   /* ── 본문 ── */
   .ab-body { font-size: 15px; line-height: 2.2; margin-bottom: 24px; }
-  .ab-body--light { color: rgba(255,255,255,0.6); }
-  .ab-body--light em { font-style: italic; color: rgba(255,255,255,0.5); }
-  .ab-body--light strong { color: #fff; font-weight: 700; }
+  .ab-body--light { color: #444; }
+  .ab-body--light em { font-style: italic; color: #666; }
+  .ab-body--light strong { color: #0d1a3a; font-weight: 700; }
 
   /* ── 반응형 ── */
   @media (max-width: 960px) {
