@@ -160,7 +160,35 @@ iframe{width:100%;height:100%;border:none;display:block;}
   </div>
 </div>
 
-<div id="pa-history" style="display:none"><div class="ps"><div class="pt">준비 중</div><p style="font-size:11px;color:rgba(255,255,255,0.25)">곧 추가돼요</p></div></div>
+<div id="pa-history" style="display:none">
+  <div class="ps">
+    <div class="pt">배경</div>
+    <div class="ctrl"><div class="cl">상단 색상</div><div class="cr"><div class="sw" id="sw-hBg1"><input type="color" id="c-hBg1" value="#060e18" oninput="oC2('hBg1',this.value)"></div><input class="hx" id="h-hBg1" value="#060e18" oninput="oH2('hBg1',this.value)"></div></div>
+    <div class="ctrl"><div class="cl">하단 색상</div><div class="cr"><div class="sw" id="sw-hBg2"><input type="color" id="c-hBg2" value="#0d1c38" oninput="oC2('hBg2',this.value)"></div><input class="hx" id="h-hBg2" value="#0d1c38" oninput="oH2('hBg2',this.value)"></div></div>
+  </div>
+  <div class="ps">
+    <div class="pt">텍스트 색상</div>
+    <div class="ctrl"><div class="cl">제목</div><div class="cr"><div class="sw" id="sw-hTitleColor"><input type="color" id="c-hTitleColor" value="#ffffff" oninput="oC2('hTitleColor',this.value)"></div><input class="hx" id="h-hTitleColor" value="#ffffff" oninput="oH2('hTitleColor',this.value)"></div></div>
+    <div class="ctrl"><div class="cl">서브타이틀</div><div class="cr"><div class="sw" id="sw-hSubColor"><input type="color" id="c-hSubColor" value="#8899bb" oninput="oC2('hSubColor',this.value)"></div><input class="hx" id="h-hSubColor" value="#8899bb" oninput="oH2('hSubColor',this.value)"></div></div>
+    <div class="ctrl"><div class="cl">연도</div><div class="cr"><div class="sw" id="sw-hYearColor"><input type="color" id="c-hYearColor" value="#ffffff" oninput="oC2('hYearColor',this.value)"></div><input class="hx" id="h-hYearColor" value="#ffffff" oninput="oH2('hYearColor',this.value)"></div></div>
+    <div class="ctrl"><div class="cl">내용 텍스트</div><div class="cr"><div class="sw" id="sw-hDescColor"><input type="color" id="c-hDescColor" value="#ccddee" oninput="oC2('hDescColor',this.value)"></div><input class="hx" id="h-hDescColor" value="#ccddee" oninput="oH2('hDescColor',this.value)"></div></div>
+  </div>
+  <div class="ps">
+    <div class="pt">크기 & 간격</div>
+    <div class="ctrl"><div class="cl">제목 크기 <span class="cv" id="v-hTitleSize">48px</span></div><input type="range" class="sl" id="s-hTitleSize" min="20" max="72" value="48" oninput="oS2('hTitleSize',this.value,'px')"></div>
+    <div class="ctrl"><div class="cl">내용 크기 <span class="cv" id="v-hDescSize">14px</span></div><input type="range" class="sl" id="s-hDescSize" min="10" max="22" value="14" oninput="oS2('hDescSize',this.value,'px')"></div>
+    <div class="ctrl"><div class="cl">줄간격 <span class="cv" id="v-hLineHeight">1.9</span></div><input type="range" class="sl" id="s-hLineHeight" min="1.2" max="3.0" step="0.1" value="1.9" oninput="oS2('hLineHeight',this.value,'')"></div>
+  </div>
+  <div class="ps">
+    <div class="pt">타임라인 스타일</div>
+    <div class="ctrl"><div class="cl">라인 색상</div><div class="cr"><div class="sw" id="sw-hLineColor"><input type="color" id="c-hLineColor" value="#334466" oninput="oC2('hLineColor',this.value)"></div><input class="hx" id="h-hLineColor" value="#334466" oninput="oH2('hLineColor',this.value)"></div></div>
+    <div class="ctrl"><div class="cl">닷 테두리 색상</div><div class="cr"><div class="sw" id="sw-hDotColor"><input type="color" id="c-hDotColor" value="#ffffff" oninput="oC2('hDotColor',this.value)"></div><input class="hx" id="h-hDotColor" value="#ffffff" oninput="oH2('hDotColor',this.value)"></div></div>
+  </div>
+  <div class="ps">
+    <div class="pt">💡 편집 방법</div>
+    <div class="tip">미리보기에서 텍스트를 <strong>클릭</strong>하면 바로 편집 가능해요.<br>드래그 후 툴바에서 서식 적용하세요.</div>
+  </div>
+</div>
 <div id="pa-services" style="display:none"><div class="ps"><div class="pt">준비 중</div><p style="font-size:11px;color:rgba(255,255,255,0.25)">곧 추가돼요</p></div></div>
 <div id="pa-portfolio" style="display:none"><div class="ps"><div class="pt">준비 중</div><p style="font-size:11px;color:rgba(255,255,255,0.25)">곧 추가돼요</p></div></div>
 
@@ -191,7 +219,9 @@ if(!tok) location.href='/admin';
 
 let editOn = true;
 let fonts = {};
+let currentSec = 'about';
 
+// ── About 스타일 ──
 let S = {
   leftBg1:'#2a45c8',leftBg2:'#0f1f6a',
   rightBg1:'#1a1f2e',rightBg2:'#0e1220',
@@ -207,7 +237,16 @@ let T = {
   rightBody:'이담에스티는 방송기술, 컴퓨터그래픽, 오디오, IT 분야의 20년 이상의 외길을 다져온 전문가들로 구성된 회사입니다. 우리 회사는 모두 엔지니어로 구성되어 있으며 매월 자체 사내 세미나 개최와 기술습득에 필요한 요소들을 지원함으로써 트렌드에 뒤쳐지지 않습니다. 91개 관공서·공공기관, 115개 교육기관, 기업 등 516개 수많은 국내고객과 해외의 미디어 시스템 고객은 이담에스티의 서비스를 검증받았습니다.'
 };
 
-const D = {S:{...S},T:{...T}};
+// ── History 스타일 ──
+let H = {
+  hBg1:'#060e18', hBg2:'#0d1c38',
+  hTitleColor:'#ffffff', hSubColor:'#8899bb',
+  hYearColor:'#ffffff', hDescColor:'#ccddee',
+  hTitleSize:48, hDescSize:14, hLineHeight:1.9,
+  hLineColor:'#334466', hDotColor:'#ffffff',
+};
+
+const D = {S:{...S},T:{...T},H:{...H}};
 const pf = document.getElementById('pf');
 
 // iframe 로드
@@ -275,7 +314,49 @@ function doInject(){
   }catch(e){console.warn('inject:',e);}
 }
 
-// ── 텍스트 주입 ──
+// ── History 스타일 주입 ──
+function doInjectH(){
+  try{
+    const doc=pf.contentDocument;
+    if(!doc||!doc.head)return;
+    let el=doc.getElementById('__ei_h__');
+    if(!el){el=doc.createElement('style');el.id='__ei_h__';doc.head.appendChild(el);}
+    el.textContent=`
+      html body #sec6 .s5{background:linear-gradient(170deg,${H.hBg1} 0%,${H.hBg2} 100%)!important;}
+      html body #sec6 .h-title{color:${H.hTitleColor};font-size:${H.hTitleSize}px;}
+      html body #sec6 .h-sub{color:${H.hSubColor};line-height:${H.hLineHeight};}
+      html body #sec6 .h-eyebrow{color:${H.hSubColor};}
+      html body #sec6 .tl-year{color:${H.hYearColor};}
+      html body #sec6 .tl-desc{color:${H.hDescColor};font-size:${H.hDescSize}px;line-height:${H.hLineHeight};}
+      html body #sec6 .tl-month{color:${H.hSubColor};}
+      html body #sec6 .tl-line{background:${H.hLineColor}!important;}
+      html body #sec6 .tl-dot{border-color:${H.hDotColor}!important;}
+      html body #sec6 .tl-end-dot{background:${H.hDotColor}!important;}
+      html body #sec6 .eds-e{outline:2px dashed rgba(99,102,241,0.5)!important;cursor:text!important;}
+    `;
+  }catch(e){}
+}
+
+// ── History 컨트롤 ──
+window.oC2=function(k,v){
+  H[k]=v;
+  const h=document.getElementById('h-'+k),sw=document.getElementById('sw-'+k);
+  if(h)h.value=v;if(sw)sw.style.background=v;
+  doInjectH();
+};
+window.oH2=function(k,v){
+  if(!/^#[0-9a-fA-F]{6}$/.test(v))return;
+  H[k]=v;
+  const c=document.getElementById('c-'+k),sw=document.getElementById('sw-'+k);
+  if(c)c.value=v;if(sw)sw.style.background=v;
+  doInjectH();
+};
+window.oS2=function(k,v,u){
+  H[k]=parseFloat(v);
+  const el=document.getElementById('v-'+k);
+  if(el)el.textContent=v+u;
+  doInjectH();
+};
 function doText(){
   try{
     const doc=pf.contentDocument;
@@ -579,11 +660,12 @@ document.getElementById('tabs').addEventListener('click',function(e){
   const tab=e.target.closest('.tab');if(!tab)return;
   document.querySelectorAll('.tab').forEach(t=>t.classList.remove('on'));
   tab.classList.add('on');
-  const s=tab.dataset.s;
+  currentSec=tab.dataset.s;
   document.querySelectorAll('[id^="pa-"]').forEach(p=>p.style.display='none');
-  document.getElementById('pa-'+s).style.display='block';
+  document.getElementById('pa-'+currentSec).style.display='block';
   const map={about:'sec2',history:'sec6',services:'sec3',portfolio:'sec4'};
-  try{const el=pf.contentDocument.getElementById(map[s]);if(el)pf.contentWindow.scrollTo(0,el.offsetTop-60);}catch(e){}
+  try{const el=pf.contentDocument.getElementById(map[currentSec]);if(el)pf.contentWindow.scrollTo(0,el.offsetTop-60);}catch(e){}
+  if(currentSec==='history') doInjectH();
 });
 
 // ── 디바이스 ──
@@ -604,12 +686,19 @@ window.doReset=function(){
 window.doSave=async function(){
   syncFromFrame();
   try{
-    const r=await fetch('/api/admin/design-styles',{
+    // About 저장
+    const r1=await fetch('/api/admin/design-styles',{
       method:'POST',
       headers:{'x-admin-token':tok,'Content-Type':'application/json'},
       body:JSON.stringify({section:'about',styles:S,texts:T})
     });
-    if(r.ok)showToast('💾 저장 완료!','ok');
+    // History 저장
+    const r2=await fetch('/api/admin/design-styles',{
+      method:'POST',
+      headers:{'x-admin-token':tok,'Content-Type':'application/json'},
+      body:JSON.stringify({section:'history',styles:H})
+    });
+    if(r1.ok&&r2.ok)showToast('💾 저장 완료!','ok');
     else showToast('저장 실패','err');
   }catch(e){showToast('오류','err');}
 };
@@ -640,18 +729,37 @@ function syncControls(){
 ['leftBg1','leftBg2','rightBg1','rightBg2','titleColor','bodyColor','accentColor'].forEach(function(k){
   const sw=document.getElementById('sw-'+k);if(sw)sw.style.background=S[k];
 });
+['hBg1','hBg2','hTitleColor','hSubColor','hYearColor','hDescColor','hLineColor','hDotColor'].forEach(function(k){
+  const sw=document.getElementById('sw-'+k);if(sw)sw.style.background=H[k];
+});
+
+function syncHistControls(){
+  Object.entries(H).forEach(function([k,v]){
+    const h=document.getElementById('h-'+k),c=document.getElementById('c-'+k),sw=document.getElementById('sw-'+k),sl=document.getElementById('s-'+k),vl=document.getElementById('v-'+k);
+    if(h)h.value=v;if(c)c.value=v;if(sw)sw.style.background=v;if(sl)sl.value=v;
+  });
+}
 
 // ── 저장값 불러오기 ──
-fetch('/api/admin/design-styles?section=about',{headers:{'x-admin-token':tok}})
-  .then(r=>r.ok?r.json():null)
-  .then(function(data){
-    if(!data)return;
-    if(data.styles)Object.assign(S,data.styles);
-    if(data.texts)Object.assign(T,data.texts);
+Promise.all([
+  fetch('/api/admin/design-styles?section=about',{headers:{'x-admin-token':tok}}).then(r=>r.ok?r.json():null),
+  fetch('/api/admin/design-styles?section=history',{headers:{'x-admin-token':tok}}).then(r=>r.ok?r.json():null),
+]).then(function([aboutData,histData]){
+  if(aboutData){
+    if(aboutData.styles)Object.assign(S,aboutData.styles);
+    if(aboutData.texts)Object.assign(T,aboutData.texts);
     syncControls();
-    // iframe이 이미 로드됐으면 바로 주입
-    try{if(pf.contentDocument&&pf.contentDocument.getElementById('sec2')){doInject();doText();}}catch(e){}
-  }).catch(function(){});
+  }
+  if(histData&&histData.styles){
+    Object.assign(H,histData.styles);
+    syncHistControls();
+  }
+  try{
+    if(pf.contentDocument&&pf.contentDocument.getElementById('sec2')){
+      doInject();doText();
+    }
+  }catch(e){}
+}).catch(function(){});
 
 // ── 토스트 ──
 function showToast(msg,type){

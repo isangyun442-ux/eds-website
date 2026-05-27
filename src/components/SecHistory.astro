@@ -88,6 +88,32 @@ const history = [
   </div>
 </section>
 
+<!-- 클라이언트 사이드 스타일 로더 -->
+<script is:inline>
+(function(){
+  fetch('/api/admin/design-styles?section=history')
+    .then(r=>r.ok?r.json():null)
+    .then(function(data){
+      if(!data||!data.styles)return;
+      var s=data.styles;
+      var st=document.getElementById('__hist_dynamic_styles__');
+      if(!st){st=document.createElement('style');st.id='__hist_dynamic_styles__';document.head.appendChild(st);}
+      st.textContent=[
+        s.hBg1&&s.hBg2?'#sec6 .s5{background:linear-gradient(170deg,'+s.hBg1+' 0%,'+s.hBg2+' 100%)!important;}':'',
+        s.hTitleColor?'#sec6 .h-title{color:'+s.hTitleColor+'!important;}':'',
+        s.hTitleSize?'#sec6 .h-title{font-size:'+s.hTitleSize+'px!important;}':'',
+        s.hSubColor?'#sec6 .h-sub,#sec6 .h-eyebrow,#sec6 .tl-month{color:'+s.hSubColor+'!important;}':'',
+        s.hYearColor?'#sec6 .tl-year{color:'+s.hYearColor+'!important;}':'',
+        s.hDescColor?'#sec6 .tl-desc{color:'+s.hDescColor+'!important;}':'',
+        s.hDescSize?'#sec6 .tl-desc{font-size:'+s.hDescSize+'px!important;}':'',
+        s.hLineHeight?'#sec6 .tl-desc{line-height:'+s.hLineHeight+'!important;}':'',
+        s.hLineColor?'#sec6 .tl-line{background:'+s.hLineColor+'!important;}':'',
+        s.hDotColor?'#sec6 .tl-dot{border-color:'+s.hDotColor+'!important;}#sec6 .tl-end-dot{background:'+s.hDotColor+'!important;}':'',
+      ].join('');
+    }).catch(function(){});
+})();
+</script>
+
 <style>
   .s5 {
     background: linear-gradient(170deg, #060e18 0%, #0a1628 35%, #0d1c38 65%, #070f1e 100%);
