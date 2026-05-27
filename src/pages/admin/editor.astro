@@ -711,18 +711,18 @@ document.getElementById('tabs').addEventListener('click',function(e){
 
 // ── 미리보기 zoom 조정 ──
 function resizePreview(){
-  const wrap = document.getElementById('fw');
-  const iframe = document.getElementById('pf');
-  if(!wrap||!iframe)return;
-  const wrapW = wrap.offsetWidth;
-  const scale = wrapW / 1440;
-  iframe.style.width = '1440px';
-  iframe.style.height = (wrap.offsetHeight / scale) + 'px';
-  iframe.style.transform = 'scale('+scale+')';
-  iframe.style.transformOrigin = 'top left';
+  try{
+    const wrap=document.getElementById('fw');
+    const iframe=document.getElementById('pf');
+    if(!wrap||!iframe)return;
+    const scale=wrap.offsetWidth/1440;
+    iframe.style.zoom=String(scale);
+    iframe.style.width='1440px';
+    iframe.style.height=(wrap.offsetHeight/scale)+'px';
+  }catch(e){}
 }
-window.addEventListener('resize', resizePreview);
-setTimeout(resizePreview, 200);
+window.addEventListener('resize',resizePreview);
+setTimeout(resizePreview,300);
 
 // ── 초기화 ──
 // 마지막 저장값 (초기화용)
