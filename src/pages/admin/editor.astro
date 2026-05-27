@@ -155,14 +155,8 @@ iframe{width:100%;height:100%;border:none;display:block;}
     </div>
   </div>
   <div class="ps">
-    <div class="pt">텍스트 직접 수정</div>
-    <div class="tip">미리보기에서 <strong>✏️ 편집모드</strong> 켜면 텍스트 클릭→편집, 드래그→서식 적용 가능해요</div>
-    <div class="ctrl" style="margin-top:10px;"><div class="cl">왼쪽 제목</div><textarea class="ti" id="t-leftTitle" rows="2" oninput="oT()">"1만 시간의
-법칙"</textarea></div>
-    <div class="ctrl"><div class="cl">왼쪽 본문</div><textarea class="ti" id="t-leftBody" rows="4" oninput="oT()">어떤 분야에서 전문성을 갖기 위해 투자해야 하는 시간을 의미합니다. 1993년 앤더스 에릭슨이 연구한 내용을 바탕으로 베스트셀러 작가 말콤 글래드웰이 이 에릭슨의 주장을 간단하게 "1만 시간을 연습하면 전문가가 된다"는 이론으로 설명했습니다. 아웃라이어에서는 빌 게이츠와 비틀즈를 예로 제시했지만, 비단 그들만이 아니라 각자의 분야에서 명성을 떨치는 사람들은 대부분 이 법칙에 따라 자신의 능력을 증진시키고 한계를 극복하며 스스로 발전시키고 있는 것입니다.</textarea></div>
-    <div class="ctrl"><div class="cl">오른쪽 제목</div><textarea class="ti" id="t-rightTitle" rows="2" oninput="oT()">전문가 집단
-이담에스티</textarea></div>
-    <div class="ctrl"><div class="cl">오른쪽 본문</div><textarea class="ti" id="t-rightBody" rows="4" oninput="oT()">이담에스티는 방송기술, 컴퓨터그래픽, 오디오, IT 분야의 20년 이상의 외길을 다져온 전문가들로 구성된 회사입니다. 우리 회사는 모두 엔지니어로 구성되어 있으며 매월 자체 사내 세미나 개최와 기술습득에 필요한 요소들을 지원함으로써 트렌드에 뒤쳐지지 않습니다. 91개 관공서·공공기관, 115개 교육기관, 기업 등 516개 수많은 국내고객과 해외의 미디어 시스템 고객은 이담에스티의 서비스를 검증받았습니다.</textarea></div>
+    <div class="pt">💡 편집 방법</div>
+    <div class="tip">미리보기에서 텍스트를 <strong>클릭</strong>하면 바로 편집 가능해요.<br>드래그로 선택 후 툴바에서 <strong>폰트·크기·색상</strong>을 적용하세요.</div>
   </div>
 </div>
 
@@ -181,7 +175,7 @@ iframe{width:100%;height:100%;border:none;display:block;}
       <button class="db-btn" onclick="setDev('t',this)">태블릿</button>
       <button class="db-btn" onclick="setDev('m',this)">모바일</button>
     </div>
-    <button class="edit-btn" id="editBtn" onclick="toggleEdit()">✏️ 편집모드</button>
+    <button class="edit-btn on" id="editBtn" onclick="toggleEdit()" style="display:none">✅ 편집모드 ON</button>
   </div>
   <div class="pv-body">
     <div class="fw d" id="fw"><iframe id="pf" src="/"></iframe></div>
@@ -195,7 +189,7 @@ iframe{width:100%;height:100%;border:none;display:block;}
 const tok = sessionStorage.getItem('eds-admin-token')||'';
 if(!tok) location.href='/admin';
 
-let editOn = false;
+let editOn = true;
 let fonts = {};
 
 let S = {
@@ -291,85 +285,135 @@ function startEdit(){
     const sec=doc.getElementById('sec2');
     if(!sec)return;
 
-    // contentEditable 적용
-    sec.querySelectorAll('.ab-title,.ab-body').forEach(function(el){
+    // contentEditable 적용 - 라벨, 제목, 본문, 임직원일동 모두
+    sec.querySelectorAll('.ab-title,.ab-body,.ab-label,.ab-sig').forEach(function(el){
       el.contentEditable='true';
       el.classList.add('eds-e');
       el.addEventListener('input',syncFromFrame);
     });
 
-    // 이미 툴바 있으면 제거
     const old=doc.getElementById('__tb__');
     if(old)old.remove();
 
-    // 플로팅 툴바 HTML 만들기
+    // 구글폰트 전체 미리 로드
+    if(!doc.getElementById('__gfall__')){
+      const lk=doc.createElement('link');lk.id='__gfall__';lk.rel='stylesheet';
+      lk.href='https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700;900&family=Nanum+Gothic:wght@400;700&family=Nanum+Myeongjo&family=Black+Han+Sans&family=Gowun+Dodum&display=swap';
+      doc.head.appendChild(lk);
+    }
+
     const tb=doc.createElement('div');
     tb.id='__tb__';
-    tb.style.cssText='position:fixed;top:-200px;left:0;z-index:99999;background:#1a1d2e;border:1px solid rgba(255,255,255,0.15);border-radius:8px;padding:5px 7px;display:flex;align-items:center;gap:4px;box-shadow:0 4px 20px rgba(0,0,0,0.6);font-family:system-ui,sans-serif;opacity:0;transition:opacity .15s;pointer-events:none;';
+    tb.style.cssText='position:fixed;top:-200px;left:0;z-index:99999;background:#1a1d2e;border:1px solid rgba(255,255,255,0.15);border-radius:9px;padding:5px 7px;display:flex;align-items:center;gap:3px;box-shadow:0 4px 24px rgba(0,0,0,0.7);font-family:system-ui,sans-serif;opacity:0;transition:opacity .15s;pointer-events:none;flex-wrap:nowrap;';
 
-    // 툴바 내부
-    tb.innerHTML=[
-      // 폰트
-      '<select id="tbF" style="background:#0f1117;border:1px solid rgba(255,255,255,0.1);color:#fff;padding:3px 5px;border-radius:4px;font-size:11px;outline:none;max-width:100px;">',
-      '<option value="">폰트</option>',
-      '<option value="Noto Sans KR">Noto Sans</option>',
-      '<option value="Pretendard">Pretendard</option>',
-      '<option value="Nanum Gothic">나눔고딕</option>',
-      '<option value="Nanum Myeongjo">나눔명조</option>',
-      '<option value="Black Han Sans">블랙한산</option>',
-      '</select>',
-      // 크기
-      '<input id="tbSz" type="number" min="8" max="120" value="15" style="background:#0f1117;border:1px solid rgba(255,255,255,0.1);color:#fff;padding:3px 4px;border-radius:4px;font-size:11px;outline:none;width:44px;">',
-      '<div style="width:1px;height:16px;background:rgba(255,255,255,0.1);margin:0 2px;"></div>',
-      // B I U
-      '<button id="tbB" style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);color:#fff;padding:3px 7px;border-radius:4px;font-size:12px;font-weight:900;cursor:pointer;font-family:serif;">B</button>',
-      '<button id="tbI" style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);color:#fff;padding:3px 7px;border-radius:4px;font-size:12px;cursor:pointer;font-style:italic;font-family:serif;">I</button>',
-      '<button id="tbU" style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);color:#fff;padding:3px 7px;border-radius:4px;font-size:12px;cursor:pointer;text-decoration:underline;font-family:serif;">U</button>',
-      '<div style="width:1px;height:16px;background:rgba(255,255,255,0.1);margin:0 2px;"></div>',
-      // 색상
-      '<input id="tbC" type="color" value="#ffffff" style="width:24px;height:24px;border:none;border-radius:4px;cursor:pointer;padding:1px;background:transparent;">',
-      '<div style="width:1px;height:16px;background:rgba(255,255,255,0.1);margin:0 2px;"></div>',
-      // 서식제거
-      '<button id="tbX" style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);color:rgba(255,255,255,0.6);padding:3px 7px;border-radius:4px;font-size:10px;cursor:pointer;">✕</button>',
-    ].join('');
+    // 폰트 버튼들 (select 대신 → selection 날아가지 않음)
+    const fontList=[
+      {n:'Noto Sans',f:"'Noto Sans KR',sans-serif"},
+      {n:'Pretendard',f:"'Pretendard',sans-serif"},
+      {n:'나눔고딕',f:"'Nanum Gothic',sans-serif"},
+      {n:'나눔명조',f:"'Nanum Myeongjo',serif"},
+      {n:'블랙한산',f:"'Black Han Sans',sans-serif"},
+      {n:'고운돋움',f:"'Gowun Dodum',sans-serif"},
+    ];
+
+    // 폰트 드롭다운 (커스텀)
+    const fd=doc.createElement('div');
+    fd.id='__fd__';
+    fd.style.cssText='position:relative;';
+    const fdBtn=doc.createElement('button');
+    fdBtn.textContent='폰트 ▾';
+    fdBtn.style.cssText='background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);color:#fff;padding:3px 8px;border-radius:4px;font-size:11px;cursor:pointer;white-space:nowrap;';
+    const fdList=doc.createElement('div');
+    fdList.style.cssText='display:none;position:absolute;top:100%;left:0;background:#1a1d2e;border:1px solid rgba(255,255,255,0.15);border-radius:6px;overflow:hidden;min-width:110px;box-shadow:0 4px 16px rgba(0,0,0,0.6);margin-top:3px;z-index:9;';
+    fontList.forEach(function(fm){
+      const item=doc.createElement('div');
+      item.textContent=fm.n;
+      item.style.cssText="padding:7px 12px;font-size:12px;color:#fff;cursor:pointer;font-family:"+fm.f+";";
+      item.addEventListener('mouseover',function(){this.style.background='rgba(99,102,241,0.2)';});
+      item.addEventListener('mouseout',function(){this.style.background='';});
+      item.addEventListener('mousedown',function(e){
+        e.preventDefault();
+        restoreSel();
+        wrapSel({fontFamily:fm.f});
+        fdList.style.display='none';
+      });
+      fdList.appendChild(item);
+    });
+    fdBtn.addEventListener('mousedown',function(e){
+      e.preventDefault();
+      saveSel();
+      fdList.style.display=fdList.style.display==='none'?'block':'none';
+    });
+    fd.appendChild(fdBtn);fd.appendChild(fdList);
+    tb.appendChild(fd);
+
+    // 구분선
+    function sep(){const d=doc.createElement('div');d.style.cssText='width:1px;height:16px;background:rgba(255,255,255,0.1);margin:0 2px;flex-shrink:0;';return d;}
+
+    // 크기 입력
+    tb.appendChild(sep());
+    const sz=doc.createElement('input');
+    sz.id='__tbSz__';sz.type='number';sz.min='8';sz.max='120';sz.value='15';
+    sz.title='글자 크기(px)';
+    sz.style.cssText='background:#0f1117;border:1px solid rgba(255,255,255,0.1);color:#fff;padding:3px 4px;border-radius:4px;font-size:11px;outline:none;width:44px;';
+    sz.addEventListener('mousedown',function(e){e.preventDefault();saveSel();});
+    sz.addEventListener('change',function(){restoreSel();wrapSel({fontSize:this.value+'px'});});
+    tb.appendChild(sz);
+
+    tb.appendChild(sep());
+
+    // B I U 버튼
+    function mkBtn(label,cmd,style){
+      const b=doc.createElement('button');
+      b.innerHTML=label;
+      b.style.cssText='background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);color:#fff;padding:3px 7px;border-radius:4px;font-size:12px;cursor:pointer;'+(style||'');
+      b.addEventListener('mousedown',function(e){e.preventDefault();saveSel();});
+      b.addEventListener('click',function(){restoreSel();doc.execCommand(cmd);syncFromFrame();});
+      return b;
+    }
+    tb.appendChild(mkBtn('<b>B</b>','bold','font-weight:900;'));
+    tb.appendChild(mkBtn('<i>I</i>','italic','font-style:italic;'));
+    tb.appendChild(mkBtn('<u>U</u>','underline','text-decoration:underline;'));
+
+    tb.appendChild(sep());
+
+    // 색상
+    const col=doc.createElement('input');
+    col.id='__tbC__';col.type='color';col.value='#ffffff';col.title='글자 색상';
+    col.style.cssText='width:26px;height:26px;border:none;border-radius:4px;cursor:pointer;padding:1px;background:transparent;';
+    col.addEventListener('mousedown',function(e){saveSel();});
+    col.addEventListener('input',function(){restoreSel();doc.execCommand('foreColor',false,this.value);syncFromFrame();});
+    tb.appendChild(col);
+
+    tb.appendChild(sep());
+
+    // 서식 제거
+    const clr=doc.createElement('button');
+    clr.textContent='✕ 서식';
+    clr.style.cssText='background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);color:rgba(255,255,255,0.5);padding:3px 7px;border-radius:4px;font-size:10px;cursor:pointer;';
+    clr.addEventListener('mousedown',function(e){e.preventDefault();saveSel();});
+    clr.addEventListener('click',function(){restoreSel();doc.execCommand('removeFormat');syncFromFrame();});
+    tb.appendChild(clr);
+
     doc.body.appendChild(tb);
 
-    // 저장된 selection (툴바 클릭해도 날아가지 않게)
+    // ── selection 저장/복원 ──
     let savedRange=null;
-    doc.addEventListener('selectionchange',function(){
+    function saveSel(){
       const sel=doc.getSelection();
-      if(!sel||sel.isCollapsed||!sel.toString()){
-        // 약간 딜레이 후 숨기기 (툴바 클릭 중일 수 있으니)
-        setTimeout(function(){
-          const s2=doc.getSelection();
-          if(!s2||s2.isCollapsed) tb.style.opacity='0',tb.style.pointerEvents='none';
-        },200);
-        return;
+      if(sel&&!sel.isCollapsed&&sel.toString()){
+        try{savedRange=sel.getRangeAt(0).cloneRange();}catch(e){}
       }
-      savedRange=sel.getRangeAt(0).cloneRange();
-      const r=sel.getRangeAt(0).getBoundingClientRect();
-      if(!r.width)return;
-      const x=Math.max(4,Math.min(r.left+r.width/2-160, doc.documentElement.clientWidth-330));
-      const y=Math.max(4,r.top-50+pf.contentWindow.scrollY);
-      tb.style.left=x+'px';
-      tb.style.top=y+'px';
-      tb.style.opacity='1';
-      tb.style.pointerEvents='all';
-      // 현재 크기 표시
-      const node=sel.anchorNode;
-      if(node){
-        const e2=node.nodeType===3?node.parentElement:node;
-        tb.querySelector('#tbSz').value=parseInt(doc.defaultView.getComputedStyle(e2).fontSize)||15;
-      }
-    });
-
-    // 헬퍼: selection 복원 후 wrap
-    function wrapSel(style){
-      if(savedRange){
+    }
+    function restoreSel(){
+      if(!savedRange)return;
+      try{
         const sel=doc.getSelection();
         sel.removeAllRanges();
         sel.addRange(savedRange);
-      }
+      }catch(e){}
+    }
+    function wrapSel(style){
       const sel=doc.getSelection();
       if(!sel||sel.isCollapsed)return;
       const range=sel.getRangeAt(0);
@@ -380,50 +424,42 @@ function startEdit(){
       syncFromFrame();
     }
 
-    // 폰트 변경
-    tb.querySelector('#tbF').addEventListener('mousedown',function(e){e.preventDefault();});
-    tb.querySelector('#tbF').addEventListener('change',function(){
-      if(!this.value)return;
-      wrapSel({fontFamily:"'"+this.value+"',sans-serif"});
-      this.value='';
+    // ── 툴바 위치 업데이트 ──
+    doc.addEventListener('selectionchange',function(){
+      const sel=doc.getSelection();
+      if(!sel||sel.isCollapsed||!sel.toString().trim()){
+        setTimeout(function(){
+          if(fdList.style.display==='block')return; // 폰트 드롭다운 열려있으면 유지
+          const s2=doc.getSelection();
+          if(!s2||s2.isCollapsed){tb.style.opacity='0';tb.style.pointerEvents='none';}
+        },200);
+        return;
+      }
+      saveSel();
+      const r=sel.getRangeAt(0).getBoundingClientRect();
+      if(!r.width)return;
+      const x=Math.max(4,Math.min(r.left+r.width/2-160,doc.documentElement.clientWidth-340));
+      const y=Math.max(4,r.top-52+pf.contentWindow.scrollY);
+      tb.style.left=x+'px';tb.style.top=y+'px';
+      tb.style.opacity='1';tb.style.pointerEvents='all';
+      // 현재 크기 표시
+      const node=sel.anchorNode;
+      if(node){
+        const el=node.nodeType===3?node.parentElement:node;
+        const fs=parseInt(doc.defaultView.getComputedStyle(el).fontSize)||15;
+        sz.value=fs;
+      }
     });
 
-    // 크기 변경
-    tb.querySelector('#tbSz').addEventListener('mousedown',function(e){e.preventDefault();});
-    tb.querySelector('#tbSz').addEventListener('change',function(){
-      wrapSel({fontSize:this.value+'px'});
+    // 외부 클릭 시 폰트 드롭다운 닫기
+    doc.addEventListener('click',function(e){
+      if(!fd.contains(e.target))fdList.style.display='none';
     });
 
-    // 볼드
-    tb.querySelector('#tbB').addEventListener('mousedown',function(e){e.preventDefault();});
-    tb.querySelector('#tbB').addEventListener('click',function(){
-      if(savedRange){const s=doc.getSelection();s.removeAllRanges();s.addRange(savedRange);}
-      doc.execCommand('bold');syncFromFrame();
-    });
-    // 이탤릭
-    tb.querySelector('#tbI').addEventListener('mousedown',function(e){e.preventDefault();});
-    tb.querySelector('#tbI').addEventListener('click',function(){
-      if(savedRange){const s=doc.getSelection();s.removeAllRanges();s.addRange(savedRange);}
-      doc.execCommand('italic');syncFromFrame();
-    });
-    // 밑줄
-    tb.querySelector('#tbU').addEventListener('mousedown',function(e){e.preventDefault();});
-    tb.querySelector('#tbU').addEventListener('click',function(){
-      if(savedRange){const s=doc.getSelection();s.removeAllRanges();s.addRange(savedRange);}
-      doc.execCommand('underline');syncFromFrame();
-    });
-    // 색상
-    tb.querySelector('#tbC').addEventListener('mousedown',function(e){e.preventDefault();});
-    tb.querySelector('#tbC').addEventListener('input',function(){
-      if(savedRange){const s=doc.getSelection();s.removeAllRanges();s.addRange(savedRange);}
-      doc.execCommand('foreColor',false,this.value);syncFromFrame();
-    });
-    // 서식 제거
-    tb.querySelector('#tbX').addEventListener('mousedown',function(e){e.preventDefault();});
-    tb.querySelector('#tbX').addEventListener('click',function(){
-      if(savedRange){const s=doc.getSelection();s.removeAllRanges();s.addRange(savedRange);}
-      doc.execCommand('removeFormat');syncFromFrame();
-    });
+  }catch(e){console.warn('startEdit:',e);}
+}
+
+
 
   }catch(e){console.warn('startEdit:',e);}
 }
