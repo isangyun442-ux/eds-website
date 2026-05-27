@@ -215,7 +215,10 @@ iframe{width:100%;height:100%;border:none;display:block;}
 
 <script>
 const tok = sessionStorage.getItem('eds-admin-token')||'';
-if(!tok) location.href='/admin';
+if(!tok){
+  alert('로그인이 필요해요. 로그인 페이지로 이동합니다.');
+  location.href='/admin';
+}
 
 let editOn = true;
 let fonts = {};
@@ -733,6 +736,12 @@ window.doReset=async function(){
 // ── 저장 ──
 window.doSave=async function(){
   syncFromFrame();
+  // 토큰 확인
+  if(!tok){
+    showToast('로그인이 필요해요','err');
+    setTimeout(()=>location.href='/admin',1500);
+    return;
+  }
   try{
     const r1=await fetch('/api/admin/design-styles',{
       method:'POST',
@@ -744,12 +753,21 @@ window.doSave=async function(){
       headers:{'x-admin-token':tok,'Content-Type':'application/json'},
       body:JSON.stringify({section:'history',styles:H})
     });
+    if(r1.status===401||r2.status===401){
+      showToast('인증 실패 - 다시 로그인해주세요','err');
+      setTimeout(()=>location.href='/admin',1500);
+      return;
+    }
     if(r1.ok&&r2.ok){
-      // 마지막 저장값 기록
       lastSaved={S:{...S},T:{...T},H:{...H}};
       showToast('💾 저장 완료!','ok');
-    } else showToast('저장 실패','err');
-  }catch(e){showToast('오류','err');}
+    } else {
+      const e1=await r1.json().catch(()=>({}));
+      showToast('저장 실패: '+(e1.error||r1.status),'err');
+    }
+  }catch(e){
+    showToast('네트워크 오류: '+e.message,'err');
+  }
 };
 
 // ── 배포 ──
