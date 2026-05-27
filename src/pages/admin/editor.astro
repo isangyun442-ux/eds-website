@@ -39,7 +39,7 @@ body{font-family:'Pretendard','Noto Sans KR',sans-serif;background:#0f1117;color
 /* 색상 */
 .cr{display:flex;align-items:center;gap:7px;}
 .sw{width:28px;height:28px;border-radius:5px;border:1.5px solid rgba(255,255,255,0.1);cursor:pointer;overflow:hidden;position:relative;flex-shrink:0;}
-.sw input[type=color]{position:absolute;inset:-4px;width:calc(100%+8px);height:calc(100%+8px);border:none;opacity:0;cursor:pointer;}
+.sw input[type=color]{position:absolute;inset:-4px;width:calc(100% + 8px);height:calc(100% + 8px);border:none;opacity:0;cursor:pointer;}
 .hx{flex:1;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);color:#fff;padding:5px 7px;border-radius:5px;font-size:12px;font-family:monospace;outline:none;}
 .hx:focus{border-color:#4f46e5;}
 /* 슬라이더 */
@@ -459,10 +459,6 @@ function startEdit(){
   }catch(e){console.warn('startEdit:',e);}
 }
 
-
-
-  }catch(e){console.warn('startEdit:',e);}
-}
 
 function stopEdit(){
   try{
