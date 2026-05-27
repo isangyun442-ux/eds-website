@@ -1,13 +1,8 @@
 {
-  "headers": [
+  "crons": [
     {
-      "source": "/(.*)",
-      "headers": [
-        {
-          "key": "Referrer-Policy",
-          "value": "unsafe-url"
-        }
-      ]
+      "path": "/api/cron/keep-alive",
+      "schedule": "0 9 * * 1"
     }
   ]
 }
