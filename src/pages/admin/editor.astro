@@ -92,7 +92,16 @@
     }
     .text-input:focus{border-color:#4f46e5;}
 
-    /* 토글 */
+    /* 폰트 선택 */
+    .font-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px;}
+    .font-btn{
+      padding:8px 6px;border-radius:6px;font-size:11px;font-weight:600;
+      cursor:pointer;border:1px solid rgba(255,255,255,0.1);
+      background:rgba(255,255,255,0.04);color:rgba(255,255,255,0.5);
+      font-family:inherit;transition:all 0.2s;text-align:center;
+    }
+    .font-btn:hover{background:rgba(255,255,255,0.08);color:#fff;}
+    .font-btn.on{background:rgba(99,102,241,0.2);border-color:#818cf8;color:#818cf8;}
     .toggle-row{display:flex;align-items:center;justify-content:space-between;}
     .toggle{position:relative;width:36px;height:20px;cursor:pointer;}
     .toggle input{opacity:0;width:0;height:0;}
@@ -238,6 +247,25 @@
         </div>
 
         <div class="panel-section">
+          <div class="panel-section-title">폰트</div>
+          <div class="ctrl">
+            <div class="ctrl-label">폰트 선택</div>
+            <div class="font-grid" id="fontGrid">
+              <button class="font-btn on" data-font="'Noto Sans KR', sans-serif" onclick="selectFont(this)">Noto Sans</button>
+              <button class="font-btn" data-font="'Pretendard', sans-serif" onclick="selectFont(this)">Pretendard</button>
+              <button class="font-btn" data-font="'Nanum Gothic', sans-serif" onclick="selectFont(this)">나눔고딕</button>
+              <button class="font-btn" data-font="'Nanum Myeongjo', serif" onclick="selectFont(this)">나눔명조</button>
+              <button class="font-btn" data-font="'Black Han Sans', sans-serif" onclick="selectFont(this)">블랙한산스</button>
+              <button class="font-btn" data-font="'Gowun Dodum', sans-serif" onclick="selectFont(this)">고운돋움</button>
+            </div>
+          </div>
+          <div class="ctrl">
+            <div class="ctrl-label">자간 <span class="ctrl-val" id="val-letterSpacing">-0.03em</span></div>
+            <input type="range" class="slider" id="slider-letterSpacing" min="-0.08" max="0.1" step="0.01" value="-0.03" oninput="updateSlider('letterSpacing',this.value,'em')">
+          </div>
+        </div>
+
+        <div class="panel-section">
           <div class="panel-section-title">폰트 & 간격</div>
           <div class="ctrl">
             <div class="ctrl-label">제목 크기 <span class="ctrl-val" id="val-titleSize">42px</span></div>
@@ -338,59 +366,74 @@
 
     // 현재 스타일 상태
     let styles = {
-      leftBg1: '#2a45c8',
-      leftBg2: '#0f1f6a',
-      rightBg1: '#1a1f2e',
-      rightBg2: '#0e1220',
-      titleColor: '#ffffff',
-      bodyColor: '#a5b4fc',
-      accentColor: '#ffffff',
-      titleSize: '42',
-      bodySize: '15',
-      lineHeight: '2.0',
-      padding: '100',
-      minHeight: '700',
+      leftBg1: '#2a45c8', leftBg2: '#0f1f6a',
+      rightBg1: '#1a1f2e', rightBg2: '#0e1220',
+      titleColor: '#ffffff', bodyColor: '#a5b4fc', accentColor: '#ffffff',
+      titleSize: '42', bodySize: '15', lineHeight: '2.0',
+      padding: '100', minHeight: '700',
+      fontFamily: "'Noto Sans KR', sans-serif",
+      letterSpacing: '-0.03',
     };
 
     const defaults = {...styles};
 
-    // iframe에 스타일 주입
+    // iframe에 스타일 주입 - style 태그 직접 삽입
     function injectStyles() {
-      const frame = document.getElementById('previewFrame');
-      if(!frame.contentDocument) return;
-      let el = frame.contentDocument.getElementById('editor-inject');
-      if(!el) {
-        el = frame.contentDocument.createElement('style');
-        el.id = 'editor-inject';
-        frame.contentDocument.head.appendChild(el);
-      }
-      el.textContent = `
-        #sec2 .ab-left {
-          background: linear-gradient(135deg, ${styles.leftBg1} 0%, ${styles.leftBg2} 100%) !important;
+      try {
+        const frame = document.getElementById('previewFrame');
+        const doc = frame.contentDocument || frame.contentWindow.document;
+        if(!doc || !doc.head) return;
+
+        let el = doc.getElementById('__editor_styles__');
+        if(!el) {
+          el = doc.createElement('style');
+          el.id = '__editor_styles__';
+          doc.head.appendChild(el);
         }
-        #sec2 .ab-right {
-          background: linear-gradient(135deg, ${styles.rightBg1} 0%, ${styles.rightBg2} 100%) !important;
+
+        // 구글 폰트 로드
+        const fontFamily = styles.fontFamily || "'Noto Sans KR', sans-serif";
+        const fontName = fontFamily.replace(/'/g,'').split(',')[0].trim();
+        const googleFonts = {'Noto Sans KR':'Noto+Sans+KR:wght@400;700;900','Nanum Gothic':'Nanum+Gothic:wght@400;700','Nanum Myeongjo':'Nanum+Myeongjo','Black Han Sans':'Black+Han+Sans','Gowun Dodum':'Gowun+Dodum','Pretendard':null};
+        const gFont = googleFonts[fontName];
+        if(gFont && !doc.getElementById('__editor_font__')) {
+          const link = doc.createElement('link');
+          link.id = '__editor_font__';
+          link.rel = 'stylesheet';
+          link.href = `https://fonts.googleapis.com/css2?family=${gFont}&display=swap`;
+          doc.head.appendChild(link);
         }
-        #sec2 .ab-title {
-          color: ${styles.titleColor} !important;
-          font-size: ${styles.titleSize}px !important;
-        }
-        #sec2 .ab-body {
-          color: ${styles.bodyColor} !important;
-          font-size: ${styles.bodySize}px !important;
-          line-height: ${styles.lineHeight} !important;
-        }
-        #sec2 .ab-body strong {
-          color: ${styles.accentColor} !important;
-        }
-        #sec2 .ab-left-content,
-        #sec2 .ab-right-content {
-          padding: ${styles.padding}px !important;
-        }
-        #sec2 .ab-wrap {
-          min-height: ${styles.minHeight}px !important;
-        }
-      `;
+
+        el.textContent = `
+          #sec2 { font-family: ${fontFamily} !important; }
+          #sec2 .ab-left {
+            background: linear-gradient(135deg, ${styles.leftBg1||'#2a45c8'} 0%, ${styles.leftBg2||'#0f1f6a'} 100%) !important;
+          }
+          #sec2 .ab-right {
+            background: linear-gradient(135deg, ${styles.rightBg1||'#1a1f2e'} 0%, ${styles.rightBg2||'#0e1220'} 100%) !important;
+          }
+          #sec2 .ab-title {
+            color: ${styles.titleColor||'#ffffff'} !important;
+            font-size: ${styles.titleSize||'42'}px !important;
+            letter-spacing: ${styles.letterSpacing||'-0.03'}em !important;
+            font-family: ${fontFamily} !important;
+          }
+          #sec2 .ab-body {
+            color: ${styles.bodyColor||'rgba(255,255,255,0.65)'} !important;
+            font-size: ${styles.bodySize||'15'}px !important;
+            line-height: ${styles.lineHeight||'2.0'} !important;
+            font-family: ${fontFamily} !important;
+          }
+          #sec2 .ab-body strong { color: ${styles.accentColor||'#ffffff'} !important; }
+          #sec2 .ab-left-content,
+          #sec2 .ab-right-content {
+            padding: ${styles.padding||'100'}px !important;
+          }
+          #sec2 .ab-wrap {
+            min-height: ${styles.minHeight||'700'}px !important;
+          }
+        `;
+      } catch(e){ console.warn('injectStyles error:', e); }
     }
 
     // iframe 로드 후 주입
@@ -447,6 +490,13 @@
       styles[key] = val;
       document.getElementById('color-'+key).value = val;
       document.getElementById('swatch-'+key).style.background = val;
+      injectStyles();
+    };
+
+    window.selectFont = function(btn) {
+      document.querySelectorAll('.font-btn').forEach(b=>b.classList.remove('on'));
+      btn.classList.add('on');
+      styles.fontFamily = btn.dataset.font;
       injectStyles();
     };
 
