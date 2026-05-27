@@ -509,13 +509,38 @@ function startEdit(){
 // ── syncFromFrame ──
 function syncFromFrame(){
   try{
-    const sec = pf.contentDocument.getElementById('sec2');
-    if(!sec) return;
-    const lc = sec.querySelector('.ab-left-content');
-    const rc = sec.querySelector('.ab-right-content');
-    if(lc) T.leftContent = lc.innerHTML;
-    if(rc) T.rightContent = rc.innerHTML;
+    const doc = pf.contentDocument;
+    // About 텍스트
+    const sec2 = doc.getElementById('sec2');
+    if(sec2){
+      const lc = sec2.querySelector('.ab-left-content');
+      const rc = sec2.querySelector('.ab-right-content');
+      if(lc) T.leftContent = cleanForSave(lc);
+      if(rc) T.rightContent = cleanForSave(rc);
+    }
+    // History 텍스트
+    const sec6 = doc.getElementById('sec6');
+    if(sec6){
+      const inner = sec6.querySelector('.hist-inner');
+      if(inner) H.histContent = cleanForSave(inner);
+    }
   }catch(e){}
+}
+
+function cleanForSave(el){
+  const clone = el.cloneNode(true);
+  clone.querySelectorAll('[contenteditable]').forEach(function(n){
+    n.removeAttribute('contenteditable');
+    n.classList.remove('eds-e');
+    if(!n.getAttribute('class')) n.removeAttribute('class');
+  });
+  clone.querySelectorAll('[style*="outline"]').forEach(function(n){
+    n.style.outline='';
+    if(!n.getAttribute('style')) n.removeAttribute('style');
+  });
+  const tb = clone.querySelector('#__tb__');
+  if(tb) tb.remove();
+  return clone.innerHTML;
 }
 
 // ── 컨트롤 핸들러 ──
@@ -629,7 +654,7 @@ window.doSave = async function(){
     const r2 = await fetch('/api/admin/design-styles',{
       method:'POST',
       headers:{'x-admin-token':tok,'Content-Type':'application/json'},
-      body: JSON.stringify({section:'history', styles:H})
+      body: JSON.stringify({section:'history', styles:H, texts:{histContent: H.histContent||''}})
     });
     if(r1.ok && r2.ok){
       lastSaved = {S:{...S}, T:{...T}, H:{...H}};
