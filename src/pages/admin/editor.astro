@@ -362,14 +362,26 @@ function doText(){
     const doc=pf.contentDocument;
     const sec=doc.getElementById('sec2');
     if(!sec)return;
-    const a=sec.querySelector('.ab-left-content .ab-title');
-    const b=sec.querySelector('.ab-left-content .ab-body');
-    const c=sec.querySelector('.ab-right-content .ab-title');
-    const d=sec.querySelector('.ab-right-content .ab-body');
-    if(a)a.innerHTML=T.leftTitle.replace(/\n/g,'<br>');
-    if(b)b.innerHTML=T.leftBody.replace(/\n/g,'<br>');
-    if(c)c.innerHTML=T.rightTitle.replace(/\n/g,'<br>');
-    if(d)d.innerHTML=T.rightBody.replace(/\n/g,'<br>');
+    // 전체 콘텐츠 영역 innerHTML로 복원 (모든 문단 포함)
+    if(T.leftContent){
+      const lc=sec.querySelector('.ab-left-content');
+      if(lc)lc.innerHTML=T.leftContent;
+    } else {
+      // 기존 개별 필드 방식 (이전 저장값 호환)
+      const a=sec.querySelector('.ab-left-content .ab-title');
+      const b=sec.querySelector('.ab-left-content .ab-body');
+      if(a)a.innerHTML=(T.leftTitle||'').replace(/\n/g,'<br>');
+      if(b)b.innerHTML=(T.leftBody||'').replace(/\n/g,'<br>');
+    }
+    if(T.rightContent){
+      const rc=sec.querySelector('.ab-right-content');
+      if(rc)rc.innerHTML=T.rightContent;
+    } else {
+      const c=sec.querySelector('.ab-right-content .ab-title');
+      const d=sec.querySelector('.ab-right-content .ab-body');
+      if(c)c.innerHTML=(T.rightTitle||'').replace(/\n/g,'<br>');
+      if(d)d.innerHTML=(T.rightBody||'').replace(/\n/g,'<br>');
+    }
   }catch(e){}
 }
 
@@ -584,14 +596,10 @@ function syncFromFrame(){
   try{
     const sec=pf.contentDocument.getElementById('sec2');
     if(!sec)return;
-    const a=sec.querySelector('.ab-left-content .ab-title');
-    const b=sec.querySelector('.ab-left-content .ab-body');
-    const c=sec.querySelector('.ab-right-content .ab-title');
-    const d=sec.querySelector('.ab-right-content .ab-body');
-    if(a){T.leftTitle=a.innerHTML;document.getElementById('t-leftTitle').value=a.innerText;}
-    if(b){T.leftBody=b.innerHTML;document.getElementById('t-leftBody').value=b.innerText;}
-    if(c){T.rightTitle=c.innerHTML;document.getElementById('t-rightTitle').value=c.innerText;}
-    if(d){T.rightBody=d.innerHTML;document.getElementById('t-rightBody').value=d.innerText;}
+    const lc=sec.querySelector('.ab-left-content');
+    const rc=sec.querySelector('.ab-right-content');
+    if(lc) T.leftContent=lc.innerHTML;
+    if(rc) T.rightContent=rc.innerHTML;
   }catch(e){}
 }
 

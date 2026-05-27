@@ -65,41 +65,6 @@
   </div>
 </section>
 
-<!-- 클라이언트 사이드 스타일 로더 - 배포 없이 즉시 반영 -->
-<script is:inline>
-(function(){
-  fetch('/api/admin/design-styles?section=about')
-    .then(r=>r.ok?r.json():null)
-    .then(function(data){
-      if(!data||!data.styles) return;
-      var s = data.styles;
-      var st = document.getElementById('__about_dynamic_styles__');
-      if(!st){st=document.createElement('style');st.id='__about_dynamic_styles__';document.head.appendChild(st);}
-      st.textContent = [
-        '#sec2 .ab-left{background:linear-gradient(135deg,'+(s.leftBg1||'#2a45c8')+' 0%,'+(s.leftBg2||'#0f1f6a')+' 100%)!important;}',
-        '#sec2 .ab-right{background:linear-gradient(135deg,'+(s.rightBg1||'#1a1f2e')+' 0%,'+(s.rightBg2||'#0e1220')+' 100%)!important;}',
-        '#sec2 .ab-title{color:'+(s.titleColor||'#fff')+'!important;font-size:'+(s.titleSize||42)+'px!important;letter-spacing:'+(s.letterSpacing||'-0.03')+'em!important;}',
-        '#sec2 .ab-body{color:'+(s.bodyColor||'rgba(255,255,255,0.65)')+'!important;font-size:'+(s.bodySize||15)+'px!important;line-height:'+(s.lineHeight||2.0)+'!important;}',
-        '#sec2 .ab-body strong{color:'+(s.accentColor||'#fff')+'!important;}',
-        '#sec2 .ab-left-content,#sec2 .ab-right-content{padding:'+(s.padding||100)+'px!important;}',
-        '#sec2 .ab-wrap{min-height:'+(s.minHeight||700)+'px!important;}',
-        s.fontFamily?'#sec2,#sec2 *{font-family:'+s.fontFamily+'!important;}':''
-      ].join('');
-
-      // 텍스트 반영
-      if(data.texts){
-        var t = data.texts;
-        var sec = document.getElementById('sec2');
-        if(!sec) return;
-        if(t.leftTitle){var el=sec.querySelector('.ab-left-content .ab-title');if(el)el.innerHTML=t.leftTitle.replace(/\n/g,'<br>');}
-        if(t.rightTitle){var el=sec.querySelector('.ab-right-content .ab-title');if(el)el.innerHTML=t.rightTitle.replace(/\n/g,'<br>');}
-        if(t.leftBody1){var els=sec.querySelectorAll('.ab-left-content .ab-body');if(els[0])els[0].textContent=t.leftBody1;}
-        if(t.rightBody1){var els=sec.querySelectorAll('.ab-right-content .ab-body');if(els[0])els[0].textContent=t.rightBody1;}
-      }
-    }).catch(function(){});
-})();
-</script>
-
 <style>
   .s2 { background: #1a2f8a; }
 
@@ -213,5 +178,48 @@
       btn.classList.add('active');
     });
   });
+})();
+</script>
+
+<!-- KV 스타일 & 텍스트 로더 -->
+<script is:inline>
+(function(){
+  fetch('/api/admin/design-styles?section=about')
+    .then(function(r){return r.ok?r.json():null;})
+    .then(function(data){
+      if(!data) return;
+      var s = data.styles || {};
+      var t = data.texts || {};
+      var sec = document.getElementById('sec2');
+      if(!sec) return;
+
+      // 스타일 주입
+      var st = document.getElementById('__about_dynamic_styles__');
+      if(!st){st=document.createElement('style');st.id='__about_dynamic_styles__';document.head.appendChild(st);}
+      st.textContent = [
+        s.leftBg1&&s.leftBg2 ? '#sec2 .ab-left{background:linear-gradient(135deg,'+s.leftBg1+' 0%,'+s.leftBg2+' 100%)!important;}' : '',
+        s.rightBg1&&s.rightBg2 ? '#sec2 .ab-right{background:linear-gradient(135deg,'+s.rightBg1+' 0%,'+s.rightBg2+' 100%)!important;}' : '',
+        s.titleColor ? '#sec2 .ab-title{color:'+s.titleColor+';}' : '',
+        s.titleSize ? '#sec2 .ab-title{font-size:'+s.titleSize+'px;}' : '',
+        s.letterSpacing ? '#sec2 .ab-title{letter-spacing:'+s.letterSpacing+'em;}' : '',
+        s.bodyColor ? '#sec2 .ab-body{color:'+s.bodyColor+';}' : '',
+        s.bodySize ? '#sec2 .ab-body{font-size:'+s.bodySize+'px;}' : '',
+        s.lineHeight ? '#sec2 .ab-body{line-height:'+s.lineHeight+';}' : '',
+        s.accentColor ? '#sec2 .ab-body strong{color:'+s.accentColor+';}' : '',
+        s.padding ? '#sec2 .ab-left-content,#sec2 .ab-right-content{padding:'+s.padding+'px!important;}' : '',
+        s.minHeight ? '#sec2 .ab-wrap{min-height:'+s.minHeight+'px!important;}' : '',
+        s.fontFamily ? '#sec2 .ab-title,#sec2 .ab-body,#sec2 .ab-label{font-family:'+s.fontFamily+';}' : '',
+      ].join('');
+
+      // 텍스트 복원 (전체 innerHTML 방식)
+      if(t.leftContent){
+        var lc=sec.querySelector('.ab-left-content');
+        if(lc) lc.innerHTML=t.leftContent;
+      }
+      if(t.rightContent){
+        var rc=sec.querySelector('.ab-right-content');
+        if(rc) rc.innerHTML=t.rightContent;
+      }
+    }).catch(function(){});
 })();
 </script>
