@@ -249,11 +249,7 @@ pf.addEventListener('load',function(){
     doInject();
     doText();
     if(editOn) startEdit();
-    // 페이지 자체 KV 로더가 늦게 실행될 수 있으니 한 번 더
-    setTimeout(function(){
-      doInject();
-    },800);
-  },1500);
+  },1200);
 });
 
 // ── 스타일 주입 ──
@@ -286,11 +282,11 @@ function doInject(){
     el.textContent = ff+`
       html body #sec2 .ab-left{background:linear-gradient(135deg,${S.leftBg1} 0%,${S.leftBg2} 100%)!important;}
       html body #sec2 .ab-right{background:linear-gradient(135deg,${S.rightBg1} 0%,${S.rightBg2} 100%)!important;}
-      html body #sec2 .ab-title{color:${S.titleColor};font-size:${S.titleSize}px;letter-spacing:${S.letterSpacing}em;font-family:${S.fontFamily};}
-      html body #sec2 .ab-body{color:${S.bodyColor};font-size:${S.bodySize}px;line-height:${S.lineHeight};font-family:${S.fontFamily};}
-      html body #sec2 .ab-label{color:${S.titleColor};font-family:${S.fontFamily};}
-      html body #sec2 .ab-sig{font-family:${S.fontFamily};}
-      html body #sec2 .ab-body strong{color:${S.accentColor};}
+      html body #sec2 .ab-title{color:${S.titleColor}!important;font-size:${S.titleSize}px!important;letter-spacing:${S.letterSpacing}em!important;font-family:${S.fontFamily}!important;}
+      html body #sec2 .ab-body{color:${S.bodyColor}!important;font-size:${S.bodySize}px!important;line-height:${S.lineHeight}!important;font-family:${S.fontFamily}!important;}
+      html body #sec2 .ab-label{color:${S.titleColor}!important;font-family:${S.fontFamily}!important;}
+      html body #sec2 .ab-sig{font-family:${S.fontFamily}!important;}
+      html body #sec2 .ab-body strong{color:${S.accentColor}!important;}
       html body #sec2 .ab-left-content,html body #sec2 .ab-right-content{padding:${S.padding}px!important;}
       html body #sec2 .ab-wrap{min-height:${S.minHeight}px!important;}
       html body #sec2 .eds-e{outline:2px dashed rgba(99,102,241,0.5)!important;cursor:text!important;}
@@ -552,7 +548,6 @@ window.oC=function(k,v){
   S[k]=v;
   const h=document.getElementById('h-'+k),sw=document.getElementById('sw-'+k);
   if(h)h.value=v;if(sw)sw.style.background=v;
-  try{const ps=pf.contentDocument.getElementById('__about_dynamic_styles__');if(ps)ps.remove();}catch(e){}
   doInject();
 };
 window.oH=function(k,v){
@@ -560,14 +555,12 @@ window.oH=function(k,v){
   S[k]=v;
   const c=document.getElementById('c-'+k),sw=document.getElementById('sw-'+k);
   if(c)c.value=v;if(sw)sw.style.background=v;
-  try{const ps=pf.contentDocument.getElementById('__about_dynamic_styles__');if(ps)ps.remove();}catch(e){}
   doInject();
 };
 window.oS=function(k,v,u){
   S[k]=parseFloat(v);
   const el=document.getElementById('v-'+k);
   if(el)el.textContent=v+u;
-  try{const ps=pf.contentDocument.getElementById('__about_dynamic_styles__');if(ps)ps.remove();}catch(e){}
   doInject();
 };
 window.oF=function(btn){
