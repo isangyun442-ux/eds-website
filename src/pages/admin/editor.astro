@@ -73,11 +73,8 @@ body{font-family:'Pretendard','Noto Sans KR',sans-serif;background:#0f1117;color
 .edit-btn{margin-left:auto;padding:4px 10px;border-radius:5px;font-size:11px;font-weight:700;cursor:pointer;border:1px solid rgba(255,255,255,0.1);background:rgba(255,255,255,0.04);color:rgba(255,255,255,0.4);font-family:inherit;}
 .edit-btn.on{background:rgba(99,102,241,0.2);border-color:#818cf8;color:#818cf8;}
 .pv-body{flex:1;overflow:hidden;display:flex;justify-content:center;}
-.fw{height:100%;}
-.fw.d{width:100%;}
-.fw.t{width:768px;}
-.fw.m{width:390px;}
-iframe{width:100%;height:100%;border:none;display:block;}
+.fw{height:100%;width:100%;overflow:hidden;position:relative;}
+iframe{width:1440px;height:100%;border:none;display:block;transform-origin:top left;}
 /* 토스트 */
 .toast{position:fixed;bottom:18px;right:18px;background:#1e2030;border:1px solid rgba(255,255,255,0.1);color:#fff;padding:9px 15px;border-radius:8px;font-size:13px;font-weight:600;z-index:9999;opacity:0;transition:opacity .25s;pointer-events:none;}
 .toast.on{opacity:1;}
@@ -198,11 +195,6 @@ iframe{width:100%;height:100%;border:none;display:block;}
 <div class="pv-wrap">
   <div class="pv-bar">
     <span class="pv-lbl">미리보기</span>
-    <div class="db">
-      <button class="db-btn on" onclick="setDev('d',this)">데스크탑</button>
-      <button class="db-btn" onclick="setDev('t',this)">태블릿</button>
-      <button class="db-btn" onclick="setDev('m',this)">모바일</button>
-    </div>
     <button class="edit-btn on" id="editBtn" onclick="toggleEdit()" style="display:none">✅ 편집모드 ON</button>
   </div>
   <div class="pv-body">
@@ -717,11 +709,17 @@ document.getElementById('tabs').addEventListener('click',function(e){
   }
 });
 
-// ── 디바이스 ──
-window.setDev=function(d,btn){
-  document.querySelectorAll('.db-btn').forEach(b=>b.classList.remove('on'));btn.classList.add('on');
-  document.getElementById('fw').className='fw '+d;
-};
+// ── 미리보기 zoom 조정 ──
+function resizePreview(){
+  const wrap = document.getElementById('fw');
+  const iframe = document.getElementById('pf');
+  if(!wrap||!iframe)return;
+  const scale = wrap.offsetWidth / 1440;
+  iframe.style.transform = 'scale('+scale+')';
+  iframe.style.height = (wrap.offsetHeight / scale) + 'px';
+}
+window.addEventListener('resize', resizePreview);
+setTimeout(resizePreview, 100);
 
 // ── 초기화 ──
 // 마지막 저장값 (초기화용)
