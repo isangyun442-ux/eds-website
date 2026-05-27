@@ -211,14 +211,32 @@
         s.fontFamily ? '#sec2 .ab-title,#sec2 .ab-body,#sec2 .ab-label{font-family:'+s.fontFamily+';}' : '',
       ].join('');
 
-      // 텍스트 복원 (전체 innerHTML 방식)
+      // 텍스트 복원 - 에디터 잔재 제거 후 적용
+      function cleanHtml(html){
+        var tmp=document.createElement('div');
+        tmp.innerHTML=html;
+        // contentEditable, eds-e 클래스, outline 스타일 제거
+        tmp.querySelectorAll('[contenteditable]').forEach(function(el){
+          el.removeAttribute('contenteditable');
+          el.classList.remove('eds-e');
+          if(!el.getAttribute('class'))el.removeAttribute('class');
+        });
+        tmp.querySelectorAll('[style*="outline"]').forEach(function(el){
+          el.style.outline='';
+          if(!el.getAttribute('style'))el.removeAttribute('style');
+        });
+        // 툴바 제거
+        var tb=tmp.querySelector('#__tb__');
+        if(tb)tb.remove();
+        return tmp.innerHTML;
+      }
       if(t.leftContent){
         var lc=sec.querySelector('.ab-left-content');
-        if(lc) lc.innerHTML=t.leftContent;
+        if(lc) lc.innerHTML=cleanHtml(t.leftContent);
       }
       if(t.rightContent){
         var rc=sec.querySelector('.ab-right-content');
-        if(rc) rc.innerHTML=t.rightContent;
+        if(rc) rc.innerHTML=cleanHtml(t.rightContent);
       }
     }).catch(function(){});
 })();
