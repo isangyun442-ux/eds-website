@@ -220,22 +220,25 @@ pf.addEventListener('load',function(){
     doInject();
     doText();
     if(editOn) startEdit();
-  },600);
+  },1200);
 });
 
-// ── 스타일 주입 (전체 폰트 강제 없음!) ──
+// ── 스타일 주입 ──
 function doInject(){
   try{
     const doc=pf.contentDocument;
     if(!doc||!doc.head)return;
+
+    // 페이지 자체 동적 스타일 제거 (에디터 우선)
+    const ps=doc.getElementById('__about_dynamic_styles__');
+    if(ps)ps.remove();
+
     let el=doc.getElementById('__ei__');
     if(!el){el=doc.createElement('style');el.id='__ei__';doc.head.appendChild(el);}
 
-    // 커스텀 폰트 face
     let ff='';
     Object.values(fonts).forEach(function(f){ff+=f;});
 
-    // 구글폰트 (변경 시 기존 제거 후 재삽입)
     const gm={'Noto Sans KR':'Noto+Sans+KR:wght@400;700;900','Nanum Gothic':'Nanum+Gothic:wght@400;700','Nanum Myeongjo':'Nanum+Myeongjo','Black Han Sans':'Black+Han+Sans','Gowun Dodum':'Gowun+Dodum'};
     const fn=S.fontFamily.replace(/'/g,'').split(',')[0].trim();
     const old=doc.getElementById('__gf__');
@@ -246,19 +249,30 @@ function doInject(){
       doc.head.appendChild(lk);
     }
 
-    // ★ #sec2 * 에 font-family 강제하지 않음 → 개별 서식 유지됨
+    // 배경은 !important, 텍스트는 !important 없음 → span 인라인 스타일 우선
     el.textContent = ff+`
-      #sec2 .ab-left{background:linear-gradient(135deg,${S.leftBg1} 0%,${S.leftBg2} 100%)!important;}
-      #sec2 .ab-right{background:linear-gradient(135deg,${S.rightBg1} 0%,${S.rightBg2} 100%)!important;}
-      #sec2 .ab-title{color:${S.titleColor}!important;font-size:${S.titleSize}px!important;letter-spacing:${S.letterSpacing}em!important;font-family:${S.fontFamily}!important;}
-      #sec2 .ab-body{color:${S.bodyColor}!important;font-size:${S.bodySize}px!important;line-height:${S.lineHeight}!important;font-family:${S.fontFamily}!important;}
-      #sec2 .ab-body strong{color:${S.accentColor}!important;}
-      #sec2 .ab-left-content,#sec2 .ab-right-content{padding:${S.padding}px!important;}
-      #sec2 .ab-wrap{min-height:${S.minHeight}px!important;}
-      .eds-e{outline:2px dashed rgba(99,102,241,0.5)!important;cursor:text!important;}
-      .eds-e:focus{outline:2px solid #818cf8!important;}
+      html body #sec2 .ab-left{background:linear-gradient(135deg,${S.leftBg1} 0%,${S.leftBg2} 100%)!important;}
+      html body #sec2 .ab-right{background:linear-gradient(135deg,${S.rightBg1} 0%,${S.rightBg2} 100%)!important;}
+      html body #sec2 .ab-title{color:${S.titleColor};font-size:${S.titleSize}px;letter-spacing:${S.letterSpacing}em;font-family:${S.fontFamily};}
+      html body #sec2 .ab-body{color:${S.bodyColor};font-size:${S.bodySize}px;line-height:${S.lineHeight};font-family:${S.fontFamily};}
+      html body #sec2 .ab-label{color:${S.titleColor};font-family:${S.fontFamily};}
+      html body #sec2 .ab-sig{font-family:${S.fontFamily};}
+      html body #sec2 .ab-body strong{color:${S.accentColor};}
+      html body #sec2 .ab-left-content,html body #sec2 .ab-right-content{padding:${S.padding}px!important;}
+      html body #sec2 .ab-wrap{min-height:${S.minHeight}px!important;}
+      html body #sec2 .eds-e{outline:2px dashed rgba(99,102,241,0.5)!important;cursor:text!important;}
+      html body #sec2 .eds-e:focus{outline:2px solid #818cf8!important;}
     `;
-  }catch(e){}
+
+    // 페이지 자체 스크립트가 다시 주입하면 바로 제거
+    if(!doc.__edObs){
+      doc.__edObs=new MutationObserver(function(){
+        const ps2=doc.getElementById('__about_dynamic_styles__');
+        if(ps2)ps2.remove();
+      });
+      doc.__edObs.observe(doc.head,{childList:true});
+    }
+  }catch(e){console.warn('inject:',e);}
 }
 
 // ── 텍스트 주입 ──
@@ -418,9 +432,14 @@ function startEdit(){
       if(!sel||sel.isCollapsed)return;
       const range=sel.getRangeAt(0);
       const span=doc.createElement('span');
-      Object.assign(span.style,style);
+      // !important 붙여서 CSS 클래스보다 우선
+      const css=Object.entries(style).map(function(e){
+        const prop=e[0].replace(/([A-Z])/g,'-$1').toLowerCase();
+        return prop+':'+e[1]+' !important';
+      }).join(';');
+      span.setAttribute('style',css);
       try{range.surroundContents(span);}
-      catch(e){span.appendChild(range.extractContents());range.insertNode(span);}
+      catch(e2){span.appendChild(range.extractContents());range.insertNode(span);}
       syncFromFrame();
     }
 
