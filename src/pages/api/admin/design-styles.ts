@@ -12,7 +12,6 @@ function getKV() {
   };
 }
 
-// GET - 스타일 불러오기
 export const GET: APIRoute = async ({ url }) => {
   const { url: KV_URL, token: KV_TOKEN } = getKV();
   const section = url.searchParams.get('section') || 'about';
@@ -31,28 +30,38 @@ export const GET: APIRoute = async ({ url }) => {
   }
 };
 
-// POST - 스타일 저장
 export const POST: APIRoute = async ({ request }) => {
-  if (!authCheck(request)) return new Response(JSON.stringify({ error: '인증 실패' }), { status: 401 });
-  
-  const KV_URL   = import.meta.env.KV_REST_API_URL   || import.meta.env.UPSTASH_REDIS_REST_URL;
-  const KV_TOKEN = import.meta.env.KV_REST_API_TOKEN || import.meta.env.UPSTASH_REDIS_REST_TOKEN;
-
-  if (!KV_URL || !KV_TOKEN) {
-    return new Response(JSON.stringify({ error: 'KV 환경변수 없음', KV_URL: !!KV_URL, KV_TOKEN: !!KV_TOKEN }), { status: 500 });
+  if (!authCheck(request)) {
+    return new Response(JSON.stringify({ error: 'auth failed' }), { status: 401 });
   }
 
-  const body = await request.json();
+  const { url: KV_URL, token: KV_TOKEN } = getKV();
+
+  if (!KV_URL || !KV_TOKEN) {
+    return new Response(JSON.stringify({ error: 'KV env missing', hasUrl: !!KV_URL, hasToken: !!KV_TOKEN }), { status: 500 });
+  }
+
+  let body: any;
+  try {
+    body = await request.json();
+  } catch(e) {
+    return new Response(JSON.stringify({ error: 'invalid json' }), { status: 400 });
+  }
+
   const section = body.section || 'about';
+
   try {
     const res = await fetch(`${KV_URL}/pipeline`, {
       method: 'POST',
-      headers: { Authorization: `Bearer ${KV_TOKEN}`, 'Content-Type': 'application/json' },
+      headers: {
+        Authorization: `Bearer ${KV_TOKEN}`,
+        'Content-Type': 'application/json',
+      },
       body: JSON.stringify([['SET', `eds-design-${section}`, JSON.stringify(body)]]),
     });
     const data = await res.json();
     if (!res.ok) {
-      return new Response(JSON.stringify({ error: 'KV 저장 실패', status: res.status, data }), { status: 500 });
+      return new Response(JSON.stringify({ error: 'KV error', status: res.status, data }), { status: 500 });
     }
     return new Response(JSON.stringify({ ok: true }), { status: 200 });
   } catch(e: any) {
