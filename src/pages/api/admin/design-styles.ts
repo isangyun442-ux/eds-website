@@ -1,19 +1,14 @@
 // src/pages/api/admin/design-styles.ts
 import type { APIRoute } from 'astro';
 
+const KV_URL   = import.meta.env.KV_REST_API_URL   || import.meta.env.UPSTASH_REDIS_REST_URL;
+const KV_TOKEN = import.meta.env.KV_REST_API_TOKEN || import.meta.env.UPSTASH_REDIS_REST_TOKEN;
+
 function authCheck(request: Request) {
   return request.headers.get('x-admin-token') === import.meta.env.ADMIN_PASSWORD;
 }
 
-function getKV() {
-  return {
-    url: import.meta.env.KV_REST_API_URL || import.meta.env.UPSTASH_REDIS_REST_URL || '',
-    token: import.meta.env.KV_REST_API_TOKEN || import.meta.env.UPSTASH_REDIS_REST_TOKEN || '',
-  };
-}
-
 export const GET: APIRoute = async ({ url }) => {
-  const { url: KV_URL, token: KV_TOKEN } = getKV();
   const section = url.searchParams.get('section') || 'about';
   try {
     const res = await fetch(`${KV_URL}/get/eds-design-${section}`, {
@@ -34,22 +29,8 @@ export const POST: APIRoute = async ({ request }) => {
   if (!authCheck(request)) {
     return new Response(JSON.stringify({ error: 'auth failed' }), { status: 401 });
   }
-
-  const { url: KV_URL, token: KV_TOKEN } = getKV();
-
-  if (!KV_URL || !KV_TOKEN) {
-    return new Response(JSON.stringify({ error: 'KV env missing', hasUrl: !!KV_URL, hasToken: !!KV_TOKEN }), { status: 500 });
-  }
-
-  let body: any;
-  try {
-    body = await request.json();
-  } catch(e) {
-    return new Response(JSON.stringify({ error: 'invalid json' }), { status: 400 });
-  }
-
+  const body = await request.json();
   const section = body.section || 'about';
-
   try {
     const res = await fetch(`${KV_URL}/pipeline`, {
       method: 'POST',
