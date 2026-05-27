@@ -401,12 +401,146 @@
       const doc=iframe.contentDocument;
       const sec=doc.getElementById('sec2');
       if(!sec)return;
-      sec.querySelectorAll('.ab-title,.ab-body').forEach(function(el){
+
+      // 편집 가능하게
+      sec.querySelectorAll('.ab-title,.ab-body,.ab-label,.ab-sig').forEach(function(el){
         el.contentEditable='true';
         el.classList.add('eds-editable');
-        el.addEventListener('blur',function(){syncTextFromIframe();});
       });
-    }catch(e){}
+
+      // 플로팅 툴바 주입
+      if(doc.getElementById('__eds_toolbar__'))return;
+      const tb=doc.createElement('div');
+      tb.id='__eds_toolbar__';
+      tb.innerHTML=`
+        <style>
+          #__eds_toolbar__{
+            position:fixed;top:-999px;left:-999px;
+            background:#1a1d2e;border:1px solid rgba(255,255,255,0.15);
+            border-radius:8px;padding:5px 6px;display:flex;align-items:center;gap:4px;
+            z-index:99999;box-shadow:0 4px 20px rgba(0,0,0,0.5);
+            transition:opacity 0.15s;opacity:0;pointer-events:none;
+            font-family:-apple-system,sans-serif;
+          }
+          #__eds_toolbar__.show{opacity:1;pointer-events:all;}
+          #__eds_toolbar__ select,#__eds_toolbar__ input{
+            background:#0f1117;border:1px solid rgba(255,255,255,0.1);
+            color:#fff;padding:3px 5px;border-radius:4px;font-size:11px;outline:none;
+            font-family:inherit;cursor:pointer;
+          }
+          #__eds_toolbar__ select{max-width:110px;}
+          #__eds_toolbar__ input[type=number]{width:46px;}
+          #__eds_toolbar__ input[type=color]{width:24px;height:24px;padding:1px;border-radius:4px;cursor:pointer;}
+          #__eds_toolbar__ button{
+            background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);
+            color:rgba(255,255,255,0.7);padding:3px 7px;border-radius:4px;font-size:12px;
+            cursor:pointer;font-weight:700;line-height:1;
+          }
+          #__eds_toolbar__ button:hover{background:rgba(99,102,241,0.3);color:#fff;}
+          #__eds_toolbar__ .sep{width:1px;height:18px;background:rgba(255,255,255,0.1);margin:0 2px;}
+        </style>
+        <select id="__tb_font__" title="폰트">
+          <option value="">폰트 선택</option>
+          <option value="'Noto Sans KR',sans-serif">Noto Sans</option>
+          <option value="'Pretendard',sans-serif">Pretendard</option>
+          <option value="'Nanum Gothic',sans-serif">나눔고딕</option>
+          <option value="'Nanum Myeongjo',serif">나눔명조</option>
+          <option value="'Black Han Sans',sans-serif">블랙한산</option>
+          <option value="'Gowun Dodum',sans-serif">고운돋움</option>
+        </select>
+        <input type="number" id="__tb_size__" min="8" max="120" value="16" title="크기(px)">
+        <div class="sep"></div>
+        <button onclick="__tb_exec('bold')" title="굵게"><b>B</b></button>
+        <button onclick="__tb_exec('italic')" title="기울임"><i>I</i></button>
+        <button onclick="__tb_exec('underline')" title="밑줄"><u>U</u></button>
+        <div class="sep"></div>
+        <input type="color" id="__tb_color__" value="#ffffff" title="글자색">
+        <div class="sep"></div>
+        <button onclick="__tb_clear()" title="서식 제거" style="font-size:10px;">✕ 서식</button>
+      `;
+      doc.body.appendChild(tb);
+
+      // 구글 폰트 로드
+      if(!doc.getElementById('__gf_extra__')){
+        const lk=doc.createElement('link');lk.id='__gf_extra__';lk.rel='stylesheet';
+        lk.href='https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700;900&family=Nanum+Gothic:wght@400;700&family=Nanum+Myeongjo&family=Black+Han+Sans&family=Gowun+Dodum&display=swap';
+        doc.head.appendChild(lk);
+      }
+
+      // 선택 변경 감지 → 툴바 위치 조정
+      doc.addEventListener('selectionchange',function(){
+        const sel=doc.getSelection();
+        if(!sel||sel.isCollapsed||!sel.toString().trim()){
+          tb.classList.remove('show');
+          return;
+        }
+        const range=sel.getRangeAt(0);
+        const rect=range.getBoundingClientRect();
+        if(!rect.width){tb.classList.remove('show');return;}
+        const tx=Math.max(4,rect.left+(rect.width/2)-140);
+        const ty=Math.max(4,rect.top-52+doc.documentElement.scrollTop);
+        tb.style.left=tx+'px';
+        tb.style.top=ty+'px';
+        tb.classList.add('show');
+        // 현재 선택 폰트 크기 감지
+        const node=sel.anchorNode;
+        if(node){
+          const el=node.nodeType===3?node.parentElement:node;
+          const cs=doc.defaultView.getComputedStyle(el);
+          const sz=parseInt(cs.fontSize)||16;
+          doc.getElementById('__tb_size__').value=sz;
+        }
+      });
+
+      // 폰트 변경
+      doc.getElementById('__tb_font__').addEventListener('change',function(){
+        if(!this.value)return;
+        doc.execCommand('fontName',false,this.value.split(',')[0].replace(/'/g,''));
+        // execCommand fontName 후 span에 직접 스타일 적용
+        const sel=doc.getSelection();
+        if(sel&&!sel.isCollapsed){
+          const range=sel.getRangeAt(0);
+          const span=doc.createElement('span');
+          span.style.fontFamily=this.value;
+          try{range.surroundContents(span);}catch(e){
+            span.appendChild(range.extractContents());
+            range.insertNode(span);
+          }
+          syncTextFromIframe();
+        }
+      });
+
+      // 크기 변경
+      doc.getElementById('__tb_size__').addEventListener('change',function(){
+        const sel=doc.getSelection();
+        if(!sel||sel.isCollapsed)return;
+        const range=sel.getRangeAt(0);
+        const span=doc.createElement('span');
+        span.style.fontSize=this.value+'px';
+        try{range.surroundContents(span);}catch(e){
+          span.appendChild(range.extractContents());
+          range.insertNode(span);
+        }
+        syncTextFromIframe();
+      });
+
+      // 색상 변경
+      doc.getElementById('__tb_color__').addEventListener('input',function(){
+        doc.execCommand('foreColor',false,this.value);
+        syncTextFromIframe();
+      });
+
+      // 실행 함수 (전역)
+      iframe.contentWindow.__tb_exec=function(cmd){
+        doc.execCommand(cmd,false,null);
+        syncTextFromIframe();
+      };
+      iframe.contentWindow.__tb_clear=function(){
+        doc.execCommand('removeFormat',false,null);
+        syncTextFromIframe();
+      };
+
+    }catch(e){console.warn(e);}
   }
 
   function disableEditMode(){
@@ -418,6 +552,8 @@
         el.contentEditable='false';
         el.classList.remove('eds-editable');
       });
+      const tb=doc.getElementById('__eds_toolbar__');
+      if(tb)tb.remove();
     }catch(e){}
   }
 
