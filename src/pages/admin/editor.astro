@@ -377,12 +377,14 @@
 
     const defaults = {...styles};
 
+    let iframeReady = false;
+
     // iframe에 스타일 주입 - style 태그 직접 삽입
     function injectStyles() {
       try {
         const frame = document.getElementById('previewFrame');
         const doc = frame.contentDocument || frame.contentWindow.document;
-        if(!doc || !doc.head) return;
+        if(!doc || !doc.head || !doc.body) return;
 
         let el = doc.getElementById('__editor_styles__');
         if(!el) {
@@ -391,7 +393,6 @@
           doc.head.appendChild(el);
         }
 
-        // 구글 폰트 로드
         const fontFamily = styles.fontFamily || "'Noto Sans KR', sans-serif";
         const fontName = fontFamily.replace(/'/g,'').split(',')[0].trim();
         const googleFonts = {'Noto Sans KR':'Noto+Sans+KR:wght@400;700;900','Nanum Gothic':'Nanum+Gothic:wght@400;700','Nanum Myeongjo':'Nanum+Myeongjo','Black Han Sans':'Black+Han+Sans','Gowun Dodum':'Gowun+Dodum','Pretendard':null};
@@ -404,8 +405,15 @@
           doc.head.appendChild(link);
         }
 
+        const ts = parseFloat(styles.titleSize||42);
+        const bs = parseFloat(styles.bodySize||15);
+        const lh = parseFloat(styles.lineHeight||2.0);
+        const pd = parseFloat(styles.padding||100);
+        const mh = parseFloat(styles.minHeight||700);
+        const ls = parseFloat(styles.letterSpacing||-0.03);
+
         el.textContent = `
-          #sec2 { font-family: ${fontFamily} !important; }
+          #sec2, #sec2 * { font-family: ${fontFamily} !important; }
           #sec2 .ab-left {
             background: linear-gradient(135deg, ${styles.leftBg1||'#2a45c8'} 0%, ${styles.leftBg2||'#0f1f6a'} 100%) !important;
           }
@@ -414,23 +422,21 @@
           }
           #sec2 .ab-title {
             color: ${styles.titleColor||'#ffffff'} !important;
-            font-size: ${styles.titleSize||'42'}px !important;
-            letter-spacing: ${styles.letterSpacing||'-0.03'}em !important;
-            font-family: ${fontFamily} !important;
+            font-size: ${ts}px !important;
+            letter-spacing: ${ls}em !important;
           }
           #sec2 .ab-body {
             color: ${styles.bodyColor||'rgba(255,255,255,0.65)'} !important;
-            font-size: ${styles.bodySize||'15'}px !important;
-            line-height: ${styles.lineHeight||'2.0'} !important;
-            font-family: ${fontFamily} !important;
+            font-size: ${bs}px !important;
+            line-height: ${lh} !important;
           }
           #sec2 .ab-body strong { color: ${styles.accentColor||'#ffffff'} !important; }
           #sec2 .ab-left-content,
           #sec2 .ab-right-content {
-            padding: ${styles.padding||'100'}px !important;
+            padding: ${pd}px !important;
           }
           #sec2 .ab-wrap {
-            min-height: ${styles.minHeight||'700'}px !important;
+            min-height: ${mh}px !important;
           }
         `;
       } catch(e){ console.warn('injectStyles error:', e); }
@@ -503,7 +509,8 @@
     // 슬라이더 업데이트
     window.updateSlider = function(key, val, unit) {
       styles[key] = val;
-      document.getElementById('val-'+key).textContent = val + unit;
+      const el = document.getElementById('val-'+key);
+      if(el) el.textContent = val + unit;
       injectStyles();
     };
 
