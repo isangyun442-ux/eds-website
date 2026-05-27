@@ -249,7 +249,11 @@ pf.addEventListener('load',function(){
     doInject();
     doText();
     if(editOn) startEdit();
-  },1200);
+    // 페이지 자체 KV 로더가 늦게 실행될 수 있으니 한 번 더
+    setTimeout(function(){
+      doInject();
+    },800);
+  },1500);
 });
 
 // ── 스타일 주입 ──
@@ -548,6 +552,7 @@ window.oC=function(k,v){
   S[k]=v;
   const h=document.getElementById('h-'+k),sw=document.getElementById('sw-'+k);
   if(h)h.value=v;if(sw)sw.style.background=v;
+  try{const ps=pf.contentDocument.getElementById('__about_dynamic_styles__');if(ps)ps.remove();}catch(e){}
   doInject();
 };
 window.oH=function(k,v){
@@ -555,12 +560,14 @@ window.oH=function(k,v){
   S[k]=v;
   const c=document.getElementById('c-'+k),sw=document.getElementById('sw-'+k);
   if(c)c.value=v;if(sw)sw.style.background=v;
+  try{const ps=pf.contentDocument.getElementById('__about_dynamic_styles__');if(ps)ps.remove();}catch(e){}
   doInject();
 };
 window.oS=function(k,v,u){
   S[k]=parseFloat(v);
   const el=document.getElementById('v-'+k);
   if(el)el.textContent=v+u;
+  try{const ps=pf.contentDocument.getElementById('__about_dynamic_styles__');if(ps)ps.remove();}catch(e){}
   doInject();
 };
 window.oF=function(btn){
