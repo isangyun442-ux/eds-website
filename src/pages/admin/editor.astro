@@ -377,14 +377,22 @@ function doText(){
 function startEdit(){
   try{
     const doc=pf.contentDocument;
-    const sec=doc.getElementById('sec2');
-    if(!sec)return;
 
-    // contentEditable 적용 - 라벨, 제목, 본문, 임직원일동 모두
-    sec.querySelectorAll('.ab-title,.ab-body,.ab-label,.ab-sig').forEach(function(el){
+    // 현재 섹션에 맞는 편집 대상 선택
+    const selectorMap = {
+      about: '#sec2 .ab-title, #sec2 .ab-body, #sec2 .ab-label, #sec2 .ab-sig',
+      history: '#sec6 .h-title, #sec6 .h-sub, #sec6 .h-eyebrow, #sec6 .tl-year, #sec6 .tl-desc, #sec6 .tl-month, #sec6 .tl-end-label',
+      services: '#sec3 [class*="title"], #sec3 [class*="desc"]',
+      portfolio: '#sec4 [class*="title"], #sec4 [class*="desc"]',
+    };
+    const selector = selectorMap[currentSec] || selectorMap.about;
+    const targets = doc.querySelectorAll(selector);
+    if(!targets.length) return;
+
+    targets.forEach(function(el){
       el.contentEditable='true';
       el.classList.add('eds-e');
-      el.addEventListener('input',syncFromFrame);
+      el.addEventListener('input', syncFromFrame);
     });
 
     const old=doc.getElementById('__tb__');
@@ -563,9 +571,9 @@ function startEdit(){
 function stopEdit(){
   try{
     const doc=pf.contentDocument;
-    const sec=doc.getElementById('sec2');
-    if(sec) sec.querySelectorAll('.eds-e').forEach(function(el){
-      el.contentEditable='false';el.classList.remove('eds-e');
+    doc.querySelectorAll('.eds-e').forEach(function(el){
+      el.contentEditable='false';
+      el.classList.remove('eds-e');
     });
     const tb=doc.getElementById('__tb__');
     if(tb)tb.remove();
@@ -664,8 +672,16 @@ document.getElementById('tabs').addEventListener('click',function(e){
   document.querySelectorAll('[id^="pa-"]').forEach(p=>p.style.display='none');
   document.getElementById('pa-'+currentSec).style.display='block';
   const map={about:'sec2',history:'sec6',services:'sec3',portfolio:'sec4'};
-  try{const el=pf.contentDocument.getElementById(map[currentSec]);if(el)pf.contentWindow.scrollTo(0,el.offsetTop-60);}catch(e){}
+  try{
+    const el=pf.contentDocument.getElementById(map[currentSec]);
+    if(el)pf.contentWindow.scrollTo(0,el.offsetTop-60);
+  }catch(e){}
   if(currentSec==='history') doInjectH();
+  // 탭 전환 시 편집모드 재적용
+  if(editOn){
+    stopEdit();
+    setTimeout(startEdit, 300);
+  }
 });
 
 // ── 디바이스 ──
@@ -675,31 +691,56 @@ window.setDev=function(d,btn){
 };
 
 // ── 초기화 ──
-window.doReset=function(){
-  if(!confirm('초기화하시겠어요?'))return;
-  Object.assign(S,D.S);Object.assign(T,D.T);
-  syncControls();doInject();doText();
-  showToast('초기화됐어요','ok');
+// 마지막 저장값 (초기화용)
+let lastSaved = {S:null, T:null, H:null};
+
+window.doReset=async function(){
+  if(!confirm('마지막 저장 시점으로 되돌릴까요?'))return;
+  // 마지막 저장값이 있으면 복원, 없으면 KV에서 다시 불러오기
+  if(lastSaved.S){
+    Object.assign(S, lastSaved.S);
+    Object.assign(T, lastSaved.T);
+    Object.assign(H, lastSaved.H||{});
+    syncControls();syncHistControls();
+    doInject();doText();
+    if(currentSec==='history') doInjectH();
+    showToast('마지막 저장 시점으로 복원됐어요','ok');
+  } else {
+    // KV에서 다시 불러오기
+    try{
+      const [a,h]=await Promise.all([
+        fetch('/api/admin/design-styles?section=about',{headers:{'x-admin-token':tok}}).then(r=>r.ok?r.json():null),
+        fetch('/api/admin/design-styles?section=history',{headers:{'x-admin-token':tok}}).then(r=>r.ok?r.json():null),
+      ]);
+      if(a){if(a.styles)Object.assign(S,a.styles);if(a.texts)Object.assign(T,a.texts);}
+      if(h&&h.styles)Object.assign(H,h.styles);
+      syncControls();syncHistControls();
+      doInject();doText();
+      if(currentSec==='history') doInjectH();
+      showToast('저장된 값으로 복원됐어요','ok');
+    }catch(e){showToast('복원 실패','err');}
+  }
 };
 
 // ── 저장 ──
 window.doSave=async function(){
   syncFromFrame();
   try{
-    // About 저장
     const r1=await fetch('/api/admin/design-styles',{
       method:'POST',
       headers:{'x-admin-token':tok,'Content-Type':'application/json'},
       body:JSON.stringify({section:'about',styles:S,texts:T})
     });
-    // History 저장
     const r2=await fetch('/api/admin/design-styles',{
       method:'POST',
       headers:{'x-admin-token':tok,'Content-Type':'application/json'},
       body:JSON.stringify({section:'history',styles:H})
     });
-    if(r1.ok&&r2.ok)showToast('💾 저장 완료!','ok');
-    else showToast('저장 실패','err');
+    if(r1.ok&&r2.ok){
+      // 마지막 저장값 기록
+      lastSaved={S:{...S},T:{...T},H:{...H}};
+      showToast('💾 저장 완료!','ok');
+    } else showToast('저장 실패','err');
   }catch(e){showToast('오류','err');}
 };
 
@@ -754,6 +795,8 @@ Promise.all([
     Object.assign(H,histData.styles);
     syncHistControls();
   }
+  // 불러온 값을 lastSaved로 기록
+  lastSaved={S:{...S},T:{...T},H:{...H}};
   try{
     if(pf.contentDocument&&pf.contentDocument.getElementById('sec2')){
       doInject();doText();
