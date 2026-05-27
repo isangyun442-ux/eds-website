@@ -1,34 +1,5 @@
 ---
 // src/components/SecAbout.astro
-
-const KV_URL   = import.meta.env.KV_REST_API_URL   || import.meta.env.UPSTASH_REDIS_REST_URL;
-const KV_TOKEN = import.meta.env.KV_REST_API_TOKEN || import.meta.env.UPSTASH_REDIS_REST_TOKEN;
-
-// 에디터에서 저장한 스타일 불러오기
-let editorStyles: any = null;
-try {
-  if (KV_URL && KV_TOKEN) {
-    const res = await fetch(`${KV_URL}/get/eds-design-about`, {
-      headers: { Authorization: `Bearer ${KV_TOKEN}` },
-    });
-    const data = await res.json();
-    if (data?.result) {
-      const parsed = typeof data.result === 'string' ? JSON.parse(data.result) : data.result;
-      editorStyles = parsed?.styles || null;
-    }
-  }
-} catch(e) {}
-
-const s = editorStyles || {};
-const css = `
-  #sec2 .ab-left  { background: linear-gradient(135deg, ${s.leftBg1||'#2a45c8'} 0%, ${s.leftBg2||'#0f1f6a'} 100%) !important; }
-  #sec2 .ab-right { background: linear-gradient(135deg, ${s.rightBg1||'#1a1f2e'} 0%, ${s.rightBg2||'#0e1220'} 100%) !important; }
-  #sec2 .ab-title { color: ${s.titleColor||'#ffffff'} !important; font-size: ${s.titleSize||'42'}px !important; }
-  #sec2 .ab-body  { color: ${s.bodyColor||'rgba(255,255,255,0.65)'} !important; font-size: ${s.bodySize||'15'}px !important; line-height: ${s.lineHeight||'2.0'} !important; }
-  #sec2 .ab-body strong { color: ${s.accentColor||'#ffffff'} !important; }
-  #sec2 .ab-left-content, #sec2 .ab-right-content { padding: ${s.padding||'100'}px !important; }
-  #sec2 .ab-wrap  { min-height: ${s.minHeight||'700'}px !important; }
-`;
 ---
 <section class="sec s2" id="sec2">
 
@@ -94,7 +65,40 @@ const css = `
   </div>
 </section>
 
-<style is:global set:html={css}></style>
+<!-- 클라이언트 사이드 스타일 로더 - 배포 없이 즉시 반영 -->
+<script is:inline>
+(function(){
+  fetch('/api/admin/design-styles?section=about')
+    .then(r=>r.ok?r.json():null)
+    .then(function(data){
+      if(!data||!data.styles) return;
+      var s = data.styles;
+      var st = document.getElementById('__about_dynamic_styles__');
+      if(!st){st=document.createElement('style');st.id='__about_dynamic_styles__';document.head.appendChild(st);}
+      st.textContent = [
+        '#sec2 .ab-left{background:linear-gradient(135deg,'+(s.leftBg1||'#2a45c8')+' 0%,'+(s.leftBg2||'#0f1f6a')+' 100%)!important;}',
+        '#sec2 .ab-right{background:linear-gradient(135deg,'+(s.rightBg1||'#1a1f2e')+' 0%,'+(s.rightBg2||'#0e1220')+' 100%)!important;}',
+        '#sec2 .ab-title{color:'+(s.titleColor||'#fff')+'!important;font-size:'+(s.titleSize||42)+'px!important;letter-spacing:'+(s.letterSpacing||'-0.03')+'em!important;}',
+        '#sec2 .ab-body{color:'+(s.bodyColor||'rgba(255,255,255,0.65)')+'!important;font-size:'+(s.bodySize||15)+'px!important;line-height:'+(s.lineHeight||2.0)+'!important;}',
+        '#sec2 .ab-body strong{color:'+(s.accentColor||'#fff')+'!important;}',
+        '#sec2 .ab-left-content,#sec2 .ab-right-content{padding:'+(s.padding||100)+'px!important;}',
+        '#sec2 .ab-wrap{min-height:'+(s.minHeight||700)+'px!important;}',
+        s.fontFamily?'#sec2,#sec2 *{font-family:'+s.fontFamily+'!important;}':''
+      ].join('');
+
+      // 텍스트 반영
+      if(data.texts){
+        var t = data.texts;
+        var sec = document.getElementById('sec2');
+        if(!sec) return;
+        if(t.leftTitle){var el=sec.querySelector('.ab-left-content .ab-title');if(el)el.innerHTML=t.leftTitle.replace(/\n/g,'<br>');}
+        if(t.rightTitle){var el=sec.querySelector('.ab-right-content .ab-title');if(el)el.innerHTML=t.rightTitle.replace(/\n/g,'<br>');}
+        if(t.leftBody1){var els=sec.querySelectorAll('.ab-left-content .ab-body');if(els[0])els[0].textContent=t.leftBody1;}
+        if(t.rightBody1){var els=sec.querySelectorAll('.ab-right-content .ab-body');if(els[0])els[0].textContent=t.rightBody1;}
+      }
+    }).catch(function(){});
+})();
+</script>
 
 <style>
   .s2 { background: #1a2f8a; }

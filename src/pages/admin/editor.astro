@@ -11,627 +11,617 @@
     *{margin:0;padding:0;box-sizing:border-box;}
     body{font-family:'Pretendard','Noto Sans KR',sans-serif;background:#0f1117;color:#fff;height:100vh;overflow:hidden;display:flex;flex-direction:column;}
 
-    /* ── TOP NAV ── */
-    .top-nav{
-      height:52px;background:#1a1d2e;border-bottom:1px solid rgba(255,255,255,0.08);
-      display:flex;align-items:center;justify-content:space-between;padding:0 20px;
-      flex-shrink:0;z-index:100;
-    }
-    .nav-left{display:flex;align-items:center;gap:16px;}
+    /* NAV */
+    .nav{height:52px;background:#1a1d2e;border-bottom:1px solid rgba(255,255,255,0.08);display:flex;align-items:center;justify-content:space-between;padding:0 16px;flex-shrink:0;}
+    .nav-left{display:flex;align-items:center;gap:12px;}
     .nav-logo{display:flex;align-items:center;gap:8px;}
     .nav-logo img{height:20px;}
-    .nav-logo span{font-size:12px;color:rgba(255,255,255,0.4);font-weight:600;}
-    .nav-divider{width:1px;height:20px;background:rgba(255,255,255,0.12);}
-    .nav-title{font-size:13px;font-weight:700;color:rgba(255,255,255,0.8);}
-
-    .section-tabs{display:flex;gap:4px;}
-    .section-tab{
-      padding:6px 14px;border-radius:6px;font-size:12px;font-weight:600;
-      cursor:pointer;border:none;background:transparent;color:rgba(255,255,255,0.4);
-      font-family:inherit;transition:all 0.2s;
-    }
-    .section-tab:hover{background:rgba(255,255,255,0.08);color:rgba(255,255,255,0.8);}
-    .section-tab.on{background:rgba(99,102,241,0.2);color:#818cf8;}
-
-    .nav-right{display:flex;align-items:center;gap:8px;}
-    .btn-reset{padding:7px 14px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);color:rgba(255,255,255,0.6);border-radius:7px;font-size:12px;font-weight:600;cursor:pointer;font-family:inherit;}
-    .btn-reset:hover{background:rgba(255,255,255,0.1);}
-    .btn-save{padding:7px 14px;background:#4f46e5;border:none;color:#fff;border-radius:7px;font-size:12px;font-weight:700;cursor:pointer;font-family:inherit;transition:background 0.2s;}
+    .nav-logo span{font-size:12px;color:rgba(255,255,255,0.35);font-weight:600;}
+    .nav-sep{width:1px;height:20px;background:rgba(255,255,255,0.1);}
+    .sec-tabs{display:flex;gap:2px;}
+    .sec-tab{padding:5px 12px;border-radius:5px;font-size:12px;font-weight:600;cursor:pointer;border:none;background:transparent;color:rgba(255,255,255,0.35);font-family:inherit;transition:all 0.15s;}
+    .sec-tab:hover{color:rgba(255,255,255,0.7);}
+    .sec-tab.on{background:rgba(99,102,241,0.2);color:#818cf8;}
+    .nav-right{display:flex;align-items:center;gap:6px;}
+    .btn{padding:6px 14px;border-radius:6px;font-size:12px;font-weight:700;cursor:pointer;font-family:inherit;border:none;transition:all 0.15s;}
+    .btn-back{background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);color:rgba(255,255,255,0.5);text-decoration:none;display:flex;align-items:center;gap:4px;}
+    .btn-reset{background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);color:rgba(255,255,255,0.5);}
+    .btn-save{background:#4f46e5;color:#fff;}
     .btn-save:hover{background:#4338ca;}
-    .btn-deploy{padding:7px 14px;background:#059669;border:none;color:#fff;border-radius:7px;font-size:12px;font-weight:700;cursor:pointer;font-family:inherit;transition:background 0.2s;}
+    .btn-deploy{background:#059669;color:#fff;}
     .btn-deploy:hover{background:#047857;}
-    .btn-back{padding:7px 14px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);color:rgba(255,255,255,0.6);border-radius:7px;font-size:12px;cursor:pointer;font-family:inherit;text-decoration:none;display:flex;align-items:center;gap:4px;}
 
-    /* ── MAIN LAYOUT ── */
+    /* LAYOUT */
     .main{display:flex;flex:1;overflow:hidden;}
 
-    /* ── LEFT PANEL ── */
-    .panel{
-      width:300px;flex-shrink:0;background:#13151f;
-      border-right:1px solid rgba(255,255,255,0.07);
-      overflow-y:auto;scrollbar-width:thin;scrollbar-color:rgba(255,255,255,0.1) transparent;
-    }
-    .panel-section{padding:16px;border-bottom:1px solid rgba(255,255,255,0.06);}
-    .panel-section-title{
-      font-size:10px;font-weight:700;letter-spacing:0.12em;
-      color:rgba(255,255,255,0.3);text-transform:uppercase;margin-bottom:14px;
-    }
-
-    /* 컨트롤 공통 */
-    .ctrl{margin-bottom:14px;}
+    /* PANEL */
+    .panel{width:280px;flex-shrink:0;background:#13151f;border-right:1px solid rgba(255,255,255,0.07);overflow-y:auto;scrollbar-width:thin;scrollbar-color:rgba(255,255,255,0.08) transparent;}
+    .ps{padding:14px;border-bottom:1px solid rgba(255,255,255,0.05);}
+    .ps-title{font-size:10px;font-weight:700;letter-spacing:0.12em;color:rgba(255,255,255,0.25);text-transform:uppercase;margin-bottom:12px;}
+    .ctrl{margin-bottom:12px;}
     .ctrl:last-child{margin-bottom:0;}
-    .ctrl-label{font-size:11px;font-weight:600;color:rgba(255,255,255,0.5);margin-bottom:6px;display:flex;justify-content:space-between;align-items:center;}
-    .ctrl-val{font-size:11px;color:#818cf8;font-weight:700;}
+    .ctrl-label{font-size:11px;font-weight:600;color:rgba(255,255,255,0.45);margin-bottom:6px;display:flex;justify-content:space-between;}
+    .ctrl-val{color:#818cf8;font-weight:700;}
 
-    /* 색상 피커 */
+    /* 색상 */
     .color-row{display:flex;align-items:center;gap:8px;}
-    .color-swatch{
-      width:32px;height:32px;border-radius:7px;border:2px solid rgba(255,255,255,0.15);
-      cursor:pointer;flex-shrink:0;overflow:hidden;position:relative;
-    }
-    .color-swatch input[type="color"]{
-      position:absolute;inset:-4px;width:calc(100%+8px);height:calc(100%+8px);
-      border:none;cursor:pointer;opacity:0;
-    }
-    .color-hex{
-      flex:1;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);
-      color:#fff;padding:6px 10px;border-radius:6px;font-size:12px;font-family:monospace;
-      outline:none;
-    }
-    .color-hex:focus{border-color:#4f46e5;}
+    .swatch{width:30px;height:30px;border-radius:6px;border:1.5px solid rgba(255,255,255,0.12);cursor:pointer;overflow:hidden;position:relative;flex-shrink:0;}
+    .swatch input[type=color]{position:absolute;inset:-4px;width:calc(100%+8px);height:calc(100%+8px);border:none;cursor:pointer;opacity:0;}
+    .hex{flex:1;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);color:#fff;padding:5px 8px;border-radius:5px;font-size:12px;font-family:monospace;outline:none;}
+    .hex:focus{border-color:#4f46e5;}
 
     /* 슬라이더 */
-    .slider{width:100%;height:4px;background:rgba(255,255,255,0.1);border-radius:2px;outline:none;-webkit-appearance:none;cursor:pointer;}
-    .slider::-webkit-slider-thumb{-webkit-appearance:none;width:14px;height:14px;border-radius:50%;background:#4f46e5;cursor:pointer;}
+    .slider{width:100%;height:3px;background:rgba(255,255,255,0.08);border-radius:2px;outline:none;-webkit-appearance:none;cursor:pointer;margin-top:4px;}
+    .slider::-webkit-slider-thumb{-webkit-appearance:none;width:13px;height:13px;border-radius:50%;background:#4f46e5;cursor:pointer;}
 
-    /* 텍스트에어리어 */
-    .text-input{
-      width:100%;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);
-      color:#fff;padding:8px 10px;border-radius:6px;font-size:12px;
-      font-family:inherit;outline:none;resize:vertical;min-height:60px;line-height:1.6;
-    }
-    .text-input:focus{border-color:#4f46e5;}
+    /* 텍스트 */
+    .tinput{width:100%;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);color:#fff;padding:7px 9px;border-radius:6px;font-size:12px;font-family:inherit;outline:none;resize:vertical;line-height:1.6;}
+    .tinput:focus{border-color:#4f46e5;}
 
-    /* 폰트 선택 */
-    .font-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px;}
-    .font-btn{
-      padding:8px 6px;border-radius:6px;font-size:11px;font-weight:600;
-      cursor:pointer;border:1px solid rgba(255,255,255,0.1);
-      background:rgba(255,255,255,0.04);color:rgba(255,255,255,0.5);
-      font-family:inherit;transition:all 0.2s;text-align:center;
-    }
-    .font-btn:hover{background:rgba(255,255,255,0.08);color:#fff;}
+    /* 폰트 버튼 */
+    .font-grid{display:grid;grid-template-columns:1fr 1fr;gap:5px;}
+    .font-btn{padding:7px 4px;border-radius:5px;font-size:11px;font-weight:600;cursor:pointer;border:1px solid rgba(255,255,255,0.08);background:rgba(255,255,255,0.03);color:rgba(255,255,255,0.45);font-family:inherit;transition:all 0.15s;text-align:center;}
+    .font-btn:hover{background:rgba(255,255,255,0.07);color:#fff;}
     .font-btn.on{background:rgba(99,102,241,0.2);border-color:#818cf8;color:#818cf8;}
-    .toggle-row{display:flex;align-items:center;justify-content:space-between;}
-    .toggle{position:relative;width:36px;height:20px;cursor:pointer;}
-    .toggle input{opacity:0;width:0;height:0;}
-    .toggle-track{position:absolute;inset:0;background:rgba(255,255,255,0.1);border-radius:10px;transition:background 0.2s;}
-    .toggle input:checked + .toggle-track{background:#4f46e5;}
-    .toggle-thumb{position:absolute;width:16px;height:16px;background:#fff;border-radius:50%;top:2px;left:2px;transition:transform 0.2s;box-shadow:0 1px 3px rgba(0,0,0,0.3);}
-    .toggle input:checked ~ .toggle-thumb{transform:translateX(16px);}
 
-    /* ── PREVIEW ── */
-    .preview-wrap{flex:1;display:flex;flex-direction:column;overflow:hidden;background:#1a1d2e;}
-    .preview-toolbar{
-      height:40px;background:#13151f;border-bottom:1px solid rgba(255,255,255,0.07);
-      display:flex;align-items:center;padding:0 16px;gap:12px;flex-shrink:0;
-    }
-    .preview-label{font-size:11px;color:rgba(255,255,255,0.3);font-weight:600;}
-    .device-btns{display:flex;gap:4px;}
-    .device-btn{padding:4px 10px;border-radius:5px;font-size:11px;font-weight:600;cursor:pointer;border:none;background:transparent;color:rgba(255,255,255,0.3);font-family:inherit;}
-    .device-btn.on{background:rgba(255,255,255,0.08);color:#fff;}
-    .preview-container{flex:1;overflow:hidden;display:flex;justify-content:center;padding:0;}
-    .preview-frame-wrap{transition:width 0.3s ease;height:100%;}
-    .preview-frame-wrap.desktop{width:100%;}
-    .preview-frame-wrap.tablet{width:768px;}
-    .preview-frame-wrap.mobile{width:390px;}
-    iframe{
-      width:100%;height:100%;border:none;
-      background:#fff;display:block;
-    }
+    /* 폰트 업로드 */
+    .upload-area{border:1.5px dashed rgba(255,255,255,0.12);border-radius:7px;padding:12px;text-align:center;cursor:pointer;transition:border 0.2s;}
+    .upload-area:hover{border-color:#4f46e5;}
+    .upload-area input{display:none;}
+    .upload-area p{font-size:11px;color:rgba(255,255,255,0.3);}
+    .upload-area p span{color:#818cf8;}
+    .uploaded-fonts{margin-top:8px;display:flex;flex-direction:column;gap:4px;}
+    .font-tag{background:rgba(99,102,241,0.15);border:1px solid rgba(99,102,241,0.3);color:#818cf8;padding:5px 8px;border-radius:5px;font-size:11px;display:flex;justify-content:space-between;align-items:center;cursor:pointer;}
+    .font-tag.on{background:rgba(99,102,241,0.3);}
+
+    /* 인라인 편집 안내 */
+    .edit-tip{background:rgba(99,102,241,0.1);border:1px solid rgba(99,102,241,0.2);border-radius:6px;padding:10px;font-size:11px;color:rgba(255,255,255,0.5);line-height:1.6;}
+    .edit-tip strong{color:#818cf8;}
+
+    /* PREVIEW */
+    .preview-wrap{flex:1;display:flex;flex-direction:column;overflow:hidden;}
+    .preview-bar{height:38px;background:#13151f;border-bottom:1px solid rgba(255,255,255,0.07);display:flex;align-items:center;padding:0 14px;gap:10px;flex-shrink:0;}
+    .preview-label{font-size:11px;color:rgba(255,255,255,0.25);font-weight:600;}
+    .dev-btns{display:flex;gap:3px;}
+    .dev-btn{padding:3px 9px;border-radius:4px;font-size:11px;font-weight:600;cursor:pointer;border:none;background:transparent;color:rgba(255,255,255,0.3);font-family:inherit;}
+    .dev-btn.on{background:rgba(255,255,255,0.08);color:#fff;}
+    .inline-toggle{margin-left:auto;display:flex;align-items:center;gap:6px;font-size:11px;color:rgba(255,255,255,0.35);}
+    .toggle-btn{padding:3px 9px;border-radius:4px;font-size:11px;font-weight:600;cursor:pointer;border:1px solid rgba(255,255,255,0.1);background:rgba(255,255,255,0.04);color:rgba(255,255,255,0.4);font-family:inherit;}
+    .toggle-btn.on{background:rgba(99,102,241,0.2);border-color:#818cf8;color:#818cf8;}
+    .preview-body{flex:1;overflow:hidden;display:flex;justify-content:center;}
+    .frame-wrap{transition:width 0.25s;height:100%;}
+    .frame-wrap.desktop{width:100%;}
+    .frame-wrap.tablet{width:768px;}
+    .frame-wrap.mobile{width:390px;}
+    iframe{width:100%;height:100%;border:none;background:#fff;display:block;}
 
     /* 토스트 */
-    .toast{position:fixed;bottom:24px;right:24px;background:#1e2030;border:1px solid rgba(255,255,255,0.1);color:#fff;padding:12px 18px;border-radius:10px;font-size:13px;font-weight:600;z-index:999;opacity:0;transition:opacity 0.3s;pointer-events:none;display:flex;align-items:center;gap:8px;}
+    .toast{position:fixed;bottom:20px;right:20px;background:#1e2030;border:1px solid rgba(255,255,255,0.1);color:#fff;padding:10px 16px;border-radius:8px;font-size:13px;font-weight:600;z-index:999;opacity:0;transition:opacity 0.25s;pointer-events:none;}
     .toast.on{opacity:1;}
-    .toast.success{border-color:rgba(5,150,105,0.4);background:rgba(5,150,105,0.15);}
-    .toast.error{border-color:rgba(239,68,68,0.4);background:rgba(239,68,68,0.15);}
+    .toast.ok{border-color:rgba(5,150,105,0.5);background:rgba(5,150,105,0.15);}
+    .toast.err{border-color:rgba(239,68,68,0.5);background:rgba(239,68,68,0.15);}
   </style>
 </head>
 <body>
 
-  <!-- TOP NAV -->
-  <nav class="top-nav">
-    <div class="nav-left">
-      <div class="nav-logo">
-        <img src="/images/logo.png" alt="EDS">
-        <span>에디터</span>
-      </div>
-      <div class="nav-divider"></div>
-      <div class="section-tabs" id="sectionTabs">
-        <button class="section-tab on" data-section="about">회사소개</button>
-        <button class="section-tab" data-section="history">회사연혁</button>
-        <button class="section-tab" data-section="services">사업분야</button>
-        <button class="section-tab" data-section="portfolio">구축사례</button>
-      </div>
+<nav class="nav">
+  <div class="nav-left">
+    <div class="nav-logo">
+      <img src="/images/logo.png" alt="EDS">
+      <span>디자인 에디터</span>
     </div>
-    <div class="nav-right">
-      <a href="/admin/dashboard" class="btn-back">← 대시보드</a>
-      <button class="btn-reset" onclick="resetStyles()">초기화</button>
-      <button class="btn-save" onclick="saveStyles()">💾 저장</button>
-      <button class="btn-deploy" onclick="deploySite()">🚀 배포</button>
+    <div class="nav-sep"></div>
+    <div class="sec-tabs" id="secTabs">
+      <button class="sec-tab on" data-sec="about">회사소개</button>
+      <button class="sec-tab" data-sec="history">회사연혁</button>
+      <button class="sec-tab" data-sec="services">사업분야</button>
+      <button class="sec-tab" data-sec="portfolio">구축사례</button>
     </div>
-  </nav>
+  </div>
+  <div class="nav-right">
+    <a href="/admin/dashboard" class="btn btn-back">← 대시보드</a>
+    <button class="btn btn-reset" onclick="resetAll()">초기화</button>
+    <button class="btn btn-save" onclick="saveAll()">💾 저장</button>
+    <button class="btn btn-deploy" onclick="deployNow()">🚀 배포</button>
+  </div>
+</nav>
 
-  <!-- MAIN -->
-  <div class="main">
+<div class="main">
 
-    <!-- LEFT PANEL -->
-    <div class="panel" id="panel">
+  <!-- PANEL -->
+  <div class="panel">
 
-      <!-- ABOUT 패널 -->
-      <div id="panel-about">
+    <!-- 회사소개 패널 -->
+    <div id="p-about">
 
-        <div class="panel-section">
-          <div class="panel-section-title">왼쪽 패널 배경</div>
-          <div class="ctrl">
-            <div class="ctrl-label">배경색 (상단)</div>
-            <div class="color-row">
-              <div class="color-swatch" id="swatch-leftBg1">
-                <input type="color" id="color-leftBg1" value="#2a45c8" oninput="updateColor('leftBg1',this.value)">
-              </div>
-              <input type="text" class="color-hex" id="hex-leftBg1" value="#2a45c8" oninput="updateHex('leftBg1',this.value)">
-            </div>
-          </div>
-          <div class="ctrl">
-            <div class="ctrl-label">배경색 (하단)</div>
-            <div class="color-row">
-              <div class="color-swatch" id="swatch-leftBg2">
-                <input type="color" id="color-leftBg2" value="#0f1f6a" oninput="updateColor('leftBg2',this.value)">
-              </div>
-              <input type="text" class="color-hex" id="hex-leftBg2" value="#0f1f6a" oninput="updateHex('leftBg2',this.value)">
-            </div>
+      <div class="ps">
+        <div class="ps-title">왼쪽 배경</div>
+        <div class="ctrl">
+          <div class="ctrl-label">상단 색상</div>
+          <div class="color-row">
+            <div class="swatch" id="sw-leftBg1"><input type="color" id="c-leftBg1" value="#2a45c8" oninput="onColor('leftBg1',this.value)"></div>
+            <input type="text" class="hex" id="h-leftBg1" value="#2a45c8" oninput="onHex('leftBg1',this.value)">
           </div>
         </div>
-
-        <div class="panel-section">
-          <div class="panel-section-title">오른쪽 패널 배경</div>
-          <div class="ctrl">
-            <div class="ctrl-label">배경색 (상단)</div>
-            <div class="color-row">
-              <div class="color-swatch" id="swatch-rightBg1">
-                <input type="color" id="color-rightBg1" value="#1a1f2e" oninput="updateColor('rightBg1',this.value)">
-              </div>
-              <input type="text" class="color-hex" id="hex-rightBg1" value="#1a1f2e" oninput="updateHex('rightBg1',this.value)">
-            </div>
-          </div>
-          <div class="ctrl">
-            <div class="ctrl-label">배경색 (하단)</div>
-            <div class="color-row">
-              <div class="color-swatch" id="swatch-rightBg2">
-                <input type="color" id="color-rightBg2" value="#0e1220" oninput="updateColor('rightBg2',this.value)">
-              </div>
-              <input type="text" class="color-hex" id="hex-rightBg2" value="#0e1220" oninput="updateHex('rightBg2',this.value)">
-            </div>
+        <div class="ctrl">
+          <div class="ctrl-label">하단 색상</div>
+          <div class="color-row">
+            <div class="swatch" id="sw-leftBg2"><input type="color" id="c-leftBg2" value="#0f1f6a" oninput="onColor('leftBg2',this.value)"></div>
+            <input type="text" class="hex" id="h-leftBg2" value="#0f1f6a" oninput="onHex('leftBg2',this.value)">
           </div>
         </div>
+      </div>
 
-        <div class="panel-section">
-          <div class="panel-section-title">텍스트 색상</div>
-          <div class="ctrl">
-            <div class="ctrl-label">제목 색상</div>
-            <div class="color-row">
-              <div class="color-swatch" id="swatch-titleColor">
-                <input type="color" id="color-titleColor" value="#ffffff" oninput="updateColor('titleColor',this.value)">
-              </div>
-              <input type="text" class="color-hex" id="hex-titleColor" value="#ffffff" oninput="updateHex('titleColor',this.value)">
-            </div>
-          </div>
-          <div class="ctrl">
-            <div class="ctrl-label">본문 색상</div>
-            <div class="color-row">
-              <div class="color-swatch" id="swatch-bodyColor">
-                <input type="color" id="color-bodyColor" value="#a5b4fc" oninput="updateColor('bodyColor',this.value)">
-              </div>
-              <input type="text" class="color-hex" id="hex-bodyColor" value="#a5b4fc" oninput="updateHex('bodyColor',this.value)">
-            </div>
-          </div>
-          <div class="ctrl">
-            <div class="ctrl-label">강조 색상</div>
-            <div class="color-row">
-              <div class="color-swatch" id="swatch-accentColor">
-                <input type="color" id="color-accentColor" value="#ffffff" oninput="updateColor('accentColor',this.value)">
-              </div>
-              <input type="text" class="color-hex" id="hex-accentColor" value="#ffffff" oninput="updateHex('accentColor',this.value)">
-            </div>
+      <div class="ps">
+        <div class="ps-title">오른쪽 배경</div>
+        <div class="ctrl">
+          <div class="ctrl-label">상단 색상</div>
+          <div class="color-row">
+            <div class="swatch" id="sw-rightBg1"><input type="color" id="c-rightBg1" value="#1a1f2e" oninput="onColor('rightBg1',this.value)"></div>
+            <input type="text" class="hex" id="h-rightBg1" value="#1a1f2e" oninput="onHex('rightBg1',this.value)">
           </div>
         </div>
-
-        <div class="panel-section">
-          <div class="panel-section-title">폰트</div>
-          <div class="ctrl">
-            <div class="ctrl-label">폰트 선택</div>
-            <div class="font-grid" id="fontGrid">
-              <button class="font-btn on" data-font="'Noto Sans KR', sans-serif" onclick="selectFont(this)">Noto Sans</button>
-              <button class="font-btn" data-font="'Pretendard', sans-serif" onclick="selectFont(this)">Pretendard</button>
-              <button class="font-btn" data-font="'Nanum Gothic', sans-serif" onclick="selectFont(this)">나눔고딕</button>
-              <button class="font-btn" data-font="'Nanum Myeongjo', serif" onclick="selectFont(this)">나눔명조</button>
-              <button class="font-btn" data-font="'Black Han Sans', sans-serif" onclick="selectFont(this)">블랙한산스</button>
-              <button class="font-btn" data-font="'Gowun Dodum', sans-serif" onclick="selectFont(this)">고운돋움</button>
-            </div>
-          </div>
-          <div class="ctrl">
-            <div class="ctrl-label">자간 <span class="ctrl-val" id="val-letterSpacing">-0.03em</span></div>
-            <input type="range" class="slider" id="slider-letterSpacing" min="-0.08" max="0.1" step="0.01" value="-0.03" oninput="updateSlider('letterSpacing',this.value,'em')">
+        <div class="ctrl">
+          <div class="ctrl-label">하단 색상</div>
+          <div class="color-row">
+            <div class="swatch" id="sw-rightBg2"><input type="color" id="c-rightBg2" value="#0e1220" oninput="onColor('rightBg2',this.value)"></div>
+            <input type="text" class="hex" id="h-rightBg2" value="#0e1220" oninput="onHex('rightBg2',this.value)">
           </div>
         </div>
+      </div>
 
-        <div class="panel-section">
-          <div class="panel-section-title">폰트 & 간격</div>
-          <div class="ctrl">
-            <div class="ctrl-label">제목 크기 <span class="ctrl-val" id="val-titleSize">42px</span></div>
-            <input type="range" class="slider" id="slider-titleSize" min="24" max="64" value="42" oninput="updateSlider('titleSize',this.value,'px')">
-          </div>
-          <div class="ctrl">
-            <div class="ctrl-label">본문 크기 <span class="ctrl-val" id="val-bodySize">15px</span></div>
-            <input type="range" class="slider" id="slider-bodySize" min="12" max="20" value="15" oninput="updateSlider('bodySize',this.value,'px')">
-          </div>
-          <div class="ctrl">
-            <div class="ctrl-label">줄간격 <span class="ctrl-val" id="val-lineHeight">2.0</span></div>
-            <input type="range" class="slider" id="slider-lineHeight" min="1.4" max="2.8" step="0.1" value="2.0" oninput="updateSlider('lineHeight',this.value,'')">
-          </div>
-          <div class="ctrl">
-            <div class="ctrl-label">패딩 <span class="ctrl-val" id="val-padding">100px</span></div>
-            <input type="range" class="slider" id="slider-padding" min="40" max="160" value="100" oninput="updateSlider('padding',this.value,'px')">
+      <div class="ps">
+        <div class="ps-title">텍스트 색상</div>
+        <div class="ctrl">
+          <div class="ctrl-label">제목</div>
+          <div class="color-row">
+            <div class="swatch" id="sw-titleColor"><input type="color" id="c-titleColor" value="#ffffff" oninput="onColor('titleColor',this.value)"></div>
+            <input type="text" class="hex" id="h-titleColor" value="#ffffff" oninput="onHex('titleColor',this.value)">
           </div>
         </div>
+        <div class="ctrl">
+          <div class="ctrl-label">본문</div>
+          <div class="color-row">
+            <div class="swatch" id="sw-bodyColor"><input type="color" id="c-bodyColor" value="#a5b4fc" oninput="onColor('bodyColor',this.value)"></div>
+            <input type="text" class="hex" id="h-bodyColor" value="#a5b4fc" oninput="onHex('bodyColor',this.value)">
+          </div>
+        </div>
+        <div class="ctrl">
+          <div class="ctrl-label">강조(bold)</div>
+          <div class="color-row">
+            <div class="swatch" id="sw-accentColor"><input type="color" id="c-accentColor" value="#ffffff" oninput="onColor('accentColor',this.value)"></div>
+            <input type="text" class="hex" id="h-accentColor" value="#ffffff" oninput="onHex('accentColor',this.value)">
+          </div>
+        </div>
+      </div>
 
-        <div class="panel-section">
-          <div class="panel-section-title">텍스트 수정</div>
-          <div class="ctrl">
-            <div class="ctrl-label">왼쪽 제목</div>
-            <textarea class="text-input" id="text-leftTitle" rows="2" oninput="updateText()">"1만 시간의
+      <div class="ps">
+        <div class="ps-title">크기 & 간격</div>
+        <div class="ctrl">
+          <div class="ctrl-label">제목 크기 <span class="ctrl-val" id="v-titleSize">42px</span></div>
+          <input type="range" class="slider" id="s-titleSize" min="20" max="72" value="42" oninput="onSlider('titleSize',this.value,'px')">
+        </div>
+        <div class="ctrl">
+          <div class="ctrl-label">본문 크기 <span class="ctrl-val" id="v-bodySize">15px</span></div>
+          <input type="range" class="slider" id="s-bodySize" min="10" max="22" value="15" oninput="onSlider('bodySize',this.value,'px')">
+        </div>
+        <div class="ctrl">
+          <div class="ctrl-label">줄간격 <span class="ctrl-val" id="v-lineHeight">2.0</span></div>
+          <input type="range" class="slider" id="s-lineHeight" min="1.2" max="3.0" step="0.1" value="2.0" oninput="onSlider('lineHeight',this.value,'')">
+        </div>
+        <div class="ctrl">
+          <div class="ctrl-label">자간 <span class="ctrl-val" id="v-letterSpacing">-0.03em</span></div>
+          <input type="range" class="slider" id="s-letterSpacing" min="-0.08" max="0.1" step="0.01" value="-0.03" oninput="onSlider('letterSpacing',this.value,'em')">
+        </div>
+        <div class="ctrl">
+          <div class="ctrl-label">패딩 <span class="ctrl-val" id="v-padding">100px</span></div>
+          <input type="range" class="slider" id="s-padding" min="30" max="180" value="100" oninput="onSlider('padding',this.value,'px')">
+        </div>
+        <div class="ctrl">
+          <div class="ctrl-label">최소 높이 <span class="ctrl-val" id="v-minHeight">700px</span></div>
+          <input type="range" class="slider" id="s-minHeight" min="300" max="1200" value="700" oninput="onSlider('minHeight',this.value,'px')">
+        </div>
+      </div>
+
+      <div class="ps">
+        <div class="ps-title">폰트</div>
+        <div class="font-grid" id="fontGrid">
+          <button class="font-btn on" data-font="'Noto Sans KR',sans-serif" onclick="onFont(this)">Noto Sans</button>
+          <button class="font-btn" data-font="'Pretendard',sans-serif" onclick="onFont(this)">Pretendard</button>
+          <button class="font-btn" data-font="'Nanum Gothic',sans-serif" onclick="onFont(this)" style="font-family:'Nanum Gothic'">나눔고딕</button>
+          <button class="font-btn" data-font="'Nanum Myeongjo',serif" onclick="onFont(this)" style="font-family:'Nanum Myeongjo'">나눔명조</button>
+          <button class="font-btn" data-font="'Black Han Sans',sans-serif" onclick="onFont(this)">블랙한산</button>
+          <button class="font-btn" data-font="'Gowun Dodum',sans-serif" onclick="onFont(this)">고운돋움</button>
+        </div>
+        <div style="margin-top:10px;">
+          <div class="ctrl-label" style="margin-bottom:6px;">커스텀 폰트 업로드</div>
+          <div class="upload-area" onclick="document.getElementById('fontFile').click()">
+            <input type="file" id="fontFile" accept=".ttf,.otf,.woff,.woff2" onchange="uploadFont(this)">
+            <p>클릭해서 폰트 파일 선택<br><span>.ttf / .otf / .woff / .woff2</span></p>
+          </div>
+          <div class="uploaded-fonts" id="uploadedFonts"></div>
+        </div>
+      </div>
+
+      <div class="ps">
+        <div class="ps-title">텍스트 직접 수정</div>
+        <div class="edit-tip">미리보기에서 <strong>텍스트 클릭</strong>하면 직접 편집 가능해요. 편집 후 저장하면 반영돼요.</div>
+        <div class="ctrl" style="margin-top:10px;">
+          <div class="ctrl-label">왼쪽 제목</div>
+          <textarea class="tinput" id="t-leftTitle" rows="2" oninput="onText()">"1만 시간의
 법칙"</textarea>
-          </div>
-          <div class="ctrl">
-            <div class="ctrl-label">왼쪽 본문 1</div>
-            <textarea class="text-input" id="text-leftBody1" rows="4" oninput="updateText()">어떤 분야에서 전문성을 갖기 위해 투자해야 하는 시간을 의미합니다.</textarea>
-          </div>
-          <div class="ctrl">
-            <div class="ctrl-label">오른쪽 제목</div>
-            <textarea class="text-input" id="text-rightTitle" rows="2" oninput="updateText()">전문가 집단
+        </div>
+        <div class="ctrl">
+          <div class="ctrl-label">왼쪽 본문</div>
+          <textarea class="tinput" id="t-leftBody" rows="3" oninput="onText()">어떤 분야에서 전문성을 갖기 위해 투자해야 하는 시간을 의미합니다.</textarea>
+        </div>
+        <div class="ctrl">
+          <div class="ctrl-label">오른쪽 제목</div>
+          <textarea class="tinput" id="t-rightTitle" rows="2" oninput="onText()">전문가 집단
 이담에스티</textarea>
-          </div>
-          <div class="ctrl">
-            <div class="ctrl-label">오른쪽 본문 1</div>
-            <textarea class="text-input" id="text-rightBody1" rows="4" oninput="updateText()">이담에스티는 방송기술, 컴퓨터그래픽, 오디오, IT 분야의 20년 이상의 외길을 다져온 전문가들로 구성된 회사입니다.</textarea>
-          </div>
         </div>
-
-        <div class="panel-section">
-          <div class="panel-section-title">섹션 높이</div>
-          <div class="ctrl">
-            <div class="ctrl-label">최소 높이 <span class="ctrl-val" id="val-minHeight">700px</span></div>
-            <input type="range" class="slider" id="slider-minHeight" min="400" max="1000" value="700" oninput="updateSlider('minHeight',this.value,'px')">
-          </div>
-        </div>
-
-      </div><!-- /panel-about -->
-
-      <div id="panel-history" style="display:none;">
-        <div class="panel-section">
-          <div class="panel-section-title">준비 중</div>
-          <p style="font-size:12px;color:rgba(255,255,255,0.3);line-height:1.8;">회사연혁 섹션 에디터는 곧 추가될 예정이에요.</p>
-        </div>
-      </div>
-      <div id="panel-services" style="display:none;">
-        <div class="panel-section">
-          <div class="panel-section-title">준비 중</div>
-          <p style="font-size:12px;color:rgba(255,255,255,0.3);line-height:1.8;">사업분야 섹션 에디터는 곧 추가될 예정이에요.</p>
-        </div>
-      </div>
-      <div id="panel-portfolio" style="display:none;">
-        <div class="panel-section">
-          <div class="panel-section-title">준비 중</div>
-          <p style="font-size:12px;color:rgba(255,255,255,0.3);line-height:1.8;">구축사례 섹션 에디터는 곧 추가될 예정이에요.</p>
+        <div class="ctrl">
+          <div class="ctrl-label">오른쪽 본문</div>
+          <textarea class="tinput" id="t-rightBody" rows="3" oninput="onText()">이담에스티는 방송기술, 컴퓨터그래픽, 오디오, IT 분야의 20년 이상의 외길을 다져온 전문가들로 구성된 회사입니다.</textarea>
         </div>
       </div>
 
-    </div><!-- /panel -->
+    </div><!-- /p-about -->
 
-    <!-- PREVIEW -->
-    <div class="preview-wrap">
-      <div class="preview-toolbar">
-        <span class="preview-label">미리보기</span>
-        <div class="device-btns">
-          <button class="device-btn on" onclick="setDevice('desktop',this)">데스크탑</button>
-          <button class="device-btn" onclick="setDevice('tablet',this)">태블릿</button>
-          <button class="device-btn" onclick="setDevice('mobile',this)">모바일</button>
-        </div>
-      </div>
-      <div class="preview-container">
-        <div class="preview-frame-wrap desktop" id="frameWrap">
-          <iframe id="previewFrame" src="/#sec2" scrolling="yes"></iframe>
-        </div>
-      </div>
+    <div id="p-history" style="display:none">
+      <div class="ps"><div class="ps-title">준비 중</div><p style="font-size:11px;color:rgba(255,255,255,0.3);line-height:1.7">회사연혁 에디터 곧 추가돼요</p></div>
+    </div>
+    <div id="p-services" style="display:none">
+      <div class="ps"><div class="ps-title">준비 중</div><p style="font-size:11px;color:rgba(255,255,255,0.3);line-height:1.7">사업분야 에디터 곧 추가돼요</p></div>
+    </div>
+    <div id="p-portfolio" style="display:none">
+      <div class="ps"><div class="ps-title">준비 중</div><p style="font-size:11px;color:rgba(255,255,255,0.3);line-height:1.7">구축사례 에디터 곧 추가돼요</p></div>
     </div>
 
   </div>
 
-  <!-- TOAST -->
-  <div class="toast" id="toast"></div>
+  <!-- PREVIEW -->
+  <div class="preview-wrap">
+    <div class="preview-bar">
+      <span class="preview-label">미리보기</span>
+      <div class="dev-btns">
+        <button class="dev-btn on" onclick="setDev('desktop',this)">데스크탑</button>
+        <button class="dev-btn" onclick="setDev('tablet',this)">태블릿</button>
+        <button class="dev-btn" onclick="setDev('mobile',this)">모바일</button>
+      </div>
+      <div class="inline-toggle">
+        <button class="toggle-btn" id="editModeBtn" onclick="toggleEditMode()">✏️ 텍스트 편집모드</button>
+      </div>
+    </div>
+    <div class="preview-body">
+      <div class="frame-wrap desktop" id="frameWrap">
+        <iframe id="pf" src="/"></iframe>
+      </div>
+    </div>
+  </div>
 
-  <script>
-    const token = sessionStorage.getItem('eds-admin-token') || '';
-    if(!token) location.href = '/admin';
+</div>
 
-    // 현재 스타일 상태
-    let styles = {
-      leftBg1: '#2a45c8', leftBg2: '#0f1f6a',
-      rightBg1: '#1a1f2e', rightBg2: '#0e1220',
-      titleColor: '#ffffff', bodyColor: '#a5b4fc', accentColor: '#ffffff',
-      titleSize: '42', bodySize: '15', lineHeight: '2.0',
-      padding: '100', minHeight: '700',
-      fontFamily: "'Noto Sans KR', sans-serif",
-      letterSpacing: '-0.03',
-    };
+<div class="toast" id="toast"></div>
 
-    const defaults = {...styles};
+<script>
+  const token = sessionStorage.getItem('eds-admin-token')||'';
+  if(!token) location.href='/admin';
 
-    let iframeReady = false;
+  let editMode = false;
+  let uploadedFontFaces = {};
 
-    // iframe에 스타일 주입 - style 태그 직접 삽입
-    function injectStyles() {
-      try {
-        const frame = document.getElementById('previewFrame');
-        const doc = frame.contentDocument || frame.contentWindow.document;
-        if(!doc || !doc.head || !doc.body) return;
+  let S = {
+    leftBg1:'#2a45c8', leftBg2:'#0f1f6a',
+    rightBg1:'#1a1f2e', rightBg2:'#0e1220',
+    titleColor:'#ffffff', bodyColor:'#a5b4fc', accentColor:'#ffffff',
+    titleSize:42, bodySize:15, lineHeight:2.0,
+    letterSpacing:-0.03, padding:100, minHeight:700,
+    fontFamily:"'Noto Sans KR',sans-serif",
+  };
 
-        let el = doc.getElementById('__editor_styles__');
-        if(!el) {
-          el = doc.createElement('style');
-          el.id = '__editor_styles__';
-          doc.head.appendChild(el);
-        }
+  let T = {
+    leftTitle:'"1만 시간의\n법칙"',
+    leftBody:'어떤 분야에서 전문성을 갖기 위해 투자해야 하는 시간을 의미합니다.',
+    rightTitle:'전문가 집단\n이담에스티',
+    rightBody:'이담에스티는 방송기술, 컴퓨터그래픽, 오디오, IT 분야의 20년 이상의 외길을 다져온 전문가들로 구성된 회사입니다.',
+  };
 
-        const fontFamily = styles.fontFamily || "'Noto Sans KR', sans-serif";
-        const fontName = fontFamily.replace(/'/g,'').split(',')[0].trim();
-        const googleFonts = {'Noto Sans KR':'Noto+Sans+KR:wght@400;700;900','Nanum Gothic':'Nanum+Gothic:wght@400;700','Nanum Myeongjo':'Nanum+Myeongjo','Black Han Sans':'Black+Han+Sans','Gowun Dodum':'Gowun+Dodum','Pretendard':null};
-        const gFont = googleFonts[fontName];
-        if(gFont && !doc.getElementById('__editor_font__')) {
-          const link = doc.createElement('link');
-          link.id = '__editor_font__';
-          link.rel = 'stylesheet';
-          link.href = `https://fonts.googleapis.com/css2?family=${gFont}&display=swap`;
-          doc.head.appendChild(link);
-        }
+  const defaults = {S:{...S}, T:{...T}};
 
-        const ts = parseFloat(styles.titleSize||42);
-        const bs = parseFloat(styles.bodySize||15);
-        const lh = parseFloat(styles.lineHeight||2.0);
-        const pd = parseFloat(styles.padding||100);
-        const mh = parseFloat(styles.minHeight||700);
-        const ls = parseFloat(styles.letterSpacing||-0.03);
+  // ─ iframe load ─
+  const iframe = document.getElementById('pf');
+  iframe.addEventListener('load', function(){
+    try {
+      const sec = this.contentDocument.getElementById('sec2');
+      if(sec) this.contentWindow.scrollTo(0, sec.offsetTop - 60);
+    } catch(e){}
+    inject();
+    applyText();
+    if(editMode) enableEditMode();
+  });
 
-        el.textContent = `
-          #sec2, #sec2 * { font-family: ${fontFamily} !important; }
-          #sec2 .ab-left {
-            background: linear-gradient(135deg, ${styles.leftBg1||'#2a45c8'} 0%, ${styles.leftBg2||'#0f1f6a'} 100%) !important;
-          }
-          #sec2 .ab-right {
-            background: linear-gradient(135deg, ${styles.rightBg1||'#1a1f2e'} 0%, ${styles.rightBg2||'#0e1220'} 100%) !important;
-          }
-          #sec2 .ab-title {
-            color: ${styles.titleColor||'#ffffff'} !important;
-            font-size: ${ts}px !important;
-            letter-spacing: ${ls}em !important;
-          }
-          #sec2 .ab-body {
-            color: ${styles.bodyColor||'rgba(255,255,255,0.65)'} !important;
-            font-size: ${bs}px !important;
-            line-height: ${lh} !important;
-          }
-          #sec2 .ab-body strong { color: ${styles.accentColor||'#ffffff'} !important; }
-          #sec2 .ab-left-content,
-          #sec2 .ab-right-content {
-            padding: ${pd}px !important;
-          }
-          #sec2 .ab-wrap {
-            min-height: ${mh}px !important;
-          }
-        `;
-      } catch(e){ console.warn('injectStyles error:', e); }
-    }
+  // ─ 스타일 주입 ─
+  function inject(){
+    try {
+      const doc = iframe.contentDocument;
+      if(!doc||!doc.head) return;
+      let el = doc.getElementById('__ei__');
+      if(!el){el=doc.createElement('style');el.id='__ei__';doc.head.appendChild(el);}
 
-    // iframe 로드 후 주입
-    document.getElementById('previewFrame').addEventListener('load', function() {
-      try {
-        const sec = this.contentDocument.getElementById('sec2');
-        if(sec) {
-          // sec2 위치로 iframe 내부 스크롤
-          this.contentWindow.scrollTo(0, sec.offsetTop);
-        }
-      } catch(e){}
-      injectStyles();
-      injectText();
-    });
+      // 커스텀 폰트 @font-face 주입
+      let fontFaceCss = '';
+      Object.values(uploadedFontFaces).forEach(f=>{fontFaceCss+=f.face;});
 
-    // 텍스트 주입
-    function injectText() {
-      try {
-        const doc = document.getElementById('previewFrame').contentDocument;
-        const sec = doc.getElementById('sec2');
-        if(!sec) return;
+      // 구글 폰트 로드
+      const gFonts={'Noto Sans KR':'Noto+Sans+KR:wght@400;700;900','Nanum Gothic':'Nanum+Gothic:wght@400;700','Nanum Myeongjo':'Nanum+Myeongjo','Black Han Sans':'Black+Han+Sans','Gowun Dodum':'Gowun+Dodum'};
+      const fname = S.fontFamily.replace(/'/g,'').split(',')[0].trim();
+      if(gFonts[fname]&&!doc.getElementById('__gf__')){
+        const lk=doc.createElement('link');lk.id='__gf__';lk.rel='stylesheet';
+        lk.href='https://fonts.googleapis.com/css2?family='+gFonts[fname]+'&display=swap';
+        doc.head.appendChild(lk);
+      }
 
-        const leftTitle = document.getElementById('text-leftTitle').value;
-        const leftBody1 = document.getElementById('text-leftBody1').value;
-        const rightTitle = document.getElementById('text-rightTitle').value;
-        const rightBody1 = document.getElementById('text-rightBody1').value;
+      el.textContent = fontFaceCss + `
+        #sec2,.ab-left,.ab-right{transition:background 0.3s,color 0.2s;}
+        #sec2 .ab-left{background:linear-gradient(135deg,${S.leftBg1} 0%,${S.leftBg2} 100%)!important;}
+        #sec2 .ab-right{background:linear-gradient(135deg,${S.rightBg1} 0%,${S.rightBg2} 100%)!important;}
+        #sec2 .ab-title{color:${S.titleColor}!important;font-size:${S.titleSize}px!important;letter-spacing:${S.letterSpacing}em!important;font-family:${S.fontFamily}!important;}
+        #sec2 .ab-body{color:${S.bodyColor}!important;font-size:${S.bodySize}px!important;line-height:${S.lineHeight}!important;font-family:${S.fontFamily}!important;}
+        #sec2 .ab-body strong{color:${S.accentColor}!important;}
+        #sec2 .ab-left-content,#sec2 .ab-right-content{padding:${S.padding}px!important;}
+        #sec2 .ab-wrap{min-height:${S.minHeight}px!important;}
+        #sec2,#sec2 *{font-family:${S.fontFamily}!important;}
+        .eds-editable{outline:2px dashed rgba(99,102,241,0.6)!important;cursor:text!important;min-height:1em;}
+        .eds-editable:focus{outline:2px solid #818cf8!important;background:rgba(99,102,241,0.08)!important;}
+      `;
+    }catch(e){}
+  }
 
-        const titleEl = sec.querySelector('.ab-left-content .ab-title');
-        if(titleEl) titleEl.innerHTML = leftTitle.replace(/\n/g,'<br>');
+  // ─ 텍스트 주입 ─
+  function applyText(){
+    try{
+      const doc=iframe.contentDocument;
+      const sec=doc.getElementById('sec2');
+      if(!sec)return;
+      const lt=sec.querySelector('.ab-left-content .ab-title');
+      const lb=sec.querySelector('.ab-left-content .ab-body');
+      const rt=sec.querySelector('.ab-right-content .ab-title');
+      const rb=sec.querySelector('.ab-right-content .ab-body');
+      if(lt)lt.innerHTML=T.leftTitle.replace(/\n/g,'<br>');
+      if(lb)lb.textContent=T.leftBody;
+      if(rt)rt.innerHTML=T.rightTitle.replace(/\n/g,'<br>');
+      if(rb)rb.textContent=T.rightBody;
+    }catch(e){}
+  }
 
-        const leftBodyEls = sec.querySelectorAll('.ab-left-content .ab-body');
-        if(leftBodyEls[0]) leftBodyEls[0].textContent = leftBody1;
-
-        const rightTitleEl = sec.querySelector('.ab-right-content .ab-title');
-        if(rightTitleEl) rightTitleEl.innerHTML = rightTitle.replace(/\n/g,'<br>');
-
-        const rightBodyEls = sec.querySelectorAll('.ab-right-content .ab-body');
-        if(rightBodyEls[0]) rightBodyEls[0].textContent = rightBody1;
-      } catch(e){}
-    }
-
-    window.updateText = function() { injectText(); };
-
-    // 색상 업데이트
-    window.updateColor = function(key, val) {
-      styles[key] = val;
-      document.getElementById('swatch-'+key).style.background = val;
-      document.getElementById('hex-'+key).value = val;
-      injectStyles();
-    };
-
-    window.updateHex = function(key, val) {
-      if(!/^#[0-9a-fA-F]{6}$/.test(val)) return;
-      styles[key] = val;
-      document.getElementById('color-'+key).value = val;
-      document.getElementById('swatch-'+key).style.background = val;
-      injectStyles();
-    };
-
-    window.selectFont = function(btn) {
-      document.querySelectorAll('.font-btn').forEach(b=>b.classList.remove('on'));
-      btn.classList.add('on');
-      styles.fontFamily = btn.dataset.font;
-      injectStyles();
-    };
-
-    // 슬라이더 업데이트
-    window.updateSlider = function(key, val, unit) {
-      styles[key] = val;
-      const el = document.getElementById('val-'+key);
-      if(el) el.textContent = val + unit;
-      injectStyles();
-    };
-
-    // 초기 색상 스워치 적용
-    Object.keys(styles).forEach(function(key) {
-      const swatch = document.getElementById('swatch-'+key);
-      if(swatch) swatch.style.background = styles[key];
-    });
-
-    // 섹션 탭
-    document.getElementById('sectionTabs').addEventListener('click', function(e) {
-      const tab = e.target.closest('.section-tab');
-      if(!tab) return;
-      document.querySelectorAll('.section-tab').forEach(t=>t.classList.remove('on'));
-      tab.classList.add('on');
-      const sec = tab.dataset.section;
-      document.querySelectorAll('[id^="panel-"]').forEach(p=>p.style.display='none');
-      document.getElementById('panel-'+sec).style.display='block';
-
-      // 해당 섹션으로 이동
-      const sectionMap = {about:'sec2',history:'sec6',services:'sec3',portfolio:'sec4'};
-      try {
-        const frame = document.getElementById('previewFrame');
-        const target = frame.contentDocument.getElementById(sectionMap[sec]);
-        if(target) target.scrollIntoView({behavior:'smooth'});
-      } catch(e){}
-    });
-
-    // 디바이스 전환
-    window.setDevice = function(device, btn) {
-      document.querySelectorAll('.device-btn').forEach(b=>b.classList.remove('on'));
-      btn.classList.add('on');
-      const wrap = document.getElementById('frameWrap');
-      wrap.className = 'preview-frame-wrap ' + device;
-    };
-
-    // 초기화
-    window.resetStyles = function() {
-      if(!confirm('현재 변경사항을 초기화하시겠어요?')) return;
-      styles = {...defaults};
-      // 컨트롤 초기화
-      Object.keys(styles).forEach(function(key) {
-        const hex = document.getElementById('hex-'+key);
-        const color = document.getElementById('color-'+key);
-        const swatch = document.getElementById('swatch-'+key);
-        const slider = document.getElementById('slider-'+key);
-        if(hex) hex.value = styles[key];
-        if(color) color.value = styles[key];
-        if(swatch) swatch.style.background = styles[key];
-        if(slider) slider.value = styles[key];
+  // ─ 인라인 편집 모드 ─
+  function enableEditMode(){
+    try{
+      const doc=iframe.contentDocument;
+      const sec=doc.getElementById('sec2');
+      if(!sec)return;
+      sec.querySelectorAll('.ab-title,.ab-body').forEach(function(el){
+        el.contentEditable='true';
+        el.classList.add('eds-editable');
+        el.addEventListener('blur',function(){syncTextFromIframe();});
       });
-      injectStyles();
-      showToast('초기화됐어요', 'success');
-    };
+    }catch(e){}
+  }
 
-    // 저장
-    window.saveStyles = async function() {
-      const texts = {
-        leftTitle:  document.getElementById('text-leftTitle').value,
-        leftBody1:  document.getElementById('text-leftBody1').value,
-        rightTitle: document.getElementById('text-rightTitle').value,
-        rightBody1: document.getElementById('text-rightBody1').value,
+  function disableEditMode(){
+    try{
+      const doc=iframe.contentDocument;
+      const sec=doc.getElementById('sec2');
+      if(!sec)return;
+      sec.querySelectorAll('.eds-editable').forEach(function(el){
+        el.contentEditable='false';
+        el.classList.remove('eds-editable');
+      });
+    }catch(e){}
+  }
+
+  function syncTextFromIframe(){
+    try{
+      const doc=iframe.contentDocument;
+      const sec=doc.getElementById('sec2');
+      if(!sec)return;
+      const lt=sec.querySelector('.ab-left-content .ab-title');
+      const lb=sec.querySelector('.ab-left-content .ab-body');
+      const rt=sec.querySelector('.ab-right-content .ab-title');
+      const rb=sec.querySelector('.ab-right-content .ab-body');
+      if(lt){T.leftTitle=lt.innerText;document.getElementById('t-leftTitle').value=T.leftTitle;}
+      if(lb){T.leftBody=lb.innerText;document.getElementById('t-leftBody').value=T.leftBody;}
+      if(rt){T.rightTitle=rt.innerText;document.getElementById('t-rightTitle').value=T.rightTitle;}
+      if(rb){T.rightBody=rb.innerText;document.getElementById('t-rightBody').value=T.rightBody;}
+    }catch(e){}
+  }
+
+  window.toggleEditMode=function(){
+    editMode=!editMode;
+    const btn=document.getElementById('editModeBtn');
+    btn.classList.toggle('on',editMode);
+    btn.textContent=editMode?'✅ 편집모드 ON':'✏️ 텍스트 편집모드';
+    if(editMode) enableEditMode(); else disableEditMode();
+  };
+
+  // ─ 색상 ─
+  window.onColor=function(k,v){
+    S[k]=v;
+    const hw=document.getElementById('h-'+k);
+    const sw=document.getElementById('sw-'+k);
+    if(hw)hw.value=v;
+    if(sw)sw.style.background=v;
+    inject();
+  };
+  window.onHex=function(k,v){
+    if(!/^#[0-9a-fA-F]{6}$/.test(v))return;
+    S[k]=v;
+    const cw=document.getElementById('c-'+k);
+    const sw=document.getElementById('sw-'+k);
+    if(cw)cw.value=v;
+    if(sw)sw.style.background=v;
+    inject();
+  };
+
+  // ─ 슬라이더 ─
+  window.onSlider=function(k,v,unit){
+    S[k]=parseFloat(v);
+    const el=document.getElementById('v-'+k);
+    if(el)el.textContent=v+unit;
+    inject();
+  };
+
+  // ─ 폰트 버튼 ─
+  window.onFont=function(btn){
+    document.querySelectorAll('.font-btn').forEach(b=>b.classList.remove('on'));
+    btn.classList.add('on');
+    S.fontFamily=btn.dataset.font;
+    inject();
+  };
+
+  // ─ 텍스트 패널 ─
+  window.onText=function(){
+    T.leftTitle=document.getElementById('t-leftTitle').value;
+    T.leftBody=document.getElementById('t-leftBody').value;
+    T.rightTitle=document.getElementById('t-rightTitle').value;
+    T.rightBody=document.getElementById('t-rightBody').value;
+    applyText();
+  };
+
+  // ─ 폰트 업로드 ─
+  window.uploadFont=function(input){
+    const file=input.files[0];
+    if(!file)return;
+    const reader=new FileReader();
+    reader.onload=function(e){
+      const name=file.name.replace(/\.[^.]+$/,'').replace(/\s+/g,'_');
+      const url=e.target.result;
+      const ext=file.name.split('.').pop().toLowerCase();
+      const fmt=ext==='ttf'?'truetype':ext==='otf'?'opentype':ext;
+      const face=`@font-face{font-family:'${name}';src:url('${url}') format('${fmt}');font-display:swap;}`;
+      uploadedFontFaces[name]={face,name};
+      S.fontFamily=`'${name}',sans-serif`;
+      // 버튼 추가
+      const wrap=document.getElementById('uploadedFonts');
+      const tag=document.createElement('div');
+      tag.className='font-tag on';tag.textContent=name;
+      tag.onclick=function(){
+        document.querySelectorAll('.font-btn,.font-tag').forEach(b=>b.classList.remove('on'));
+        tag.classList.add('on');
+        S.fontFamily=`'${name}',sans-serif`;
+        inject();
       };
-      try {
-        const r = await fetch('/api/admin/design-styles', {
-          method: 'POST',
-          headers: {'x-admin-token': token, 'Content-Type': 'application/json'},
-          body: JSON.stringify({section: 'about', styles, texts})
-        });
-        if(r.ok) showToast('💾 저장됐어요!', 'success');
-        else showToast('저장 실패', 'error');
-      } catch(e) {
-        showToast('저장 오류', 'error');
-      }
+      wrap.appendChild(tag);
+      document.querySelectorAll('.font-btn,.font-tag').forEach(b=>b.classList.remove('on'));
+      tag.classList.add('on');
+      inject();
+      toast('폰트 적용됨: '+name,'ok');
     };
+    reader.readAsDataURL(file);
+    input.value='';
+  };
 
-    // 배포
-    window.deploySite = async function() {
-      if(!confirm('저장 후 배포하시겠어요?')) return;
-      await window.saveStyles();
-      try {
-        const r = await fetch('/api/admin/deploy', {
-          method: 'POST',
-          headers: {'x-admin-token': token}
-        });
-        if(r.ok) showToast('🚀 배포 시작! 1~2분 후 반영돼요', 'success');
-        else showToast('배포 실패', 'error');
-      } catch(e) {
-        showToast('배포 오류', 'error');
-      }
-    };
+  // ─ 섹션 탭 ─
+  document.getElementById('secTabs').addEventListener('click',function(e){
+    const tab=e.target.closest('.sec-tab');
+    if(!tab)return;
+    document.querySelectorAll('.sec-tab').forEach(t=>t.classList.remove('on'));
+    tab.classList.add('on');
+    const s=tab.dataset.sec;
+    document.querySelectorAll('[id^="p-"]').forEach(p=>p.style.display='none');
+    document.getElementById('p-'+s).style.display='block';
+    const map={about:'sec2',history:'sec6',services:'sec3',portfolio:'sec4'};
+    try{
+      const el=iframe.contentDocument.getElementById(map[s]);
+      if(el)iframe.contentWindow.scrollTo(0,el.offsetTop-60);
+    }catch(e){}
+  });
 
-    // 토스트
-    function showToast(msg, type) {
-      const t = document.getElementById('toast');
-      t.textContent = msg;
-      t.className = 'toast on ' + (type||'');
-      clearTimeout(window._toastTimer);
-      window._toastTimer = setTimeout(()=>t.className='toast', 2500);
-    }
+  // ─ 디바이스 ─
+  window.setDev=function(d,btn){
+    document.querySelectorAll('.dev-btn').forEach(b=>b.classList.remove('on'));
+    btn.classList.add('on');
+    document.getElementById('frameWrap').className='frame-wrap '+d;
+  };
 
-    // 저장된 스타일 불러오기
-    fetch('/api/admin/design-styles?section=about', {
-      headers: {'x-admin-token': token}
-    }).then(r=>r.ok?r.json():null).then(data=>{
-      if(data && data.styles) {
-        Object.assign(styles, data.styles);
-        Object.keys(styles).forEach(function(key) {
-          const hex = document.getElementById('hex-'+key);
-          const color = document.getElementById('color-'+key);
-          const swatch = document.getElementById('swatch-'+key);
-          const slider = document.getElementById('slider-'+key);
-          const val = document.getElementById('val-'+key);
-          if(hex) hex.value = styles[key];
-          if(color) color.value = styles[key];
-          if(swatch) swatch.style.background = styles[key];
-          if(slider) slider.value = styles[key];
-        });
-        injectStyles();
-      }
+  // ─ 초기화 ─
+  window.resetAll=function(){
+    if(!confirm('초기화하시겠어요?'))return;
+    S={...defaults.S};T={...defaults.T};
+    syncControlsFromState();
+    inject();applyText();
+    toast('초기화됐어요','ok');
+  };
+
+  // ─ 저장 ─
+  window.saveAll=async function(){
+    syncTextFromIframe();
+    try{
+      const r=await fetch('/api/admin/design-styles',{
+        method:'POST',
+        headers:{'x-admin-token':token,'Content-Type':'application/json'},
+        body:JSON.stringify({section:'about',styles:S,texts:T})
+      });
+      if(r.ok)toast('💾 저장 완료!','ok');
+      else toast('저장 실패','err');
+    }catch(e){toast('저장 오류','err');}
+  };
+
+  // ─ 배포 ─
+  window.deployNow=async function(){
+    if(!confirm('배포하시겠어요? 1~2분 후 반영돼요.'))return;
+    await saveAll();
+    try{
+      const r=await fetch('/api/admin/deploy',{method:'POST',headers:{'x-admin-token':token}});
+      if(r.ok)toast('🚀 배포 시작!','ok');
+      else toast('배포 실패','err');
+    }catch(e){toast('배포 오류','err');}
+  };
+
+  // ─ 컨트롤 동기화 ─
+  function syncControlsFromState(){
+    Object.entries(S).forEach(function([k,v]){
+      const hw=document.getElementById('h-'+k);
+      const cw=document.getElementById('c-'+k);
+      const sw=document.getElementById('sw-'+k);
+      const sl=document.getElementById('s-'+k);
+      const vl=document.getElementById('v-'+k);
+      if(hw)hw.value=v;
+      if(cw)cw.value=v;
+      if(sw)sw.style.background=v;
+      if(sl)sl.value=v;
+    });
+    ['leftTitle','leftBody','rightTitle','rightBody'].forEach(function(k){
+      const el=document.getElementById('t-'+k);
+      if(el)el.value=T[k]||'';
+    });
+  }
+
+  // 초기 스워치 색상 세팅
+  Object.keys(S).forEach(function(k){
+    const sw=document.getElementById('sw-'+k);
+    if(sw)sw.style.background=S[k];
+  });
+
+  // ─ 저장값 불러오기 ─
+  fetch('/api/admin/design-styles?section=about',{headers:{'x-admin-token':token}})
+    .then(r=>r.ok?r.json():null)
+    .then(function(data){
+      if(!data)return;
+      if(data.styles)Object.assign(S,data.styles);
+      if(data.texts)Object.assign(T,data.texts);
+      syncControlsFromState();
+      inject();applyText();
     }).catch(()=>{});
-  </script>
+
+  // ─ 토스트 ─
+  function toast(msg,type){
+    const t=document.getElementById('toast');
+    t.textContent=msg;t.className='toast on '+(type||'');
+    clearTimeout(window._tt);
+    window._tt=setTimeout(()=>t.className='toast',2500);
+  }
+</script>
 </body>
 </html>
