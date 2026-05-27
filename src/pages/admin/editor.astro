@@ -72,9 +72,17 @@ body{font-family:'Pretendard','Noto Sans KR',sans-serif;background:#0f1117;color
 .db-btn.on{background:rgba(255,255,255,0.07);color:#fff;}
 .edit-btn{margin-left:auto;padding:4px 10px;border-radius:5px;font-size:11px;font-weight:700;cursor:pointer;border:1px solid rgba(255,255,255,0.1);background:rgba(255,255,255,0.04);color:rgba(255,255,255,0.4);font-family:inherit;}
 .edit-btn.on{background:rgba(99,102,241,0.2);border-color:#818cf8;color:#818cf8;}
-.pv-body{flex:1;overflow:hidden;display:flex;}
-.fw{flex:1;height:100%;}
-iframe{width:100%;height:100%;border:none;display:block;}
+.pv-body{flex:1;overflow:hidden;background:#1a1d2e;}
+.fw{width:100%;height:100%;position:relative;overflow:hidden;}
+.fw iframe{
+  width:1440px;
+  height:900px;
+  border:none;
+  display:block;
+  position:absolute;
+  top:0;left:0;
+  transform-origin:top left;
+}
 /* 토스트 */
 .toast{position:fixed;bottom:18px;right:18px;background:#1e2030;border:1px solid rgba(255,255,255,0.1);color:#fff;padding:9px 15px;border-radius:8px;font-size:13px;font-weight:600;z-index:9999;opacity:0;transition:opacity .25s;pointer-events:none;}
 .toast.on{opacity:1;}
@@ -246,6 +254,13 @@ const pf = document.getElementById('pf');
 
 // iframe 로드
 pf.addEventListener('load',function(){
+  // 미리보기 축소
+  var fw=document.querySelector('.fw');
+  if(fw){
+    var s=fw.offsetWidth/1440;
+    pf.style.transform='scale('+s+')';
+    pf.style.height=Math.round(fw.offsetHeight/s)+'px';
+  }
   setTimeout(function(){
     doInject();
     doText();
