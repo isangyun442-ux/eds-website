@@ -28,7 +28,7 @@
     <p class="cert-sub fade-up fade-up-d2">이담에스티가 보유한 공인 인증 및 등록 현황입니다</p>
 
     <!-- 1열: 5개 -->
-    <div class="cert-grid cert-grid-5 fade-up fade-up-d3">
+    <div class="cert-grid cert-grid-all fade-up fade-up-d3">
       <div class="cert-card" data-img="/images/cert/cert_01.jpg" data-name="공장등록증명서">
         <div class="cert-img-wrap"><img src="/images/cert/cert_01.jpg" alt="공장등록증명서" loading="lazy" /></div>
         <div class="cert-info"><p class="cert-name">공장등록증명서</p><p class="cert-desc">제조업 공장 공식 등록</p></div>
@@ -49,10 +49,7 @@
         <div class="cert-img-wrap"><img src="/images/cert/cert_05.jpg" alt="소프트웨어사업자" loading="lazy" /></div>
         <div class="cert-info"><p class="cert-name">소프트웨어사업자</p><p class="cert-desc">SW 사업자 확인서</p></div>
       </div>
-    </div>
-
-    <!-- 2열: 6개 -->
-    <div class="cert-grid cert-grid-6 fade-up fade-up-d3">
+      <!-- 2열 카드 이어서 -->
       <div class="cert-card" data-img="/images/cert/cert_06.jpg" data-name="품질경영시스템인증서">
         <div class="cert-img-wrap"><img src="/images/cert/cert_06.jpg" alt="품질경영시스템인증서" loading="lazy" /></div>
         <div class="cert-info"><p class="cert-name">품질경영시스템인증서</p><p class="cert-desc">ISO 9001</p></div>
@@ -82,19 +79,12 @@
 </section>
 
 <style>
-  /* 라이트박스 */
-  .cert-lb { display:none; position:fixed; inset:0; z-index:1000; align-items:center; justify-content:center; padding:24px; }
-  .cert-lb.on { display:flex; }
-  .cert-lb-overlay { position:absolute; inset:0; background:rgba(5,12,35,0.88); backdrop-filter:blur(8px); cursor:pointer; }
-  .cert-lb-box { position:relative; z-index:1; max-width:680px; width:100%; background:#fff; border-radius:14px; overflow:hidden; box-shadow:0 40px 100px rgba(0,0,0,0.45); }
-  .cert-lb-close { position:absolute; top:12px; right:12px; width:32px; height:32px; border-radius:50%; background:rgba(0,0,0,0.07); border:none; font-size:14px; cursor:pointer; z-index:2; display:flex; align-items:center; justify-content:center; color:#333; transition:background 0.2s; }
-  .cert-lb-close:hover { background:rgba(0,0,0,0.15); }
-  .cert-lb-img { width:100%; display:block; max-height:80vh; object-fit:contain; background:#f5f7fb; }
-  .cert-lb-caption { padding:12px 20px; font-size:13px; font-weight:700; color:#0d1a3a; text-align:center; border-top:1px solid #f0f0f5; }
+  /* 라이트박스 - 사용 안함 */
+  .cert-lb { display:none !important; }
 
   /* 섹션 */
   .s-cert { background:linear-gradient(180deg,#ffffff 0%,#eef2fb 60%,#dce6f8 100%); padding:100px 0 90px; }
-  .cert-inner { max-width:1200px; margin:0 auto; padding:0 40px; text-align:center; }
+  .cert-inner { max-width:1400px; margin:0 auto; padding:0 40px; text-align:center; }
 
   .cert-label { font-size:11px; font-weight:700; letter-spacing:0.22em; text-transform:uppercase; color:#1a2f8a; margin-bottom:14px; display:flex; align-items:center; justify-content:center; gap:10px; }
   .cert-label::before, .cert-label::after { content:''; width:28px; height:1px; background:#1a2f8a; display:block; opacity:0.5; }
@@ -102,25 +92,22 @@
   .cert-title-icon { flex-shrink:0; }
   .cert-sub { font-size:14px; color:#8896a4; line-height:1.7; margin-bottom:48px; }
 
-  /* 5열 그리드 */
-  .cert-grid { display:grid; gap:14px; margin-bottom:14px; }
-  .cert-grid:last-of-type { margin-bottom:0; }
-  .cert-grid-5 { grid-template-columns:repeat(5,1fr); }
-  .cert-grid-6 { grid-template-columns:repeat(6,1fr); }
+  /* 한 줄 11열 그리드 */
+  .cert-grid { display:grid; gap:12px; margin-bottom:0; }
+  .cert-grid-all { grid-template-columns:repeat(11,1fr); }
 
-  /* 카드 */
-  .cert-card { background:rgba(255,255,255,0.88); border:1px solid rgba(26,47,138,0.1); border-radius:10px; overflow:hidden; cursor:pointer; transition:box-shadow 0.25s, transform 0.25s, border-color 0.25s; }
-  .cert-card:hover { box-shadow:0 8px 28px rgba(26,47,138,0.11); transform:translateY(-4px); border-color:#c5d0ed; }
+  /* 카드 - 클릭 효과 없음 */
+  .cert-card { background:rgba(255,255,255,0.88); border:1px solid rgba(26,47,138,0.1); border-radius:10px; overflow:hidden; cursor:default; }
+  .cert-card:hover { box-shadow:0 4px 16px rgba(26,47,138,0.08); border-color:#c5d0ed; }
 
-  /* 이미지 — contain으로 전체 보이게 */
-  .cert-img-wrap { width:100%; aspect-ratio:3/4; background:#f5f7fb; display:flex; align-items:center; justify-content:center; overflow:hidden; padding:8px; box-sizing:border-box; }
-  .cert-img-wrap img { width:100%; height:100%; object-fit:contain; transition:transform 0.35s; }
-  .cert-card:hover .cert-img-wrap img { transform:scale(1.03); }
+  /* 이미지 */
+  .cert-img-wrap { width:100%; aspect-ratio:3/4; background:#f5f7fb; display:flex; align-items:center; justify-content:center; overflow:hidden; padding:6px; box-sizing:border-box; }
+  .cert-img-wrap img { width:100%; height:100%; object-fit:contain; }
 
   /* 카드 하단 */
-  .cert-info { padding:10px 12px 12px; text-align:left; border-top:1px solid #f0f4fb; }
-  .cert-name { font-size:11px; font-weight:700; color:#0d1a3a; margin:0 0 2px; line-height:1.4; }
-  .cert-desc { font-size:10px; color:#9aa4b8; margin:0; }
+  .cert-info { padding:8px 8px 10px; text-align:left; border-top:1px solid #f0f4fb; }
+  .cert-name { font-size:10px; font-weight:700; color:#0d1a3a; margin:0 0 2px; line-height:1.4; }
+  .cert-desc { font-size:9px; color:#9aa4b8; margin:0; }
 
   /* fade-up */
   .fade-up { opacity:0; transform:translateY(28px); transition:opacity 0.7s cubic-bezier(0.16,1,0.3,1), transform 0.7s cubic-bezier(0.16,1,0.3,1); transition-delay:0.15s; }
@@ -129,34 +116,13 @@
   .fade-up-d2 { transition-delay:0.35s; }
   .fade-up-d3 { transition-delay:0.45s; }
 
-  @media (max-width:1100px) { .cert-grid-5 { grid-template-columns:repeat(5,1fr); } .cert-grid-6 { grid-template-columns:repeat(4,1fr); } }
-  @media (max-width:768px) { .cert-grid-5, .cert-grid-6 { grid-template-columns:repeat(3,1fr); gap:10px; } .s-cert { padding:70px 0 60px; } .cert-inner { padding:0 20px; } }
-  @media (max-width:480px) { .cert-grid-5, .cert-grid-6 { grid-template-columns:repeat(2,1fr); } }
+  @media (max-width:1200px) { .cert-grid-all { grid-template-columns:repeat(6,1fr); } }
+  @media (max-width:768px) { .cert-grid-all { grid-template-columns:repeat(4,1fr); gap:10px; } .s-cert { padding:70px 0 60px; } .cert-inner { padding:0 20px; } }
+  @media (max-width:480px) { .cert-grid-all { grid-template-columns:repeat(3,1fr); } }
 </style>
 
 <script is:inline>
 (function () {
-  const lb = document.getElementById('certLb');
-  const lbImg = document.getElementById('certLbImg');
-  const lbCap = document.getElementById('certLbCaption');
-  const lbClose = document.getElementById('certLbClose');
-  const lbOverlay = document.getElementById('certLbOverlay');
-
-  document.querySelectorAll('.cert-card').forEach(function (card) {
-    card.addEventListener('click', function () {
-      lbImg.src = card.dataset.img;
-      lbImg.alt = card.dataset.name;
-      lbCap.textContent = card.dataset.name;
-      lb.classList.add('on');
-      document.body.style.overflow = 'hidden';
-    });
-  });
-
-  function closeLb() { lb.classList.remove('on'); document.body.style.overflow = ''; }
-  lbClose.addEventListener('click', closeLb);
-  lbOverlay.addEventListener('click', closeLb);
-  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeLb(); });
-
   const targets = document.querySelectorAll('#sec-cert .fade-up');
   const obs = new IntersectionObserver(function (entries) {
     entries.forEach(function (e) {
