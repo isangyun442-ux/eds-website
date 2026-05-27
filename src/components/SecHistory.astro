@@ -110,26 +110,13 @@ const history = [
         s.hLineColor?'#sec6 .tl-line{background:'+s.hLineColor+'!important;}':'',
         s.hDotColor?'#sec6 .tl-dot{border-color:'+s.hDotColor+'!important;}#sec6 .tl-end-dot{background:'+s.hDotColor+'!important;}':'',
       ].join('');
-      // 텍스트 복원
-      if(data.texts && data.texts.histContent){
+      // 제목/서브타이틀만 복원 (연혁 항목 건드리지 않음)
+      if(data.texts){
+        var t=data.texts;
         var sec6=document.getElementById('sec6');
         if(sec6){
-          var inner=sec6.querySelector('.hist-inner');
-          if(inner){
-            // 에디터 잔재 제거 후 적용
-            var tmp=document.createElement('div');
-            tmp.innerHTML=data.texts.histContent;
-            tmp.querySelectorAll('[contenteditable]').forEach(function(el){
-              el.removeAttribute('contenteditable');
-              el.classList.remove('eds-e');
-              if(!el.getAttribute('class'))el.removeAttribute('class');
-            });
-            tmp.querySelectorAll('[style*="outline"]').forEach(function(el){
-              el.style.outline='';
-              if(!el.getAttribute('style'))el.removeAttribute('style');
-            });
-            inner.innerHTML=tmp.innerHTML;
-          }
+          if(t.histTitle){var ht=sec6.querySelector('.h-title');if(ht)ht.textContent=t.histTitle;}
+          if(t.histSub){var hs=sec6.querySelector('.h-sub');if(hs)hs.textContent=t.histSub;}
         }
       }
     }).catch(function(){});
