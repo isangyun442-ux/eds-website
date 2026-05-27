@@ -325,11 +325,23 @@ function doText(){
 function startEdit(){
   try{
     const doc=pf.contentDocument;
-    const sec=doc.getElementById('sec2');
+
+    // 현재 탭에 맞는 섹션 선택
+    const curTab=document.querySelector('.tab.on');
+    const s=curTab?curTab.dataset.s:'about';
+    const secMap={about:'sec2',history:'sec6'};
+    const secId=secMap[s]||'sec2';
+    const sec=doc.getElementById(secId);
     if(!sec)return;
 
-    // contentEditable 적용 - 라벨, 제목, 본문, 임직원일동 모두
-    sec.querySelectorAll('.ab-title,.ab-body,.ab-label,.ab-sig').forEach(function(el){
+    // 섹션별 편집 대상
+    const selMap={
+      about:'.ab-title,.ab-body,.ab-label,.ab-sig',
+      history:'.h-title,.h-sub,.h-eyebrow,.tl-year,.tl-desc,.tl-month,.tl-end-label',
+    };
+    const selector=selMap[s]||selMap.about;
+
+    sec.querySelectorAll(selector).forEach(function(el){
       el.contentEditable='true';
       el.classList.add('eds-e');
       el.addEventListener('input',syncFromFrame);
@@ -637,8 +649,19 @@ document.getElementById('tabs').addEventListener('click',function(e){
   document.querySelectorAll('[id^="pa-"]').forEach(p=>p.style.display='none');
   document.getElementById('pa-'+s).style.display='block';
   const map={about:'sec2',history:'sec6',services:'sec3',portfolio:'sec4'};
-  try{const el=pf.contentDocument.getElementById(map[s]);if(el)pf.contentWindow.scrollTo(0,el.offsetTop-60);}catch(e){}
-  if(s==='history') doInjectH();
+  try{
+    const el=pf.contentDocument.getElementById(map[s]);
+    if(el)pf.contentWindow.scrollTo(0,el.offsetTop-60);
+  }catch(e){}
+  // 탭별 inject + editMode 재적용
+  stopEdit();
+  if(s==='about'){
+    doInject();
+    setTimeout(function(){if(editOn)startEdit();},300);
+  } else if(s==='history'){
+    doInjectH();
+    setTimeout(function(){if(editOn)startEdit();},300);
+  }
 });
 
 // ── 디바이스 ──
