@@ -111,16 +111,14 @@
     .device-btns{display:flex;gap:4px;}
     .device-btn{padding:4px 10px;border-radius:5px;font-size:11px;font-weight:600;cursor:pointer;border:none;background:transparent;color:rgba(255,255,255,0.3);font-family:inherit;}
     .device-btn.on{background:rgba(255,255,255,0.08);color:#fff;}
-    .preview-container{flex:1;overflow:auto;display:flex;justify-content:center;padding:20px;}
-    .preview-frame-wrap{transition:width 0.3s ease;}
+    .preview-container{flex:1;overflow:hidden;display:flex;justify-content:center;padding:0;}
+    .preview-frame-wrap{transition:width 0.3s ease;height:100%;}
     .preview-frame-wrap.desktop{width:100%;}
     .preview-frame-wrap.tablet{width:768px;}
     .preview-frame-wrap.mobile{width:390px;}
     iframe{
-      width:100%;border:none;border-radius:8px;
-      box-shadow:0 8px 40px rgba(0,0,0,0.5);
+      width:100%;height:100%;border:none;
       background:#fff;display:block;
-      min-height:600px;
     }
 
     /* 토스트 */
@@ -260,6 +258,28 @@
         </div>
 
         <div class="panel-section">
+          <div class="panel-section-title">텍스트 수정</div>
+          <div class="ctrl">
+            <div class="ctrl-label">왼쪽 제목</div>
+            <textarea class="text-input" id="text-leftTitle" rows="2" oninput="updateText()">"1만 시간의
+법칙"</textarea>
+          </div>
+          <div class="ctrl">
+            <div class="ctrl-label">왼쪽 본문 1</div>
+            <textarea class="text-input" id="text-leftBody1" rows="4" oninput="updateText()">어떤 분야에서 전문성을 갖기 위해 투자해야 하는 시간을 의미합니다.</textarea>
+          </div>
+          <div class="ctrl">
+            <div class="ctrl-label">오른쪽 제목</div>
+            <textarea class="text-input" id="text-rightTitle" rows="2" oninput="updateText()">전문가 집단
+이담에스티</textarea>
+          </div>
+          <div class="ctrl">
+            <div class="ctrl-label">오른쪽 본문 1</div>
+            <textarea class="text-input" id="text-rightBody1" rows="4" oninput="updateText()">이담에스티는 방송기술, 컴퓨터그래픽, 오디오, IT 분야의 20년 이상의 외길을 다져온 전문가들로 구성된 회사입니다.</textarea>
+          </div>
+        </div>
+
+        <div class="panel-section">
           <div class="panel-section-title">섹션 높이</div>
           <div class="ctrl">
             <div class="ctrl-label">최소 높이 <span class="ctrl-val" id="val-minHeight">700px</span></div>
@@ -375,13 +395,44 @@
 
     // iframe 로드 후 주입
     document.getElementById('previewFrame').addEventListener('load', function() {
-      // about 섹션으로 스크롤
       try {
         const sec = this.contentDocument.getElementById('sec2');
-        if(sec) sec.scrollIntoView({behavior:'instant'});
+        if(sec) {
+          // sec2 위치로 iframe 내부 스크롤
+          this.contentWindow.scrollTo(0, sec.offsetTop);
+        }
       } catch(e){}
       injectStyles();
+      injectText();
     });
+
+    // 텍스트 주입
+    function injectText() {
+      try {
+        const doc = document.getElementById('previewFrame').contentDocument;
+        const sec = doc.getElementById('sec2');
+        if(!sec) return;
+
+        const leftTitle = document.getElementById('text-leftTitle').value;
+        const leftBody1 = document.getElementById('text-leftBody1').value;
+        const rightTitle = document.getElementById('text-rightTitle').value;
+        const rightBody1 = document.getElementById('text-rightBody1').value;
+
+        const titleEl = sec.querySelector('.ab-left-content .ab-title');
+        if(titleEl) titleEl.innerHTML = leftTitle.replace(/\n/g,'<br>');
+
+        const leftBodyEls = sec.querySelectorAll('.ab-left-content .ab-body');
+        if(leftBodyEls[0]) leftBodyEls[0].textContent = leftBody1;
+
+        const rightTitleEl = sec.querySelector('.ab-right-content .ab-title');
+        if(rightTitleEl) rightTitleEl.innerHTML = rightTitle.replace(/\n/g,'<br>');
+
+        const rightBodyEls = sec.querySelectorAll('.ab-right-content .ab-body');
+        if(rightBodyEls[0]) rightBodyEls[0].textContent = rightBody1;
+      } catch(e){}
+    }
+
+    window.updateText = function() { injectText(); };
 
     // 색상 업데이트
     window.updateColor = function(key, val) {
@@ -460,11 +511,17 @@
 
     // 저장
     window.saveStyles = async function() {
+      const texts = {
+        leftTitle:  document.getElementById('text-leftTitle').value,
+        leftBody1:  document.getElementById('text-leftBody1').value,
+        rightTitle: document.getElementById('text-rightTitle').value,
+        rightBody1: document.getElementById('text-rightBody1').value,
+      };
       try {
         const r = await fetch('/api/admin/design-styles', {
           method: 'POST',
           headers: {'x-admin-token': token, 'Content-Type': 'application/json'},
-          body: JSON.stringify({section: 'about', styles})
+          body: JSON.stringify({section: 'about', styles, texts})
         });
         if(r.ok) showToast('💾 저장됐어요!', 'success');
         else showToast('저장 실패', 'error');
