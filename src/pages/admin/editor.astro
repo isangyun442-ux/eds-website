@@ -599,11 +599,33 @@ function syncFromFrame(){
   try{
     const sec=pf.contentDocument.getElementById('sec2');
     if(!sec)return;
+
+    function cleanHTML(el){
+      if(!el)return '';
+      // 클론해서 원본 건드리지 않음
+      const clone=el.cloneNode(true);
+      // 툴바 제거
+      const tb=clone.querySelector('#__tb__');
+      if(tb)tb.remove();
+      // contentEditable, eds-e 클래스 제거
+      clone.querySelectorAll('[contenteditable]').forEach(function(n){
+        n.removeAttribute('contenteditable');
+        n.classList.remove('eds-e');
+        if(n.classList.length===0)n.removeAttribute('class');
+      });
+      // outline 인라인 스타일 제거 (편집모드 표시용)
+      clone.querySelectorAll('[style*="outline"]').forEach(function(n){
+        n.style.outline='';
+        if(!n.getAttribute('style'))n.removeAttribute('style');
+      });
+      return clone.innerHTML;
+    }
+
     const lc=sec.querySelector('.ab-left-content');
     const rc=sec.querySelector('.ab-right-content');
-    if(lc) T.leftContent=lc.innerHTML;
-    if(rc) T.rightContent=rc.innerHTML;
-  }catch(e){}
+    if(lc) T.leftContent=cleanHTML(lc);
+    if(rc) T.rightContent=cleanHTML(rc);
+  }catch(e){console.warn('syncFromFrame:',e);}
 }
 
 window.toggleEdit=function(){
