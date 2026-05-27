@@ -1,7 +1,7 @@
 ---
 // src/components/SecAbout.astro
 ---
-<section class="sec s2 ab-section" id="sec2">
+<section class="sec s2" id="sec2">
 
   <!-- 모바일 전용 언어 버튼 -->
   <div class="ab-lang-bar">
@@ -13,215 +13,139 @@
 
   <div class="ab-wrap">
 
-    <!-- 왼쪽: 네이비 그라데이션 + 1만 시간 -->
+    <!-- 왼쪽: 브랜드 컬러 -->
     <div class="ab-left fade-up">
-      <div class="ab-mark ab-mark-icon-l"></div>
-      <div class="ab-mark ab-mark-logo-l"></div>
+      <!-- 장식 SVG -->
+      <svg class="ab-deco" viewBox="0 0 800 700" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+        <path d="M 800 0 L 500 0 L 800 400 Z" fill="rgba(255,255,255,0.04)"/>
+        <path d="M 800 0 L 620 0 L 800 250 Z" fill="rgba(255,255,255,0.05)"/>
+        <path d="M 800 150 L 800 500 L 500 700 L 800 700 Z" fill="rgba(0,0,0,0.08)"/>
+        <path d="M 0 500 L 300 700 L 0 700 Z" fill="rgba(255,255,255,0.03)"/>
+      </svg>
       <div class="ab-left-content">
-        <h2 class="ab-title ab-title--light">"1만 시간의 법칙"</h2>
-        <p class="ab-body ab-body--light">
-          어떤 분야에서 전문성을 갖기 위해 투자해야 하는 시간을 의미합니다. 1993년 앤더스 에릭슨이 연구한 내용을 바탕으로 베스트셀러 작가 말콤 글래드웰이 <em>《아웃라이어, 성공의 기회를 발견한 사람들, 2009》</em>에서 이 에릭슨의 주장을 간단하게 <strong>"1만 시간을 연습하면 전문가가 된다"</strong>는 이론으로 설명했습니다. 시간으로 보자면 하루 3시간, 일주일에 20시간씩 10년간 한가지 일을 훈련하고 반복하는 과정을 거쳐야 비로소 한 분야의 전문가가 될 수 있다는 뜻입니다.
+        <p class="ab-label">ABOUT US</p>
+        <h2 class="ab-title">"1만 시간의<br>법칙"</h2>
+        <p class="ab-body">
+          어떤 분야에서 전문성을 갖기 위해 투자해야 하는 시간을 의미합니다. 1993년 앤더스 에릭슨이 연구한 내용을 바탕으로 베스트셀러 작가 말콤 글래드웰이 <em>《아웃라이어, 성공의 기회를 발견한 사람들, 2009》</em>에서 이 에릭슨의 주장을 간단하게 <strong>"1만 시간을 연습하면 전문가가 된다"</strong>는 이론으로 설명했습니다.
         </p>
-        <p class="ab-body ab-body--light">
-          절대적인 숫자로 정의할 수 없지만 그 시간을 한눈 팔지 않고 꾸준하게 지속적으로 노력해야 한다는 말이기도 합니다. 연구소에서는 바이올린과 피아노를 매우 우수, 우수, 평범으로 구분하여 매우 우수를 받은 학생은 1만시간, 우수를 받은 학생은 7~8천 시간, 평범한 학생은 3~4천시간을 연습했다는 결론을 얻었습니다.
-        </p>
-        <p class="ab-body ab-body--light">
+        <p class="ab-body">
           아웃라이어에서는 빌 게이츠와 비틀즈를 예로 제시했지만, 비단 그들만이 아니라 각자의 분야에서 명성을 떨치는 사람들은 대부분 이 법칙에 따라 자신의 능력을 증진시키고 한계를 극복하며 스스로 발전시키고 있는 것입니다.
         </p>
       </div>
     </div>
 
-    <!-- 오른쪽: 어두운 배경 + 전문가 집단 -->
+    <!-- 오른쪽: 다크 배경 -->
     <div class="ab-right fade-up fade-up-d2">
-      <div class="ab-mark ab-mark-icon-r"></div>
-      <div class="ab-mark ab-mark-logo-r"></div>
+      <!-- 장식 SVG -->
+      <svg class="ab-deco" viewBox="0 0 800 700" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+        <path d="M 0 700 L 300 700 L 0 300 Z" fill="rgba(255,255,255,0.03)"/>
+        <path d="M 0 700 L 180 700 L 0 450 Z" fill="rgba(255,255,255,0.04)"/>
+        <path d="M 0 200 L 0 550 L 300 0 L 0 0 Z" fill="rgba(255,255,255,0.025)"/>
+        <path d="M 800 200 L 500 0 L 800 0 Z" fill="rgba(255,255,255,0.03)"/>
+      </svg>
       <div class="ab-right-content">
-        <h2 class="ab-title ab-title--light">전문가 집단<br><em class="ab-em--cyan">이담에스티</em></h2>
-        <p class="ab-body ab-body--light">
-          이담에스티는 방송기술, 컴퓨터그래픽, 오디오, IT 분야의 <strong>20년 이상의 외길</strong>을 다져온 전문가들로 구성된 회사입니다. 미디어 기술은 컴퓨터와 IT분야의 빠른 성장을 바탕으로 HDTV, 3DTV, AR/VR을 거쳐 Metaverse와 홀로그램으로 빠르게 변화하고 있습니다. 또한 고객의 요구는 기술적뿐만 아니라 사회적, 경제적, 정치적, 문화적 활용에 대한 중요성이 높아져 달라진 미디어 산업의 개념과 정의의 트렌드를 쫓아가야만 합니다.
+        <p class="ab-label">PROFESSIONAL GROUP</p>
+        <h2 class="ab-title">전문가 집단<br><em class="ab-em">이담에스티</em></h2>
+        <p class="ab-body">
+          이담에스티는 방송기술, 컴퓨터그래픽, 오디오, IT 분야의 <strong>20년 이상의 외길</strong>을 다져온 전문가들로 구성된 회사입니다. 미디어 기술은 컴퓨터와 IT분야의 빠른 성장을 바탕으로 HDTV, 3DTV, AR/VR을 거쳐 Metaverse와 홀로그램으로 빠르게 변화하고 있습니다.
         </p>
-        <p class="ab-body ab-body--light">
+        <p class="ab-body">
           우리 회사는 <strong>모두 엔지니어로 구성</strong>되어 있으며 매월 자체 사내 세미나 개최와 기술습득에 필요한 요소들을 지원함으로써 트렌드에 뒤쳐지지 않습니다.
         </p>
-        <p class="ab-body ab-body--light">
+        <p class="ab-body">
           이러한 준비된 기술 서비스를 바탕으로 중앙정부, 지자체, 공기업을 포함한 <strong>91개 관공서·공공기관</strong>, <strong>115개 교육기관</strong>, 방송국, 종교단체, 병원, 기업 등 <strong>516개</strong> 수많은 국내고객과 해외의 미디어 시스템 고객은 상호 소개와 재구매를 통하여 이담에스티의 서비스를 검증받았습니다.
         </p>
-        <p class="ab-body ab-body--light">
+        <p class="ab-body">
           이담에스티는 다양한 미디어 시스템 구축 노하우와 끊임없는 사내 연구와 대외 기술 습득 활동을 통해 트렌디한 구축 서비스를 제공하겠습니다.
         </p>
-        <p class="ab-body ab-body--light" style="margin-top:8px;color:#aaa;font-size:13px;">임직원 일동</p>
+        <p class="ab-sig">임직원 일동</p>
       </div>
     </div>
 
   </div>
-  <div class="ab-fade" id="ab-fade"></div>
 </section>
 
-<script is:inline>
-(function(){
-  const section = document.getElementById('sec2');
-  const fade = document.getElementById('ab-fade');
-  if(!section || !fade) return;
-
-  window.addEventListener('scroll', function(){
-    const rect = section.getBoundingClientRect();
-    const sectionH = section.offsetHeight;
-    // 섹션 끝까지 남은 거리
-    const distFromBottom = rect.bottom - window.innerHeight;
-    // 섹션 하단이 화면 밖으로 나가기 직전에 페이드 시작
-    const threshold = window.innerHeight * 0.06;
-
-    if(distFromBottom < threshold && distFromBottom > -100){
-      const progress = 1 - (distFromBottom / threshold);
-      fade.style.opacity = Math.min(1, Math.max(0, progress));
-    } else if(distFromBottom <= -100){
-      fade.style.opacity = 1;
-    } else {
-      fade.style.opacity = 0;
-    }
-  }, { passive: true });
-})();
-</script>
-
 <style>
-  .s2 { background: #fff; }
+  .s2 { background: #1a2f8a; }
 
   /* ── 전체 레이아웃 ── */
   .ab-wrap {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    min-height: 600px;
+    min-height: 700px;
   }
 
-  /* ── 왼쪽 배경 ── */
+  /* ── 장식 SVG ── */
+  .ab-deco {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%;
+    z-index: 0; pointer-events: none;
+  }
+
+  /* ── 왼쪽 (브랜드 블루) ── */
   .ab-left {
     position: relative;
-    background: #ffffff;
+    background: linear-gradient(135deg, #2a45c8 0%, #1a2f8a 60%, #0f1f6a 100%);
     overflow: hidden;
-  }
-  .ab-left::before {
-    content: ''; position: absolute; inset: 0; z-index: 0;
-    background: url('/images/texture-blue.jpg') center/cover no-repeat;
-    opacity: 0.06; mix-blend-mode: overlay;
-  }
-  .ab-left::after {
-    content: ''; position: absolute; inset: 0; z-index: 0;
-    background:
-      radial-gradient(ellipse 80% 60% at 15% 15%, rgba(0,0,0,0.02) 0%, transparent 60%),
-      radial-gradient(ellipse 60% 50% at 85% 85%, rgba(0,0,0,0.04) 0%, transparent 55%);
   }
   .ab-left-content {
     position: relative; z-index: 2;
-    padding: 80px 60px;
+    padding: 100px 72px;
     display: flex; flex-direction: column; justify-content: center;
     height: 100%;
   }
 
-  /* ── 오른쪽 배경 (왼쪽과 동일 질감, 더 밝게) ── */
+  /* ── 오른쪽 (다크 차콜) ── */
   .ab-right {
     position: relative;
-    background: #f8f9fc;
+    background: linear-gradient(135deg, #1a1f2e 0%, #141828 60%, #0e1220 100%);
     overflow: hidden;
-  }
-  .ab-right::before {
-    content: ''; position: absolute; inset: 0; z-index: 0;
-    background: url('/images/texture-white.jpg') center/cover no-repeat;
-    opacity: 0.08; mix-blend-mode: overlay;
-  }
-  .ab-right::after {
-    content: ''; position: absolute; inset: 0; z-index: 0;
-    background:
-      radial-gradient(ellipse 60% 40% at 85% 10%, rgba(0,0,0,0.02) 0%, transparent 55%),
-      radial-gradient(ellipse 70% 60% at 10% 90%, rgba(0,0,0,0.03) 0%, transparent 55%);
-  }
-  /* About 섹션 하단 스크롤 페이드 오버레이 */
-  .ab-fade {
-    position: absolute;
-    bottom: 0; left: 0; right: 0;
-    height: 140px;
-    background: linear-gradient(to bottom, rgba(6,14,24,0) 0%, #060e18 100%);
-    z-index: 10;
-    pointer-events: none;
-    opacity: 0;
-    transition: opacity 0.4s ease;
   }
   .ab-right-content {
     position: relative; z-index: 2;
-    padding: 80px 60px;
+    padding: 100px 72px;
     display: flex; flex-direction: column; justify-content: center;
     height: 100%;
   }
 
-  .ab-mark { display: none; }
-  /* EDAM 아이콘 - 왼쪽 우하단 (모서리 딱 맞춤) */
-  .ab-mark-icon-l {
-    right: -30px; bottom: -30px;
-    width: 280px; height: 280px;
-    background-image: url('/images/EDAM_ICON.png');
-    background-position: bottom right;
-    mix-blend-mode: screen;
-    opacity: 0.28;
+  /* ── 라벨 ── */
+  .ab-label {
+    font-size: 11px; font-weight: 700;
+    letter-spacing: 0.22em; color: rgba(255,255,255,0.45);
+    margin-bottom: 20px;
   }
-  /* 메인CI - 왼쪽 왼쪽끝 원본 방향 */
-  .ab-mark-logo-l {
-    left: 20px; top: 20px;
-    width: 220px; height: 88px;
-    background-image: url('/images/메인CI.png');
-    background-size: contain;
-    mix-blend-mode: screen;
-    opacity: 0.32;
-  }
-  /* EDAM 아이콘 - 오른쪽 좌상단 (모서리 딱 맞춤) */
-  .ab-mark-icon-r {
-    left: -30px; top: -30px;
-    width: 280px; height: 280px;
-    background-image: url('/images/EDAM_ICON.png');
-    background-position: top left;
-    mix-blend-mode: screen;
-    opacity: 0.28;
-  }
-  /* 메인CI - 오른쪽 오른쪽끝 */
-  .ab-mark-logo-r {
-    right: 20px; bottom: 20px;
-    width: 200px; height: 80px;
-    background-image: url('/images/메인CI.png');
-    background-size: contain;
-    mix-blend-mode: screen;
-    opacity: 0.32;
-  }
-
-  .ab-deco { position:absolute;inset:0;width:100%;height:100%;z-index:0; }
-
-  /* ── Point 라벨 ── */
-  .ab-point {
-    display: inline-flex; align-items: center; gap: 10px;
-    font-size: 11px; font-weight: 800; letter-spacing: 0.2em;
-    text-transform: uppercase; margin-bottom: 18px;
-  }
-  .ab-point--light { color: #1a2f8a; }
-  .ab-point--light::before { content: ''; width: 28px; height: 2px; background: #1a2f8a; display: block; }
 
   /* ── 제목 ── */
   .ab-title {
-    font-size: clamp(26px, 2.8vw, 42px); font-weight: 900;
-    letter-spacing: -0.04em; line-height: 1.15; margin-bottom: 36px;
+    font-size: clamp(30px, 3vw, 48px); font-weight: 900;
+    letter-spacing: -0.03em; line-height: 1.15;
+    color: #fff; margin-bottom: 40px;
   }
-  .ab-title--light { color: #0d1a3a; }
-  .ab-em--cyan { font-style: normal; color: #1a2f8a; }
+  .ab-em { font-style: normal; color: rgba(255,255,255,0.65); }
 
   /* ── 본문 ── */
-  .ab-body { font-size: 15px; line-height: 2.2; margin-bottom: 24px; }
-  .ab-body--light { color: #444; }
-  .ab-body--light em { font-style: italic; color: #666; }
-  .ab-body--light strong { color: #0d1a3a; font-weight: 700; }
+  .ab-body {
+    font-size: 15px; line-height: 2.0;
+    color: rgba(255,255,255,0.65);
+    margin-bottom: 20px;
+  }
+  .ab-body em { font-style: italic; color: rgba(255,255,255,0.5); }
+  .ab-body strong { color: #fff; font-weight: 700; }
+
+  /* ── 임직원 일동 ── */
+  .ab-sig {
+    font-size: 13px; color: rgba(255,255,255,0.3);
+    margin-top: 12px;
+  }
 
   /* ── 반응형 ── */
   @media (max-width: 960px) {
     .ab-wrap { grid-template-columns: 1fr; }
-    .ab-left-content, .ab-right-content { padding: 60px 40px; }
+    .ab-left-content, .ab-right-content { padding: 72px 48px; }
   }
   @media (max-width: 480px) {
-    .ab-left-content, .ab-right-content { padding: 48px 24px; }
+    .ab-left-content, .ab-right-content { padding: 56px 28px; }
+    .ab-title { margin-bottom: 28px; }
   }
 
   /* 모바일 언어 버튼 */
@@ -229,16 +153,17 @@
   @media (max-width: 768px) {
     .ab-lang-bar {
       display: flex; gap: 6px; padding: 14px 24px;
-      justify-content: flex-end; border-bottom: 1px solid #f0f0f0;
+      justify-content: flex-end; border-bottom: 1px solid rgba(255,255,255,0.1);
+      background: #1a2f8a;
     }
     .ab-lang-btn {
       font-size: 11px; font-weight: 700; padding: 5px 10px;
-      background: transparent; border: 1px solid #ddd;
-      color: #aaa; cursor: pointer; letter-spacing: 0.06em;
+      background: transparent; border: 1px solid rgba(255,255,255,0.2);
+      color: rgba(255,255,255,0.5); cursor: pointer; letter-spacing: 0.06em;
       font-family: inherit; transition: all 0.2s;
     }
-    .ab-lang-btn:hover { border-color: #1a2f8a; color: #1a2f8a; }
-    .ab-lang-btn.active { border-color: #1a2f8a; color: #1a2f8a; background: rgba(26,47,138,0.07); }
+    .ab-lang-btn:hover { border-color: #fff; color: #fff; }
+    .ab-lang-btn.active { border-color: #fff; color: #fff; background: rgba(255,255,255,0.1); }
   }
 </style>
 
