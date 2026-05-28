@@ -1,6 +1,73 @@
 ---
 // src/components/SecContact.astro
 ---
+
+<!-- 도입문의 모달 -->
+<div class="iq-modal" id="inquiryModal">
+  <div class="iq-overlay" id="iqOverlay"></div>
+  <div class="iq-box">
+    <button class="iq-close" id="iqClose">✕</button>
+
+    <div class="iq-head">
+      <span class="iq-eyebrow">INQUIRY</span>
+      <h3 class="iq-title">도입 문의</h3>
+      <p class="iq-sub">담당자가 확인 후 빠르게 연락드리겠습니다</p>
+    </div>
+
+    <div id="iqForm">
+      <div class="iq-row">
+        <div class="iq-field">
+          <label class="iq-label">회사명 <span class="iq-req">*</span></label>
+          <input class="iq-input" id="iq-company" type="text" placeholder="(주)이담에스티" />
+        </div>
+        <div class="iq-field">
+          <label class="iq-label">담당자명 <span class="iq-req">*</span></label>
+          <input class="iq-input" id="iq-name" type="text" placeholder="홍길동" />
+        </div>
+      </div>
+      <div class="iq-row">
+        <div class="iq-field">
+          <label class="iq-label">연락처 <span class="iq-req">*</span></label>
+          <input class="iq-input" id="iq-phone" type="tel" placeholder="010-1234-5678" />
+        </div>
+        <div class="iq-field">
+          <label class="iq-label">이메일</label>
+          <input class="iq-input" id="iq-email" type="email" placeholder="example@company.com" />
+        </div>
+      </div>
+      <div class="iq-field">
+        <label class="iq-label">문의 유형</label>
+        <div class="iq-chips" id="iq-type-chips">
+          <button class="iq-chip on" data-v="방송·미디어 시스템">방송·미디어 시스템</button>
+          <button class="iq-chip" data-v="LED 디스플레이">LED 디스플레이</button>
+          <button class="iq-chip" data-v="화상회의 시스템">화상회의 시스템</button>
+          <button class="iq-chip" data-v="아카이브·스토리지">아카이브·스토리지</button>
+          <button class="iq-chip" data-v="기타">기타</button>
+        </div>
+      </div>
+      <div class="iq-field">
+        <label class="iq-label">문의 내용</label>
+        <textarea class="iq-input iq-ta" id="iq-message" placeholder="도입을 검토 중인 시스템이나 궁금한 사항을 자유롭게 작성해주세요." rows="4"></textarea>
+      </div>
+
+      <p class="iq-privacy">수집된 정보는 문의 응대 목적으로만 사용되며, 응대 완료 후 즉시 파기됩니다.</p>
+
+      <button class="iq-submit" id="iqSubmit" onclick="iqSend()">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><line x1="22" y1="2" x2="11" y2="13" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><polygon points="22 2 15 22 11 13 2 9 22 2" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>
+        문의 보내기
+      </button>
+    </div>
+
+    <!-- 완료 화면 -->
+    <div class="iq-done" id="iqDone" style="display:none">
+      <div class="iq-done-icon">✓</div>
+      <h3 class="iq-done-title">문의가 접수됐습니다</h3>
+      <p class="iq-done-sub">담당자가 확인 후 빠른 시간 내에 연락드리겠습니다.<br>평일 09:00 – 18:00 운영</p>
+      <button class="iq-done-btn" onclick="iqClose()">닫기</button>
+    </div>
+
+  </div>
+</div>
 <section class="sec s7" id="sec7">
 
   <!-- 물결 배경 SVG -->
@@ -206,4 +273,136 @@
   @media (max-width: 480px) {
     .ct-content { padding: 48px 20px 40px; }
   }
+
+  /* ── 도입문의 모달 ── */
+  .iq-modal { display:none; position:fixed; inset:0; z-index:9000; align-items:center; justify-content:center; padding:20px; }
+  .iq-modal.open { display:flex; }
+  .iq-overlay { position:fixed; inset:0; background:rgba(8,12,32,0.72); backdrop-filter:blur(4px); cursor:pointer; }
+  .iq-box {
+    position:relative; z-index:1;
+    background:#fff; border-radius:18px;
+    width:100%; max-width:560px;
+    max-height:90vh; overflow-y:auto;
+    padding:40px 40px 36px;
+    box-shadow:0 32px 80px rgba(0,0,0,0.22);
+    scrollbar-width:thin; scrollbar-color:#e0e7f4 transparent;
+    animation: iqIn .28s cubic-bezier(0.16,1,0.3,1);
+  }
+  @keyframes iqIn { from { opacity:0; transform:translateY(24px) scale(0.97); } to { opacity:1; transform:none; } }
+  .iq-close {
+    position:absolute; top:16px; right:16px;
+    width:32px; height:32px; border-radius:50%;
+    background:#f4f6fb; border:none; cursor:pointer;
+    font-size:14px; color:#666; display:flex; align-items:center; justify-content:center;
+    transition:background .15s;
+  }
+  .iq-close:hover { background:#e8edf4; }
+  .iq-head { margin-bottom:28px; }
+  .iq-eyebrow { font-size:10px; font-weight:700; letter-spacing:.18em; color:#1a2f8a; text-transform:uppercase; }
+  .iq-title { font-size:26px; font-weight:900; color:#0d1a3a; letter-spacing:-.03em; margin:6px 0 6px; }
+  .iq-sub { font-size:13px; color:#8896a4; line-height:1.6; }
+
+  .iq-row { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+  .iq-field { display:flex; flex-direction:column; gap:6px; margin-bottom:14px; }
+  .iq-label { font-size:12px; font-weight:700; color:#4a5568; }
+  .iq-req { color:#e53e3e; }
+  .iq-input {
+    padding:11px 14px; border:1.5px solid #e2e8f0; border-radius:8px;
+    font-size:14px; font-family:inherit; color:#0d1a3a;
+    outline:none; transition:border-color .15s, box-shadow .15s;
+    background:#fafbfe;
+  }
+  .iq-input:focus { border-color:#1a2f8a; box-shadow:0 0 0 3px rgba(26,47,138,.08); background:#fff; }
+  .iq-ta { resize:vertical; min-height:96px; line-height:1.6; }
+
+  .iq-chips { display:flex; flex-wrap:wrap; gap:7px; }
+  .iq-chip {
+    padding:6px 14px; border-radius:50px;
+    border:1.5px solid #e2e8f0; background:#fafbfe;
+    font-size:12px; font-weight:600; color:#6b7a8d;
+    cursor:pointer; font-family:inherit; transition:all .15s;
+  }
+  .iq-chip.on { border-color:#1a2f8a; background:rgba(26,47,138,.07); color:#1a2f8a; }
+  .iq-chip:hover { border-color:#1a2f8a; color:#1a2f8a; }
+
+  .iq-privacy { font-size:11px; color:#aaa; line-height:1.6; margin:4px 0 20px; }
+  .iq-submit {
+    width:100%; padding:15px; border-radius:10px;
+    background:#1a2f8a; color:#fff; border:none;
+    font-size:15px; font-weight:700; font-family:inherit;
+    cursor:pointer; display:flex; align-items:center; justify-content:center; gap:8px;
+    transition:background .2s, transform .15s;
+  }
+  .iq-submit:hover { background:#152570; transform:translateY(-1px); }
+  .iq-submit:disabled { background:#a0aec0; cursor:not-allowed; transform:none; }
+
+  /* 완료 화면 */
+  .iq-done { text-align:center; padding:20px 0; }
+  .iq-done-icon { width:60px; height:60px; border-radius:50%; background:rgba(26,47,138,.1); color:#1a2f8a; font-size:26px; display:flex; align-items:center; justify-content:center; margin:0 auto 20px; }
+  .iq-done-title { font-size:22px; font-weight:900; color:#0d1a3a; margin-bottom:10px; }
+  .iq-done-sub { font-size:14px; color:#6b7a8d; line-height:1.8; margin-bottom:28px; }
+  .iq-done-btn { padding:12px 36px; border-radius:50px; border:2px solid #1a2f8a; background:transparent; color:#1a2f8a; font-size:14px; font-weight:700; font-family:inherit; cursor:pointer; transition:all .2s; }
+  .iq-done-btn:hover { background:#1a2f8a; color:#fff; }
+
+  @media (max-width:560px) {
+    .iq-box { padding:28px 20px 24px; }
+    .iq-row { grid-template-columns:1fr; }
+  }
 </style>
+
+<script is:inline>
+// ── 모달 열기/닫기 ──
+function iqClose(){
+  document.getElementById('inquiryModal').classList.remove('open');
+  document.getElementById('iqDone').style.display = 'none';
+  document.getElementById('iqForm').style.display = 'block';
+}
+document.getElementById('iqClose').addEventListener('click', iqClose);
+document.getElementById('iqOverlay').addEventListener('click', iqClose);
+
+// ── 유형 칩 토글 ──
+document.getElementById('iq-type-chips').addEventListener('click', function(e){
+  const chip = e.target.closest('.iq-chip');
+  if(!chip) return;
+  document.querySelectorAll('.iq-chip').forEach(c => c.classList.remove('on'));
+  chip.classList.add('on');
+});
+
+// ── 제출 ──
+window.iqSend = async function(){
+  const company = document.getElementById('iq-company').value.trim();
+  const name    = document.getElementById('iq-name').value.trim();
+  const phone   = document.getElementById('iq-phone').value.trim();
+  const email   = document.getElementById('iq-email').value.trim();
+  const type    = document.querySelector('.iq-chip.on')?.dataset.v || '';
+  const message = document.getElementById('iq-message').value.trim();
+
+  if(!company){ alert('회사명을 입력해주세요.'); return; }
+  if(!name)   { alert('담당자명을 입력해주세요.'); return; }
+  if(!phone)  { alert('연락처를 입력해주세요.'); return; }
+
+  const btn = document.getElementById('iqSubmit');
+  btn.disabled = true;
+  btn.textContent = '전송 중...';
+
+  try {
+    const res = await fetch('/api/contact', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ company, name, phone, email, type, message })
+    });
+    if(res.ok){
+      document.getElementById('iqForm').style.display = 'none';
+      document.getElementById('iqDone').style.display = 'block';
+    } else {
+      alert('전송에 실패했습니다. 잠시 후 다시 시도해주세요.');
+      btn.disabled = false;
+      btn.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none"><line x1="22" y1="2" x2="11" y2="13" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><polygon points="22 2 15 22 11 13 2 9 22 2" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg> 문의 보내기';
+    }
+  } catch(e) {
+    alert('네트워크 오류가 발생했습니다.');
+    btn.disabled = false;
+    btn.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none"><line x1="22" y1="2" x2="11" y2="13" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><polygon points="22 2 15 22 11 13 2 9 22 2" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg> 문의 보내기';
+  }
+};
+</script>
