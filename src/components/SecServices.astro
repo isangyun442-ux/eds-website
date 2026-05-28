@@ -262,34 +262,88 @@
 
 <script is:inline>
 (function () {
-  const tabs   = document.querySelectorAll('.svc-tab');
-  const panels = document.querySelectorAll('.svc-panel');
-  let cur = 0;
+  const sec3 = document.getElementById('sec3');
 
-  function go(idx) {
-    cur = idx;
-    tabs.forEach(function (el) { el.classList.remove('active'); });
-    panels.forEach(function (el) { el.classList.remove('active'); });
-    tabs[cur].classList.add('active');
-    panels[cur].classList.add('active');
+  function bindTabs() {
+    const tabs   = sec3.querySelectorAll('.svc-tab');
+    const panels = sec3.querySelectorAll('.svc-panel');
+    const total  = tabs.length;
+    let cur = 0;
+
+    function go(idx) {
+      cur = ((idx % total) + total) % total;
+      tabs.forEach(function (el) { el.classList.remove('active'); });
+      panels.forEach(function (el) { el.classList.remove('active'); });
+      if (tabs[cur])   tabs[cur].classList.add('active');
+      if (panels[cur]) panels[cur].classList.add('active');
+    }
+
+    tabs.forEach(function (el) {
+      el.addEventListener('click', function () { go(parseInt(el.dataset.idx)); });
+    });
+
+    const btnPrev = document.getElementById('svcPrev');
+    const btnNext = document.getElementById('svcNext');
+    if (btnPrev) btnPrev.onclick = function () { go(cur - 1); };
+    if (btnNext) btnNext.onclick = function () { go(cur + 1); };
+
+    go(0);
   }
 
-  tabs.forEach(function (el) {
-    el.addEventListener('click', function () { go(parseInt(el.dataset.idx)); });
-  });
+  function bindObserver() {
+    const targets = sec3.querySelectorAll('.fade-up');
+    const obs = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) e.target.classList.add('visible');
+        else e.target.classList.remove('visible');
+      });
+    }, { threshold: 0.08 });
+    targets.forEach(function (el) { obs.observe(el); });
+  }
 
-  const btnPrev = document.getElementById('svcPrev');
-  const btnNext = document.getElementById('svcNext');
-  if (btnPrev) btnPrev.addEventListener('click', function () { go((cur - 1 + 5) % 5); });
-  if (btnNext) btnNext.addEventListener('click', function () { go((cur + 1) % 5); });
+  function rebuildFromData(data) {
+    if (!data || !Array.isArray(data.tabs) || data.tabs.length === 0) return;
+    const tabsEl   = sec3.querySelector('.svc-tabs');
+    const panelsEl = sec3.querySelector('.svc-panels');
+    if (!tabsEl || !panelsEl) return;
 
-  const targets = document.querySelectorAll('#sec3 .fade-up');
-  const obs = new IntersectionObserver(function (entries) {
-    entries.forEach(function (e) {
-      if (e.isIntersecting) { e.target.classList.add('visible'); }
-      else { e.target.classList.remove('visible'); }
-    });
-  }, { threshold: 0.08 });
-  targets.forEach(function (el) { obs.observe(el); });
+    tabsEl.innerHTML = data.tabs.map(function (t, i) {
+      const num = String(i + 1).padStart(2, '0');
+      return '<button class="svc-tab" data-idx="' + i + '">'
+        + '<span class="svc-tab-num">' + num + '</span>'
+        + '<span class="svc-tab-name">' + (t.name || '') + '</span>'
+        + '</button>';
+    }).join('');
+
+    panelsEl.innerHTML = data.tabs.map(function (t, i) {
+      const chips = (t.chips || []).map(function (c) {
+        return '<span class="svc-chip">' + c + '</span>';
+      }).join('');
+      const imgS = t.img ? 'background-image:url(\'' + t.img + '\')' : '';
+      return '<div class="svc-panel" data-idx="' + i + '">'
+        + '<div class="svc-panel-img" style="' + imgS + '"><div class="svc-panel-ov"></div></div>'
+        + '<div class="svc-panel-text">'
+          + '<span class="svc-tag">' + (t.tag || '') + '</span>'
+          + '<h3 class="svc-name">' + (t.title || '') + '</h3>'
+          + '<p class="svc-desc">' + (t.desc || '') + '</p>'
+          + '<div class="svc-chips">' + chips + '</div>'
+        + '</div>'
+        + '</div>';
+    }).join('');
+
+    bindTabs();
+  }
+
+  bindTabs();
+  bindObserver();
+
+  fetch('/api/admin/design-styles?section=services')
+    .then(function (r) { return r.ok ? r.json() : null; })
+    .then(function (data) {
+      if (data && data.tabs && data.tabs.length > 0) {
+        rebuildFromData(data);
+      }
+    })
+    .catch(function () {});
 })();
 </script>
