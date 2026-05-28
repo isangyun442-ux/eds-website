@@ -273,9 +273,15 @@
     function go(idx) {
       cur = ((idx % total) + total) % total;
       tabs.forEach(function (el) { el.classList.remove('active'); });
-      panels.forEach(function (el) { el.classList.remove('active'); });
+      panels.forEach(function (el) {
+        el.classList.remove('active');
+        el.style.display = 'none';
+      });
       if (tabs[cur])   tabs[cur].classList.add('active');
-      if (panels[cur]) panels[cur].classList.add('active');
+      if (panels[cur]) {
+        panels[cur].classList.add('active');
+        panels[cur].style.display = '';
+      }
     }
 
     tabs.forEach(function (el) {
@@ -320,7 +326,9 @@
         return '<span class="svc-chip">' + c + '</span>';
       }).join('');
       const imgS = t.img ? 'background-image:url(\'' + t.img + '\')' : '';
-      return '<div class="svc-panel" data-idx="' + i + '">'
+      const activeClass = i === 0 ? ' active' : '';
+      const hideStyle   = i === 0 ? '' : ' style="display:none"';
+      return '<div class="svc-panel' + activeClass + '" data-idx="' + i + '"' + hideStyle + '>'
         + '<div class="svc-panel-img" style="' + imgS + '"><div class="svc-panel-ov"></div></div>'
         + '<div class="svc-panel-text">'
           + '<span class="svc-tag">' + (t.tag || '') + '</span>'
