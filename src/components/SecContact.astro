@@ -8,64 +8,118 @@
   <div class="iq-box">
     <button class="iq-close" id="iqClose">✕</button>
 
-    <div class="iq-head">
-      <span class="iq-eyebrow">INQUIRY</span>
-      <h3 class="iq-title">도입 문의</h3>
-      <p class="iq-sub">담당자가 확인 후 빠르게 연락드리겠습니다</p>
-    </div>
+    <!-- 2컬럼 레이아웃 -->
+    <div class="iq-layout">
 
-    <div id="iqForm">
-      <div class="iq-row">
-        <div class="iq-field">
-          <label class="iq-label">회사명 <span class="iq-req">*</span></label>
-          <input class="iq-input" id="iq-company" type="text" placeholder="(주)이담에스티" />
+      <!-- 왼쪽: 포스터 -->
+      <div class="iq-poster">
+        <div class="iq-poster-bg" aria-hidden="true">
+          <svg viewBox="0 0 400 600" fill="none" preserveAspectRatio="xMidYMid slice" style="position:absolute;inset:0;width:100%;height:100%;">
+            <circle cx="340" cy="80"  r="200" fill="rgba(255,255,255,0.05)"/>
+            <circle cx="340" cy="80"  r="130" fill="rgba(255,255,255,0.05)"/>
+            <circle cx="40"  cy="520" r="160" fill="rgba(255,255,255,0.04)"/>
+            <path d="M0 400 Q100 320 200 400 Q300 480 400 400" stroke="rgba(255,255,255,0.07)" stroke-width="1" fill="none"/>
+            <path d="M0 440 Q100 360 200 440 Q300 520 400 440" stroke="rgba(255,255,255,0.05)" stroke-width="1" fill="none"/>
+          </svg>
         </div>
-        <div class="iq-field">
-          <label class="iq-label">담당자명 <span class="iq-req">*</span></label>
-          <input class="iq-input" id="iq-name" type="text" placeholder="홍길동" />
+        <div class="iq-poster-inner">
+          <div class="iq-poster-badge">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+            19년 전문 기업
+          </div>
+          <h2 class="iq-poster-title">설계부터 구축,<br>유지보수까지<br><em>책임집니다</em></h2>
+          <p class="iq-poster-desc">방송·미디어·LED·화상회의 시스템<br>공공기관 · 교육기관 · 기업 전문</p>
+          <div class="iq-poster-tags">
+            <div class="iq-poster-tag">
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+              당일 견적 가능
+            </div>
+            <div class="iq-poster-tag">
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+              전국 출고
+            </div>
+            <div class="iq-poster-tag">
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+              ISO 9001 인증
+            </div>
+            <div class="iq-poster-tag">
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+              특허 보유 기업
+            </div>
+          </div>
+          <div class="iq-poster-contact">
+            <div class="iq-poster-contact-item">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.27h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.96a16 16 0 0 0 6.13 6.13l.96-.96a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.73 16.92z"/></svg>
+              02-857-7744
+            </div>
+            <div class="iq-poster-contact-item">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              평일 09:00 – 18:00
+            </div>
+          </div>
         </div>
       </div>
-      <div class="iq-row">
-        <div class="iq-field">
-          <label class="iq-label">연락처 <span class="iq-req">*</span></label>
-          <input class="iq-input" id="iq-phone" type="tel" placeholder="010-1234-5678" />
+
+      <!-- 오른쪽: 폼 -->
+      <div class="iq-form-wrap">
+        <div class="iq-head">
+          <span class="iq-eyebrow">INQUIRY</span>
+          <h3 class="iq-title">도입 문의</h3>
+          <p class="iq-sub">담당자가 확인 후 빠르게 연락드리겠습니다</p>
         </div>
-        <div class="iq-field">
-          <label class="iq-label">이메일</label>
-          <input class="iq-input" id="iq-email" type="email" placeholder="example@company.com" />
+
+        <div id="iqForm">
+          <div class="iq-row">
+            <div class="iq-field">
+              <label class="iq-label">회사명 <span class="iq-req">*</span></label>
+              <input class="iq-input" id="iq-company" type="text" placeholder="(주)이담에스티" />
+            </div>
+            <div class="iq-field">
+              <label class="iq-label">담당자명 <span class="iq-req">*</span></label>
+              <input class="iq-input" id="iq-name" type="text" placeholder="홍길동" />
+            </div>
+          </div>
+          <div class="iq-row">
+            <div class="iq-field">
+              <label class="iq-label">연락처 <span class="iq-req">*</span></label>
+              <input class="iq-input" id="iq-phone" type="tel" placeholder="010-1234-5678" />
+            </div>
+            <div class="iq-field">
+              <label class="iq-label">이메일</label>
+              <input class="iq-input" id="iq-email" type="email" placeholder="example@company.com" />
+            </div>
+          </div>
+          <div class="iq-field">
+            <label class="iq-label">문의 유형</label>
+            <div class="iq-chips" id="iq-type-chips">
+              <button class="iq-chip on" data-v="방송·미디어 시스템">방송·미디어 시스템</button>
+              <button class="iq-chip" data-v="LED 디스플레이">LED 디스플레이</button>
+              <button class="iq-chip" data-v="화상회의 시스템">화상회의 시스템</button>
+              <button class="iq-chip" data-v="아카이브·스토리지">아카이브·스토리지</button>
+              <button class="iq-chip" data-v="기타">기타</button>
+            </div>
+          </div>
+          <div class="iq-field">
+            <label class="iq-label">문의 내용</label>
+            <textarea class="iq-input iq-ta" id="iq-message" placeholder="도입을 검토 중인 시스템이나 궁금한 사항을 자유롭게 작성해주세요." rows="4"></textarea>
+          </div>
+          <p class="iq-privacy">수집된 정보는 문의 응대 목적으로만 사용되며, 응대 완료 후 즉시 파기됩니다.</p>
+          <button class="iq-submit" id="iqSubmit" onclick="iqSend()">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><line x1="22" y1="2" x2="11" y2="13" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><polygon points="22 2 15 22 11 13 2 9 22 2" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>
+            문의 보내기
+          </button>
+        </div>
+
+        <!-- 완료 화면 -->
+        <div class="iq-done" id="iqDone" style="display:none">
+          <div class="iq-done-icon">✓</div>
+          <h3 class="iq-done-title">문의가 접수됐습니다</h3>
+          <p class="iq-done-sub">담당자가 확인 후 빠른 시간 내에 연락드리겠습니다.<br>평일 09:00 – 18:00 운영</p>
+          <button class="iq-done-btn" onclick="iqClose()">닫기</button>
         </div>
       </div>
-      <div class="iq-field">
-        <label class="iq-label">문의 유형</label>
-        <div class="iq-chips" id="iq-type-chips">
-          <button class="iq-chip on" data-v="방송·미디어 시스템">방송·미디어 시스템</button>
-          <button class="iq-chip" data-v="LED 디스플레이">LED 디스플레이</button>
-          <button class="iq-chip" data-v="화상회의 시스템">화상회의 시스템</button>
-          <button class="iq-chip" data-v="아카이브·스토리지">아카이브·스토리지</button>
-          <button class="iq-chip" data-v="기타">기타</button>
-        </div>
-      </div>
-      <div class="iq-field">
-        <label class="iq-label">문의 내용</label>
-        <textarea class="iq-input iq-ta" id="iq-message" placeholder="도입을 검토 중인 시스템이나 궁금한 사항을 자유롭게 작성해주세요." rows="4"></textarea>
-      </div>
 
-      <p class="iq-privacy">수집된 정보는 문의 응대 목적으로만 사용되며, 응대 완료 후 즉시 파기됩니다.</p>
-
-      <button class="iq-submit" id="iqSubmit" onclick="iqSend()">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><line x1="22" y1="2" x2="11" y2="13" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><polygon points="22 2 15 22 11 13 2 9 22 2" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>
-        문의 보내기
-      </button>
-    </div>
-
-    <!-- 완료 화면 -->
-    <div class="iq-done" id="iqDone" style="display:none">
-      <div class="iq-done-icon">✓</div>
-      <h3 class="iq-done-title">문의가 접수됐습니다</h3>
-      <p class="iq-done-sub">담당자가 확인 후 빠른 시간 내에 연락드리겠습니다.<br>평일 09:00 – 18:00 운영</p>
-      <button class="iq-done-btn" onclick="iqClose()">닫기</button>
-    </div>
-
+    </div><!-- /iq-layout -->
   </div>
 </div>
 <section class="sec s7" id="sec7">
@@ -86,69 +140,64 @@
   <!-- 콘텐츠 2컬럼 -->
   <div class="ct-content">
 
-    <!-- 왼쪽: 포스터 -->
+    <!-- 왼쪽: Contact 정보 -->
     <div class="ct-left fade-up">
-      <div class="ct-poster">
+      <div class="ct-logo">
+        <img src="/images/logo.png" alt="EDS 이담에스티" />
+      </div>
+      <div class="ct-header">
+        <h2 class="ct-title">Contact Us</h2>
+        <p class="ct-sub">제품 문의 · 기술문의</p>
+      </div>
 
-        <!-- 배경 그래픽 -->
-        <div class="ct-poster-bg" aria-hidden="true">
-          <svg class="ct-poster-svg" viewBox="0 0 600 520" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
-            <circle cx="480" cy="80"  r="220" fill="rgba(255,255,255,0.04)"/>
-            <circle cx="480" cy="80"  r="160" fill="rgba(255,255,255,0.04)"/>
-            <circle cx="480" cy="80"  r="100" fill="rgba(255,255,255,0.05)"/>
-            <circle cx="60"  cy="460" r="180" fill="rgba(255,255,255,0.03)"/>
-            <path d="M0 340 Q150 260 300 340 Q450 420 600 340" stroke="rgba(255,255,255,0.08)" stroke-width="1" fill="none"/>
-            <path d="M0 380 Q150 300 300 380 Q450 460 600 380" stroke="rgba(255,255,255,0.06)" stroke-width="1" fill="none"/>
+      <!-- 연락처 정보 -->
+      <div class="ct-info-list fade-up fade-up-d1">
+        <div class="ct-info-item">
+          <div class="ct-info-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          </div>
+          <div>
+            <p class="ct-info-label">주소</p>
+            <p class="ct-info-value">서울시 구로구 디지털로31길 19, 406호<br>(구로동, 에이스테크노타워2차)</p>
+          </div>
+        </div>
+        <div class="ct-info-item">
+          <div class="ct-info-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.27h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.96a16 16 0 0 0 6.13 6.13l.96-.96a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.73 16.92z"/></svg>
+          </div>
+          <div>
+            <p class="ct-info-label">전화</p>
+            <p class="ct-info-value">02-857-7744</p>
+          </div>
+        </div>
+        <div class="ct-info-item">
+          <div class="ct-info-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+          </div>
+          <div>
+            <p class="ct-info-label">이메일</p>
+            <p class="ct-info-value">pub@edamst.com</p>
+          </div>
+        </div>
+        <div class="ct-info-item">
+          <div class="ct-info-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          </div>
+          <div>
+            <p class="ct-info-label">운영시간</p>
+            <p class="ct-info-value">평일 09:00 – 18:00</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="ct-btn-wrap fade-up fade-up-d2">
+        <button class="ct-btn" onclick="document.getElementById('inquiryModal').classList.add('open')">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+            <line x1="22" y1="2" x2="11" y2="13" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            <polygon points="22 2 15 22 11 13 2 9 22 2" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
           </svg>
-        </div>
-
-        <!-- 포스터 콘텐츠 -->
-        <div class="ct-poster-inner">
-          <div class="ct-poster-badge">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2l2.2 3.2 3.8-.8 1 3.8 3.8 1-.8 3.8L25 16l-3 2.4.6 3.9-3.8.6L16 26l-3.8-1.2L9 26l-2.8-2.8-3.8-.6.6-3.9L0 16l3-2.8-.8-3.8 3.8-1 1-3.8 3.8.8Z"/></svg>
-            19년 전문 기업
-          </div>
-
-          <h2 class="ct-poster-title">설계부터 구축,<br>유지보수까지<br><em>책임집니다</em></h2>
-
-          <p class="ct-poster-desc">방송·미디어·LED·화상회의 시스템<br>공공기관 · 교육기관 · 기업 전문</p>
-
-          <!-- 배지 -->
-          <div class="ct-poster-badges">
-            <div class="ct-poster-tag">
-              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
-              당일 견적 가능
-            </div>
-            <div class="ct-poster-tag">
-              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
-              전국 출고
-            </div>
-            <div class="ct-poster-tag">
-              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
-              ISO 9001 인증
-            </div>
-            <div class="ct-poster-tag">
-              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
-              특허 보유 기업
-            </div>
-          </div>
-
-          <!-- 문의 버튼 -->
-          <button class="ct-poster-btn" onclick="document.getElementById('inquiryModal').classList.add('open')">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><line x1="22" y1="2" x2="11" y2="13" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><polygon points="22 2 15 22 11 13 2 9 22 2" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>
-            도입 문의하기
-          </button>
-
-          <!-- 연락처 -->
-          <div class="ct-poster-contact">
-            <span>02-857-7744</span>
-            <span class="ct-poster-div">|</span>
-            <span>pub@edamst.com</span>
-            <span class="ct-poster-div">|</span>
-            <span>평일 09:00 – 18:00</span>
-          </div>
-        </div>
-
+          문의하기
+        </button>
       </div>
     </div>
 
@@ -212,74 +261,38 @@
     align-items: center;
   }
 
-  /* 왼쪽: 포스터 */
-  .ct-left { padding-right: 40px; }
-  .ct-poster {
-    position: relative;
-    background: linear-gradient(135deg, #1a2f8a 0%, #0d1a4a 55%, #060e28 100%);
-    border-radius: 20px;
-    overflow: hidden;
-    min-height: 480px;
-    display: flex; align-items: stretch;
-  }
-  .ct-poster-bg { position: absolute; inset: 0; pointer-events: none; }
-  .ct-poster-svg { width: 100%; height: 100%; }
+  /* 왼쪽 */
+  .ct-left { display: flex; flex-direction: column; gap: 0; padding-right: 60px; }
+  .ct-logo { margin-bottom: 28px; }
+  .ct-logo img { height: 40px; width: auto; }
+  .ct-title { font-size: clamp(40px, 5vw, 72px); font-weight: 900; letter-spacing: -0.04em; color: #1a2f8a; line-height: 1.0; margin-bottom: 8px; }
+  .ct-sub { font-size: 16px; color: #6b7a8d; letter-spacing: 0.02em; margin-bottom: 36px; }
 
-  .ct-poster-inner {
-    position: relative; z-index: 1;
-    padding: 48px 44px;
-    display: flex; flex-direction: column; justify-content: center;
-    gap: 0;
+  /* 연락처 정보 */
+  .ct-info-list { display: flex; flex-direction: column; gap: 20px; margin-bottom: 36px; }
+  .ct-info-item { display: flex; align-items: flex-start; gap: 14px; }
+  .ct-info-icon {
+    width: 36px; height: 36px; flex-shrink: 0;
+    background: rgba(26,47,138,0.08); border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    color: #1a2f8a;
   }
+  .ct-info-label { font-size: 11px; font-weight: 700; color: #aaa; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 3px; }
+  .ct-info-value { font-size: 14px; color: #333; line-height: 1.6; font-weight: 500; }
 
-  .ct-poster-badge {
-    display: inline-flex; align-items: center; gap: 7px;
-    background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.2);
-    color: rgba(255,255,255,0.9); font-size: 11px; font-weight: 700;
-    letter-spacing: 0.08em; padding: 5px 13px; border-radius: 50px;
-    margin-bottom: 24px; width: fit-content;
+  /* 버튼 */
+  .ct-btn-wrap { }
+  .ct-btn {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: transparent; color: #1a2f8a;
+    border: 2px solid #1a2f8a;
+    font-size: 15px; font-weight: 700;
+    padding: 16px 44px; cursor: pointer;
+    letter-spacing: 0.06em; font-family: inherit;
+    border-radius: 50px;
+    transition: background 0.2s, color 0.2s, transform 0.2s;
   }
-
-  .ct-poster-title {
-    font-size: clamp(28px, 3.2vw, 42px); font-weight: 900;
-    color: #fff; letter-spacing: -0.04em; line-height: 1.2;
-    margin-bottom: 16px;
-  }
-  .ct-poster-title em { font-style: normal; color: #7dd3fc; }
-
-  .ct-poster-desc {
-    font-size: 14px; color: rgba(255,255,255,0.55);
-    line-height: 1.8; margin-bottom: 28px;
-  }
-
-  .ct-poster-badges {
-    display: flex; flex-wrap: wrap; gap: 8px;
-    margin-bottom: 36px;
-  }
-  .ct-poster-tag {
-    display: inline-flex; align-items: center; gap: 6px;
-    background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.14);
-    color: rgba(255,255,255,0.75); font-size: 12px; font-weight: 600;
-    padding: 6px 14px; border-radius: 6px;
-  }
-
-  .ct-poster-btn {
-    display: inline-flex; align-items: center; gap: 9px;
-    background: #fff; color: #1a2f8a;
-    border: none; cursor: pointer; font-family: inherit;
-    font-size: 15px; font-weight: 800;
-    padding: 15px 36px; border-radius: 50px;
-    margin-bottom: 24px; width: fit-content;
-    transition: transform 0.2s, box-shadow 0.2s;
-    box-shadow: 0 8px 24px rgba(0,0,0,0.25);
-  }
-  .ct-poster-btn:hover { transform: translateY(-2px); box-shadow: 0 12px 32px rgba(0,0,0,0.35); }
-
-  .ct-poster-contact {
-    display: flex; align-items: center; flex-wrap: wrap; gap: 6px 10px;
-    font-size: 12px; color: rgba(255,255,255,0.35);
-  }
-  .ct-poster-div { color: rgba(255,255,255,0.15); }
+  .ct-btn:hover { background: #1a2f8a; color: #fff; transform: translateY(-2px); }
 
   /* 오른쪽: 지도 */
   .ct-right { display: flex; flex-direction: column; gap: 12px; }
@@ -305,9 +318,7 @@
 
   @media (max-width: 960px) {
     .ct-content { grid-template-columns: 1fr; padding: 60px 32px 48px; }
-    .ct-left { padding-right: 0; margin-bottom: 32px; }
-    .ct-poster { min-height: 360px; }
-    .ct-poster-inner { padding: 36px 28px; }
+    .ct-left { padding-right: 0; margin-bottom: 40px; }
     .ct-map-wrap { height: 300px; }
     .eds-footer-inner { padding: 24px 32px; flex-direction: column; align-items: flex-start; }
     .eds-footer-details .div { display: none; }
@@ -315,53 +326,99 @@
   }
   @media (max-width: 480px) {
     .ct-content { padding: 48px 20px 40px; }
-    .ct-poster-inner { padding: 28px 22px; }
   }
 
   /* ── 도입문의 모달 ── */
   .iq-modal { display:none; position:fixed; inset:0; z-index:9000; align-items:center; justify-content:center; padding:20px; }
   .iq-modal.open { display:flex; }
   .iq-overlay { position:fixed; inset:0; background:rgba(8,12,32,0.72); backdrop-filter:blur(4px); cursor:pointer; }
+
+  /* 모달 박스 — 2컬럼 */
   .iq-box {
     position:relative; z-index:1;
-    background:#fff; border-radius:18px;
-    width:100%; max-width:560px;
-    max-height:90vh; overflow-y:auto;
-    padding:40px 40px 36px;
-    box-shadow:0 32px 80px rgba(0,0,0,0.22);
-    scrollbar-width:thin; scrollbar-color:#e0e7f4 transparent;
+    background:#fff; border-radius:20px;
+    width:100%; max-width:860px;
+    max-height:92vh; overflow:hidden;
+    box-shadow:0 32px 80px rgba(0,0,0,0.28);
     animation: iqIn .28s cubic-bezier(0.16,1,0.3,1);
+    display:flex; flex-direction:column;
   }
   @keyframes iqIn { from { opacity:0; transform:translateY(24px) scale(0.97); } to { opacity:1; transform:none; } }
+
   .iq-close {
-    position:absolute; top:16px; right:16px;
+    position:absolute; top:14px; right:14px; z-index:10;
     width:32px; height:32px; border-radius:50%;
-    background:#f4f6fb; border:none; cursor:pointer;
-    font-size:14px; color:#666; display:flex; align-items:center; justify-content:center;
+    background:rgba(255,255,255,0.15); border:none; cursor:pointer;
+    font-size:14px; color:#fff; display:flex; align-items:center; justify-content:center;
     transition:background .15s;
   }
-  .iq-close:hover { background:#e8edf4; }
-  .iq-head { margin-bottom:28px; }
+  .iq-close:hover { background:rgba(255,255,255,0.25); }
+
+  /* 2컬럼 */
+  .iq-layout { display:grid; grid-template-columns:340px 1fr; flex:1; overflow:hidden; }
+
+  /* 왼쪽 포스터 */
+  .iq-poster {
+    position:relative; overflow:hidden;
+    background:linear-gradient(145deg, #1a2f8a 0%, #0d1a4a 55%, #060e28 100%);
+    border-radius:20px 0 0 20px;
+  }
+  .iq-poster-bg { position:absolute; inset:0; pointer-events:none; }
+  .iq-poster-inner {
+    position:relative; z-index:1;
+    padding:44px 36px; height:100%;
+    display:flex; flex-direction:column; justify-content:center;
+    gap:0;
+  }
+  .iq-poster-badge {
+    display:inline-flex; align-items:center; gap:7px;
+    background:rgba(255,255,255,0.12); border:1px solid rgba(255,255,255,0.2);
+    color:rgba(255,255,255,0.9); font-size:11px; font-weight:700;
+    letter-spacing:.08em; padding:5px 13px; border-radius:50px;
+    margin-bottom:22px; width:fit-content;
+  }
+  .iq-poster-title {
+    font-size:clamp(24px,2.6vw,34px); font-weight:900;
+    color:#fff; letter-spacing:-.04em; line-height:1.25;
+    margin-bottom:14px;
+  }
+  .iq-poster-title em { font-style:normal; color:#7dd3fc; }
+  .iq-poster-desc { font-size:13px; color:rgba(255,255,255,0.5); line-height:1.8; margin-bottom:24px; }
+  .iq-poster-tags { display:flex; flex-direction:column; gap:8px; margin-bottom:32px; }
+  .iq-poster-tag {
+    display:inline-flex; align-items:center; gap:8px;
+    color:rgba(255,255,255,0.7); font-size:12px; font-weight:600;
+  }
+  .iq-poster-contact { display:flex; flex-direction:column; gap:8px; border-top:1px solid rgba(255,255,255,0.1); padding-top:20px; }
+  .iq-poster-contact-item { display:flex; align-items:center; gap:8px; font-size:12px; color:rgba(255,255,255,0.45); }
+
+  /* 오른쪽 폼 */
+  .iq-form-wrap {
+    padding:36px 36px 32px;
+    overflow-y:auto;
+    scrollbar-width:thin; scrollbar-color:#e0e7f4 transparent;
+  }
+  .iq-head { margin-bottom:22px; }
   .iq-eyebrow { font-size:10px; font-weight:700; letter-spacing:.18em; color:#1a2f8a; text-transform:uppercase; }
-  .iq-title { font-size:26px; font-weight:900; color:#0d1a3a; letter-spacing:-.03em; margin:6px 0 6px; }
+  .iq-title { font-size:24px; font-weight:900; color:#0d1a3a; letter-spacing:-.03em; margin:5px 0 5px; }
   .iq-sub { font-size:13px; color:#8896a4; line-height:1.6; }
 
-  .iq-row { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
-  .iq-field { display:flex; flex-direction:column; gap:6px; margin-bottom:14px; }
+  .iq-row { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+  .iq-field { display:flex; flex-direction:column; gap:5px; margin-bottom:12px; }
   .iq-label { font-size:12px; font-weight:700; color:#4a5568; }
   .iq-req { color:#e53e3e; }
   .iq-input {
-    padding:11px 14px; border:1.5px solid #e2e8f0; border-radius:8px;
-    font-size:14px; font-family:inherit; color:#0d1a3a;
+    padding:10px 13px; border:1.5px solid #e2e8f0; border-radius:8px;
+    font-size:13px; font-family:inherit; color:#0d1a3a;
     outline:none; transition:border-color .15s, box-shadow .15s;
     background:#fafbfe;
   }
   .iq-input:focus { border-color:#1a2f8a; box-shadow:0 0 0 3px rgba(26,47,138,.08); background:#fff; }
-  .iq-ta { resize:vertical; min-height:96px; line-height:1.6; }
+  .iq-ta { resize:vertical; min-height:80px; line-height:1.6; }
 
-  .iq-chips { display:flex; flex-wrap:wrap; gap:7px; }
+  .iq-chips { display:flex; flex-wrap:wrap; gap:6px; }
   .iq-chip {
-    padding:6px 14px; border-radius:50px;
+    padding:5px 13px; border-radius:50px;
     border:1.5px solid #e2e8f0; background:#fafbfe;
     font-size:12px; font-weight:600; color:#6b7a8d;
     cursor:pointer; font-family:inherit; transition:all .15s;
@@ -369,11 +426,11 @@
   .iq-chip.on { border-color:#1a2f8a; background:rgba(26,47,138,.07); color:#1a2f8a; }
   .iq-chip:hover { border-color:#1a2f8a; color:#1a2f8a; }
 
-  .iq-privacy { font-size:11px; color:#aaa; line-height:1.6; margin:4px 0 20px; }
+  .iq-privacy { font-size:11px; color:#aaa; line-height:1.6; margin:4px 0 16px; }
   .iq-submit {
-    width:100%; padding:15px; border-radius:10px;
+    width:100%; padding:14px; border-radius:10px;
     background:#1a2f8a; color:#fff; border:none;
-    font-size:15px; font-weight:700; font-family:inherit;
+    font-size:14px; font-weight:700; font-family:inherit;
     cursor:pointer; display:flex; align-items:center; justify-content:center; gap:8px;
     transition:background .2s, transform .15s;
   }
@@ -381,15 +438,20 @@
   .iq-submit:disabled { background:#a0aec0; cursor:not-allowed; transform:none; }
 
   /* 완료 화면 */
-  .iq-done { text-align:center; padding:20px 0; }
-  .iq-done-icon { width:60px; height:60px; border-radius:50%; background:rgba(26,47,138,.1); color:#1a2f8a; font-size:26px; display:flex; align-items:center; justify-content:center; margin:0 auto 20px; }
-  .iq-done-title { font-size:22px; font-weight:900; color:#0d1a3a; margin-bottom:10px; }
-  .iq-done-sub { font-size:14px; color:#6b7a8d; line-height:1.8; margin-bottom:28px; }
-  .iq-done-btn { padding:12px 36px; border-radius:50px; border:2px solid #1a2f8a; background:transparent; color:#1a2f8a; font-size:14px; font-weight:700; font-family:inherit; cursor:pointer; transition:all .2s; }
+  .iq-done { text-align:center; padding:40px 0; }
+  .iq-done-icon { width:56px; height:56px; border-radius:50%; background:rgba(26,47,138,.1); color:#1a2f8a; font-size:24px; display:flex; align-items:center; justify-content:center; margin:0 auto 18px; }
+  .iq-done-title { font-size:20px; font-weight:900; color:#0d1a3a; margin-bottom:10px; }
+  .iq-done-sub { font-size:13px; color:#6b7a8d; line-height:1.8; margin-bottom:24px; }
+  .iq-done-btn { padding:11px 32px; border-radius:50px; border:2px solid #1a2f8a; background:transparent; color:#1a2f8a; font-size:13px; font-weight:700; font-family:inherit; cursor:pointer; transition:all .2s; }
   .iq-done-btn:hover { background:#1a2f8a; color:#fff; }
 
-  @media (max-width:560px) {
-    .iq-box { padding:28px 20px 24px; }
+  /* 반응형 */
+  @media (max-width:720px) {
+    .iq-layout { grid-template-columns:1fr; }
+    .iq-poster { display:none; }
+    .iq-box { border-radius:16px; }
+    .iq-close { background:rgba(0,0,0,0.08); color:#333; }
+    .iq-form-wrap { padding:28px 22px 24px; }
     .iq-row { grid-template-columns:1fr; }
   }
 </style>
