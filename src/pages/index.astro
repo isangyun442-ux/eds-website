@@ -375,7 +375,7 @@ import SecContact    from '../components/SecContact.astro';
 
   /* 퀵 네비게이션 */
   .quick-nav {
-    position: fixed; right: 24px; top: 50%; transform: translateY(-50%);
+    position: fixed; right: 24px; top: 0;
     z-index: 350; display: flex; flex-direction: column; gap: 3px;
     background: rgba(10,16,40,0.65);
     backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
@@ -383,6 +383,7 @@ import SecContact    from '../components/SecContact.astro';
     padding: 12px 10px; opacity: 0; pointer-events: none;
     transition: opacity 0.5s cubic-bezier(0.16,1,0.3,1);
     box-shadow: 0 8px 32px rgba(0,0,0,0.25), inset 0 1px 0 rgba(255,255,255,0.1);
+    will-change: transform;
   }
   .quick-nav.visible { opacity: 1; pointer-events: all; }
   .quick-nav.dim { opacity: 0.18 !important; }
@@ -429,7 +430,7 @@ import SecContact    from '../components/SecContact.astro';
 </style>
 
 <script is:inline>
-// 퀵메뉴 표시/숨김 + 활성 섹션 + 슬라이딩 인디케이터
+// 퀵메뉴 표시/숨김 + 활성 섹션 + 슬라이딩 인디케이터 + 플로팅 lag
 (function(){
   var nav       = document.getElementById('quickNav');
   var items     = document.querySelectorAll('.qn-item');
@@ -437,12 +438,27 @@ import SecContact    from '../components/SecContact.astro';
   var list      = document.getElementById('qnList');
   var sections  = ['sec2','sec6','sec-cert','sec3','sec4','sec-strength','sec5','sec7'];
 
+  // ── 플로팅 lag (lerp) ──
+  var currentY = window.innerHeight / 2;
+  var targetY  = currentY;
+  var navH     = 0;
+
+  function lerp(a, b, t){ return a + (b - a) * t; }
+
+  function raf(){
+    navH = nav.offsetHeight;
+    targetY = window.innerHeight / 2;
+    currentY = lerp(currentY, targetY, 0.07);  // 0.07 = lag 강도 (낮을수록 더 느림)
+    var y = Math.round(currentY - navH / 2);
+    nav.style.transform = 'translateY(' + y + 'px)';
+    requestAnimationFrame(raf);
+  }
+  requestAnimationFrame(raf);
+
   function moveIndicator(activeItem){
-    if(!activeItem || !list || !indicator) return;
-    var listRect = list.getBoundingClientRect();
-    var itemRect = activeItem.getBoundingClientRect();
-    indicator.style.top    = (activeItem.offsetTop) + 'px';
-    indicator.style.height = itemRect.height + 'px';
+    if(!activeItem || !indicator) return;
+    indicator.style.top    = activeItem.offsetTop + 'px';
+    indicator.style.height = activeItem.offsetHeight + 'px';
     indicator.classList.add('on');
   }
 
@@ -451,17 +467,16 @@ import SecContact    from '../components/SecContact.astro';
     var winH    = window.innerHeight;
     var docH    = document.body.scrollHeight;
 
-    // 표시/숨김
     if(scrollY > 200) nav.classList.add('visible');
     else nav.classList.remove('visible');
 
-    // sec2(회사소개) 구간에서 dim 처리
+    // sec2 구간 dim 처리
     var sec2El = document.getElementById('sec2');
     var sec6El = document.getElementById('sec6');
     if(sec2El && sec6El){
-      var sec2Bottom = sec2El.getBoundingClientRect().bottom + scrollY;
-      var sec6Top    = sec6El.getBoundingClientRect().top + scrollY;
-      if(scrollY >= sec2El.getBoundingClientRect().top + scrollY - 100 && scrollY < sec6Top - 100){
+      var sec2Top = sec2El.getBoundingClientRect().top + scrollY;
+      var sec6Top = sec6El.getBoundingClientRect().top + scrollY;
+      if(scrollY >= sec2Top - 100 && scrollY < sec6Top - 100){
         nav.classList.add('dim');
       } else {
         nav.classList.remove('dim');
@@ -476,8 +491,7 @@ import SecContact    from '../components/SecContact.astro';
       sections.forEach(function(id){
         var el = document.getElementById(id);
         if(!el) return;
-        var top = el.getBoundingClientRect().top + scrollY - 80;
-        if(scrollY >= top) cur = id;
+        if(scrollY >= el.getBoundingClientRect().top + scrollY - 80) cur = id;
       });
     }
 
@@ -492,7 +506,6 @@ import SecContact    from '../components/SecContact.astro';
   }
 
   window.addEventListener('scroll', update, { passive: true });
-  // 초기 실행 — DOM 안정 후
   requestAnimationFrame(function(){ requestAnimationFrame(update); });
 })();
 </script>
