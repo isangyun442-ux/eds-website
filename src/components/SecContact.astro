@@ -386,7 +386,7 @@ window.iqSend = async function(){
   btn.textContent = '전송 중...';
 
   try {
-    const res = await fetch('/api/contact', {
+    const res = await fetch('https://formspree.io/f/xredrdpl', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ company, name, phone, email, type, message })
