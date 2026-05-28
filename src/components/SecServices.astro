@@ -319,10 +319,14 @@
         if (descEl) descEl.textContent = t.desc || '';
 
         const chipsEl = panel.querySelector('.svc-chips');
-        if (chipsEl && t.chips) {
-          chipsEl.innerHTML = t.chips.map(function (c) {
-            return '<span class="svc-chip">' + c + '</span>';
-          }).join('');
+        if (chipsEl && t.chips && t.chips.length > 0) {
+          chipsEl.innerHTML = '';
+          t.chips.forEach(function (c) {
+            const span = document.createElement('span');
+            span.className = 'svc-chip';
+            span.textContent = c;
+            chipsEl.appendChild(span);
+          });
         }
       });
     })
