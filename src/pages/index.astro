@@ -350,12 +350,12 @@ import SecContact    from '../components/SecContact.astro';
   .quick-nav {
     position: fixed; right: 24px; top: 50%; transform: translateY(-50%);
     z-index: 350; display: flex; flex-direction: column; gap: 3px;
-    background: rgba(10,16,40,0.88);
+    background: rgba(10,16,40,0.65);
     backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
     border: 0.5px solid rgba(255,255,255,0.15); border-radius: 16px;
     padding: 12px 10px; opacity: 0; pointer-events: none;
     transition: opacity 0.3s;
-    box-shadow: 0 8px 32px rgba(0,0,0,0.35), inset 0 1px 0 rgba(255,255,255,0.1);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.25), inset 0 1px 0 rgba(255,255,255,0.1);
   }
   .quick-nav.visible { opacity: 1; pointer-events: all; }
   .qn-top {
