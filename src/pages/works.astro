@@ -590,6 +590,21 @@ function reset(){sv='all';cl='all';q='';document.querySelectorAll('.sidebar-btn'
 document.addEventListener('keydown',e=>{if(e.key==='Escape') closeModal();});
 render();
 loadAdminProjects();
+
+// URL 파라미터 ?open=ID 로 특정 프로젝트 자동 오픈
+(function(){
+  const params = new URLSearchParams(window.location.search);
+  const openId = params.get('open');
+  if (!openId) return;
+  const id = parseInt(openId);
+  // hardcoded 데이터는 이미 로드됨 → 바로 오픈
+  const p = allProjects.find(x => x.id === id);
+  if (p) {
+    openModal(id);
+    // URL 파라미터 정리 (뒤로가기 오작동 방지)
+    history.replaceState(null, '', '/works');
+  }
+})()
 </script>
 </body>
 </html>
