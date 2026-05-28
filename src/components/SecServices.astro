@@ -281,6 +281,7 @@
       if (panels[cur]) {
         panels[cur].classList.add('active');
         panels[cur].style.display = 'grid';
+        panels[cur].style.gridTemplateColumns = '1fr 1fr';
       }
     }
 
@@ -327,7 +328,7 @@
       }).join('');
       const imgS = t.img ? 'background-image:url(\'' + t.img + '\')' : '';
       const activeClass = i === 0 ? ' active' : '';
-      const hideStyle   = i === 0 ? ' style="display:grid"' : ' style="display:none"';
+      const hideStyle   = i === 0 ? ' style="display:grid;grid-template-columns:1fr 1fr"' : ' style="display:none"';
       return '<div class="svc-panel' + activeClass + '" data-idx="' + i + '"' + hideStyle + '>'
         + '<div class="svc-panel-img" style="' + imgS + '"><div class="svc-panel-ov"></div></div>'
         + '<div class="svc-panel-text">'
