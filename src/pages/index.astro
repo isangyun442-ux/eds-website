@@ -177,6 +177,23 @@ import SecContact    from '../components/SecContact.astro';
   <SecClients />
   <SecContact />
 
+  <!-- 퀵 네비게이션 -->
+  <div class="quick-nav" id="quickNav">
+    <button class="qn-top" onclick="smoothScrollTo(0)" aria-label="맨 위로">
+      <svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M6.5 10V3M3 6l3.5-3.5L10 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      TOP
+    </button>
+    <div class="qn-divider"></div>
+    <a class="qn-item" data-sec="sec2" onclick="qnGo('sec2')">회사소개</a>
+    <a class="qn-item" data-sec="sec6" onclick="qnGo('sec6')">회사연혁</a>
+    <a class="qn-item" data-sec="sec-cert" onclick="qnGo('sec-cert')">인증현황</a>
+    <a class="qn-item" data-sec="sec3" onclick="qnGo('sec3')">사업분야</a>
+    <a class="qn-item" data-sec="sec4" onclick="qnGo('sec4')">구축사례</a>
+    <a class="qn-item" data-sec="sec-strength" onclick="qnGo('sec-strength')">회사강점</a>
+    <a class="qn-item" data-sec="sec5" onclick="qnGo('sec5')">조달청 제품</a>
+    <a class="qn-item" data-sec="sec7" onclick="qnGo('sec7')">문의</a>
+  </div>
+
   <div class="float-btn" id="floatBtn" onclick="document.getElementById('inquiryModal').classList.add('open')">
     <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
       <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -328,4 +345,101 @@ import SecContact    from '../components/SecContact.astro';
   .inq-submit { width: 100%; padding: 14px; background: #1a2f8a; color: #fff; border: none; border-radius: 8px; font-size: 15px; font-weight: 700; cursor: pointer; font-family: inherit; transition: background 0.2s; }
   .inq-submit:hover { background: #142580; }
   .inq-privacy { font-size: 11px; color: #bbb; text-align: center; margin-top: 10px; }
+
+  /* 퀵 네비게이션 */
+  .quick-nav {
+    position: fixed; right: 24px; top: 50%; transform: translateY(-50%);
+    z-index: 350; display: flex; flex-direction: column; gap: 2px;
+    background: rgba(10,14,32,0.82); backdrop-filter: blur(12px);
+    border: 0.5px solid rgba(255,255,255,0.12); border-radius: 12px;
+    padding: 10px 8px; opacity: 0; pointer-events: none;
+    transition: opacity 0.3s;
+  }
+  .quick-nav.visible { opacity: 1; pointer-events: all; }
+  .qn-top {
+    display: flex; align-items: center; justify-content: center; gap: 5px;
+    padding: 7px 12px; background: rgba(99,102,241,0.18);
+    border: 0.5px solid rgba(99,102,241,0.35); border-radius: 7px;
+    color: #818cf8; font-size: 10px; font-weight: 800; letter-spacing: 0.08em;
+    cursor: pointer; font-family: inherit; transition: background 0.2s;
+    margin-bottom: 2px;
+  }
+  .qn-top:hover { background: rgba(99,102,241,0.3); }
+  .qn-divider { width: 100%; height: 0.5px; background: rgba(255,255,255,0.1); margin: 2px 0 4px; }
+  .qn-item {
+    display: flex; align-items: center; gap: 8px;
+    padding: 6px 12px; border-radius: 6px; cursor: pointer;
+    font-size: 11px; color: rgba(255,255,255,0.45); font-weight: 600;
+    transition: color 0.2s, background 0.2s; white-space: nowrap; text-decoration: none;
+  }
+  .qn-item::before {
+    content: ''; width: 4px; height: 4px; border-radius: 50%;
+    background: rgba(255,255,255,0.25); flex-shrink: 0; transition: background 0.2s;
+  }
+  .qn-item:hover { color: rgba(255,255,255,0.8); background: rgba(255,255,255,0.06); }
+  .qn-item.active { color: #fff; background: rgba(255,255,255,0.08); }
+  .qn-item.active::before { background: #818cf8; }
+  @media (max-width: 768px) { .quick-nav { display: none; } }
 </style>
+
+<script is:inline>
+// easing 스크롤 (마지막에 천천히)
+function smoothScrollTo(target) {
+  var start = window.scrollY;
+  var distance = target - start;
+  var duration = Math.min(800 + Math.abs(distance) * 0.3, 1400);
+  var startTime = null;
+  function easeOutQuart(t){ return 1 - Math.pow(1 - t, 4); }
+  function step(ts){
+    if(!startTime) startTime = ts;
+    var elapsed = ts - startTime;
+    var progress = Math.min(elapsed / duration, 1);
+    window.scrollTo(0, start + distance * easeOutQuart(progress));
+    if(progress < 1) requestAnimationFrame(step);
+  }
+  requestAnimationFrame(step);
+}
+
+function qnGo(id){
+  var el = document.getElementById(id);
+  if(!el) return;
+  var top = el.getBoundingClientRect().top + window.scrollY - 60;
+  smoothScrollTo(top);
+}
+
+// 네비 링크도 easing 적용
+document.querySelectorAll('[onclick*="scrollIntoView"]').forEach(function(el){
+  var match = el.getAttribute('onclick').match(/getElementById\('([^']+)'\)/);
+  if(!match) return;
+  var id = match[1];
+  el.setAttribute('onclick', "event.preventDefault();qnGo('"+id+"')");
+});
+
+// 퀵메뉴 표시/숨김 + 활성 섹션
+(function(){
+  var nav = document.getElementById('quickNav');
+  var items = document.querySelectorAll('.qn-item');
+  var sections = ['sec2','sec6','sec-cert','sec3','sec4','sec-strength','sec5','sec7'];
+
+  function update(){
+    var scrollY = window.scrollY;
+    // 스크롤 200px 이상이면 표시
+    if(scrollY > 200) nav.classList.add('visible');
+    else nav.classList.remove('visible');
+
+    // 현재 섹션 활성화
+    var cur = '';
+    sections.forEach(function(id){
+      var el = document.getElementById(id);
+      if(!el) return;
+      var top = el.getBoundingClientRect().top + scrollY - 80;
+      if(scrollY >= top) cur = id;
+    });
+    items.forEach(function(item){
+      item.classList.toggle('active', item.dataset.sec === cur);
+    });
+  }
+  window.addEventListener('scroll', update, { passive: true });
+  update();
+})();
+</script>
