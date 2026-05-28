@@ -274,6 +274,103 @@ import SecContact    from '../components/SecContact.astro';
       if (window.scrollY > 80) sh.classList.add('hide');
     }, { passive: true });
   }
+
+  // ── 섹션 스냅 스크롤 ──
+  (function(){
+    // 섹션 순서 (회사연혁 sec6은 자유스크롤)
+    var SECTIONS = ['sec0','sec2','sec6','sec3','sec-cert','sec4','sec5','sec7'];
+    var FREE_SCROLL = ['sec6']; // 자유 스크롤 섹션
+    var locked = false;
+    var lockTimer = null;
+
+    function getEl(id){ return document.getElementById(id); }
+
+    // 현재 가장 가까운 섹션 인덱스
+    function getCurrentIdx(){
+      var mid = window.scrollY + window.innerHeight * 0.4;
+      var best = 0, bestDist = Infinity;
+      SECTIONS.forEach(function(id, i){
+        var el = getEl(id);
+        if(!el) return;
+        var top = el.getBoundingClientRect().top + window.scrollY;
+        var dist = Math.abs(top - mid);
+        if(dist < bestDist){ bestDist = dist; best = i; }
+      });
+      return best;
+    }
+
+    // 섹션으로 부드럽게 이동
+    function goTo(id){
+      var el = getEl(id);
+      if(!el) return;
+      locked = true;
+      clearTimeout(lockTimer);
+      var top = el.getBoundingClientRect().top + window.scrollY - 60;
+      window.scrollTo({ top: top, behavior: 'smooth' });
+      lockTimer = setTimeout(function(){ locked = false; }, 1100);
+    }
+
+    // 회사연혁 끝까지 왔는지 체크
+    function isHistoryEnd(){
+      var el = getEl('sec6');
+      if(!el) return false;
+      var bottom = el.getBoundingClientRect().bottom;
+      return bottom <= window.innerHeight + 10;
+    }
+    function isHistoryTop(){
+      var el = getEl('sec6');
+      if(!el) return false;
+      var top = el.getBoundingClientRect().top;
+      return top >= -10;
+    }
+
+    // 현재 섹션이 자유스크롤 섹션인지
+    function isFreeSection(id){
+      return FREE_SCROLL.indexOf(id) !== -1;
+    }
+
+    // 휠 이벤트
+    window.addEventListener('wheel', function(e){
+      if(locked) return;
+      var idx = getCurrentIdx();
+      var curId = SECTIONS[idx];
+
+      // 자유스크롤 섹션
+      if(isFreeSection(curId)){
+        if(e.deltaY > 0 && isHistoryEnd()){
+          e.preventDefault();
+          goTo(SECTIONS[idx + 1]);
+        } else if(e.deltaY < 0 && isHistoryTop()){
+          e.preventDefault();
+          goTo(SECTIONS[idx - 1]);
+        }
+        return;
+      }
+
+      e.preventDefault();
+      if(e.deltaY > 0 && idx < SECTIONS.length - 1){
+        goTo(SECTIONS[idx + 1]);
+      } else if(e.deltaY < 0 && idx > 0){
+        goTo(SECTIONS[idx - 1]);
+      }
+    }, { passive: false });
+
+    // 터치 스와이프
+    var touchStart = 0;
+    window.addEventListener('touchstart', function(e){
+      touchStart = e.touches[0].clientY;
+    }, { passive: true });
+    window.addEventListener('touchend', function(e){
+      if(locked) return;
+      var diff = touchStart - e.changedTouches[0].clientY;
+      if(Math.abs(diff) < 50) return;
+      var idx = getCurrentIdx();
+      var curId = SECTIONS[idx];
+      if(isFreeSection(curId)) return;
+      if(diff > 0 && idx < SECTIONS.length - 1) goTo(SECTIONS[idx + 1]);
+      else if(diff < 0 && idx > 0) goTo(SECTIONS[idx - 1]);
+    }, { passive: true });
+  })();
   </script>
 
 </body>
