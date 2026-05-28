@@ -292,6 +292,30 @@ import SecContact    from '../components/SecContact.astro';
     }, { passive: true });
   }
 
+  // easing 스크롤 함수 (전역으로 먼저 선언)
+  window.smoothScrollTo = function(target) {
+    var start = window.scrollY;
+    var distance = target - start;
+    var duration = Math.min(800 + Math.abs(distance) * 0.3, 1400);
+    var startTime = null;
+    function easeOutQuart(t){ return 1 - Math.pow(1 - t, 4); }
+    function step(ts){
+      if(!startTime) startTime = ts;
+      var elapsed = ts - startTime;
+      var progress = Math.min(elapsed / duration, 1);
+      window.scrollTo(0, start + distance * easeOutQuart(progress));
+      if(progress < 1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  };
+
+  window.qnGo = function(id){
+    var el = document.getElementById(id);
+    if(!el) return;
+    var top = el.getBoundingClientRect().top + window.scrollY - 60;
+    smoothScrollTo(top);
+  };
+
   </script>
 
 </body>
@@ -387,38 +411,6 @@ import SecContact    from '../components/SecContact.astro';
 </style>
 
 <script is:inline>
-// easing 스크롤 (마지막에 천천히)
-function smoothScrollTo(target) {
-  var start = window.scrollY;
-  var distance = target - start;
-  var duration = Math.min(800 + Math.abs(distance) * 0.3, 1400);
-  var startTime = null;
-  function easeOutQuart(t){ return 1 - Math.pow(1 - t, 4); }
-  function step(ts){
-    if(!startTime) startTime = ts;
-    var elapsed = ts - startTime;
-    var progress = Math.min(elapsed / duration, 1);
-    window.scrollTo(0, start + distance * easeOutQuart(progress));
-    if(progress < 1) requestAnimationFrame(step);
-  }
-  requestAnimationFrame(step);
-}
-
-function qnGo(id){
-  var el = document.getElementById(id);
-  if(!el) return;
-  var top = el.getBoundingClientRect().top + window.scrollY - 60;
-  smoothScrollTo(top);
-}
-
-// 네비 링크도 easing 적용
-document.querySelectorAll('[onclick*="scrollIntoView"]').forEach(function(el){
-  var match = el.getAttribute('onclick').match(/getElementById\('([^']+)'\)/);
-  if(!match) return;
-  var id = match[1];
-  el.setAttribute('onclick', "event.preventDefault();qnGo('"+id+"')");
-});
-
 // 퀵메뉴 표시/숨김 + 활성 섹션
 (function(){
   var nav = document.getElementById('quickNav');
