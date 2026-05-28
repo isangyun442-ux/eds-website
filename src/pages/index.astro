@@ -438,19 +438,26 @@ import SecContact    from '../components/SecContact.astro';
   var list      = document.getElementById('qnList');
   var sections  = ['sec2','sec6','sec-cert','sec3','sec4','sec-strength','sec5','sec7'];
 
-  // ── 플로팅 lag (lerp) ──
-  var currentY = window.innerHeight / 2;
-  var targetY  = currentY;
-  var navH     = 0;
+  // ── 플로팅 lag (scroll velocity → offset) ──
+  var navH       = 0;
+  var offset     = 0;
+  var velocity   = 0;
+  var lastScroll = window.scrollY;
 
   function lerp(a, b, t){ return a + (b - a) * t; }
 
   function raf(){
-    navH = nav.offsetHeight;
-    targetY = window.innerHeight / 2;
-    currentY = lerp(currentY, targetY, 0.07);  // 0.07 = lag 강도 (낮을수록 더 느림)
-    var y = Math.round(currentY - navH / 2);
-    nav.style.transform = 'translateY(' + y + 'px)';
+    navH = nav.offsetHeight || navH;
+    var scrollY = window.scrollY;
+    var delta   = scrollY - lastScroll;
+    lastScroll  = scrollY;
+
+    velocity += delta * 0.18;   // 스크롤 방향으로 밀림
+    velocity *= 0.82;            // 마찰 (낮을수록 오래 남음)
+    offset = lerp(offset, velocity, 0.25);
+
+    var baseY = window.innerHeight / 2 - navH / 2;
+    nav.style.transform = 'translateY(' + Math.round(baseY + offset) + 'px)';
     requestAnimationFrame(raf);
   }
   requestAnimationFrame(raf);
