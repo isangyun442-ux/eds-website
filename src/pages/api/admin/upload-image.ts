@@ -6,8 +6,7 @@ export const prerender = false;
 export const POST: APIRoute = async ({ request }) => {
   // 어드민 토큰 확인
   const tok = request.headers.get('x-admin-token') || '';
-  const validTok = import.meta.env.ADMIN_TOKEN || 'eds-admin-2024';
-  if (tok !== validTok) {
+  if (tok !== import.meta.env.ADMIN_PASSWORD) {
     return new Response(JSON.stringify({ error: '인증 실패' }), { status: 401 });
   }
 
