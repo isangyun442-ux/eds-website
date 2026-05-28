@@ -184,14 +184,17 @@ import SecContact    from '../components/SecContact.astro';
       TOP
     </button>
     <div class="qn-divider"></div>
-    <a class="qn-item" data-sec="sec2" onclick="qnGo('sec2')">회사소개</a>
-    <a class="qn-item" data-sec="sec6" onclick="qnGo('sec6')">회사연혁</a>
-    <a class="qn-item" data-sec="sec-cert" onclick="qnGo('sec-cert')">인증현황</a>
-    <a class="qn-item" data-sec="sec3" onclick="qnGo('sec3')">사업분야</a>
-    <a class="qn-item" data-sec="sec4" onclick="qnGo('sec4')">구축사례</a>
-    <a class="qn-item" data-sec="sec-strength" onclick="qnGo('sec-strength')">회사강점</a>
-    <a class="qn-item" data-sec="sec5" onclick="qnGo('sec5')">조달청 제품</a>
-    <a class="qn-item" data-sec="sec7" onclick="qnGo('sec7')">문의</a>
+    <div class="qn-list" id="qnList">
+      <div class="qn-indicator" id="qnIndicator"></div>
+      <a class="qn-item" data-sec="sec2" onclick="qnGo('sec2')">회사소개</a>
+      <a class="qn-item" data-sec="sec6" onclick="qnGo('sec6')">회사연혁</a>
+      <a class="qn-item" data-sec="sec-cert" onclick="qnGo('sec-cert')">인증현황</a>
+      <a class="qn-item" data-sec="sec3" onclick="qnGo('sec3')">사업분야</a>
+      <a class="qn-item" data-sec="sec4" onclick="qnGo('sec4')">구축사례</a>
+      <a class="qn-item" data-sec="sec-strength" onclick="qnGo('sec-strength')">회사강점</a>
+      <a class="qn-item" data-sec="sec5" onclick="qnGo('sec5')">조달청 제품</a>
+      <a class="qn-item" data-sec="sec7" onclick="qnGo('sec7')">문의</a>
+    </div>
   </div>
 
   <div class="float-btn" id="floatBtn" onclick="document.getElementById('inquiryModal').classList.add('open')">
@@ -378,10 +381,12 @@ import SecContact    from '../components/SecContact.astro';
     backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
     border: 0.5px solid rgba(255,255,255,0.15); border-radius: 16px;
     padding: 12px 10px; opacity: 0; pointer-events: none;
-    transition: opacity 0.3s;
+    transition: opacity 0.5s cubic-bezier(0.16,1,0.3,1);
     box-shadow: 0 8px 32px rgba(0,0,0,0.25), inset 0 1px 0 rgba(255,255,255,0.1);
   }
   .quick-nav.visible { opacity: 1; pointer-events: all; }
+  .quick-nav.dim { opacity: 0.18 !important; }
+  .quick-nav.dim:hover { opacity: 1 !important; }
   .qn-top {
     display: flex; align-items: center; justify-content: center; gap: 5px;
     padding: 8px 14px;
@@ -394,39 +399,77 @@ import SecContact    from '../components/SecContact.astro';
   }
   .qn-top:hover { box-shadow: 0 0 18px rgba(99,102,241,0.6), 0 0 36px rgba(99,102,241,0.25), inset 0 1px 0 rgba(255,255,255,0.2); }
   .qn-divider { width: 100%; height: 0.5px; background: linear-gradient(90deg,transparent,rgba(255,255,255,0.15),transparent); margin: 2px 0 4px; }
+  .qn-list { position: relative; display: flex; flex-direction: column; gap: 3px; }
+  /* 슬라이딩 인디케이터 */
+  .qn-indicator {
+    position: absolute; left: 0; right: 0;
+    background: rgba(255,255,255,0.1);
+    border: 0.5px solid rgba(255,255,255,0.15);
+    border-radius: 8px; pointer-events: none;
+    transition: top 0.35s cubic-bezier(0.34,1.56,0.64,1), height 0.35s cubic-bezier(0.34,1.56,0.64,1), opacity 0.3s;
+    opacity: 0;
+  }
+  .qn-indicator.on { opacity: 1; }
   .qn-item {
     display: flex; align-items: center; gap: 8px;
     padding: 6px 12px; border-radius: 8px; cursor: pointer;
     font-size: 11px; color: rgba(255,255,255,0.45); font-weight: 600;
-    transition: color 0.2s, background 0.2s; white-space: nowrap; text-decoration: none;
+    transition: color 0.25s; white-space: nowrap; text-decoration: none;
+    position: relative; z-index: 1;
   }
   .qn-item::before {
     content: ''; width: 4px; height: 4px; border-radius: 50%;
-    background: rgba(255,255,255,0.2); flex-shrink: 0; transition: background 0.2s, box-shadow 0.2s;
+    background: rgba(255,255,255,0.2); flex-shrink: 0;
+    transition: background 0.25s, box-shadow 0.25s, transform 0.35s cubic-bezier(0.34,1.56,0.64,1);
   }
-  .qn-item:hover { color: rgba(255,255,255,0.8); background: rgba(255,255,255,0.06); }
-  .qn-item.active { color: #fff; background: rgba(255,255,255,0.1); border: 0.5px solid rgba(255,255,255,0.15); }
-  .qn-item.active::before { background: #818cf8; box-shadow: 0 0 6px rgba(129,140,248,0.8); }
+  .qn-item:hover { color: rgba(255,255,255,0.8); }
+  .qn-item.active { color: #fff; }
+  .qn-item.active::before { background: #818cf8; box-shadow: 0 0 6px rgba(129,140,248,0.8); transform: scale(1.4); }
   @media (max-width: 768px) { .quick-nav { display: none; } }
 </style>
 
 <script is:inline>
-// 퀵메뉴 표시/숨김 + 활성 섹션
+// 퀵메뉴 표시/숨김 + 활성 섹션 + 슬라이딩 인디케이터
 (function(){
-  var nav = document.getElementById('quickNav');
-  var items = document.querySelectorAll('.qn-item');
-  var sections = ['sec2','sec6','sec-cert','sec3','sec4','sec-strength','sec5','sec7'];
+  var nav       = document.getElementById('quickNav');
+  var items     = document.querySelectorAll('.qn-item');
+  var indicator = document.getElementById('qnIndicator');
+  var list      = document.getElementById('qnList');
+  var sections  = ['sec2','sec6','sec-cert','sec3','sec4','sec-strength','sec5','sec7'];
+
+  function moveIndicator(activeItem){
+    if(!activeItem || !list || !indicator) return;
+    var listRect = list.getBoundingClientRect();
+    var itemRect = activeItem.getBoundingClientRect();
+    indicator.style.top    = (activeItem.offsetTop) + 'px';
+    indicator.style.height = itemRect.height + 'px';
+    indicator.classList.add('on');
+  }
 
   function update(){
     var scrollY = window.scrollY;
-    var winH = window.innerHeight;
-    var docH = document.body.scrollHeight;
+    var winH    = window.innerHeight;
+    var docH    = document.body.scrollHeight;
 
+    // 표시/숨김
     if(scrollY > 200) nav.classList.add('visible');
     else nav.classList.remove('visible');
 
+    // sec2(회사소개) 구간에서 dim 처리
+    var sec2El = document.getElementById('sec2');
+    var sec6El = document.getElementById('sec6');
+    if(sec2El && sec6El){
+      var sec2Bottom = sec2El.getBoundingClientRect().bottom + scrollY;
+      var sec6Top    = sec6El.getBoundingClientRect().top + scrollY;
+      if(scrollY >= sec2El.getBoundingClientRect().top + scrollY - 100 && scrollY < sec6Top - 100){
+        nav.classList.add('dim');
+      } else {
+        nav.classList.remove('dim');
+      }
+    }
+
+    // 활성 섹션
     var cur = '';
-    // 페이지 맨 끝이면 마지막 섹션 활성화
     if(scrollY + winH >= docH - 50){
       cur = sections[sections.length - 1];
     } else {
@@ -437,11 +480,19 @@ import SecContact    from '../components/SecContact.astro';
         if(scrollY >= top) cur = id;
       });
     }
+
+    var activeItem = null;
     items.forEach(function(item){
-      item.classList.toggle('active', item.dataset.sec === cur);
+      var isActive = item.dataset.sec === cur;
+      item.classList.toggle('active', isActive);
+      if(isActive) activeItem = item;
     });
+    if(activeItem) moveIndicator(activeItem);
+    else indicator.classList.remove('on');
   }
+
   window.addEventListener('scroll', update, { passive: true });
-  update();
+  // 초기 실행 — DOM 안정 후
+  requestAnimationFrame(function(){ requestAnimationFrame(update); });
 })();
 </script>
