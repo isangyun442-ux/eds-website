@@ -168,7 +168,53 @@ iframe{width:100%;height:100%;border:none;display:block;}
   </div>
 </div>
 
-<div id="pa-services" style="display:none"><div class="ps"><div class="pt">준비 중</div><p style="font-size:11px;color:rgba(255,255,255,0.25)">곧 추가돼요</p></div></div>
+<div id="pa-services" style="display:none">
+
+  <!-- 탭 선택기 -->
+  <div class="ps">
+    <div class="pt">탭 선택</div>
+    <div id="svc-tab-selector" style="display:flex;flex-wrap:wrap;gap:4px;margin-bottom:10px;"></div>
+    <div style="display:flex;gap:5px;">
+      <button class="btn btn-ghost" style="font-size:11px;padding:5px 10px;flex:1;" onclick="svcAddTab()">＋ 탭 추가</button>
+      <button class="btn btn-ghost" style="font-size:11px;padding:5px 10px;flex:1;color:rgba(239,68,68,.7);border-color:rgba(239,68,68,.2);" onclick="svcDelTab()">－ 탭 삭제</button>
+    </div>
+  </div>
+
+  <!-- 현재 탭 편집 폼 -->
+  <div class="ps" id="svc-edit-panel">
+    <div class="pt">탭 내용 <span id="svc-edit-num" style="color:#818cf8;font-weight:700;"></span></div>
+
+    <div class="ctrl">
+      <div class="cl">탭 이름</div>
+      <input class="hx" id="svc-f-name" placeholder="공공기관" oninput="svcUpdate()">
+    </div>
+    <div class="ctrl">
+      <div class="cl">영문 태그</div>
+      <input class="hx" id="svc-f-tag" placeholder="Public Institution" oninput="svcUpdate()">
+    </div>
+    <div class="ctrl">
+      <div class="cl">제목</div>
+      <input class="hx" id="svc-f-title" placeholder="공공기관" oninput="svcUpdate()">
+    </div>
+    <div class="ctrl">
+      <div class="cl">설명 텍스트</div>
+      <textarea class="hx" id="svc-f-desc" rows="5" style="resize:vertical;height:90px;line-height:1.6;padding-top:6px;" oninput="svcUpdate()"></textarea>
+    </div>
+    <div class="ctrl">
+      <div class="cl">이미지 URL <span style="color:rgba(255,255,255,0.2)">(Cloudinary 또는 /images/)</span></div>
+      <input class="hx" id="svc-f-img" placeholder="/images/services/public.jpg" oninput="svcUpdate()">
+    </div>
+    <div class="ctrl">
+      <div class="cl">키워드 칩 <span style="color:rgba(255,255,255,0.2)">(쉼표로 구분)</span></div>
+      <input class="hx" id="svc-f-chips" placeholder="방송 SI, 아카이브 시스템, ..." oninput="svcUpdate()">
+    </div>
+  </div>
+
+  <div class="ps">
+    <div class="tip">미리보기에서 <strong>텍스트를 클릭</strong>하면 바로 편집할 수 있어요.<br>이미지는 URL 입력 후 자동 반영됩니다.</div>
+  </div>
+
+</div>
 <div id="pa-portfolio" style="display:none"><div class="ps"><div class="pt">준비 중</div><p style="font-size:11px;color:rgba(255,255,255,0.25)">곧 추가돼요</p></div></div>
 
 </div>
@@ -214,7 +260,7 @@ let H = {
   hTitleSize:48, hDescSize:14, hLineHeight:1.9,
   hLineColor:'#c5d0ed', hDotColor:'#1a2f8a'
 };
-let lastSaved = {S:null, T:null, H:null};
+let lastSaved = {S:null, T:null, H:null, SVC:null};
 
 const pf = document.getElementById('pf');
 
@@ -577,6 +623,166 @@ window.oC2 = function(k,v){ H[k]=v; const h=document.getElementById('h-'+k),sw=d
 window.oH2 = function(k,v){ if(!/^#[0-9a-fA-F]{6}$/.test(v))return; H[k]=v; const c=document.getElementById('c-'+k),sw=document.getElementById('sw-'+k); if(c)c.value=v; if(sw)sw.style.background=v; doInjectH(); };
 window.oS2 = function(k,v,u){ H[k]=parseFloat(v); const el=document.getElementById('v-'+k); if(el)el.textContent=v+u; doInjectH(); };
 
+// ── Services 상태 ──
+let SVC = {
+  tabs: [
+    { name:'공공기관', tag:'Public Institution', img:'/images/services/public.jpg', title:'공공기관',
+      desc:'방송제작, 디지털미디어, 아카이브, 장애인방송 시스템 구축 경험을 바탕으로 공공기관에 최적화된 솔루션을 제공합니다. 안정적인 콘텐츠 제작 기반 마련을 위한 미디어 스토리지, 비디오 서버, 미디어관리시스템을 구축합니다.',
+      chips:['방송 SI','아카이브 시스템','장애인방송','MAM 자산관리','화상회의 시스템'] },
+    { name:'교육기관', tag:'Education', img:'/images/services/education.jpg', title:'교육기관',
+      desc:'사이버대학교부터 초·중·고등학교까지 목적에 맞는 최적의 교육 환경을 설계합니다. 이러닝 스튜디오, 스마트 강의실, LED 디스플레이를 통해 온·오프라인 교육 모두를 아우릅니다.',
+      chips:['이러닝 스튜디오','스마트 강의실','하이브리드 수업','인터랙티브 디스플레이','LED 디스플레이'] },
+    { name:'기업', tag:'Enterprise', img:'/images/services/enterprise.jpg', title:'기업',
+      desc:'기업 유튜브 채널, 사내 방송, 화상회의 시스템 구축까지 다양한 기업 미디어 환경을 지원합니다. Zoom, Teams, Webex 등 주요 플랫폼과 완벽 호환되는 스마트 오피스 환경을 완성합니다.',
+      chips:['유튜브 스튜디오','화상회의 시스템','사내방송','Zoom·Teams 통합','스마트 오피스'] },
+    { name:'미디어센터', tag:'Media Center', img:'/images/services/media.jpg', title:'미디어센터',
+      desc:'P1.5 초고해상도 LED Wall부터 실내외 대형 전광판, XR 가상 스튜디오까지 전문 미디어센터에 필요한 모든 솔루션을 구축합니다. 미디어 서버 연동으로 최고의 영상 환경을 완성합니다.',
+      chips:['LED Wall','XR 가상 스튜디오','미디어서버','전광판','미디어 아카이브'] },
+    { name:'종교시설', tag:'Religious Facility', img:'/images/services/religion.jpg', title:'종교시설',
+      desc:'교회, 성당, 사찰 등 종교 시설에 특화된 음향·영상·조명 통합 시스템을 구축합니다. 예배·법회 영상 송출, LED 전광판, 온라인 스트리밍까지 종교 공간에 최적화된 솔루션을 제공합니다.',
+      chips:['음향·영상 통합','예배 영상 송출','온라인 스트리밍','LED 전광판','조명 시스템'] }
+  ]
+};
+let svcCurTab = 0;
+
+// 탭 선택기 렌더
+function svcRenderSelector(){
+  const sel = document.getElementById('svc-tab-selector');
+  if(!sel) return;
+  sel.innerHTML = SVC.tabs.map(function(t,i){
+    const on = i===svcCurTab;
+    return '<button onclick="svcSelectTab('+i+')" style="padding:4px 9px;border-radius:5px;font-size:11px;font-weight:600;cursor:pointer;font-family:inherit;border:1px solid '+(on?'#818cf8':'rgba(255,255,255,0.1)')+';background:'+(on?'rgba(99,102,241,0.2)':'rgba(255,255,255,0.04)')+';color:'+(on?'#818cf8':'rgba(255,255,255,0.45)')+';">'+(i+1)+'. '+t.name+'</button>';
+  }).join('');
+}
+
+// 탭 선택
+window.svcSelectTab = function(i){
+  svcCurTab = i;
+  svcRenderSelector();
+  svcLoadForm();
+  doInjectSVC();
+};
+
+// 폼 → 현재 탭 데이터 로드
+function svcLoadForm(){
+  const t = SVC.tabs[svcCurTab];
+  if(!t) return;
+  const numEl = document.getElementById('svc-edit-num');
+  if(numEl) numEl.textContent = '— '+(svcCurTab+1)+' / '+SVC.tabs.length;
+  document.getElementById('svc-f-name').value = t.name;
+  document.getElementById('svc-f-tag').value = t.tag;
+  document.getElementById('svc-f-title').value = t.title;
+  document.getElementById('svc-f-desc').value = t.desc;
+  document.getElementById('svc-f-img').value = t.img;
+  document.getElementById('svc-f-chips').value = t.chips.join(', ');
+}
+
+// 폼 변경 → SVC 업데이트
+window.svcUpdate = function(){
+  const t = SVC.tabs[svcCurTab];
+  if(!t) return;
+  t.name  = document.getElementById('svc-f-name').value;
+  t.tag   = document.getElementById('svc-f-tag').value;
+  t.title = document.getElementById('svc-f-title').value;
+  t.desc  = document.getElementById('svc-f-desc').value;
+  t.img   = document.getElementById('svc-f-img').value;
+  t.chips = document.getElementById('svc-f-chips').value.split(',').map(s=>s.trim()).filter(Boolean);
+  svcRenderSelector();
+  doInjectSVC();
+};
+
+// 탭 추가
+window.svcAddTab = function(){
+  SVC.tabs.push({name:'새 탭', tag:'New Tab', img:'', title:'새 탭', desc:'설명을 입력하세요.', chips:[]});
+  svcCurTab = SVC.tabs.length - 1;
+  svcRenderSelector(); svcLoadForm(); doInjectSVC();
+};
+
+// 탭 삭제
+window.svcDelTab = function(){
+  if(SVC.tabs.length <= 1){ showToast('탭은 1개 이상 필요해요', 'err'); return; }
+  if(!confirm((svcCurTab+1)+'번 탭 "'+SVC.tabs[svcCurTab].name+'"을 삭제할까요?')) return;
+  SVC.tabs.splice(svcCurTab, 1);
+  svcCurTab = Math.min(svcCurTab, SVC.tabs.length-1);
+  svcRenderSelector(); svcLoadForm(); doInjectSVC();
+};
+
+// iframe에 Services 콘텐츠 주입
+function doInjectSVC(){
+  try{
+    const doc = pf.contentDocument;
+    if(!doc) return;
+    const sec3 = doc.getElementById('sec3');
+    if(!sec3) return;
+    const tabsEl  = sec3.querySelector('.svc-tabs');
+    const panelsEl = sec3.querySelector('.svc-panels');
+    if(!tabsEl || !panelsEl) return;
+
+    // 탭 버튼 재빌드
+    tabsEl.innerHTML = SVC.tabs.map(function(t,i){
+      const num = String(i+1).padStart(2,'0');
+      return '<button class="svc-tab'+(i===0?' active':'')+'" data-idx="'+i+'">'
+        +'<span class="svc-tab-num">'+num+'</span>'
+        +'<span class="svc-tab-name">'+t.name+'</span>'
+        +'</button>';
+    }).join('');
+
+    // 패널 재빌드
+    panelsEl.innerHTML = SVC.tabs.map(function(t,i){
+      const chips = t.chips.map(function(c){ return '<span class="svc-chip">'+c+'</span>'; }).join('');
+      const imgS = t.img ? "background-image:url('"+t.img+"')" : '';
+      return '<div class="svc-panel'+(i===0?' active':'')+'" data-idx="'+i+'">'
+        +'<div class="svc-panel-img" style="'+imgS+'"><div class="svc-panel-ov"></div></div>'
+        +'<div class="svc-panel-text">'
+          +'<span class="svc-tag eds-svc-e" data-f="tag" data-idx="'+i+'">'+t.tag+'</span>'
+          +'<h3 class="svc-name eds-svc-e" data-f="title" data-idx="'+i+'">'+t.title+'</h3>'
+          +'<p class="svc-desc eds-svc-e" data-f="desc" data-idx="'+i+'">'+t.desc+'</p>'
+          +'<div class="svc-chips">'+chips+'</div>'
+        +'</div>'
+        +'</div>';
+    }).join('');
+
+    // 탭 클릭 재연결
+    let iframeCur = 0;
+    function iframeGo(idx){
+      iframeCur = Math.max(0, Math.min(idx, SVC.tabs.length-1));
+      doc.querySelectorAll('.svc-tab').forEach(function(b){ b.classList.remove('active'); });
+      doc.querySelectorAll('.svc-panel').forEach(function(p){ p.classList.remove('active'); });
+      const tb = doc.querySelector('.svc-tab[data-idx="'+iframeCur+'"]');
+      const pn = doc.querySelector('.svc-panel[data-idx="'+iframeCur+'"]');
+      if(tb) tb.classList.add('active');
+      if(pn) pn.classList.add('active');
+    }
+    doc.querySelectorAll('.svc-tab').forEach(function(btn){
+      btn.addEventListener('click', function(){ iframeGo(parseInt(btn.dataset.idx)); });
+    });
+    const bp = doc.getElementById('svcPrev'), bn = doc.getElementById('svcNext');
+    if(bp) bp.onclick = function(){ iframeGo(iframeCur-1); };
+    if(bn) bn.onclick = function(){ iframeGo(iframeCur+1); };
+
+    // contentEditable + 편집 아웃라인
+    const old = doc.getElementById('__ei_svc__');
+    if(old) old.remove();
+    const st = doc.createElement('style');
+    st.id = '__ei_svc__';
+    st.textContent = '.eds-svc-e{outline:2px dashed rgba(99,102,241,0.5)!important;cursor:text!important;min-height:1.2em;display:block;}.eds-svc-e:focus{outline:2px solid #818cf8!important;background:rgba(99,102,241,0.04)!important;}';
+    doc.head.appendChild(st);
+
+    sec3.querySelectorAll('.eds-svc-e').forEach(function(el){
+      el.contentEditable = 'true';
+      el.addEventListener('input', function(){
+        const idx = parseInt(el.dataset.idx);
+        const field = el.dataset.f;
+        if(!SVC.tabs[idx]) return;
+        SVC.tabs[idx][field] = el.innerText.trim();
+        if(idx === svcCurTab) svcLoadForm();
+        svcRenderSelector();
+      });
+    });
+
+  }catch(e){ console.warn('doInjectSVC:', e); }
+}
+
 // 폰트 업로드
 window.oFU = function(input){
   const file=input.files[0]; if(!file)return;
@@ -616,6 +822,7 @@ document.getElementById('tabs').addEventListener('click', function(e){
   }catch(e){}
   if(curSec==='about'){ doInject(); }
   else if(curSec==='history'){ doInjectH(); }
+  else if(curSec==='services'){ svcRenderSelector(); svcLoadForm(); setTimeout(doInjectSVC, 300); }
   setTimeout(startEdit, 300);
 });
 
@@ -626,18 +833,23 @@ window.doReset = async function(){
     Object.assign(S, lastSaved.S);
     Object.assign(T, lastSaved.T||{});
     Object.assign(H, lastSaved.H||{});
+    if(lastSaved.SVC) SVC = JSON.parse(JSON.stringify(lastSaved.SVC));
     syncControls();
-    doInject(); doText(); doInjectH();
+    doInject(); doText(); doInjectH(); doInjectSVC();
+    if(curSec==='services'){ svcRenderSelector(); svcLoadForm(); }
     showToast('마지막 저장 시점으로 복원됐어요', 'ok');
   } else {
     try{
-      const [a,h] = await Promise.all([
+      const [a,h,sv] = await Promise.all([
         fetch('/api/admin/design-styles?section=about',{headers:{'x-admin-token':tok}}).then(r=>r.ok?r.json():null),
         fetch('/api/admin/design-styles?section=history',{headers:{'x-admin-token':tok}}).then(r=>r.ok?r.json():null),
+        fetch('/api/admin/design-styles?section=services',{headers:{'x-admin-token':tok}}).then(r=>r.ok?r.json():null),
       ]);
       if(a){ if(a.styles)Object.assign(S,a.styles); if(a.texts)Object.assign(T,a.texts); }
       if(h && h.styles) Object.assign(H, h.styles);
-      syncControls(); doInject(); doText(); doInjectH();
+      if(sv && sv.tabs) SVC = {tabs: sv.tabs};
+      syncControls(); doInject(); doText(); doInjectH(); doInjectSVC();
+      if(curSec==='services'){ svcRenderSelector(); svcLoadForm(); }
       showToast('저장된 값으로 복원됐어요', 'ok');
     }catch(e){ showToast('복원 실패', 'err'); }
   }
@@ -658,8 +870,13 @@ window.doSave = async function(){
       headers:{'x-admin-token':tok,'Content-Type':'application/json'},
       body: JSON.stringify({section:'history', styles:H, texts:{histTitle:H.histTitle||'', histSub:H.histSub||''}})
     });
-    if(r1.ok && r2.ok){
-      lastSaved = {S:{...S}, T:{...T}, H:{...H}};
+    const r3 = await fetch('/api/admin/design-styles',{
+      method:'POST',
+      headers:{'x-admin-token':tok,'Content-Type':'application/json'},
+      body: JSON.stringify({section:'services', tabs:SVC.tabs})
+    });
+    if(r1.ok && r2.ok && r3.ok){
+      lastSaved = {S:{...S}, T:{...T}, H:{...H}, SVC:JSON.parse(JSON.stringify(SVC))};
       showToast('💾 저장 완료!', 'ok');
     } else {
       showToast('저장 실패 ('+r1.status+')', 'err');
@@ -702,10 +919,12 @@ Object.keys(H).forEach(function(k){
 Promise.all([
   fetch('/api/admin/design-styles?section=about',{headers:{'x-admin-token':tok}}).then(r=>r.ok?r.json():null).catch(()=>null),
   fetch('/api/admin/design-styles?section=history',{headers:{'x-admin-token':tok}}).then(r=>r.ok?r.json():null).catch(()=>null),
-]).then(function([aboutData, histData]){
+  fetch('/api/admin/design-styles?section=services',{headers:{'x-admin-token':tok}}).then(r=>r.ok?r.json():null).catch(()=>null),
+]).then(function([aboutData, histData, svcData]){
   if(aboutData){ if(aboutData.styles)Object.assign(S,aboutData.styles); if(aboutData.texts)Object.assign(T,aboutData.texts); }
   if(histData && histData.styles) Object.assign(H, histData.styles);
-  lastSaved = {S:{...S}, T:{...T}, H:{...H}};
+  if(svcData && svcData.tabs) SVC = {tabs: svcData.tabs};
+  lastSaved = {S:{...S}, T:{...T}, H:{...H}, SVC:JSON.parse(JSON.stringify(SVC))};
   syncControls();
   try{
     if(pf.contentDocument && pf.contentDocument.getElementById('sec2')){
