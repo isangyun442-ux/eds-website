@@ -217,12 +217,12 @@
   }
   .svc-desc { font-size: 14px; color: #555; line-height: 2; margin-bottom: 28px; }
   .svc-chips { display: flex; flex-wrap: wrap; gap: 7px; }
-  .svc-chip {
+  :global(.svc-chip) {
     font-size: 11px; font-weight: 600; padding: 5px 14px;
     border: 1.5px solid #dde3ef; color: #666; background: #fff;
     border-radius: 4px; transition: all 0.2s;
   }
-  .svc-chip:hover { border-color: #1a2f8a; color: #1a2f8a; }
+  :global(.svc-chip:hover) { border-color: #1a2f8a; color: #1a2f8a; }
 
   /* 화살표 — svc-inner 기준 절대 배치 */
   .svc-inner { position: relative; }
