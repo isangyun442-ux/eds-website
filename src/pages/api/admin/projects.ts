@@ -195,7 +195,13 @@ async function readProjects(): Promise<any[]> {
       ? JSON.parse(data.result)
       : data.result;
 
-    return Array.isArray(parsed) ? parsed : [];
+    // 빈 배열이면 하드코딩 데이터로 자동 시딩
+    if (!Array.isArray(parsed) || parsed.length === 0) {
+      await writeProjects(HARDCODED_PROJECTS);
+      return HARDCODED_PROJECTS;
+    }
+
+    return parsed;
   } catch (e) {
     console.error('readProjects error:', e);
     return HARDCODED_PROJECTS;
