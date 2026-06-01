@@ -39,9 +39,33 @@ const translations = {
     'about.sign':      '임직원 일동',
 
     // SERVICES
-    'svc.eyebrow':     'Services',
-    'svc.title':       '서비스',
-    'svc.1.title':     '방송제작 스튜디오',
+    'svc.eyebrow':     'BUSINESS FIELD',
+    'svc.title':       '사업 분야',
+    'svc.subtitle':    '19년의 현장 경험으로 완성된 솔루션 — 설계부터 구축, 유지보수까지 책임집니다',
+
+    // CERTIFICATION
+    'cert.eyebrow':    'CERTIFICATION',
+    'cert.title':      '인증현황',
+    'cert.sub':        '이담에스티가 보유한 공인 인증 및 등록 현황입니다',
+
+    // STRENGTH
+    'str.sub':         '설계·구축만 잘하는 회사는 있을 수 있습니다',
+    'str.headline':    '이담에스티는<br><em>설계·구축만</em> 잘하지 않습니다',
+    'str.card1.title': '철저한 유지보수',
+    'str.card1.desc':  '구축 후에도 끝까지 책임집니다. 신속한 AS와 정기 점검으로 시스템을 안정적으로 유지합니다.',
+    'str.card2.title': '투명한 견적',
+    'str.card2.desc':  '예상치 못한 추가 비용 없이 명확하고 투명한 견적으로 신뢰할 수 있는 파트너십을 제공합니다.',
+    'str.card3.title': '일정 준수',
+    'str.card3.desc':  '쌓아온 노하우로 프로젝트 일정을 철저히 관리합니다. 약속한 날짜는 반드시 지킵니다.',
+    'str.card4.title': '검증된 퀄리티',
+    'str.card4.desc':  '516개 이상의 구축 사례가 증명합니다. 공공기관부터 방송국까지 신뢰받는 기술력입니다.',
+
+    // PROCUREMENT (조달청)
+    'proc.eyebrow':    'Procurement',
+    'proc.title':      '조달청 등록제품',
+    'proc.sub':        '이담에스티의 제품은 조달청에 공식 등록되어 공공기관 납품이 가능합니다',
+    'proc.cta':        '자세히 보기 →',
+    'proc.badge':      '등록완료',
     'svc.1.desc':      '4K UHD 촬영부터 실시간 스트리밍까지',
     'svc.2.title':     '이러닝 스튜디오',
     'svc.2.desc':      '자동 추적 카메라와 크로마키 환경',
@@ -150,10 +174,22 @@ const translations = {
     'cert.title':      'Certifications',
     'cert.sub':        'Official certifications and registrations held by EDAMST',
 
-    'cli.eyebrow':     'Clients & Partners',
-    'cli.title':       'Trusted Partnerships',
-    'cli.sub':         'Working with 200+ organizations nationwide',
-    'cli.brands':      'Technology Partners',
+    'str.sub':         'Some companies only excel at design and construction.',
+    'str.headline':    'EDAMST does<br><em>more than just build</em>',
+    'str.card1.title': 'Thorough Maintenance',
+    'str.card1.desc':  'We take responsibility even after construction. Rapid after-sales service and regular inspections keep your system stable.',
+    'str.card2.title': 'Transparent Pricing',
+    'str.card2.desc':  'No unexpected costs. We provide clear and honest estimates for a trustworthy partnership.',
+    'str.card3.title': 'On-Time Delivery',
+    'str.card3.desc':  'Our accumulated know-how ensures strict project schedule management. We always keep our promises.',
+    'str.card4.title': 'Proven Quality',
+    'str.card4.desc':  'Over 516 completed projects speak for themselves — trusted expertise from public institutions to broadcasters.',
+
+    'proc.eyebrow':    'Procurement',
+    'proc.title':      'Procurement Products',
+    'proc.sub':        'EDAMST products are officially registered with the Public Procurement Service for direct government purchases.',
+    'proc.cta':        'Learn More →',
+    'proc.badge':      'Registered',
 
     'ct.form.title':   'Inquiry',
     'ct.form.sub':     'We\'ll get back to you as soon as possible',
@@ -208,10 +244,22 @@ const translations = {
     'cert.title':      '认证现况',
     'cert.sub':        'EDAMST持有的官方认证及注册情况',
 
-    'cli.eyebrow':     '客户与合作伙伴',
-    'cli.title':       '值得信赖的合作关系',
-    'cli.sub':         '携手国内200+机构与企业',
-    'cli.brands':      '技术合作品牌',
+    'str.sub':         '只擅长设计和建设的公司可能有很多',
+    'str.headline':    'EDAMST<br><em>不止于设计与建设</em>',
+    'str.card1.title': '全面的售后维护',
+    'str.card1.desc':  '施工后也负责到底。通过快速售后服务和定期检查，保持系统稳定运行。',
+    'str.card2.title': '透明报价',
+    'str.card2.desc':  '无意外费用。提供清晰透明的报价，建立值得信赖的合作关系。',
+    'str.card3.title': '准时交付',
+    'str.card3.desc':  '凭借积累的经验严格管理项目进度。约定的日期必定履行。',
+    'str.card4.title': '经过验证的品质',
+    'str.card4.desc':  '516个以上的建设案例证明一切。从公共机构到广播机构均受信赖的技术实力。',
+
+    'proc.eyebrow':    '采购',
+    'proc.title':      '采购产品',
+    'proc.sub':        'EDAMST的产品已在采购厅正式登记，可直接向公共机构供货。',
+    'proc.cta':        '查看详情 →',
+    'proc.badge':      '已登记',
 
     'ct.form.title':   '发送咨询',
     'ct.form.sub':     '我们将尽快与您联系',
@@ -266,10 +314,22 @@ const translations = {
     'cert.title':      '認証状況',
     'cert.sub':        'EDAMSTが保有する公認認証および登録状況',
 
-    'cli.eyebrow':     'クライアント & パートナー',
-    'cli.title':       '信頼されるパートナーシップ',
-    'cli.sub':         '国内200以上の機関・企業と共に',
-    'cli.brands':      'テクノロジーパートナー',
+    'str.sub':         '設計・構築だけが得意な会社はあるかもしれません',
+    'str.headline':    'EDAMSTは<br><em>設計・構築だけ</em>ではありません',
+    'str.card1.title': '徹底したアフターメンテナンス',
+    'str.card1.desc':  '構築後も最後まで責任を持ちます。迅速なアフターサービスと定期点検でシステムを安定維持します。',
+    'str.card2.title': '透明な見積もり',
+    'str.card2.desc':  '予期せぬ追加費用なし。明確で透明な見積もりで信頼できるパートナーシップを提供します。',
+    'str.card3.title': '納期厳守',
+    'str.card3.desc':  '蓄積されたノウハウでプロジェクトスケジュールを徹底管理。約束した日程は必ず守ります。',
+    'str.card4.title': '実証済みの品質',
+    'str.card4.desc':  '516件以上の構築実績が証明。官公署から放送局まで信頼される技術力です。',
+
+    'proc.eyebrow':    '調達',
+    'proc.title':      '調達庁登録製品',
+    'proc.sub':        'EDAMSTの製品は調達庁に公式登録され、公共機関への直接納品が可能です。',
+    'proc.cta':        '詳細を見る →',
+    'proc.badge':      '登録済み',
 
     'ct.form.title':   'お問い合わせ',
     'ct.form.sub':     'できる限り早くご連絡いたします',
@@ -376,6 +436,40 @@ function applyLang(lang) {
     const sub   = modal.querySelector('.iq-sub');
     if (title) title.textContent = t('ct.form.title');
     if (sub)   sub.textContent   = t('ct.form.sub');
+  }
+
+  // ── SecStrength 직접 교체 ──
+  const secStr = document.getElementById('sec-strength');
+  if (secStr) {
+    const sub      = secStr.querySelector('.ab-str-sub');
+    const headline = secStr.querySelector('.ab-str-headline');
+    const titles   = secStr.querySelectorAll('.ab-str-title');
+    const descs    = secStr.querySelectorAll('.ab-str-desc');
+    if (sub)      sub.textContent      = t('str.sub');
+    if (headline) headline.innerHTML   = t('str.headline');
+    if (titles[0]) titles[0].textContent = t('str.card1.title');
+    if (descs[0])  descs[0].textContent  = t('str.card1.desc');
+    if (titles[1]) titles[1].textContent = t('str.card2.title');
+    if (descs[1])  descs[1].textContent  = t('str.card2.desc');
+    if (titles[2]) titles[2].textContent = t('str.card3.title');
+    if (descs[2])  descs[2].textContent  = t('str.card3.desc');
+    if (titles[3]) titles[3].textContent = t('str.card4.title');
+    if (descs[3])  descs[3].textContent  = t('str.card4.desc');
+  }
+
+  // ── SecClients(조달청) 직접 교체 ──
+  const sec5 = document.getElementById('sec5');
+  if (sec5) {
+    const eyebrow = sec5.querySelector('.s6-eyebrow');
+    const title   = sec5.querySelector('.s6-title');
+    const sub     = sec5.querySelector('.s6-sub');
+    const badges  = sec5.querySelectorAll('.s6-card-badge');
+    const ctas    = sec5.querySelectorAll('.s6-thumb-cta');
+    if (eyebrow) eyebrow.textContent = t('proc.eyebrow');
+    if (title)   title.textContent   = t('proc.title');
+    if (sub)     sub.textContent     = t('proc.sub');
+    badges.forEach(el => el.textContent = t('proc.badge'));
+    ctas.forEach(el => el.textContent   = t('proc.cta'));
   }
 
   // lang 버튼 활성화 표시
