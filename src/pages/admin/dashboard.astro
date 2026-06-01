@@ -112,6 +112,41 @@
       </div>
     </div>
 
+    <!-- 검색/필터 -->
+    <div style="display:flex;gap:10px;margin-bottom:16px;flex-wrap:wrap;">
+      <input id="searchInput" type="text" placeholder="🔍  제목 검색..." oninput="filterTable()"
+        style="flex:1;min-width:200px;padding:9px 14px;border:1.5px solid #e0e5f0;border-radius:8px;font-size:13px;outline:none;font-family:inherit;">
+      <select id="filterService" onchange="filterTable()"
+        style="padding:9px 14px;border:1.5px solid #e0e5f0;border-radius:8px;font-size:13px;outline:none;font-family:inherit;background:#fff;color:#333;">
+        <option value="">전체 분야</option>
+        <option value="방송제작 스튜디오">방송제작 스튜디오</option>
+        <option value="이러닝 스튜디오">이러닝 스튜디오</option>
+        <option value="LED 디스플레이">LED 디스플레이</option>
+        <option value="스마트 강의실">스마트 강의실</option>
+        <option value="아카이브 시스템">아카이브 시스템</option>
+        <option value="방송 인프라">방송 인프라</option>
+        <option value="전시체험">전시체험</option>
+        <option value="화상회의">화상회의</option>
+        <option value="유튜브 스튜디오">유튜브 스튜디오</option>
+        <option value="미디어박스">미디어박스</option>
+        <option value="레코딩 스튜디오">레코딩 스튜디오</option>
+        <option value="스마트 솔루션">스마트 솔루션</option>
+      </select>
+      <select id="filterClient" onchange="filterTable()"
+        style="padding:9px 14px;border:1.5px solid #e0e5f0;border-radius:8px;font-size:13px;outline:none;font-family:inherit;background:#fff;color:#333;">
+        <option value="">전체 고객</option>
+        <option value="공공기관">공공기관</option>
+        <option value="교육기관">교육기관</option>
+        <option value="기업">기업</option>
+        <option value="종교">종교</option>
+      </select>
+      <button onclick="resetFilter()"
+        style="padding:9px 14px;border:1.5px solid #e0e5f0;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;font-family:inherit;background:#fff;color:#888;">
+        초기화
+      </button>
+      <span id="filterCount" style="display:flex;align-items:center;font-size:13px;color:#888;white-space:nowrap;"></span>
+    </div>
+
     <div class="table-wrap">
       <table>
         <thead>
@@ -223,14 +258,15 @@
       }
     }
 
-    function renderTable() {
+    function renderTable(list) {
+      const data = list || projects;
       document.getElementById('totalCount').textContent = projects.length;
       const tbody = document.getElementById('tbody');
-      if (projects.length === 0) {
-        tbody.innerHTML = '<tr><td colspan="6" class="empty">프로젝트가 없습니다. 추가해보세요!</td></tr>';
+      if (data.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="6" class="empty">검색 결과가 없습니다.</td></tr>';
         return;
       }
-      tbody.innerHTML = projects.map(p => `
+      tbody.innerHTML = data.map(p => `
         <tr>
           <td>${p.images && p.images[0]
             ? `<img src="${p.images[0]}" alt="" style="width:80px;height:58px;object-fit:cover;border-radius:6px;display:block;">`
@@ -248,6 +284,29 @@
           </td>
         </tr>
       `).join('');
+    }
+
+    window.filterTable = function() {
+      const q       = document.getElementById('searchInput').value.trim().toLowerCase();
+      const service = document.getElementById('filterService').value;
+      const client  = document.getElementById('filterClient').value;
+      const filtered = projects.filter(p => {
+        const matchQ = !q || (p.title || '').toLowerCase().includes(q) || (p.overview || '').toLowerCase().includes(q);
+        const matchS = !service || p.service === service;
+        const matchC = !client  || p.client  === client;
+        return matchQ && matchS && matchC;
+      });
+      const countEl = document.getElementById('filterCount');
+      countEl.textContent = (q || service || client) ? `${filtered.length}개 결과` : '';
+      renderTable(filtered);
+    }
+
+    window.resetFilter = function() {
+      document.getElementById('searchInput').value = '';
+      document.getElementById('filterService').value = '';
+      document.getElementById('filterClient').value = '';
+      document.getElementById('filterCount').textContent = '';
+      renderTable();
     }
 
     window.openModal = function(id) {
