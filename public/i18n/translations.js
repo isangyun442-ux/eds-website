@@ -367,28 +367,14 @@ function applyLang(lang) {
     el.innerHTML = t(key);
   });
 
-  // ── About 섹션 직접 교체 ──
-  const sec2 = document.getElementById('sec2');
-  if (sec2) {
-    const labels  = sec2.querySelectorAll('.ab-label');
-    const titles  = sec2.querySelectorAll('.ab-title');
-    const bodies  = sec2.querySelectorAll('.ab-body');
-    const sig     = sec2.querySelector('.ab-sig');
-
-    if (lang === 'ko') {
-      // KO는 원본 HTML 복원
-      if (labels[0])  labels[0].textContent  = 'ABOUT US';
-      if (titles[0])  titles[0].innerHTML    = '"1만 시간의<br>법칙"';
-      if (bodies[0])  bodies[0].innerHTML    = '어떤 분야에서 전문성을 갖기 위해 투자해야 하는 시간을 의미합니다. 1993년 앤더스 에릭슨이 연구한 내용을 바탕으로 베스트셀러 작가 말콤 글래드웰이 <em>《아웃라이어, 성공의 기회를 발견한 사람들, 2009》</em>에서 이 에릭슨의 주장을 간단하게 <strong>"1만 시간을 연습하면 전문가가 된다"</strong>는 이론으로 설명했습니다.';
-      if (bodies[1])  bodies[1].innerHTML    = '아웃라이어에서는 빌 게이츠와 비틀즈를 예로 제시했지만, 비단 그들만이 아니라 각자의 분야에서 명성을 떨치는 사람들은 대부분 이 법칙에 따라 자신의 능력을 증진시키고 한계를 극복하며 스스로 발전시키고 있는 것입니다.';
-      if (labels[1])  labels[1].textContent  = 'PROFESSIONAL GROUP';
-      if (titles[1])  titles[1].innerHTML    = '전문가 집단<br><em class="ab-em">이담에스티</em>';
-      if (bodies[2])  bodies[2].innerHTML    = '이담에스티는 방송기술, 컴퓨터그래픽, 오디오, IT 분야의 <strong>20년 이상의 외길</strong>을 다져온 전문가들로 구성된 회사입니다. 미디어 기술은 컴퓨터와 IT분야의 빠른 성장을 바탕으로 HDTV, 3DTV, AR/VR을 거쳐 Metaverse와 홀로그램으로 빠르게 변화하고 있습니다.';
-      if (bodies[3])  bodies[3].innerHTML    = '우리 회사는 <strong>모두 엔지니어로 구성</strong>되어 있으며 매월 자체 사내 세미나 개최와 기술습득에 필요한 요소들을 지원함으로써 트렌드에 뒤쳐지지 않습니다.';
-      if (bodies[4])  bodies[4].innerHTML    = '이러한 준비된 기술 서비스를 바탕으로 중앙정부, 지자체, 공기업을 포함한 <strong>91개 관공서·공공기관</strong>, <strong>115개 교육기관</strong>, 방송국, 종교단체, 병원, 기업 등 <strong>516개</strong> 수많은 국내고객과 해외의 미디어 시스템 고객은 상호 소개와 재구매를 통하여 이담에스티의 서비스를 검증받았습니다.';
-      if (bodies[5])  bodies[5].innerHTML    = '이담에스티는 다양한 미디어 시스템 구축 노하우와 끊임없는 사내 연구와 대외 기술 습득 활동을 통해 트렌디한 구축 서비스를 제공하겠습니다.';
-      if (sig)        sig.textContent        = '임직원 일동';
-    } else {
+  // ── About 섹션 직접 교체 (KO는 원본 유지) ──
+  if (lang !== 'ko') {
+    const sec2 = document.getElementById('sec2');
+    if (sec2) {
+      const labels  = sec2.querySelectorAll('.ab-label');
+      const titles  = sec2.querySelectorAll('.ab-title');
+      const bodies  = sec2.querySelectorAll('.ab-body');
+      const sig     = sec2.querySelector('.ab-sig');
       if (labels[0])  labels[0].innerHTML  = t('about.eyebrow1');
       if (titles[0])  titles[0].innerHTML  = t('about.title1');
       if (bodies[0])  bodies[0].innerHTML  = t('about.body1');
@@ -400,6 +386,12 @@ function applyLang(lang) {
       if (bodies[4])  bodies[4].innerHTML  = t('about.body3');
       if (bodies[5])  bodies[5].innerHTML  = t('about.msg');
       if (sig)        sig.textContent      = t('about.sign');
+    }
+  } else {
+    // KO로 돌아올 때 페이지 새로고침으로 원본 복원
+    if (document.querySelector('.ab-body') &&
+        document.querySelector('.ab-body').textContent.length < 100) {
+      location.reload();
     }
   }
 
