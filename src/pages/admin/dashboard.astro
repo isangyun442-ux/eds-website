@@ -32,6 +32,8 @@
     .page-title{font-size:22px;font-weight:800;color:#0d1a3a;}
     .add-btn{background:#1a2f8a;color:#fff;border:none;padding:10px 20px;border-radius:8px;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit;display:flex;align-items:center;gap:6px;}
     .add-btn:hover{background:#0d1a3a;}
+    .migrate-btn{background:rgba(26,47,138,0.1);color:#1a2f8a;border:1.5px solid rgba(26,47,138,0.25);padding:10px 18px;border-radius:8px;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit;}
+    .migrate-btn:hover{background:rgba(26,47,138,0.18);}
 
     /* TABLE */
     .table-wrap{background:#fff;border-radius:12px;overflow:hidden;box-shadow:0 2px 12px rgba(0,0,0,0.06);}
@@ -107,6 +109,7 @@
       <div style="display:flex;gap:8px;">
         <a href="/admin/editor" style="background:#6366f1;color:#fff;border:none;padding:10px 20px;border-radius:8px;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit;display:flex;align-items:center;gap:6px;text-decoration:none;">🎨 디자인 에디터</a>
         <button class="add-btn" onclick="openModal()">＋ 프로젝트 추가</button>
+        <button class="migrate-btn" onclick="migrateProjects()" title="works.astro의 기존 170개 데이터를 KV로 가져옵니다">📥 기존 데이터 불러오기</button>
       </div>
     </div>
 
@@ -442,6 +445,31 @@
     });
 
     loadProjects();
+
+    async function migrateProjects(){
+      if(!confirm('works.astro의 기존 구축사례 데이터를 KV로 불러올까요?\n이미 있는 데이터는 중복 추가되지 않아요.')) return;
+      const btn = document.querySelector('.migrate-btn');
+      btn.textContent = '⏳ 불러오는 중...';
+      btn.disabled = true;
+      try{
+        const r = await fetch('/api/admin/migrate-projects', {
+          method: 'POST',
+          headers: { 'x-admin-token': tok }
+        });
+        const data = await r.json();
+        if(r.ok){
+          alert(`✅ 완료!\n총 ${data.total}개 (신규 ${data.added}개 추가)`);
+          loadProjects();
+        } else {
+          alert('오류: ' + (data.error || '알 수 없는 오류'));
+        }
+      } catch(e){
+        alert('오류: ' + e.message);
+      } finally {
+        btn.textContent = '📥 기존 데이터 불러오기';
+        btn.disabled = false;
+      }
+    }
   </script>
 </body>
 </html>
