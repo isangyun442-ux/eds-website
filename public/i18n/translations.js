@@ -337,7 +337,92 @@ const translations = {
   }
 };
 
-// 현재 언어 상태
+// 원본 HTML 저장소
+var _originals = {};
+
+function saveOriginals() {
+  var sec2 = document.getElementById('sec2');
+  if (sec2) {
+    var labels = sec2.querySelectorAll('.ab-label');
+    var titles = sec2.querySelectorAll('.ab-title');
+    var bodies = sec2.querySelectorAll('.ab-body');
+    var sig    = sec2.querySelector('.ab-sig');
+    _originals.ab = {
+      l0: labels[0] ? labels[0].innerHTML : '',
+      t0: titles[0] ? titles[0].innerHTML : '',
+      b0: bodies[0] ? bodies[0].innerHTML : '',
+      b1: bodies[1] ? bodies[1].innerHTML : '',
+      l1: labels[1] ? labels[1].innerHTML : '',
+      t1: titles[1] ? titles[1].innerHTML : '',
+      b2: bodies[2] ? bodies[2].innerHTML : '',
+      b3: bodies[3] ? bodies[3].innerHTML : '',
+      b4: bodies[4] ? bodies[4].innerHTML : '',
+      b5: bodies[5] ? bodies[5].innerHTML : '',
+      sig: sig ? sig.innerHTML : '',
+    };
+  }
+  var secStr = document.getElementById('sec-strength');
+  if (secStr) {
+    _originals.str = {
+      sub: secStr.querySelector('.ab-str-sub') ? secStr.querySelector('.ab-str-sub').innerHTML : '',
+      headline: secStr.querySelector('.ab-str-headline') ? secStr.querySelector('.ab-str-headline').innerHTML : '',
+      titles: Array.from(secStr.querySelectorAll('.ab-str-title')).map(function(el){ return el.innerHTML; }),
+      descs:  Array.from(secStr.querySelectorAll('.ab-str-desc')).map(function(el){ return el.innerHTML; }),
+    };
+  }
+  var sec5 = document.getElementById('sec5');
+  if (sec5) {
+    _originals.proc = {
+      eyebrow: sec5.querySelector('.s6-eyebrow') ? sec5.querySelector('.s6-eyebrow').innerHTML : '',
+      title:   sec5.querySelector('.s6-title')   ? sec5.querySelector('.s6-title').innerHTML   : '',
+      sub:     sec5.querySelector('.s6-sub')     ? sec5.querySelector('.s6-sub').innerHTML     : '',
+    };
+  }
+}
+
+function restoreOriginals() {
+  var sec2 = document.getElementById('sec2');
+  if (sec2 && _originals.ab) {
+    var o = _originals.ab;
+    var labels = sec2.querySelectorAll('.ab-label');
+    var titles = sec2.querySelectorAll('.ab-title');
+    var bodies = sec2.querySelectorAll('.ab-body');
+    var sig    = sec2.querySelector('.ab-sig');
+    if (labels[0]) labels[0].innerHTML = o.l0;
+    if (titles[0]) titles[0].innerHTML = o.t0;
+    if (bodies[0]) bodies[0].innerHTML = o.b0;
+    if (bodies[1]) bodies[1].innerHTML = o.b1;
+    if (labels[1]) labels[1].innerHTML = o.l1;
+    if (titles[1]) titles[1].innerHTML = o.t1;
+    if (bodies[2]) bodies[2].innerHTML = o.b2;
+    if (bodies[3]) bodies[3].innerHTML = o.b3;
+    if (bodies[4]) bodies[4].innerHTML = o.b4;
+    if (bodies[5]) bodies[5].innerHTML = o.b5;
+    if (sig)       sig.innerHTML       = o.sig;
+  }
+  var secStr = document.getElementById('sec-strength');
+  if (secStr && _originals.str) {
+    var s = _originals.str;
+    var sub      = secStr.querySelector('.ab-str-sub');
+    var headline = secStr.querySelector('.ab-str-headline');
+    var titles   = secStr.querySelectorAll('.ab-str-title');
+    var descs    = secStr.querySelectorAll('.ab-str-desc');
+    if (sub)      sub.innerHTML      = s.sub;
+    if (headline) headline.innerHTML = s.headline;
+    s.titles.forEach(function(html, i){ if(titles[i]) titles[i].innerHTML = html; });
+    s.descs.forEach(function(html, i){ if(descs[i])  descs[i].innerHTML  = html; });
+  }
+  var sec5 = document.getElementById('sec5');
+  if (sec5 && _originals.proc) {
+    var p = _originals.proc;
+    var eyebrow = sec5.querySelector('.s6-eyebrow');
+    var title   = sec5.querySelector('.s6-title');
+    var sub     = sec5.querySelector('.s6-sub');
+    if (eyebrow) eyebrow.innerHTML = p.eyebrow;
+    if (title)   title.innerHTML   = p.title;
+    if (sub)     sub.innerHTML     = p.sub;
+  }
+}
 let currentLang = localStorage.getItem('eds-lang') || 'ko';
 
 // 번역 텍스트 반환
@@ -367,14 +452,16 @@ function applyLang(lang) {
     el.innerHTML = t(key);
   });
 
-  // ── About 섹션 직접 교체 (KO는 원본 유지) ──
-  if (lang !== 'ko') {
-    const sec2 = document.getElementById('sec2');
+  // ── About 섹션 직접 교체 (KO는 원본 복원) ──
+  if (lang === 'ko') {
+    restoreOriginals();
+  } else {
+    var sec2 = document.getElementById('sec2');
     if (sec2) {
-      const labels  = sec2.querySelectorAll('.ab-label');
-      const titles  = sec2.querySelectorAll('.ab-title');
-      const bodies  = sec2.querySelectorAll('.ab-body');
-      const sig     = sec2.querySelector('.ab-sig');
+      var labels  = sec2.querySelectorAll('.ab-label');
+      var titles  = sec2.querySelectorAll('.ab-title');
+      var bodies  = sec2.querySelectorAll('.ab-body');
+      var sig     = sec2.querySelector('.ab-sig');
       if (labels[0])  labels[0].innerHTML  = t('about.eyebrow1');
       if (titles[0])  titles[0].innerHTML  = t('about.title1');
       if (bodies[0])  bodies[0].innerHTML  = t('about.body1');
@@ -386,12 +473,6 @@ function applyLang(lang) {
       if (bodies[4])  bodies[4].innerHTML  = t('about.body3');
       if (bodies[5])  bodies[5].innerHTML  = t('about.msg');
       if (sig)        sig.textContent      = t('about.sign');
-    }
-  } else {
-    // KO로 돌아올 때 페이지 새로고침으로 원본 복원
-    if (document.querySelector('.ab-body') &&
-        document.querySelector('.ab-body').textContent.length < 100) {
-      location.reload();
     }
   }
 
@@ -445,37 +526,41 @@ function applyLang(lang) {
   }
 
   // ── SecStrength 직접 교체 ──
-  const secStr = document.getElementById('sec-strength');
-  if (secStr) {
-    const sub      = secStr.querySelector('.ab-str-sub');
-    const headline = secStr.querySelector('.ab-str-headline');
-    const titles   = secStr.querySelectorAll('.ab-str-title');
-    const descs    = secStr.querySelectorAll('.ab-str-desc');
-    if (sub)      sub.textContent      = t('str.sub');
-    if (headline) headline.innerHTML   = t('str.headline');
-    if (titles[0]) titles[0].textContent = t('str.card1.title');
-    if (descs[0])  descs[0].textContent  = t('str.card1.desc');
-    if (titles[1]) titles[1].textContent = t('str.card2.title');
-    if (descs[1])  descs[1].textContent  = t('str.card2.desc');
-    if (titles[2]) titles[2].textContent = t('str.card3.title');
-    if (descs[2])  descs[2].textContent  = t('str.card3.desc');
-    if (titles[3]) titles[3].textContent = t('str.card4.title');
-    if (descs[3])  descs[3].textContent  = t('str.card4.desc');
+  if (lang !== 'ko') {
+    var secStr = document.getElementById('sec-strength');
+    if (secStr) {
+      var sub      = secStr.querySelector('.ab-str-sub');
+      var headline = secStr.querySelector('.ab-str-headline');
+      var strTitles = secStr.querySelectorAll('.ab-str-title');
+      var descs    = secStr.querySelectorAll('.ab-str-desc');
+      if (sub)      sub.textContent      = t('str.sub');
+      if (headline) headline.innerHTML   = t('str.headline');
+      if (strTitles[0]) strTitles[0].textContent = t('str.card1.title');
+      if (descs[0])     descs[0].textContent     = t('str.card1.desc');
+      if (strTitles[1]) strTitles[1].textContent = t('str.card2.title');
+      if (descs[1])     descs[1].textContent     = t('str.card2.desc');
+      if (strTitles[2]) strTitles[2].textContent = t('str.card3.title');
+      if (descs[2])     descs[2].textContent     = t('str.card3.desc');
+      if (strTitles[3]) strTitles[3].textContent = t('str.card4.title');
+      if (descs[3])     descs[3].textContent     = t('str.card4.desc');
+    }
   }
 
   // ── SecClients(조달청) 직접 교체 ──
-  const sec5 = document.getElementById('sec5');
-  if (sec5) {
-    const eyebrow = sec5.querySelector('.s6-eyebrow');
-    const title   = sec5.querySelector('.s6-title');
-    const sub     = sec5.querySelector('.s6-sub');
-    const badges  = sec5.querySelectorAll('.s6-card-badge');
-    const ctas    = sec5.querySelectorAll('.s6-thumb-cta');
-    if (eyebrow) eyebrow.textContent = t('proc.eyebrow');
-    if (title)   title.textContent   = t('proc.title');
-    if (sub)     sub.textContent     = t('proc.sub');
-    badges.forEach(el => el.textContent = t('proc.badge'));
-    ctas.forEach(el => el.textContent   = t('proc.cta'));
+  if (lang !== 'ko') {
+    var sec5 = document.getElementById('sec5');
+    if (sec5) {
+      var eyebrow = sec5.querySelector('.s6-eyebrow');
+      var title   = sec5.querySelector('.s6-title');
+      var sub     = sec5.querySelector('.s6-sub');
+      var badges  = sec5.querySelectorAll('.s6-card-badge');
+      var ctas    = sec5.querySelectorAll('.s6-thumb-cta');
+      if (eyebrow) eyebrow.textContent = t('proc.eyebrow');
+      if (title)   title.textContent   = t('proc.title');
+      if (sub)     sub.textContent     = t('proc.sub');
+      badges.forEach(function(el){ el.textContent = t('proc.badge'); });
+      ctas.forEach(function(el){   el.textContent = t('proc.cta');   });
+    }
   }
 
   // lang 버튼 활성화 표시
@@ -489,7 +574,8 @@ function applyLang(lang) {
 }
 
 // 초기 적용
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', function() {
+  saveOriginals();
   applyLang(currentLang);
 });
 
