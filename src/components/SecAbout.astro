@@ -238,6 +238,10 @@
         var rc=sec.querySelector('.ab-right-content');
         if(rc) rc.innerHTML=cleanHtml(t.rightContent);
       }
+
+      // KV 로드 완료 후 원본 저장 (다국어 복원용)
+      if(window.saveOriginals) window.saveOriginals();
+
     }).catch(function(){});
 })();
 </script>

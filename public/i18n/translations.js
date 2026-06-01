@@ -575,7 +575,6 @@ function applyLang(lang) {
 
 // 초기 적용
 document.addEventListener('DOMContentLoaded', function() {
-  saveOriginals();
   applyLang(currentLang);
 });
 
