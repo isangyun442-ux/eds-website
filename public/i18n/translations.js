@@ -433,8 +433,8 @@ function applyLang(lang) {
     el.innerHTML = t(key);
   });
 
-  // lang 버튼 활성화 표시
-  document.querySelectorAll('.lang-btn').forEach(btn => {
+  // lang 버튼 활성화 표시 (NAV + 모바일 ab-lang-btn)
+  document.querySelectorAll('.lang-btn, .ab-lang-btn').forEach(btn => {
     btn.classList.toggle('active', btn.dataset.lang === lang);
   });
 
