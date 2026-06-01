@@ -60,12 +60,39 @@ const translations = {
     'str.card4.title': '검증된 퀄리티',
     'str.card4.desc':  '516개 이상의 구축 사례가 증명합니다. 공공기관부터 방송국까지 신뢰받는 기술력입니다.',
 
-    // PROCUREMENT (조달청)
+    // PROCUREMENT 제품
     'proc.eyebrow':    'Procurement',
     'proc.title':      '조달청 등록제품',
     'proc.sub':        '이담에스티의 제품은 조달청에 공식 등록되어 공공기관 납품이 가능합니다',
     'proc.cta':        '자세히 보기 →',
     'proc.badge':      '등록완료',
+    'proc.p1.title':   '미디어박스',
+    'proc.p1.desc':    'HDTV 동시녹화 녹화영상 키워드 검색 및 편집 시스템',
+    'proc.p1.t1': '방송 모니터링', 'proc.p1.t2': '실시간 분석', 'proc.p1.t3': '특허 보유',
+    'proc.p2.title':   '컴퓨터 서버',
+    'proc.p2.desc':    '방송·미디어 환경에 최적화된 고성능 서버. 안정적인 24/7 운용을 보장합니다.',
+    'proc.p2.t1': '고성능', 'proc.p2.t2': '24/7 운용', 'proc.p2.t3': '직접생산',
+    'proc.p3.title':   '디스크 어레이',
+    'proc.p3.desc':    '대용량 미디어 스토리지 솔루션. SAN·NAS 기반의 고속 데이터 접근을 제공합니다.',
+    'proc.p3.t1': 'SAN·NAS', 'proc.p3.t2': '대용량', 'proc.p3.t3': '고속 접근',
+    'proc.p4.title':   'LED 전광판',
+    'proc.p4.desc':    '실내외 대형 LED 디스플레이. P1.5 초고해상도부터 대형 전광판까지 맞춤 설계합니다.',
+    'proc.p4.t1': 'P1.5 고해상도', 'proc.p4.t2': '실내외', 'proc.p4.t3': '맞춤 설계',
+    'proc.note':       '이담에스티의 모든 등록제품은 조달청 나라장터를 통해 공공기관 직접 구매가 가능합니다. 자세한 사항은 문의하기를 통해 확인하세요.',
+
+    // CONTACT (sec7)
+    'ct.title':        'Contact Us',
+    'ct.sub':          '제품 문의 · 기술문의',
+    'ct.label.addr':   '주소',
+    'ct.label.phone':  '전화',
+    'ct.label.email':  '이메일',
+    'ct.label.hours':  '운영시간',
+    'ct.val.addr':     '서울시 구로구 디지털로31길 19, 406호<br>(구로동, 에이스테크노타워2차)',
+    'ct.val.hours':    '평일 09:00 – 18:00',
+    'ct.btn':          '문의하기',
+
+    // HISTORY 월 표기
+    'hist.month':      '월',
     'svc.1.desc':      '4K UHD 촬영부터 실시간 스트리밍까지',
     'svc.2.title':     '이러닝 스튜디오',
     'svc.2.desc':      '자동 추적 카메라와 크로마키 환경',
@@ -190,6 +217,30 @@ const translations = {
     'proc.sub':        'EDAMST products are officially registered with the Public Procurement Service for direct government purchases.',
     'proc.cta':        'Learn More →',
     'proc.badge':      'Registered',
+    'proc.p1.title':   'Mediabox',
+    'proc.p1.desc':    'HDTV simultaneous recording with keyword search and editing system.',
+    'proc.p1.t1': 'Broadcast Monitoring', 'proc.p1.t2': 'Real-time Analysis', 'proc.p1.t3': 'Patented',
+    'proc.p2.title':   'Computer Server',
+    'proc.p2.desc':    'High-performance server optimized for broadcast and media environments. Guaranteed stable 24/7 operation.',
+    'proc.p2.t1': 'High Performance', 'proc.p2.t2': '24/7 Operation', 'proc.p2.t3': 'Direct Production',
+    'proc.p3.title':   'Disk Array',
+    'proc.p3.desc':    'Large-capacity media storage solution. Provides high-speed data access based on SAN/NAS.',
+    'proc.p3.t1': 'SAN·NAS', 'proc.p3.t2': 'Large Capacity', 'proc.p3.t3': 'High-Speed Access',
+    'proc.p4.title':   'LED Display',
+    'proc.p4.desc':    'Indoor/outdoor large LED display. Custom design from P1.5 ultra-high resolution to large signage.',
+    'proc.p4.t1': 'P1.5 Resolution', 'proc.p4.t2': 'Indoor/Outdoor', 'proc.p4.t3': 'Custom Design',
+    'proc.note':       'All registered products from EDAMST are available for direct purchase by public institutions through the KONEPS marketplace. Contact us for more details.',
+
+    'ct.title':        'Contact Us',
+    'ct.sub':          'Product & Technical Inquiries',
+    'ct.label.addr':   'Address',
+    'ct.label.phone':  'Phone',
+    'ct.label.email':  'Email',
+    'ct.label.hours':  'Hours',
+    'ct.val.addr':     '406, 19, Digital-ro 31-gil, Guro-gu, Seoul<br>(Ace Techno Tower 2)',
+    'ct.val.hours':    'Weekdays 09:00 – 18:00',
+    'ct.btn':          'Contact Us',
+    'hist.month':      '',
 
     'ct.form.title':   'Inquiry',
     'ct.form.sub':     'We\'ll get back to you as soon as possible',
@@ -260,6 +311,30 @@ const translations = {
     'proc.sub':        'EDAMST的产品已在采购厅正式登记，可直接向公共机构供货。',
     'proc.cta':        '查看详情 →',
     'proc.badge':      '已登记',
+    'proc.p1.title':   '媒体盒',
+    'proc.p1.desc':    'HDTV同步录制、录像关键词搜索及编辑系统。',
+    'proc.p1.t1': '广播监控', 'proc.p1.t2': '实时分析', 'proc.p1.t3': '专利持有',
+    'proc.p2.title':   '计算机服务器',
+    'proc.p2.desc':    '针对广播和媒体环境优化的高性能服务器。保障稳定的24/7运行。',
+    'proc.p2.t1': '高性能', 'proc.p2.t2': '24/7运行', 'proc.p2.t3': '直接生产',
+    'proc.p3.title':   '磁盘阵列',
+    'proc.p3.desc':    '大容量媒体存储解决方案。基于SAN/NAS提供高速数据访问。',
+    'proc.p3.t1': 'SAN·NAS', 'proc.p3.t2': '大容量', 'proc.p3.t3': '高速访问',
+    'proc.p4.title':   'LED显示屏',
+    'proc.p4.desc':    '室内外大型LED显示屏。从P1.5超高分辨率到大型广告牌均可定制设计。',
+    'proc.p4.t1': 'P1.5高清', 'proc.p4.t2': '室内外', 'proc.p4.t3': '定制设计',
+    'proc.note':       'EDAMST所有登记产品均可通过采购厅网络商城直接向公共机构采购。详情请通过联系我们咨询。',
+
+    'ct.title':        'Contact Us',
+    'ct.sub':          '产品咨询 · 技术咨询',
+    'ct.label.addr':   '地址',
+    'ct.label.phone':  '电话',
+    'ct.label.email':  '邮箱',
+    'ct.label.hours':  '营业时间',
+    'ct.val.addr':     '首尔市九老区数字路31街19号406室<br>(Ace Techno Tower 2)',
+    'ct.val.hours':    '工作日 09:00 – 18:00',
+    'ct.btn':          '联系我们',
+    'hist.month':      '月',
 
     'ct.form.title':   '发送咨询',
     'ct.form.sub':     '我们将尽快与您联系',
@@ -330,6 +405,30 @@ const translations = {
     'proc.sub':        'EDAMSTの製品は調達庁に公式登録され、公共機関への直接納品が可能です。',
     'proc.cta':        '詳細を見る →',
     'proc.badge':      '登録済み',
+    'proc.p1.title':   'メディアボックス',
+    'proc.p1.desc':    'HDTV同時録画・録画映像キーワード検索および編集システム。',
+    'proc.p1.t1': '放送モニタリング', 'proc.p1.t2': 'リアルタイム分析', 'proc.p1.t3': '特許保有',
+    'proc.p2.title':   'コンピュータサーバー',
+    'proc.p2.desc':    '放送・メディア環境に最適化された高性能サーバー。安定した24/7運用を保証します。',
+    'proc.p2.t1': '高性能', 'proc.p2.t2': '24/7稼働', 'proc.p2.t3': '自社生産',
+    'proc.p3.title':   'ディスクアレイ',
+    'proc.p3.desc':    '大容量メディアストレージソリューション。SAN/NASベースの高速データアクセスを提供します。',
+    'proc.p3.t1': 'SAN·NAS', 'proc.p3.t2': '大容量', 'proc.p3.t3': '高速アクセス',
+    'proc.p4.title':   'LED電光掲示板',
+    'proc.p4.desc':    '屋内外大型LEDディスプレイ。P1.5超高解像度から大型サイネージまでカスタム設計します。',
+    'proc.p4.t1': 'P1.5高解像度', 'proc.p4.t2': '屋内外', 'proc.p4.t3': 'カスタム設計',
+    'proc.note':       'EDAMSTのすべての登録製品は調達庁電子調達システムを通じて公共機関への直接購入が可能です。詳細はお問い合わせください。',
+
+    'ct.title':        'お問い合わせ',
+    'ct.sub':          '製品・技術お問い合わせ',
+    'ct.label.addr':   '住所',
+    'ct.label.phone':  '電話',
+    'ct.label.email':  'メール',
+    'ct.label.hours':  '営業時間',
+    'ct.val.addr':     'ソウル市九老区デジタル路31街19番406号<br>(Ace Techno Tower 2)',
+    'ct.val.hours':    '平日 09:00 – 18:00',
+    'ct.btn':          'お問い合わせ',
+    'hist.month':      '月',
 
     'ct.form.title':   'お問い合わせ',
     'ct.form.sub':     'できる限り早くご連絡いたします',
@@ -560,7 +659,66 @@ function applyLang(lang) {
       if (sub)     sub.textContent     = t('proc.sub');
       badges.forEach(function(el){ el.textContent = t('proc.badge'); });
       ctas.forEach(function(el){   el.textContent = t('proc.cta');   });
+
+      // 제품 카드 상세
+      var cards = sec5.querySelectorAll('.s6-card');
+      var prods = ['p1','p2','p3','p4'];
+      cards.forEach(function(card, i) {
+        var p = prods[i]; if (!p) return;
+        var cardTitle = card.querySelector('.s6-card-title');
+        var cardDesc  = card.querySelector('.s6-card-desc');
+        var tags      = card.querySelectorAll('.s6-tag');
+        if (cardTitle) cardTitle.textContent = t('proc.'+p+'.title');
+        if (cardDesc)  cardDesc.textContent  = t('proc.'+p+'.desc');
+        if (tags[0])   tags[0].textContent   = t('proc.'+p+'.t1');
+        if (tags[1])   tags[1].textContent   = t('proc.'+p+'.t2');
+        if (tags[2])   tags[2].textContent   = t('proc.'+p+'.t3');
+      });
+
+      // 하단 안내문
+      var note = sec5.querySelector('.s6-note p');
+      if (note) note.textContent = t('proc.note');
     }
+  }
+
+  // ── Contact (sec7) 직접 교체 ──
+  var sec7 = document.getElementById('sec7');
+  if (sec7) {
+    var ctTitle  = sec7.querySelector('.ct-title');
+    var ctSub    = sec7.querySelector('.ct-sub');
+    var ctLabels = sec7.querySelectorAll('.ct-info-label');
+    var ctValues = sec7.querySelectorAll('.ct-info-value');
+    var ctBtn    = sec7.querySelector('.ct-btn');
+    if (lang === 'ko') {
+      if (ctTitle)     ctTitle.textContent     = '이담에스티';
+      if (ctSub)       ctSub.textContent       = '제품 문의 · 기술문의';
+      if (ctLabels[0]) ctLabels[0].textContent = '주소';
+      if (ctLabels[1]) ctLabels[1].textContent = '전화';
+      if (ctLabels[2]) ctLabels[2].textContent = '이메일';
+      if (ctLabels[3]) ctLabels[3].textContent = '운영시간';
+      if (ctValues[0]) ctValues[0].innerHTML   = '서울시 구로구 디지털로31길 19, 406호<br>(구로동, 에이스테크노타워2차)';
+      if (ctValues[3]) ctValues[3].textContent = '평일 09:00 – 18:00';
+      if (ctBtn)       ctBtn.childNodes[ctBtn.childNodes.length-1].textContent = ' 문의하기';
+    } else {
+      if (ctTitle)     ctTitle.textContent     = t('ct.title');
+      if (ctSub)       ctSub.textContent       = t('ct.sub');
+      if (ctLabels[0]) ctLabels[0].textContent = t('ct.label.addr');
+      if (ctLabels[1]) ctLabels[1].textContent = t('ct.label.phone');
+      if (ctLabels[2]) ctLabels[2].textContent = t('ct.label.email');
+      if (ctLabels[3]) ctLabels[3].textContent = t('ct.label.hours');
+      if (ctValues[0]) ctValues[0].innerHTML   = t('ct.val.addr');
+      if (ctValues[3]) ctValues[3].textContent = t('ct.val.hours');
+      if (ctBtn)       ctBtn.childNodes[ctBtn.childNodes.length-1].textContent = ' ' + t('ct.btn');
+    }
+  }
+
+  // ── History 월 표기 교체 (한자 표기용) ──
+  if (sec6 && lang !== 'ko') {
+    sec6.querySelectorAll('.tl-month').forEach(function(el) {
+      if (lang === 'zh' || lang === 'ja') {
+        el.textContent = el.textContent.replace('월', t('hist.month'));
+      }
+    });
   }
 
   // lang 버튼 활성화 표시
