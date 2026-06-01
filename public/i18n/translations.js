@@ -298,7 +298,6 @@ function applyLang(lang) {
     if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
       el.placeholder = text;
     } else {
-      // 줄바꿈 처리
       el.innerHTML = text.replace(/\n/g, '<br>');
     }
   });
@@ -308,8 +307,79 @@ function applyLang(lang) {
     el.innerHTML = t(key);
   });
 
+  // ── About 섹션 직접 교체 ──
+  const sec2 = document.getElementById('sec2');
+  if (sec2) {
+    const labels  = sec2.querySelectorAll('.ab-label');
+    const titles  = sec2.querySelectorAll('.ab-title');
+    const bodies  = sec2.querySelectorAll('.ab-body');
+    const sig     = sec2.querySelector('.ab-sig');
+
+    if (labels[0])  labels[0].innerHTML  = t('about.eyebrow1');
+    if (titles[0])  titles[0].innerHTML  = t('about.title1');
+    if (bodies[0])  bodies[0].innerHTML  = t('about.body1');
+    if (bodies[1])  bodies[1].innerHTML  = t('about.body1b');
+
+    if (labels[1])  labels[1].innerHTML  = t('about.eyebrow2');
+    if (titles[1])  titles[1].innerHTML  = t('about.title2');
+    if (bodies[2])  bodies[2].innerHTML  = t('about.body2a');
+    if (bodies[3])  bodies[3].innerHTML  = t('about.body2b');
+    if (bodies[4])  bodies[4].innerHTML  = t('about.body3');
+    if (bodies[5])  bodies[5].innerHTML  = t('about.msg');
+    if (sig)        sig.textContent      = t('about.sign');
+  }
+
+  // ── SecServices 헤더 직접 교체 ──
+  const sec3 = document.getElementById('sec3');
+  if (sec3) {
+    const eyebrow  = sec3.querySelector('.svc-eyebrow');
+    const subtitle = sec3.querySelector('.svc-subtitle');
+    if (eyebrow)  eyebrow.textContent  = t('svc.eyebrow');
+    if (subtitle) subtitle.textContent = t('svc.subtitle');
+  }
+
+  // ── SecCert 직접 교체 ──
+  const secCert = document.getElementById('sec-cert');
+  if (secCert) {
+    const label    = secCert.querySelector('.cert-label');
+    const titleSpan = secCert.querySelector('.cert-title span');
+    const sub      = secCert.querySelector('.cert-sub');
+    if (label)     label.textContent     = t('cert.eyebrow');
+    if (titleSpan) titleSpan.textContent = t('cert.title');
+    if (sub)       sub.textContent       = t('cert.sub');
+  }
+
+  // ── SecHistory 직접 교체 ──
+  const sec6 = document.getElementById('sec6');
+  if (sec6) {
+    const eyebrow = sec6.querySelector('.h-eyebrow');
+    const title   = sec6.querySelector('.h-title');
+    const sub     = sec6.querySelector('.h-sub');
+    if (eyebrow) eyebrow.textContent = t('hist.eyebrow');
+    if (title)   title.textContent   = t('hist.title');
+    if (sub)     sub.textContent     = t('hist.sub');
+  }
+
+  // ── SecPortfolio 직접 교체 ──
+  const sec4 = document.getElementById('sec4');
+  if (sec4) {
+    const eyebrow = sec4.querySelector('.port-eyebrow');
+    const more    = sec4.querySelector('.port-all');
+    if (eyebrow) eyebrow.textContent = t('port.eyebrow');
+    if (more)    more.textContent    = t('port.more');
+  }
+
+  // ── SecContact 직접 교체 ──
+  const modal = document.getElementById('inquiryModal');
+  if (modal) {
+    const title = modal.querySelector('.iq-title');
+    const sub   = modal.querySelector('.iq-sub');
+    if (title) title.textContent = t('ct.form.title');
+    if (sub)   sub.textContent   = t('ct.form.sub');
+  }
+
   // lang 버튼 활성화 표시
-  document.querySelectorAll('.lang-btn').forEach(btn => {
+  document.querySelectorAll('.lang-btn, .ab-lang-btn').forEach(btn => {
     btn.classList.toggle('active', btn.dataset.lang === lang);
   });
 
