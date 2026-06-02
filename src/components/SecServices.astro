@@ -286,8 +286,10 @@
   const targets = document.querySelectorAll('#sec3 .fade-up');
   const obs = new IntersectionObserver(function (entries) {
     entries.forEach(function (e) {
-      if (e.isIntersecting) { e.target.classList.add('visible'); }
-      else { e.target.classList.remove('visible'); }
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        obs.unobserve(e.target);
+      }
     });
   }, { threshold: 0.08 });
   targets.forEach(function (el) { obs.observe(el); });

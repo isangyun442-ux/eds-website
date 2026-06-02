@@ -108,7 +108,7 @@
   .cert-desc { font-size:9px; color:#9aa4b8; margin:0; }
 
   /* fade-up */
-  .fade-up { opacity:0; transform:translateY(28px); transition:opacity 0.7s cubic-bezier(0.16,1,0.3,1), transform 0.7s cubic-bezier(0.16,1,0.3,1); transition-delay:0.15s; }
+  .fade-up { opacity:0; transform:translateY(28px); transition:opacity 0.7s cubic-bezier(0.16,1,0.3,1), transform 0.7s cubic-bezier(0.16,1,0.3,1); transition-delay:0.15s; will-change:transform,opacity; }
   .fade-up.visible { opacity:1; transform:translateY(0); }
   .fade-up-d1 { transition-delay:0.25s; }
   .fade-up-d2 { transition-delay:0.35s; }
@@ -124,8 +124,10 @@
   const targets = document.querySelectorAll('#sec-cert .fade-up');
   const obs = new IntersectionObserver(function (entries) {
     entries.forEach(function (e) {
-      if (e.isIntersecting) { e.target.classList.add('visible'); }
-      else { e.target.classList.remove('visible'); }
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        obs.unobserve(e.target); // 한 번 실행 후 감시 해제 → 스크롤 끊김 방지
+      }
     });
   }, { threshold: 0.08 });
   targets.forEach(function (el) { obs.observe(el); });

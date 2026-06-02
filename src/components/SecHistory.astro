@@ -115,20 +115,8 @@ const history = [
         var t=data.texts;
         var sec6=document.getElementById('sec6');
         if(sec6){
-          if(t.histTitle){
-            var ht=sec6.querySelector('.h-title');
-            if(ht){
-              ht.textContent=t.histTitle;
-              if(window.__setKoTranslation) window.__setKoTranslation('hist.title', t.histTitle);
-            }
-          }
-          if(t.histSub){
-            var hs=sec6.querySelector('.h-sub');
-            if(hs){
-              hs.textContent=t.histSub;
-              if(window.__setKoTranslation) window.__setKoTranslation('hist.sub', t.histSub);
-            }
-          }
+          if(t.histTitle){var ht=sec6.querySelector('.h-title');if(ht)ht.textContent=t.histTitle;}
+          if(t.histSub){var hs=sec6.querySelector('.h-sub');if(hs)hs.textContent=t.histSub;}
         }
       }
     }).catch(function(){});
@@ -249,8 +237,7 @@ const history = [
     entries.forEach(e => {
       if (e.isIntersecting) {
         e.target.classList.add('visible');
-      } else {
-        e.target.classList.remove('visible');
+        obs.unobserve(e.target);
       }
     });
   }, { threshold: 0.08, rootMargin: '0px 0px -20px 0px' });
