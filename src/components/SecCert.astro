@@ -89,7 +89,7 @@
 
   /* 한 줄 11열 그리드 */
   .cert-grid { display:grid; gap:12px; margin-bottom:0; opacity:1; transform:none; }
-  .cert-grid-all { grid-template-columns:repeat(10,1fr); }
+  .cert-grid-all { grid-template-columns:repeat(10,minmax(120px,1fr)); }
 
   /* 카드 */
   .cert-card {
@@ -104,7 +104,7 @@
 
   /* 이미지 */
   .cert-img-wrap {
-    width:100%; aspect-ratio:3/4; background:#f5f7fb;
+    width:100%; aspect-ratio:3/4; background:#f5f7fb; min-height:140px;
     display:flex; align-items:center; justify-content:center;
     overflow:hidden; padding:6px; box-sizing:border-box;
   }
@@ -115,9 +115,9 @@
   .cert-card:hover .cert-img-wrap img { transform:scale(1.06); }
 
   /* 카드 하단 */
-  .cert-info { padding:6px 5px 8px; text-align:left; border-top:1px solid #f0f4fb; }
-  .cert-name { font-size:12px; font-weight:700; color:#0d1a3a; margin:0 0 2px; line-height:1.35; letter-spacing:-0.03em; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
-  .cert-desc { font-size:12px; color:#9aa4b8; margin:0; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .cert-info { padding:8px 6px 10px; text-align:left; border-top:1px solid #f0f4fb; }
+  .cert-name { font-size:12px; font-weight:700; color:#0d1a3a; margin:0 0 3px; line-height:1.35; letter-spacing:-0.03em; white-space:nowrap; overflow:hidden; text-overflow:clip; }
+  .cert-desc { font-size:12px; color:#9aa4b8; margin:0; white-space:nowrap; overflow:hidden; text-overflow:clip; }
 
   /* 카드 등장 애니메이션 */
   .cert-card-anim {
@@ -142,7 +142,7 @@
   .fade-up-d2 { transition-delay:0.35s; }
   .fade-up-d3 { transition-delay:0.45s; }
 
-  @media (max-width:1200px) { .cert-grid-all { grid-template-columns:repeat(6,1fr); } }
+  @media (max-width:1200px) { .cert-grid-all { grid-template-columns:repeat(10,minmax(100px,1fr)); } }
   @media (max-width:768px) { .cert-grid-all { grid-template-columns:repeat(4,1fr); gap:10px; } .s-cert { padding:70px 0 60px; } .cert-inner { padding:0 20px; } }
   @media (max-width:480px) { .cert-grid-all { grid-template-columns:repeat(3,1fr); } }
 </style>
