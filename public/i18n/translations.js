@@ -270,6 +270,36 @@ const translations = {
     'ct.val.hours':    'Weekdays 09:00 – 18:00',
     'ct.btn':          'Contact Us',
     'hist.month':      '',
+    // HISTORY 항목
+    'hist.m': {'01월':'Jan.','02월':'Feb.','03월':'Mar.','04월':'Apr.','05월':'May','06월':'Jun.','07월':'Jul.','08월':'Aug.','09월':'Sep.','10월':'Oct.','11월':'Nov.','12월':'Dec.'},
+    'hist.d0':  'Disk Array (Storage) registered as procurement product',
+    'hist.d1':  'Video production service registered as direct manufacturing',
+    'hist.d2':  'In-house broadcasting device registered as direct manufacturing',
+    'hist.d3':  'Computer server registered as direct manufacturing',
+    'hist.d4':  'Canada Kontron Symkloud Partner Agreement signed',
+    'hist.d5':  'Factory registration (Ace Techno Tower 2)',
+    'hist.d6':  'Exhibited at KOBA 2018',
+    'hist.d7':  'Headquarters relocated to Ace Techno Tower 2, Digital-ro 31-gil, Guro-gu',
+    'hist.d8':  'Capital increased to KRW 200 million',
+    'hist.d9':  'ICT construction business license obtained',
+    'hist.d10': 'Software direct manufacturing certificate registered',
+    'hist.d11': 'Certified as Technology Innovation SME (INNO-BIZ)',
+    'hist.d12': 'Digital broadcast monitoring system patent registered',
+    'hist.d13': 'Content-based video search device and method patent obtained',
+    'hist.d14': 'NetClips Inc. Authorized Value Partner',
+    'hist.d15': 'Multi-video stream recording method and device patent obtained',
+    'hist.d16': 'Headquarters relocated to Byuksan Digital Valley 7th, Guro 3-dong',
+    'hist.d17': 'Digital broadcast monitoring equipment "mediabox" launched',
+    'hist.d18': 'R&D dedicated department established',
+    'hist.d19': 'Digital broadcast monitoring system patent obtained',
+    'hist.d20': 'ISO 9001:2000, KS A 9001:2007 obtained',
+    'hist.d21': 'HP Business Partner',
+    'hist.d22': 'Apple Technical Partner Agreement signed',
+    'hist.d23': 'Software business registration',
+    'hist.d24': 'Program registration (EDAM Easy Encode / EDAM CLUSTER MG)',
+    'hist.d25': 'Venture company certificate (Korea Technology Finance Corporation)',
+    'hist.d26': 'EDAMST founded at ENC Venture Dream Tower 5, Guro-dong, Guro-gu',
+    'hist.d27': 'Capital increased to KRW 100 million',
 
     'ct.form.title':   'Inquiry',
     'ct.form.sub':     'We\'ll get back to you as soon as possible',
@@ -391,6 +421,36 @@ const translations = {
     'ct.val.hours':    '工作日 09:00 – 18:00',
     'ct.btn':          '联系我们',
     'hist.month':      '月',
+    // HISTORY 항목
+    'hist.m': {'01월':'1月','02월':'2月','03월':'3月','04월':'4月','05월':'5月','06월':'6月','07월':'7月','08월':'8月','09월':'9月','10월':'10月','11월':'11月','12월':'12月'},
+    'hist.d0':  '磁盘阵列（存储）注册为采购产品',
+    'hist.d1':  '视频制作服务直接生产证明登记',
+    'hist.d2':  '楼内广播设备直接生产证明登记',
+    'hist.d3':  '计算机服务器直接生产证明登记',
+    'hist.d4':  '与加拿大Kontron公司签订Symkloud Partner合同',
+    'hist.d5':  '工厂注册（爱思泰科诺塔2期）',
+    'hist.d6':  '参展KOBA 2018展览会',
+    'hist.d7':  '总部迁至九老区数字路31街爱思泰科诺塔2期',
+    'hist.d8':  '注册资本增至2亿韩元',
+    'hist.d9':  '取得信息通信工程业许可证',
+    'hist.d10': '软件直接生产证明登记',
+    'hist.d11': '获评技术创新型中小企业（INNO-BIZ）认证',
+    'hist.d12': '数字广播监控系统专利登记',
+    'hist.d13': '获得基于内容的视频检索装置及方法专利',
+    'hist.d14': '(株)Netclips 授权增值合作伙伴',
+    'hist.d15': '获得多视频流录制方法及装置专利',
+    'hist.d16': '总部迁至九老3洞170-3碧山数字谷7期',
+    'hist.d17': '发布数字广播监控设备"mediabox"',
+    'hist.d18': '成立研究开发专职部门',
+    'hist.d19': '获得数字广播监控系统专利',
+    'hist.d20': 'ISO 9001:2000、KS A 9001:2007认证获得',
+    'hist.d21': 'HP商业合作伙伴',
+    'hist.d22': '签订Apple技术合作伙伴合同',
+    'hist.d23': '软件业者注册',
+    'hist.d24': '程序注册（EDAM Easy Encode / EDAM CLUSTER MG）',
+    'hist.d25': '风险企业认定书（韩国技术保证基金）',
+    'hist.d26': '在九老区九老洞ENC创业梦想塔5期成立(株)EDAMST',
+    'hist.d27': '注册资本增至1亿韩元',
 
     'ct.form.title':   '发送咨询',
     'ct.form.sub':     '我们将尽快与您联系',
@@ -512,6 +572,66 @@ const translations = {
     'ct.val.hours':    '平日 09:00 – 18:00',
     'ct.btn':          'お問い合わせ',
     'hist.month':      '月',
+    // HISTORY 항목
+    'hist.m': {'01월':'1月','02월':'2月','03월':'3月','04월':'4月','05월':'5月','06월':'6月','07월':'7月','08월':'8月','09월':'9月','10월':'10月','11월':'11月','12월':'12月'},
+    'hist.d0':  'ディスクアレイ（ストレージ）調達品目登録',
+    'hist.d1':  'ビデオ制作サービス直接生産証明登録',
+    'hist.d2':  '構内放送装置直接生産証明登録',
+    'hist.d3':  'コンピューターサーバー直接生産証明登録',
+    'hist.d4':  'カナダKontron社Symkloudパートナー契約締結',
+    'hist.d5':  '工場登録（エーステクノタワー2次）',
+    'hist.d6':  'KOBA 2018展示会出展',
+    'hist.d7':  '九老区デジタル路31街エーステクノタワー2次へ本店移転',
+    'hist.d8':  '払込資本金2億ウォンに増資',
+    'hist.d9':  '情報通信工事業免許取得',
+    'hist.d10': 'ソフトウェア直接生産証明登録',
+    'hist.d11': '技術革新型中小企業（INNO-BIZ）認定',
+    'hist.d12': 'デジタル放送モニタリングシステム特許登録',
+    'hist.d13': 'コンテンツベース映像検索装置・方法特許取得',
+    'hist.d14': '(株)ネットクリップス Authorized Value Partner',
+    'hist.d15': 'マルチ映像ストリーム録画方法・装置特許取得',
+    'hist.d16': '九老3洞170-3ビッサンデジタルバレー7次へ本店移転',
+    'hist.d17': 'デジタル放送モニタリング機器「mediabox」発売',
+    'hist.d18': '研究開発専担部署設立',
+    'hist.d19': 'デジタル放送モニタリングシステム特許取得',
+    'hist.d20': 'ISO 9001:2000、KS A 9001:2007取得',
+    'hist.d21': 'HPビジネスパートナー',
+    'hist.d22': 'Appleテクニカルパートナー契約締結',
+    'hist.d23': 'ソフトウェア事業者登録',
+    'hist.d24': 'プログラム登録（EDAM Easy Encode / EDAM CLUSTER MG）',
+    'hist.d25': 'ベンチャー企業確認書（韓国技術保証基金）',
+    'hist.d26': '九老区九老洞ENCベンチャードリームタワー5次にて(株)EDAMST設立',
+    'hist.d27': '資本金1億ウォンに増資',
+    // HISTORY 항목
+    'hist.m': {'01월':'1月','02월':'2月','03월':'3月','04월':'4月','05월':'5月','06월':'6月','07월':'7月','08월':'8月','09월':'9月','10월':'10月','11월':'11月','12월':'12月'},
+    'hist.d0':  '磁盘阵列（存储）注册为采购产品',
+    'hist.d1':  '视频制作服务直接生产证明登记',
+    'hist.d2':  '楼内广播设备直接生产证明登记',
+    'hist.d3':  '计算机服务器直接生产证明登记',
+    'hist.d4':  '与加拿大Kontron公司签订Symkloud Partner合同',
+    'hist.d5':  '工厂注册（爱思泰科诺塔2期）',
+    'hist.d6':  '参展KOBA 2018展览会',
+    'hist.d7':  '总部迁至九老区数字路31街爱思泰科诺塔2期',
+    'hist.d8':  '注册资本增至2亿韩元',
+    'hist.d9':  '取得信息通信工程业许可证',
+    'hist.d10': '软件直接生产证明登记',
+    'hist.d11': '获评技术创新型中小企业（INNO-BIZ）认证',
+    'hist.d12': '数字广播监控系统专利登记',
+    'hist.d13': '获得基于内容的视频检索装置及方法专利',
+    'hist.d14': '(株)Netclips 授权增值合作伙伴',
+    'hist.d15': '获得多视频流录制方法及装置专利',
+    'hist.d16': '总部迁至九老3洞170-3碧山数字谷7期',
+    'hist.d17': '发布数字广播监控设备"mediabox"',
+    'hist.d18': '成立研究开发专职部门',
+    'hist.d19': '获得数字广播监控系统专利',
+    'hist.d20': 'ISO 9001:2000、KS A 9001:2007认证获得',
+    'hist.d21': 'HP商业合作伙伴',
+    'hist.d22': '签订Apple技术合作伙伴合同',
+    'hist.d23': '软件业者注册',
+    'hist.d24': '程序注册（EDAM Easy Encode / EDAM CLUSTER MG）',
+    'hist.d25': '风险企业认定书（韩国技术保证基金）',
+    'hist.d26': '在九老区九老洞ENC创业梦想塔5期成立(株)EDAMST',
+    'hist.d27': '注册资本增至1亿韩元',
 
     'ct.form.title':   'お問い合わせ',
     'ct.form.sub':     'できる限り早くご連絡いたします',
@@ -600,6 +720,13 @@ function saveOriginals() {
       });
     }
     _originals.svc = { tabs: origTabNames, panels: origPanels };
+  }
+  var sec6hist = document.getElementById('sec6');
+  if (sec6hist) {
+    _originals.hist = {
+      months: Array.from(sec6hist.querySelectorAll('.tl-month')).map(function(el){ return el.textContent; }),
+      descs:  Array.from(sec6hist.querySelectorAll('.tl-desc')).map(function(el){ return el.textContent; }),
+    };
   }
 }
 
@@ -911,13 +1038,29 @@ function applyLang(lang) {
     }
   }
 
-  // ── History 월 표기 교체 (한자 표기용) ──
-  if (sec6 && lang !== 'ko') {
-    sec6.querySelectorAll('.tl-month').forEach(function(el) {
-      if (lang === 'zh' || lang === 'ja') {
-        el.textContent = el.textContent.replace('월', t('hist.month'));
+  // ── History 연혁 항목 번역 ──
+  if (sec6) {
+    var tlMonths = sec6.querySelectorAll('.tl-month');
+    var tlDescs  = sec6.querySelectorAll('.tl-desc');
+    if (lang === 'ko') {
+      // 한국어: 원본 복원
+      if (_originals.hist) {
+        _originals.hist.months.forEach(function(m, i){ if(tlMonths[i]) tlMonths[i].textContent = m; });
+        _originals.hist.descs.forEach(function(d, i){ if(tlDescs[i])  tlDescs[i].textContent  = d; });
       }
-    });
+    } else {
+      // 타언어: 번역 적용
+      var monthMap = translations[lang] && translations[lang]['hist.m'];
+      tlMonths.forEach(function(el, i){
+        var ko = (_originals.hist && _originals.hist.months[i]) || el.textContent;
+        el.textContent = (monthMap && monthMap[ko]) || ko;
+      });
+      tlDescs.forEach(function(el, i){
+        var key = 'hist.d' + i;
+        var translated = translations[lang] && translations[lang][key];
+        if (translated) el.textContent = translated;
+      });
+    }
   }
 
   // lang 버튼 활성화 표시
