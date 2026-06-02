@@ -27,15 +27,15 @@
     <!-- ISO 3개 → 특허증 3개 → 나머지 4개 -->
     <div class="cert-grid cert-grid-all">
       <!-- ISO 3개 -->
-      <div class="cert-card" data-img="/images/cert/cert_06.webp" data-name="품질경영시스템인증서">
+      <div class="cert-card cert-card-anim" data-img="/images/cert/cert_06.webp" data-name="품질경영시스템인증서" style="transition-delay:0.0s">
         <div class="cert-img-wrap"><img src="/images/cert/cert_06.webp" alt="품질경영시스템인증서" loading="eager" /></div>
         <div class="cert-info"><p class="cert-name">품질경영시스템인증서</p><p class="cert-desc">ISO 9001</p></div>
       </div>
-      <div class="cert-card" data-img="/images/cert/cert_07.webp" data-name="환경경영시스템인증서">
+      <div class="cert-card cert-card-anim" data-img="/images/cert/cert_07.webp" data-name="환경경영시스템인증서" style="transition-delay:0.06s">
         <div class="cert-img-wrap"><img src="/images/cert/cert_07.webp" alt="환경경영시스템인증서" loading="eager" /></div>
         <div class="cert-info"><p class="cert-name">환경경영시스템인증서</p><p class="cert-desc">ISO 14001</p></div>
       </div>
-      <div class="cert-card" data-img="/images/cert/cert_08.webp" data-name="안전보건경영시스템인증서">
+      <div class="cert-card cert-card-anim" data-img="/images/cert/cert_08.webp" data-name="안전보건경영시스템인증서" style="transition-delay:0.12s">
         <div class="cert-img-wrap"><img src="/images/cert/cert_08.webp" alt="안전보건경영시스템인증서" loading="eager" /></div>
         <div class="cert-info"><p class="cert-name">안전보건경영시스템인증서</p><p class="cert-desc">ISO 45001</p></div>
       </div>
@@ -53,19 +53,19 @@
         <div class="cert-info"><p class="cert-name">특허증</p><p class="cert-desc">디지털 방송 모니터링 시스템</p></div>
       </div>
       <!-- 나머지 4개 -->
-      <div class="cert-card" data-img="/images/cert/cert_02.webp" data-name="정보통신공사등록증">
+      <div class="cert-card cert-card-anim" data-img="/images/cert/cert_02.webp" data-name="정보통신공사등록증" style="transition-delay:0.36s">
         <div class="cert-img-wrap"><img src="/images/cert/cert_02.webp" alt="정보통신공사등록증" loading="eager" /></div>
         <div class="cert-info"><p class="cert-name">정보통신공사등록증</p><p class="cert-desc">공사업 면허 보유</p></div>
       </div>
-      <div class="cert-card" data-img="/images/cert/cert_03.webp" data-name="이노비즈 인증">
+      <div class="cert-card cert-card-anim" data-img="/images/cert/cert_03.webp" data-name="이노비즈 인증" style="transition-delay:0.42s">
         <div class="cert-img-wrap"><img src="/images/cert/cert_03.webp" alt="이노비즈 인증" loading="eager" /></div>
         <div class="cert-info"><p class="cert-name">이노비즈 인증</p><p class="cert-desc">기술혁신형 중소기업</p></div>
       </div>
-      <div class="cert-card" data-img="/images/cert/cert_04.webp" data-name="경영혁신형중소기업확인서">
+      <div class="cert-card cert-card-anim" data-img="/images/cert/cert_04.webp" data-name="경영혁신형중소기업확인서" style="transition-delay:0.48s">
         <div class="cert-img-wrap"><img src="/images/cert/cert_04.webp" alt="경영혁신형중소기업확인서" loading="eager" /></div>
         <div class="cert-info"><p class="cert-name">경영혁신형중소기업확인서</p><p class="cert-desc">메인비즈 공식 인증</p></div>
       </div>
-      <div class="cert-card" data-img="/images/cert/cert_05.webp" data-name="소프트웨어사업자">
+      <div class="cert-card cert-card-anim" data-img="/images/cert/cert_05.webp" data-name="소프트웨어사업자" style="transition-delay:0.54s">
         <div class="cert-img-wrap"><img src="/images/cert/cert_05.webp" alt="소프트웨어사업자" loading="eager" /></div>
         <div class="cert-info"><p class="cert-name">소프트웨어사업자</p><p class="cert-desc">SW 사업자 확인서</p></div>
       </div>
@@ -100,7 +100,6 @@
   .cert-card:hover {
     box-shadow:0 8px 28px rgba(26,47,138,0.15);
     border-color:#1a2f8a;
-    transform:translateY(-3px);
   }
 
   /* 이미지 */
@@ -120,6 +119,22 @@
   .cert-name { font-size:8.5px; font-weight:700; color:#0d1a3a; margin:0 0 2px; line-height:1.35; letter-spacing:-0.03em; word-break:keep-all; }
   .cert-desc { font-size:9px; color:#9aa4b8; margin:0; }
 
+  /* 카드 등장 애니메이션 */
+  .cert-card-anim {
+    opacity:0;
+    transform:translateY(20px);
+    transition:opacity 0.5s cubic-bezier(0.16,1,0.3,1),
+               transform 0.5s cubic-bezier(0.16,1,0.3,1),
+               box-shadow 0.25s, border-color 0.25s, transform 0.25s;
+  }
+  .cert-card-anim.visible {
+    opacity:1;
+    transform:translateY(0);
+  }
+  .cert-card-anim.visible:hover {
+    transform:translateY(-3px);
+  }
+
   /* fade-up */
   .fade-up { opacity:0; transform:translateY(28px); transition:opacity 0.7s cubic-bezier(0.16,1,0.3,1), transform 0.7s cubic-bezier(0.16,1,0.3,1); transition-delay:0.15s; will-change:transform,opacity; }
   .fade-up.visible { opacity:1; transform:translateY(0); }
@@ -134,7 +149,7 @@
 
 <script is:inline>
 (function () {
-  // fade-up 옵저버
+  // fade-up 옵저버 (헤더)
   const targets = document.querySelectorAll('#sec-cert .fade-up');
   const obs = new IntersectionObserver(function (entries) {
     entries.forEach(function (e) {
@@ -145,6 +160,19 @@
     });
   }, { threshold: 0.08 });
   targets.forEach(function (el) { obs.observe(el); });
+
+  // 카드 등장 옵저버
+  const cardObs = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        cardObs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.05, rootMargin: '0px 0px -40px 0px' });
+  document.querySelectorAll('#sec-cert .cert-card-anim').forEach(function (el) {
+    cardObs.observe(el);
+  });
 
 
 })();
