@@ -500,11 +500,14 @@ function saveOriginals() {
   }
   var sec7 = document.getElementById('sec7');
   if (sec7) {
+    var ctBtn = sec7.querySelector('.ct-btn');
+    var ctBtnTextNode = ctBtn ? Array.from(ctBtn.childNodes).find(function(n){ return n.nodeType === 3 && n.textContent.trim(); }) : null;
     _originals.ct = {
       title:   sec7.querySelector('.ct-title')   ? sec7.querySelector('.ct-title').innerHTML   : '',
       sub:     sec7.querySelector('.ct-sub')     ? sec7.querySelector('.ct-sub').innerHTML     : '',
       labels:  Array.from(sec7.querySelectorAll('.ct-info-label')).map(function(el){ return el.innerHTML; }),
       values:  Array.from(sec7.querySelectorAll('.ct-info-value')).map(function(el){ return el.innerHTML; }),
+      btnText: ctBtnTextNode ? ctBtnTextNode.textContent.trim() : '',
     };
   }
 }
@@ -576,6 +579,11 @@ function restoreOriginals() {
     if (ctSub)   ctSub.innerHTML   = c.sub;
     sec7.querySelectorAll('.ct-info-label').forEach(function(el, i){ if(c.labels[i] !== undefined) el.innerHTML = c.labels[i]; });
     sec7.querySelectorAll('.ct-info-value').forEach(function(el, i){ if(c.values[i] !== undefined) el.innerHTML = c.values[i]; });
+    var ctBtn = sec7.querySelector('.ct-btn');
+    if (ctBtn && c.btnText) {
+      var btnTextNode = Array.from(ctBtn.childNodes).find(function(n){ return n.nodeType === 3 && n.textContent.trim(); });
+      if (btnTextNode) btnTextNode.textContent = ' ' + c.btnText;
+    }
   }
 }
 let currentLang = localStorage.getItem('eds-lang') || 'ko';
@@ -758,7 +766,10 @@ function applyLang(lang) {
       if (ctLabels[3]) ctLabels[3].textContent = t('ct.label.hours');
       if (ctValues[0]) ctValues[0].innerHTML   = t('ct.val.addr');
       if (ctValues[3]) ctValues[3].textContent = t('ct.val.hours');
-      if (ctBtn)       ctBtn.childNodes[ctBtn.childNodes.length-1].textContent = ' ' + t('ct.btn');
+      if (ctBtn) {
+        var btnTextNode = Array.from(ctBtn.childNodes).find(function(n){ return n.nodeType === 3 && n.textContent.trim(); });
+        if (btnTextNode) btnTextNode.textContent = ' ' + t('ct.btn');
+      }
     }
   }
 
