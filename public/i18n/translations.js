@@ -471,10 +471,30 @@ function saveOriginals() {
   }
   var sec5 = document.getElementById('sec5');
   if (sec5) {
+    var cards = sec5.querySelectorAll('.s6-card');
     _originals.proc = {
       eyebrow: sec5.querySelector('.s6-eyebrow') ? sec5.querySelector('.s6-eyebrow').innerHTML : '',
       title:   sec5.querySelector('.s6-title')   ? sec5.querySelector('.s6-title').innerHTML   : '',
       sub:     sec5.querySelector('.s6-sub')     ? sec5.querySelector('.s6-sub').innerHTML     : '',
+      badges:  Array.from(sec5.querySelectorAll('.s6-card-badge')).map(function(el){ return el.innerHTML; }),
+      ctas:    Array.from(sec5.querySelectorAll('.s6-thumb-cta')).map(function(el){ return el.innerHTML; }),
+      note:    sec5.querySelector('.s6-note p') ? sec5.querySelector('.s6-note p').innerHTML : '',
+      cards:   Array.from(cards).map(function(card) {
+        return {
+          title: card.querySelector('.s6-card-title') ? card.querySelector('.s6-card-title').innerHTML : '',
+          desc:  card.querySelector('.s6-card-desc')  ? card.querySelector('.s6-card-desc').innerHTML  : '',
+          tags:  Array.from(card.querySelectorAll('.s6-tag')).map(function(el){ return el.innerHTML; }),
+        };
+      }),
+    };
+  }
+  var sec7 = document.getElementById('sec7');
+  if (sec7) {
+    _originals.ct = {
+      title:   sec7.querySelector('.ct-title')   ? sec7.querySelector('.ct-title').innerHTML   : '',
+      sub:     sec7.querySelector('.ct-sub')     ? sec7.querySelector('.ct-sub').innerHTML     : '',
+      labels:  Array.from(sec7.querySelectorAll('.ct-info-label')).map(function(el){ return el.innerHTML; }),
+      values:  Array.from(sec7.querySelectorAll('.ct-info-value')).map(function(el){ return el.innerHTML; }),
     };
   }
 }
@@ -517,9 +537,31 @@ function restoreOriginals() {
     var eyebrow = sec5.querySelector('.s6-eyebrow');
     var title   = sec5.querySelector('.s6-title');
     var sub     = sec5.querySelector('.s6-sub');
+    var note    = sec5.querySelector('.s6-note p');
     if (eyebrow) eyebrow.innerHTML = p.eyebrow;
     if (title)   title.innerHTML   = p.title;
     if (sub)     sub.innerHTML     = p.sub;
+    if (note)    note.innerHTML    = p.note;
+    sec5.querySelectorAll('.s6-card-badge').forEach(function(el, i){ if(p.badges[i] !== undefined) el.innerHTML = p.badges[i]; });
+    sec5.querySelectorAll('.s6-thumb-cta').forEach(function(el, i){ if(p.ctas[i] !== undefined) el.innerHTML = p.ctas[i]; });
+    sec5.querySelectorAll('.s6-card').forEach(function(card, i) {
+      if (!p.cards[i]) return;
+      var ct = card.querySelector('.s6-card-title');
+      var cd = card.querySelector('.s6-card-desc');
+      if (ct) ct.innerHTML = p.cards[i].title;
+      if (cd) cd.innerHTML = p.cards[i].desc;
+      card.querySelectorAll('.s6-tag').forEach(function(el, j){ if(p.cards[i].tags[j] !== undefined) el.innerHTML = p.cards[i].tags[j]; });
+    });
+  }
+  var sec7 = document.getElementById('sec7');
+  if (sec7 && _originals.ct) {
+    var c = _originals.ct;
+    var ctTitle  = sec7.querySelector('.ct-title');
+    var ctSub    = sec7.querySelector('.ct-sub');
+    if (ctTitle) ctTitle.innerHTML = c.title;
+    if (ctSub)   ctSub.innerHTML   = c.sub;
+    sec7.querySelectorAll('.ct-info-label').forEach(function(el, i){ if(c.labels[i] !== undefined) el.innerHTML = c.labels[i]; });
+    sec7.querySelectorAll('.ct-info-value').forEach(function(el, i){ if(c.values[i] !== undefined) el.innerHTML = c.values[i]; });
   }
 }
 let currentLang = localStorage.getItem('eds-lang') || 'ko';
@@ -682,24 +724,14 @@ function applyLang(lang) {
   }
 
   // ── Contact (sec7) 직접 교체 ──
-  var sec7 = document.getElementById('sec7');
-  if (sec7) {
-    var ctTitle  = sec7.querySelector('.ct-title');
-    var ctSub    = sec7.querySelector('.ct-sub');
-    var ctLabels = sec7.querySelectorAll('.ct-info-label');
-    var ctValues = sec7.querySelectorAll('.ct-info-value');
-    var ctBtn    = sec7.querySelector('.ct-btn');
-    if (lang === 'ko') {
-      if (ctTitle)     ctTitle.textContent     = 'Contact Us';
-      if (ctSub)       ctSub.textContent       = '제품 문의 · 기술문의';
-      if (ctLabels[0]) ctLabels[0].textContent = '주소';
-      if (ctLabels[1]) ctLabels[1].textContent = '전화';
-      if (ctLabels[2]) ctLabels[2].textContent = '이메일';
-      if (ctLabels[3]) ctLabels[3].textContent = '운영시간';
-      if (ctValues[0]) ctValues[0].innerHTML   = '서울시 구로구 디지털로31길 19, 406호<br>(구로동, 에이스테크노타워2차)';
-      if (ctValues[3]) ctValues[3].textContent = '평일 09:00 – 18:00';
-      if (ctBtn)       ctBtn.childNodes[ctBtn.childNodes.length-1].textContent = ' 문의하기';
-    } else {
+  if (lang !== 'ko') {
+    var sec7 = document.getElementById('sec7');
+    if (sec7) {
+      var ctTitle  = sec7.querySelector('.ct-title');
+      var ctSub    = sec7.querySelector('.ct-sub');
+      var ctLabels = sec7.querySelectorAll('.ct-info-label');
+      var ctValues = sec7.querySelectorAll('.ct-info-value');
+      var ctBtn    = sec7.querySelector('.ct-btn');
       if (ctTitle)     ctTitle.textContent     = t('ct.title');
       if (ctSub)       ctSub.textContent       = t('ct.sub');
       if (ctLabels[0]) ctLabels[0].textContent = t('ct.label.addr');
