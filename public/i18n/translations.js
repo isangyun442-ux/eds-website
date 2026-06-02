@@ -233,7 +233,7 @@ const translations = {
     'proc.p4.title':   'LED Display',
     'proc.p4.desc':    'Indoor/outdoor large LED display. Custom design from P1.5 ultra-high resolution to large signage.',
     'proc.p4.t1': 'P1.5 Resolution', 'proc.p4.t2': 'Indoor/Outdoor', 'proc.p4.t3': 'Custom Design',
-    'proc.note':       'All registered products from EDAMST are available for direct purchase by public institutions through the KONEPS marketplace. Contact us for more details.',
+    'proc.note':       'All registered products from EDAMST are available for direct purchase by public institutions through the KONEPS marketplace. Contact us for more details — click <strong style="cursor:pointer;color:#1a2f8a;" onclick="document.getElementById(\'sec7\').scrollIntoView({behavior:\'smooth\'})">here</strong> to inquire.',
 
     'ct.title':        'Contact Us',
     'ct.sub':          'Product & Technical Inquiries',
@@ -329,7 +329,7 @@ const translations = {
     'proc.p4.title':   'LED显示屏',
     'proc.p4.desc':    '室内外大型LED显示屏。从P1.5超高分辨率到大型广告牌均可定制设计。',
     'proc.p4.t1': 'P1.5高清', 'proc.p4.t2': '室内外', 'proc.p4.t3': '定制设计',
-    'proc.note':       'EDAMST所有登记产品均可通过采购厅网络商城直接向公共机构采购。详情请通过联系我们咨询。',
+    'proc.note':       'EDAMST所有登记产品均可通过采购厅网络商城直接向公共机构采购。详情请<strong style="cursor:pointer;color:#1a2f8a;" onclick="document.getElementById(\'sec7\').scrollIntoView({behavior:\'smooth\'})">联系我们</strong>咨询。',
 
     'ct.title':        'Contact Us',
     'ct.sub':          '产品咨询 · 技术咨询',
@@ -425,7 +425,7 @@ const translations = {
     'proc.p4.title':   'LED電光掲示板',
     'proc.p4.desc':    '屋内外大型LEDディスプレイ。P1.5超高解像度から大型サイネージまでカスタム設計します。',
     'proc.p4.t1': 'P1.5高解像度', 'proc.p4.t2': '屋内外', 'proc.p4.t3': 'カスタム設計',
-    'proc.note':       'EDAMSTのすべての登録製品は調達庁電子調達システムを通じて公共機関への直接購入が可能です。詳細はお問い合わせください。',
+    'proc.note':       'EDAMSTのすべての登録製品は調達庁電子調達システムを通じて公共機関への直接購入が可能です。詳細は<strong style="cursor:pointer;color:#1a2f8a;" onclick="document.getElementById(\'sec7\').scrollIntoView({behavior:\'smooth\'})">お問い合わせ</strong>ください。',
 
     'ct.title':        'お問い合わせ',
     'ct.sub':          '製品・技術お問い合わせ',
@@ -783,6 +783,7 @@ function applyLang(lang) {
 
 // 초기 적용
 document.addEventListener('DOMContentLoaded', function() {
+  saveOriginals();
   applyLang(currentLang);
 });
 
