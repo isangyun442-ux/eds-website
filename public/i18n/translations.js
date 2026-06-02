@@ -59,6 +59,8 @@ const translations = {
     'str.card3.desc':  '쌓아온 노하우로 프로젝트 일정을 철저히 관리합니다. 약속한 날짜는 반드시 지킵니다.',
     'str.card4.title': '검증된 퀄리티',
     'str.card4.desc':  '516개 이상의 구축 사례가 증명합니다. 공공기관부터 방송국까지 신뢰받는 기술력입니다.',
+    'str.msg':         '이담에스티는 다양한 미디어 시스템 구축 노하우와<br>끊임없는 사내 연구 및 대외 기술 습득 활동을 통해<br><strong>트렌디한 구축 서비스</strong>를 제공하겠습니다.',
+    'str.sig':         '— 이담에스티 임직원 일동',
 
     // PROCUREMENT 제품
     'proc.eyebrow':    'Procurement',
@@ -211,6 +213,8 @@ const translations = {
     'str.card3.desc':  'Our accumulated know-how ensures strict project schedule management. We always keep our promises.',
     'str.card4.title': 'Proven Quality',
     'str.card4.desc':  'Over 516 completed projects speak for themselves — trusted expertise from public institutions to broadcasters.',
+    'str.msg':         'EDAMST will continue to provide cutting-edge construction services<br>through diverse media system know-how<br>and <strong>relentless research and technology acquisition</strong>.',
+    'str.sig':         '— From all EDAMST staff',
 
     'proc.eyebrow':    'Procurement',
     'proc.title':      'Procurement Products',
@@ -305,6 +309,8 @@ const translations = {
     'str.card3.desc':  '凭借积累的经验严格管理项目进度。约定的日期必定履行。',
     'str.card4.title': '经过验证的品质',
     'str.card4.desc':  '516个以上的建设案例证明一切。从公共机构到广播机构均受信赖的技术实力。',
+    'str.msg':         'EDAMST将凭借多样的媒体系统建设经验，<br>通过不断的内部研究和外部技术学习活动，<br>持续提供<strong>前沿的建设服务</strong>。',
+    'str.sig':         '— EDAMST 全体员工',
 
     'proc.eyebrow':    '采购',
     'proc.title':      '采购产品',
@@ -399,6 +405,8 @@ const translations = {
     'str.card3.desc':  '蓄積されたノウハウでプロジェクトスケジュールを徹底管理。約束した日程は必ず守ります。',
     'str.card4.title': '実証済みの品質',
     'str.card4.desc':  '516件以上の構築実績が証明。官公署から放送局まで信頼される技術力です。',
+    'str.msg':         'EDAMSTは多様なメディアシステム構築のノウハウと<br>絶え間ない社内研究・社外技術習得活動を通じて<br><strong>トレンドに即した構築サービス</strong>を提供してまいります。',
+    'str.sig':         '— EDAMST 役職員一同',
 
     'proc.eyebrow':    '調達',
     'proc.title':      '調達庁登録製品',
@@ -467,6 +475,8 @@ function saveOriginals() {
       headline: secStr.querySelector('.ab-str-headline') ? secStr.querySelector('.ab-str-headline').innerHTML : '',
       titles: Array.from(secStr.querySelectorAll('.ab-str-title')).map(function(el){ return el.innerHTML; }),
       descs:  Array.from(secStr.querySelectorAll('.ab-str-desc')).map(function(el){ return el.innerHTML; }),
+      msg:    secStr.querySelector('.ab-msg-text') ? secStr.querySelector('.ab-msg-text').innerHTML : '',
+      sig:    secStr.querySelector('.ab-msg-sig')  ? secStr.querySelector('.ab-msg-sig').innerHTML  : '',
     };
   }
   var sec5 = document.getElementById('sec5');
@@ -530,6 +540,10 @@ function restoreOriginals() {
     if (headline) headline.innerHTML = s.headline;
     s.titles.forEach(function(html, i){ if(titles[i]) titles[i].innerHTML = html; });
     s.descs.forEach(function(html, i){ if(descs[i])  descs[i].innerHTML  = html; });
+    var msgText = secStr.querySelector('.ab-msg-text');
+    var msgSig  = secStr.querySelector('.ab-msg-sig');
+    if (msgText && s.msg) msgText.innerHTML = s.msg;
+    if (msgSig  && s.sig) msgSig.innerHTML  = s.sig;
   }
   var sec5 = document.getElementById('sec5');
   if (sec5 && _originals.proc) {
@@ -674,6 +688,8 @@ function applyLang(lang) {
       var headline = secStr.querySelector('.ab-str-headline');
       var strTitles = secStr.querySelectorAll('.ab-str-title');
       var descs    = secStr.querySelectorAll('.ab-str-desc');
+      var msgText  = secStr.querySelector('.ab-msg-text');
+      var msgSig   = secStr.querySelector('.ab-msg-sig');
       if (sub)      sub.textContent      = t('str.sub');
       if (headline) headline.innerHTML   = t('str.headline');
       if (strTitles[0]) strTitles[0].textContent = t('str.card1.title');
@@ -684,6 +700,8 @@ function applyLang(lang) {
       if (descs[2])     descs[2].textContent     = t('str.card3.desc');
       if (strTitles[3]) strTitles[3].textContent = t('str.card4.title');
       if (descs[3])     descs[3].textContent     = t('str.card4.desc');
+      if (msgText)  msgText.innerHTML    = t('str.msg');
+      if (msgSig)   msgSig.textContent   = t('str.sig');
     }
   }
 
