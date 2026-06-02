@@ -737,7 +737,7 @@ function applyLang(lang) {
 
       // 하단 안내문
       var note = sec5.querySelector('.s6-notice p');
-      if (note) note.textContent = t('proc.note');
+      if (note) note.innerHTML = t('proc.note');
     }
   }
 
