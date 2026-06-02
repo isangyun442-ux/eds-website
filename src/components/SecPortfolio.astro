@@ -367,13 +367,12 @@ import { projects } from '../data/projects.js';
   // KV 데이터 + 정적 데이터 합치기
   const staticProjects = window.__staticProjects || [];
 
-  fetch('/api/admin/projects')
+  fetch('/api/admin/projects', { cache: 'no-store' })
     .then(r => r.json())
     .then(kvProjects => {
       if (Array.isArray(kvProjects) && kvProjects.length > 0) {
-        // KV 프로젝트 ID 기준 중복 제거 (KV 우선, 정적 데이터 보완)
-        const kvIds = new Set(kvProjects.map(p => p.id));
-        const merged = [...kvProjects, ...staticProjects.filter(p => !kvIds.has(p.id))];
+        // KV 프로젝트를 앞에, 정적 프로젝트를 뒤에 합치기
+        const merged = [...kvProjects, ...staticProjects];
         initSlider(merged);
       } else {
         initSlider(staticProjects);

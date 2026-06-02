@@ -233,7 +233,11 @@ function authCheck(request: Request) {
 export const GET: APIRoute = async () => {
   const projects = await readProjects();
   return new Response(JSON.stringify(projects), {
-    headers: { 'Content-Type': 'application/json' },
+    headers: {
+      'Content-Type': 'application/json',
+      'Cache-Control': 'no-store, no-cache, must-revalidate',
+      'Pragma': 'no-cache',
+    },
   });
 };
 
