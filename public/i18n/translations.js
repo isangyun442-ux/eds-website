@@ -488,7 +488,7 @@ function saveOriginals() {
       sub:     sec5.querySelector('.s6-sub')     ? sec5.querySelector('.s6-sub').innerHTML     : '',
       badges:  Array.from(sec5.querySelectorAll('.s6-card-badge')).map(function(el){ return el.innerHTML; }),
       ctas:    Array.from(sec5.querySelectorAll('.s6-thumb-cta')).map(function(el){ return el.innerHTML; }),
-      note:    sec5.querySelector('.s6-note p') ? sec5.querySelector('.s6-note p').innerHTML : '',
+      note:    sec5.querySelector('.s6-notice p') ? sec5.querySelector('.s6-notice p').innerHTML : '',
       cards:   Array.from(cards).map(function(card) {
         return {
           title: card.querySelector('.s6-card-title') ? card.querySelector('.s6-card-title').innerHTML : '',
@@ -551,7 +551,7 @@ function restoreOriginals() {
     var eyebrow = sec5.querySelector('.s6-eyebrow');
     var title   = sec5.querySelector('.s6-title');
     var sub     = sec5.querySelector('.s6-sub');
-    var note    = sec5.querySelector('.s6-note p');
+    var note    = sec5.querySelector('.s6-notice p');
     if (eyebrow) eyebrow.innerHTML = p.eyebrow;
     if (title)   title.innerHTML   = p.title;
     if (sub)     sub.innerHTML     = p.sub;
@@ -736,7 +736,7 @@ function applyLang(lang) {
       });
 
       // 하단 안내문
-      var note = sec5.querySelector('.s6-note p');
+      var note = sec5.querySelector('.s6-notice p');
       if (note) note.textContent = t('proc.note');
     }
   }
