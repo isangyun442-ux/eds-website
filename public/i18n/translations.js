@@ -189,6 +189,31 @@ const translations = {
     'svc.eyebrow':     'Business Fields',
     'svc.title':       'Business Fields',
     'svc.subtitle':    'Complete solutions from design to construction and maintenance — backed by 19 years of field experience.',
+    'svc.tab0':        'Public Institutions',
+    'svc.tab1':        'Education',
+    'svc.tab2':        'Enterprise',
+    'svc.tab3':        'Media Center',
+    'svc.tab4':        'Religious Facilities',
+    'svc.p0.tag':      'Public Institution',
+    'svc.p0.name':     'Public Institutions',
+    'svc.p0.desc':     'We deliver optimized solutions for government agencies, leveraging our experience in broadcast production, digital media, archive, and accessibility broadcasting. We build media storage, video servers, and MAM systems for stable content infrastructure.',
+    'svc.p0.c1': 'Broadcast SI', 'svc.p0.c2': 'Archive System', 'svc.p0.c3': 'Accessibility Broadcasting', 'svc.p0.c4': 'MAM Asset Mgmt', 'svc.p0.c5': 'Video Conferencing',
+    'svc.p1.tag':      'Education',
+    'svc.p1.name':     'Educational Institutions',
+    'svc.p1.desc':     'We design optimal learning environments from cyber universities to K-12 schools. E-learning studios, smart classrooms, and LED displays support both online and in-person education.',
+    'svc.p1.c1': 'E-Learning Studio', 'svc.p1.c2': 'Smart Classroom', 'svc.p1.c3': 'Hybrid Learning', 'svc.p1.c4': 'Interactive Display', 'svc.p1.c5': 'LED Display',
+    'svc.p2.tag':      'Enterprise',
+    'svc.p2.name':     'Enterprise',
+    'svc.p2.desc':     'We support diverse corporate media environments from YouTube studios and in-house broadcasting to video conferencing. Build a smart office fully compatible with Zoom, Teams, and Webex.',
+    'svc.p2.c1': 'YouTube Studio', 'svc.p2.c2': 'Video Conferencing', 'svc.p2.c3': 'In-House Broadcasting', 'svc.p2.c4': 'Zoom Teams Integration', 'svc.p2.c5': 'Smart Office',
+    'svc.p3.tag':      'Media Center',
+    'svc.p3.name':     'Media Center',
+    'svc.p3.desc':     'From P1.5 ultra-high-resolution LED Walls and large outdoor signage to XR virtual studios, we build every solution a professional media center needs.',
+    'svc.p3.c1': 'LED Wall', 'svc.p3.c2': 'XR Virtual Studio', 'svc.p3.c3': 'Media Server', 'svc.p3.c4': 'Large Signage', 'svc.p3.c5': 'Media Archive',
+    'svc.p4.tag':      'Religious Facility',
+    'svc.p4.name':     'Religious Facilities',
+    'svc.p4.desc':     'We build integrated audio, video, and lighting systems for churches, cathedrals, and temples. Worship broadcasting, LED displays, and online streaming all optimized for religious spaces.',
+    'svc.p4.c1': 'AV Integration', 'svc.p4.c2': 'Worship Broadcasting', 'svc.p4.c3': 'Online Streaming', 'svc.p4.c4': 'LED Signage', 'svc.p4.c5': 'Lighting System',
 
     'port.eyebrow':    'Portfolio',
     'port.title':      'Project Cases',
@@ -510,6 +535,22 @@ function saveOriginals() {
       btnText: ctBtnTextNode ? ctBtnTextNode.textContent.trim() : '',
     };
   }
+  var sec3orig = document.getElementById('sec3');
+  if (sec3orig) {
+    var origTabNames = Array.from(sec3orig.querySelectorAll('.svc-tab-name')).map(function(el){ return el.textContent; });
+    var origPanels = [];
+    for (var i = 0; i < 5; i++) {
+      var panel = sec3orig.querySelector('.svc-panel[data-idx="' + i + '"]');
+      if (!panel) { origPanels.push(null); continue; }
+      origPanels.push({
+        tag:   panel.querySelector('.svc-tag')  ? panel.querySelector('.svc-tag').textContent  : '',
+        name:  panel.querySelector('.svc-name') ? panel.querySelector('.svc-name').textContent : '',
+        desc:  panel.querySelector('.svc-desc') ? panel.querySelector('.svc-desc').textContent : '',
+        chips: Array.from(panel.querySelectorAll('.svc-chip')).map(function(el){ return el.textContent; }),
+      });
+    }
+    _originals.svc = { tabs: origTabNames, panels: origPanels };
+  }
 }
 
 function restoreOriginals() {
@@ -568,6 +609,25 @@ function restoreOriginals() {
       if (ct) ct.innerHTML = p.cards[i].title;
       if (cd) cd.innerHTML = p.cards[i].desc;
       card.querySelectorAll('.s6-tag').forEach(function(el, j){ if(p.cards[i].tags[j] !== undefined) el.innerHTML = p.cards[i].tags[j]; });
+    });
+  }
+  var sec3restore = document.getElementById('sec3');
+  if (sec3restore && _originals.svc) {
+    var sv = _originals.svc;
+    var tabNameEls = sec3restore.querySelectorAll('.svc-tab-name');
+    sv.tabs.forEach(function(name, i){ if(tabNameEls[i]) tabNameEls[i].textContent = name; });
+    sv.panels.forEach(function(pd, i){
+      if (!pd) return;
+      var panel = sec3restore.querySelector('.svc-panel[data-idx="' + i + '"]');
+      if (!panel) return;
+      var tagEl  = panel.querySelector('.svc-tag');
+      var nameEl = panel.querySelector('.svc-name');
+      var descEl = panel.querySelector('.svc-desc');
+      var chips  = panel.querySelectorAll('.svc-chip');
+      if (tagEl)  tagEl.textContent  = pd.tag;
+      if (nameEl) nameEl.textContent = pd.name;
+      if (descEl) descEl.textContent = pd.desc;
+      pd.chips.forEach(function(chip, j){ if(chips[j]) chips[j].textContent = chip; });
     });
   }
   var sec7 = document.getElementById('sec7');
@@ -646,6 +706,26 @@ function applyLang(lang) {
     const subtitle = sec3.querySelector('.svc-subtitle');
     if (eyebrow)  eyebrow.textContent  = t('svc.eyebrow');
     if (subtitle) subtitle.textContent = t('svc.subtitle');
+
+  // ── SecServices 탭·패널 교체 ──
+  if (lang !== 'ko' && sec3) {
+    var svcTabNames = sec3.querySelectorAll('.svc-tab-name');
+    for (var i = 0; i < 5; i++) {
+      if (svcTabNames[i]) svcTabNames[i].textContent = t('svc.tab' + i);
+      var panel = sec3.querySelector('.svc-panel[data-idx="' + i + '"]');
+      if (!panel) continue;
+      var tagEl  = panel.querySelector('.svc-tag');
+      var nameEl = panel.querySelector('.svc-name');
+      var descEl = panel.querySelector('.svc-desc');
+      var chips  = panel.querySelectorAll('.svc-chip');
+      if (tagEl)  tagEl.textContent  = t('svc.p' + i + '.tag');
+      if (nameEl) nameEl.textContent = t('svc.p' + i + '.name');
+      if (descEl) descEl.textContent = t('svc.p' + i + '.desc');
+      for (var j = 1; j <= 5; j++) {
+        if (chips[j-1]) chips[j-1].textContent = t('svc.p' + i + '.c' + j);
+      }
+    }
+  }
   }
 
   // ── SecCert 직접 교체 ──
