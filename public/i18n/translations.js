@@ -690,7 +690,7 @@ function applyLang(lang) {
     var ctValues = sec7.querySelectorAll('.ct-info-value');
     var ctBtn    = sec7.querySelector('.ct-btn');
     if (lang === 'ko') {
-      if (ctTitle)     ctTitle.textContent     = '이담에스티';
+      if (ctTitle)     ctTitle.textContent     = 'Contact Us';
       if (ctSub)       ctSub.textContent       = '제품 문의 · 기술문의';
       if (ctLabels[0]) ctLabels[0].textContent = '주소';
       if (ctLabels[1]) ctLabels[1].textContent = '전화';
