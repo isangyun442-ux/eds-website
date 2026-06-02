@@ -1081,3 +1081,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 window.__t = t;
 window.__applyLang = applyLang;
+// KV 에디터에서 수정된 한국어 텍스트를 번역 키에 반영
+window.__setKoTranslation = function(key, value) {
+  if (translations.ko) translations.ko[key] = value;
+};
