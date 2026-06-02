@@ -187,7 +187,7 @@ const translations = {
     'about.sign':      'From all staff',
 
     'svc.eyebrow':     'Business Fields',
-    'svc.title':       'Business Fields',
+    'svc.title':       "EDAMST's <em>Business Fields</em>",
     'svc.subtitle':    'Complete solutions from design to construction and maintenance — backed by 19 years of field experience.',
     'svc.tab0':        'Public Institutions',
     'svc.tab1':        'Education',
@@ -308,7 +308,7 @@ const translations = {
     'about.sign':      '全体员工',
 
     'svc.eyebrow':     '业务领域',
-    'svc.title':       '业务领域',
+    'svc.title':       'EDAMST的<em>业务领域</em>',
     'svc.subtitle':    '凭借19年现场经验，提供从设计到施工和维护的完整解决方案。',
     'svc.tab0':        '政府机关',
     'svc.tab1':        '教育机构',
@@ -429,7 +429,7 @@ const translations = {
     'about.sign':      '役職員一同',
 
     'svc.eyebrow':     '事業分野',
-    'svc.title':       '事業分野',
+    'svc.title':       'EDAMSTの<em>事業分野</em>',
     'svc.subtitle':    '19年の現場経験で完成したソリューション — 設計から構築、保守まで責任を持って対応します。',
     'svc.tab0':        '公共機関',
     'svc.tab1':        '教育機関',
@@ -754,6 +754,14 @@ function applyLang(lang) {
   if (sec3) {
     const eyebrow  = sec3.querySelector('.svc-eyebrow');
     const subtitle = sec3.querySelector('.svc-subtitle');
+    const svcTitle  = sec3.querySelector('.svc-title');
+    if (svcTitle) {
+      if (lang === 'ko') {
+        svcTitle.innerHTML = '이담에스티의 <em>사업 분야</em>';
+      } else {
+        svcTitle.innerHTML = t('svc.title');
+      }
+    }
     if (eyebrow)  eyebrow.textContent  = t('svc.eyebrow');
     if (subtitle) subtitle.textContent = t('svc.subtitle');
 
