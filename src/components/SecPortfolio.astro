@@ -4,7 +4,7 @@ import { projects } from '../data/projects.js';
 ---
 <section class="sec s4" id="sec4">
 
-  <!-- 배경 (블러 + 어둡게) -->
+  <!-- 배경 (블러 + ?�둡�? -->
   <div class="port-bg" id="port-bg">
     {projects.map((p, i) => (
       <div class={`port-bg-slide${i === 0 ? ' active' : ''}`} style={`background-image:url('${p.images && p.images[0] ? p.images[0] : ''}')`}></div>
@@ -12,10 +12,10 @@ import { projects } from '../data/projects.js';
   </div>
   <div class="port-overlay"></div>
 
-  <!-- 콘텐츠 -->
+  <!-- 콘텐�?-->
   <div class="port-content">
 
-    <!-- 왼쪽: 메인 이미지 -->
+    <!-- ?�쪽: 메인 ?��?지 -->
     <div class="port-left">
       <div class="port-img-wrap" id="port-img-wrap">
         {projects.map((p, i) => (
@@ -25,10 +25,10 @@ import { projects } from '../data/projects.js';
       </div>
     </div>
 
-    <!-- 오른쪽: 텍스트 -->
+    <!-- ?�른�? ?�스??-->
     <div class="port-right">
 
-      <!-- 썸네일 3장 (이전/현재/다음) -->
+      <!-- ?�네??3??(?�전/?�재/?�음) -->
       <div class="port-thumbs" id="port-thumbs">
         <div class="port-thumb" id="port-thumb-prev"></div>
         <div class="port-thumb active" id="port-thumb-cur"></div>
@@ -47,11 +47,11 @@ import { projects } from '../data/projects.js';
         ))}
       </div>
 
-      <!-- 하단 컨트롤 -->
+      <!-- ?�단 컨트�?-->
       <div class="port-bottom">
         <div class="port-arrows">
-          <button class="port-btn" id="port-prev">←</button>
-          <button class="port-btn" id="port-next">→</button>
+          <button class="port-btn" id="port-prev">??/button>
+          <button class="port-btn" id="port-next">??/button>
         </div>
         <div class="port-counter">
           <span class="port-cur-num" id="port-cur-num">01</span>
@@ -59,7 +59,7 @@ import { projects } from '../data/projects.js';
           <span class="port-total-num">170</span>
         </div>
       </div>
-      <a href="/works" class="port-all" data-i18n="port.more">전체 구축사례 보기 →</a>
+      <a href="/works" class="port-all" data-i18n="port.more">?�체 구축?��? 보기 ??/a>
     </div>
 
   </div>
@@ -74,7 +74,7 @@ import { projects } from '../data/projects.js';
     display: flex; align-items: center;
   }
 
-  /* ── 배경 ── */
+  /* ?�?� 배경 ?�?� */
   .port-bg { position: absolute; inset: 0; }
   .port-bg-slide {
     position: absolute; inset: 0;
@@ -90,7 +90,7 @@ import { projects } from '../data/projects.js';
     z-index: 1;
   }
 
-  /* ── 콘텐츠 ── */
+  /* ?�?� 콘텐�??�?� */
   .port-content {
     position: relative; z-index: 2;
     width: 100%; display: flex;
@@ -99,7 +99,7 @@ import { projects } from '../data/projects.js';
     padding: 0;
   }
 
-  /* ── 왼쪽 이미지 패널 ── */
+  /* ?�?� ?�쪽 ?��?지 ?�널 ?�?� */
   .port-left {
     flex: 0 0 680px;
     padding: 20px 20px 20px 0;
@@ -112,7 +112,7 @@ import { projects } from '../data/projects.js';
     cursor: pointer;
     overflow: hidden;
   }
-  /* 호버 시 "자세히 보기" 오버레이 */
+  /* ?�버 ??"?�세??보기" ?�버?�이 */
   .port-img-hover {
     position: absolute; inset: 0; z-index: 10;
     background: rgba(8,16,48,0.45);
@@ -136,7 +136,7 @@ import { projects } from '../data/projects.js';
   }
   .port-img-slide.active { opacity: 1; }
 
-  /* ── 썸네일 3장 ── */
+  /* ?�?� ?�네??3???�?� */
   .port-thumbs {
     display: flex; gap: 10px;
     margin-bottom: 28px;
@@ -159,13 +159,13 @@ import { projects } from '../data/projects.js';
   }
   .port-thumb.hidden { opacity: 0; pointer-events: none; }
 
-  /* ── 오른쪽 텍스트 ── */
+  /* ?�?� ?�른�??�스???�?� */
   .port-right {
     flex: 0 0 480px;
     padding: 80px 40px 60px 60px;
     display: flex; flex-direction: column;
     justify-content: center; gap: 0;
-    /* 전체 높이 고정 — 내부 요소 움직임 방지 */
+    /* ?�체 ?�이 고정 ???��? ?�소 ?�직임 방�? */
     height: 100vh;
     min-height: 600px;
     box-sizing: border-box;
@@ -178,7 +178,7 @@ import { projects } from '../data/projects.js';
   }
   .port-eyebrow::before { content: ''; width: 28px; height: 2px; background: #fff; display: block; }
 
-  /* 슬라이드 텍스트 — 고정 높이로 레이아웃 이동 방지 */
+  /* ?�라?�드 ?�스????고정 ?�이�??�이?�웃 ?�동 방�? */
   .port-slides {
     position: relative;
     height: 200px;
@@ -212,7 +212,7 @@ import { projects } from '../data/projects.js';
     -webkit-box-orient: vertical; overflow: hidden;
   }
 
-  /* ── 하단 컨트롤 ── */
+  /* ?�?� ?�단 컨트�??�?� */
   .port-bottom {
     display: flex; align-items: center; gap: 16px; flex-wrap: wrap;
   }
@@ -229,7 +229,7 @@ import { projects } from '../data/projects.js';
   .port-btn:hover { background: rgba(255,255,255,0.18); border-color: #fff; }
   .port-btn:disabled { opacity: 0.2; cursor: default; }
 
-  /* 카운터 */
+  /* 카운??*/
   .port-counter {
     font-size: 13px; color: rgba(255,255,255,0.5);
     font-weight: 600; letter-spacing: 0.05em;
@@ -258,7 +258,7 @@ import { projects } from '../data/projects.js';
   }
 </style>
 
-<!-- 정적 프로젝트 데이터 클라이언트에 전달 -->
+<!-- ?�적 ?�로?�트 ?�이???�라?�언?�에 ?�달 -->
 <script is:inline define:vars={{ staticProjectsJSON: JSON.stringify(projects) }}>
   window.__staticProjects = JSON.parse(staticProjectsJSON);
 </script>
@@ -273,8 +273,7 @@ import { projects } from '../data/projects.js';
     const slidesEl = document.getElementById('port-slides');
     const totalEl = document.querySelector('.port-total-num');
 
-    // DOM 재구성
-    bg.innerHTML = allProjects.map((p, i) =>
+    // DOM ?�구??    bg.innerHTML = allProjects.map((p, i) =>
       `<div class="port-bg-slide${i===0?' active':''}" style="background-image:url('${p.images&&p.images[0]?p.images[0]:''}')"></div>`
     ).join('');
 
@@ -282,7 +281,7 @@ import { projects } from '../data/projects.js';
       `<div class="port-img-slide${i===0?' active':''}"></div>`
     ).join('');
 
-    // background-image를 JS로 직접 설정 (inline style 파싱 문제 방지)
+    // background-image�?JS�?직접 ?�정 (inline style ?�싱 문제 방�?)
     const imgDivs = imgWrap.querySelectorAll('.port-img-slide');
     allProjects.forEach((p, i) => {
       if (p.images && p.images[0]) {
@@ -302,8 +301,7 @@ import { projects } from '../data/projects.js';
 
     if (totalEl) totalEl.textContent = allProjects.length;
 
-    // 슬라이더 초기화
-    const bgs   = document.querySelectorAll('.port-bg-slide');
+    // ?�라?�더 초기??    const bgs   = document.querySelectorAll('.port-bg-slide');
     const imgs  = document.querySelectorAll('.port-img-slide');
     const slds  = document.querySelectorAll('.port-slide');
     const total = slds.length;
@@ -349,7 +347,7 @@ import { projects } from '../data/projects.js';
     btnPrev.addEventListener('click', function () { go(cur - 1); });
     btnNext.addEventListener('click', function () { go(cur + 1); });
 
-    // 메인 이미지 클릭 → /works?open=ID 이동
+    // 메인 ?��?지 ?�릭 ??/works?open=ID ?�동
     imgWrap.addEventListener('click', function () {
       const p = allProjects[cur];
       if (p && p.id) {
@@ -364,16 +362,17 @@ import { projects } from '../data/projects.js';
     go(0);
   }
 
-  // KV 데이터 + 정적 데이터 합치기
-  const staticProjects = window.__staticProjects || [];
+  // KV ?�이??+ ?�적 ?�이???�치�?  const staticProjects = window.__staticProjects || [];
 
   fetch('/api/admin/projects', { cache: 'no-store' })
     .then(r => r.json())
     .then(kvProjects => {
       if (Array.isArray(kvProjects) && kvProjects.length > 0) {
-        // KV 프로젝트를 앞에, 정적 프로젝트를 뒤에 합치기
-        const merged = [...kvProjects, ...staticProjects];
-        initSlider(merged);
+        // KV 내 중복 ID 제거 (Map으로 유일값만 유지)
+        const kvMap = new Map(kvProjects.map(p => [p.id, p]));
+        // 정적 데이터에서 KV에 없는 항목만 보완
+        staticProjects.forEach(p => { if (!kvMap.has(p.id)) kvMap.set(p.id, p); });
+        initSlider(Array.from(kvMap.values()));
       } else {
         initSlider(staticProjects);
       }
@@ -383,3 +382,4 @@ import { projects } from '../data/projects.js';
     });
 })();
 </script>
+
