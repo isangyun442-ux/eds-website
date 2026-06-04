@@ -6,6 +6,15 @@
   <!-- 영상 영역 100vh -->
   <div class="video-wrap">
     <video src="https://res.cloudinary.com/dlaty4qsq/video/upload/v1779928477/2025_%ED%99%8D%EB%B3%B4%EC%98%81%EC%83%81_%EB%A9%94%EC%9D%B8_3_r5glqx.mp4" autoplay muted loop playsinline preload="auto"></video>
+    <div class="scroll-hint">
+      <span class="scroll-label">SCROLL</span>
+      <div class="scroll-arrow">
+        <svg width="20" height="28" viewBox="0 0 20 28" fill="none">
+          <rect x="1" y="1" width="18" height="26" rx="9" stroke="rgba(255,255,255,0.5)" stroke-width="1.5"/>
+          <rect class="scroll-dot" x="9" y="5" width="2" height="5" rx="1" fill="white"/>
+        </svg>
+      </div>
+    </div>
   </div>
 
 </section>
@@ -27,6 +36,33 @@
     object-position: top center;
   }
 
+  .scroll-hint {
+    position: absolute;
+    bottom: 36px; left: 50%;
+    transform: translateX(-50%);
+    display: flex; flex-direction: column; align-items: center; gap: 8px;
+    animation: scrollFade 2.5s ease-in-out infinite;
+    cursor: pointer; z-index: 10;
+  }
+  .scroll-label {
+    font-size: 10px; font-weight: 700; letter-spacing: 0.2em;
+    color: rgba(255,255,255,0.5);
+  }
+  .scroll-dot {
+    animation: scrollDot 2.5s ease-in-out infinite;
+  }
+  @keyframes scrollDot {
+    0%   { transform: translateY(0); opacity: 1; }
+    60%  { transform: translateY(10px); opacity: 0.2; }
+    61%  { transform: translateY(0); opacity: 0; }
+    70%  { opacity: 1; }
+    100% { transform: translateY(0); opacity: 1; }
+  }
+  @keyframes scrollFade {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.6; }
+  }
+
   @media (max-width: 768px) {
     #sec0, #sec0.active, #sec0.sec {
       display: none !important;
@@ -35,3 +71,16 @@
     }
   }
 </style>
+
+<script>
+  const hint = document.querySelector('.scroll-hint') as HTMLElement | null;
+  if (hint) {
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 80) hint.style.opacity = '0';
+      else hint.style.opacity = '1';
+    }, { passive: true });
+    hint.addEventListener('click', () => {
+      window.scrollBy({ top: window.innerHeight, behavior: 'smooth' });
+    });
+  }
+</script>
