@@ -59,6 +59,9 @@
     }
     .nav-cta:hover{background:#142580;}
     @media(max-width:768px){.nav{padding:12px 20px;}.nav-menu{display:none;}}
+    .lang-switch { display:flex; gap:6px; margin-right:12px; }
+    .lang-sw-btn { font-size:11px; font-weight:700; padding:4px 8px; border:1.5px solid #ddd; background:transparent; cursor:pointer; border-radius:4px; color:#666; font-family:inherit; transition:all 0.2s; }
+    .lang-sw-btn.active { background:#1a2f8a; color:#fff; border-color:#1a2f8a; }
 
     /* HERO */
     .hero{padding:120px 60px 80px;background:linear-gradient(170deg,#f7f9ff 0%,#edf1fb 100%);}
@@ -169,7 +172,8 @@
         <a href="/#sec7" class="nav-link">문의</a>
       </div>
     </div>
-    <a href="/#sec7" class="nav-cta">도입 문의</a>
+    <div class="lang-switch"><button class="lang-sw-btn active" onclick="setLang('ko')">KO</button><button class="lang-sw-btn" onclick="setLang('en')">EN</button></div>
+      <a href="/#sec7" class="nav-cta">도입 문의</a>
   </nav>
 
   <!-- HERO -->
@@ -384,5 +388,109 @@
     </div>
   </footer>
 
+
+<script>
+(function() {
+  const nav = {
+    ko: ['회사소개','인사말','인증현황','오시는 길','사업분야','조달청 등록제품','미디어박스','컴퓨터 서버','디스크 어레이','LED 전광판','구축사례','도입 문의'],
+    en: ['About','Greeting','Certifications','Directions','Services','Procurement','Mediabox','Computer Server','Disk Array','LED Display','Portfolio','Inquire']
+  };
+  const page = {
+    ko: {
+      title: '컴퓨터 서버 — EDS 이담에스티',
+      badge: '조달청 등록제품',
+      heroSub: '고성능과 확장성을 바탕으로 개발된<br>2U 2WAY 8BAY 컴퓨터 서버시스템',
+      secTitles: ['미디어밴스 컴퓨터서버란?','제품 특징','제품 사양'],
+      secDesc: '미디어밴스 컴퓨터서버는 안정적인 서버 구축을 위한 최적의 솔루션을 제시합니다. 최신 인텔 제온 스케일러블 프로세서와 DDR5 메모리를 기반으로 압도적인 컴퓨팅 성능을 제공하며, PCIe 5.0 기반의 초고속 인터페이스를 통해 데이터 병목 현상을 최소화합니다.',
+      featTitles: ['고성능 프로세서','그래픽 처리','DDR5 메모리','스토리지','네트워크 & 확장','RAID 및 안정성'],
+      featItems: [
+        ['Single 또는 Dual CPU 사용 가능','12코어 24쓰레드 최대 4.1GHz','Intel Xeon Scalable 5th 프로세서 장착'],
+        ['26개의 2세대 RT 코어, 104개의 3세대 Tensor 코어','3,328개의 차세대 CUDA코어와 12GB GDDR6 그래픽 메모리 GPU RTX A2000 탑재','NVIDIA RTX 기술, 실시간 레이트레이싱, AI 기술 컴퓨팅 지원'],
+        ['DDR5규격의 서버 및 워크스테이션용 메모리 모듈로 빠른 속도와 높은 대역폭 제공','4800MHz의 작동 속도 및 ECC(오류 수정 코드) 기능으로 안정성 제공','REG(Registered/버피링) DIMM으로 메모리 컨트롤러의 안정적인 작동들을 제공'],
+        ['차세대 규격 NVMe SSD 또는 범용성 높은 SATA SSD 채택','HDD 최대 80TB 옵션','8BAY 핫스왑 베이 3.5인치, 2.5인치 드라이브 지원'],
+        ['10Gbps 이더넷 포트 3개, IPMI 관리 포트 등 서버 환경에 필요한 네트워크 및 관리 기능 지원','DDR5 메모리 슬롯 16개를 지원하며 PCIe 5.0 슬롯과 다양한 저장 장치 인터페이스를 지원하는 최신 기술을 활용 가능'],
+        ['컨트롤러당 최대 240개의 SAS/SATA 장치 또는 32개의 NVMe 장치 연결','RAID 0, 1, 5, 6, 50, 60 및 SDS 환경을 위한 JBOD 모드 지원','CacheVault 플래시 캐시 보호 기능','고속 Backplane을 통한 안전적인 데이터 전송']
+      ],
+      specHeader: ['항목','사양'],
+      ctaTitle: '도입 문의를 환영합니다',
+      ctaDesc: '컴퓨터 서버는 조달청 나라장터를 통해 공공기관 직접 구매가 가능합니다.',
+      ctaDesc2: '자세한 사양 및 견적은 문의를 통해 확인하세요.',
+      ctaBtn: '도입 문의하기 →', ctaBtn2: '구축사례 보기',
+      footer: '© 2025 이담에스티 주식회사. All rights reserved.'
+    },
+    en: {
+      title: 'Computer Server — EDS EDAMST',
+      badge: 'Procurement Product',
+      heroSub: 'High-performance and scalable<br>2U 2WAY 8BAY Computer Server System',
+      secTitles: ['What is Mediavance Server?','Product Features','Specifications'],
+      secDesc: 'Mediavance Computer Server offers the optimal solution for reliable server infrastructure. Built on the latest Intel Xeon Scalable processors and DDR5 memory, it delivers exceptional computing performance while minimizing data bottlenecks through PCIe 5.0 ultra-fast interfaces.',
+      featTitles: ['High-Performance Processor','Graphics Processing','DDR5 Memory','Storage','Network & Expansion','RAID & Reliability'],
+      featItems: [
+        ['Single or Dual CPU configuration','12 cores, 24 threads, up to 4.1GHz','Intel Xeon Scalable 5th Gen processor'],
+        ['26 2nd-gen RT Cores, 104 3rd-gen Tensor Cores','3,328 next-gen CUDA cores with 12GB GDDR6 GPU RTX A2000','NVIDIA RTX technology: real-time ray tracing and AI computing'],
+        ['DDR5 server/workstation memory with fast speed and high bandwidth','4800MHz operating speed with ECC for stability','REG DIMM for stable memory controller operation'],
+        ['Next-gen NVMe SSD or versatile SATA SSD','HDD up to 80TB option','8-bay hot-swap bay supporting 3.5" and 2.5" drives'],
+        ['3x 10Gbps Ethernet ports, IPMI management port for full server networking','16 DDR5 memory slots, PCIe 5.0, and various storage interfaces'],
+        ['Up to 240 SAS/SATA or 32 NVMe devices per controller','RAID 0/1/5/6/50/60 and JBOD mode support','CacheVault flash cache protection','Reliable data transfer via high-speed Backplane']
+      ],
+      specHeader: ['Item','Specification'],
+      ctaTitle: 'Welcome to Your Inquiry',
+      ctaDesc: 'Computer Server is available for direct purchase by public institutions through KONEPS.',
+      ctaDesc2: 'Contact us for detailed specifications and quotes.',
+      ctaBtn: 'Inquire Now →', ctaBtn2: 'View Case Studies',
+      footer: '© 2025 EDAMST Co., Ltd. All rights reserved.'
+    }
+  };
+
+  function applyLang(lang) {
+    var t = page[lang] || page.ko;
+    var n = nav[lang] || nav.ko;
+    document.title = t.title;
+    var navLinks = document.querySelectorAll('.nav-link');
+    var navTexts = [n[0],n[4],n[5],n[10],n[11]];
+    navLinks.forEach(function(el, i){ if(navTexts[i]) el.textContent = navTexts[i]; });
+    var dropLinks = document.querySelectorAll('.drop-link');
+    var dropTexts = [n[1],n[2],n[3],n[6],n[7],n[8],n[9]];
+    dropLinks.forEach(function(el, i){ if(dropTexts[i]) el.textContent = dropTexts[i]; });
+    var navCta = document.querySelector('.nav-cta');
+    if(navCta) navCta.textContent = n[11];
+    var badge = document.querySelector('.hero-badge');
+    var heroSub = document.querySelector('.hero-sub');
+    if(badge) badge.textContent = t.badge;
+    if(heroSub) heroSub.innerHTML = t.heroSub;
+    var secTitles = document.querySelectorAll('.sec-title');
+    t.secTitles.forEach(function(title, i){ if(secTitles[i]) secTitles[i].textContent = title; });
+    var secDesc = document.querySelector('.sec-desc');
+    if(secDesc) secDesc.textContent = t.secDesc;
+    var featTitles = document.querySelectorAll('.feat-title');
+    featTitles.forEach(function(el, i){ if(t.featTitles[i]) el.textContent = t.featTitles[i]; });
+    var featCards = document.querySelectorAll('.feat-card');
+    featCards.forEach(function(card, i){
+      if(!t.featItems[i]) return;
+      var items = card.querySelectorAll('.feat-item');
+      items.forEach(function(el, j){ if(t.featItems[i][j]) el.textContent = t.featItems[i][j]; });
+    });
+    var ths = document.querySelectorAll('.specs-table th');
+    ths.forEach(function(el, i){ if(t.specHeader[i]) el.textContent = t.specHeader[i]; });
+    var ctaTitle = document.querySelector('.cta-title');
+    var ctaDescs = document.querySelectorAll('.cta-desc');
+    var ctaBtns = document.querySelectorAll('.cta-btn');
+    if(ctaTitle) ctaTitle.textContent = t.ctaTitle;
+    if(ctaDescs[0]) ctaDescs[0].textContent = t.ctaDesc;
+    if(ctaDescs[1]) ctaDescs[1].textContent = t.ctaDesc2;
+    if(ctaBtns[0]) ctaBtns[0].textContent = t.ctaBtn;
+    if(ctaBtns[1]) ctaBtns[1].textContent = t.ctaBtn2;
+    var footer = document.querySelector('.footer-copy');
+    if(footer) footer.textContent = t.footer;
+    document.querySelectorAll('.lang-sw-btn').forEach(function(btn){
+      btn.classList.toggle('active', btn.textContent === lang.toUpperCase());
+    });
+    localStorage.setItem('eds-lang', lang);
+  }
+  window.setLang = applyLang;
+  var saved = localStorage.getItem('eds-lang') || 'ko';
+  if(saved !== 'ko') applyLang(saved);
+})();
+</script>
 </body>
 </html>

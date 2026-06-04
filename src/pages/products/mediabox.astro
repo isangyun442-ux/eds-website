@@ -59,6 +59,9 @@
     }
     .nav-cta:hover{background:#142580;}
     @media(max-width:768px){.nav{padding:12px 20px;}.nav-menu{display:none;}}
+    .lang-switch { display:flex; gap:6px; margin-right:12px; }
+    .lang-sw-btn { font-size:11px; font-weight:700; padding:4px 8px; border:1.5px solid #ddd; background:transparent; cursor:pointer; border-radius:4px; color:#666; font-family:inherit; transition:all 0.2s; }
+    .lang-sw-btn.active { background:#1a2f8a; color:#fff; border-color:#1a2f8a; }
 
     /* HERO */
     .hero{padding:120px 60px 80px;background:linear-gradient(170deg,#f7f9ff 0%,#edf1fb 100%);}
@@ -185,7 +188,8 @@
         <a href="/#sec7" class="nav-link">문의</a>
       </div>
     </div>
-    <a href="/#sec7" class="nav-cta">도입 문의</a>
+    <div class="lang-switch"><button class="lang-sw-btn active" onclick="setLang('ko')">KO</button><button class="lang-sw-btn" onclick="setLang('en')">EN</button></div>
+      <a href="/#sec7" class="nav-cta">도입 문의</a>
   </nav>
 
   <!-- HERO -->
@@ -373,6 +377,167 @@
     </div>
   </footer>
 
+
+<script>
+(function() {
+  const nav = {
+    ko: ['회사소개','인사말','인증현황','오시는 길','사업분야','조달청 등록제품','미디어박스','컴퓨터 서버','디스크 어레이','LED 전광판','구축사례','도입 문의'],
+    en: ['About','Greeting','Certifications','Directions','Services','Procurement','Mediabox','Computer Server','Disk Array','LED Display','Portfolio','Inquire']
+  };
+  const page = {
+    ko: {
+      title: 'mediabox — EDS 이담에스티',
+      badge: '조달청 등록제품',
+      heroSub: 'HDTV 동시녹화 녹화영상<br>키워드 검색 및 편집 시스템',
+      secTitles: ['미디어박스란?','제품 특징','제품 사양'],
+      secDesc: 'HD 방송 녹화의 새로운 기준을 제시하는 미디어박스는 원하는 시간대에 원하는 방송 프로그램을 최대 8개 채널까지 동시에 녹화할 수 있으며, 특화된 키워드 검색 기능을 통해 원하는 장면을 신속하게 찾아 편집할 수 있습니다.',
+      overviewItems: [
+        '최대 16채널 HDTV(1080i) 동시녹화',
+        '키워드, 기간지정, 채널 지정, 프로그램명 입력으로 녹화된 영상을 검색',
+        '녹화영상 중 필요한 부분에 대해 In/out point를 지정하여 영상 및 자막 추출',
+        '추출되는 영상 해상도(480, 720, 1080), 포맷(mpeg, mpegts, avi, mp4, mov) 지정가능',
+        '라이브채널로 지정하여 시청 가능하며 시청 중 즉시 녹화기능 제공'
+      ],
+      featTitles: ['녹화 기능','검색 기능','재생 및 내보내기','관리 기능','방송 수신 지원','하드웨어 플랫폼'],
+      featItems: [
+        ['최대 8채널 HDTV(1080i) 동시녹화','채널별 독립적인 녹화 스케줄 설정','녹화일자로 저장폴더 생성','녹화 예약 설정을 한번, 매일, 매주로 선택','녹화영상이 저장되는 폴더를 지정','녹화시간 표시 및 녹화상태 표시','채널별 녹화상태 표시'],
+        ['키워드 입력으로 녹화된 영상을 검색','키워드검색에 대해 결과내 재검색 제공','기간지정, 채널 지정, 프로그래밍 등 고급검색 제공','검색 결과물을 파일별, 채널별, 시간별, 프로그램명으로 정렬','키워드가 언급된 녹화영상 장면으로 정밀 이동','EPG를 이용한 프로그램명 자동 저장'],
+        ['직관적인 GUI로 간편한 사용이 가능','녹화 영상 재생 시 해당 자막 화면 표시','In/out point를 지정하여 영상 및 자막 추출','추출영상의 해상도(480, 720, 1080) 선택 가능','추출 포맷 변형 지원 (mpeg, mpegts, avi, mp4, mov 등)','Snap shot 기능 (jpg, bmp)'],
+        ['채널검색, 채널 설정 및 tuner 상태 관리','클라이언트 소프트웨어로 네트워크상에서 운영 가능','자동 스토리지 관리 (오래된 녹화 영상부터 자동 삭제)','Freespace 설정으로 디스크 사용량 제어 가능','날짜별로 저장된 파일 수, 데이터 크기를 표시','로그기록을 통해 시스템정보 확인'],
+        ['지상파 및 CATV 완벽지원','최대 8채널 HDTV 동시 녹화','지역별, SO별 관계없이 간단한 채널 설정','최대 약 4개월 연속녹화 가능 (8VSB, QAM, Raid 5 기준)','RF케이블 1개를 이용하여 최대 8채널 녹화지원'],
+        ['Microsoft BDA(Broadcast Driver Architecture) 사용으로 안정적인 하드웨어 환경 제공','서버용 Intel Xeon Processor 적용','Hot-Swap Disk로 손쉬운 관리','전원공급장치 이중화로 시스템 안정성확보','2개의 Gigabit 이더넷 제공','RAID 시스템 제공 (RAID 5 또는 RAID 6)']
+      ],
+      specHeader: ['항목','사양'],
+      specRows: [['모델명','MB-HD8000']],
+      ctaTitle: '도입 문의를 환영합니다',
+      ctaDesc: '미디어박스는 조달청 나라장터를 통해 공공기관 직접 구매가 가능합니다.',
+      ctaDesc2: '자세한 사양 및 견적은 문의를 통해 확인하세요.',
+      ctaBtn: '도입 문의하기 →',
+      ctaBtn2: '구축사례 보기',
+      footer: '© 2025 이담에스티 주식회사. All rights reserved.'
+    },
+    en: {
+      title: 'Mediabox — EDS EDAMST',
+      badge: 'Procurement Product',
+      heroSub: 'HDTV Simultaneous Recording<br>Keyword Search & Editing System',
+      secTitles: ['What is Mediabox?','Product Features','Specifications'],
+      secDesc: 'Mediabox sets a new standard for HD broadcast recording, allowing simultaneous recording of up to 8 channels at any time, with specialized keyword search to quickly find and edit desired scenes.',
+      overviewItems: [
+        'Up to 16-channel HDTV(1080i) simultaneous recording',
+        'Search recorded footage by keyword, date range, channel, or program name',
+        'Extract video and subtitles by specifying In/out points',
+        'Selectable output resolution (480, 720, 1080) and format (mpeg, mpegts, avi, mp4, mov)',
+        'Assign as live channel for real-time viewing with instant recording'
+      ],
+      featTitles: ['Recording','Search','Playback & Export','Management','Broadcast Support','Hardware Platform'],
+      featItems: [
+        ['Up to 8-channel HDTV(1080i) simultaneous recording','Independent recording schedule per channel','Create storage folders by recording date','Set recording reservations as once, daily, or weekly','Designate storage folder for recordings','Display recording time and status','Show recording status per channel'],
+        ['Search recorded footage by keyword','Re-search within keyword search results','Advanced search by date, channel, and program','Sort results by file, channel, time, or program name','Navigate precisely to scenes where keywords appear','Auto-save program names via EPG'],
+        ['Easy operation with intuitive GUI','Display subtitles during playback','Extract video and subtitles via In/out points','Selectable output resolution (480, 720, 1080)','Format conversion support (mpeg, mpegts, avi, mp4, mov)','Snapshot function (jpg, bmp)'],
+        ['Channel search, channel settings, and tuner status management','Operable over network via client software','Automatic storage management (auto-delete oldest recordings)','Control disk usage via Freespace settings','Display file count and data size by date','System information via log records'],
+        ['Full support for terrestrial and CATV','Up to 8-channel HDTV simultaneous recording','Simple channel setup regardless of region or SO','Up to ~4 months continuous recording (8VSB, QAM, Raid 5)','Support up to 8-channel recording with a single RF cable'],
+        ['Stable hardware environment via Microsoft BDA','Server-grade Intel Xeon Processor','Easy management with Hot-Swap Disk','Redundant power supply for system stability','2 Gigabit Ethernet ports','RAID system support (RAID 5 or RAID 6)']
+      ],
+      specHeader: ['Item','Specification'],
+      specRows: [['Model','MB-HD8000']],
+      ctaTitle: 'Welcome to Your Inquiry',
+      ctaDesc: 'Mediabox is available for direct purchase by public institutions through the KONEPS marketplace.',
+      ctaDesc2: 'Contact us for detailed specifications and quotes.',
+      ctaBtn: 'Inquire Now →',
+      ctaBtn2: 'View Case Studies',
+      footer: '© 2025 EDAMST Co., Ltd. All rights reserved.'
+    }
+  };
+
+  function applyLang(lang) {
+    const t = page[lang] || page.ko;
+    const n = nav[lang] || nav.ko;
+
+    // 제목
+    document.title = t.title;
+
+    // nav 텍스트
+    const navLinks = document.querySelectorAll('.nav-link');
+    const navTexts = [n[0],n[4],n[5],n[10],n[11]];
+    const dropLinks = document.querySelectorAll('.drop-link');
+    const dropTexts = [n[1],n[2],n[3],n[6],n[7],n[8],n[9]];
+    navLinks.forEach(function(el, i){ if(navTexts[i]) el.textContent = navTexts[i]; });
+    dropLinks.forEach(function(el, i){ if(dropTexts[i]) el.textContent = dropTexts[i]; });
+    const navCta = document.querySelector('.nav-cta');
+    if(navCta) navCta.textContent = n[11];
+
+    // Hero
+    const badge = document.querySelector('.hero-badge');
+    const heroSub = document.querySelector('.hero-sub');
+    if(badge) badge.textContent = t.badge;
+    if(heroSub) heroSub.innerHTML = t.heroSub;
+
+    // 섹션 제목
+    const secTitles = document.querySelectorAll('.sec-title');
+    t.secTitles.forEach(function(title, i){ if(secTitles[i]) secTitles[i].textContent = title; });
+
+    // Overview
+    const secDesc = document.querySelector('.sec-desc');
+    if(secDesc) secDesc.textContent = t.secDesc;
+    const overviewItems = document.querySelectorAll('.overview-box li');
+    overviewItems.forEach(function(el, i){
+      if(t.overviewItems[i]){
+        const dot = el.querySelector('span');
+        el.textContent = t.overviewItems[i];
+        if(dot) el.insertBefore(dot, el.firstChild);
+      }
+    });
+
+    // Features
+    const featTitles = document.querySelectorAll('.feat-title');
+    featTitles.forEach(function(el, i){ if(t.featTitles[i]) el.textContent = t.featTitles[i]; });
+    const featCards = document.querySelectorAll('.feat-card');
+    featCards.forEach(function(card, i){
+      if(!t.featItems[i]) return;
+      const items = card.querySelectorAll('.feat-item');
+      items.forEach(function(el, j){ if(t.featItems[i][j]) el.textContent = t.featItems[i][j]; });
+    });
+
+    // Specs 헤더
+    const ths = document.querySelectorAll('.specs-table th');
+    ths.forEach(function(el, i){ if(t.specHeader[i]) el.textContent = t.specHeader[i]; });
+    const firstTd = document.querySelector('.specs-table tbody tr:first-child td:first-child');
+    if(firstTd && t.specRows[0]) firstTd.textContent = t.specRows[0][0];
+
+    // CTA
+    const ctaTitle = document.querySelector('.cta-title');
+    const ctaDescs = document.querySelectorAll('.cta-desc');
+    const ctaBtns = document.querySelectorAll('.cta-btn');
+    if(ctaTitle) ctaTitle.textContent = t.ctaTitle;
+    if(ctaDescs[0]) ctaDescs[0].textContent = t.ctaDesc;
+    if(ctaDescs[1]) ctaDescs[1].textContent = t.ctaDesc2;
+    if(ctaBtns[0]) ctaBtns[0].textContent = t.ctaBtn;
+    if(ctaBtns[1]) ctaBtns[1].textContent = t.ctaBtn2;
+
+    // Footer
+    const footer = document.querySelector('.footer-copy');
+    if(footer) footer.textContent = t.footer;
+
+    // 언어 버튼 활성화
+    document.querySelectorAll('.lang-sw-btn').forEach(function(btn){
+      btn.classList.toggle('active', btn.textContent === lang.toUpperCase());
+    });
+
+    // localStorage 저장
+    localStorage.setItem('eds-lang', lang);
+  }
+
+  window.setLang = applyLang;
+
+  // 페이지 로드 시 적용
+  var savedLang = localStorage.getItem('eds-lang') || 'ko';
+  if(savedLang !== 'ko') applyLang(savedLang);
+  else {
+    var btn = document.querySelector('.lang-sw-btn');
+    if(btn) btn.classList.add('active');
+  }
+})();
+</script>
 </body>
 </html>
 

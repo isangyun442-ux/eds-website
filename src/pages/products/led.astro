@@ -33,6 +33,9 @@
     .nav-cta{font-size:13px;font-weight:700;padding:9px 20px;background:#1a2f8a;color:#fff;border:none;cursor:pointer;border-radius:6px;font-family:inherit;transition:background 0.2s;text-decoration:none;}
     .nav-cta:hover{background:#142580;}
     @media(max-width:768px){.nav{padding:12px 20px;}.nav-menu{display:none;}}
+    .lang-switch { display:flex; gap:6px; margin-right:12px; }
+    .lang-sw-btn { font-size:11px; font-weight:700; padding:4px 8px; border:1.5px solid #ddd; background:transparent; cursor:pointer; border-radius:4px; color:#666; font-family:inherit; transition:all 0.2s; }
+    .lang-sw-btn.active { background:#1a2f8a; color:#fff; border-color:#1a2f8a; }
 
     /* HERO */
     .hero{padding:120px 60px 80px;background:linear-gradient(170deg,#f7f9ff 0%,#edf1fb 100%);}
@@ -138,7 +141,8 @@
         <a href="/#sec7" class="nav-link">문의</a>
       </div>
     </div>
-    <a href="/#sec7" class="nav-cta">도입 문의</a>
+    <div class="lang-switch"><button class="lang-sw-btn active" onclick="setLang('ko')">KO</button><button class="lang-sw-btn" onclick="setLang('en')">EN</button></div>
+      <a href="/#sec7" class="nav-cta">도입 문의</a>
   </nav>
 
   <!-- HERO -->
@@ -292,5 +296,82 @@
     </div>
   </footer>
 
+
+<script>
+(function() {
+  var nav = {
+    ko: ['회사소개','인사말','인증현황','오시는 길','사업분야','조달청 등록제품','미디어박스','컴퓨터 서버','디스크 어레이','LED 전광판','구축사례','도입 문의'],
+    en: ['About','Greeting','Certifications','Directions','Services','Procurement','Mediabox','Computer Server','Disk Array','LED Display','Portfolio','Inquire']
+  };
+  var page = {
+    ko: {
+      title: 'LED 디스플레이 — EDS 이담에스티', badge: '조달청 등록제품',
+      heroSub: '공공 미디어아트, XR 스튜디오, 미디어파사드 등<br>다양한 장르의 설계, 제작 및 시공의 노하우를 보유하고 있습니다.',
+      secTitles: ['LED 디스플레이 시리즈'],
+      featTitles: ['제품 특징','제품 사양','제품 특징','제품 사양','제품 특징','제품 사양'],
+      featItems: [
+        ['캐비닛당 무게 4kg, 두께 29.6mm — 쉽고 효율적인 운송 및 설치','10000:1의 높은 명암비로 프리미엄 몰입형 시각적 경험','최대 에너지 절약 성능','최고 수준의 보호성으로 충돌 및 주변 환경으로 인한 손상 절감','곡선형, 모서리형 및 하프사이즈 패널의 유연한 설계 가능'],
+        [],
+        ['800~3500nits의 밝기 및 높은 명암비로 몰입감 높은 경험 제공','다양하고 창의적인 구성 및 멀티 어플리케이션 가능','최대 50%의 전력 소비 절감','소프트 모듈을 사용한 창의적인 스플라이싱','Wall 마운팅, 스태킹, 행잉 등 여러 형태로 설치 가능'],
+        [],
+        ['역동적인 창의성과 초유연성으로 건물의 구조 및 디자인과 자연스럽게 통합','프로젝트 요구에 따라 다양한 캐비닛 크기 사용 가능','뛰어난 유연성과 높은 밀도로 다양한 디자인 가능성 제공','높은 화면 평탄도 보장','우수한 방열효과'],
+        []
+      ],
+      specHeader: ['항목','사양'],
+      ctaTitle: '도입 문의를 환영합니다',
+      ctaBtn: '도입 문의하기 →', ctaBtn2: '구축사례 보기',
+      footer: '© 2025 이담에스티 주식회사. All rights reserved.'
+    },
+    en: {
+      title: 'LED Display — EDS EDAMST', badge: 'Procurement Product',
+      heroSub: 'Public Media Art, XR Studio, Media Facade & More<br>Expertise in design, production, and installation across diverse genres.',
+      secTitles: ['LED Display Series'],
+      featTitles: ['Product Features','Specifications','Product Features','Specifications','Product Features','Specifications'],
+      featItems: [
+        ['Cabinet weight 4kg, thickness 29.6mm — easy and efficient transport & installation','Premium immersive visual experience with 10000:1 contrast ratio','Maximum energy saving performance','Superior protection against impact and environmental damage','Flexible design with curved, corner, and half-size panels'],
+        [],
+        ['800~3500nits brightness with high contrast for immersive experience','Diverse and creative configurations with multi-application support','Up to 50% reduction in power consumption','Creative splicing using soft modules','Multiple installation options: wall mount, stacking, hanging'],
+        [],
+        ['Naturally integrates with building structure and design via dynamic creativity and ultra-flexibility','Various cabinet sizes available per project requirements','Wide design possibilities with excellent flexibility and high density','High screen flatness guaranteed','Excellent heat dissipation'],
+        []
+      ],
+      specHeader: ['Item','Specification'],
+      ctaTitle: 'Welcome to Your Inquiry',
+      ctaBtn: 'Inquire Now →', ctaBtn2: 'View Case Studies',
+      footer: '© 2025 EDAMST Co., Ltd. All rights reserved.'
+    }
+  };
+
+  function applyLang(lang) {
+    var t = page[lang] || page.ko;
+    var n = nav[lang] || nav.ko;
+    document.title = t.title;
+    var navLinks = document.querySelectorAll('.nav-link');
+    [n[0],n[4],n[5],n[10],n[11]].forEach(function(txt,i){ if(navLinks[i]) navLinks[i].textContent = txt; });
+    var dropLinks = document.querySelectorAll('.drop-link');
+    [n[1],n[2],n[3],n[6],n[7],n[8],n[9]].forEach(function(txt,i){ if(dropLinks[i]) dropLinks[i].textContent = txt; });
+    var navCta = document.querySelector('.nav-cta'); if(navCta) navCta.textContent = n[11];
+    var badge = document.querySelector('.hero-badge'); if(badge) badge.textContent = t.badge;
+    var heroSub = document.querySelector('.hero-sub'); if(heroSub) heroSub.innerHTML = t.heroSub;
+    document.querySelectorAll('.sec-title').forEach(function(el,i){ if(t.secTitles[i]) el.textContent = t.secTitles[i]; });
+    document.querySelectorAll('.feat-title').forEach(function(el,i){ if(t.featTitles[i]) el.textContent = t.featTitles[i]; });
+    document.querySelectorAll('.feat-card').forEach(function(card,i){
+      if(!t.featItems[i] || !t.featItems[i].length) return;
+      card.querySelectorAll('.feat-item').forEach(function(el,j){ if(t.featItems[i][j]) el.textContent = t.featItems[i][j]; });
+    });
+    document.querySelectorAll('.specs-table th').forEach(function(el,i){ if(t.specHeader[i]) el.textContent = t.specHeader[i]; });
+    var ctaTitle = document.querySelector('.cta-title'); if(ctaTitle) ctaTitle.textContent = t.ctaTitle;
+    var ctaBtns = document.querySelectorAll('.cta-btn');
+    if(ctaBtns[0]) ctaBtns[0].textContent = t.ctaBtn;
+    if(ctaBtns[1]) ctaBtns[1].textContent = t.ctaBtn2;
+    var footer = document.querySelector('.footer-copy'); if(footer) footer.textContent = t.footer;
+    document.querySelectorAll('.lang-sw-btn').forEach(function(btn){ btn.classList.toggle('active', btn.textContent === lang.toUpperCase()); });
+    localStorage.setItem('eds-lang', lang);
+  }
+  window.setLang = applyLang;
+  var saved = localStorage.getItem('eds-lang') || 'ko';
+  if(saved !== 'ko') applyLang(saved);
+})();
+</script>
 </body>
 </html>
