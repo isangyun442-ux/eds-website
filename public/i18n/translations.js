@@ -884,7 +884,7 @@ function applyLang(lang) {
     const svcTitle  = sec3.querySelector('.svc-title');
     if (svcTitle) {
       if (lang === 'ko') {
-        svcTitle.innerHTML = '이담에스티의 <em>사업 분야</em>';
+        svcTitle.innerHTML = '사업 분야';
       } else {
         svcTitle.innerHTML = t('svc.title');
       }
