@@ -50,69 +50,8 @@ import { projects } from '../data/projects.js';
       <!-- ?�단 컨트�?-->
       <div class="port-bottom">
         <div class="port-arrows">
-          <button class="port-btn" id="port-prev">&#8249;</button>
-          <button class="port-btn" id="port-next">&#8250;</button>
-        </div>
-        <div class="port-counter">
-          <span class="port-cur-num" id="port-cur-num">01</span>
-          <span class="port-sep"> / </span>
-          <span class="port-total-num">170</span>
-        </div>
-      </div>
-      <a href="/works" class="port-all" data-i18n="port.more">전체 구축사례 보기 →</a>
-// src/components/SecPortfolio.astro
-import { projects } from '../data/projects.js';
----
-<section class="sec s4" id="sec4">
-
-  <!-- 배경 (블러 + ?�둡�? -->
-  <div class="port-bg" id="port-bg">
-    {projects.map((p, i) => (
-      <div class={`port-bg-slide${i === 0 ? ' active' : ''}`} style={`background-image:url('${p.images && p.images[0] ? p.images[0] : ''}')`}></div>
-    ))}
-  </div>
-  <div class="port-overlay"></div>
-
-  <!-- 콘텐�?-->
-  <div class="port-content">
-
-    <!-- ?�쪽: 메인 ?��?지 -->
-    <div class="port-left">
-      <div class="port-img-wrap" id="port-img-wrap">
-        {projects.map((p, i) => (
-          <div class={`port-img-slide${i === 0 ? ' active' : ''}`} style={`background-image:url('${p.images && p.images[0] ? p.images[0] : ''}')`}></div>
-        ))}
-        <div class="port-img-hover"><span>View Detail</span></div>
-      </div>
-    </div>
-
-    <!-- ?�른�? ?�스??-->
-    <div class="port-right">
-
-      <!-- ?�네??3??(?�전/?�재/?�음) -->
-      <div class="port-thumbs" id="port-thumbs">
-        <div class="port-thumb" id="port-thumb-prev"></div>
-        <div class="port-thumb active" id="port-thumb-cur"></div>
-        <div class="port-thumb" id="port-thumb-next"></div>
-      </div>
-
-      <div class="port-eyebrow" data-i18n="port.eyebrow">Portfolio</div>
-
-      <div class="port-slides" id="port-slides">
-        {projects.map((p, i) => (
-          <div class={`port-slide${i === 0 ? ' active' : ''}`}>
-            <h3 class="port-title">{p.title}</h3>
-            <p class="port-sub">{p.service}&nbsp;·&nbsp;{p.date}</p>
-            <p class="port-desc">{p.overview || ''}</p>
-          </div>
-        ))}
-      </div>
-
-      <!-- ?�단 컨트�?-->
-      <div class="port-bottom">
-        <div class="port-arrows">
-          <button class="port-btn" id="port-prev">&#8249;</button>
-          <button class="port-btn" id="port-next">&#8250;</button>
+          <button class="port-btn" id="port-prev">??/button>
+          <button class="port-btn" id="port-next">??/button>
         </div>
         <div class="port-counter">
           <span class="port-cur-num" id="port-cur-num">01</span>
