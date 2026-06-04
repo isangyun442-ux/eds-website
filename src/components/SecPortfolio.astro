@@ -367,13 +367,12 @@ import { projects } from '../data/projects.js';
   // KV 데이터 + 정적 데이터 합치기
   const staticProjects = window.__staticProjects || [];
 
-  fetch('/api/admin/projects', { cache: 'no-store' })
+  fetch('/api/admin/projects')
     .then(r => r.json())
     .then(kvProjects => {
       if (Array.isArray(kvProjects) && kvProjects.length > 0) {
-        // KV 프로젝트를 앞에, 정적 프로젝트를 뒤에 합치기
-        const merged = [...kvProjects, ...staticProjects];
-        initSlider(merged);
+        // KV에 데이터 있으면 KV만 사용 (중복 방지)
+        initSlider(kvProjects);
       } else {
         initSlider(staticProjects);
       }
