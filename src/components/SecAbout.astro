@@ -12,7 +12,7 @@
   </div>
 
   <div class="ab-wrap">
-  <canvas id="aboutCanvas" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0;opacity:0.25;"></canvas>
+  <canvas id="aboutCanvas" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0;opacity:0.35;"></canvas>
 
     <!-- 왼쪽: 브랜드 컬러 -->
     <div class="ab-left fade-up">
@@ -84,27 +84,36 @@
       ctx.scale(1, 0.35);
       ctx.beginPath();
       ctx.arc(0, 0, r + i * 18, 0, Math.PI * 2);
-      ctx.strokeStyle = 'rgba(100, 160, 255, ' + (0.5 - i * 0.12) + ')';
+      ctx.shadowColor = 'rgba(100, 160, 255, 0.6)';
+      ctx.shadowBlur = 6;
+      ctx.strokeStyle = 'rgba(130, 180, 255, ' + (0.55 - i * 0.12) + ')';
       ctx.lineWidth = 1.2;
       ctx.stroke();
+      ctx.shadowBlur = 0;
       ctx.restore();
     }
 
-    // 바깥 글로우 원
+    // 바깥 글로우 원 (shadowBlur로 빛나는 효과)
+    ctx.shadowColor = 'rgba(100, 160, 255, 0.8)';
+    ctx.shadowBlur = 12;
     ctx.beginPath();
     ctx.arc(0, 0, r * 1.05, 0, Math.PI * 2);
-    ctx.strokeStyle = 'rgba(80, 140, 255, 0.2)';
-    ctx.lineWidth = 8;
+    ctx.strokeStyle = 'rgba(120, 170, 255, 0.35)';
+    ctx.lineWidth = 1.5;
     ctx.stroke();
+    ctx.shadowBlur = 0;
 
-    // 점선 원
+    // 점선 원 (글로우)
+    ctx.shadowColor = 'rgba(80, 150, 255, 0.5)';
+    ctx.shadowBlur = 8;
     ctx.setLineDash([4, 8]);
     ctx.beginPath();
     ctx.arc(0, 0, r * 1.3, 0, Math.PI * 2);
-    ctx.strokeStyle = 'rgba(100, 180, 255, 0.15)';
+    ctx.strokeStyle = 'rgba(100, 180, 255, 0.25)';
     ctx.lineWidth = 1;
     ctx.stroke();
     ctx.setLineDash([]);
+    ctx.shadowBlur = 0;
 
     ctx.restore();
     angle += 0.003;
