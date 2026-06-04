@@ -59,6 +59,9 @@
     }
     .nav-cta:hover{background:#142580;}
     @media(max-width:768px){.nav{padding:12px 20px;}.nav-menu{display:none;}}
+    .lang-switch { display:flex; gap:6px; margin-right:12px; }
+    .lang-sw-btn { font-size:11px; font-weight:700; padding:4px 8px; border:1.5px solid #ddd; background:transparent; cursor:pointer; border-radius:4px; color:#666; font-family:inherit; transition:all 0.2s; }
+    .lang-sw-btn.active { background:#1a2f8a; color:#fff; border-color:#1a2f8a; }
 
     /* HERO */
     .hero{padding:120px 60px 80px;background:linear-gradient(170deg,#f7f9ff 0%,#edf1fb 100%);}
@@ -172,7 +175,8 @@
         <a href="/#sec7" class="nav-link">문의</a>
       </div>
     </div>
-    <a href="/#sec7" class="nav-cta">도입 문의</a>
+    <div class="lang-switch"><button class="lang-sw-btn active" onclick="setLang('ko')">KO</button><button class="lang-sw-btn" onclick="setLang('en')">EN</button></div>
+      <a href="/#sec7" class="nav-cta">도입 문의</a>
   </nav>
 
   <!-- HERO -->
@@ -409,5 +413,81 @@
     </div>
   </footer>
 
+
+<script>
+(function() {
+  var nav = {
+    ko: ['회사소개','인사말','인증현황','오시는 길','사업분야','조달청 등록제품','미디어박스','컴퓨터 서버','디스크 어레이','LED 전광판','구축사례','도입 문의'],
+    en: ['About','Greeting','Certifications','Directions','Services','Procurement','Mediabox','Computer Server','Disk Array','LED Display','Portfolio','Inquire']
+  };
+  var page = {
+    ko: {
+      title: '디스크 어레이 — EDS 이담에스티', badge: '조달청 등록제품',
+      heroSub: '안전성, 확장성, 사용자의 편의성을 고려한<br>고성능 네트워크 공유 스토리지',
+      secTitles: ['NS-NAS란?','제품 특징','제품 사양'],
+      secDesc: 'NS-NAS 스토리지는 Xeon 최대 2개의 CPU 및 2TB까지 확장 가능한 메모리를 장착할 수 있는 고성능 시스템 기반으로 대용량의 데이터를 고속 전송에 적합한 파일시스템으로 설계되었습니다.',
+      featTitles: ['최고의 성능','안정적 백업','넓은 확장성','최상의 관리성'],
+      featItems: [
+        ['최대 2개의 Xeon 프로세서 확장','2TB 메모리 증설 및 SSD 캐쉬 적용','최대 4개의 100GbE 옵션 장착 가능','대용량 데이터 처리에 최적화된 NAS 엔진'],
+        ['다양한 외장형스토리지 연결 지원','양방향 백업, 압축백업, QoS설정 기능 제공','백업 스케줄링, 무한 License 제공'],
+        ['최소 1TB부터 최대 8PB까지 확장','최신의 고 용량 하드 디스크 지원','스토리지 폴더단위 용량 증설, 감설 지원','이기종 외장형 스토리지 지원'],
+        ['CPU, 메모리, 네트워크 사용 모니터링','안전하고 직관적인 RAID 구성 관리','시스템, 디스크, 네트워크 별도 로그 관리','시간, 일자별 조회 선택 자원 사용 관리']
+      ],
+      specHeader: ['항목','사양'],
+      ctaTitle: '도입 문의를 환영합니다',
+      ctaBtn: '도입 문의하기 →', ctaBtn2: '구축사례 보기',
+      footer: '© 2025 이담에스티 주식회사. All rights reserved.'
+    },
+    en: {
+      title: 'Disk Array — EDS EDAMST', badge: 'Procurement Product',
+      heroSub: 'Safety, Scalability, and User Convenience<br>High-Performance Network Shared Storage',
+      secTitles: ['What is NS-NAS?','Product Features','Specifications'],
+      secDesc: 'NS-NAS Storage is designed on a high-performance platform supporting up to 2 Xeon CPUs and 2TB expandable memory, with a file system optimized for high-speed transfer of large-scale data.',
+      featTitles: ['Peak Performance','Reliable Backup','Wide Scalability','Optimal Management'],
+      featItems: [
+        ['Up to 2 Xeon processor expansion','2TB memory upgrade and SSD cache support','Up to 4x 100GbE option slots','NAS engine optimized for large-scale data processing'],
+        ['Supports various external storage connections','Bidirectional backup, compressed backup, QoS settings','Backup scheduling, unlimited license'],
+        ['Scalable from 1TB to 8PB','Supports latest high-capacity hard drives','Per-folder storage capacity expansion and reduction','Heterogeneous external storage support'],
+        ['CPU, memory, and network usage monitoring','Safe and intuitive RAID configuration management','Separate system, disk, and network log management','Hourly and daily resource usage management']
+      ],
+      specHeader: ['Item','Specification'],
+      ctaTitle: 'Welcome to Your Inquiry',
+      ctaBtn: 'Inquire Now →', ctaBtn2: 'View Case Studies',
+      footer: '© 2025 EDAMST Co., Ltd. All rights reserved.'
+    }
+  };
+
+  function applyLang(lang) {
+    var t = page[lang] || page.ko;
+    var n = nav[lang] || nav.ko;
+    document.title = t.title;
+    var navLinks = document.querySelectorAll('.nav-link');
+    [n[0],n[4],n[5],n[10],n[11]].forEach(function(txt,i){ if(navLinks[i]) navLinks[i].textContent = txt; });
+    var dropLinks = document.querySelectorAll('.drop-link');
+    [n[1],n[2],n[3],n[6],n[7],n[8],n[9]].forEach(function(txt,i){ if(dropLinks[i]) dropLinks[i].textContent = txt; });
+    var navCta = document.querySelector('.nav-cta'); if(navCta) navCta.textContent = n[11];
+    var badge = document.querySelector('.hero-badge'); if(badge) badge.textContent = t.badge;
+    var heroSub = document.querySelector('.hero-sub'); if(heroSub) heroSub.innerHTML = t.heroSub;
+    document.querySelectorAll('.sec-title').forEach(function(el,i){ if(t.secTitles[i]) el.textContent = t.secTitles[i]; });
+    var secDesc = document.querySelector('.sec-desc'); if(secDesc) secDesc.textContent = t.secDesc;
+    document.querySelectorAll('.feat-title').forEach(function(el,i){ if(t.featTitles[i]) el.textContent = t.featTitles[i]; });
+    document.querySelectorAll('.feat-card').forEach(function(card,i){
+      if(!t.featItems[i]) return;
+      card.querySelectorAll('.feat-item').forEach(function(el,j){ if(t.featItems[i][j]) el.textContent = t.featItems[i][j]; });
+    });
+    document.querySelectorAll('.specs-table th').forEach(function(el,i){ if(t.specHeader[i]) el.textContent = t.specHeader[i]; });
+    var ctaTitle = document.querySelector('.cta-title'); if(ctaTitle) ctaTitle.textContent = t.ctaTitle;
+    var ctaBtns = document.querySelectorAll('.cta-btn');
+    if(ctaBtns[0]) ctaBtns[0].textContent = t.ctaBtn;
+    if(ctaBtns[1]) ctaBtns[1].textContent = t.ctaBtn2;
+    var footer = document.querySelector('.footer-copy'); if(footer) footer.textContent = t.footer;
+    document.querySelectorAll('.lang-sw-btn').forEach(function(btn){ btn.classList.toggle('active', btn.textContent === lang.toUpperCase()); });
+    localStorage.setItem('eds-lang', lang);
+  }
+  window.setLang = applyLang;
+  var saved = localStorage.getItem('eds-lang') || 'ko';
+  if(saved !== 'ko') applyLang(saved);
+})();
+</script>
 </body>
 </html>
