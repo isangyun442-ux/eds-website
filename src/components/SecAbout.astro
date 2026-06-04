@@ -67,6 +67,8 @@
 
 <style>
   .s2 { background: url('/images/about-bg.png') center center / cover no-repeat; }
+  .ab-left { background: transparent !important; }
+  .ab-right { background: transparent !important; }
 
   /* ── 전체 레이아웃 ── */
   .ab-wrap {
@@ -197,8 +199,8 @@
       var st = document.getElementById('__about_dynamic_styles__');
       if(!st){st=document.createElement('style');st.id='__about_dynamic_styles__';document.head.appendChild(st);}
       st.textContent = [
-        s.leftBg1&&s.leftBg2 ? '#sec2 .ab-left{background:linear-gradient(135deg,'+s.leftBg1+' 0%,'+s.leftBg2+' 100%)!important;}' : '',
-        s.rightBg1&&s.rightBg2 ? '#sec2 .ab-right{background:linear-gradient(135deg,'+s.rightBg1+' 0%,'+s.rightBg2+' 100%)!important;}' : '',
+        '',
+        '',
         s.titleColor ? '#sec2 .ab-title{color:'+s.titleColor+';}' : '',
         s.titleSize ? '#sec2 .ab-title{font-size:'+s.titleSize+'px;}' : '',
         s.letterSpacing ? '#sec2 .ab-title{letter-spacing:'+s.letterSpacing+'em;}' : '',
