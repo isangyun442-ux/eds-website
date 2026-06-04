@@ -115,8 +115,8 @@ const history = [
         var t=data.texts;
         var sec6=document.getElementById('sec6');
         if(sec6){
-          if(t.histTitle){var ht=sec6.querySelector('.h-title');if(ht)ht.textContent=t.histTitle;}
-          if(t.histSub){var hs=sec6.querySelector('.h-sub');if(hs)hs.textContent=t.histSub;}
+          if(t.histTitle){var ht=sec6.querySelector('.h-title');if(ht){ht.textContent=t.histTitle;if(window.__setKoTranslation)window.__setKoTranslation('hist.title',t.histTitle);}}
+          if(t.histSub){var hs=sec6.querySelector('.h-sub');if(hs){hs.textContent=t.histSub;if(window.__setKoTranslation)window.__setKoTranslation('hist.sub',t.histSub);}}
         }
       }
     }).catch(function(){});
