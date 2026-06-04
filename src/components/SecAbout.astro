@@ -16,12 +16,6 @@
     <!-- 왼쪽: 브랜드 컬러 -->
     <div class="ab-left fade-up">
       <!-- 장식 SVG -->
-      <svg class="ab-deco" viewBox="0 0 800 700" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
-        <path d="M 800 0 L 500 0 L 800 400 Z" fill="rgba(255,255,255,0.04)"/>
-        <path d="M 800 0 L 620 0 L 800 250 Z" fill="rgba(255,255,255,0.05)"/>
-        <path d="M 800 150 L 800 500 L 500 700 L 800 700 Z" fill="rgba(0,0,0,0.08)"/>
-        <path d="M 0 500 L 300 700 L 0 700 Z" fill="rgba(255,255,255,0.03)"/>
-      </svg>
       <div class="ab-left-content">
         <p class="ab-label" data-i18n="about.eyebrow1">ABOUT US</p>
         <h2 class="ab-title" data-i18n-html="about.title1">"1만 시간의<br>법칙"</h2>
@@ -37,12 +31,6 @@
     <!-- 오른쪽: 다크 배경 -->
     <div class="ab-right fade-up fade-up-d2">
       <!-- 장식 SVG -->
-      <svg class="ab-deco" viewBox="0 0 800 700" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
-        <path d="M 0 700 L 300 700 L 0 300 Z" fill="rgba(255,255,255,0.03)"/>
-        <path d="M 0 700 L 180 700 L 0 450 Z" fill="rgba(255,255,255,0.04)"/>
-        <path d="M 0 200 L 0 550 L 300 0 L 0 0 Z" fill="rgba(255,255,255,0.025)"/>
-        <path d="M 800 200 L 500 0 L 800 0 Z" fill="rgba(255,255,255,0.03)"/>
-      </svg>
       <div class="ab-right-content">
         <p class="ab-label" data-i18n="about.eyebrow2">PROFESSIONAL GROUP</p>
         <h2 class="ab-title" data-i18n-html="about.title2">전문가 집단<br><em class="ab-em">이담에스티</em></h2>
@@ -67,8 +55,6 @@
 
 <style>
   .s2 { background: url('/images/about-bg.png') center center / cover no-repeat; }
-  .ab-left { background: transparent !important; }
-  .ab-right { background: transparent !important; }
 
   /* ── 전체 레이아웃 ── */
   .ab-wrap {
@@ -78,11 +64,6 @@
   }
 
   /* ── 장식 SVG ── */
-  .ab-deco {
-    position: absolute; inset: 0;
-    width: 100%; height: 100%;
-    z-index: 0; pointer-events: none;
-  }
 
   /* ── 왼쪽 (브랜드 블루) ── */
   .ab-left {
@@ -199,8 +180,8 @@
       var st = document.getElementById('__about_dynamic_styles__');
       if(!st){st=document.createElement('style');st.id='__about_dynamic_styles__';document.head.appendChild(st);}
       st.textContent = [
-        '',
-        '',
+        s.leftBg1&&s.leftBg2 ? '#sec2 .ab-left{background:linear-gradient(135deg,'+s.leftBg1+' 0%,'+s.leftBg2+' 100%)!important;}' : '',
+        s.rightBg1&&s.rightBg2 ? '#sec2 .ab-right{background:linear-gradient(135deg,'+s.rightBg1+' 0%,'+s.rightBg2+' 100%)!important;}' : '',
         s.titleColor ? '#sec2 .ab-title{color:'+s.titleColor+';}' : '',
         s.titleSize ? '#sec2 .ab-title{font-size:'+s.titleSize+'px;}' : '',
         s.letterSpacing ? '#sec2 .ab-title{letter-spacing:'+s.letterSpacing+'em;}' : '',
