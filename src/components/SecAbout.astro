@@ -54,7 +54,24 @@
 </section>
 
 <style>
-  .s2 { background: url('/images/about-bg.png') center center / cover no-repeat; }
+  .s2 {
+    background: url('/images/about-bg.png') center center / cover no-repeat;
+    position: relative;
+  }
+  .s2::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: rgba(10, 16, 48, 0.55);
+    z-index: 0; pointer-events: none;
+  }
+  .s2::after {
+    content: '';
+    position: absolute; bottom: 0; left: 0; right: 0;
+    height: 220px;
+    background: linear-gradient(to bottom, transparent 0%, #ffffff 100%);
+    z-index: 0; pointer-events: none;
+  }
+  .s2 > * { position: relative; z-index: 1; }
 
   /* ── 전체 레이아웃 ── */
   .ab-wrap {
@@ -68,7 +85,7 @@
   /* ── 왼쪽 (브랜드 블루) ── */
   .ab-left {
     position: relative;
-    background: transparent;
+    background: linear-gradient(135deg, #2a45c8 0%, #1a2f8a 60%, #0f1f6a 100%);
     overflow: hidden;
   }
   .ab-left-content {
@@ -81,7 +98,7 @@
   /* ── 오른쪽 (다크 차콜) ── */
   .ab-right {
     position: relative;
-    background: transparent;
+    background: linear-gradient(135deg, #1a1f2e 0%, #141828 60%, #0e1220 100%);
     overflow: hidden;
   }
   .ab-right-content {
@@ -180,8 +197,8 @@
       var st = document.getElementById('__about_dynamic_styles__');
       if(!st){st=document.createElement('style');st.id='__about_dynamic_styles__';document.head.appendChild(st);}
       st.textContent = [
-        s.leftBg1&&s.leftBg2 ? '#sec2 .ab-left{background: transparent;}' : '',
-        s.rightBg1&&s.rightBg2 ? '#sec2 .ab-right{background: transparent;}' : '',
+        s.leftBg1&&s.leftBg2 ? '#sec2 .ab-left{background:linear-gradient(135deg,'+s.leftBg1+' 0%,'+s.leftBg2+' 100%)!important;}' : '',
+        s.rightBg1&&s.rightBg2 ? '#sec2 .ab-right{background:linear-gradient(135deg,'+s.rightBg1+' 0%,'+s.rightBg2+' 100%)!important;}' : '',
         s.titleColor ? '#sec2 .ab-title{color:'+s.titleColor+';}' : '',
         s.titleSize ? '#sec2 .ab-title{font-size:'+s.titleSize+'px;}' : '',
         s.letterSpacing ? '#sec2 .ab-title{letter-spacing:'+s.letterSpacing+'em;}' : '',
