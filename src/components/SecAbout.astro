@@ -12,6 +12,7 @@
   </div>
 
   <div class="ab-wrap">
+  <canvas id="aboutCanvas" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0;opacity:0.25;"></canvas>
 
     <!-- 왼쪽: 브랜드 컬러 -->
     <div class="ab-left fade-up">
@@ -51,6 +52,67 @@
     </div>
 
   </div>
+
+<script is:inline>
+(function(){
+  var canvas = document.getElementById('aboutCanvas');
+  if(!canvas) return;
+  var ctx = canvas.getContext('2d');
+  var angle = 0;
+
+  function resize(){
+    canvas.width = canvas.offsetWidth;
+    canvas.height = canvas.offsetHeight;
+  }
+  resize();
+  window.addEventListener('resize', resize);
+
+  function draw(){
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    var cx = canvas.width * 0.5;
+    var cy = canvas.height * 0.5;
+    var r = Math.min(canvas.width, canvas.height) * 0.28;
+
+    ctx.save();
+    ctx.translate(cx, cy);
+    ctx.rotate(angle);
+
+    // 회전하는 타원 링 3개
+    for(var i = 0; i < 3; i++){
+      ctx.save();
+      ctx.rotate((Math.PI / 3) * i);
+      ctx.scale(1, 0.35);
+      ctx.beginPath();
+      ctx.arc(0, 0, r + i * 18, 0, Math.PI * 2);
+      ctx.strokeStyle = 'rgba(100, 160, 255, ' + (0.5 - i * 0.12) + ')';
+      ctx.lineWidth = 1.2;
+      ctx.stroke();
+      ctx.restore();
+    }
+
+    // 바깥 글로우 원
+    ctx.beginPath();
+    ctx.arc(0, 0, r * 1.05, 0, Math.PI * 2);
+    ctx.strokeStyle = 'rgba(80, 140, 255, 0.2)';
+    ctx.lineWidth = 8;
+    ctx.stroke();
+
+    // 점선 원
+    ctx.setLineDash([4, 8]);
+    ctx.beginPath();
+    ctx.arc(0, 0, r * 1.3, 0, Math.PI * 2);
+    ctx.strokeStyle = 'rgba(100, 180, 255, 0.15)';
+    ctx.lineWidth = 1;
+    ctx.stroke();
+    ctx.setLineDash([]);
+
+    ctx.restore();
+    angle += 0.003;
+    requestAnimationFrame(draw);
+  }
+  draw();
+})();
+</script>
 </section>
 
 <style>
@@ -69,12 +131,26 @@
     position: absolute; bottom: 0; left: 0; right: 0;
     height: 220px;
     background: linear-gradient(to bottom, transparent 0%, #ffffff 100%);
+    z-index: 2; pointer-events: none;
+  }
+  .s2::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: rgba(10, 16, 48, 0.55);
+    z-index: 0; pointer-events: none;
+  }
+  .s2::after {
+    content: '';
+    position: absolute; bottom: 0; left: 0; right: 0;
+    height: 220px;
+    background: linear-gradient(to bottom, transparent 0%, #ffffff 100%);
     z-index: 0; pointer-events: none;
   }
   .s2 > * { position: relative; z-index: 1; }
 
   /* ── 전체 레이아웃 ── */
   .ab-wrap {
+    position: relative; z-index: 1;
     display: grid;
     grid-template-columns: 1fr 1fr;
     min-height: 700px;
@@ -85,7 +161,7 @@
   /* ── 왼쪽 (브랜드 블루) ── */
   .ab-left {
     position: relative;
-    background: linear-gradient(135deg, #2a45c8 0%, #1a2f8a 60%, #0f1f6a 100%);
+    background: transparent;
     overflow: hidden;
   }
   .ab-left-content {
@@ -98,7 +174,7 @@
   /* ── 오른쪽 (다크 차콜) ── */
   .ab-right {
     position: relative;
-    background: linear-gradient(135deg, #1a1f2e 0%, #141828 60%, #0e1220 100%);
+    background: transparent;
     overflow: hidden;
   }
   .ab-right-content {
@@ -140,7 +216,8 @@
 
   /* ── 반응형 ── */
   @media (max-width: 960px) {
-    .ab-wrap { grid-template-columns: 1fr; }
+    .ab-wrap {
+    position: relative; z-index: 1; grid-template-columns: 1fr; }
     .ab-left-content, .ab-right-content { padding: 72px 48px; }
   }
   @media (max-width: 480px) {
@@ -197,8 +274,8 @@
       var st = document.getElementById('__about_dynamic_styles__');
       if(!st){st=document.createElement('style');st.id='__about_dynamic_styles__';document.head.appendChild(st);}
       st.textContent = [
-        s.leftBg1&&s.leftBg2 ? '#sec2 .ab-left{background:linear-gradient(135deg,'+s.leftBg1+' 0%,'+s.leftBg2+' 100%)!important;}' : '',
-        s.rightBg1&&s.rightBg2 ? '#sec2 .ab-right{background:linear-gradient(135deg,'+s.rightBg1+' 0%,'+s.rightBg2+' 100%)!important;}' : '',
+        '',
+        '',
         s.titleColor ? '#sec2 .ab-title{color:'+s.titleColor+';}' : '',
         s.titleSize ? '#sec2 .ab-title{font-size:'+s.titleSize+'px;}' : '',
         s.letterSpacing ? '#sec2 .ab-title{letter-spacing:'+s.letterSpacing+'em;}' : '',
@@ -207,7 +284,8 @@
         s.lineHeight ? '#sec2 .ab-body{line-height:'+s.lineHeight+';}' : '',
         s.accentColor ? '#sec2 .ab-body strong{color:'+s.accentColor+';}' : '',
         s.padding ? '#sec2 .ab-left-content,#sec2 .ab-right-content{padding:'+s.padding+'px!important;}' : '',
-        s.minHeight ? '#sec2 .ab-wrap{min-height:'+s.minHeight+'px!important;}' : '',
+        s.minHeight ? '#sec2 .ab-wrap{
+    position: relative; z-index: 1;min-height:'+s.minHeight+'px!important;}' : '',
         s.fontFamily ? '#sec2 .ab-title,#sec2 .ab-body,#sec2 .ab-label{font-family:'+s.fontFamily+';}' : '',
       ].join('');
 
