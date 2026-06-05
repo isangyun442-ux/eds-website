@@ -15,48 +15,53 @@ const { title = 'EDS (주)이담에스티' } = Astro.props;
     <link rel="shortcut icon" href="/favicon.ico" />
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
     <link rel="manifest" href="/site.webmanifest" />
-    <!-- Lenis 관성 스크롤 -->
-    <script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
   </head>
   <body>
     <!-- 각 페이지 내용이 여기에 들어와요 -->
     <slot />
 
     <!-- Lenis 관성 스크롤 + 스크롤 등장 애니메이션 -->
-    <script>
-      // ── Lenis 초기화 ──
-      const lenis = new (window as any).Lenis({
-        duration: 1.3,          // 스크롤 지속 시간 (클수록 느리고 부드럽게)
-        easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // expo easing
-        smoothWheel: true,      // 마우스 휠 부드럽게
-        touchMultiplier: 1.8,   // 터치 감도
-      });
-
-      // RAF 루프 (Lenis 필수)
-      function raf(time: number) {
-        lenis.raf(time);
-        requestAnimationFrame(raf);
-      }
-      requestAnimationFrame(raf);
-
-      // anchor 링크 클릭 시 Lenis로 부드럽게 이동
-      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', (e) => {
-          e.preventDefault();
-          const target = document.querySelector((anchor as HTMLAnchorElement).getAttribute('href')!);
-          if (target) lenis.scrollTo(target, { offset: -80, duration: 1.6 });
+    <script is:inline>
+      // Lenis CDN 로드 후 초기화
+      var lenisScript = document.createElement('script');
+      lenisScript.src = 'https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js';
+      lenisScript.onload = function() {
+        // ── Lenis 초기화 ──
+        var lenis = new Lenis({
+          duration: 1.3,
+          easing: function(t) { return Math.min(1, 1.001 - Math.pow(2, -10 * t)); },
+          smoothWheel: true,
+          touchMultiplier: 1.8,
         });
-      });
+
+        // RAF 루프
+        function raf(time) {
+          lenis.raf(time);
+          requestAnimationFrame(raf);
+        }
+        requestAnimationFrame(raf);
+
+        // anchor 링크 클릭 시 Lenis로 부드럽게 이동
+        document.querySelectorAll('a[href^="#"]').forEach(function(anchor) {
+          anchor.addEventListener('click', function(e) {
+            e.preventDefault();
+            var href = anchor.getAttribute('href');
+            var target = document.querySelector(href);
+            if (target) lenis.scrollTo(target, { offset: -80, duration: 1.6 });
+          });
+        });
+      };
+      document.head.appendChild(lenisScript);
 
       // ── 스크롤 등장 애니메이션 ──
-      const ANIM_CLASSES = ['.reveal', '.fade-up', '.fade-left', '.fade-right', '.fade-scale'];
+      var ANIM_CLASSES = ['.reveal', '.fade-up', '.fade-left', '.fade-right', '.fade-scale'];
 
-      const obs = new IntersectionObserver((entries) => {
-        const intersecting = entries.filter(e => e.isIntersecting);
-        intersecting.forEach((e, i) => {
-          const extra = parseInt((e.target as HTMLElement).dataset.delay || '0', 10);
-          const stagger = i * 80;
-          setTimeout(() => e.target.classList.add('visible'), stagger + extra);
+      var obs = new IntersectionObserver(function(entries) {
+        var intersecting = entries.filter(function(e) { return e.isIntersecting; });
+        intersecting.forEach(function(e, i) {
+          var extra = parseInt(e.target.dataset.delay || '0', 10);
+          var stagger = i * 80;
+          setTimeout(function() { e.target.classList.add('visible'); }, stagger + extra);
           obs.unobserve(e.target);
         });
       }, {
@@ -64,7 +69,7 @@ const { title = 'EDS (주)이담에스티' } = Astro.props;
         rootMargin: '0px 0px -40px 0px'
       });
 
-      document.querySelectorAll(ANIM_CLASSES.join(',')).forEach(el => obs.observe(el));
+      document.querySelectorAll(ANIM_CLASSES.join(',')).forEach(function(el) { obs.observe(el); });
     </script>
   </body>
 </html>
