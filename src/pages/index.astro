@@ -579,9 +579,9 @@ import SecContact    from '../components/SecContact.astro';
     var delta   = scrollY - lastScroll;
     lastScroll  = scrollY;
 
-    velocity += delta * 0.06;   // 스크롤 방향으로 밀림
-    velocity *= 0.88;            // 마찰 (낮을수록 오래 남음)
-    offset = lerp(offset, velocity, 0.1);
+    velocity += delta * 0.10;   // 스크롤 방향으로 밀림
+    velocity *= 0.84;            // 마찰 (낮을수록 오래 남음)
+    offset = lerp(offset, velocity, 0.12);
 
     var baseY = window.innerHeight / 2 - navH / 2;
     nav.style.transform = 'translateY(' + Math.round(baseY + offset) + 'px)';
