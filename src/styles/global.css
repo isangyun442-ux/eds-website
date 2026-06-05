@@ -23,6 +23,63 @@ body  { background: var(--bg); color: var(--navy3); font-family: var(--sans); ov
 img   { max-width: 100%; display: block; }
 a     { text-decoration: none; }
 
-/* 스크롤 등장 애니메이션 */
-.reveal { opacity: 0; transform: translateY(20px); transition: opacity .7s ease, transform .7s ease; }
+/* ── 스크롤 등장 애니메이션 ── */
+
+/* 기존 reveal (하위 호환) */
+.reveal {
+  opacity: 0;
+  transform: translateY(36px);
+  transition: opacity .75s cubic-bezier(.22,.61,.36,1), transform .75s cubic-bezier(.22,.61,.36,1);
+}
 .reveal.visible { opacity: 1; transform: translateY(0); }
+
+/* 방향별 */
+.fade-up {
+  opacity: 0;
+  transform: translateY(48px);
+  transition: opacity .7s cubic-bezier(.22,.61,.36,1), transform .7s cubic-bezier(.22,.61,.36,1);
+}
+.fade-up.visible { opacity: 1; transform: translateY(0); }
+
+.fade-left {
+  opacity: 0;
+  transform: translateX(-56px);
+  transition: opacity .7s cubic-bezier(.22,.61,.36,1), transform .7s cubic-bezier(.22,.61,.36,1);
+}
+.fade-left.visible { opacity: 1; transform: translateX(0); }
+
+.fade-right {
+  opacity: 0;
+  transform: translateX(56px);
+  transition: opacity .7s cubic-bezier(.22,.61,.36,1), transform .7s cubic-bezier(.22,.61,.36,1);
+}
+.fade-right.visible { opacity: 1; transform: translateX(0); }
+
+.fade-scale {
+  opacity: 0;
+  transform: scale(.88);
+  transition: opacity .7s cubic-bezier(.22,.61,.36,1), transform .7s cubic-bezier(.22,.61,.36,1);
+}
+.fade-scale.visible { opacity: 1; transform: scale(1); }
+
+/* 딜레이 단계 */
+.fade-d1 { transition-delay: .1s; }
+.fade-d2 { transition-delay: .2s; }
+.fade-d3 { transition-delay: .3s; }
+.fade-d4 { transition-delay: .4s; }
+.fade-d5 { transition-delay: .5s; }
+
+/* 기존 fade-up-d* 하위 호환 */
+.fade-up-d1 { transition-delay: .12s; }
+.fade-up-d2 { transition-delay: .24s; }
+.fade-up-d3 { transition-delay: .36s; }
+.fade-up-d4 { transition-delay: .48s; }
+
+/* 모션 감소 설정 시 애니메이션 끄기 */
+@media (prefers-reduced-motion: reduce) {
+  .reveal, .fade-up, .fade-left, .fade-right, .fade-scale {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}

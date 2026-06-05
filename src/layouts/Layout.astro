@@ -22,15 +22,27 @@ const { title = 'EDS (주)이담에스티' } = Astro.props;
 
     <!-- 스크롤 애니메이션 스크립트 (모든 페이지 공통) -->
     <script>
+      const ANIM_CLASSES = ['.reveal', '.fade-up', '.fade-left', '.fade-right', '.fade-scale'];
+
       const obs = new IntersectionObserver((entries) => {
-        entries.forEach((e, i) => {
-          if (e.isIntersecting) {
-            setTimeout(() => e.target.classList.add('visible'), i * 60);
-            obs.unobserve(e.target);
-          }
+        // 같은 타이밍에 들어온 요소들끼리만 스태거 적용
+        const intersecting = entries.filter(e => e.isIntersecting);
+        intersecting.forEach((e, i) => {
+          // data-delay 속성이 있으면 그 값 우선 사용
+          const extra = parseInt(e.target.dataset.delay || '0', 10);
+          const stagger = i * 80; // 같은 배치에서 80ms 간격
+          setTimeout(() => {
+            e.target.classList.add('visible');
+          }, stagger + extra);
+          obs.unobserve(e.target);
         });
-      }, { threshold: 0.08 });
-      document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+      }, {
+        threshold: 0.1,
+        rootMargin: '0px 0px -40px 0px' // 뷰포트 하단 40px 전에 미리 트리거
+      });
+
+      // 모든 애니메이션 대상 관찰 시작
+      document.querySelectorAll(ANIM_CLASSES.join(',')).forEach(el => obs.observe(el));
     </script>
   </body>
 </html>
