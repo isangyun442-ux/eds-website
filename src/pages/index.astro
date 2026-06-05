@@ -116,7 +116,7 @@ import SecContact    from '../components/SecContact.astro';
       background: none;
       border: none;
       border-radius: 8px;
-      padding: 7px 12px;
+      padding: 8px 13px;
       cursor: pointer; font-family: inherit;
       color: #fff; font-size: 12px; font-weight: 700; letter-spacing: 0.06em;
       transition: color 0.3s, background 0.2s;
@@ -125,9 +125,9 @@ import SecContact    from '../components/SecContact.astro';
     .nav.scrolled .lang-trigger { color: #0d1a3a; }
     .nav.scrolled .lang-trigger:hover { background: rgba(13,26,58,0.06); }
 
-    .lang-globe { font-size: 14px; line-height: 1; }
-    .lang-cur-code { font-size: 12px; font-weight: 800; }
-    .lang-caret { font-size: 10px; transition: transform 0.25s; display: inline-block; }
+    .lang-globe { flex-shrink: 0; color: currentColor; }
+    .lang-cur-code { font-size: 13px; font-weight: 800; }
+    .lang-caret { font-size: 11px; transition: transform 0.25s; display: inline-block; }
     .lang-wrap.open .lang-caret { transform: rotate(180deg); }
 
     /* 드롭다운 목록 */
@@ -204,7 +204,10 @@ import SecContact    from '../components/SecContact.astro';
     </div>
     <div class="lang-wrap" id="langWrap">
       <button class="lang-trigger" id="langTrigger" onclick="toggleLangDrop()">
-        <span class="lang-globe">🌐</span>
+        <svg class="lang-globe" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/>
+          <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+        </svg>
         <span class="lang-cur-code" id="langCurCode">KO</span>
         <span class="lang-caret" id="langCaret">︿</span>
       </button>
