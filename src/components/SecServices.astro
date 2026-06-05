@@ -137,7 +137,11 @@
 </section>
 
 <style>
-  .s3 { background: linear-gradient(180deg, #dce6f8 0%, #eef2fb 40%, #ffffff 100%); }
+  /* 섹션 배경 — 더 깊은 그라디언트 */
+  .s3 {
+    background:
+      linear-gradient(180deg, #c8d8f4 0%, #dce8fb 30%, #eef3fc 65%, #f8faff 100%);
+  }
   .svc-inner { max-width: 1300px; margin: 0 auto; padding: 100px 60px; }
 
   /* 헤더 */
@@ -152,98 +156,169 @@
   .svc-title em { font-style: normal; color: #1a2f8a; }
   .svc-subtitle { font-size: 15px; color: #6b7a8d; line-height: 1.8; }
 
-  /* 탭 */
+  /* 탭 — 입체감 강화 */
   .svc-tabs {
     display: flex; gap: 0;
-    border-bottom: 2px solid #e8edf4;
+    border-bottom: 2px solid rgba(26,47,138,0.15);
     margin-bottom: 0;
     overflow-x: auto;
     scrollbar-width: none;
+    background: rgba(255,255,255,0.5);
+    border-radius: 12px 12px 0 0;
+    padding: 0 4px;
+    backdrop-filter: blur(8px);
   }
   .svc-tabs::-webkit-scrollbar { display: none; }
   .svc-tab {
     display: flex; align-items: center; gap: 8px;
-    padding: 16px 28px; background: none; border: none;
+    padding: 18px 28px; background: none; border: none;
     cursor: pointer; font-family: inherit;
-    border-bottom: 2px solid transparent;
+    border-bottom: 3px solid transparent;
     margin-bottom: -2px;
-    transition: color 0.2s, border-color 0.2s, background 0.2s;
+    transition: color 0.25s, border-color 0.25s, background 0.25s, transform 0.2s, box-shadow 0.2s;
     white-space: nowrap; flex-shrink: 0;
+    border-radius: 10px 10px 0 0;
+    position: relative;
   }
-  .svc-tab:hover { background: #f7f9ff; }
-  .svc-tab.active { border-bottom-color: #1a2f8a; background: rgba(255,255,255,0.95); }
-  .svc-tab-num { font-size: 10px; font-weight: 700; color: #ccc; letter-spacing: 0.1em; }
+  .svc-tab:hover {
+    background: rgba(255,255,255,0.85);
+    transform: translateY(-2px);
+  }
+  .svc-tab.active {
+    border-bottom-color: #1a2f8a;
+    background: rgba(255,255,255,0.98);
+    transform: translateY(-3px);
+    box-shadow: 0 -4px 16px rgba(26,47,138,0.10), 0 -1px 0 rgba(26,47,138,0.06);
+  }
+  .svc-tab-num { font-size: 10px; font-weight: 700; color: #ccc; letter-spacing: 0.1em; transition: color 0.2s; }
+  .svc-tab:hover .svc-tab-num { color: #8898cc; }
   .svc-tab.active .svc-tab-num { color: #1a2f8a; }
-  .svc-tab-name { font-size: 15px; font-weight: 700; color: #999; }
+  .svc-tab-name { font-size: 15px; font-weight: 700; color: #aaa; transition: color 0.2s; }
+  .svc-tab:hover .svc-tab-name { color: #334; }
   .svc-tab.active .svc-tab-name { color: #0d1a3a; }
 
-  /* 패널 영역 */
+  /* 패널 래퍼 — 입체 카드 */
+  .svc-panels-wrap { position: relative; }
   .svc-panels {
-    border: 1px solid rgba(26,47,138,0.12);
+    width: 100%;
+    border: 1px solid rgba(26,47,138,0.13);
     border-top: none;
-    border-radius: 0 0 16px 16px;
+    border-radius: 0 0 20px 20px;
     overflow: hidden;
-    box-shadow: 0 8px 40px rgba(26,47,138,0.08);
+    /* 다층 그림자로 깊이감 */
+    box-shadow:
+      0 2px 0 rgba(255,255,255,0.9) inset,
+      0 4px 24px rgba(26,47,138,0.08),
+      0 16px 60px rgba(26,47,138,0.10),
+      0 40px 100px rgba(26,47,138,0.07);
   }
   .svc-panel { display: none; grid-template-columns: 1.15fr 1fr; align-items: stretch; }
   .svc-panel.active { display: grid; }
 
-  /* 패널 이미지 */
+  /* 패널 이미지 — 더 강한 오버레이 + 엣지 */
   .svc-panel-img {
     background-size: cover; background-position: center;
-    width: 100%; height: 100%; min-height: 460px; position: relative;
+    width: 100%; height: 100%; min-height: 480px; position: relative;
+    transition: transform 0.6s cubic-bezier(.22,.61,.36,1);
   }
+  .svc-panel.active .svc-panel-img { transform: scale(1); }
   .svc-panel-ov {
     position: absolute; inset: 0;
-    background: linear-gradient(135deg, rgba(13,26,58,0.18) 0%, transparent 60%);
+    background:
+      linear-gradient(135deg, rgba(10,20,60,0.35) 0%, transparent 55%),
+      linear-gradient(to right, rgba(10,20,50,0.15) 0%, transparent 40%);
+  }
+  /* 이미지 우측 엣지 하이라이트 (빛 반사) */
+  .svc-panel-img::after {
+    content: '';
+    position: absolute; top: 0; right: 0; bottom: 0; width: 3px;
+    background: linear-gradient(180deg, rgba(255,255,255,0.35) 0%, rgba(255,255,255,0.08) 50%, rgba(255,255,255,0.25) 100%);
   }
 
-  /* 패널 텍스트 */
+  /* 패널 텍스트 — 유리 느낌 */
   .svc-panel-text {
-    padding: 48px 48px;
+    padding: 52px 52px;
     display: flex; flex-direction: column; justify-content: center;
-    background: rgba(255,255,255,0.95);
+    background:
+      linear-gradient(160deg, rgba(255,255,255,0.99) 0%, rgba(245,249,255,0.97) 100%);
+    border-left: 1px solid rgba(255,255,255,0.9);
+    position: relative;
   }
+  /* 텍스트 패널 상단 엣지 하이라이트 */
+  .svc-panel-text::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; height: 1px;
+    background: linear-gradient(90deg, rgba(26,47,138,0.0) 0%, rgba(26,47,138,0.12) 40%, rgba(255,255,255,0.0) 100%);
+  }
+  /* 우측 상단 장식 */
+  .svc-panel-text::after {
+    content: '';
+    position: absolute; top: 24px; right: 24px;
+    width: 48px; height: 48px;
+    border-top: 2px solid rgba(26,47,138,0.12);
+    border-right: 2px solid rgba(26,47,138,0.12);
+  }
+
   .svc-tag {
-    font-size: 10px; font-weight: 700; letter-spacing: 0.18em;
-    text-transform: uppercase; color: #1a2f8a; margin-bottom: 12px;
+    font-size: 10px; font-weight: 700; letter-spacing: 0.22em;
+    text-transform: uppercase; color: #1a2f8a; margin-bottom: 14px;
     display: flex; align-items: center; gap: 8px;
   }
-  .svc-tag::before { content: ''; width: 20px; height: 2px; background: #1a2f8a; display: block; }
+  .svc-tag::before { content: ''; width: 24px; height: 2px; background: linear-gradient(90deg,#1a2f8a,#4a6fd8); display: block; }
+
   .svc-name {
-    font-size: clamp(26px, 2.8vw, 40px); font-weight: 900;
+    font-size: clamp(26px, 2.8vw, 42px); font-weight: 900;
     letter-spacing: -0.04em; color: #0d1a3a;
     margin-bottom: 20px; line-height: 1.15;
+    text-shadow: 0 2px 12px rgba(26,47,138,0.07);
   }
-  .svc-desc { font-size: 14px; color: #555; line-height: 2; margin-bottom: 28px; }
-  .svc-chips { display: flex; flex-wrap: wrap; gap: 7px; }
-  :global(.svc-chip) {
-    font-size: 11px; font-weight: 600; padding: 5px 14px;
-    border: 1.5px solid #dde3ef; color: #666; background: #fff;
-    border-radius: 4px; transition: all 0.2s;
-  }
-  :global(.svc-chip:hover) { border-color: #1a2f8a; color: #1a2f8a; }
+  .svc-desc { font-size: 14px; color: #556; line-height: 2.05; margin-bottom: 32px; }
 
-  /* 화살표 — svc-inner 기준 절대 배치 */
+  /* 칩 태그 — 입체감 */
+  .svc-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+  :global(.svc-chip) {
+    font-size: 11px; font-weight: 600; padding: 6px 16px;
+    border: 1px solid rgba(26,47,138,0.18);
+    color: #445;
+    background: linear-gradient(145deg, #ffffff 0%, #f0f4fc 100%);
+    border-radius: 6px;
+    box-shadow: 0 2px 6px rgba(26,47,138,0.07), 0 1px 0 rgba(255,255,255,0.9) inset;
+    transition: all 0.22s cubic-bezier(.22,.61,.36,1);
+    cursor: default;
+  }
+  :global(.svc-chip:hover) {
+    border-color: #1a2f8a;
+    color: #1a2f8a;
+    background: linear-gradient(145deg, #eef3ff 0%, #dce8ff 100%);
+    box-shadow: 0 4px 12px rgba(26,47,138,0.14), 0 1px 0 rgba(255,255,255,0.9) inset;
+    transform: translateY(-2px);
+  }
+
+  /* 화살표 */
   .svc-inner { position: relative; }
-  .svc-panels-wrap { position: relative; }
-  .svc-panels { width: 100%; }
   .svc-arrow {
     position: absolute; top: 50%; transform: translateY(-50%);
-    width: 48px; height: 100px;
-    background: rgba(255,255,255,0.7);
-    border: none; cursor: pointer; z-index: 10;
-    font-size: 36px; color: #1a2f8a;
+    width: 44px; height: 96px;
+    background: rgba(255,255,255,0.75);
+    border: 1px solid rgba(26,47,138,0.12);
+    cursor: pointer; z-index: 10;
+    font-size: 32px; color: #1a2f8a;
     display: flex; align-items: center; justify-content: center;
-    backdrop-filter: blur(6px);
-    transition: background 0.2s, opacity 0.2s;
-    border-radius: 6px;
-    opacity: 0.65;
+    backdrop-filter: blur(10px);
+    transition: background 0.2s, opacity 0.2s, transform 0.2s, box-shadow 0.2s;
+    border-radius: 8px;
+    opacity: 0.7;
+    box-shadow: 0 4px 16px rgba(26,47,138,0.10);
   }
-  .svc-arrow:hover { background: rgba(255,255,255,0.95); opacity: 1; }
+  .svc-arrow:hover {
+    background: rgba(255,255,255,0.97);
+    opacity: 1;
+    box-shadow: 0 8px 28px rgba(26,47,138,0.16);
+    transform: translateY(calc(-50% - 2px));
+  }
   .svc-arrow:disabled { opacity: 0.15; cursor: default; }
-  .svc-arrow--l { left: -64px; }
-  .svc-arrow--r { right: -64px; }
+  .svc-arrow--l { left: -60px; }
+  .svc-arrow--r { right: -60px; }
 
   /* 반응형 */
   @media (max-width: 900px) {
