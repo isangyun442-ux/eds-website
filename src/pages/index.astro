@@ -255,7 +255,7 @@ import SecContact    from '../components/SecContact.astro';
       <a class="qn-item" data-sec="sec3" onclick="qnGo('sec3')" data-i18n="nav.services">사업분야</a>
       <a class="qn-item" data-sec="sec4" onclick="qnGo('sec4')" data-i18n="nav.portfolio">구축사례</a>
       <a class="qn-item" data-sec="sec-strength" onclick="qnGo('sec-strength')" data-i18n="nav.strength">회사강점</a>
-      <a class="qn-item" data-sec="sec5" onclick="qnGo('sec5')" data-i18n="nav.procurement">조달청 제품</a>
+      <a class="qn-item" data-sec="sec5" onclick="qnGo('sec5')" data-i18n="nav.procurement">등록제품</a>
       <a class="qn-item" data-sec="sec7" onclick="qnGo('sec7')" data-i18n="nav.contact">문의</a>
     </div>
   </div>
@@ -507,7 +507,7 @@ import SecContact    from '../components/SecContact.astro';
     background: rgba(10,16,40,0.65);
     backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
     border: 0.5px solid rgba(255,255,255,0.15); border-radius: 16px;
-    padding: 12px 10px; opacity: 0; pointer-events: none;
+    padding: 10px 8px; opacity: 0; pointer-events: none;
     transition: opacity 0.5s cubic-bezier(0.16,1,0.3,1);
     box-shadow: 0 8px 32px rgba(0,0,0,0.25), inset 0 1px 0 rgba(255,255,255,0.1);
     will-change: transform;
@@ -539,9 +539,9 @@ import SecContact    from '../components/SecContact.astro';
   }
   .qn-indicator.on { opacity: 1; }
   .qn-item {
-    display: flex; align-items: center; gap: 8px;
-    padding: 6px 12px; border-radius: 8px; cursor: pointer;
-    font-size: 11px; color: rgba(255,255,255,0.45); font-weight: 600;
+    display: flex; align-items: center; gap: 6px;
+    padding: 5px 8px; border-radius: 8px; cursor: pointer;
+    font-size: 10px; color: rgba(255,255,255,0.45); font-weight: 600;
     transition: color 0.25s; white-space: nowrap; text-decoration: none;
     position: relative; z-index: 1;
   }

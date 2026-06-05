@@ -7,7 +7,7 @@ const translations = {
     // NAV
     'nav.about':     '회사소개',
     'nav.services':  '사업분야',
-    'nav.procurement': '조달청 등록제품',
+    'nav.procurement': '등록제품',
     'nav.portfolio': '구축사례',
     'nav.history':   '회사연혁',
     'nav.clients':   '파트너',
@@ -161,7 +161,7 @@ const translations = {
   en: {
     'nav.about':     'About',
     'nav.services':  'Services',
-    'nav.procurement': 'Procurement Products',
+    'nav.procurement': 'Products',
     'nav.portfolio': 'Portfolio',
     'nav.history':   'History',
     'nav.clients':   'Partners',
