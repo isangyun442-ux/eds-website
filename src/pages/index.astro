@@ -223,11 +223,8 @@ import SecContact    from '../components/SecContact.astro';
         <button class="lang-option" data-lang="zh" onclick="selectLang('zh')">
           <span class="lang-flag">🇨🇳</span><span class="lang-name">중국어</span>
         </button>
-        <button class="lang-option" data-lang="vi" onclick="selectLang('vi')">
-          <span class="lang-flag">🇻🇳</span><span class="lang-name">베트남어</span>
-        </button>
-        <button class="lang-option" data-lang="th" onclick="selectLang('th')">
-          <span class="lang-flag">🇹🇭</span><span class="lang-name">태국어</span>
+        <button class="lang-option" data-lang="ja" onclick="selectLang('ja')">
+          <span class="lang-flag">🇯🇵</span><span class="lang-name">일본어</span>
         </button>
       </div>
     </div>
@@ -386,7 +383,7 @@ import SecContact    from '../components/SecContact.astro';
   };
 
   // ── 언어 드롭다운 ──
-  var langNames = { ko:'KO', en:'EN', zh:'ZH', vi:'VI', th:'TH' };
+  var langNames = { ko:'KO', en:'EN', zh:'ZH', ja:'JA' };
 
   window.toggleLangDrop = function() {
     document.getElementById('langWrap').classList.toggle('open');
