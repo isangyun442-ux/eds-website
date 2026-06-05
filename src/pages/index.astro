@@ -249,14 +249,14 @@ import SecContact    from '../components/SecContact.astro';
     <div class="qn-divider"></div>
     <div class="qn-list" id="qnList">
       <div class="qn-indicator" id="qnIndicator"></div>
-      <a class="qn-item" data-sec="sec2" onclick="qnGo('sec2')">회사소개</a>
-      <a class="qn-item" data-sec="sec6" onclick="qnGo('sec6')">회사연혁</a>
-      <a class="qn-item" data-sec="sec-cert" onclick="qnGo('sec-cert')">인증현황</a>
-      <a class="qn-item" data-sec="sec3" onclick="qnGo('sec3')">사업분야</a>
-      <a class="qn-item" data-sec="sec4" onclick="qnGo('sec4')">구축사례</a>
-      <a class="qn-item" data-sec="sec-strength" onclick="qnGo('sec-strength')">회사강점</a>
-      <a class="qn-item" data-sec="sec5" onclick="qnGo('sec5')">조달청 제품</a>
-      <a class="qn-item" data-sec="sec7" onclick="qnGo('sec7')">문의</a>
+      <a class="qn-item" data-sec="sec2" onclick="qnGo('sec2')" data-i18n="nav.about">회사소개</a>
+      <a class="qn-item" data-sec="sec6" onclick="qnGo('sec6')" data-i18n="nav.history">회사연혁</a>
+      <a class="qn-item" data-sec="sec-cert" onclick="qnGo('sec-cert')" data-i18n="nav.cert">인증현황</a>
+      <a class="qn-item" data-sec="sec3" onclick="qnGo('sec3')" data-i18n="nav.services">사업분야</a>
+      <a class="qn-item" data-sec="sec4" onclick="qnGo('sec4')" data-i18n="nav.portfolio">구축사례</a>
+      <a class="qn-item" data-sec="sec-strength" onclick="qnGo('sec-strength')" data-i18n="nav.strength">회사강점</a>
+      <a class="qn-item" data-sec="sec5" onclick="qnGo('sec5')" data-i18n="nav.procurement">조달청 제품</a>
+      <a class="qn-item" data-sec="sec7" onclick="qnGo('sec7')" data-i18n="nav.contact">문의</a>
     </div>
   </div>
 
@@ -264,7 +264,7 @@ import SecContact    from '../components/SecContact.astro';
     <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
       <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
     </svg>
-    <span>문의하기</span>
+    <span data-i18n="nav.float">문의하기</span>
   </div>
 
   <div class="inq-modal" id="inquiryModal">

@@ -12,6 +12,9 @@ const translations = {
     'nav.history':   '회사연혁',
     'nav.clients':   '파트너',
     'nav.contact':   '문의',
+    'nav.cert':      '인증현황',
+    'nav.strength':  '회사강점',
+    'nav.float':     '문의하기',
 
     // HERO
     'hero.tag':      'Smart Space Solution · Since 2007',
@@ -163,6 +166,9 @@ const translations = {
     'nav.history':   'History',
     'nav.clients':   'Partners',
     'nav.contact':   'Contact',
+    'nav.cert':      'Certifications',
+    'nav.strength':  'Strengths',
+    'nav.float':     'Inquiry',
 
     'hero.tag':      'Smart Space Solution · Since 2007',
     'hero.title':    'Smart Spaces,\nBuilt by\nEDAMST',
@@ -314,6 +320,9 @@ const translations = {
     'nav.history':   '公司历程',
     'nav.clients':   '合作伙伴',
     'nav.contact':   '联系我们',
+    'nav.cert':      '认证现况',
+    'nav.strength':  '公司优势',
+    'nav.float':     '联系咨询',
 
     'hero.tag':      '智能空间解决方案 · 创立于2007年',
     'hero.title':    '智能空间，\n由EDAMST\n打造',
@@ -465,6 +474,9 @@ const translations = {
     'nav.history':   '会社沿革',
     'nav.clients':   'パートナー',
     'nav.contact':   'お問い合わせ',
+    'nav.cert':      '認証状況',
+    'nav.strength':  '会社の強み',
+    'nav.float':     'お問い合わせ',
 
     'hero.tag':      'スマート空間ソリューション · 2007年創立',
     'hero.title':    'スマートな空間を、\nEDAMSTが\n創ります',
