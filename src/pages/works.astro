@@ -132,7 +132,23 @@
     .modal-body{display:grid;grid-template-columns:1fr 300px;}
     .mleft{padding:0 0 28px 32px;}
     .mmain{width:100%;aspect-ratio:16/10;overflow:hidden;position:relative;background:#f0f3fa;border-radius:10px;}
-    .mmain-bg{position:absolute;inset:0;background-size:cover;background-position:center;transition:opacity 0.25s;}
+    .mmain-bg{position:absolute;inset:0;background-size:cover;background-position:center;transition:opacity 0.3s;}
+    .mmain-arrow{
+      position:absolute;top:50%;transform:translateY(-50%);
+      width:44px;height:68px;
+      background:rgba(0,0,0,0.38);
+      border:none;cursor:pointer;color:#fff;
+      font-size:32px;line-height:1;
+      display:flex;align-items:center;justify-content:center;
+      border-radius:6px;z-index:10;
+      opacity:0;transition:opacity 0.2s,background 0.2s,transform 0.2s;
+      backdrop-filter:blur(4px);
+    }
+    .mmain:hover .mmain-arrow{opacity:1;}
+    .mmain-arrow:hover{background:rgba(26,47,138,0.75);transform:translateY(-50%) scale(1.06);}
+    .mmain-arrow--l{left:10px;}
+    .mmain-arrow--r{right:10px;}
+    .mmain-arrow:disabled{opacity:0!important;cursor:default;}
     .mmain-ph{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;}
     .mmain-ph span{font-size:13px;color:#bbb;}
     .mthumbs{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap;}
@@ -294,6 +310,8 @@
           <div class="mmain">
             <div class="mmain-bg" id="mbg2"></div>
             <div class="mmain-ph" id="mph"><span>이미지 준비 중</span></div>
+            <button class="mmain-arrow mmain-arrow--l" id="marr-prev" onclick="imgPrev()" aria-label="이전">&#8249;</button>
+            <button class="mmain-arrow mmain-arrow--r" id="marr-next" onclick="imgNext()" aria-label="다음">&#8250;</button>
           </div>
           <div class="mthumbs" id="mth"></div>
         </div>
@@ -545,6 +563,7 @@ function openModal(id){
   document.getElementById('mdesc').textContent=p.overview||'';
   document.getElementById('mtags').innerHTML=[p.service,p.client].map(t=>'<span class="mtag">'+t+'</span>').join('');
   const th=document.getElementById('mth');
+  curImgIdx = 0;
   if(p.images&&p.images.length>0){
     th.innerHTML=p.images.map((img,i)=>'<div class="mthumb '+(i===0?'on':'')+'" onclick="selImg('+i+')"><div class="mthumb-bg" style="background-image:url('+img+')"></div></div>').join('');
     th.className=p.images.length<=1?'mthumbs hidden':'mthumbs';
@@ -553,6 +572,7 @@ function openModal(id){
     th.className='mthumbs hidden';
     setMain(null,false);
   }
+  updateArrows();
   document.getElementById('mbg').classList.add('on');
   document.body.style.overflow='hidden';
 }
@@ -563,10 +583,32 @@ function setMain(url,has){
   else{bg.style.display='none';ph.style.display='flex';}
 }
 
+let curImgIdx = 0;
+
 function selImg(i){
   if(!cp||!cp.images||i>=cp.images.length) return;
+  curImgIdx = i;
   document.querySelectorAll('.mthumb').forEach((t,j)=>t.classList.toggle('on',j===i));
   setMain(cp.images[i],true);
+  updateArrows();
+}
+
+function imgPrev(){
+  if(!cp||!cp.images) return;
+  selImg((curImgIdx - 1 + cp.images.length) % cp.images.length);
+}
+
+function imgNext(){
+  if(!cp||!cp.images) return;
+  selImg((curImgIdx + 1) % cp.images.length);
+}
+
+function updateArrows(){
+  const total = cp&&cp.images ? cp.images.length : 0;
+  const prev = document.getElementById('marr-prev');
+  const next = document.getElementById('marr-next');
+  if(prev) prev.style.display = total > 1 ? '' : 'none';
+  if(next) next.style.display = total > 1 ? '' : 'none';
 }
 
 function closeModal(){
@@ -576,6 +618,14 @@ function closeModal(){
 }
 
 document.getElementById('mbg').addEventListener('click',e=>{if(e.target===document.getElementById('mbg')) closeModal();});
+
+// 키보드 방향키로 이미지 이동
+document.addEventListener('keydown', e=>{
+  if(!document.getElementById('mbg').classList.contains('on')) return;
+  if(e.key==='ArrowLeft') imgPrev();
+  if(e.key==='ArrowRight') imgNext();
+  if(e.key==='Escape') closeModal();
+});
 
 document.querySelectorAll('.sidebar-btn').forEach(b=>b.addEventListener('click',()=>{
   const f=b.dataset.f,v=b.dataset.v;
