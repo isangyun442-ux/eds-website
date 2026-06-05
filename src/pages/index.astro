@@ -113,17 +113,17 @@ import SecContact    from '../components/SecContact.astro';
 
     .lang-trigger {
       display: flex; align-items: center; gap: 6px;
-      background: #fff;
+      background: none;
       border: none;
       border-radius: 8px;
       padding: 7px 12px;
       cursor: pointer; font-family: inherit;
-      color: #111; font-size: 12px; font-weight: 700; letter-spacing: 0.06em;
-      transition: background 0.2s;
+      color: #fff; font-size: 12px; font-weight: 700; letter-spacing: 0.06em;
+      transition: color 0.3s, background 0.2s;
     }
-    .lang-trigger:hover { background: #f0f0f0; }
-    .nav.scrolled .lang-trigger { background: #fff; color: #111; }
-    .nav.scrolled .lang-trigger:hover { background: #f0f0f0; }
+    .lang-trigger:hover { background: rgba(255,255,255,0.12); }
+    .nav.scrolled .lang-trigger { color: #0d1a3a; }
+    .nav.scrolled .lang-trigger:hover { background: rgba(13,26,58,0.06); }
 
     .lang-globe { font-size: 14px; line-height: 1; }
     .lang-cur-code { font-size: 12px; font-weight: 800; }
