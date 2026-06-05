@@ -108,18 +108,66 @@ import SecContact    from '../components/SecContact.astro';
       padding: 10px 20px; border-radius: 6px; transition: background 0.15s, color 0.15s; white-space: nowrap;
     }
     .drop-link:hover { background: rgba(255,255,255,0.1); }
-    .lang-wrap { display: flex; gap: 4px; flex-shrink: 0; }
-    .lang-btn {
-      font-size: 11px; font-weight: 800; padding: 6px 10px;
-      background: transparent; border: none;
-      color: rgba(255,255,255,0.45); cursor: pointer; letter-spacing: 0.08em;
-      transition: all 0.2s; border-radius: 6px; position: relative;
+    /* 언어 드롭다운 */
+    .lang-wrap { position: relative; flex-shrink: 0; }
+
+    .lang-trigger {
+      display: flex; align-items: center; gap: 6px;
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.22);
+      border-radius: 8px;
+      padding: 7px 12px;
+      cursor: pointer; font-family: inherit;
+      color: #fff; font-size: 12px; font-weight: 700; letter-spacing: 0.06em;
+      transition: background 0.2s, border-color 0.2s;
+      backdrop-filter: blur(6px);
     }
-    .lang-btn:hover { color: #fff; background: rgba(255,255,255,0.12); }
-    .lang-btn.active { color: #fff; font-weight: 900; text-decoration: underline; text-underline-offset: 3px; }
-    .nav.scrolled .lang-btn { color: rgba(0,0,0,0.35); }
-    .nav.scrolled .lang-btn:hover { color: #1a2f8a; background: rgba(26,47,138,0.06); }
-    .nav.scrolled .lang-btn.active { color: #1a2f8a; font-weight: 900; }
+    .lang-trigger:hover { background: rgba(255,255,255,0.18); border-color: rgba(255,255,255,0.4); }
+    .nav.scrolled .lang-trigger {
+      background: rgba(26,47,138,0.07);
+      border-color: rgba(26,47,138,0.2);
+      color: #1a2f8a;
+    }
+    .nav.scrolled .lang-trigger:hover { background: rgba(26,47,138,0.13); }
+
+    .lang-globe { font-size: 14px; line-height: 1; }
+    .lang-cur-code { font-size: 12px; font-weight: 800; }
+    .lang-caret { font-size: 10px; transition: transform 0.25s; display: inline-block; }
+    .lang-wrap.open .lang-caret { transform: rotate(180deg); }
+
+    /* 드롭다운 목록 */
+    .lang-drop {
+      position: absolute; top: calc(100% + 8px); right: 0;
+      background: #fff;
+      border: 1px solid rgba(26,47,138,0.12);
+      border-radius: 12px;
+      padding: 6px;
+      min-width: 148px;
+      box-shadow: 0 8px 32px rgba(26,47,138,0.14), 0 2px 8px rgba(0,0,0,0.08);
+      opacity: 0; pointer-events: none;
+      transform: translateY(-6px) scale(0.97);
+      transform-origin: top right;
+      transition: opacity 0.2s, transform 0.2s;
+      z-index: 999;
+    }
+    .lang-wrap.open .lang-drop {
+      opacity: 1; pointer-events: all;
+      transform: translateY(0) scale(1);
+    }
+
+    .lang-option {
+      display: flex; align-items: center; gap: 10px;
+      width: 100%; padding: 9px 12px;
+      background: none; border: none; cursor: pointer;
+      font-family: inherit; font-size: 13px; font-weight: 600;
+      color: #333; border-radius: 8px;
+      transition: background 0.15s, color 0.15s;
+      text-align: left;
+    }
+    .lang-option:hover { background: #f0f4ff; color: #1a2f8a; }
+    .lang-option.active { background: #eef2ff; color: #1a2f8a; font-weight: 700; }
+    .lang-flag { font-size: 18px; line-height: 1; flex-shrink: 0; }
+    .lang-name { font-size: 13px; }
     @media (max-width: 768px) { .nav { display: none !important; } }
   </style>
 </head>
@@ -159,11 +207,29 @@ import SecContact    from '../components/SecContact.astro';
         <a href="#sec7" class="nav-link" onclick="event.preventDefault();qnGo('sec7')" data-i18n="nav.contact">문의</a>
       </div>
     </div>
-    <div class="lang-wrap">
-      <button class="lang-btn active" data-lang="ko" onclick="__applyLang('ko')">KO</button>
-      <button class="lang-btn" data-lang="en" onclick="__applyLang('en')">EN</button>
-      <button class="lang-btn" data-lang="zh" onclick="__applyLang('zh')">ZH</button>
-      <button class="lang-btn" data-lang="ja" onclick="__applyLang('ja')">JA</button>
+    <div class="lang-wrap" id="langWrap">
+      <button class="lang-trigger" id="langTrigger" onclick="toggleLangDrop()">
+        <span class="lang-globe">🌐</span>
+        <span class="lang-cur-code" id="langCurCode">KO</span>
+        <span class="lang-caret" id="langCaret">︿</span>
+      </button>
+      <div class="lang-drop" id="langDrop">
+        <button class="lang-option" data-lang="ko" onclick="selectLang('ko')">
+          <span class="lang-flag">🇰🇷</span><span class="lang-name">한국어</span>
+        </button>
+        <button class="lang-option" data-lang="en" onclick="selectLang('en')">
+          <span class="lang-flag">🇺🇸</span><span class="lang-name">영어</span>
+        </button>
+        <button class="lang-option" data-lang="zh" onclick="selectLang('zh')">
+          <span class="lang-flag">🇨🇳</span><span class="lang-name">중국어</span>
+        </button>
+        <button class="lang-option" data-lang="vi" onclick="selectLang('vi')">
+          <span class="lang-flag">🇻🇳</span><span class="lang-name">베트남어</span>
+        </button>
+        <button class="lang-option" data-lang="th" onclick="selectLang('th')">
+          <span class="lang-flag">🇹🇭</span><span class="lang-name">태국어</span>
+        </button>
+      </div>
     </div>
   </nav>
 
@@ -318,6 +384,41 @@ import SecContact    from '../components/SecContact.astro';
     var top = el.getBoundingClientRect().top + window.scrollY - 60;
     smoothScrollTo(top);
   };
+
+  // ── 언어 드롭다운 ──
+  var langNames = { ko:'KO', en:'EN', zh:'ZH', vi:'VI', th:'TH' };
+
+  window.toggleLangDrop = function() {
+    document.getElementById('langWrap').classList.toggle('open');
+  };
+
+  window.selectLang = function(lang) {
+    // 언어 적용
+    if (typeof window.__applyLang === 'function') window.__applyLang(lang);
+    // 현재 코드 업데이트
+    document.getElementById('langCurCode').textContent = langNames[lang] || lang.toUpperCase();
+    // active 표시
+    document.querySelectorAll('.lang-option').forEach(function(btn) {
+      btn.classList.toggle('active', btn.dataset.lang === lang);
+    });
+    // 드롭다운 닫기
+    document.getElementById('langWrap').classList.remove('open');
+  };
+
+  // 저장된 언어 초기 적용
+  (function() {
+    var saved = localStorage.getItem('eds-lang') || 'ko';
+    document.getElementById('langCurCode').textContent = langNames[saved] || saved.toUpperCase();
+    document.querySelectorAll('.lang-option').forEach(function(btn) {
+      btn.classList.toggle('active', btn.dataset.lang === saved);
+    });
+  })();
+
+  // 외부 클릭 시 드롭다운 닫기
+  document.addEventListener('click', function(e) {
+    var wrap = document.getElementById('langWrap');
+    if (wrap && !wrap.contains(e.target)) wrap.classList.remove('open');
+  });
 
   </script>
 
