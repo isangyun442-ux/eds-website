@@ -321,64 +321,33 @@ import SecContact    from '../components/SecContact.astro';
 
   </script>
 
-  <!-- 관성 스크롤 (라이브러리 없이 직접 구현 — 전역 오염 없음) -->
-  <script is:inline>
-  (function() {
-    // 터치 기기나 모션 감소 설정 시 스킵
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-    if ('ontouchstart' in window && window.innerWidth < 1024) return;
+  <!-- Lenis 관성 스크롤 (ES Module — 전역 오염 없음) -->
+  <script type="module">
+    import Lenis from 'https://esm.sh/@studio-freight/lenis@1.0.42';
 
-    var scrollY  = window.scrollY;
-    var targetY  = window.scrollY;
-    var rafId    = null;
-    var ease     = 0.09; // 클수록 빠름 (0.05~0.15 권장)
-    var running  = false;
+    const lenis = new Lenis({
+      duration: 1.2,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      smoothWheel: true,
+      touchMultiplier: 1.5,
+    });
 
-    // 네이티브 스크롤 위치 추적 (wheel/keyboard/scrollbar 모두 감지)
-    window.addEventListener('scroll', function() {
-      targetY = window.scrollY;
-      if (!running) startLoop();
-    }, { passive: true });
-
-    // 마우스 휠은 직접 가로채서 속도감 조절
-    window.addEventListener('wheel', function(e) {
-      e.preventDefault();
-      targetY += e.deltaY * 1.0;
-      targetY = Math.max(0, Math.min(targetY, document.body.scrollHeight - window.innerHeight));
-      if (!running) startLoop();
-    }, { passive: false });
-
-    function startLoop() {
-      running = true;
-      rafId = requestAnimationFrame(loop);
+    function raf(time) {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
     }
-
-    function loop() {
-      var diff = targetY - scrollY;
-      if (Math.abs(diff) < 0.5) {
-        scrollY = targetY;
-        running = false;
-        window.scrollTo(0, scrollY);
-        return;
-      }
-      scrollY += diff * ease;
-      window.scrollTo(0, scrollY);
-      rafId = requestAnimationFrame(loop);
-    }
+    requestAnimationFrame(raf);
 
     // anchor 클릭 시 부드럽게 이동
-    document.addEventListener('click', function(e) {
-      var a = e.target.closest('a[href^="#"]');
+    document.addEventListener('click', (e) => {
+      const a = e.target.closest('a[href^="#"]');
       if (!a) return;
-      var href = a.getAttribute('href');
-      var dest = document.querySelector(href);
-      if (!dest) return;
-      e.preventDefault();
-      var destY = dest.getBoundingClientRect().top + window.scrollY - 80;
-      targetY = Math.max(0, Math.min(destY, document.body.scrollHeight - window.innerHeight));
-      if (!running) startLoop();
+      const dest = document.querySelector(a.getAttribute('href'));
+      if (dest) {
+        e.preventDefault();
+        lenis.scrollTo(dest, { offset: -80, duration: 1.4 });
+      }
     });
-  })();
   </script>
 
 </body>
