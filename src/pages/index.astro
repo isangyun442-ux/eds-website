@@ -343,8 +343,7 @@ import SecContact    from '../components/SecContact.astro';
     entries.forEach(function(e) {
       if (e.isIntersecting) {
         e.target.classList.add('visible');
-      } else {
-        e.target.classList.remove('visible');
+        fadeObs.unobserve(e.target); // 한 번 보이면 해제 — 위로 스크롤 시 깜빡임 방지
       }
     });
   }, { threshold: 0.12 });
