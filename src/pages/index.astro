@@ -426,6 +426,7 @@ import SecContact    from '../components/SecContact.astro';
     var THRESHOLD = 100;
     var EDGE_MARGIN = 80;
     var locked = false;
+    var lockTimer = null; // 중복 타이머 방지용
     var accDelta = 0;
     var accTimer = null;
     var currentIdx = 0; // 스크롤 위치 대신 타겟 인덱스 추적
@@ -464,15 +465,20 @@ import SecContact    from '../components/SecContact.astro';
       }
     }
 
+    function setLock(){
+      locked = true;
+      clearTimeout(lockTimer); // 기존 타이머 취소 후 재설정
+      lockTimer = setTimeout(function(){ locked = false; }, COOLDOWN);
+    }
+
     function goToIndex(idx){
       if(idx < 0 || idx >= SECTIONS.length) return;
       var el = document.getElementById(SECTIONS[idx]);
       if(!el) return;
-      locked = true;
-      currentIdx = idx; // 애니메이션 완료 전에도 타겟 인덱스 확정
+      currentIdx = idx;
+      setLock();
       var top = el.getBoundingClientRect().top + window.scrollY - 60;
       smoothScrollTo(Math.max(0, top));
-      setTimeout(function(){ locked = false; }, COOLDOWN);
     }
 
     // 페이지 로드 시 현재 위치로 인덱스 초기화
@@ -523,7 +529,7 @@ import SecContact    from '../components/SecContact.astro';
       var el = document.getElementById(id);
       if(!el) return;
       var idx = SECTIONS.indexOf(id);
-      if(idx !== -1){ currentIdx = idx; locked = true; setTimeout(function(){ locked = false; }, COOLDOWN); }
+      if(idx !== -1){ currentIdx = idx; setLock(); } // 기존 타이머 취소 후 재설정
       var top = el.getBoundingClientRect().top + window.scrollY - 60;
       smoothScrollTo(Math.max(0, top));
     };
