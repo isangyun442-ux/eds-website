@@ -4,5 +4,19 @@
       "path": "/api/cron/keep-alive",
       "schedule": "0 9 * * 1"
     }
+  ],
+  "redirects": [
+    { "source": "/products", "destination": "/products/led", "permanent": true },
+    { "source": "/products/", "destination": "/products/led", "permanent": true },
+    { "source": "/shop", "destination": "/", "permanent": true },
+    { "source": "/shop/", "destination": "/", "permanent": true },
+    { "source": "/%EA%B8%B0%EC%97%85", "destination": "/", "permanent": true },
+    { "source": "/%EA%B8%B0%EC%97%85/", "destination": "/", "permanent": true },
+    { "source": "/%EA%B5%90%EC%9C%A1%EA%B8%B0%EA%B4%80", "destination": "/", "permanent": true },
+    { "source": "/%EA%B5%90%EC%9C%A1%EA%B8%B0%EA%B4%80/", "destination": "/", "permanent": true },
+    { "source": "/%EA%B3%B5%EA%B3%B5%EA%B8%B0%EA%B4%80", "destination": "/", "permanent": true },
+    { "source": "/%EA%B3%B5%EA%B3%B5%EA%B8%B0%EA%B4%80/", "destination": "/", "permanent": true },
+    { "source": "/it%EC%8B%9C%EC%8A%A4%ED%85%9C", "destination": "/", "permanent": true },
+    { "source": "/it%EC%8B%9C%EC%8A%A4%ED%85%9C/", "destination": "/", "permanent": true }
   ]
 }
