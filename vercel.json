@@ -10,6 +10,8 @@
     { "source": "/products/", "destination": "/products/led", "permanent": true },
     { "source": "/shop", "destination": "/", "permanent": true },
     { "source": "/shop/", "destination": "/", "permanent": true },
+    { "source": "/contact-us", "destination": "/#sec7", "permanent": true },
+    { "source": "/contact-us/", "destination": "/#sec7", "permanent": true },
     { "source": "/%EA%B8%B0%EC%97%85", "destination": "/", "permanent": true },
     { "source": "/%EA%B8%B0%EC%97%85/", "destination": "/", "permanent": true },
     { "source": "/%EA%B5%90%EC%9C%A1%EA%B8%B0%EA%B4%80", "destination": "/", "permanent": true },
