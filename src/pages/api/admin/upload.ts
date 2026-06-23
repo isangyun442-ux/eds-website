@@ -1,15 +1,10 @@
 // src/pages/api/admin/upload.ts
 import type { APIRoute } from 'astro';
-import { v2 as cloudinary } from 'cloudinary';
+import { put } from '@vercel/blob';
 
-cloudinary.config({
-  cloud_name: import.meta.env.CLOUDINARY_CLOUD_NAME,
-  api_key:    import.meta.env.CLOUDINARY_API_KEY,
-  api_secret: import.meta.env.CLOUDINARY_API_SECRET,
-});
+export const prerender = false;
 
 export const POST: APIRoute = async ({ request }) => {
-  // 인증 확인
   const auth = request.headers.get('x-admin-token');
   if (auth !== import.meta.env.ADMIN_PASSWORD) {
     return new Response(JSON.stringify({ error: '인증 실패' }), { status: 401 });
@@ -20,23 +15,17 @@ export const POST: APIRoute = async ({ request }) => {
     const file = formData.get('file') as File;
     if (!file) return new Response(JSON.stringify({ error: '파일 없음' }), { status: 400 });
 
-    const buffer = await file.arrayBuffer();
-    const base64 = Buffer.from(buffer).toString('base64');
-    const dataUri = `data:${file.type};base64,${base64}`;
-
-    const result = await cloudinary.uploader.upload(dataUri, {
-      folder: 'eds-portfolio',
-      resource_type: 'image',
+    const filename = `eds-portfolio/${Date.now()}-${file.name}`;
+    const blob = await put(filename, file, {
+      access: 'public',
+      token: import.meta.env.BLOB_READ_WRITE_TOKEN,
     });
 
-    return new Response(JSON.stringify({
-      url:       result.secure_url,
-      public_id: result.public_id,
-    }), {
+    return new Response(JSON.stringify({ url: blob.url, public_id: blob.pathname }), {
       status: 200,
       headers: { 'Content-Type': 'application/json' },
     });
-  } catch (e) {
+  } catch (e: any) {
     console.error(e);
     return new Response(JSON.stringify({ error: '업로드 실패' }), { status: 500 });
   }
