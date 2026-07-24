@@ -7,7 +7,7 @@ const translations = {
     // NAV
     'nav.about':     '회사소개',
     'nav.services':  '사업분야',
-    'nav.procurement': '등록제품',
+    'nav.procurement': '제품/시스템 소개',
     'nav.portfolio': '구축사례',
     'nav.history':   '회사연혁',
     'nav.clients':   '파트너',
