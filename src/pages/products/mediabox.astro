@@ -121,17 +121,6 @@
     .feat-item::before{content:'·';position:absolute;left:0;color:#1a2f8a;font-weight:700;}
     @media(max-width:768px){.feat-grid{grid-template-columns:1fr;}}
 
-    /* SPECS */
-    .specs{background:#fff;}
-    .specs-table{width:100%;border-collapse:collapse;margin-top:40px;}
-    .specs-table thead{background:#0d1a3a;}
-    .specs-table thead th{padding:16px 24px;font-size:12px;font-weight:700;color:#fff;text-align:left;letter-spacing:0.06em;text-transform:uppercase;}
-    .specs-table tbody tr{border-bottom:1px solid #f0f4fb;}
-    .specs-table tbody tr:last-child{border-bottom:none;}
-    .specs-table tbody tr:hover{background:#f7f9ff;}
-    .specs-table td{padding:16px 24px;font-size:14px;color:#333;}
-    .specs-table td:first-child{font-weight:700;color:#1a2f8a;width:30%;}
-
     /* CTA */
     .cta-sec{background:linear-gradient(135deg,#0d1a3a 0%,#1a2f8a 100%);padding:80px 60px;}
     .cta-inner{max-width:700px;margin:0 auto;text-align:center;}
@@ -330,32 +319,6 @@
     </div>
   </section>
 
-  <!-- SPECS -->
-  <section class="sec specs">
-    <div class="sec-inner">
-      <div class="sec-label">Specifications</div>
-      <h2 class="sec-title">제품 사양</h2>
-      <table class="specs-table">
-        <thead>
-          <tr>
-            <th>항목</th>
-            <th>사양</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr><td>모델명</td><td>MB-HD8000</td></tr>
-          <tr><td>Processor</td><td>Xeon Silver 4510 2.4G 12Core × 2</td></tr>
-          <tr><td>GPU</td><td>Nvidia GT1030 2G</td></tr>
-          <tr><td>RAM</td><td>32GB</td></tr>
-          <tr><td>SSD</td><td>500GB (NVMe)</td></tr>
-          <tr><td>HDD</td><td>80TB</td></tr>
-          <tr><td>RAID</td><td>Broadcom LSI9560-8I</td></tr>
-          <tr><td>PSU</td><td>800W Redundant</td></tr>
-        </tbody>
-      </table>
-    </div>
-  </section>
-
   <!-- CTA -->
   <section class="cta-sec">
     <div class="cta-inner">
@@ -389,7 +352,7 @@
       title: 'mediabox — EDS 이담에스티',
       badge: '제품/시스템 소개',
       heroSub: 'HDTV 동시녹화 녹화영상<br>키워드 검색 및 편집 시스템',
-      secTitles: ['미디어박스란?','제품 특징','제품 사양'],
+      secTitles: ['미디어박스란?','제품 특징'],
       secDesc: 'HD 방송 녹화의 새로운 기준을 제시하는 미디어박스는 원하는 시간대에 원하는 방송 프로그램을 최대 8개 채널까지 동시에 녹화할 수 있으며, 특화된 키워드 검색 기능을 통해 원하는 장면을 신속하게 찾아 편집할 수 있습니다.',
       overviewItems: [
         '최대 16채널 HDTV(1080i) 동시녹화',
@@ -407,8 +370,6 @@
         ['지상파 및 CATV 완벽지원','최대 8채널 HDTV 동시 녹화','지역별, SO별 관계없이 간단한 채널 설정','최대 약 4개월 연속녹화 가능 (8VSB, QAM, Raid 5 기준)','RF케이블 1개를 이용하여 최대 8채널 녹화지원'],
         ['Microsoft BDA(Broadcast Driver Architecture) 사용으로 안정적인 하드웨어 환경 제공','서버용 Intel Xeon Processor 적용','Hot-Swap Disk로 손쉬운 관리','전원공급장치 이중화로 시스템 안정성확보','2개의 Gigabit 이더넷 제공','RAID 시스템 제공 (RAID 5 또는 RAID 6)']
       ],
-      specHeader: ['항목','사양'],
-      specRows: [['모델명','MB-HD8000']],
       ctaTitle: '도입 문의를 환영합니다',
       ctaDesc: '미디어박스는 조달청 나라장터를 통해 공공기관 직접 구매가 가능합니다.',
       ctaDesc2: '자세한 사양 및 견적은 문의를 통해 확인하세요.',
@@ -420,7 +381,7 @@
       title: 'Mediabox — EDS EDAMST',
       badge: 'Procurement Product',
       heroSub: 'HDTV Simultaneous Recording<br>Keyword Search & Editing System',
-      secTitles: ['What is Mediabox?','Product Features','Specifications'],
+      secTitles: ['What is Mediabox?','Product Features'],
       secDesc: 'Mediabox sets a new standard for HD broadcast recording, allowing simultaneous recording of up to 8 channels at any time, with specialized keyword search to quickly find and edit desired scenes.',
       overviewItems: [
         'Up to 16-channel HDTV(1080i) simultaneous recording',
@@ -438,8 +399,6 @@
         ['Full support for terrestrial and CATV','Up to 8-channel HDTV simultaneous recording','Simple channel setup regardless of region or SO','Up to ~4 months continuous recording (8VSB, QAM, Raid 5)','Support up to 8-channel recording with a single RF cable'],
         ['Stable hardware environment via Microsoft BDA','Server-grade Intel Xeon Processor','Easy management with Hot-Swap Disk','Redundant power supply for system stability','2 Gigabit Ethernet ports','RAID system support (RAID 5 or RAID 6)']
       ],
-      specHeader: ['Item','Specification'],
-      specRows: [['Model','MB-HD8000']],
       ctaTitle: 'Welcome to Your Inquiry',
       ctaDesc: 'Mediabox is available for direct purchase by public institutions through the KONEPS marketplace.',
       ctaDesc2: 'Contact us for detailed specifications and quotes.',
@@ -497,12 +456,6 @@
       const items = card.querySelectorAll('.feat-item');
       items.forEach(function(el, j){ if(t.featItems[i][j]) el.textContent = t.featItems[i][j]; });
     });
-
-    // Specs 헤더
-    const ths = document.querySelectorAll('.specs-table th');
-    ths.forEach(function(el, i){ if(t.specHeader[i]) el.textContent = t.specHeader[i]; });
-    const firstTd = document.querySelector('.specs-table tbody tr:first-child td:first-child');
-    if(firstTd && t.specRows[0]) firstTd.textContent = t.specRows[0][0];
 
     // CTA
     const ctaTitle = document.querySelector('.cta-title');
