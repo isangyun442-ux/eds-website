@@ -357,20 +357,27 @@ import SecContact    from '../components/SecContact.astro';
   }
 
   // easing 스크롤 함수 (전역으로 먼저 선언)
-  window.smoothScrollTo = function(target) {
+  var _rafId = null;
+  window.smoothScrollTo = function(target, onDone) {
+    if(_rafId) cancelAnimationFrame(_rafId);
     var start = window.scrollY;
     var distance = target - start;
-    var duration = Math.min(800 + Math.abs(distance) * 0.3, 1400);
+    var duration = Math.min(600 + Math.abs(distance) * 0.15, 900);
     var startTime = null;
-    function easeOutQuart(t){ return 1 - Math.pow(1 - t, 4); }
+    function easeOutCubic(t){ return 1 - Math.pow(1 - t, 3); }
     function step(ts){
       if(!startTime) startTime = ts;
       var elapsed = ts - startTime;
       var progress = Math.min(elapsed / duration, 1);
-      window.scrollTo(0, start + distance * easeOutQuart(progress));
-      if(progress < 1) requestAnimationFrame(step);
+      window.scrollTo(0, start + distance * easeOutCubic(progress));
+      if(progress < 1){
+        _rafId = requestAnimationFrame(step);
+      } else {
+        _rafId = null;
+        if(onDone) onDone();
+      }
     }
-    requestAnimationFrame(step);
+    _rafId = requestAnimationFrame(step);
   };
 
   window.qnGo = function(id){
@@ -423,14 +430,12 @@ import SecContact    from '../components/SecContact.astro';
     var SECTIONS = ['sec0','sec2','sec6','sec-cert','sec3','sec4','sec-strength','sec5','sec7'];
     // 뷰포트보다 길어서 자유 스크롤 허용할 섹션
     var FREE_SCROLL_SECTIONS = ['sec6', 'sec-strength'];
-    var COOLDOWN = 1500;
-    var THRESHOLD = 100;
+    var THRESHOLD = 80;
     var EDGE_MARGIN = 80;
     var locked = false;
-    var lockTimer = null; // 중복 타이머 방지용
     var accDelta = 0;
     var accTimer = null;
-    var currentIdx = 0; // 스크롤 위치 대신 타겟 인덱스 추적
+    var currentIdx = 0;
 
     function getScrollIndex(){
       var scrollY = window.scrollY;
@@ -466,20 +471,14 @@ import SecContact    from '../components/SecContact.astro';
       }
     }
 
-    function setLock(){
-      locked = true;
-      clearTimeout(lockTimer); // 기존 타이머 취소 후 재설정
-      lockTimer = setTimeout(function(){ locked = false; }, COOLDOWN);
-    }
-
     function goToIndex(idx){
       if(idx < 0 || idx >= SECTIONS.length) return;
       var el = document.getElementById(SECTIONS[idx]);
       if(!el) return;
       currentIdx = idx;
-      setLock();
+      locked = true;
       var top = el.getBoundingClientRect().top + window.scrollY - 60;
-      smoothScrollTo(Math.max(0, top));
+      smoothScrollTo(Math.max(0, top), function(){ locked = false; });
     }
 
     // 페이지 로드 시 현재 위치로 인덱스 초기화
@@ -530,9 +529,10 @@ import SecContact    from '../components/SecContact.astro';
       var el = document.getElementById(id);
       if(!el) return;
       var idx = SECTIONS.indexOf(id);
-      if(idx !== -1){ currentIdx = idx; setLock(); } // 기존 타이머 취소 후 재설정
+      if(idx !== -1) currentIdx = idx;
+      locked = true;
       var top = el.getBoundingClientRect().top + window.scrollY - 60;
-      smoothScrollTo(Math.max(0, top));
+      smoothScrollTo(Math.max(0, top), function(){ locked = false; });
     };
   })();
   </script>
