@@ -241,7 +241,7 @@ import SecContact    from '../components/SecContact.astro';
 
   <!-- 퀵 네비게이션 -->
   <div class="quick-nav" id="quickNav">
-    <button class="qn-top" onclick="smoothScrollTo(0)" aria-label="맨 위로">
+    <button class="qn-top" onclick="goToTop()" aria-label="맨 위로">
       <svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M6.5 10V3M3 6l3.5-3.5L10 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
       TOP
     </button>
@@ -533,6 +533,12 @@ import SecContact    from '../components/SecContact.astro';
       locked = true;
       var top = el.getBoundingClientRect().top + window.scrollY - 60;
       smoothScrollTo(Math.max(0, top), function(){ locked = false; });
+    };
+
+    window.goToTop = function(){
+      currentIdx = 0;
+      locked = true;
+      smoothScrollTo(0, function(){ locked = false; });
     };
   })();
   </script>
