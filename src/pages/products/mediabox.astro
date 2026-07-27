@@ -634,14 +634,53 @@ body > *{position:relative;z-index:1;}
       pipeS: ['매일 자동','프로그램 단위','원본+재생본','자동','형태소 분석','이슈 요약'],
       uiTitle: '직관적인 웹 콘솔',
       uiSub: '별도 클라이언트 설치 없이 PC·태블릿 어디서든 접근. 기관 내부망(폐쇄망) 운영을 기본으로 합니다.',
+      uiLabel: ['지능형 예약 및 자동 녹화 시스템','AI 및 데이터 기반 초정밀 검색','웹 기반 재생 및 자동화 파이프라인','통합 모니터링 및 지능형 스토리지 관리'],
+      uiDetailTitle: ['한눈에 파악하는<br>실시간 녹화 현황','원하는 발언을<br>즉시 찾아냅니다','설치 없이 어디서나<br>재생과 편집','시스템 상태를<br>한 화면에서 통합 감시'],
+      uiList: [
+        ['최대 8채널 동시녹화 : 지상파 및 종편 등 최대 8개 채널 HDTV(1080i) 독립녹화','시각적 EPG 타임라인 : 한눈에 파악되는 편성표 UI로 직관적인 스케줄 설정','스마트 자동 편성 예약 : 채널, 장르, 특정 키워드 등의 규칙 설정을 통한 무인 자동 녹화','유연한 녹화관리 : 긴급 상황을 위한 \'즉시 녹화\' 및 다중 처리를 위한 \'CSV 일괄 예약\' 지원','실시간 튜너 모니터링 : 대시보드에서 8개 채널의 수신상태와 녹화 진행 현황 즉시 확인'],
+        ['자연어 및 키워드 검색 : 입력만으로 녹화된 영상과 자막을 빠르고 정확하게 검색','초정밀 자막 텍스트 이동 : 추출된 자막 데이터를 클릭하여 해당 단어가 언급된 정확한 시점으로 즉시 이동','AI 핫이슈 트렌드 분석 : AI가 방송 내용을 분석하여 시간대별 관심키워드 및 빈출 단어 시각화 제공','다중 조건 고급 필터링 : 채널별, 기간별, 장르별, 녹화 상태별 세분화된 맞춤형 검색','직관적인 미디어 식별 : 검색 결과와 녹화 완료본을 썸네일 뷰(갤러리)와 리스트 뷰로 제공'],
+        ['웹 브라우저(Web GUI) 접근 : 별도 클라이언트 설치없이 PC, 태블릿 등 다양한 환경에서 재생 및 관리','자동화 파이프라인 : 녹화 완료와 동시에 프록시(Proxy) 영상 변환 및 자막 파일(Caption) 자동 추출','효율적인 구간 추출(In/Out) : 녹화 영상 중 필요한 핵심 구간만 지정하여 영상 및 자막 파일 동시 보내기','완벽한 확장 호환성 : 추출영상(mp4, MKV, TS원본) 및 자막은 NLE 및 일반 업무용 PC와 완벽호환'],
+        ['실시간 리소스 대시보드 : CPU, 메모리, GPU, 디스크 용량 등 H/W 자원을 한 화면에서 통합 감시','지능형 스토리지 정리(Purge) : 디스크 공간 확보를 위해 오래된 영상부터 순차적으로 삭제하는 자동화 정책','데이터 영구 보호(Lock) : 중요한 필수 보존 영상은 삭제 대상에서 제외하는 개별 잠금 및 예외 규칙 적용','작업센터(파이프라인) 헬스 체크 : 프록시 변환, 자막 처리 등 백그라운드 프로세스의 진행 상태 실시간 점검','보안 및 사용자 편의 : 역할 기반(RBAC) 권한 관리, 다크모드 테마, 상세한 온라인 매뉴얼 시스템 내장']
+      ],
       useTitle: '공공기관 홍보 업무를<br>위해 설계된 시스템',
       useSub: '정부기관·지방자치단체 홍보·대변인·기록 업무를 위해 최적화되어 있습니다.',
+      scnT: ['아침 이슈 보고','보도 대응','기록 보존'],
+      scnD: [
+        '대시보드의 키워드와 AI 브리핑을 확인하고, 대기열 연속 시청으로 밤사이 보도를 빠르게 훑어 아침 보고 자료를 만듭니다.',
+        '기관명·정책명·인물명으로 자막을 검색해 발언을 즉시 확인하고, 해당 방송과 자막을 근거 자료로 확보합니다.',
+        '주요 프로그램을 원본 화질로 보존하고 잠금으로 보호합니다. 저장 공간은 보호 규칙에 따라 자동 관리됩니다.'
+      ],
       hwTitle: '하드웨어 플랫폼',
       hwSub: '서버급 고성능 프로세서, RAID 이중화, 전원 이중화로 방송 녹화의 연속성을 보장합니다.',
+      hwDetailTitle: ['8채널 동시 수신<br>완벽한 방송 지원','엔터프라이즈급<br>안정성 보장'],
+      hwList: [
+        ['지상파 및 CATV(8VSB, QAM) 완벽지원','최대 8채널 HDTV 동시 녹화','지역별, SO(종합유선방송국)별 관계없이 간단한 채널 설정','RF케이블 1개로 최대 8채널 수신 및 녹화 환경 구성'],
+        ['서버급 고성능 Processor 적용','안정적인 대용량 RAID 시스템 탑재(RAID 5 or RAID 6)','전원 공급 장치 이중화(Redundant Power)로 시스템 안정성 확보','Microsoft BDA(Broadcast Driver Architecture) 기반의 신뢰성 높은 하드웨어 환경 제공']
+      ],
       opsTitle: '운영 · 신뢰성',
+      opsB: ['익숙한 관리 방식','안전한 삭제','감사 기록','권한 관리','작업 현황 가시화','저장 공간 자동 관리'],
+      opsP: [
+        '파일 탐색기와 같은 선택·우클릭·키보드 조작으로 목록 관리',
+        '삭제 후 실행 취소, 휴지통 복원, 보존 기간 경과 후 자동 정리',
+        '로그인·삭제·내보내기·설정 변경을 수정 불가 방식으로 보존',
+        '관리자·운영자·열람자 역할 기반 접근 제어, 모바일은 조회 전용',
+        '변환·자막 등 후처리 진행 상태와 문제 항목을 작업센터에서 확인',
+        '여유 공간·정리 기준 화면 표시, 잠금 항목과 진행 중 녹화는 보호'
+      ],
       specTitle: '시스템 구성',
       specTh: ['항목','사양'],
+      specRows: [
+        ['녹화 채널','지상파·보도·종편 8채널 동시'],
+        ['수신 장치','Hauppauge WinTV-quadHD × 2매'],
+        ['저장 형식','방송 원본(TS) + 웹 재생본(MP4)'],
+        ['검색 엔진','한국어 형태소 분석 · 전문 검색'],
+        ['데이터베이스','PostgreSQL'],
+        ['이용 방식','웹 콘솔(PC) · 모바일(조회 전용)'],
+        ['설치 환경','기관 내부망(폐쇄망) 기준 설계'],
+        ['서버 사양','납품 시 별도 기재']
+      ],
       roadmapT: '로드맵 — 개발 진행 중인 기능',
+      roadmapChips: ['자막-영상 정밀 동기화','뉴스 화면 OCR 검색','인물 모니터링','키워드 히트맵','보안 공유 뷰어','알림 센터'],
       ctaTitle: '도입 문의를 환영합니다',
       ctaSub: 'MediaBox V2는 조달청 나라장터를 통해 공공기관 직접 구매가 가능합니다. 60여 개 기관 납품 경험을 바탕으로 최적의 구성을 제안해드립니다.',
       ctaBtn: '문의하기',
@@ -670,14 +709,53 @@ body > *{position:relative;z-index:1;}
       pipeS: ['Daily auto','Per program','TS + MP4','Auto','Morpheme','Issue summary'],
       uiTitle: 'Intuitive Web Console',
       uiSub: 'Access from any PC or tablet — no client installation required. Designed for closed intranet environments.',
+      uiLabel: ['Intelligent Scheduling & Auto-Recording','AI-Powered Precision Search','Web-Based Playback & Automation Pipeline','Integrated Monitoring & Smart Storage'],
+      uiDetailTitle: ['Real-Time Recording Status<br>at a Glance','Find Any Statement<br>Instantly','Play & Edit<br>Anywhere, No Install','Unified System Monitoring<br>on One Screen'],
+      uiList: [
+        ['Up to 8-ch simultaneous recording: Independent HDTV(1080i) recording for up to 8 terrestrial & cable channels','Visual EPG timeline: Intuitive schedule UI for quick programming overview','Smart auto-scheduling: Unattended auto-recording via channel, genre, and keyword rules','Flexible recording management: Instant recording for emergencies & CSV bulk reservation support','Live tuner monitoring: Instantly check reception status and recording progress for all 8 channels'],
+        ['Natural language & keyword search: Search recorded video and captions quickly and accurately','Precision caption navigation: Click extracted caption text to jump instantly to that moment','AI hot-issue trend analysis: AI analyzes broadcast content and visualizes trending keywords by time slot','Multi-condition advanced filtering: Granular search by channel, date, genre, and recording status','Intuitive media identification: Browse results and recordings in thumbnail gallery or list view'],
+        ['Web browser (Web GUI) access: Playback and management from PC, tablet, etc. — no client needed','Automated pipeline: Proxy video conversion and caption extraction triggered automatically on recording completion','Efficient clip extraction (In/Out): Designate only the key segment and export video and captions simultaneously','Full compatibility: Extracted files (mp4, MKV, TS) and captions work perfectly with NLE editors and standard PCs'],
+        ['Real-time resource dashboard: Unified view of CPU, memory, GPU, and disk usage in one screen','Smart storage purge: Automated policy that deletes oldest recordings first to free disk space','Permanent data protection (Lock): Individual lock and exception rules to exclude critical footage from deletion','Pipeline health check: Real-time status of proxy conversion and caption processing background tasks','Security & UX: Role-based (RBAC) access control, dark mode theme, and built-in online manual']
+      ],
       useTitle: 'Designed for<br>Public Institution PR',
       useSub: 'Optimized for PR, communications, and records management at government agencies and local authorities.',
+      scnT: ['Morning Issue Report','Media Response','Record Archiving'],
+      scnD: [
+        'Review the AI briefing and keyword dashboard, then binge-watch overnight news at 1.5x speed to prepare your morning report.',
+        'Search captions by agency name, policy, or person to instantly verify statements and secure broadcast evidence.',
+        'Preserve key programs in original quality with lock protection. Storage is managed automatically by retention rules.'
+      ],
       hwTitle: 'Hardware Platform',
       hwSub: 'Server-grade processor, RAID redundancy, and dual power supply ensure uninterrupted broadcast recording.',
+      hwDetailTitle: ['8-Channel Simultaneous Reception<br>Full Broadcast Support','Enterprise-Grade<br>Reliability Guaranteed'],
+      hwList: [
+        ['Full support for terrestrial & CATV (8VSB, QAM)','Up to 8-channel HDTV simultaneous recording','Simple channel setup regardless of region or cable operator','Single RF cable supports up to 8-channel reception and recording'],
+        ['Server-grade high-performance processor','Large-capacity RAID system (RAID 5 or RAID 6)','Redundant power supply for system stability','Reliable hardware environment based on Microsoft BDA architecture']
+      ],
       opsTitle: 'Operations & Reliability',
+      opsB: ['Familiar Management','Safe Deletion','Audit Log','Access Control','Task Visibility','Auto Storage Management'],
+      opsP: [
+        'Manage file lists with familiar explorer-style select, right-click, and keyboard controls.',
+        'Undo after deletion, restore from trash, and auto-purge after retention period expires.',
+        'Logins, deletions, exports, and setting changes are preserved in an immutable audit log.',
+        'Role-based access control for admin, operator, and viewer; mobile is read-only.',
+        'Monitor processing status and problem items for transcoding and caption tasks in the task center.',
+        'Display available space and purge criteria; locked items and active recordings are protected.'
+      ],
       specTitle: 'System Specifications',
       specTh: ['Item','Specification'],
+      specRows: [
+        ['Recording Channels','8 simultaneous (terrestrial, news, general)'],
+        ['Tuner Device','Hauppauge WinTV-quadHD × 2'],
+        ['Storage Format','Broadcast TS + Web MP4'],
+        ['Search Engine','Korean morpheme analysis · Full-text search'],
+        ['Database','PostgreSQL'],
+        ['Access Method','Web console (PC) · Mobile (read-only)'],
+        ['Environment','Closed intranet (on-premises) design'],
+        ['Server Spec','Specified at delivery']
+      ],
       roadmapT: 'Roadmap — Features in Development',
+      roadmapChips: ['Caption-Video Sync','News OCR Search','Person Monitoring','Keyword Heatmap','Secure Share Viewer','Alert Center'],
       ctaTitle: 'Welcome Your Inquiry',
       ctaSub: 'MediaBox V2 is available for direct purchase through KONEPS. We propose the best configuration based on experience with 60+ institutions.',
       ctaBtn: 'Contact Us',
@@ -711,24 +789,45 @@ body > *{position:relative;z-index:1;}
     qa('[data-pipe]').forEach(function(el){ el.textContent = t.pipe[+el.dataset.pipe] || el.textContent; });
     qa('[data-pipe-s]').forEach(function(el){ el.textContent = t.pipeS[+el.dataset.pipeS] || el.textContent; });
 
-    // UI
+    // UI 섹션
     var ut = q('#ui-title'); if(ut) ut.textContent = t.uiTitle;
     var us = q('#ui-sub'); if(us) us.textContent = t.uiSub;
+    qa('[data-ui-label]').forEach(function(el){ var i=+el.dataset.uiLabel; el.textContent = t.uiLabel[i] || el.textContent; });
+    qa('[data-ui-title]').forEach(function(el){ var i=+el.dataset.uiTitle; el.innerHTML = t.uiDetailTitle[i] || el.innerHTML; });
+    qa('[data-ui-list]').forEach(function(el){
+      var i=+el.dataset.uiList; if(!t.uiList[i]) return;
+      var items = el.querySelectorAll('li');
+      items.forEach(function(li,j){ if(t.uiList[i][j]) li.textContent = t.uiList[i][j]; });
+    });
 
     // USE CASES
     var useT = q('#use-title'); if(useT) useT.innerHTML = t.useTitle;
     var useS = q('#use-sub'); if(useS) useS.textContent = t.useSub;
+    qa('[data-scn-t]').forEach(function(el){ var i=+el.dataset.scnT; el.textContent = t.scnT[i] || el.textContent; });
+    qa('[data-scn-d]').forEach(function(el){ var i=+el.dataset.scnD; el.textContent = t.scnD[i] || el.textContent; });
 
     // HW
     var hwT = q('#hw-title'); if(hwT) hwT.textContent = t.hwTitle;
     var hwS = q('#hw-sub'); if(hwS) hwS.textContent = t.hwSub;
+    qa('[data-hw-title]').forEach(function(el){ var i=+el.dataset.hwTitle; el.innerHTML = t.hwDetailTitle[i] || el.innerHTML; });
+    qa('[data-hw-list]').forEach(function(el){
+      var i=+el.dataset.hwList; if(!t.hwList[i]) return;
+      var items = el.querySelectorAll('li');
+      items.forEach(function(li,j){ if(t.hwList[i][j]) li.textContent = t.hwList[i][j]; });
+    });
 
     // OPS
     var opsT = q('#ops-title'); if(opsT) opsT.textContent = t.opsTitle;
+    qa('[data-ops-b]').forEach(function(el){ var i=+el.dataset.opsB; el.textContent = t.opsB[i] || el.textContent; });
+    qa('[data-ops-p]').forEach(function(el){ var i=+el.dataset.opsP; el.textContent = t.opsP[i] || el.textContent; });
+
+    // SPEC
     var specT = q('#spec-title'); if(specT) specT.textContent = t.specTitle;
     var th0 = q('#spec-th0'); if(th0) th0.textContent = t.specTh[0];
     var th1 = q('#spec-th1'); if(th1) th1.textContent = t.specTh[1];
+    if(t.specRows){ var rows=document.querySelectorAll('.spec tbody tr'); rows.forEach(function(tr,i){ if(!t.specRows[i]) return; var tds=tr.querySelectorAll('td'); if(tds[0]) tds[0].textContent=t.specRows[i][0]; if(tds[1]) tds[1].textContent=t.specRows[i][1]; }); }
     var rmT = q('#roadmap-t'); if(rmT) rmT.textContent = t.roadmapT;
+    if(t.roadmapChips){ var chips=document.querySelectorAll('.rm-chip'); chips.forEach(function(el,i){ if(t.roadmapChips[i]) el.textContent=t.roadmapChips[i]; }); }
 
     // CTA
     var ctaT = q('#cta-title'); if(ctaT) ctaT.textContent = t.ctaTitle;
