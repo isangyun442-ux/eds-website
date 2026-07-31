@@ -43,6 +43,7 @@
     .filter-scroll::-webkit-scrollbar{display:none;}
     .filter-btn{flex-shrink:0;padding:7px 14px;border:1.5px solid #e8ecf4;border-radius:50px;font-size:12px;font-weight:500;color:#888;background:#fff;cursor:pointer;font-family:inherit;white-space:nowrap;transition:all 0.2s;}
     .filter-btn.on{background:#1a2f8a;color:#fff;border-color:#1a2f8a;font-weight:700;}
+    .year-select{width:100%;padding:9px 12px;border:1.5px solid #e8ecf4;border-radius:8px;font-size:13px;color:#333;background:#fff;font-family:inherit;}
 
     /* 결과 카운트 */
     .result-bar{padding:14px 20px 10px;display:flex;align-items:center;justify-content:space-between;}
@@ -150,21 +151,22 @@
     </div>
     <div class="filter-group">
       <div class="filter-label">기간</div>
-      <div class="filter-scroll">
-        <button class="filter-btn on" data-f="y" data-v="all">전체</button>
-        <button class="filter-btn" data-f="y" data-v="2025">2025년</button>
-        <button class="filter-btn" data-f="y" data-v="2024">2024년</button>
-        <button class="filter-btn" data-f="y" data-v="2023">2023년</button>
-        <button class="filter-btn" data-f="y" data-v="2022">2022년</button>
-        <button class="filter-btn" data-f="y" data-v="2021">2021년</button>
-        <button class="filter-btn" data-f="y" data-v="2020">2020년</button>
-        <button class="filter-btn" data-f="y" data-v="2019">2019년</button>
-        <button class="filter-btn" data-f="y" data-v="2018">2018년</button>
-        <button class="filter-btn" data-f="y" data-v="2017">2017년</button>
-        <button class="filter-btn" data-f="y" data-v="2016">2016년</button>
-        <button class="filter-btn" data-f="y" data-v="2015">2015년</button>
-        <button class="filter-btn" data-f="y" data-v="old">2015년 이전</button>
-      </div>
+      <select id="yr-select" class="year-select">
+        <option value="all">전체</option>
+        <option value="2026">2026년</option>
+        <option value="2025">2025년</option>
+        <option value="2024">2024년</option>
+        <option value="2023">2023년</option>
+        <option value="2022">2022년</option>
+        <option value="2021">2021년</option>
+        <option value="2020">2020년</option>
+        <option value="2019">2019년</option>
+        <option value="2018">2018년</option>
+        <option value="2017">2017년</option>
+        <option value="2016">2016년</option>
+        <option value="2015">2015년</option>
+        <option value="old">2015년 이전</option>
+      </select>
     </div>
   </div>
 
@@ -453,12 +455,14 @@ document.querySelectorAll('.filter-btn').forEach(b=>b.addEventListener('click',(
   const f=b.dataset.f,v=b.dataset.v;
   document.querySelectorAll('.filter-btn[data-f="'+f+'"]').forEach(x=>x.classList.remove('on'));
   b.classList.add('on');
-  if(f==='s') sv=v; else if(f==='c') cl=v; else yr=v;
+  if(f==='s') sv=v; else cl=v;
   render();
 }));
 
+document.getElementById('yr-select').addEventListener('change',e=>{yr=e.target.value;render();});
+
 document.getElementById('si').addEventListener('input',e=>{q=e.target.value.trim();render();});
-function reset(){sv='all';cl='all';yr='all';q='';document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('on'));document.querySelectorAll('.filter-btn[data-v="all"]').forEach(b=>b.classList.add('on'));document.getElementById('si').value='';render();}
+function reset(){sv='all';cl='all';yr='all';q='';document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('on'));document.querySelectorAll('.filter-btn[data-v="all"]').forEach(b=>b.classList.add('on'));document.getElementById('yr-select').value='all';document.getElementById('si').value='';render();}
 document.addEventListener('keydown',e=>{if(e.key==='Escape') closeModal();});
 render();
 
