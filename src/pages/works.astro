@@ -639,22 +639,23 @@ document.getElementById('si').addEventListener('input',e=>{q=e.target.value.trim
 function reset(){sv='all';cl='all';q='';document.querySelectorAll('.sidebar-btn').forEach(b=>b.classList.remove('on'));document.querySelectorAll('.sidebar-btn[data-v="all"]').forEach(b=>b.classList.add('on'));document.getElementById('si').value='';render();}
 document.addEventListener('keydown',e=>{if(e.key==='Escape') closeModal();});
 render();
-loadAdminProjects();
 
 // URL 파라미터 ?open=ID 로 특정 프로젝트 자동 오픈
-(function(){
+// (신규 추가 프로젝트는 loadAdminProjects()가 끝나야 allProjects에 들어오므로, fetch 완료 후에 열어야 함)
+function openFromUrlParam(){
   const params = new URLSearchParams(window.location.search);
   const openId = params.get('open');
   if (!openId) return;
   const id = parseInt(openId);
-  // hardcoded 데이터는 이미 로드됨 → 바로 오픈
   const p = allProjects.find(x => x.id === id);
   if (p) {
     openModal(id);
     // URL 파라미터 정리 (뒤로가기 오작동 방지)
     history.replaceState(null, '', '/works');
   }
-})()
+}
+
+loadAdminProjects().then(openFromUrlParam);
 </script>
 </body>
 </html>

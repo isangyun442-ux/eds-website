@@ -363,6 +363,17 @@ const hardcodedProjects = [
 let allProjects = [...hardcodedProjects];
 let sv='all',cl='all',q='',cp=null;
 
+async function loadAdminProjects() {
+  try {
+    const res = await fetch('/api/admin/projects');
+    if (!res.ok) return;
+    const adminProjects = await res.json();
+    const hardcodedIds = new Set(hardcodedProjects.map(p => p.id));
+    const newOnes = adminProjects.filter(p => !hardcodedIds.has(p.id));
+    if (newOnes.length > 0) { allProjects = [...newOnes, ...hardcodedProjects]; render(); }
+  } catch(e) {}
+}
+
 function render(){
   const fl=allProjects.filter(p=>(sv==='all'||p.service===sv)&&(cl==='all'||p.client===cl)&&(!q||p.title.includes(q)||(p.overview||''). includes(q)));
   const g=document.getElementById('grid'),e=document.getElementById('empty');
@@ -432,6 +443,20 @@ document.getElementById('si').addEventListener('input',e=>{q=e.target.value.trim
 function reset(){sv='all';cl='all';q='';document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('on'));document.querySelectorAll('.filter-btn[data-v="all"]').forEach(b=>b.classList.add('on'));document.getElementById('si').value='';render();}
 document.addEventListener('keydown',e=>{if(e.key==='Escape') closeModal();});
 render();
+
+function openFromUrlParam(){
+  const params = new URLSearchParams(window.location.search);
+  const openId = params.get('open');
+  if (!openId) return;
+  const id = parseInt(openId);
+  const p = allProjects.find(x => x.id === id);
+  if (p) {
+    openModal(id);
+    history.replaceState(null, '', '/mobile/works');
+  }
+}
+
+loadAdminProjects().then(openFromUrlParam);
 </script>
 </body>
 </html>
