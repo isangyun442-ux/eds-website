@@ -148,6 +148,24 @@
         <button class="filter-btn" data-f="c" data-v="종교">종교</button>
       </div>
     </div>
+    <div class="filter-group">
+      <div class="filter-label">기간</div>
+      <div class="filter-scroll">
+        <button class="filter-btn on" data-f="y" data-v="all">전체</button>
+        <button class="filter-btn" data-f="y" data-v="2025">2025년</button>
+        <button class="filter-btn" data-f="y" data-v="2024">2024년</button>
+        <button class="filter-btn" data-f="y" data-v="2023">2023년</button>
+        <button class="filter-btn" data-f="y" data-v="2022">2022년</button>
+        <button class="filter-btn" data-f="y" data-v="2021">2021년</button>
+        <button class="filter-btn" data-f="y" data-v="2020">2020년</button>
+        <button class="filter-btn" data-f="y" data-v="2019">2019년</button>
+        <button class="filter-btn" data-f="y" data-v="2018">2018년</button>
+        <button class="filter-btn" data-f="y" data-v="2017">2017년</button>
+        <button class="filter-btn" data-f="y" data-v="2016">2016년</button>
+        <button class="filter-btn" data-f="y" data-v="2015">2015년</button>
+        <button class="filter-btn" data-f="y" data-v="old">2015년 이전</button>
+      </div>
+    </div>
   </div>
 
   <!-- 결과 바 -->
@@ -361,7 +379,7 @@ const hardcodedProjects = [
 ];
 
 let allProjects = [...hardcodedProjects];
-let sv='all',cl='all',q='',cp=null;
+let sv='all',cl='all',yr='all',q='',cp=null;
 
 async function loadAdminProjects() {
   try {
@@ -375,7 +393,7 @@ async function loadAdminProjects() {
 }
 
 function render(){
-  const fl=allProjects.filter(p=>(sv==='all'||p.service===sv)&&(cl==='all'||p.client===cl)&&(!q||p.title.includes(q)||(p.overview||''). includes(q)));
+  const fl=allProjects.filter(p=>(sv==='all'||p.service===sv)&&(cl==='all'||p.client===cl)&&(yr==='all'||(yr==='old'?parseInt(p.date)<2015:p.date.startsWith(yr)))&&(!q||p.title.includes(q)||(p.overview||''). includes(q)));
   const g=document.getElementById('grid'),e=document.getElementById('empty');
   document.getElementById('rn').textContent=fl.length;
   if(!fl.length){g.style.display='none';e.style.display='block';return;}
@@ -435,12 +453,12 @@ document.querySelectorAll('.filter-btn').forEach(b=>b.addEventListener('click',(
   const f=b.dataset.f,v=b.dataset.v;
   document.querySelectorAll('.filter-btn[data-f="'+f+'"]').forEach(x=>x.classList.remove('on'));
   b.classList.add('on');
-  if(f==='s') sv=v; else cl=v;
+  if(f==='s') sv=v; else if(f==='c') cl=v; else yr=v;
   render();
 }));
 
 document.getElementById('si').addEventListener('input',e=>{q=e.target.value.trim();render();});
-function reset(){sv='all';cl='all';q='';document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('on'));document.querySelectorAll('.filter-btn[data-v="all"]').forEach(b=>b.classList.add('on'));document.getElementById('si').value='';render();}
+function reset(){sv='all';cl='all';yr='all';q='';document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('on'));document.querySelectorAll('.filter-btn[data-v="all"]').forEach(b=>b.classList.add('on'));document.getElementById('si').value='';render();}
 document.addEventListener('keydown',e=>{if(e.key==='Escape') closeModal();});
 render();
 
