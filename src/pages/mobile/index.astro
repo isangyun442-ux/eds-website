@@ -702,15 +702,17 @@ const projects = [
   { id:12034, title:'대구디지털산업진흥원 스튜디오', date:'2007.01', service:'방송제작 스튜디오', client:'공공기관', overview:'스튜디오 부스, 부조정실 구조의 촬영 스튜디오', images:["/images/portfolio/DIP_2.jpg", "/images/portfolio/DIP_1.jpg", "/images/portfolio/DIP_3.jpg"] },
 ];
 // projects 데이터를 모바일용 형식으로 변환
-const mProjects = projects.map(function(p) {
+function toMobileShape(p) {
   return {
+    id: p.id,
     title: p.title,
     cat: p.service,
     date: p.date,
     desc: p.overview || '',
     imgs: p.images || []
   };
-});
+}
+let mProjects = projects.map(toMobileShape);
 let cur = 0;
 let curImg = 0;
 const slidesWrap = document.getElementById('mPortSlides');
@@ -787,6 +789,22 @@ function goPort(n) {
 document.getElementById('mPortPrev').addEventListener('click', function(){ goPort(cur-1); });
 document.getElementById('mPortNext').addEventListener('click', function(){ goPort(cur+1); });
 renderPort();
+
+// 관리자 대시보드로 추가한 신규 프로젝트 병합
+fetch('/api/admin/projects')
+  .then(function(r){ return r.json(); })
+  .then(function(adminProjects){
+    if (!Array.isArray(adminProjects) || adminProjects.length === 0) return;
+    var hardcodedIds = {};
+    projects.forEach(function(p){ hardcodedIds[p.id] = true; });
+    var newOnes = adminProjects.filter(function(p){ return !hardcodedIds[p.id]; });
+    if (newOnes.length > 0) {
+      mProjects = newOnes.map(toMobileShape).concat(mProjects);
+      cur = 0;
+      renderPort();
+    }
+  })
+  .catch(function(){});
 </script>
 
 <script>
