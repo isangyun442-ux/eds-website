@@ -90,17 +90,33 @@
     .overview-box{background:#f7f9ff;border-left:4px solid #1a2f8a;border-radius:0 10px 10px 0;padding:28px 32px;margin-top:24px;}
     .overview-box p{font-size:14px;color:#444;line-height:2;font-weight:500;}
 
+    /* COOLING / ALUMINUM COVER (이미지 대기 섹션) */
+    .img-placeholder{
+      display:flex; flex-direction:column; align-items:center; justify-content:center; gap:8px;
+      aspect-ratio:16/9; width:100%; margin-top:32px;
+      background:repeating-linear-gradient(135deg,#f4f6fb,#f4f6fb 10px,#eceff7 10px,#eceff7 20px);
+      border:1.5px dashed #c3cde0; border-radius:12px;
+      font-size:13px; color:#8792a6; font-weight:600;
+    }
+    .img-placeholder span{font-size:11px;color:#aab3c5;font-weight:500;}
+    .cover-photos{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:32px;}
+    .cover-photos .img-placeholder{margin-top:0;aspect-ratio:4/5;}
+    @media(max-width:768px){.cover-photos{grid-template-columns:1fr;}}
+
     /* FEATURES */
     .features{background:#f7f9ff;}
-    .feat-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;margin-top:48px;}
+    .feat-highlights{display:grid;grid-template-columns:repeat(2,1fr);gap:12px 32px;margin-top:32px;}
+    .feat-hl-item{font-size:13px;color:#3a4657;line-height:1.7;padding-left:16px;position:relative;font-weight:500;}
+    .feat-hl-item::before{content:'';position:absolute;left:0;top:8px;width:6px;height:6px;border-radius:50%;background:#1a2f8a;}
+    .feat-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;margin-top:32px;}
     .feat-card{background:#fff;border:1px solid #e8edf4;border-radius:12px;padding:28px 28px 24px;transition:box-shadow 0.25s,transform 0.25s;}
     .feat-card:hover{box-shadow:0 10px 36px rgba(26,47,138,0.1);transform:translateY(-3px);}
-    .feat-tag{display:inline-block;font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#1a2f8a;background:rgba(26,47,138,0.08);padding:3px 10px;border-radius:4px;margin-bottom:12px;}
+    .feat-icon{width:36px;height:36px;background:rgba(26,47,138,0.08);border-radius:8px;display:flex;align-items:center;justify-content:center;margin-bottom:14px;}
     .feat-title{font-size:15px;font-weight:800;color:#0d1a3a;margin-bottom:12px;}
     .feat-list{display:flex;flex-direction:column;gap:7px;}
     .feat-item{font-size:13px;color:#555;line-height:1.75;padding-left:14px;position:relative;}
     .feat-item::before{content:'·';position:absolute;left:0;color:#1a2f8a;font-weight:700;}
-    @media(max-width:768px){.feat-grid{grid-template-columns:1fr;}}
+    @media(max-width:768px){.feat-highlights{grid-template-columns:1fr;}.feat-grid{grid-template-columns:1fr;}}
 
     /* SPECS */
     .specs{background:#fff;}
@@ -114,7 +130,7 @@
     .specs-table tbody tr:hover{background:#f7f9ff;}
     .specs-table td{padding:14px 16px;font-size:13px;color:#333;text-align:center;vertical-align:middle;}
     .specs-table td:first-child{font-weight:700;color:#1a2f8a;text-align:left;white-space:nowrap;}
-    .specs-note{font-size:12px;color:#aaa;margin-top:14px;text-align:right;}
+    .specs-note{font-size:12px;color:#aaa;line-height:1.8;margin-top:14px;text-align:right;}
 
     /* CTA */
     .cta-sec{background:linear-gradient(135deg,#0d1a3a 0%,#1a2f8a 100%);padding:80px 60px;}
@@ -202,9 +218,24 @@
     <div class="sec-inner">
       <div class="sec-label">Overview</div>
       <h2 class="sec-title">미디어밴스 컴퓨터서버란?</h2>
-      <p class="sec-desc">미디어밴스 컴퓨터서버는 안정적인 서버 구축을 위한 최적의 솔루션을 제시합니다. 최신 인텔 제온 스케일러블 프로세서와 DDR5 메모리를 기반으로 압도적인 컴퓨팅 성능을 제공하며, PCIe 5.0 기반의 초고속 인터페이스를 통해 데이터 병목 현상을 최소화합니다.</p>
+      <p class="sec-desc">미디어밴스 컴퓨터서버는 안정적인 서버 구축을 위한 최적의 솔루션을 제시합니다. 최신 인텔 제온 스케일러블 프로세서와 DDR5 메모리를 기반으로 압도적인 컴퓨팅 성능을 제공하며, PCIe 5.0 기반의 초고속 인터페이스를 통해 데이터 병목 현상을 최소화합니다. 또한, 고대역폭 네트워크 연결과 지능형 관리 기능을 통해 안정적이고 효율적인 운영 환경을 보장합니다.</p>
       <div class="overview-box">
-        <p>미디어밴스는 그래픽 옵션이 있어 기본적인 그래픽 및 디스플레이를 작업용 고객, 고성능의 성능과 메모리를 탐재하여 3D 렌더링, 고급 그래픽 작업이 필요한 고객 모두 원하는 옵션을 선택할 수 있습니다. 서버내 하드웨어 컨트롤러는 RAID 0, 1, 5, 6, 50, 60 등 다양한 RAID 레벨을 지원하여 데이터 안정성과 성능을 동시에 향상시키고, 데이터 센터, 연구 개발, 콘텐츠 제작 등 다양한 분야에서 활용이 가능합니다.</p>
+        <p>미디어밴스는 그래픽 옵션이 있어 기본적인 그래픽 및 디스플레이 작업용 고객, 고성능의 성능과 메모리를 탑재하여 3D 렌더링, 고급 그래픽 작업이 필요한 고객 모두 원하는 옵션을 선택할 수 있으며, 이 외에도 메모리, 저장장치 또한 다양한 옵션이 제공되어 선택폭이 넓습니다.</p>
+        <p style="margin-top:16px;">서버내 하드웨어 컨트롤러는 RAID 0, 00, 1, 5, 6, 50, 60 등 다양한 RAID 레벨을 지원하여 데이터 안정성과 성능을 동시에 향상시키고, 데이터 센터, 연구 개발, 콘텐츠 제작 등 다양한 분야에서 활용이 가능합니다.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- COOLING -->
+  <section class="sec cooling">
+    <div class="sec-inner">
+      <div class="sec-label">Cooling</div>
+      <h2 class="sec-title">최적의 쿨링설계</h2>
+      <p class="sec-desc">전면 흡기 → 후면 배기 구조의 공기 흐름 설계로 CPU, GPU, 스토리지 전 구간의 열을 효율적으로 배출하여 고부하 환경에서도 안정적인 성능을 유지합니다.</p>
+      <!-- TODO: 실제 쿨링 구조 사진(공기 흐름 화살표 포함) 도착하면 아래 placeholder를 <img src="..." alt="최적의 쿨링설계" /> 로 교체 -->
+      <div class="img-placeholder">
+        쿨링 구조 사진 자리
+        <span>실제 제품 사진 추가 예정</span>
       </div>
     </div>
   </section>
@@ -214,10 +245,20 @@
     <div class="sec-inner">
       <div class="sec-label">Features</div>
       <h2 class="sec-title">제품 특징</h2>
+
+      <div class="feat-highlights">
+        <div class="feat-hl-item">고속 Backplane을 통한 안전적인 데이터 전송</div>
+        <div class="feat-hl-item">EMI 차폐설계 된 하드디스크랙은 팬과 HDD 성능유지, 공진 감소 및 온도 유지</div>
+        <div class="feat-hl-item">안정성과 효율성이 뛰어난 800W Redundant, 풀 모듈러 파워서플라이 제공</div>
+        <div class="feat-hl-item">지문 방지, 내식성, 내열성, 열 전도성 및 열 반사성이 우수한 1급 SGCC 아연도금 강판을 사용</div>
+      </div>
+
       <div class="feat-grid">
 
         <div class="feat-card">
-          <div class="feat-tag">CPU</div>
+          <div class="feat-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1a2f8a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><line x1="9" y1="1" x2="9" y2="4"/><line x1="15" y1="1" x2="15" y2="4"/><line x1="9" y1="20" x2="9" y2="23"/><line x1="15" y1="20" x2="15" y2="23"/><line x1="20" y1="9" x2="23" y2="9"/><line x1="20" y1="14" x2="23" y2="14"/><line x1="1" y1="9" x2="4" y2="9"/><line x1="1" y1="14" x2="4" y2="14"/></svg>
+          </div>
           <div class="feat-title">고성능 프로세서</div>
           <div class="feat-list">
             <div class="feat-item">Single 또는 Dual CPU 사용 가능</div>
@@ -227,27 +268,33 @@
         </div>
 
         <div class="feat-card">
-          <div class="feat-tag">GPU</div>
+          <div class="feat-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1a2f8a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+          </div>
           <div class="feat-title">그래픽 처리</div>
           <div class="feat-list">
             <div class="feat-item">26개의 2세대 RT 코어, 104개의 3세대 Tensor 코어</div>
             <div class="feat-item">3,328개의 차세대 CUDA코어와 12GB GDDR6 그래픽 메모리 GPU RTX A2000 탑재</div>
-            <div class="feat-item">NVIDIA RTX 기술, 실시간 레이트레이싱, AI 기술 컴퓨팅 지원</div>
+            <div class="feat-item">NVIDIA RTX 기술, 실시간 레이트레이싱, AI 가속 컴퓨팅, 고성능 그래픽 지원 가능</div>
           </div>
         </div>
 
         <div class="feat-card">
-          <div class="feat-tag">Memory</div>
+          <div class="feat-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1a2f8a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+          </div>
           <div class="feat-title">DDR5 메모리</div>
           <div class="feat-list">
             <div class="feat-item">DDR5규격의 서버 및 워크스테이션용 메모리 모듈로 빠른 속도와 높은 대역폭 제공</div>
             <div class="feat-item">4800MHz의 작동 속도 및 ECC(오류 수정 코드) 기능으로 안정성 제공</div>
-            <div class="feat-item">REG(Registered/버피링) DIMM으로 메모리 컨트롤러의 안정적인 작동들을 제공</div>
+            <div class="feat-item">REG(Registered/버퍼링) DIMM으로 메모리 컨트롤러의 안정적인 작동을 제공</div>
           </div>
         </div>
 
         <div class="feat-card">
-          <div class="feat-tag">Storage</div>
+          <div class="feat-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1a2f8a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="12" x2="2" y2="12"/><path d="M5.45 5.11L2 12v6a2 2 0 002 2h16a2 2 0 002-2v-6l-3.45-6.89A2 2 0 0016.76 4H7.24a2 2 0 00-1.79 1.11z"/><line x1="6" y1="16" x2="6.01" y2="16"/><line x1="10" y1="16" x2="10.01" y2="16"/></svg>
+          </div>
           <div class="feat-title">스토리지</div>
           <div class="feat-list">
             <div class="feat-item">차세대 규격 NVMe SSD 또는 범용성 높은 SATA SSD 채택</div>
@@ -257,25 +304,49 @@
         </div>
 
         <div class="feat-card">
-          <div class="feat-tag">Network</div>
+          <div class="feat-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1a2f8a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+          </div>
           <div class="feat-title">네트워크 & 확장</div>
           <div class="feat-list">
             <div class="feat-item">10Gbps 이더넷 포트 3개, IPMI 관리 포트 등 서버 환경에 필요한 네트워크 및 관리 기능 지원</div>
-            <div class="feat-item">DDR5 메모리 슬롯 16개를 지원하며 PCIe 5.0 슬롯과 다양한 저장 장치 인터페이스를 지원하는 최신 기술을 활용 가능</div>
+            <div class="feat-item">DDR5 메모리 슬롯 16개를 지원하며 PCIe 5.0 슬롯과 다양한 저장 장치 인터페이스를 지원하여 최신 기술을 활용 가능</div>
           </div>
         </div>
 
         <div class="feat-card">
-          <div class="feat-tag">RAID</div>
+          <div class="feat-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1a2f8a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          </div>
           <div class="feat-title">RAID 및 안정성</div>
           <div class="feat-list">
             <div class="feat-item">컨트롤러당 최대 240개의 SAS/SATA 장치 또는 32개의 NVMe 장치 연결</div>
             <div class="feat-item">RAID 0, 1, 5, 6, 50, 60 및 SDS 환경을 위한 JBOD 모드 지원</div>
             <div class="feat-item">CacheVault 플래시 캐시 보호 기능</div>
-            <div class="feat-item">고속 Backplane을 통한 안전적인 데이터 전송</div>
           </div>
         </div>
 
+      </div>
+    </div>
+  </section>
+
+  <!-- ALUMINUM COVER -->
+  <section class="sec aluminum">
+    <div class="sec-inner">
+      <div class="sec-label">Design</div>
+      <h2 class="sec-title">알루미늄 커버</h2>
+      <p class="sec-desc">설치된 타 서버와의 차별성을 위한 커버를 제공하며, 물리적 시건장치 기능을 포함합니다. 공기흐름을 최소화하는 디자인으로 제작되었으며, 2가지 스타일의 전면 베젤 중 하나를 선택할 수 있습니다.</p>
+      <!-- TODO: 실제 알루미늄 커버 사진(전면 베젤 2종 + 완제품) 도착하면 아래 placeholder를 <img> 로 교체 -->
+      <div class="cover-photos">
+        <div class="img-placeholder">
+          전면 베젤 스타일 A<span>실제 제품 사진 추가 예정</span>
+        </div>
+        <div class="img-placeholder">
+          전면 베젤 스타일 B<span>실제 제품 사진 추가 예정</span>
+        </div>
+      </div>
+      <div class="img-placeholder" style="aspect-ratio:21/9;">
+        완제품 사진 자리<span>실제 제품 사진 추가 예정</span>
       </div>
     </div>
   </section>
@@ -363,7 +434,11 @@
           </tbody>
         </table>
       </div>
-      <p class="specs-note">※ 상기 스펙은 제품 모델별로 상이합니다.</p>
+      <p class="specs-note">
+        ※ 상기 스펙은 제품 모델별로 상이합니다.<br>
+        ※ 본 페이지의 제품 사양, 외관 등은 성능 개선을 위해 예고 없이 일부 변경될 수 있습니다.<br>
+        ※ 본 페이지의 내용은 2025년 02월 기준으로 작성되었습니다.
+      </p>
     </div>
   </section>
 
@@ -400,16 +475,30 @@
       title: '컴퓨터 서버 — EDS 이담에스티',
       badge: '제품/시스템 소개',
       heroSub: '고성능과 확장성을 바탕으로 개발된<br>2U 2WAY 8BAY 컴퓨터 서버시스템',
-      secTitles: ['미디어밴스 컴퓨터서버란?','제품 특징','제품 사양'],
-      secDesc: '미디어밴스 컴퓨터서버는 안정적인 서버 구축을 위한 최적의 솔루션을 제시합니다. 최신 인텔 제온 스케일러블 프로세서와 DDR5 메모리를 기반으로 압도적인 컴퓨팅 성능을 제공하며, PCIe 5.0 기반의 초고속 인터페이스를 통해 데이터 병목 현상을 최소화합니다.',
+      secTitles: ['미디어밴스 컴퓨터서버란?','최적의 쿨링설계','제품 특징','알루미늄 커버','제품 사양'],
+      secDescs: [
+        '미디어밴스 컴퓨터서버는 안정적인 서버 구축을 위한 최적의 솔루션을 제시합니다. 최신 인텔 제온 스케일러블 프로세서와 DDR5 메모리를 기반으로 압도적인 컴퓨팅 성능을 제공하며, PCIe 5.0 기반의 초고속 인터페이스를 통해 데이터 병목 현상을 최소화합니다. 또한, 고대역폭 네트워크 연결과 지능형 관리 기능을 통해 안정적이고 효율적인 운영 환경을 보장합니다.',
+        '전면 흡기 → 후면 배기 구조의 공기 흐름 설계로 CPU, GPU, 스토리지 전 구간의 열을 효율적으로 배출하여 고부하 환경에서도 안정적인 성능을 유지합니다.',
+        '설치된 타 서버와의 차별성을 위한 커버를 제공하며, 물리적 시건장치 기능을 포함합니다. 공기흐름을 최소화하는 디자인으로 제작되었으며, 2가지 스타일의 전면 베젤 중 하나를 선택할 수 있습니다.'
+      ],
+      overviewBox: [
+        '미디어밴스는 그래픽 옵션이 있어 기본적인 그래픽 및 디스플레이 작업용 고객, 고성능의 성능과 메모리를 탑재하여 3D 렌더링, 고급 그래픽 작업이 필요한 고객 모두 원하는 옵션을 선택할 수 있으며, 이 외에도 메모리, 저장장치 또한 다양한 옵션이 제공되어 선택폭이 넓습니다.',
+        '서버내 하드웨어 컨트롤러는 RAID 0, 00, 1, 5, 6, 50, 60 등 다양한 RAID 레벨을 지원하여 데이터 안정성과 성능을 동시에 향상시키고, 데이터 센터, 연구 개발, 콘텐츠 제작 등 다양한 분야에서 활용이 가능합니다.'
+      ],
+      featHighlights: [
+        '고속 Backplane을 통한 안전적인 데이터 전송',
+        'EMI 차폐설계 된 하드디스크랙은 팬과 HDD 성능유지, 공진 감소 및 온도 유지',
+        '안정성과 효율성이 뛰어난 800W Redundant, 풀 모듈러 파워서플라이 제공',
+        '지문 방지, 내식성, 내열성, 열 전도성 및 열 반사성이 우수한 1급 SGCC 아연도금 강판을 사용'
+      ],
       featTitles: ['고성능 프로세서','그래픽 처리','DDR5 메모리','스토리지','네트워크 & 확장','RAID 및 안정성'],
       featItems: [
         ['Single 또는 Dual CPU 사용 가능','12코어 24쓰레드 최대 4.1GHz','Intel Xeon Scalable 5th 프로세서 장착'],
-        ['26개의 2세대 RT 코어, 104개의 3세대 Tensor 코어','3,328개의 차세대 CUDA코어와 12GB GDDR6 그래픽 메모리 GPU RTX A2000 탑재','NVIDIA RTX 기술, 실시간 레이트레이싱, AI 기술 컴퓨팅 지원'],
-        ['DDR5규격의 서버 및 워크스테이션용 메모리 모듈로 빠른 속도와 높은 대역폭 제공','4800MHz의 작동 속도 및 ECC(오류 수정 코드) 기능으로 안정성 제공','REG(Registered/버피링) DIMM으로 메모리 컨트롤러의 안정적인 작동들을 제공'],
+        ['26개의 2세대 RT 코어, 104개의 3세대 Tensor 코어','3,328개의 차세대 CUDA코어와 12GB GDDR6 그래픽 메모리 GPU RTX A2000 탑재','NVIDIA RTX 기술, 실시간 레이트레이싱, AI 가속 컴퓨팅, 고성능 그래픽 지원 가능'],
+        ['DDR5규격의 서버 및 워크스테이션용 메모리 모듈로 빠른 속도와 높은 대역폭 제공','4800MHz의 작동 속도 및 ECC(오류 수정 코드) 기능으로 안정성 제공','REG(Registered/버퍼링) DIMM으로 메모리 컨트롤러의 안정적인 작동을 제공'],
         ['차세대 규격 NVMe SSD 또는 범용성 높은 SATA SSD 채택','HDD 최대 80TB 옵션','8BAY 핫스왑 베이 3.5인치, 2.5인치 드라이브 지원'],
-        ['10Gbps 이더넷 포트 3개, IPMI 관리 포트 등 서버 환경에 필요한 네트워크 및 관리 기능 지원','DDR5 메모리 슬롯 16개를 지원하며 PCIe 5.0 슬롯과 다양한 저장 장치 인터페이스를 지원하는 최신 기술을 활용 가능'],
-        ['컨트롤러당 최대 240개의 SAS/SATA 장치 또는 32개의 NVMe 장치 연결','RAID 0, 1, 5, 6, 50, 60 및 SDS 환경을 위한 JBOD 모드 지원','CacheVault 플래시 캐시 보호 기능','고속 Backplane을 통한 안전적인 데이터 전송']
+        ['10Gbps 이더넷 포트 3개, IPMI 관리 포트 등 서버 환경에 필요한 네트워크 및 관리 기능 지원','DDR5 메모리 슬롯 16개를 지원하며 PCIe 5.0 슬롯과 다양한 저장 장치 인터페이스를 지원하여 최신 기술을 활용 가능'],
+        ['컨트롤러당 최대 240개의 SAS/SATA 장치 또는 32개의 NVMe 장치 연결','RAID 0, 1, 5, 6, 50, 60 및 SDS 환경을 위한 JBOD 모드 지원','CacheVault 플래시 캐시 보호 기능']
       ],
       specHeader: ['항목','사양'],
       ctaTitle: '도입 문의를 환영합니다',
@@ -422,16 +511,30 @@
       title: 'Computer Server — EDS EDAMST',
       badge: 'Procurement Product',
       heroSub: 'High-performance and scalable<br>2U 2WAY 8BAY Computer Server System',
-      secTitles: ['What is Mediavance Server?','Product Features','Specifications'],
-      secDesc: 'Mediavance Computer Server offers the optimal solution for reliable server infrastructure. Built on the latest Intel Xeon Scalable processors and DDR5 memory, it delivers exceptional computing performance while minimizing data bottlenecks through PCIe 5.0 ultra-fast interfaces.',
+      secTitles: ['What is Mediavance Server?','Optimal Cooling Design','Product Features','Aluminum Cover','Specifications'],
+      secDescs: [
+        'Mediavance Computer Server offers the optimal solution for reliable server infrastructure. Built on the latest Intel Xeon Scalable processors and DDR5 memory, it delivers exceptional computing performance while minimizing data bottlenecks through PCIe 5.0 ultra-fast interfaces. It also ensures a stable, efficient operating environment through high-bandwidth network connectivity and intelligent management features.',
+        'A front-intake, rear-exhaust airflow design efficiently vents heat from the CPU, GPU, and storage, maintaining stable performance even under heavy load.',
+        'A distinctive cover for the installed server, including a physical locking mechanism. Designed to minimize airflow resistance, with a choice of two front bezel styles.'
+      ],
+      overviewBox: [
+        'Mediavance offers graphics options for customers who need basic graphics and display work, as well as high-performance GPUs and memory for customers who need 3D rendering and advanced graphics work — with a wide range of memory and storage options available as well.',
+        'The onboard hardware controller supports a wide range of RAID levels — RAID 0, 00, 1, 5, 6, 50, 60 — simultaneously improving data reliability and performance, making it suitable for data centers, R&D, content production, and many other fields.'
+      ],
+      featHighlights: [
+        'Secure data transfer via high-speed Backplane',
+        'EMI-shielded hard disk rack maintains fan and HDD performance, reducing resonance and heat',
+        'Reliable, efficient 800W Redundant, fully modular power supply',
+        'Fingerprint-resistant, corrosion- and heat-resistant, high-conductivity Grade-1 SGCC galvanized steel casing'
+      ],
       featTitles: ['High-Performance Processor','Graphics Processing','DDR5 Memory','Storage','Network & Expansion','RAID & Reliability'],
       featItems: [
         ['Single or Dual CPU configuration','12 cores, 24 threads, up to 4.1GHz','Intel Xeon Scalable 5th Gen processor'],
-        ['26 2nd-gen RT Cores, 104 3rd-gen Tensor Cores','3,328 next-gen CUDA cores with 12GB GDDR6 GPU RTX A2000','NVIDIA RTX technology: real-time ray tracing and AI computing'],
+        ['26 2nd-gen RT Cores, 104 3rd-gen Tensor Cores','3,328 next-gen CUDA cores with 12GB GDDR6 GPU RTX A2000','NVIDIA RTX technology: real-time ray tracing, AI-accelerated computing, high-performance graphics support'],
         ['DDR5 server/workstation memory with fast speed and high bandwidth','4800MHz operating speed with ECC for stability','REG DIMM for stable memory controller operation'],
         ['Next-gen NVMe SSD or versatile SATA SSD','HDD up to 80TB option','8-bay hot-swap bay supporting 3.5" and 2.5" drives'],
         ['3x 10Gbps Ethernet ports, IPMI management port for full server networking','16 DDR5 memory slots, PCIe 5.0, and various storage interfaces'],
-        ['Up to 240 SAS/SATA or 32 NVMe devices per controller','RAID 0/1/5/6/50/60 and JBOD mode support','CacheVault flash cache protection','Reliable data transfer via high-speed Backplane']
+        ['Up to 240 SAS/SATA or 32 NVMe devices per controller','RAID 0/1/5/6/50/60 and JBOD mode support','CacheVault flash cache protection']
       ],
       specHeader: ['Item','Specification'],
       ctaTitle: 'Welcome to Your Inquiry',
@@ -460,8 +563,12 @@
     if(heroSub) heroSub.innerHTML = t.heroSub;
     var secTitles = document.querySelectorAll('.sec-title');
     t.secTitles.forEach(function(title, i){ if(secTitles[i]) secTitles[i].textContent = title; });
-    var secDesc = document.querySelector('.sec-desc');
-    if(secDesc) secDesc.textContent = t.secDesc;
+    var secDescs = document.querySelectorAll('.sec-desc');
+    secDescs.forEach(function(el, i){ if(t.secDescs && t.secDescs[i]) el.textContent = t.secDescs[i]; });
+    var overviewPs = document.querySelectorAll('.overview-box p');
+    overviewPs.forEach(function(el, i){ if(t.overviewBox && t.overviewBox[i]) el.textContent = t.overviewBox[i]; });
+    var hlItems = document.querySelectorAll('.feat-hl-item');
+    hlItems.forEach(function(el, i){ if(t.featHighlights && t.featHighlights[i]) el.textContent = t.featHighlights[i]; });
     var featTitles = document.querySelectorAll('.feat-title');
     featTitles.forEach(function(el, i){ if(t.featTitles[i]) el.textContent = t.featTitles[i]; });
     var featCards = document.querySelectorAll('.feat-card');
@@ -473,11 +580,10 @@
     var ths = document.querySelectorAll('.specs-table th');
     ths.forEach(function(el, i){ if(t.specHeader[i]) el.textContent = t.specHeader[i]; });
     var ctaTitle = document.querySelector('.cta-title');
-    var ctaDescs = document.querySelectorAll('.cta-desc');
+    var ctaSub = document.querySelector('.cta-sub');
     var ctaBtns = document.querySelectorAll('.cta-btn');
     if(ctaTitle) ctaTitle.textContent = t.ctaTitle;
-    if(ctaDescs[0]) ctaDescs[0].textContent = t.ctaDesc;
-    if(ctaDescs[1]) ctaDescs[1].textContent = t.ctaDesc2;
+    if(ctaSub) ctaSub.innerHTML = t.ctaDesc + '<br>' + t.ctaDesc2;
     if(ctaBtns[0]) ctaBtns[0].textContent = t.ctaBtn;
     if(ctaBtns[1]) ctaBtns[1].textContent = t.ctaBtn2;
     var footer = document.querySelector('.footer-copy');
