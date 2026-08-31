@@ -101,7 +101,27 @@ body > *{position:relative;z-index:1;}
   border-radius:6px;font-family:inherit;transition:background 0.2s;text-decoration:none;
 }
 .nav-cta:hover{background:#142580;}
-@media(max-width:768px){.nav{padding:12px 20px;}.nav-menu{display:none;}}
+.nav-menu-btn{display:none;background:none;border:none;cursor:pointer;width:36px;height:36px;flex-direction:column;justify-content:center;align-items:center;gap:5px;padding:4px;}
+.nav-menu-btn span{display:block;width:22px;height:2px;background:#1a1a1a;border-radius:2px;transition:all 0.3s;}
+.nav-menu-btn.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+.nav-menu-btn.open span:nth-child(2){opacity:0;}
+.nav-menu-btn.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+.drawer{position:fixed;inset:0;z-index:400;pointer-events:none;}
+.drawer-bg{position:absolute;inset:0;background:rgba(0,0,0,0.4);opacity:0;transition:opacity 0.3s;}
+.drawer-panel{position:absolute;top:0;right:0;width:78vw;max-width:300px;height:100%;background:#fff;transform:translateX(100%);transition:transform 0.3s cubic-bezier(0.4,0,0.2,1);padding:72px 28px 40px;display:flex;flex-direction:column;gap:2px;overflow-y:auto;}
+.drawer.open{pointer-events:auto;}
+.drawer.open .drawer-bg{opacity:1;}
+.drawer.open .drawer-panel{transform:translateX(0);}
+.drawer-link{font-size:16px;font-weight:600;color:#0d1a3a;text-decoration:none;padding:12px 0;border-bottom:1px solid #f0f4fb;display:block;}
+.drawer-group-label{font-size:11px;font-weight:700;letter-spacing:0.08em;color:#9aa4b8;text-transform:uppercase;padding:18px 0 4px;}
+.drawer-sub-link{font-size:14px;font-weight:500;color:#444e6a;text-decoration:none;padding:10px 0 10px 12px;border-bottom:1px solid #f5f7fb;display:block;}
+.drawer-cta{margin-top:20px;background:#1a2f8a;color:#fff;border:none;font-size:15px;font-weight:700;padding:14px;border-radius:8px;width:100%;cursor:pointer;font-family:inherit;text-align:center;text-decoration:none;display:block;}
+@media(max-width:768px){
+  .nav{padding:12px 20px;}
+  .nav-menu{display:none;}
+  .nav-right .nav-cta{display:none;}
+  .nav-menu-btn{display:flex;}
+}
 
 /* HERO */
 .hero{
@@ -316,8 +336,32 @@ body > *{position:relative;z-index:1;}
       <button class="lang-sw-btn" onclick="setLang('en')">EN</button>
     </div>
     <a href="/#sec7" class="nav-cta" id="nav-cta-btn">도입 문의</a>
+    <button class="nav-menu-btn" id="menuBtn" aria-label="메뉴">
+      <span></span><span></span><span></span>
+    </button>
   </div>
 </nav>
+
+<!-- 모바일 드로어 -->
+<div class="drawer" id="drawer">
+  <div class="drawer-bg" id="drawerBg"></div>
+  <div class="drawer-panel">
+    <div class="drawer-group-label">회사소개</div>
+    <a href="/#sec2" class="drawer-sub-link" data-drop="0" onclick="closeDrawer()">인사말</a>
+    <a href="/#sec6" class="drawer-sub-link" data-drop="1" onclick="closeDrawer()">연혁</a>
+    <a href="/#sec-cert" class="drawer-sub-link" data-drop="2" onclick="closeDrawer()">인증현황</a>
+    <a href="/#sec7" class="drawer-sub-link" data-drop="3" onclick="closeDrawer()">오시는 길</a>
+    <a href="/#sec3" class="drawer-link" data-nav="1" onclick="closeDrawer()">사업분야</a>
+    <a href="/works" class="drawer-link" data-nav="2" onclick="closeDrawer()">구축사례</a>
+    <div class="drawer-group-label">제품/시스템 소개</div>
+    <a href="/products/mediabox" class="drawer-sub-link" data-drop="4" onclick="closeDrawer()">미디어박스</a>
+    <a href="/products/server" class="drawer-sub-link" data-drop="5" onclick="closeDrawer()">컴퓨터 서버</a>
+    <a href="/products/disk-array" class="drawer-sub-link" data-drop="6" onclick="closeDrawer()">디스크 어레이</a>
+    <a href="/products/led" class="drawer-sub-link" data-drop="7" onclick="closeDrawer()">LED 전광판</a>
+    <a href="/#sec7" class="drawer-link" data-nav="4" onclick="closeDrawer()">문의</a>
+    <a href="/#sec7" class="drawer-cta" id="drawer-cta-btn" onclick="closeDrawer()">도입 문의하기</a>
+  </div>
+</div>
 
 <!-- HERO -->
 <section class="hero">
@@ -778,6 +822,7 @@ body > *{position:relative;z-index:1;}
     qa('[data-nav]').forEach(function(el){ el.textContent = t.nav[+el.dataset.nav] || el.textContent; });
     qa('[data-drop]').forEach(function(el){ el.textContent = t.drop[+el.dataset.drop] || el.textContent; });
     var ctaBtn = q('#nav-cta-btn'); if(ctaBtn) ctaBtn.textContent = t.navCta;
+    var drawerCtaBtn = q('#drawer-cta-btn'); if(drawerCtaBtn) drawerCtaBtn.textContent = t.navCta;
 
     // HERO
     var h1 = q('#hero-h1'); if(h1) h1.innerHTML = t.heroH1;
@@ -852,6 +897,18 @@ body > *{position:relative;z-index:1;}
   var saved = localStorage.getItem('eds-lang') || 'ko';
   applyLang(saved);
 })();
+</script>
+
+<script is:inline>
+  var menuBtn = document.getElementById('menuBtn');
+  var drawer = document.getElementById('drawer');
+  var drawerBg = document.getElementById('drawerBg');
+  function openDrawer() { menuBtn.classList.add('open'); drawer.classList.add('open'); document.body.style.overflow = 'hidden'; }
+  function closeDrawer() { menuBtn.classList.remove('open'); drawer.classList.remove('open'); document.body.style.overflow = ''; }
+  if (menuBtn && drawer && drawerBg) {
+    menuBtn.addEventListener('click', function() { drawer.classList.contains('open') ? closeDrawer() : openDrawer(); });
+    drawerBg.addEventListener('click', closeDrawer);
+  }
 </script>
 </body>
 </html>
