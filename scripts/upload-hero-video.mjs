@@ -9,7 +9,7 @@ if (!token) {
   process.exit(1);
 }
 
-const filePath = 'public/videos/main.mp4';
+const filePath = process.argv[2] || 'public/videos/main.mp4';
 const fileBuffer = readFileSync(filePath);
 const pathname = `eds-hero/${Date.now()}-main.mp4`;
 
