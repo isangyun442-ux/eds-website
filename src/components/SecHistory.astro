@@ -240,18 +240,7 @@ const history = [
 
 <script is:inline>
 (function() {
-  /* 타임라인 fade-up */
-  /* 스크롤 재실행 fade-up */
-  const targets = document.querySelectorAll('#sec6 .tl-row, #sec6 .h-header .fade-up');
-  const obs = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if (e.isIntersecting) {
-        e.target.classList.add('visible');
-        obs.unobserve(e.target);
-      }
-    });
-  }, { threshold: 0.08, rootMargin: '0px 0px -20px 0px' });
-  targets.forEach(el => obs.observe(el));
+  /* fade-up 관찰(IntersectionObserver)은 index.astro 전역 스크립트가 담당 — 여기서 중복 생성하지 않음 */
 
   /* 패럴렉스 */
   function onScroll() {

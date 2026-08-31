@@ -348,7 +348,18 @@ import SecContact    from '../components/SecContact.astro';
       }
     });
   }, { threshold: 0.12 });
-  document.querySelectorAll('.fade-up').forEach(function(el) { fadeObs.observe(el); });
+  document.querySelectorAll('.fade-up').forEach(function(el) {
+    // 해시 링크(예: /#sec6)로 페이지 중간에 바로 진입한 경우, 이미 화면에 보이는
+    // 요소까지 fade-up 애니메이션을 재생하면 로딩 중 화면이 깜빡이는 것처럼 보임 —
+    // 이미 보이는 요소는 애니메이션 없이 즉시 표시
+    const r = el.getBoundingClientRect();
+    if (r.top < window.innerHeight && r.bottom > 0) {
+      el.style.transition = 'none';
+      el.classList.add('visible');
+    } else {
+      fadeObs.observe(el);
+    }
+  });
   const sh = document.getElementById('sh');
   if (sh) {
     window.addEventListener('scroll', function() {
