@@ -12,8 +12,6 @@
   </div>
 
   <div class="ab-wrap">
-  <canvas id="aboutCanvas" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0;opacity:0.25;"></canvas>
-  <div class="ab-watermark" aria-hidden="true">BEYOND THE FUTURE</div>
 
     <!-- 왼쪽: 브랜드 컬러 -->
     <div class="ab-left fade-up">
@@ -53,61 +51,11 @@
     </div>
 
   </div>
-
-<script is:inline>
-(function(){
-  var canvas = document.getElementById('aboutCanvas');
-  if(!canvas) return;
-  var ctx = canvas.getContext('2d');
-  var angle = 0;
-
-  function resize(){
-    canvas.width = canvas.offsetWidth;
-    canvas.height = canvas.offsetHeight;
-  }
-  resize();
-  window.addEventListener('resize', resize);
-
-  function draw(){
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    var cx = canvas.width * 0.5;
-    var cy = canvas.height * 0.5;
-    var r = Math.min(canvas.width, canvas.height) * 0.28;
-
-    ctx.save();
-    ctx.translate(cx, cy);
-    ctx.rotate(angle);
-
-    // 회전하는 타원 링 3개
-    for(var i = 0; i < 3; i++){
-      ctx.save();
-      ctx.rotate((Math.PI / 3) * i);
-      ctx.scale(1, 0.35);
-      ctx.beginPath();
-      ctx.arc(0, 0, r + i * 18, 0, Math.PI * 2);
-      ctx.strokeStyle = 'rgba(100, 160, 255, ' + (0.5 - i * 0.12) + ')';
-      ctx.lineWidth = 1.2;
-      ctx.stroke();
-      ctx.restore();
-    }
-
-
-
-    ctx.restore();
-    angle += 0.003;
-    requestAnimationFrame(draw);
-  }
-  draw();
-})();
-</script>
 </section>
 
 <style>
   .s2 {
-    background:
-      radial-gradient(ellipse 900px 600px at 12% 8%, rgba(130,170,255,0.09) 0%, transparent 60%),
-      radial-gradient(ellipse 800px 600px at 88% 95%, rgba(0,0,0,0.30) 0%, transparent 60%),
-      linear-gradient(135deg, #0a1130 0%, #16296b 50%, #0d1a3a 100%);
+    background: url('/images/about-bg.jpg') center center / cover no-repeat, #f7f9ff;
     position: relative;
     overflow: hidden;
   }
@@ -160,7 +108,7 @@
   /* ── 라벨 ── */
   .ab-label {
     font-size: 11px; font-weight: 700;
-    letter-spacing: 0.22em; color: rgba(255,255,255,0.45);
+    letter-spacing: 0.22em; color: #1a2f8a;
     margin-bottom: 20px;
   }
 
@@ -168,39 +116,22 @@
   .ab-title {
     font-size: clamp(30px, 3vw, 48px); font-weight: 900;
     letter-spacing: -0.03em; line-height: 1.15;
-    color: #fff; margin-bottom: 40px;
+    color: #0d1a3a; margin-bottom: 40px;
   }
-  .ab-em { font-style: normal; color: rgba(255,255,255,0.65); }
-
-  /* ── 배경 워터마크 ── */
-  .ab-watermark {
-    position: absolute; inset: 0;
-    display: flex; align-items: center; justify-content: center;
-    font-size: clamp(48px, 9vw, 140px);
-    font-weight: 900;
-    letter-spacing: 0.05em;
-    color: rgba(255,255,255,0.045);
-    white-space: nowrap;
-    z-index: 1;
-    pointer-events: none;
-    user-select: none;
-  }
-  @media (max-width: 960px) {
-    .ab-watermark { font-size: clamp(32px, 12vw, 80px); }
-  }
+  .ab-em { font-style: normal; color: #6b7a99; }
 
   /* ── 본문 ── */
   .ab-body {
     font-size: 15px; line-height: 2.0;
-    color: rgba(255,255,255,0.65);
+    color: #444e6a;
     margin-bottom: 20px;
   }
-  .ab-body em { font-style: italic; color: rgba(255,255,255,0.5); }
-  .ab-body strong { color: #fff; font-weight: 700; }
+  .ab-body em { font-style: italic; color: #6b7a99; }
+  .ab-body strong { color: #0d1a3a; font-weight: 700; }
 
   /* ── 임직원 일동 ── */
   .ab-sig {
-    font-size: 13px; color: rgba(255,255,255,0.3);
+    font-size: 13px; color: #9aa4b8;
     margin-top: 12px;
   }
 
