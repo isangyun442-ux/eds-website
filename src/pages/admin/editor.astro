@@ -90,20 +90,10 @@ iframe{width:100%;height:100%;border:none;display:block;}
 
 <div id="pa-about">
   <div class="ps">
-    <div class="pt">왼쪽 배경</div>
-    <div class="ctrl"><div class="cl">상단 색상</div><div class="cr"><div class="sw" id="sw-leftBg1"><input type="color" id="c-leftBg1" value="#2a45c8" oninput="oC('leftBg1',this.value)"></div><input class="hx" id="h-leftBg1" value="#2a45c8" oninput="oH('leftBg1',this.value)"></div></div>
-    <div class="ctrl"><div class="cl">하단 색상</div><div class="cr"><div class="sw" id="sw-leftBg2"><input type="color" id="c-leftBg2" value="#0f1f6a" oninput="oC('leftBg2',this.value)"></div><input class="hx" id="h-leftBg2" value="#0f1f6a" oninput="oH('leftBg2',this.value)"></div></div>
-  </div>
-  <div class="ps">
-    <div class="pt">오른쪽 배경</div>
-    <div class="ctrl"><div class="cl">상단 색상</div><div class="cr"><div class="sw" id="sw-rightBg1"><input type="color" id="c-rightBg1" value="#1a1f2e" oninput="oC('rightBg1',this.value)"></div><input class="hx" id="h-rightBg1" value="#1a1f2e" oninput="oH('rightBg1',this.value)"></div></div>
-    <div class="ctrl"><div class="cl">하단 색상</div><div class="cr"><div class="sw" id="sw-rightBg2"><input type="color" id="c-rightBg2" value="#0e1220" oninput="oC('rightBg2',this.value)"></div><input class="hx" id="h-rightBg2" value="#0e1220" oninput="oH('rightBg2',this.value)"></div></div>
-  </div>
-  <div class="ps">
     <div class="pt">텍스트 색상</div>
-    <div class="ctrl"><div class="cl">제목</div><div class="cr"><div class="sw" id="sw-titleColor"><input type="color" id="c-titleColor" value="#ffffff" oninput="oC('titleColor',this.value)"></div><input class="hx" id="h-titleColor" value="#ffffff" oninput="oH('titleColor',this.value)"></div></div>
-    <div class="ctrl"><div class="cl">본문</div><div class="cr"><div class="sw" id="sw-bodyColor"><input type="color" id="c-bodyColor" value="#a5b4fc" oninput="oC('bodyColor',this.value)"></div><input class="hx" id="h-bodyColor" value="#a5b4fc" oninput="oH('bodyColor',this.value)"></div></div>
-    <div class="ctrl"><div class="cl">강조(bold)</div><div class="cr"><div class="sw" id="sw-accentColor"><input type="color" id="c-accentColor" value="#ffffff" oninput="oC('accentColor',this.value)"></div><input class="hx" id="h-accentColor" value="#ffffff" oninput="oH('accentColor',this.value)"></div></div>
+    <div class="ctrl"><div class="cl">제목</div><div class="cr"><div class="sw" id="sw-titleColor"><input type="color" id="c-titleColor" value="#0d1a3a" oninput="oC('titleColor',this.value)"></div><input class="hx" id="h-titleColor" value="#0d1a3a" oninput="oH('titleColor',this.value)"></div></div>
+    <div class="ctrl"><div class="cl">본문</div><div class="cr"><div class="sw" id="sw-bodyColor"><input type="color" id="c-bodyColor" value="#444e6a" oninput="oC('bodyColor',this.value)"></div><input class="hx" id="h-bodyColor" value="#444e6a" oninput="oH('bodyColor',this.value)"></div></div>
+    <div class="ctrl"><div class="cl">강조(bold)</div><div class="cr"><div class="sw" id="sw-accentColor"><input type="color" id="c-accentColor" value="#0d1a3a" oninput="oC('accentColor',this.value)"></div><input class="hx" id="h-accentColor" value="#0d1a3a" oninput="oH('accentColor',this.value)"></div></div>
   </div>
   <div class="ps">
     <div class="pt">크기 & 간격</div>
@@ -249,9 +239,7 @@ let fonts = {};
 let curSec = 'about';
 
 let S = {
-  leftBg1:'#2a45c8', leftBg2:'#0f1f6a',
-  rightBg1:'#1a1f2e', rightBg2:'#0e1220',
-  titleColor:'#ffffff', bodyColor:'#a5b4fc', accentColor:'#ffffff',
+  titleColor:'#0d1a3a', bodyColor:'#444e6a', accentColor:'#0d1a3a',
   titleSize:42, bodySize:15, lineHeight:2.0,
   letterSpacing:-0.03, padding:100, minHeight:700,
   fontFamily:"'Noto Sans KR',sans-serif"
@@ -317,8 +305,6 @@ function doInject(){
     }
 
     el.textContent = ff + `
-      #sec2 .ab-left{background:linear-gradient(135deg,${S.leftBg1} 0%,${S.leftBg2} 100%)!important;}
-      #sec2 .ab-right{background:linear-gradient(135deg,${S.rightBg1} 0%,${S.rightBg2} 100%)!important;}
       #sec2 .ab-title{color:${S.titleColor}!important;font-size:${S.titleSize}px!important;letter-spacing:${S.letterSpacing}em!important;font-family:${S.fontFamily}!important;}
       #sec2 .ab-body{color:${S.bodyColor}!important;font-size:${S.bodySize}px!important;line-height:${S.lineHeight}!important;font-family:${S.fontFamily}!important;}
       #sec2 .ab-label{color:${S.titleColor}!important;font-family:${S.fontFamily}!important;}
