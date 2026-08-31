@@ -73,12 +73,20 @@
     .hero-sub{font-size:15px;color:#6b7a8d;line-height:1.8;margin-bottom:32px;}
     .hero-models{display:flex;flex-wrap:wrap;gap:8px;}
     .hero-model{display:inline-block;font-size:11px;font-weight:700;background:#1a2f8a;color:#fff;padding:4px 12px;border-radius:4px;letter-spacing:0.06em;}
-    /* 이미지 2장 나란히 */
-    .hero-imgs{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
-    .hero-img-item{}
-    .hero-img-item img{width:100%;height:auto;display:block;}
-    .hero-img-label{font-size:10px;font-weight:700;letter-spacing:0.1em;color:#888;text-align:center;margin-top:8px;text-transform:uppercase;}
-    @media(max-width:900px){.hero{padding:100px 24px 60px;}.hero-inner{grid-template-columns:1fr;gap:40px;}.hero-imgs{order:-1;}}
+    .hero-img{width:100%;position:relative;aspect-ratio:5/4;}
+    .hero-img img{position:absolute;width:80%;height:auto;display:block;border-radius:10px;filter:drop-shadow(0 20px 40px rgba(13,26,58,0.18));}
+    .hero-img .img-back{top:0;right:0;z-index:1;}
+    .hero-img .img-front{bottom:0;left:0;z-index:2;}
+    @media(max-width:900px){.hero{padding:100px 24px 60px;}.hero-inner{grid-template-columns:1fr;gap:40px;}.hero-img{order:-1;}}
+
+    /* 제품 사진 갤러리 */
+    .gallery{background:#f7f9ff;}
+    .gallery-imgs{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-top:40px;}
+    .gallery-img-item{background:linear-gradient(145deg,#ffffff 0%,#eef2fc 100%);border-radius:14px;padding:20px;display:flex;align-items:center;justify-content:center;aspect-ratio:1/1;transition:box-shadow 0.3s ease,transform 0.3s ease;}
+    .gallery-img-item:hover{box-shadow:0 16px 36px rgba(26,47,138,0.12);transform:translateY(-4px);}
+    .gallery-img-item img{width:100%;height:100%;object-fit:contain;display:block;}
+    .gallery-img-label{font-size:12px;font-weight:700;letter-spacing:0.04em;color:#0d1a3a;text-align:center;margin-top:12px;}
+    @media(max-width:768px){.gallery-imgs{grid-template-columns:repeat(2,1fr);}}
 
     /* SECTION 공통 */
     .sec{padding:80px 60px;}
@@ -95,7 +103,11 @@
 
     /* FEATURES 4박스 */
     .features{background:#f7f9ff;}
-    .feat-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;margin-top:48px;}
+    .feat-highlights{display:grid;grid-template-columns:repeat(2,1fr);gap:12px 32px;margin-top:32px;}
+    .feat-hl-item{font-size:13px;color:#3a4657;line-height:1.7;padding-left:16px;position:relative;font-weight:500;}
+    .feat-hl-item::before{content:'';position:absolute;left:0;top:8px;width:6px;height:6px;border-radius:50%;background:#1a2f8a;}
+    @media(max-width:768px){.feat-highlights{grid-template-columns:1fr;}}
+    .feat-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;margin-top:32px;}
     .feat-card{background:#fff;border:1px solid #e8edf4;border-radius:12px;padding:28px 28px 24px;transition:box-shadow 0.25s,transform 0.25s;}
     .feat-card:hover{box-shadow:0 10px 36px rgba(26,47,138,0.1);transform:translateY(-3px);}
     .feat-icon{width:36px;height:36px;background:rgba(26,47,138,0.08);border-radius:8px;display:flex;align-items:center;justify-content:center;margin-bottom:14px;}
@@ -193,33 +205,9 @@
           <span class="hero-model">NS-J2000-192</span>
         </div>
       </div>
-      <div>
-        <div class="hero-imgs">
-          <div>
-            <div class="hero-img-item">
-              <img src="/images/products/disk-array-nas2012.png" alt="NS-NAS 2012" />
-            </div>
-            <p class="hero-img-label">NS-NAS 2012</p>
-          </div>
-          <div>
-            <div class="hero-img-item">
-              <img src="/images/products/disk-array-nas4036.png" alt="NS-NAS 4036" />
-            </div>
-            <p class="hero-img-label">NS-NAS 4036</p>
-          </div>
-          <div>
-            <div class="hero-img-item">
-              <img src="/images/products/disk-array-j2000-96.png" alt="NS-J2000-96" />
-            </div>
-            <p class="hero-img-label">NS-J2000-96</p>
-          </div>
-          <div>
-            <div class="hero-img-item">
-              <img src="/images/products/disk-array-j2000-192.png" alt="NS-J2000-192" />
-            </div>
-            <p class="hero-img-label">NS-J2000-192</p>
-          </div>
-        </div>
+      <div class="hero-img">
+        <img class="img-back" src="/images/products/disk-array-hero-back.png" alt="디스크 어레이 후면" loading="lazy" />
+        <img class="img-front" src="/images/products/disk-array-hero-front.png" alt="디스크 어레이 정면" loading="lazy" />
       </div>
     </div>
   </section>
@@ -231,7 +219,8 @@
       <h2 class="sec-title">NS-NAS란?</h2>
       <p class="sec-desc">NS-NAS 스토리지는 Xeon 최대 2개의 CPU 및 2TB까지 확장 가능한 메모리를 장착할 수 있는 고성능 시스템 기반으로 대용량의 데이터를 고속 전송에 적합한 파일시스템으로 설계되었습니다.</p>
       <div class="overview-box">
-        <p>양방향 백업, 스케줄링, 원격지 압축백업, QoS 지원 등 다양한 설정이 가능한 백업을 지원하며 직관적인 GUI로 관련설정, 사용자, 네트워크 구성 등을 손 쉽게 추가, 변경할 수 있는 환경을 제공합니다. NS-NAS는 파일서버, 영상미디어, 학교, 관공서, 연구소, CCTV등 스토리지 공유가 필요한 다양한 업무에 적합한 합리적인 네트워크 스토리지입니다.</p>
+        <p>양방향 백업, 스케줄링, 원격지 압축백업, QoS 지원 등 다양한 설정이 가능한 백업을 지원하며 직관적인 GUI로 권한설정, 사용자, 네트워크 구성 등을 손 쉽게 추가, 변경할 수 있는 환경을 제공합니다.</p>
+        <p style="margin-top:16px;">NS-NAS는 파일서버, 영상미디어, 학교, 관공서, 연구소, CCTV등 스토리지 공유가 필요한 다양한 업무에 적합한 합리적인 네트워크 스토리지입니다.</p>
       </div>
     </div>
   </section>
@@ -241,6 +230,14 @@
     <div class="sec-inner">
       <div class="sec-label">Features</div>
       <h2 class="sec-title">제품 특징</h2>
+
+      <div class="feat-highlights">
+        <div class="feat-hl-item">Xeon 최대 2개의 CPU 및 2TB까지 확장 가능한 대용량 고속전송 파일시스템 스토리지</div>
+        <div class="feat-hl-item">양방향 백업, 스케줄링, 원격지 압축백업, QoS 지원 등 다양한 설정 가능</div>
+        <div class="feat-hl-item">직관적인 GUI를 통한 권한설정, 사용자, 네트워크 구성 등을 쉽게 변경가능한 환경제공</div>
+        <div class="feat-hl-item">파일서버, 영상미디어, 학교, 관공서, 연구소, CCTV등 다양한 업무에 적합한 네트워크 스토리지</div>
+      </div>
+
       <div class="feat-grid">
 
         <div class="feat-card">
@@ -298,6 +295,40 @@
     </div>
   </section>
 
+  <!-- GALLERY -->
+  <section class="sec gallery">
+    <div class="sec-inner">
+      <div class="sec-label">Lineup</div>
+      <h2 class="sec-title">제품 라인업</h2>
+      <div class="gallery-imgs">
+        <div>
+          <div class="gallery-img-item">
+            <img src="/images/products/disk-array-nas2012.png" alt="NS-NAS 2012" loading="lazy" />
+          </div>
+          <p class="gallery-img-label">NS-NAS 2012</p>
+        </div>
+        <div>
+          <div class="gallery-img-item">
+            <img src="/images/products/disk-array-nas4036.png" alt="NS-NAS 4036" loading="lazy" />
+          </div>
+          <p class="gallery-img-label">NS-NAS 4036</p>
+        </div>
+        <div>
+          <div class="gallery-img-item">
+            <img src="/images/products/disk-array-j2000-96.png" alt="NS-J2000-96" loading="lazy" />
+          </div>
+          <p class="gallery-img-label">NS-J2000-96</p>
+        </div>
+        <div>
+          <div class="gallery-img-item">
+            <img src="/images/products/disk-array-j2000-192.png" alt="NS-J2000-192" loading="lazy" />
+          </div>
+          <p class="gallery-img-label">NS-J2000-192</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- SPECS -->
   <section class="sec specs">
     <div class="sec-inner">
@@ -338,8 +369,8 @@
             </tr>
             <tr>
               <td>프로세서</td>
-              <td>Intel Xeon Multi Core</td>
-              <td>Intel Xeon Multi Core</td>
+              <td>인텔 Xeon Multi Core</td>
+              <td>인텔 Xeon Multi Core</td>
               <td>—</td>
               <td>—</td>
             </tr>
@@ -380,15 +411,19 @@
             </tr>
             <tr>
               <td>크기</td>
-              <td>436×650×90(H)</td>
-              <td>437.5×650×176.5(H)</td>
-              <td>436×650×90(H)</td>
-              <td>436×650×90(H)</td>
+              <td>436(W)×650(D)×90(H)</td>
+              <td>437.5(W)×650(D)×176.5(H)</td>
+              <td>436(W)×650(D)×90(H)</td>
+              <td>436(W)×650(D)×90(H)</td>
             </tr>
           </tbody>
         </table>
       </div>
-      <p class="specs-note">※ 본 카탈로그의 내용은 2025년 2월 기준으로 작성되었습니다.</p>
+      <p class="specs-note">
+        ※ 상기 스펙은 제품 모델별로 상이합니다.<br>
+        ※ 본 페이지의 제품 사양, 외관 등은 성능 개선을 위해 예고 없이 일부 변경될 수 있습니다.<br>
+        ※ 본 페이지의 내용은 2025년 02월 기준으로 작성되었습니다.
+      </p>
     </div>
   </section>
 
@@ -424,8 +459,20 @@
     ko: {
       title: '디스크 어레이 — EDS 이담에스티', badge: '제품/시스템 소개',
       heroSub: '안전성, 확장성, 사용자의 편의성을 고려한<br>고성능 네트워크 공유 스토리지',
-      secTitles: ['NS-NAS란?','제품 특징','제품 사양'],
+      secTitles: ['NS-NAS란?','제품 특징','제품 라인업','제품 사양'],
       secDesc: 'NS-NAS 스토리지는 Xeon 최대 2개의 CPU 및 2TB까지 확장 가능한 메모리를 장착할 수 있는 고성능 시스템 기반으로 대용량의 데이터를 고속 전송에 적합한 파일시스템으로 설계되었습니다.',
+      overviewBox: [
+        '양방향 백업, 스케줄링, 원격지 압축백업, QoS 지원 등 다양한 설정이 가능한 백업을 지원하며 직관적인 GUI로 권한설정, 사용자, 네트워크 구성 등을 손 쉽게 추가, 변경할 수 있는 환경을 제공합니다.',
+        'NS-NAS는 파일서버, 영상미디어, 학교, 관공서, 연구소, CCTV등 스토리지 공유가 필요한 다양한 업무에 적합한 합리적인 네트워크 스토리지입니다.'
+      ],
+      featHighlights: [
+        'Xeon 최대 2개의 CPU 및 2TB까지 확장 가능한 대용량 고속전송 파일시스템 스토리지',
+        '양방향 백업, 스케줄링, 원격지 압축백업, QoS 지원 등 다양한 설정 가능',
+        '직관적인 GUI를 통한 권한설정, 사용자, 네트워크 구성 등을 쉽게 변경가능한 환경제공',
+        '파일서버, 영상미디어, 학교, 관공서, 연구소, CCTV등 다양한 업무에 적합한 네트워크 스토리지'
+      ],
+      ctaDesc: '디스크 어레이는 조달청 나라장터를 통해 공공기관 직접 구매가 가능합니다.',
+      ctaDesc2: '자세한 사양 및 견적은 문의를 통해 확인하세요.',
       featTitles: ['최고의 성능','안정적 백업','넓은 확장성','최상의 관리성'],
       featItems: [
         ['최대 2개의 Xeon 프로세서 확장','2TB 메모리 증설 및 SSD 캐쉬 적용','최대 4개의 100GbE 옵션 장착 가능','대용량 데이터 처리에 최적화된 NAS 엔진'],
@@ -441,8 +488,20 @@
     en: {
       title: 'Disk Array — EDS EDAMST', badge: 'Procurement Product',
       heroSub: 'Safety, Scalability, and User Convenience<br>High-Performance Network Shared Storage',
-      secTitles: ['What is NS-NAS?','Product Features','Specifications'],
+      secTitles: ['What is NS-NAS?','Product Features','Product Lineup','Specifications'],
       secDesc: 'NS-NAS Storage is designed on a high-performance platform supporting up to 2 Xeon CPUs and 2TB expandable memory, with a file system optimized for high-speed transfer of large-scale data.',
+      overviewBox: [
+        'It supports bidirectional backup, scheduling, remote compressed backup, and QoS settings, with an intuitive GUI that makes it easy to add or change permission settings, users, and network configuration.',
+        'NS-NAS is a practical network storage solution suited for file servers, video media, schools, government offices, research institutes, CCTV, and other tasks requiring shared storage.'
+      ],
+      featHighlights: [
+        'Large-capacity, high-speed file system storage supporting up to 2 Xeon CPUs and 2TB of memory',
+        'Various backup settings available: bidirectional backup, scheduling, remote compressed backup, QoS support',
+        'Intuitive GUI makes permission settings, users, and network configuration easy to change',
+        'Practical network storage for file servers, video media, schools, government offices, research institutes, CCTV, and more'
+      ],
+      ctaDesc: 'Disk Array is available for direct purchase by public institutions through KONEPS.',
+      ctaDesc2: 'Contact us for detailed specifications and quotes.',
       featTitles: ['Peak Performance','Reliable Backup','Wide Scalability','Optimal Management'],
       featItems: [
         ['Up to 2 Xeon processor expansion','2TB memory upgrade and SSD cache support','Up to 4x 100GbE option slots','NAS engine optimized for large-scale data processing'],
@@ -470,6 +529,10 @@
     var heroSub = document.querySelector('.hero-sub'); if(heroSub) heroSub.innerHTML = t.heroSub;
     document.querySelectorAll('.sec-title').forEach(function(el,i){ if(t.secTitles[i]) el.textContent = t.secTitles[i]; });
     var secDesc = document.querySelector('.sec-desc'); if(secDesc) secDesc.textContent = t.secDesc;
+    var overviewPs = document.querySelectorAll('.overview-box p');
+    overviewPs.forEach(function(el,i){ if(t.overviewBox && t.overviewBox[i]) el.textContent = t.overviewBox[i]; });
+    var hlItems = document.querySelectorAll('.feat-hl-item');
+    hlItems.forEach(function(el,i){ if(t.featHighlights && t.featHighlights[i]) el.textContent = t.featHighlights[i]; });
     document.querySelectorAll('.feat-title').forEach(function(el,i){ if(t.featTitles[i]) el.textContent = t.featTitles[i]; });
     document.querySelectorAll('.feat-card').forEach(function(card,i){
       if(!t.featItems[i]) return;
@@ -477,6 +540,7 @@
     });
     document.querySelectorAll('.specs-table th').forEach(function(el,i){ if(t.specHeader[i]) el.textContent = t.specHeader[i]; });
     var ctaTitle = document.querySelector('.cta-title'); if(ctaTitle) ctaTitle.textContent = t.ctaTitle;
+    var ctaSub = document.querySelector('.cta-sub'); if(ctaSub) ctaSub.innerHTML = t.ctaDesc + '<br>' + t.ctaDesc2;
     var ctaBtns = document.querySelectorAll('.cta-btn');
     if(ctaBtns[0]) ctaBtns[0].textContent = t.ctaBtn;
     if(ctaBtns[1]) ctaBtns[1].textContent = t.ctaBtn2;
