@@ -7,15 +7,23 @@
   <div class="video-wrap">
     <video id="heroDeskVideo" src="https://uacyx65ftsezenuu.public.blob.vercel-storage.com/eds-hero/1788166253626-main.mp4" autoplay muted loop playsinline preload="auto"></video>
     <div class="hero-timeline" id="heroTimeline">
+      <div class="hero-timeline-segments" id="heroTimelineSegments">
+        <div class="hero-seg" data-t="0"><span class="hero-seg-label">회사소개</span></div>
+        <div class="hero-seg" data-t="8"><span class="hero-seg-label">연혁</span></div>
+        <div class="hero-seg" data-t="28"><span class="hero-seg-label">사업영역</span></div>
+        <div class="hero-seg" data-t="48"><span class="hero-seg-label">기술조직</span></div>
+        <div class="hero-seg" data-t="68"><span class="hero-seg-label">포트폴리오</span></div>
+        <div class="hero-seg" data-t="92"><span class="hero-seg-label">협력사</span></div>
+      </div>
       <div class="hero-timeline-track" id="heroTimelineTrack">
         <div class="hero-timeline-progress" id="heroTimelineProgress"></div>
         <div class="hero-timeline-marks" id="heroTimelineMarks">
-          <button class="hero-mark" data-t="0"><span class="hero-mark-label">회사소개</span></button>
-          <button class="hero-mark" data-t="8"><span class="hero-mark-label">연혁</span></button>
-          <button class="hero-mark" data-t="28"><span class="hero-mark-label">사업영역</span></button>
-          <button class="hero-mark" data-t="48"><span class="hero-mark-label">기술조직</span></button>
-          <button class="hero-mark" data-t="68"><span class="hero-mark-label">포트폴리오</span></button>
-          <button class="hero-mark" data-t="92"><span class="hero-mark-label">협력사</span></button>
+          <div class="hero-mark" data-t="0"></div>
+          <div class="hero-mark" data-t="8"></div>
+          <div class="hero-mark" data-t="28"></div>
+          <div class="hero-mark" data-t="48"></div>
+          <div class="hero-mark" data-t="68"></div>
+          <div class="hero-mark" data-t="92"></div>
         </div>
       </div>
     </div>
@@ -53,22 +61,45 @@
   .hero-timeline {
     position: absolute;
     bottom: 0; left: 0; right: 0;
-    height: 64px;
-    display: flex; align-items: flex-end;
-    padding: 0 40px 18px;
+    display: flex; flex-direction: column;
+    padding: 0 40px 14px;
     z-index: 10;
     opacity: 0; pointer-events: none;
-    background: linear-gradient(to top, rgba(0,0,0,0.35) 0%, transparent 100%);
+    background: linear-gradient(to top, rgba(0,0,0,0.3) 0%, transparent 100%);
     transition: opacity 0.25s ease;
   }
   .video-wrap:hover .hero-timeline,
   .video-wrap:focus-within .hero-timeline {
     opacity: 1; pointer-events: auto;
   }
+
+  /* 구간 호버 영역 — 눈금이 아니라 구간 전체에 호버하면 이름 표시 */
+  .hero-timeline-segments {
+    position: relative;
+    width: 100%; height: 30px;
+  }
+  .hero-seg {
+    position: absolute; top: 0; height: 100%;
+  }
+  .hero-seg-label {
+    position: absolute; bottom: 6px; left: 50%;
+    transform: translateX(-50%);
+    font-size: 11px; font-weight: 600; letter-spacing: -0.01em;
+    color: #fff;
+    background: rgba(10,16,40,0.55);
+    backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+    padding: 5px 10px; border-radius: 6px;
+    white-space: nowrap;
+    opacity: 0; pointer-events: none;
+    transition: opacity 0.15s ease;
+  }
+  .hero-seg:hover .hero-seg-label { opacity: 1; }
+
   .hero-timeline-track {
     position: relative;
     width: 100%; height: 4px;
-    background: rgba(255,255,255,0.28);
+    background: rgba(255,255,255,0.18);
+    backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
     border-radius: 999px;
     cursor: pointer;
     transition: height 0.15s ease;
@@ -77,35 +108,21 @@
   .hero-timeline-progress {
     position: absolute; top: 0; left: 0; height: 100%;
     width: 0%;
-    background: #5b7cfa;
+    background: rgba(91,124,250,0.7);
     border-radius: 999px;
     pointer-events: none;
   }
   .hero-timeline-marks {
-    position: absolute; inset: 0;
+    position: absolute; inset: 0; pointer-events: none;
   }
   .hero-mark {
     position: absolute; top: 50%; left: 0;
     width: 3px; height: 12px;
     transform: translate(-50%, -50%);
-    background: rgba(255,255,255,0.9);
-    border: none; border-radius: 2px;
-    padding: 0; cursor: pointer;
-    transition: background 0.15s ease, height 0.15s ease;
+    background: rgba(255,255,255,0.75);
+    border-radius: 2px;
   }
-  .hero-mark:hover, .hero-mark.active { background: #fff; height: 16px; }
-  .hero-mark-label {
-    position: absolute; bottom: 22px; left: 50%;
-    transform: translateX(-50%);
-    font-size: 11px; font-weight: 600; letter-spacing: -0.01em;
-    color: #fff;
-    background: rgba(10,16,40,0.85);
-    padding: 5px 10px; border-radius: 6px;
-    white-space: nowrap;
-    opacity: 0; pointer-events: none;
-    transition: opacity 0.15s ease;
-  }
-  .hero-mark:hover .hero-mark-label { opacity: 1; }
+  .hero-mark.active { background: rgba(255,255,255,0.95); height: 16px; }
 
   @media (max-width: 960px) {
     .hero-timeline { display: none; }
@@ -162,16 +179,23 @@
   const heroVideo = document.getElementById('heroDeskVideo') as HTMLVideoElement | null;
   const track = document.getElementById('heroTimelineTrack') as HTMLElement | null;
   const progress = document.getElementById('heroTimelineProgress') as HTMLElement | null;
-  const markBtns = Array.from(document.querySelectorAll('.hero-mark')) as HTMLButtonElement[];
+  const markEls = Array.from(document.querySelectorAll('.hero-mark')) as HTMLElement[];
+  const segEls = Array.from(document.querySelectorAll('.hero-seg')) as HTMLElement[];
 
-  if (heroVideo && track && progress && markBtns.length) {
-    const times = markBtns.map((b) => parseFloat(b.dataset.t || '0'));
+  if (heroVideo && track && progress && markEls.length) {
+    const times = markEls.map((el) => parseFloat(el.dataset.t || '0'));
 
     function layoutMarks() {
       const dur = heroVideo!.duration;
       if (!dur || !isFinite(dur)) return;
-      markBtns.forEach((btn, i) => {
-        btn.style.left = (times[i] / dur) * 100 + '%';
+      markEls.forEach((el, i) => {
+        el.style.left = (times[i] / dur) * 100 + '%';
+      });
+      segEls.forEach((el, i) => {
+        const start = times[i];
+        const end = i < times.length - 1 ? times[i + 1] : dur;
+        el.style.left = (start / dur) * 100 + '%';
+        el.style.width = ((end - start) / dur) * 100 + '%';
       });
     }
     if (heroVideo.readyState >= 1) layoutMarks();
@@ -185,9 +209,8 @@
     }
     track.addEventListener('click', (e) => seekFromClientX((e as MouseEvent).clientX));
 
-    markBtns.forEach((btn, i) => {
-      btn.addEventListener('click', (e) => {
-        e.stopPropagation();
+    segEls.forEach((el, i) => {
+      el.addEventListener('click', () => {
         heroVideo!.currentTime = times[i];
       });
     });
@@ -200,7 +223,7 @@
       for (let i = 0; i < times.length; i++) {
         if (t >= times[i]) activeIdx = i;
       }
-      markBtns.forEach((btn, i) => btn.classList.toggle('active', i === activeIdx));
+      markEls.forEach((el, i) => el.classList.toggle('active', i === activeIdx));
     });
   }
 </script>
