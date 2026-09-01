@@ -12,6 +12,7 @@
   </div>
 
   <div class="ab-wrap">
+    <div class="ab-fold" aria-hidden="true"></div>
 
     <!-- 왼쪽: 브랜드 컬러 -->
     <div class="ab-left fade-up">
@@ -88,7 +89,30 @@
     background: radial-gradient(ellipse 120% 100% at 50% 0%, transparent 60%, rgba(13,26,58,0.04) 100%);
     z-index: 0; pointer-events: none;
   }
-  .ab-wrap > * { position: relative; z-index: 1; }
+  .ab-wrap > *:not(.ab-fold) { position: relative; z-index: 1; }
+
+  /* 종이 아래쪽 모서리 접힘 */
+  .ab-fold {
+    position: absolute;
+    right: 0; bottom: 0;
+    width: 46px; height: 46px;
+    z-index: 2;
+    pointer-events: none;
+  }
+  .ab-fold::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(circle at 100% 100%, rgba(13,26,58,0.25) 0%, transparent 65%);
+  }
+  .ab-fold::after {
+    content: '';
+    position: absolute; right: 0; bottom: 0;
+    width: 0; height: 0;
+    border-style: solid;
+    border-width: 0 0 46px 46px;
+    border-color: transparent transparent #ece6d9 transparent;
+    box-shadow: -3px -3px 6px rgba(13,26,58,0.12);
+  }
 
   /* ── 장식 SVG ── */
 
