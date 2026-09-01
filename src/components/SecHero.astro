@@ -5,7 +5,15 @@
 
   <!-- 영상 영역 100vh -->
   <div class="video-wrap">
-    <video src="https://uacyx65ftsezenuu.public.blob.vercel-storage.com/eds-hero/1788166253626-main.mp4" autoplay muted loop playsinline preload="auto"></video>
+    <video id="heroDeskVideo" src="https://uacyx65ftsezenuu.public.blob.vercel-storage.com/eds-hero/1788166253626-main.mp4" autoplay muted loop playsinline preload="auto"></video>
+    <div class="hero-chapters" id="heroChapters">
+      <button class="hero-chap" data-t="0">회사소개</button>
+      <button class="hero-chap" data-t="8">연혁</button>
+      <button class="hero-chap" data-t="28">사업영역</button>
+      <button class="hero-chap" data-t="48">기술조직</button>
+      <button class="hero-chap" data-t="68">포트폴리오</button>
+      <button class="hero-chap" data-t="92">협력사</button>
+    </div>
     <div class="scroll-hint">
       <span class="scroll-label">SCROLL</span>
       <div class="scroll-arrow">
@@ -34,6 +42,41 @@
     transform: translateX(-50%);
     object-fit: cover;
     object-position: top center;
+  }
+
+  /* 히어로 영상 구간 선택 — 기본은 숨김, 영상 위 호버 시에만 노출 */
+  .hero-chapters {
+    position: absolute;
+    bottom: 92px; left: 50%;
+    transform: translateX(-50%) translateY(8px);
+    display: flex; gap: 6px;
+    z-index: 10;
+    opacity: 0; pointer-events: none;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+  }
+  .video-wrap:hover .hero-chapters,
+  .video-wrap:focus-within .hero-chapters {
+    opacity: 1; pointer-events: auto;
+    transform: translateX(-50%) translateY(0);
+  }
+  .hero-chap {
+    font-family: inherit;
+    font-size: 12px; font-weight: 600; letter-spacing: -0.01em;
+    color: rgba(255,255,255,0.75);
+    background: rgba(10,16,40,0.55);
+    backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+    border: 0.5px solid rgba(255,255,255,0.15);
+    border-radius: 999px;
+    padding: 8px 16px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+  }
+  .hero-chap:hover { color: #fff; background: rgba(26,47,138,0.65); border-color: rgba(255,255,255,0.3); }
+  .hero-chap.active { color: #fff; background: rgba(26,47,138,0.85); border-color: rgba(255,255,255,0.4); }
+
+  @media (max-width: 960px) {
+    .hero-chapters { display: none; }
   }
 
   .scroll-hint {
@@ -81,6 +124,27 @@
     }, { passive: true });
     hint.addEventListener('click', () => {
       window.scrollBy({ top: window.innerHeight, behavior: 'smooth' });
+    });
+  }
+
+  const heroVideo = document.getElementById('heroDeskVideo') as HTMLVideoElement | null;
+  const chapterBtns = Array.from(document.querySelectorAll('.hero-chap')) as HTMLButtonElement[];
+  if (heroVideo && chapterBtns.length) {
+    const times = chapterBtns.map((b) => parseFloat(b.dataset.t || '0'));
+
+    chapterBtns.forEach((btn, i) => {
+      btn.addEventListener('click', () => {
+        heroVideo.currentTime = times[i];
+      });
+    });
+
+    heroVideo.addEventListener('timeupdate', () => {
+      const t = heroVideo.currentTime;
+      let activeIdx = 0;
+      for (let i = 0; i < times.length; i++) {
+        if (t >= times[i]) activeIdx = i;
+      }
+      chapterBtns.forEach((btn, i) => btn.classList.toggle('active', i === activeIdx));
     });
   }
 </script>
