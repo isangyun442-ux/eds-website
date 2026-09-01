@@ -373,7 +373,7 @@ import SecContact    from '../components/SecContact.astro';
     if(_rafId) cancelAnimationFrame(_rafId);
     var start = window.scrollY;
     var distance = target - start;
-    var duration = Math.min(600 + Math.abs(distance) * 0.15, 900);
+    var duration = Math.min(700 + Math.abs(distance) * 0.25, 1500);
     var startTime = null;
     function easeOutCubic(t){ return 1 - Math.pow(1 - t, 3); }
     function step(ts){
