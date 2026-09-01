@@ -610,12 +610,12 @@ import SecContact    from '../components/SecContact.astro';
   .quick-nav {
     position: fixed; right: 24px; top: 0;
     z-index: 350; display: flex; flex-direction: column; gap: 3px;
-    background: rgba(10,16,40,0.32);
+    background: rgba(255,255,255,0.55);
     backdrop-filter: blur(24px) saturate(160%); -webkit-backdrop-filter: blur(24px) saturate(160%);
-    border: 0.5px solid rgba(255,255,255,0.25); border-radius: 16px;
+    border: 0.5px solid rgba(255,255,255,0.7); border-radius: 16px;
     padding: 10px 8px; opacity: 0; pointer-events: none;
     transition: opacity 0.5s cubic-bezier(0.16,1,0.3,1);
-    box-shadow: 0 8px 32px rgba(0,0,0,0.18), inset 0 1px 0 rgba(255,255,255,0.2);
+    box-shadow: 0 8px 28px rgba(13,26,58,0.14), inset 0 1px 0 rgba(255,255,255,0.6);
     will-change: transform;
   }
   .quick-nav.visible { opacity: 1; pointer-events: all; }
@@ -624,21 +624,21 @@ import SecContact    from '../components/SecContact.astro';
   .qn-top {
     display: flex; align-items: center; justify-content: center; gap: 5px;
     padding: 8px 14px;
-    background: linear-gradient(135deg,rgba(59,130,246,0.5) 0%,rgba(37,99,235,0.4) 100%);
-    border: 0.5px solid rgba(59,130,246,0.6); border-radius: 9px;
-    color: #93c5fd; font-size: 10px; font-weight: 800; letter-spacing: 0.1em;
+    background: linear-gradient(135deg,rgba(59,130,246,0.9) 0%,rgba(37,99,235,0.85) 100%);
+    border: 0.5px solid rgba(37,99,235,0.5); border-radius: 9px;
+    color: #fff; font-size: 10px; font-weight: 800; letter-spacing: 0.1em;
     cursor: pointer; font-family: inherit; margin-bottom: 4px;
-    box-shadow: 0 0 12px rgba(59,130,246,0.4), 0 0 24px rgba(59,130,246,0.15), inset 0 1px 0 rgba(255,255,255,0.2);
+    box-shadow: 0 4px 14px rgba(37,99,235,0.35), inset 0 1px 0 rgba(255,255,255,0.3);
     transition: box-shadow 0.2s;
   }
-  .qn-top:hover { box-shadow: 0 0 18px rgba(59,130,246,0.6), 0 0 36px rgba(59,130,246,0.25), inset 0 1px 0 rgba(255,255,255,0.2); }
-  .qn-divider { width: 100%; height: 0.5px; background: linear-gradient(90deg,transparent,rgba(255,255,255,0.15),transparent); margin: 2px 0 4px; }
+  .qn-top:hover { box-shadow: 0 6px 20px rgba(37,99,235,0.5), inset 0 1px 0 rgba(255,255,255,0.3); }
+  .qn-divider { width: 100%; height: 0.5px; background: linear-gradient(90deg,transparent,rgba(13,26,58,0.12),transparent); margin: 2px 0 4px; }
   .qn-list { position: relative; display: flex; flex-direction: column; gap: 3px; }
   /* 슬라이딩 인디케이터 */
   .qn-indicator {
     position: absolute; left: 0; right: 0;
-    background: rgba(255,255,255,0.1);
-    border: 0.5px solid rgba(255,255,255,0.15);
+    background: rgba(13,26,58,0.06);
+    border: 0.5px solid rgba(13,26,58,0.1);
     border-radius: 8px; pointer-events: none;
     transition: top 0.35s cubic-bezier(0.34,1.56,0.64,1), height 0.35s cubic-bezier(0.34,1.56,0.64,1), opacity 0.3s;
     opacity: 0;
@@ -647,18 +647,18 @@ import SecContact    from '../components/SecContact.astro';
   .qn-item {
     display: flex; align-items: center; gap: 6px;
     padding: 6px 10px; border-radius: 8px; cursor: pointer;
-    font-size: 12px; color: rgba(255,255,255,0.45); font-weight: 600;
+    font-size: 12px; color: rgba(13,26,58,0.55); font-weight: 600;
     transition: color 0.25s; white-space: nowrap; text-decoration: none;
     position: relative; z-index: 1;
   }
   .qn-item::before {
     content: ''; width: 4px; height: 4px; border-radius: 50%;
-    background: rgba(255,255,255,0.2); flex-shrink: 0;
+    background: rgba(13,26,58,0.25); flex-shrink: 0;
     transition: background 0.25s, box-shadow 0.25s, transform 0.35s cubic-bezier(0.34,1.56,0.64,1);
   }
-  .qn-item:hover { color: rgba(255,255,255,0.8); }
-  .qn-item.active { color: #fff; }
-  .qn-item.active::before { background: #818cf8; box-shadow: 0 0 6px rgba(129,140,248,0.8); transform: scale(1.4); }
+  .qn-item:hover { color: rgba(13,26,58,0.9); }
+  .qn-item.active { color: #0d1a3a; }
+  .qn-item.active::before { background: #2563eb; box-shadow: 0 0 6px rgba(37,99,235,0.6); transform: scale(1.4); }
   @media (max-width: 768px) { .quick-nav { display: none; } }
 </style>
 
