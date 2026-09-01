@@ -237,17 +237,19 @@ import { projects } from '../data/projects.js';
   .port-cur-num { color: #fff; font-size: 18px; font-weight: 900; }
 
   .port-all {
-    display: inline-flex; align-items: center;
-    margin-top: 16px;
-    font-size: 12px; font-weight: 800; color: #fff;
-    text-decoration: none; letter-spacing: 0.1em; text-transform: uppercase;
-    height: 48px; padding: 0 28px;
-    border: 1.5px solid rgba(255,255,255,0.4);
-    transition: background 0.2s, border-color 0.2s;
+    display: inline-flex; align-items: center; gap: 10px;
+    margin-top: 28px;
+    font-size: 15px; font-weight: 800; color: #fff;
+    text-decoration: none; letter-spacing: 0.06em; text-transform: uppercase;
+    height: 64px; padding: 0 40px;
+    background: rgba(255,255,255,0.1);
+    border: 1.5px solid rgba(255,255,255,0.5);
+    border-radius: 999px;
+    transition: background 0.2s, border-color 0.2s, transform 0.2s;
     white-space: nowrap;
     align-self: flex-start;
   }
-  .port-all:hover { background: rgba(255,255,255,0.1); border-color: #fff; }
+  .port-all:hover { background: #fff; color: #0d1a3a; border-color: #fff; transform: translateY(-2px); }
 
   @media (max-width: 900px) {
     .port-content { flex-direction: column; }
