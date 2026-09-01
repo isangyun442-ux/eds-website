@@ -59,6 +59,11 @@
     background: #fff;
     position: relative;
     overflow: hidden;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 48px 0;
   }
 
   /* ── 전체 레이아웃 — 종이 질감 카드를 여백 안쪽에 붙여놓은 느낌 ── */
@@ -66,7 +71,8 @@
     position: relative;
     display: grid;
     grid-template-columns: 1fr 1fr;
-    margin: 48px;
+    margin: 0 48px;
+    width: calc(100% - 96px);
     background: #faf8f4;
     border-radius: 8px;
     box-shadow: 0 28px 60px rgba(13,26,58,0.16), 0 3px 10px rgba(13,26,58,0.08);
@@ -173,13 +179,15 @@
 
   /* ── 반응형 ── */
   @media (max-width: 960px) {
+    .s2 { padding: 24px 0; }
     .ab-wrap {
     position: relative; grid-template-columns: 1fr;
-    margin: 24px; }
+    margin: 0 24px; width: calc(100% - 48px); }
     .ab-left-content, .ab-right-content { padding: 72px 48px; }
   }
   @media (max-width: 480px) {
-    .ab-wrap { margin: 14px; border-radius: 6px; }
+    .s2 { padding: 14px 0; }
+    .ab-wrap { margin: 0 14px; width: calc(100% - 28px); border-radius: 6px; }
     .ab-left-content, .ab-right-content { padding: 56px 28px; }
     .ab-title { margin-bottom: 28px; }
   }
