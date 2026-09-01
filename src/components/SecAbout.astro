@@ -55,29 +55,37 @@
 
 <style>
   .s2 {
-    background: #e3e8f2;
+    background: #fff;
     position: relative;
     overflow: hidden;
   }
 
-  /* ── 전체 레이아웃 — 배경 이미지를 종이 한 장처럼 여백 안쪽에 붙여놓은 느낌 ── */
+  /* ── 전체 레이아웃 — 종이 질감 카드를 여백 안쪽에 붙여놓은 느낌 ── */
   .ab-wrap {
     position: relative;
     display: grid;
     grid-template-columns: 1fr 1fr;
     margin: 48px;
     min-height: calc(100vh - 96px);
-    background: url('/images/about-bg.jpg') center center / cover no-repeat;
+    background: #faf8f4;
     border-radius: 8px;
-    box-shadow: 0 28px 60px rgba(13,26,58,0.22), 0 3px 10px rgba(13,26,58,0.12);
+    box-shadow: 0 28px 60px rgba(13,26,58,0.16), 0 3px 10px rgba(13,26,58,0.08);
     overflow: hidden;
   }
+  /* 종이 결(fiber) 질감 */
   .ab-wrap::before {
     content: '';
     position: absolute; inset: 0;
-    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='140' height='140'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix type='saturate' values='0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
-    opacity: 0.05;
-    mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/><feColorMatrix type='saturate' values='0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+    opacity: 0.1;
+    mix-blend-mode: multiply;
+    z-index: 0; pointer-events: none;
+  }
+  /* 은은한 종이 음영(가장자리 살짝 어둡게) */
+  .ab-wrap::after {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse 120% 100% at 50% 0%, transparent 60%, rgba(13,26,58,0.04) 100%);
     z-index: 0; pointer-events: none;
   }
   .ab-wrap > * { position: relative; z-index: 1; }
