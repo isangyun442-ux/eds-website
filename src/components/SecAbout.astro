@@ -55,11 +55,24 @@
 
 <style>
   .s2 {
-    background: url('/images/about-bg.jpg') center center / cover no-repeat, #f7f9ff;
+    background: #e3e8f2;
     position: relative;
     overflow: hidden;
   }
-  .s2::before {
+
+  /* ── 전체 레이아웃 — 배경 이미지를 종이 한 장처럼 여백 안쪽에 붙여놓은 느낌 ── */
+  .ab-wrap {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    margin: 48px;
+    min-height: calc(100vh - 96px);
+    background: url('/images/about-bg.jpg') center center / cover no-repeat;
+    border-radius: 8px;
+    box-shadow: 0 28px 60px rgba(13,26,58,0.22), 0 3px 10px rgba(13,26,58,0.12);
+    overflow: hidden;
+  }
+  .ab-wrap::before {
     content: '';
     position: absolute; inset: 0;
     background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='140' height='140'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix type='saturate' values='0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
@@ -67,15 +80,7 @@
     mix-blend-mode: overlay;
     z-index: 0; pointer-events: none;
   }
-  .s2 > * { position: relative; z-index: 1; }
-
-  /* ── 전체 레이아웃 ── */
-  .ab-wrap {
-    position: relative; z-index: 2;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    min-height: 100vh;
-  }
+  .ab-wrap > * { position: relative; z-index: 1; }
 
   /* ── 장식 SVG ── */
 
@@ -138,10 +143,12 @@
   /* ── 반응형 ── */
   @media (max-width: 960px) {
     .ab-wrap {
-    position: relative; z-index: 2; grid-template-columns: 1fr; }
+    position: relative; grid-template-columns: 1fr;
+    margin: 24px; min-height: calc(100vh - 48px); }
     .ab-left-content, .ab-right-content { padding: 72px 48px; }
   }
   @media (max-width: 480px) {
+    .ab-wrap { margin: 14px; min-height: calc(100vh - 28px); border-radius: 6px; }
     .ab-left-content, .ab-right-content { padding: 56px 28px; }
     .ab-title { margin-bottom: 28px; }
   }
