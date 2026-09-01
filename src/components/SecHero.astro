@@ -6,13 +6,18 @@
   <!-- 영상 영역 100vh -->
   <div class="video-wrap">
     <video id="heroDeskVideo" src="https://uacyx65ftsezenuu.public.blob.vercel-storage.com/eds-hero/1788166253626-main.mp4" autoplay muted loop playsinline preload="auto"></video>
-    <div class="hero-chapters" id="heroChapters">
-      <button class="hero-chap" data-t="0">회사소개</button>
-      <button class="hero-chap" data-t="8">연혁</button>
-      <button class="hero-chap" data-t="28">사업영역</button>
-      <button class="hero-chap" data-t="48">기술조직</button>
-      <button class="hero-chap" data-t="68">포트폴리오</button>
-      <button class="hero-chap" data-t="92">협력사</button>
+    <div class="hero-timeline" id="heroTimeline">
+      <div class="hero-timeline-track" id="heroTimelineTrack">
+        <div class="hero-timeline-progress" id="heroTimelineProgress"></div>
+        <div class="hero-timeline-marks" id="heroTimelineMarks">
+          <button class="hero-mark" data-t="0"><span class="hero-mark-label">회사소개</span></button>
+          <button class="hero-mark" data-t="8"><span class="hero-mark-label">연혁</span></button>
+          <button class="hero-mark" data-t="28"><span class="hero-mark-label">사업영역</span></button>
+          <button class="hero-mark" data-t="48"><span class="hero-mark-label">기술조직</span></button>
+          <button class="hero-mark" data-t="68"><span class="hero-mark-label">포트폴리오</span></button>
+          <button class="hero-mark" data-t="92"><span class="hero-mark-label">협력사</span></button>
+        </div>
+      </div>
     </div>
     <div class="scroll-hint">
       <span class="scroll-label">SCROLL</span>
@@ -44,39 +49,66 @@
     object-position: top center;
   }
 
-  /* 히어로 영상 구간 선택 — 기본은 숨김, 영상 위 호버 시에만 노출 */
-  .hero-chapters {
+  /* 히어로 영상 타임라인 — 하단 호버 시에만 노출되는 유튜브 스타일 구간 탐색 바 */
+  .hero-timeline {
     position: absolute;
-    bottom: 92px; left: 50%;
-    transform: translateX(-50%) translateY(8px);
-    display: flex; gap: 6px;
+    bottom: 0; left: 0; right: 0;
+    height: 64px;
+    display: flex; align-items: flex-end;
+    padding: 0 40px 18px;
     z-index: 10;
     opacity: 0; pointer-events: none;
-    transition: opacity 0.3s ease, transform 0.3s ease;
+    background: linear-gradient(to top, rgba(0,0,0,0.35) 0%, transparent 100%);
+    transition: opacity 0.25s ease;
   }
-  .video-wrap:hover .hero-chapters,
-  .video-wrap:focus-within .hero-chapters {
+  .video-wrap:hover .hero-timeline,
+  .video-wrap:focus-within .hero-timeline {
     opacity: 1; pointer-events: auto;
-    transform: translateX(-50%) translateY(0);
   }
-  .hero-chap {
-    font-family: inherit;
-    font-size: 12px; font-weight: 600; letter-spacing: -0.01em;
-    color: rgba(255,255,255,0.75);
-    background: rgba(10,16,40,0.55);
-    backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
-    border: 0.5px solid rgba(255,255,255,0.15);
+  .hero-timeline-track {
+    position: relative;
+    width: 100%; height: 4px;
+    background: rgba(255,255,255,0.28);
     border-radius: 999px;
-    padding: 8px 16px;
     cursor: pointer;
-    transition: all 0.2s ease;
-    white-space: nowrap;
+    transition: height 0.15s ease;
   }
-  .hero-chap:hover { color: #fff; background: rgba(26,47,138,0.65); border-color: rgba(255,255,255,0.3); }
-  .hero-chap.active { color: #fff; background: rgba(26,47,138,0.85); border-color: rgba(255,255,255,0.4); }
+  .hero-timeline-track:hover { height: 7px; }
+  .hero-timeline-progress {
+    position: absolute; top: 0; left: 0; height: 100%;
+    width: 0%;
+    background: #5b7cfa;
+    border-radius: 999px;
+    pointer-events: none;
+  }
+  .hero-timeline-marks {
+    position: absolute; inset: 0;
+  }
+  .hero-mark {
+    position: absolute; top: 50%; left: 0;
+    width: 3px; height: 12px;
+    transform: translate(-50%, -50%);
+    background: rgba(255,255,255,0.9);
+    border: none; border-radius: 2px;
+    padding: 0; cursor: pointer;
+    transition: background 0.15s ease, height 0.15s ease;
+  }
+  .hero-mark:hover, .hero-mark.active { background: #fff; height: 16px; }
+  .hero-mark-label {
+    position: absolute; bottom: 22px; left: 50%;
+    transform: translateX(-50%);
+    font-size: 11px; font-weight: 600; letter-spacing: -0.01em;
+    color: #fff;
+    background: rgba(10,16,40,0.85);
+    padding: 5px 10px; border-radius: 6px;
+    white-space: nowrap;
+    opacity: 0; pointer-events: none;
+    transition: opacity 0.15s ease;
+  }
+  .hero-mark:hover .hero-mark-label { opacity: 1; }
 
   @media (max-width: 960px) {
-    .hero-chapters { display: none; }
+    .hero-timeline { display: none; }
   }
 
   .scroll-hint {
@@ -128,23 +160,47 @@
   }
 
   const heroVideo = document.getElementById('heroDeskVideo') as HTMLVideoElement | null;
-  const chapterBtns = Array.from(document.querySelectorAll('.hero-chap')) as HTMLButtonElement[];
-  if (heroVideo && chapterBtns.length) {
-    const times = chapterBtns.map((b) => parseFloat(b.dataset.t || '0'));
+  const track = document.getElementById('heroTimelineTrack') as HTMLElement | null;
+  const progress = document.getElementById('heroTimelineProgress') as HTMLElement | null;
+  const markBtns = Array.from(document.querySelectorAll('.hero-mark')) as HTMLButtonElement[];
 
-    chapterBtns.forEach((btn, i) => {
-      btn.addEventListener('click', () => {
-        heroVideo.currentTime = times[i];
+  if (heroVideo && track && progress && markBtns.length) {
+    const times = markBtns.map((b) => parseFloat(b.dataset.t || '0'));
+
+    function layoutMarks() {
+      const dur = heroVideo!.duration;
+      if (!dur || !isFinite(dur)) return;
+      markBtns.forEach((btn, i) => {
+        btn.style.left = (times[i] / dur) * 100 + '%';
+      });
+    }
+    if (heroVideo.readyState >= 1) layoutMarks();
+    heroVideo.addEventListener('loadedmetadata', layoutMarks);
+
+    function seekFromClientX(clientX: number) {
+      const rect = track!.getBoundingClientRect();
+      const ratio = Math.min(1, Math.max(0, (clientX - rect.left) / rect.width));
+      const dur = heroVideo!.duration;
+      if (dur && isFinite(dur)) heroVideo!.currentTime = ratio * dur;
+    }
+    track.addEventListener('click', (e) => seekFromClientX((e as MouseEvent).clientX));
+
+    markBtns.forEach((btn, i) => {
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        heroVideo!.currentTime = times[i];
       });
     });
 
     heroVideo.addEventListener('timeupdate', () => {
-      const t = heroVideo.currentTime;
+      const dur = heroVideo!.duration;
+      const t = heroVideo!.currentTime;
+      if (dur && isFinite(dur)) progress!.style.width = (t / dur) * 100 + '%';
       let activeIdx = 0;
       for (let i = 0; i < times.length; i++) {
         if (t >= times[i]) activeIdx = i;
       }
-      chapterBtns.forEach((btn, i) => btn.classList.toggle('active', i === activeIdx));
+      markBtns.forEach((btn, i) => btn.classList.toggle('active', i === activeIdx));
     });
   }
 </script>
