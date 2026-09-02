@@ -218,11 +218,22 @@
 
   <!-- Footer -->
   <footer class="eds-footer">
-    <div class="eds-footer-logo"><img src="/images/logo.png" alt="EDS 이담에스티" /></div>
-    <div class="eds-footer-info">
-      <span class="eds-footer-contact">Tel. 02-857-7744 &nbsp;·&nbsp; 평일 09:00 – 18:00</span>
-      <span class="eds-footer-copy">© 2025 이담에스티 주식회사. All rights reserved.</span>
+    <div class="eds-footer-left">
+      <img class="eds-footer-logo" src="/images/logo.png" alt="EDS 이담에스티" />
+      <div class="eds-footer-info">
+        <div class="eds-footer-company">(주)이담에스티 &nbsp;|&nbsp; 대표자 최명순</div>
+        <div class="eds-footer-details">
+          <span>주소 서울시 구로구 디지털로31길 19, 406호</span>
+          <span class="div">|</span>
+          <span>TEL 02-857-7744</span>
+          <span class="div">|</span>
+          <span>FAX 02-857-7321</span>
+          <span class="div">|</span>
+          <span>E-mail pub@edamst.com</span>
+        </div>
+      </div>
     </div>
+    <span class="eds-footer-copy">© 2025 이담에스티 주식회사. All rights reserved.</span>
   </footer>
 
 </section>
@@ -289,10 +300,13 @@
   .ct-map-caption { font-size: 12px; color: #aaa; text-align: center; }
 
   /* Footer */
-  .eds-footer { position: relative; z-index: 1; background: #0d1a3a; padding: 28px 60px; display: flex; justify-content: space-between; align-items: center; gap: 16px; }
-  .eds-footer-logo img { height: 20px; width: auto; filter: brightness(0) invert(1); opacity: 0.6; }
-  .eds-footer-info { display: flex; flex-direction: column; gap: 4px; text-align: right; }
-  .eds-footer-contact { font-size: 12px; color: rgba(255,255,255,0.45); }
+  .eds-footer { position: relative; z-index: 1; background: #0d1a3a; padding: 28px 60px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; }
+  .eds-footer-left { display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
+  .eds-footer-logo img { height: 22px; width: auto; filter: brightness(0) invert(1); opacity: 0.75; }
+  .eds-footer-info { display: flex; flex-direction: column; gap: 5px; }
+  .eds-footer-company { font-size: 12.5px; font-weight: 700; color: rgba(255,255,255,0.85); letter-spacing: -0.01em; }
+  .eds-footer-details { display: flex; align-items: center; flex-wrap: wrap; gap: 4px 8px; font-size: 12px; color: rgba(255,255,255,0.45); }
+  .eds-footer-details .div { color: rgba(255,255,255,0.18); }
   .eds-footer-copy { font-size: 11px; color: rgba(255,255,255,0.3); letter-spacing: 0.04em; }
 
   @media (max-width: 960px) {
@@ -301,8 +315,9 @@
     .ct-map-wrap { height: 300px; }
   }
   @media (max-width: 768px) {
-    .eds-footer { padding: 20px 24px; flex-direction: column; text-align: center; }
-    .eds-footer-info { text-align: center; }
+    .eds-footer { padding: 20px 24px; flex-direction: column; align-items: flex-start; text-align: left; }
+    .eds-footer-details .div { display: none; }
+    .eds-footer-details { flex-direction: column; gap: 4px; }
   }
   @media (max-width: 480px) {
     .ct-content { padding: 48px 20px 40px; }
