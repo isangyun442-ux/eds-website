@@ -17,7 +17,7 @@
           <span class="cert-group-name">품질 · 안전보건 경영시스템</span>
           <span class="cert-group-line"></span>
         </div>
-        <div class="cert-row" style="--cols:3">
+        <div class="cert-row">
           <div class="cert-card cert-card-anim" style="transition-delay:0.0s">
             <div class="cert-img-wrap"><img src="/images/cert/cert_06.webp" alt="품질경영시스템인증서" loading="eager" /></div>
             <div class="cert-info"><p class="cert-name">품질경영시스템인증서</p><p class="cert-desc">ISO 9001</p></div>
@@ -39,7 +39,7 @@
           <span class="cert-group-name">특허</span>
           <span class="cert-group-line"></span>
         </div>
-        <div class="cert-row" style="--cols:3">
+        <div class="cert-row">
           <div class="cert-card cert-card-anim" style="transition-delay:0.0s">
             <div class="cert-img-wrap"><img src="/images/cert/cert_09.webp" alt="특허증 다중 영상 스트림 녹화" loading="eager" /></div>
             <div class="cert-info"><p class="cert-name">특허증</p><p class="cert-desc">다중 영상 스트림 녹화 방법 및 그 장치</p></div>
@@ -61,7 +61,7 @@
           <span class="cert-group-name">사업자 인증</span>
           <span class="cert-group-line"></span>
         </div>
-        <div class="cert-row" style="--cols:4">
+        <div class="cert-row">
           <div class="cert-card cert-card-anim" style="transition-delay:0.0s">
             <div class="cert-img-wrap"><img src="/images/cert/cert_02.webp" alt="정보통신공사등록증" loading="eager" /></div>
             <div class="cert-info"><p class="cert-name">정보통신공사등록증</p><p class="cert-desc">공사업 면허 보유</p></div>
@@ -86,24 +86,26 @@
 
 <style>
   /* 섹션 */
-  .s-cert { background:linear-gradient(180deg,#ffffff 0%,#eef2fb 60%,#dce6f8 100%); padding:80px 0 70px; }
+  .s-cert { background:linear-gradient(180deg,#ffffff 0%,#eef2fb 60%,#dce6f8 100%); padding:64px 0 56px; }
   .cert-inner { max-width:1200px; margin:0 auto; padding:0 40px; text-align:center; width:100%; }
 
-  .cert-label { font-size:11px; font-weight:700; letter-spacing:0.22em; text-transform:uppercase; color:#1a2f8a; margin-bottom:12px; display:flex; align-items:center; justify-content:center; gap:10px; }
+  .cert-label { font-size:11px; font-weight:700; letter-spacing:0.22em; text-transform:uppercase; color:#1a2f8a; margin-bottom:10px; display:flex; align-items:center; justify-content:center; gap:10px; }
   .cert-label::before, .cert-label::after { content:''; width:28px; height:1px; background:#1a2f8a; display:block; opacity:0.5; }
-  .cert-title { font-size:clamp(28px,3.5vw,48px); font-weight:900; color:#0d1a3a; letter-spacing:-0.04em; margin-bottom:14px; display:flex; align-items:center; justify-content:center; gap:12px; }
-  .cert-sub { font-size:14px; color:#8896a4; line-height:1.7; margin-bottom:40px; }
+  .cert-title { font-size:clamp(28px,3.5vw,48px); font-weight:900; color:#0d1a3a; letter-spacing:-0.04em; margin-bottom:12px; display:flex; align-items:center; justify-content:center; gap:12px; }
+  .cert-sub { font-size:14px; color:#8896a4; line-height:1.7; margin-bottom:26px; }
 
   /* 카테고리 그룹 */
-  .cert-groups { display:flex; flex-direction:column; gap:32px; }
-  .cert-group-head { display:flex; align-items:baseline; gap:10px; margin-bottom:14px; text-align:left; }
+  .cert-groups { display:flex; flex-direction:column; gap:20px; }
+  .cert-group-head { display:flex; align-items:baseline; gap:10px; margin-bottom:10px; text-align:left; }
   .cert-group-name { font-size:14px; font-weight:800; color:#0d1a3a; letter-spacing:-0.02em; white-space:nowrap; }
   .cert-group-line { flex:1; height:1px; background:linear-gradient(90deg,rgba(26,47,138,0.18),transparent); }
 
-  .cert-row { display:grid; grid-template-columns:repeat(var(--cols,3),1fr); gap:16px; }
+  /* 카드 폭을 고정해 이미지 비율(4:3)을 그대로 유지하면서 전체 높이를 줄임 */
+  .cert-row { display:flex; justify-content:center; flex-wrap:wrap; gap:14px; }
 
   /* 카드 */
   .cert-card {
+    flex:0 1 160px; width:160px;
     background:#fff; border:1px solid rgba(13,26,58,0.08);
     border-radius:14px; overflow:hidden; text-align:left; cursor:default;
     box-shadow:0 1px 2px rgba(13,26,58,0.04);
@@ -154,17 +156,15 @@
   .fade-up-d1 { transition-delay:0.25s; }
   .fade-up-d2 { transition-delay:0.35s; }
 
-  @media (max-width:900px) {
-    .cert-row { grid-template-columns:repeat(2,1fr) !important; }
-  }
   @media (max-width:768px) {
-    .s-cert { padding:60px 0 50px; }
+    .s-cert { padding:56px 0 46px; }
     .cert-inner { padding:0 20px; }
-    .cert-sub { margin-bottom:32px; }
-    .cert-groups { gap:26px; }
+    .cert-sub { margin-bottom:22px; }
+    .cert-groups { gap:22px; }
+    .cert-card { flex:0 1 130px; width:130px; }
   }
-  @media (max-width:520px) {
-    .cert-row { grid-template-columns:1fr !important; }
+  @media (max-width:420px) {
+    .cert-card { flex:1 1 42%; width:auto; }
   }
 </style>
 
