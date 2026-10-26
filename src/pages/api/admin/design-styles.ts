@@ -8,8 +8,20 @@ function authCheck(request: Request) {
   return request.headers.get('x-admin-token') === import.meta.env.ADMIN_PASSWORD;
 }
 
+// section 값은 Redis 키/REST 경로에 그대로 들어가므로, 정해진 값만 허용한다.
+// ('../' 등으로 임의의 Redis 명령을 실행하는 것을 막기 위함)
+const SECTIONS = new Set(['about', 'history', 'services']);
+
+function badSection() {
+  return new Response(JSON.stringify({ error: 'invalid section' }), {
+    status: 400,
+    headers: { 'Content-Type': 'application/json' },
+  });
+}
+
 export const GET: APIRoute = async ({ url }) => {
   const section = url.searchParams.get('section') || 'about';
+  if (!SECTIONS.has(section)) return badSection();
   try {
     const res = await fetch(`${KV_URL}/get/eds-design-${section}`, {
       headers: { Authorization: `Bearer ${KV_TOKEN}` },
@@ -31,6 +43,7 @@ export const POST: APIRoute = async ({ request }) => {
   }
   const body = await request.json();
   const section = body.section || 'about';
+  if (typeof section !== 'string' || !SECTIONS.has(section)) return badSection();
   try {
     const res = await fetch(`${KV_URL}/pipeline`, {
       method: 'POST',
