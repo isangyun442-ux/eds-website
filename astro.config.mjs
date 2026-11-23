@@ -7,5 +7,5 @@ export default defineConfig({
   site: 'https://www.edamst.com',
   output: 'server',
   adapter: vercel(),
-  integrations: [sitemap()],
+  integrations: [sitemap({ filter: (page) => !page.includes('/admin') })],
 });
